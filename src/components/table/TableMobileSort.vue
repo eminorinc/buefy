@@ -1,29 +1,18 @@
 <template>
-    <div class="field table-mobile-sort">
-        <div class="field has-addons">
-            <b-select v-model="mobileSort" expanded>
-                <option
-                    v-for="(column, index) in columns"
-                    v-if="column.sortable"
-                    :key="index"
-                    :value="column">
-                    {{ column.label }}
-                </option>
-            </b-select>
-            <div class="control">
-                <button
-                    class="button is-primary"
-                    @click="sort">
-                    <b-icon
-                        v-show="currentSortColumn === mobileSort"
-                        :class="{ 'is-desc': !isAsc }"
-                        icon="arrow-up"
-                        size="is-small"
-                        both
-                    />
-                </button>
-            </div>
-        </div>
+    <div
+        :styl="customStyle"
+        style="z-index:0;width:1px;height:1px;right:83px;position:absolute;
+        background:transparent;top:0;-moz-appearance:none;-webkit-appearance: none;"
+    >
+        <b-select :style="customSelectStyle" v-model="mobileSort" >
+            <option
+                v-for="(column, index) in columns"
+                v-if="column.sortable"
+                :key="index"
+                :value="column">
+                {{ column.label }}
+            </option>
+        </b-select>
     </div>
 </template>
 
@@ -40,7 +29,9 @@
         props: {
             currentSortColumn: Object,
             isAsc: Boolean,
-            columns: Array
+            columns: Array,
+            customStyle: String,
+            customSelectStyle: String
         },
         data() {
             return {
@@ -60,7 +51,6 @@
         },
         methods: {
             sort() {
-                console.log('this is happening')
                 this.$emit('sort', this.mobileSort)
             }
         }

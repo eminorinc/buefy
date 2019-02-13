@@ -5,6 +5,8 @@
             :current-sort-column="currentSortColumn"
             :is-asc="isAsc"
             :columns="newColumns"
+            :custom-style="customStyle"
+            :custom-select-style="customSelectStyle"
             @sort="(column) => sort(column)"
         />
 
@@ -261,6 +263,14 @@
             total: {
                 type: [Number, String],
                 default: 0
+            },
+            customStyle: {
+                type: String,
+                default: ''
+            },
+            customSelectStyle: {
+                type: String,
+                default: ''
             }
         },
         data() {

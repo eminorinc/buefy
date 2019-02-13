@@ -8947,6 +8947,8 @@ var _components;
 //
 //
 //
+//
+//
 
 
 
@@ -9045,6 +9047,14 @@ var _components;
         total: {
             type: [Number, String],
             default: 0
+        },
+        customStyle: {
+            type: String,
+            default: ''
+        },
+        customSelectStyle: {
+            type: String,
+            default: ''
         }
     },
     data: function data() {
@@ -9720,17 +9730,6 @@ var _components;
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -9741,7 +9740,9 @@ var _components;
     props: {
         currentSortColumn: Object,
         isAsc: Boolean,
-        columns: Array
+        columns: Array,
+        customStyle: String,
+        customSelectStyle: String
     },
     data: function data() {
         return {
@@ -9761,7 +9762,6 @@ var _components;
     },
     methods: {
         sort: function sort() {
-            console.log('this is happening');
             this.$emit('sort', this.mobileSort);
         }
     }
@@ -9773,13 +9773,22 @@ var _components;
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "field table-mobile-sort"
-  }, [_c('div', {
-    staticClass: "field has-addons"
-  }, [_c('b-select', {
-    attrs: {
-      "expanded": ""
+    staticStyle: {
+      "z-index": "0",
+      "width": "1px",
+      "height": "1px",
+      "right": "83px",
+      "position": "absolute",
+      "background": "transparent",
+      "top": "0",
+      "-moz-appearance": "none",
+      "-webkit-appearance": "none"
     },
+    attrs: {
+      "styl": _vm.customStyle
+    }
+  }, [_c('b-select', {
+    style: (_vm.customSelectStyle),
     model: {
       value: (_vm.mobileSort),
       callback: function($$v) {
@@ -9793,30 +9802,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       domProps: {
         "value": column
       }
-    }, [_vm._v("\n                " + _vm._s(column.label) + "\n            ")]) : _vm._e()
-  })), _vm._v(" "), _c('div', {
-    staticClass: "control"
-  }, [_c('button', {
-    staticClass: "button is-primary",
-    on: {
-      "click": _vm.sort
-    }
-  }, [_c('b-icon', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.currentSortColumn === _vm.mobileSort),
-      expression: "currentSortColumn === mobileSort"
-    }],
-    class: {
-      'is-desc': !_vm.isAsc
-    },
-    attrs: {
-      "icon": "arrow-up",
-      "size": "is-small",
-      "both": ""
-    }
-  })], 1)])], 1)])
+    }, [_vm._v("\n            " + _vm._s(column.label) + "\n        ")]) : _vm._e()
+  }))], 1)
 },staticRenderFns: []}
 
 /***/ }),
@@ -9924,7 +9911,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "current-sort-column": _vm.currentSortColumn,
       "is-asc": _vm.isAsc,
-      "columns": _vm.newColumns
+      "columns": _vm.newColumns,
+      "custom-style": _vm.customStyle,
+      "custom-select-style": _vm.customSelectStyle
     },
     on: {
       "sort": function (column) { return _vm.sort(column); }
