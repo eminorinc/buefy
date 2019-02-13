@@ -60,6 +60,7 @@
         },
         methods: {
             sort() {
+                console.log('this is happening')
                 this.$emit('sort', this.mobileSort)
             }
         }

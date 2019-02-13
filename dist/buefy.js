@@ -9761,6 +9761,7 @@ var _components;
     },
     methods: {
         sort: function sort() {
+            console.log('this is happening');
             this.$emit('sort', this.mobileSort);
         }
     }
