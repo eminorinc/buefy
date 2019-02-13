@@ -9730,6 +9730,7 @@ var _components;
 //
 //
 //
+//
 
 
 
@@ -9773,6 +9774,7 @@ var _components;
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
+    staticClass: "table-mobile-sort",
     staticStyle: {
       "z-index": "0",
       "width": "1px",

@@ -1,6 +1,7 @@
 <template>
     <div
         :style="customStyle"
+        class="table-mobile-sort"
         style="z-index:0;width:1px;height:1px;right:83px;position:absolute;
         background:transparent;top:0;-moz-appearance:none;-webkit-appearance: none;"
     >
