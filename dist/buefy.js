@@ -9784,9 +9784,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "-moz-appearance": "none",
       "-webkit-appearance": "none"
     },
-    attrs: {
-      "styl": _vm.customStyle
-    }
+    style: (_vm.customStyle)
   }, [_c('b-select', {
     style: (_vm.customSelectStyle),
     model: {
