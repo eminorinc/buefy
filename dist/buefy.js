@@ -9822,7 +9822,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       domProps: {
         "value": column
       }
-    }, [_vm._v("\n            " + _vm._s(column.mobileSortOptions && index / 2 === 1 ?
+    }, [_vm._v("\n            " + _vm._s(column.mobileSortOptions && index % 2 === 1 ?
       ((column.label) + ": " + (column.mobileSortOptions[0])) :
       ((column.label) + ": " + (column.mobileSortOptions[1]))) + "\n        ")]) : _vm._e()
   }))], 1)
