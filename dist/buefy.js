@@ -9738,6 +9738,8 @@ var _components;
 //
 //
 //
+//
+//
 
 
 
@@ -9752,11 +9754,9 @@ var _components;
         customStyle: String,
         customSelectStyle: String
     },
-
     data: function data() {
         return {
-            mobileSort: this.currentSortColumn,
-            parsedColumns: []
+            mobileSort: this.currentSortColumn
         };
     },
 
@@ -9772,6 +9772,7 @@ var _components;
     },
     watch: {
         mobileSort: function mobileSort(column) {
+            if (this.currentSortColumn === column) return;
             this.$emit('sort', column);
         },
         currentSortColumn: function currentSortColumn(column) {
@@ -9815,13 +9816,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "mobileSort"
     }
-  }, _vm._l((_vm.calculateParsedColumns), function(column, index) {
+  }, _vm._l((_vm.columns), function(column, index) {
     return (column.sortable) ? _c('option', {
       key: index,
       domProps: {
         "value": column
       }
-    }, [_vm._v("\n            " + _vm._s(column.label) + "\n        ")]) : _vm._e()
+    }, [_vm._v("\n            " + _vm._s(column.mobileSortOptions && index / 2 === 1 ?
+      ((column.label) + ": " + (column.mobileSortOptions[0])) :
+      ((column.label) + ": " + (column.mobileSortOptions[1]))) + "\n        ")]) : _vm._e()
   }))], 1)
 },staticRenderFns: []}
 
@@ -9860,7 +9863,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             default: true
         },
         customSort: Function,
-        internal: Boolean // Used internally by Table
+        internal: Boolean, // Used internally by Table
+        mobileSortOptions: Array
     },
     data: function data() {
         return {
