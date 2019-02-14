@@ -1,7 +1,9 @@
 <template>
     <div
         class="control"
-        :class="{ 'is-expanded': expanded, 'has-icons-left': icon }">
+        :class="{ 'is-expanded': expanded, 'has-icons-left': icon }"
+        :style="style"
+    >
         <span class="select" :class="spanClasses">
 
             <select

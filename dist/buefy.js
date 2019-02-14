@@ -5812,6 +5812,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -5828,7 +5830,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         placeholder: String,
         multiple: Boolean,
-        nativeSize: [String, Number]
+        nativeSize: [String, Number],
+        style: String
     },
     data: function data() {
         return {
@@ -5881,7 +5884,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "control",
     class: {
       'is-expanded': _vm.expanded, 'has-icons-left': _vm.icon
-    }
+    },
+    style: (_vm.style)
   }, [_c('span', {
     staticClass: "select",
     class: _vm.spanClasses
