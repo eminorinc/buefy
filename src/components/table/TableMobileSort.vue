@@ -7,13 +7,11 @@
     >
         <b-select :custom-style="customSelectStyle" v-model="mobileSort" >
             <option
-                v-for="(column, index) in columns"
+                v-for="(column, index) in calculateParsedColumns"
                 v-if="column.sortable"
                 :key="index"
                 :value="column">
-                {{ column.mobileSortOptions && index % 2 === 1 ?
-                    `${column.label}: ${column.mobileSortOptions[0]}` :
-                `${column.label}: ${column.mobileSortOptions[1]}` }}
+                {{ calculateLabel(column, index) }}
             </option>
         </b-select>
     </div>
@@ -62,6 +60,16 @@
         methods: {
             sort() {
                 this.$emit('sort', this.mobileSort)
+            },
+            calculateLabel(column, index) {
+                if (column.mobileSortOptions) {
+                    if (index % 2 === 0) {
+                        return `${column.label}: ${column.mobileSortOptions[0]}`
+                    } else {
+                        return `${column.label}: ${column.mobileSortOptions[1]}`
+                    }
+                }
+                return column.label
             }
         }
     }
