@@ -24,7 +24,8 @@
                 default: true
             },
             customSort: Function,
-            internal: Boolean // Used internally by Table
+            internal: Boolean, // Used internally by Table
+            mobileSortOptions: Array
         },
         data() {
             return {
