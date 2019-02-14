@@ -1,7 +1,9 @@
 <template>
     <div
         class="control"
-        :class="{ 'is-expanded': expanded, 'has-icons-left': icon }">
+        :class="{ 'is-expanded': expanded, 'has-icons-left': icon }"
+        :style="style"
+    >
         <span class="select" :class="spanClasses">
 
             <select
@@ -53,7 +55,8 @@
             },
             placeholder: String,
             multiple: Boolean,
-            nativeSize: [String, Number]
+            nativeSize: [String, Number],
+            style: String
         },
         data() {
             return {
