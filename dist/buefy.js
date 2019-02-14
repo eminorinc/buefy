@@ -5831,7 +5831,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         placeholder: String,
         multiple: Boolean,
         nativeSize: [String, Number],
-        style: String
+        customStyle: String
     },
     data: function data() {
         return {
@@ -5885,7 +5885,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     class: {
       'is-expanded': _vm.expanded, 'has-icons-left': _vm.icon
     },
-    style: (_vm.style)
+    style: (_vm.customStyle)
   }, [_c('span', {
     staticClass: "select",
     class: _vm.spanClasses
@@ -9792,7 +9792,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     style: (_vm.customStyle)
   }, [_c('b-select', {
-    style: (_vm.customSelectStyle),
+    attrs: {
+      "custom-style": _vm.customSelectStyle
+    },
     model: {
       value: (_vm.mobileSort),
       callback: function($$v) {
