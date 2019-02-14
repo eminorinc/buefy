@@ -5,7 +5,7 @@
         style="z-index:0;width:1px;height:1px;right:83px;position:absolute;
         background:transparent;top:0;-moz-appearance:none;-webkit-appearance: none;"
     >
-        <b-select :style="customSelectStyle" v-model="mobileSort" >
+        <b-select :custom-style="customSelectStyle" v-model="mobileSort" >
             <option
                 v-for="(column, index) in columns"
                 v-if="column.sortable"
