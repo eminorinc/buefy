@@ -11,7 +11,7 @@
                 v-if="column.sortable"
                 :key="index"
                 :value="column">
-                {{ column.mobileSortOptions && index/2 === 1 ?
+                {{ column.mobileSortOptions && index % 2 === 1 ?
                     `${column.label}: ${column.mobileSortOptions[0]}` :
                 `${column.label}: ${column.mobileSortOptions[1]}` }}
             </option>
