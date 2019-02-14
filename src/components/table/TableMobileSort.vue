@@ -7,7 +7,7 @@
     >
         <b-select :custom-style="customSelectStyle" v-model="mobileSort" >
             <option
-                v-for="(column, index) in columns"
+                v-for="(column, index) in calculateParsedColumns"
                 v-if="column.sortable"
                 :key="index"
                 :value="column">
@@ -34,15 +34,23 @@
             customStyle: String,
             customSelectStyle: String
         },
+
         data() {
             return {
-                mobileSort: this.currentSortColumn
+                mobileSort: this.currentSortColumn,
+                parsedColumns: []
+            }
+        },
+        computed: {
+            calculateParsedColumns() {
+                if (this.columns) {
+                    return this.columns.reduce((res, current) => [...res, current, current], [])
+                }
+                return []
             }
         },
         watch: {
             mobileSort(column) {
-                if (this.currentSortColumn === column) return
-
                 this.$emit('sort', column)
             },
 
