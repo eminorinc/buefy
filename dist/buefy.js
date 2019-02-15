@@ -9761,14 +9761,9 @@ var _components;
     computed: {
         calculateParsedColumns: function calculateParsedColumns() {
             if (this.columns) {
-                var newColumns = this.columns.reduce(function (res, current) {
+                return this.columns.reduce(function (res, current) {
                     return [].concat(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray___default()(res), [current, current]);
                 }, []);
-                return newColumns.map(function (c, i) {
-                    var sortOrder = i % 2 === 0 ? 'asc' : 'desc';
-                    c.sortOrder = sortOrder;
-                    return c;
-                });
             }
             return [];
         }
@@ -9801,6 +9796,15 @@ var _components;
                 }
             }
             return column.label;
+        },
+        calculateColumnValue: function calculateColumnValue(column, index) {
+            var newColumn = column;
+            if (index % 2 === 0) {
+                newColumn.sortOrder = 'asc';
+            } else {
+                newColumn.sortOrder = 'desc';
+            }
+            return newColumn;
         }
     }
 });
@@ -9839,7 +9843,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return (column.sortable) ? _c('option', {
       key: index,
       domProps: {
-        "value": column
+        "value": _vm.calculateColumnValue(column, index)
       }
     }, [_vm._v("\n            " + _vm._s(_vm.calculateLabel(column, index)) + "\n        ")]) : _vm._e()
   }))], 1)
