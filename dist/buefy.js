@@ -9738,9 +9738,6 @@ var _components;
 //
 //
 //
-//
-//
-//
 
 
 
@@ -9757,7 +9754,7 @@ var _components;
     },
     data: function data() {
         return {
-            mobileSort: this.currentSortColumn
+            mobileSort: { column: this.currentSortColumn, index: null }
         };
     },
 
@@ -9772,24 +9769,22 @@ var _components;
         }
     },
     watch: {
-        mobileSort: function mobileSort(column) {
+        mobileSort: function mobileSort(_ref) {
+            var column = _ref.column,
+                index = _ref.index;
+
             if (this.currentSortColumn === column) return;
             console.log('column from mobileSort:');
             console.log(column);
-            this.$emit('sort', column);
+            this.$emit('sort', column, index % 2 === 0 ? 'asc' : 'desc');
         },
         currentSortColumn: function currentSortColumn(column) {
             console.log('column from currentSortColumn:');
             console.log(column);
-            this.mobileSort = column;
+            this.mobileSort.column = column;
         }
     },
     methods: {
-        sort: function sort() {
-            console.log('column from sort method:');
-            console.log(this.mobileSort);
-            this.$emit('sort', this.mobileSort);
-        },
         calculateLabel: function calculateLabel(column, index) {
             if (column.mobileSortOptions) {
                 if (index % 2 === 0) {
@@ -9799,9 +9794,6 @@ var _components;
                 }
             }
             return column.label;
-        },
-        onChange: function onChange() {
-            console.log('changed value');
         }
     }
 });
@@ -9829,11 +9821,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "custom-style": _vm.customSelectStyle
     },
-    on: {
-      "change": function($event) {
-        _vm.onChange()
-      }
-    },
     model: {
       value: (_vm.mobileSort),
       callback: function($$v) {
@@ -9845,7 +9832,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return (column.sortable) ? _c('option', {
       key: index,
       domProps: {
-        "value": column
+        "value": {
+          column: column,
+          index: index
+        }
       }
     }, [_vm._v("\n            " + _vm._s(_vm.calculateLabel(column, index)) + "\n        ")]) : _vm._e()
   }))], 1)
