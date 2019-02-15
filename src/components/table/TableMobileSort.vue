@@ -5,12 +5,15 @@
         style="z-index:0;width:1px;height:1px;right:83px;position:absolute;
         background:transparent;top:0;-moz-appearance:none;-webkit-appearance: none;"
     >
-        <b-select :custom-style="customSelectStyle" v-model="mobileSort" >
+        <b-select
+            :custom-style="customSelectStyle"
+            v-model="mobileSort"
+            @change="onChange">
             <option
                 v-for="(column, index) in calculateParsedColumns"
                 v-if="column.sortable"
                 :key="index"
-                :value="calculateColumnValue(column, index)">
+                :value="column">
                 {{ calculateLabel(column, index) }}
             </option>
         </b-select>
@@ -42,7 +45,13 @@
         computed: {
             calculateParsedColumns() {
                 if (this.columns) {
-                    return this.columns.reduce((res, current) => [...res, current, current], [])
+                    const newColumns = this.columns.reduce(
+                        (res, current) => [...res, current, current], [])
+                    return newColumns.map((c, i) => {
+                        const sortOrder = i % 2 === 0 ? 'asc' : 'desc'
+                        c.sortOrder = sortOrder
+                        return c
+                    })
                 }
                 return []
             }
@@ -76,14 +85,8 @@
                 }
                 return column.label
             },
-            calculateColumnValue(column, index) {
-                const newColumn = column
-                if (index % 2 === 0) {
-                    newColumn.sortOrder = 'asc'
-                } else {
-                    newColumn.sortOrder = 'desc'
-                }
-                return newColumn
+            onChange() {
+                console.log('changed value')
             }
         }
     }

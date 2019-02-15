@@ -9738,6 +9738,9 @@ var _components;
 //
 //
 //
+//
+//
+//
 
 
 
@@ -9761,9 +9764,14 @@ var _components;
     computed: {
         calculateParsedColumns: function calculateParsedColumns() {
             if (this.columns) {
-                return this.columns.reduce(function (res, current) {
+                var newColumns = this.columns.reduce(function (res, current) {
                     return [].concat(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray___default()(res), [current, current]);
                 }, []);
+                return newColumns.map(function (c, i) {
+                    var sortOrder = i % 2 === 0 ? 'asc' : 'desc';
+                    c.sortOrder = sortOrder;
+                    return c;
+                });
             }
             return [];
         }
@@ -9797,14 +9805,8 @@ var _components;
             }
             return column.label;
         },
-        calculateColumnValue: function calculateColumnValue(column, index) {
-            var newColumn = column;
-            if (index % 2 === 0) {
-                newColumn.sortOrder = 'asc';
-            } else {
-                newColumn.sortOrder = 'desc';
-            }
-            return newColumn;
+        onChange: function onChange() {
+            console.log('changed value');
         }
     }
 });
@@ -9832,6 +9834,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "custom-style": _vm.customSelectStyle
     },
+    on: {
+      "change": _vm.onChange
+    },
     model: {
       value: (_vm.mobileSort),
       callback: function($$v) {
@@ -9843,7 +9848,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return (column.sortable) ? _c('option', {
       key: index,
       domProps: {
-        "value": _vm.calculateColumnValue(column, index)
+        "value": column
       }
     }, [_vm._v("\n            " + _vm._s(_vm.calculateLabel(column, index)) + "\n        ")]) : _vm._e()
   }))], 1)
