@@ -9774,13 +9774,17 @@ var _components;
     watch: {
         mobileSort: function mobileSort(column) {
             if (this.currentSortColumn === column) {
+                console.log('do nothing');
+                console.log(column);
                 return;
             }
+            console.log(column);
             if (column.sort_option) {
                 this.$emit('sort', this.mobileSort, column.sort_option);
             }
         },
         currentSortColumn: function currentSortColumn(column) {
+            console.log('setting current sort column');
             this.mobileSort = column;
         }
     },
