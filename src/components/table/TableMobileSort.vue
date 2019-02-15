@@ -42,11 +42,12 @@
         computed: {
             calculateParsedColumns() {
                 if (this.columns) {
-                    return this.columns.reduce((res, current) => {
-                        const current1 = {...current, sort_order: 'asc'}
-                        const current2 = {...current, sort_order: 'desc'}
-                        return [...res, current1, current2]
-                    }, [])
+                    const newColumns = this.columns.reduce(
+                        (res, current) => [...res, current, current], [])
+                    return newColumns.map((c, i) => {
+                        const sortOrder = i % 2 === 0 ? 'asc' : 'desc'
+                        return {...c, sort_order: sortOrder}
+                    })
                 }
                 return []
             }
