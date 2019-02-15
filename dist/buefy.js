@@ -9769,18 +9769,13 @@ var _components;
         }
     },
     watch: {
-        mobileSort: function mobileSort(_ref) {
-            var column = _ref.column,
-                index = _ref.index;
-
-            if (this.currentSortColumn === column) return;
-            console.log('column from mobileSort:');
-            console.log(column);
-            this.$emit('sort', column, index % 2 === 0 ? 'asc' : 'desc');
+        mobileSort: function mobileSort(newVal, oldVal) {
+            if (newVal.column !== oldVal.column || newVal.index !== oldVal.index) {
+                if (this.currentSortColumn === newVal.column && newVal.index === oldVal.index) return;
+                this.$emit('sort', newVal.column, newVal.index % 2 === 0 ? 'asc' : 'desc');
+            }
         },
         currentSortColumn: function currentSortColumn(column) {
-            console.log('column from currentSortColumn:');
-            console.log(column);
             this.mobileSort.column = column;
         }
     },
@@ -9877,8 +9872,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         customSort: Function,
         internal: Boolean, // Used internally by Table
-        mobileSortOptions: Array,
-        sortOrder: String
+        mobileSortOptions: Array
     },
     data: function data() {
         return {
