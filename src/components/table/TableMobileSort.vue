@@ -48,15 +48,14 @@
             }
         },
         watch: {
-            mobileSort({column, index}) {
-                if (this.currentSortColumn === column) return
-                console.log('column from mobileSort:')
-                console.log(column)
-                this.$emit('sort', column, index % 2 === 0 ? 'asc' : 'desc')
+            mobileSort(newVal, oldVal) {
+                if (newVal.column !== oldVal.column || newVal.index !== oldVal.index) {
+                    if (this.currentSortColumn === newVal.column &&
+                        newVal.index === oldVal.index) return
+                    this.$emit('sort', newVal.column, newVal.index % 2 === 0 ? 'asc' : 'desc')
+                }
             },
             currentSortColumn(column) {
-                console.log('column from currentSortColumn:')
-                console.log(column)
                 this.mobileSort.column = column
             }
         },
