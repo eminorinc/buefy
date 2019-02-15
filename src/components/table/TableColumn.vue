@@ -13,7 +13,7 @@
         props: {
             label: String,
             customKey: [String, Number],
-            field: Stringgit 
+            field: String,
             meta: [String, Number, Boolean, Function, Object, Array, Symbol],
             width: [Number, String],
             numeric: Boolean,
