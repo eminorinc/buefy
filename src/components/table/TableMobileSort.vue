@@ -53,6 +53,7 @@
                     console.log('this should be returned')
                     return
                 }
+                console.log(column)
                 this.$emit('sort', column)
             },
 
