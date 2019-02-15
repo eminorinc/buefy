@@ -44,10 +44,12 @@
                 if (this.columns) {
                     const newColumns = this.columns.reduce(
                         (res, current) => [...res, current, current], [])
-                    return newColumns.map((c, i) => {
+                    const newNewCol = newColumns.map((c, i) => {
                         const sortOrder = i % 2 === 0 ? 'asc' : 'desc'
                         return {...c, sort_order: sortOrder}
                     })
+                    console.log(newNewCol)
+                    return newNewCol
                 }
                 return []
             }

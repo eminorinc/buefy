@@ -9767,10 +9767,12 @@ var _components;
                 var newColumns = this.columns.reduce(function (res, current) {
                     return [].concat(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray___default()(res), [current, current]);
                 }, []);
-                return newColumns.map(function (c, i) {
+                var newNewCol = newColumns.map(function (c, i) {
                     var sortOrder = i % 2 === 0 ? 'asc' : 'desc';
                     return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, c, { sort_order: sortOrder });
                 });
+                console.log(newNewCol);
+                return newNewCol;
             }
             return [];
         }
