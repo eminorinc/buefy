@@ -10,7 +10,7 @@
                 v-for="(column, index) in calculateParsedColumns"
                 v-if="column.sortable"
                 :key="index"
-                :value="column">
+                :value="calculateColumnValue(column, index)">
                 {{ calculateLabel(column, index) }}
             </option>
         </b-select>
@@ -42,13 +42,7 @@
         computed: {
             calculateParsedColumns() {
                 if (this.columns) {
-                    const newColumns = this.columns.reduce(
-                        (res, current) => [...res, current, current], [])
-                    return newColumns.map((c, i) => {
-                        const sortOrder = i % 2 === 0 ? 'asc' : 'desc'
-                        c.sortOrder = sortOrder
-                        return c
-                    })
+                    return this.columns.reduce((res, current) => [...res, current, current], [])
                 }
                 return []
             }
@@ -81,6 +75,15 @@
                     }
                 }
                 return column.label
+            },
+            calculateColumnValue(column, index) {
+                const newColumn = column
+                if (index % 2 === 0) {
+                    newColumn.sortOrder = 'asc'
+                } else {
+                    newColumn.sortOrder = 'desc'
+                }
+                return newColumn
             }
         }
     }
