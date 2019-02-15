@@ -42,7 +42,8 @@
         computed: {
             calculateParsedColumns() {
                 if (this.columns) {
-                    return this.columns.reduce((res, current) => [...res, current, current], [])
+                    return this.columns.reduce((res, current) =>
+                        [...res, {...current, sort_order: 'asc'}, {...current, sort_order: 'desc'}], [])
                 }
                 return []
             }
