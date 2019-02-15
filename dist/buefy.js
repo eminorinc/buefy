@@ -9770,7 +9770,10 @@ var _components;
     },
     watch: {
         mobileSort: function mobileSort(column) {
-            if (this.currentSortColumn === column) return;
+            if (this.currentSortColumn === column) {
+                console.log('this should be returned');
+                return;
+            }
             this.$emit('sort', column);
         },
         currentSortColumn: function currentSortColumn(column) {

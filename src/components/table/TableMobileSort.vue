@@ -49,7 +49,10 @@
         },
         watch: {
             mobileSort(column) {
-                if (this.currentSortColumn === column) return
+                if (this.currentSortColumn === column) {
+                    console.log('this should be returned')
+                    return
+                }
                 this.$emit('sort', column)
             },
 
