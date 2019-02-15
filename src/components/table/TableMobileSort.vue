@@ -42,8 +42,11 @@
         computed: {
             calculateParsedColumns() {
                 if (this.columns) {
-                    return this.columns.reduce((res, current) =>
-                        [...res, {...current, sort_order: 'asc'}, {...current, sort_order: 'desc'}], [])
+                    return this.columns.reduce((res, current) => {
+                        const current1 = {...current, sort_order: 'asc'}
+                        const current2 = {...current, sort_order: 'desc'}
+                        return [...res, current1, current2]
+                    }, [])
                 }
                 return []
             }
