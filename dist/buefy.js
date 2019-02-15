@@ -9706,10 +9706,10 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray__ = __webpack_require__(66);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends__ = __webpack_require__(178);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(178);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_defineProperty__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_defineProperty___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_defineProperty__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__select_Select__ = __webpack_require__(28);
@@ -9764,11 +9764,13 @@ var _components;
     computed: {
         calculateParsedColumns: function calculateParsedColumns() {
             if (this.columns) {
-                return this.columns.reduce(function (res, current) {
-                    var current1 = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends___default()({}, current, { sort_order: 'asc' });
-                    var current2 = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends___default()({}, current, { sort_order: 'desc' });
-                    return [].concat(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray___default()(res), [current1, current2]);
+                var newColumns = this.columns.reduce(function (res, current) {
+                    return [].concat(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_toConsumableArray___default()(res), [current, current]);
                 }, []);
+                return newColumns.map(function (c, i) {
+                    var sortOrder = i % 2 === 0 ? 'asc' : 'desc';
+                    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, c, { sort_order: sortOrder });
+                });
             }
             return [];
         }
