@@ -25,7 +25,8 @@
             },
             customSort: Function,
             internal: Boolean, // Used internally by Table
-            mobileSortOptions: Array
+            mobileSortOptions: Array,
+            sortOrder: String
         },
         data() {
             return {
