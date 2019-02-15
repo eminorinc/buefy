@@ -50,17 +50,20 @@
         watch: {
             mobileSort(column) {
                 if (this.currentSortColumn === column) return
-                console.log(`column from mobileSort: ${column}`)
+                console.log('column from mobileSort:')
+                console.log(column)
                 this.$emit('sort', column)
             },
             currentSortColumn(column) {
-                console.log(`column from currentSortColumn: ${column}`)
+                console.log('column from currentSortColumn:')
+                console.log(column)
                 this.mobileSort = column
             }
         },
         methods: {
             sort() {
-                console.log(`column from sort method: ${this.mobileSort}`)
+                console.log('column from sort method:')
+                console.log(this.mobileSort)
                 this.$emit('sort', this.mobileSort)
             },
             calculateLabel(column, index) {
