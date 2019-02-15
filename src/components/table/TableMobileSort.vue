@@ -10,7 +10,7 @@
                 v-for="(column, index) in calculateParsedColumns"
                 v-if="column.sortable"
                 :key="index"
-                :value="column">
+                :value="calculateMobileColumn(column, index)">
                 {{ calculateLabel(column, index) }}
             </option>
         </b-select>
@@ -50,11 +50,11 @@
         watch: {
             mobileSort(column) {
                 if (this.currentSortColumn === column) {
-                    console.log('this should be returned')
                     return
                 }
-                console.log(column)
-                this.$emit('sort', column)
+                if (column.sort_option) {
+                    this.$emit('sort', this.mobileSort, column.sort_option)
+                }
             },
 
             currentSortColumn(column) {
@@ -74,6 +74,13 @@
                     }
                 }
                 return column.label
+            },
+            calculateMobileColumn(column, index) {
+                const sortOption = (index % 2 === 0) ? 'asc' : 'desc'
+                return {
+                    ...column,
+                    sort_option: sortOption
+                }
             }
         }
     }
