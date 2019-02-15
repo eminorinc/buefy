@@ -9764,14 +9764,9 @@ var _components;
     computed: {
         calculateParsedColumns: function calculateParsedColumns() {
             if (this.columns) {
-                var newColumns = this.columns.reduce(function (res, current) {
+                return this.columns.reduce(function (res, current) {
                     return [].concat(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray___default()(res), [current, current]);
                 }, []);
-                return newColumns.map(function (c, i) {
-                    var sortOrder = i % 2 === 0 ? 'asc' : 'desc';
-                    c.sortOrder = sortOrder;
-                    return c;
-                });
             }
             return [];
         }
@@ -9835,7 +9830,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "custom-style": _vm.customSelectStyle
     },
     on: {
-      "change": _vm.onChange
+      "change": function($event) {
+        _vm.onChange()
+      }
     },
     model: {
       value: (_vm.mobileSort),
