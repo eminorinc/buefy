@@ -9,8 +9,9 @@
             :icon="icon"
             :icon-pack="iconPack"
             :maxlength="maxlength"
-            autocomplete="off"
+            :autocomplete="newAutocomplete"
             v-bind="$attrs"
+            @input="onInput"
             @focus="focused"
             @blur="onBlur"
             @keyup.native.esc.prevent="isActive = false"
@@ -26,7 +27,7 @@
                 :class="{ 'is-opened-top': !isListInViewportVertically }"
                 v-show="isActive && (data.length > 0 || hasEmptySlot || hasHeaderSlot)"
                 ref="dropdown">
-                <div class="dropdown-content">
+                <div class="dropdown-content" v-show="isActive">
                     <div
                         v-if="hasHeaderSlot"
                         class="dropdown-item">
@@ -44,7 +45,9 @@
                             :option="option"
                             :index="index"
                         />
-                        <span v-else v-html="getValue(option, true)"/>
+                        <span v-else>
+                            {{ getValue(option, true) }}
+                        </span>
                     </a>
                     <div
                         v-if="data.length === 0 && hasEmptySlot"
@@ -58,7 +61,7 @@
 </template>
 
 <script>
-    import { getValueByPath, escapeRegExpChars } from '../../utils/helpers'
+    import { getValueByPath } from '../../utils/helpers'
     import FormElementMixin from '../../utils/FormElementMixin'
     import Input from '../input/Input'
 
@@ -89,6 +92,7 @@
                 hovered: null,
                 isActive: false,
                 newValue: this.value,
+                newAutocomplete: this.autocomplete || 'off',
                 isListInViewportVertically: true,
                 hasFocus: false,
                 _isAutocomplete: true,
@@ -265,23 +269,13 @@
             /**
              * Return display text for the input.
              * If object, get value from path, or else just the value.
-             * If hightlight, find the text with regex and make bold.
              */
-            getValue(option, isHighlight = false) {
+            getValue(option) {
                 if (!option) return
 
-                const value = typeof option === 'object'
+                return typeof option === 'object'
                     ? getValueByPath(option, this.field)
                     : option
-
-                const escapedValue = typeof this.newValue === 'string'
-                    ? escapeRegExpChars(this.newValue)
-                    : this.newValue
-                const regex = new RegExp(`(${escapedValue})`, 'gi')
-
-                return isHighlight
-                    ? value.replace(regex, '<b>$1</b>')
-                    : value
             },
 
             /**
@@ -320,7 +314,7 @@
                     this.setHovered(this.data[index])
 
                     const list = this.$refs.dropdown.querySelector('.dropdown-content')
-                    const element = list.querySelectorAll('.dropdown-item:not(.is-disabled)')[index]
+                    const element = list.querySelectorAll('a.dropdown-item:not(.is-disabled)')[index]
 
                     if (!element) return
 
@@ -365,6 +359,11 @@
             onBlur(event) {
                 this.hasFocus = false
                 this.$emit('blur', event)
+            },
+            onInput(event) {
+                const currentValue = this.getValue(this.selected)
+                if (currentValue && currentValue === this.newValue) return
+                this.$emit('typing', this.newValue)
             }
         },
         created() {

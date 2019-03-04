@@ -61,6 +61,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>closable</code>',
+                description: 'Add close/delete button to the tag',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>field</code>',
                 description: 'Property of the object (if <code>data</code> is array of objects) to use as display text',
                 type: 'String',
@@ -90,10 +97,10 @@ export default [
             },
             {
                 name: '<code>confirm-key-codes</code>',
-                description: 'Array of key codes which will add a tag when typing (default comma and enter)',
+                description: 'Array of key codes which will add a tag when typing (default comma, enter and tab)',
                 type: 'Array',
                 values: '—',
-                default: '<code>[13, 188]</code>'
+                default: '<code>[13, 188, 9]</code>'
             },
             {
                 name: '<code>on-paste-separators</code>',
@@ -117,6 +124,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>readonly</code>',
+                description: 'Disable input/typing',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: 'Any other native attribute or Autocomplete prop',
                 description: '—',
                 type: '—',
@@ -133,6 +147,11 @@ export default [
             {
                 name: '<code>empty</code>',
                 description: 'Show like an option if <code>data</code> array prop is empty',
+                props: '—'
+            },
+            {
+                name: '<code>header</code>',
+                description: 'Show a custom header as first option',
                 props: '—'
             }
         ],

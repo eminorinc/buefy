@@ -7,6 +7,7 @@
             <label
                 v-if="label"
                 :for="labelFor"
+                :class="customClass"
                 class="label" >
                 {{ label }}
             </label>
@@ -47,10 +48,10 @@
             [FieldBody.name]: FieldBody
         },
         props: {
-            type: String,
+            type: [String, Object],
             label: String,
             labelFor: String,
-            message: [String, Array],
+            message: [String, Array, Object],
             grouped: Boolean,
             groupMultiline: Boolean,
             position: String,
@@ -102,18 +103,30 @@
              * (each element is separated by <br> tag)
              */
             formattedMessage() {
-                if (this.newMessage) {
-                    if (Array.isArray(this.newMessage)) {
-                        return this.newMessage.filter((value) => {
-                            if (value) {
-                                return value
-                            }
-                        }).join(' <br> ')
-                    } else {
-                        return this.newMessage
-                    }
-                } else {
+                if (typeof this.newMessage === 'string') {
                     return this.newMessage
+                } else {
+                    let messages = []
+                    if (Array.isArray(this.newMessage)) {
+                        this.newMessage.forEach((message) => {
+                            if (typeof message === 'string') {
+                                messages.push(message)
+                            } else {
+                                for (let key in message) {
+                                    if (message[key]) {
+                                        messages.push(key)
+                                    }
+                                }
+                            }
+                        })
+                    } else {
+                        for (let key in this.newMessage) {
+                            if (this.newMessage[key]) {
+                                messages.push(key)
+                            }
+                        }
+                    }
+                    return messages.filter((m) => { if (m) return m }).join(' <br> ')
                 }
             }
         },

@@ -15,7 +15,7 @@
                 :tabstop="false"
                 :disabled="disabled"
                 :ellipsis="ellipsis"
-                closable
+                :closable="closable"
                 @close="removeTag(index)">
                 {{ getNormalizedTagText(tag) }}
             </b-tag>
@@ -34,11 +34,16 @@
                 :size="size"
                 :disabled="disabled"
                 :loading="loading"
-                keep-first
+                :autocomplete="nativeAutocomplete"
+                :keep-first="!allowNew"
+                @typing="onTyping"
                 @focus="onFocus"
                 @blur="customOnBlur"
                 @keydown.native="keydown"
                 @select="onSelect">
+                <template :slot="headerSlotName">
+                    <slot name="header" />
+                </template>
                 <template
                     :slot="defaultSlotName"
                     slot-scope="props">
@@ -104,8 +109,13 @@
                 default: 'value'
             },
             autocomplete: Boolean,
+            nativeAutocomplete: String,
             disabled: Boolean,
             ellipsis: Boolean,
+            closable: {
+                type: Boolean,
+                default: true
+            },
             confirmKeyCodes: {
                 type: Array,
                 default: () => [13, 188]
@@ -162,12 +172,20 @@
                 return this.hasEmptySlot ? 'empty' : 'dontrender'
             },
 
+            headerSlotName() {
+                return this.hasHeaderSlot ? 'header' : 'dontrender'
+            },
+
             hasDefaultSlot() {
                 return !!this.$scopedSlots.default
             },
 
             hasEmptySlot() {
                 return !!this.$slots.empty
+            },
+
+            hasHeaderSlot() {
+                return !!this.$slots.header
             },
 
             /**
@@ -199,10 +217,6 @@
              */
             value(value) {
                 this.tags = value
-            },
-
-            newTag(value) {
-                this.$emit('typing', value.trim())
             },
 
             hasInput() {
@@ -286,6 +300,10 @@
                     event.preventDefault()
                     this.addTag()
                 }
+            },
+
+            onTyping($event) {
+                this.$emit('typing', $event.trim())
             }
         }
     }

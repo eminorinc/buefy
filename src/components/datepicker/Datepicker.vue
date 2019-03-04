@@ -19,7 +19,7 @@
                 :rounded="rounded"
                 :loading="loading"
                 :disabled="disabled"
-                :readonly="readonly"
+                :readonly="!editable"
                 v-bind="$attrs"
                 @change.native="onChange($event.target.value)"
                 @focus="$emit('focus', $event)"
@@ -30,7 +30,10 @@
                     <template v-if="$slots.header !== undefined && $slots.header.length">
                         <slot name="header" />
                     </template>
-                    <div v-else class="pagination field is-centered">
+                    <div
+                        v-else
+                        class="pagination field is-centered"
+                        :class="size">
                         <a
                             v-if="!isFirstMonth && !disabled"
                             class="pagination-previous"
@@ -67,7 +70,8 @@
                             <b-field>
                                 <b-select
                                     v-model="focusedDateData.month"
-                                    :disabled="disabled">
+                                    :disabled="disabled"
+                                    :size="size">
                                     <option
                                         v-for="(month, index) in monthNames"
                                         :value="index"
@@ -77,7 +81,8 @@
                                 </b-select>
                                 <b-select
                                     v-model="focusedDateData.year"
-                                    :disabled="disabled">
+                                    :disabled="disabled"
+                                    :size="size">
                                     <option
                                         v-for="year in listOfYears"
                                         :value="year"
@@ -90,21 +95,24 @@
                     </div>
                 </header>
 
-                <b-datepicker-table
-                    v-model="dateSelected"
-                    :day-names="dayNames"
-                    :month-names="monthNames"
-                    :first-day-of-week="firstDayOfWeek"
-                    :min-date="minDate"
-                    :max-date="maxDate"
-                    :focused="focusedDateData"
-                    :disabled="disabled"
-                    :unselectable-dates="unselectableDates"
-                    :unselectable-days-of-week="unselectableDaysOfWeek"
-                    :selectable-dates="selectableDates"
-                    :events="events"
-                    :indicators="indicators"
-                    @close="$refs.dropdown.isActive = false"/>
+                <div class="datepicker-content">
+                    <b-datepicker-table
+                        v-model="dateSelected"
+                        :day-names="dayNames"
+                        :month-names="monthNames"
+                        :first-day-of-week="firstDayOfWeek"
+                        :min-date="minDate"
+                        :max-date="maxDate"
+                        :focused="focusedDateData"
+                        :disabled="disabled"
+                        :unselectable-dates="unselectableDates"
+                        :unselectable-days-of-week="unselectableDaysOfWeek"
+                        :selectable-dates="selectableDates"
+                        :events="events"
+                        :indicators="indicators"
+                        :date-creator="dateCreator"
+                        @close="$refs.dropdown.isActive = false"/>
+                </div>
 
                 <footer
                     v-if="$slots.default !== undefined && $slots.default.length"
@@ -220,14 +228,8 @@
             maxDate: Date,
             focusedDate: Date,
             placeholder: String,
-            readonly: {
-                type: Boolean,
-                default: true
-            },
-            disabled: {
-                type: Boolean,
-                default: false
-            },
+            editable: Boolean,
+            disabled: Boolean,
             unselectableDates: Array,
             unselectableDaysOfWeek: {
                 type: Array,
@@ -258,6 +260,16 @@
                     }
                 }
             },
+            dateCreator: {
+                type: Function,
+                default: () => {
+                    if (typeof config.defaultDateCreator === 'function') {
+                        return config.defaultDateCreator()
+                    } else {
+                        return new Date()
+                    }
+                }
+            },
             mobileNative: {
                 type: Boolean,
                 default: () => {
@@ -272,7 +284,7 @@
             }
         },
         data() {
-            const focusedDate = this.value || this.focusedDate || new Date()
+            const focusedDate = this.value || this.focusedDate || this.dateCreator()
 
             return {
                 dateSelected: this.value,
@@ -292,7 +304,9 @@
             listOfYears() {
                 const latestYear = this.maxDate
                 ? this.maxDate.getFullYear()
-                    : (Math.max(new Date().getFullYear(), this.focusedDateData.year) + 3)
+                    : (Math.max(
+                        this.dateCreator().getFullYear(),
+                        this.focusedDateData.year) + 3)
 
                 const earliestYear = this.minDate
                 ? this.minDate.getFullYear() : 1900
@@ -329,7 +343,7 @@
             * Update internal focusedDateData
             */
             dateSelected(value) {
-                const currentDate = !value ? new Date() : value
+                const currentDate = !value ? this.dateCreator() : value
                 this.focusedDateData = {
                     month: currentDate.getMonth(),
                     year: currentDate.getFullYear()

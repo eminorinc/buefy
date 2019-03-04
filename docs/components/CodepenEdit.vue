@@ -55,8 +55,8 @@
                     css_external: this.externalStyles.join(';'),
                     js_external: this.externalScripts.join(';')
                 })
-                    .replace(/"/g, '&​quot;')
-                    .replace(/'/g, '&apos;')
+                    .replace(/"/g, '\u0022')
+                    .replace(/'/g, '\u0027')
             }
         },
         methods: {
@@ -66,7 +66,7 @@
                 if (start < 0 || end < 0) return
 
                 let html = this.code.substring(start + 10, end)
-                html = html.replace(/src="\/static/g, 'src="https://buefy.github.io/static')
+                html = html.replace(/src="\/static/g, 'src="https://buefy.org/static')
 
                 // FontAwesome
                 if (
@@ -95,6 +95,11 @@
 
                     js = js.replace('require(\'@/data/sample.json\')', dataTest)
 
+                    // Vue
+                    if (this.code.indexOf('vue')) {
+                        js = js.replace('import Vue from \'vue\'', '')
+                    }
+
                     // Axios
                     if (this.code.indexOf('this.$http')) {
                         js = js.replace(/this\.\$http/g, 'axios')
@@ -118,6 +123,12 @@
                     if (this.code.indexOf('sortablejs')) {
                         js = js.replace('import Sortable from \'sortablejs\'', '')
                         this.externalScripts.push('https://cdn.jsdelivr.net/npm/sortablejs@1.6.1/Sortable.min.js')
+                    }
+
+                    // VeeValidate
+                    if (this.code.indexOf('vee-validate')) {
+                        js = js.replace('import VeeValidate from \'vee-validate\'', '')
+                        this.externalScripts.push('https://cdn.jsdelivr.net/npm/vee-validate@2.1.0-beta.9/dist/vee-validate.min.js')
                     }
                 }
 

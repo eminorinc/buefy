@@ -7,6 +7,7 @@
             :columns="newColumns"
             :custom-style="customStyle"
             :custom-select-style="customSelectStyle"
+            :placeholder="mobileSortPlaceholder"
             @sort="(column) => sort(column)"
         />
 
@@ -15,11 +16,11 @@
                 class="table"
                 :class="tableClasses"
                 :tabindex="!focusable ? false : 0"
-                @keydown.prevent.up="pressedArrow(-1)"
-                @keydown.prevent.down="pressedArrow(1)">
+                @keydown.self.prevent.up="pressedArrow(-1)"
+                @keydown.self.prevent.down="pressedArrow(1)">
                 <thead v-if="newColumns.length">
                     <tr>
-                        <th v-if="detailed" width="40px"/>
+                        <th v-if="showDetailRowIcon" width="40px"/>
                         <th class="checkbox-cell" v-if="checkable">
                             <b-checkbox
                                 :value="isAllChecked"
@@ -27,8 +28,7 @@
                                 @change.native="checkAll"/>
                         </th>
                         <th
-                            v-for="(column, index) in newColumns"
-                            v-if="column.visible || column.visible === undefined"
+                            v-for="(column, index) in visibleColumns"
                             :key="index"
                             :class="{
                                 'is-current-sort': currentSortColumn === column,
@@ -53,7 +53,7 @@
                                 <b-icon
                                     v-show="currentSortColumn === column"
                                     icon="arrow-up"
-                                    :icon-pack="iconPack"
+                                    :pack="iconPack"
                                     both
                                     size="is-small"
                                     :class="{ 'is-desc': !isAsc }"/>
@@ -64,16 +64,17 @@
                 <tbody v-if="visibleData.length">
                     <template v-for="(row, index) in visibleData">
                         <tr
-                            :key="index"
+                            :key="customRowKey ? row[customRowKey] : index"
                             :class="[rowClass(row, index), {
                                 'is-selected': row === selected,
-                                'is-checked': isRowChecked(row)
+                                'is-checked': isRowChecked(row),
                             }]"
                             @click="selectRow(row)"
-                            @dblclick="$emit('dblclick', row)">
+                            @dblclick="$emit('dblclick', row)"
+                            @contextmenu="$emit('contextmenu', row, $event)">
 
                             <td
-                                v-if="detailed"
+                                v-if="showDetailRowIcon"
                                 class="chevron-cell"
                             >
                                 <a
@@ -82,7 +83,7 @@
                                     @click.stop="toggleDetails(row)">
                                     <b-icon
                                         icon="chevron-right"
-                                        :icon-pack="iconPack"
+                                        :pack="iconPack"
                                         both
                                         :class="{'is-expanded': isVisibleDetailRow(row)}"/>
                                 </a>
@@ -93,6 +94,7 @@
                                     :disabled="!isRowCheckable(row)"
                                     :value="isRowChecked(row)"
                                     @change.native="checkRow(row)"
+                                    @click.native.stop
                                 />
                             </td>
 
@@ -183,8 +185,6 @@
     import TableMobileSort from './TableMobileSort'
     import TableColumn from './TableColumn'
 
-    import BaseElementMixin from '../../utils/BaseElementMixin'
-
     export default {
         name: 'BTable',
         components: {
@@ -194,7 +194,6 @@
             [TableMobileSort.name]: TableMobileSort,
             [TableColumn.name]: TableColumn
         },
-        mixins: [BaseElementMixin],
         props: {
             data: {
                 type: Array,
@@ -240,6 +239,10 @@
                 type: [Number, String],
                 default: 20
             },
+            showDetailIcon: {
+                type: Boolean,
+                default: true
+            },
             paginationSimple: Boolean,
             paginationSize: String,
             backendSorting: Boolean,
@@ -271,7 +274,10 @@
             customSelectStyle: {
                 type: String,
                 default: ''
-            }
+            },
+            iconPack: String,
+            mobileSortPlaceholder: String,
+            customRowKey: String
         },
         data() {
             return {
@@ -289,6 +295,14 @@
             }
         },
         computed: {
+            /**
+             * return if detailed row tabled
+             * will be with chevron column & icon or not
+             */
+            showDetailRowIcon() {
+                return this.detailed && this.showDetailIcon
+            },
+
             tableClasses() {
                 return {
                     'is-bordered': this.bordered,
@@ -318,6 +332,13 @@
                     const end = parseInt(start, 10) + parseInt(perPage, 10)
                     return this.newData.slice(start, end)
                 }
+            },
+
+            visibleColumns() {
+                if (!this.newColumns) return this.newColumns
+                return this.newColumns.filter((column) => {
+                    return column.visible || column.visible === undefined
+                })
             },
 
             /**
@@ -413,23 +434,8 @@
                 this.newColumns = [...value]
             },
 
-            /**
-             * When newColumns change, call initSort only first time (For example async data).
-             */
-            newColumns(newColumns) {
-                if (newColumns.length && this.firstTimeSort) {
-                    this.initSort()
-                    this.firstTimeSort = false
-                } else if (newColumns.length) {
-                    if (this.currentSortColumn.field) {
-                        for (let i = 0; i < newColumns.length; i++) {
-                            if (newColumns[i].field === this.currentSortColumn.field) {
-                                this.currentSortColumn = newColumns[i]
-                                break
-                            }
-                        }
-                    }
-                }
+            newColumns(value) {
+                this.checkSort()
             },
 
             /**
@@ -459,6 +465,11 @@
                         // Get nested values from objects
                         let newA = getValueByPath(a, key)
                         let newB = getValueByPath(b, key)
+
+                        // sort boolean type
+                        if (typeof newA === 'boolean' && typeof newB === 'boolean') {
+                            return isAsc ? newA - newB : newB - newA
+                        }
 
                         if (!newA && newA !== 0) return 1
                         if (!newB && newB !== 0) return -1
@@ -637,7 +648,26 @@
             checkPredefinedDetailedRows() {
                 const defaultExpandedRowsDefined = this.openedDetailed.length > 0
                 if (defaultExpandedRowsDefined && !this.detailKey.length) {
-                    throw new Error('If you set a predefined opened-detailed, you must provide an unique key using the prop "detail-key"')
+                    throw new Error('If you set a predefined opened-detailed, you must provide a unique key using the prop "detail-key"')
+                }
+            },
+
+            /**
+             * Call initSort only first time (For example async data).
+             */
+            checkSort() {
+                if (this.newColumns.length && this.firstTimeSort) {
+                    this.initSort()
+                    this.firstTimeSort = false
+                } else if (this.newColumns.length) {
+                    if (this.currentSortColumn.field) {
+                        for (let i = 0; i < this.newColumns.length; i++) {
+                            if (this.newColumns[i].field === this.currentSortColumn.field) {
+                                this.currentSortColumn = this.newColumns[i]
+                                break
+                            }
+                        }
+                    }
                 }
             },
 
@@ -716,6 +746,7 @@
 
         mounted() {
             this.checkPredefinedDetailedRows()
+            this.checkSort()
         }
     }
 </script>

@@ -103,6 +103,11 @@ export default [
                 name: '<code>empty</code>',
                 description: 'Show like an option if <code>data</code> array prop is empty',
                 props: '—'
+            },
+            {
+                name: '<code>header</code>',
+                description: 'Show a custom header as first option',
+                props: '—'
             }
         ],
         events: [
@@ -125,6 +130,11 @@ export default [
                 name: '<code>blur</code>',
                 description: 'Triggers when input has lost focus',
                 parameters: '<code>event: $event</code>'
+            },
+            {
+                name: '<code>typing</code>',
+                description: 'Triggers when user is typing',
+                parameters: '<code>value: String</code>'
             },
             {
                 name: '<code>[any].native</code>',

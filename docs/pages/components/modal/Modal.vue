@@ -5,7 +5,7 @@
         <Example :component="ExComponent" :code="ExComponentCode" title="Component">
             <p>
                 A modal with a component. When you want to close the Modal, call the 'close' method —
-                <code>this.$parent.close()</code> — from the component's parent.
+                <code>this.$parent.close()</code> — from the injected component.
             </p>
         </Example>
 
@@ -45,7 +45,7 @@
                 this.$modal.open(props)
 
                 // From outside Vue instance
-                import { ModalProgrammatic } from 'buefy'
+                import { ModalProgrammatic } from 'buefy/dist/components/modal'
                 ModalProgrammatic.open(props)`
             }
         }

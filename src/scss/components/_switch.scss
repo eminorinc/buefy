@@ -13,7 +13,11 @@ $switch-active-background-color: $primary !default;
         margin-left: 0.5em;
     }
     input[type=checkbox] {
-        display: none;
+        position: absolute;
+        left: 0;
+        opacity: 0;
+        outline: none;
+        z-index: -1;
         + .check {
             display: flex;
             align-items: center;
@@ -26,6 +30,7 @@ $switch-active-background-color: $primary !default;
             transition: background $speed-slow $easing;
             &:before {
                 content: "";
+                display: block;
                 border-radius: 1em;
                 width: #{($switch-width - $switch-padding * 2) / 2};
                 height: #{($switch-width - $switch-padding * 2) / 2};

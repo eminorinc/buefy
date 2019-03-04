@@ -1,21 +1,26 @@
-import BaseElementMixin from './BaseElementMixin'
+import config from '../utils/config'
 
 export default {
-    mixins: [BaseElementMixin],
     props: {
         size: String,
         expanded: Boolean,
         loading: Boolean,
         rounded: Boolean,
         icon: String,
+        iconPack: String,
         // Native options to use in HTML5 validation
         autocomplete: String,
-        maxlength: [Number, String]
+        maxlength: [Number, String],
+        useHtml5Validation: {
+            type: Boolean,
+            default: () => config.defaultUseHtml5Validation
+        }
     },
     data() {
         return {
             isValid: true,
-            isFocused: false
+            isFocused: false,
+            newIconPack: this.iconPack || config.defaultIconPack
         }
     },
     computed: {
@@ -37,8 +42,16 @@ export default {
          */
         statusType() {
             if (!this.parentField) return
-
-            return this.parentField.newType
+            if (!this.parentField.newType) return
+            if (typeof this.parentField.newType === 'string') {
+                return this.parentField.newType
+            } else {
+                for (let key in this.parentField.newType) {
+                    if (this.parentField.newType[key]) {
+                        return key
+                    }
+                }
+            }
         },
 
         /**
@@ -90,6 +103,8 @@ export default {
          * and error message to parent if it's a Field.
          */
         checkHtml5Validity() {
+            if (!this.useHtml5Validation) return
+
             if (this.$refs[this.$data._elementRef] === undefined) return
 
             const el = this.$el.querySelector(this.$data._elementRef)
@@ -104,16 +119,18 @@ export default {
             }
             this.isValid = isValid
 
-            if (this.parentField) {
-                // Set type only if not defined
-                if (!this.parentField.type) {
-                    this.parentField.newType = type
+            this.$nextTick(() => {
+                if (this.parentField) {
+                    // Set type only if not defined
+                    if (!this.parentField.type) {
+                        this.parentField.newType = type
+                    }
+                    // Set message only if not defined
+                    if (!this.parentField.message) {
+                        this.parentField.newMessage = message
+                    }
                 }
-                // Set message only if not defined
-                if (!this.parentField.message) {
-                    this.parentField.newMessage = message
-                }
-            }
+            })
 
             return this.isValid
         }

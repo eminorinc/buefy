@@ -38,6 +38,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>striped</code>',
+                description: 'Whether table is striped',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>narrowed</code>',
                 description: 'Makes the cells narrower',
                 type: 'Boolean',
@@ -164,22 +171,29 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>showDetailIcon</code>',
+                description: 'Allow chevron icon and column to be visible',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>opened-detailed</code>',
-                description: 'Allow pre-defined opened details. Ideal to open details via vue-router. (An unique key is required; check detail-key prop)',
+                description: 'Allow pre-defined opened details. Ideal to open details via vue-router. (A unique key is required; check detail-key prop)',
                 type: 'Array',
                 values: '—',
                 default: '<code>[]</code>'
             },
             {
-              name: '<code>has-detailed-visible</code>',
-              description: 'Controls the visibility of the trigger that toggles the detailed rows.',
-              type: 'Function (row: Object)',
-              values: '—',
-              default: '<code>true</code>'
+                name: '<code>has-detailed-visible</code>',
+                description: 'Controls the visibility of the trigger that toggles the detailed rows.',
+                type: 'Function (row: Object)',
+                values: '—',
+                default: '<code>true</code>'
             },
             {
                 name: '<code>detail-key</code>',
-                description: 'Use an unique key of your data Object when use detailed or opened detailed. (id recommended)',
+                description: 'Use a unique key of your data Object when use detailed or opened detailed. (id recommended)',
                 type: 'String',
                 values: '—',
                 default: '—'
@@ -204,6 +218,20 @@ export default [
                 type: 'String',
                 values: '<code>mdi</code>, <code>fa</code>, <code>fas</code>, <code>far</code>, <code>fad</code>, <code>fal</code>',
                 default: '<code>mdi</code>'
+            },
+            {
+                name: '<code>mobile-sort-placeholder</code>',
+                description: 'Text when nothing is selected',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>custom-row-key</code>',
+                description: 'Use a unique key of your <code>data</code> Object for each row. Useful if your <code>data</code> prop has dynamic indices. (id recommended)',
+                type: 'String',
+                values: '-',
+                default: '-'
             }
         ],
         slots: [
@@ -283,6 +311,11 @@ export default [
                 name: '<code>details-close</code>',
                 description: 'Triggers when details is closed',
                 parameters: '<code>row: Object</code>'
+            },
+            {
+                name: '<code>contextmenu</code>',
+                description: 'Triggers when right-click on a row',
+                parameters: '<code>row: Object</code>, <code>row: Object</code>'
             }
         ],
         methods: [
@@ -293,6 +326,11 @@ export default [
             {
                 name: '<code>focus</code>',
                 description: 'Focus table element if is <code>focusable</code>'
+            },
+            {
+                name: '<code>toggleDetails</code>',
+                description: 'Toggle row detail if table is <code>detailed</code>',
+                parameters: '<code>row: Object</code>'
             }
         ]
     },

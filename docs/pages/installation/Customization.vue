@@ -19,7 +19,7 @@
                 <h3 class="subtitle">Set your variables with Sass</h3>
                 <b-message type="is-info">
                     <div class="content">
-                        <p><b>Tip:</b> You can see all Bulma's variables <a href="http://bulma.io/documentation/overview/variables/" target="_blank">here</a>.</p>
+                        <p><b>Tip:</b> You can see <a href="http://bulma.io/documentation/overview/variables/" target="_blank">all of Bulma's variables</a>.</p>
                         <p>There's also two other variables created by Buefy:</p>
                         <ol>
                             <li><code>$speed-slow: 150ms !default</code></li>
@@ -52,13 +52,6 @@
                 <CodeView :code="importing | pre" lang="javascript" expanded/>
             </div>
         </div>
-
-        <hr>
-
-        <b-message type="is-info">
-            If you're still not sure how to proceed, take a look at this <a href="https://github.com/rafaelpimpa/buefy-simple" target="_blank">
-            repository with a basic setup to customize Buefy</a>.
-        </b-message>
     </div>
 </template>
 

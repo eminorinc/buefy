@@ -12,7 +12,19 @@
         <b-message type="is-info">
             Using <code>far</code> or <code>fad</code> while having FontAwesome free tier might have missing icons.
         </b-message>
+        <b-message type="is-info">
+            You can set the <code>defaultIconComponent</code> constructor option to render icons with the
+            <a href="https://www.npmjs.com/package/@fortawesome/vue-fontawesome" target="_blank">vue-fontawesome</a> component.
+        </b-message>
         <Example :component="ExFa" :code="ExFaCode" title="FontAwesome" vertical/>
+
+        <Example :component="ExObjectSyntax" :code="ExObjectSyntaxCode" title="Object syntax" vertical>
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+                <span class="tag is-info">0.7.0</span>
+            </div>
+            <p>You can also use object syntax for <code>type</code> props just like Vuejs <code>class</code>.</p>
+        </Example>
 
         <ApiView :data="api"/>
     </div>
@@ -27,14 +39,19 @@
     import ExFa from './examples/ExFa'
     import ExFaCode from '!!raw-loader!./examples/ExFa'
 
+    import ExObjectSyntax from './examples/ExObjectSyntax'
+    import ExObjectSyntaxCode from '!!raw-loader!./examples/ExObjectSyntax'
+
     export default {
         data() {
             return {
                 api,
                 ExMdi,
                 ExFa,
+                ExObjectSyntax,
                 ExMdiCode,
-                ExFaCode
+                ExFaCode,
+                ExObjectSyntaxCode
             }
         }
     }
