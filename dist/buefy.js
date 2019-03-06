@@ -9831,6 +9831,10 @@ var _components;
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -9906,6 +9910,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     style: (_vm.customStyle)
   }, [_c('b-select', {
+    staticClass: "mobile-sort",
     attrs: {
       "custom-style": _vm.customSelectStyle
     },
