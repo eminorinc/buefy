@@ -7,7 +7,11 @@
             <div class="modal-background" @click="cancel('outside')"/>
             <div class="modal-card animation-content">
                 <header class="modal-card-head" v-if="title">
-                    <p class="modal-card-title">{{ title }}</p>
+                    <div class="modal-card-title">{{ title }}</div>
+                    <button
+                        class="delete"
+                        aria-label="close"
+                        @click="cancel('button')"/>
                 </header>
 
                 <section
@@ -42,13 +46,6 @@
                 </section>
 
                 <footer class="modal-card-foot">
-                    <button
-                        v-if="showCancel"
-                        class="button"
-                        ref="cancelButton"
-                        @click="cancel('button')">
-                        {{ cancelText }}
-                    </button>
                     <button
                         class="button"
                         :class="type"

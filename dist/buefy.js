@@ -6995,9 +6995,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 
@@ -7417,9 +7414,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "modal-card animation-content"
   }, [(_vm.title) ? _c('header', {
     staticClass: "modal-card-head"
-  }, [_c('p', {
+  }, [_c('div', {
     staticClass: "modal-card-title"
-  }, [_vm._v(_vm._s(_vm.title))])]) : _vm._e(), _vm._v(" "), _c('section', {
+  }, [_vm._v(_vm._s(_vm.title))]), _vm._v(" "), _c('button', {
+    staticClass: "delete",
+    attrs: {
+      "aria-label": "close"
+    },
+    on: {
+      "click": function($event) {
+        _vm.cancel('button')
+      }
+    }
+  })]) : _vm._e(), _vm._v(" "), _c('section', {
     staticClass: "modal-card-body",
     class: {
       'is-titleless': !_vm.title, 'is-flex': _vm.hasIcon
@@ -7475,15 +7482,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "help is-danger"
   }, [_vm._v(_vm._s(_vm.validationMessage))])]) : _vm._e()])])]), _vm._v(" "), _c('footer', {
     staticClass: "modal-card-foot"
-  }, [(_vm.showCancel) ? _c('button', {
-    ref: "cancelButton",
-    staticClass: "button",
-    on: {
-      "click": function($event) {
-        _vm.cancel('button')
-      }
-    }
-  }, [_vm._v("\n                    " + _vm._s(_vm.cancelText) + "\n                ")]) : _vm._e(), _vm._v(" "), _c('button', {
+  }, [_c('button', {
     ref: "confirmButton",
     staticClass: "button",
     class: _vm.type,
