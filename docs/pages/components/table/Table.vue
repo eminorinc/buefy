@@ -26,6 +26,10 @@
             <p>A slot called <code>bottom-left</code> is available whenever the table is checkable or paginated, you can add anything in there.</p>
         </Example>
 
+        <Example :component="ExSearchable" :code="ExSearchableCode" title="Searchable">
+            <p>You can add search filtering to rows by using the <code>searchable</code> prop.</p>
+        </Example>
+
         <Example :component="ExPaginationSort" :code="ExPaginationSortCode" title="Pagination and sorting">
             <p>To make a column sortable, add the <code>sortable</code> prop on it and specify a <code>field</code> name.</p>
             <p>You can also use the <code>default-sort</code> prop to determine the default sort column and order. The column must be <code>sortable</code> to work.</p>
@@ -42,6 +46,14 @@
             <p> You can also toggle row detail programmatically using <code>toggleDetails</code> method and <code>:show-detail-icon="false"</code> if you want to hide chevron icon.</p>
         </Example>
 
+        <Example :component="ExCustomDetailedRow" :code="ExCustomDetailedRowCode" title="Custom Detailed rows">
+            <p>You can add anything you like into the <code>detail</code> named scoped by providing the <code>customDetailRow</code> prop to the table.</p>
+            <b-message type="is-warning">
+                Be cautious when using a custom detailed row and toggling the display of columns,
+                as you will have to manage either the content within (with <code>colspan</code>) or the columns themselves dependent on the content displayed.
+            </b-message>
+        </Example>
+
         <Example :component="ExRowStatus" :code="ExRowStatusCode" title="Row status">
             <p>Use the <code>row-class</code> prop to return a class name. It's a function that receives <code>row</code> and <code>index</code> parameters.</p>
             <p>Note that <strong>you have to style the class yourself</strong>.</p>
@@ -49,8 +61,11 @@
 
         <Example :component="ExCustomHeaders" :code="ExCustomHeadersCode" title="Custom headers">
             <p>
-                By adding a scoped slot named <code>header</code> you can customize the headers.
+                By adding a scoped slot named <code>header</code> in table component you can customize the headers.
                 Use the <code>meta</code> prop on column to pass anything you may need.
+            </p>
+            <p>
+                Previous scoped slot named <code>header</code> in table will be deprecated.
             </p>
         </Example>
 
@@ -68,6 +83,13 @@
                 then manage it with <code>page-change</code> and <code>sort</code> events.
             </p>
             <p><small>API from <a href="https://www.themoviedb.org" target="_blank">TMDb</a>.</small></p>
+        </Example>
+
+        <Example :component="ExDraggableRows" :code="ExDraggableRowsCode" title="Draggable rows">
+            <p>
+                Use <code>draggable</code> prop to allow rows to be draggable. Manage dragging using <code>dragstart</code>,
+                <code>dragover</code> and <code>drop</code> events
+            </p>
         </Example>
 
         <ApiView :data="api"/>
@@ -89,11 +111,17 @@
     import ExCheckable from './examples/ExCheckable'
     import ExCheckableCode from '!!raw-loader!./examples/ExCheckable'
 
+    import ExSearchable from './examples/ExSearchable'
+    import ExSearchableCode from '!!raw-loader!./examples/ExSearchable'
+
     import ExPaginationSort from './examples/ExPaginationSort'
     import ExPaginationSortCode from '!!raw-loader!./examples/ExPaginationSort'
 
     import ExDetailedRow from './examples/ExDetailedRow'
     import ExDetailedRowCode from '!!raw-loader!./examples/ExDetailedRow'
+
+    import ExCustomDetailedRow from './examples/ExCustomDetailedRow';
+    import ExCustomDetailedRowCode from '!!raw-loader!./examples/ExCustomDetailedRow';
 
     import ExRowStatus from './examples/ExRowStatus'
     import ExRowStatusCode from '!!raw-loader!./examples/ExRowStatus'
@@ -110,6 +138,9 @@
     import ExAsyncData from './examples/ExAsyncData'
     import ExAsyncDataCode from '!!raw-loader!./examples/ExAsyncData'
 
+    import ExDraggableRows from './examples/ExDraggableRows'
+    import ExDraggableRowsCode from '!!raw-loader!./examples/ExDraggableRows'
+
     export default {
         data() {
             return {
@@ -118,24 +149,30 @@
                 ExSandbox,
                 ExSelection,
                 ExCheckable,
+                ExSearchable,
                 ExPaginationSort,
                 ExDetailedRow,
+                ExCustomDetailedRow,
                 ExRowStatus,
                 ExCustomHeaders,
                 ExToggleColumns,
                 ExFooter,
                 ExAsyncData,
                 ExSimpleCode,
+                ExDraggableRows,
                 ExSandboxCode,
                 ExSelectionCode,
                 ExCheckableCode,
+                ExSearchableCode,
                 ExPaginationSortCode,
                 ExDetailedRowCode,
+                ExCustomDetailedRowCode,
                 ExRowStatusCode,
                 ExCustomHeadersCode,
                 ExToggleColumnsCode,
                 ExFooterCode,
-                ExAsyncDataCode
+                ExAsyncDataCode,
+                ExDraggableRowsCode
             }
         }
     }

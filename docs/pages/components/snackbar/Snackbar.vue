@@ -13,11 +13,13 @@
         </Example>
 
         <ApiView :data="api"/>
+        <VariablesView :data="variables"/>
     </div>
 </template>
 
 <script>
     import api from './api/snackbar'
+    import variables from './variables/snackbar'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
@@ -26,10 +28,11 @@
         data() {
             return {
                 api,
+                variables,
                 ExSimple,
                 ExSimpleCode,
                 outsideVueInstance: `
-                import { Snackbar } from 'buefy/dist/components/snackbar'
+                import { SnackbarProgrammatic as Snackbar } from 'buefy'
                 Snackbar.open('Look at me!')`
             }
         }

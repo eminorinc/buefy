@@ -1,11 +1,11 @@
-$tooltip-arrow-size: 5px;
-$tooltip-arrow-margin: 2px;
+$tooltip-arrow-size: 5px !default;
+$tooltip-arrow-margin: 2px !default;
 
 $tooltip-multiline-sizes: (
     small: 180px,
     medium: 240px,
     large: 300px
-);
+) !default;
 
 @mixin tooltip-arrow($direction, $color) {
     @if ($direction == "is-top") {
@@ -109,6 +109,7 @@ $tooltip-multiline-sizes: (
     }
     &:not([data-label=""]):hover:before,
     &:not([data-label=""]):hover:after {
+        transition-delay: inherit;
         opacity: 1;
         visibility: visible;
     }

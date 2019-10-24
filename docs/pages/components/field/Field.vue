@@ -20,6 +20,17 @@
 
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
+        <Example :component="ExLabelPosition" :code="ExLabelPositionCode" title="Label Position" vertical>
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+                <span class="tag is-info">0.7.8</span>
+            </div>
+            <p>Add the <code>label-position</code> prop to modify field style.</p>
+            <b-message type="is-info">
+                You can set the <code>defaultFieldLabelPosition</code> constructor option to override the default style
+            </b-message>
+        </Example>
+
         <Example :component="ExObjectSyntax" :code="ExObjectSyntaxCode" title="Object syntax" vertical>
             <div class="tags has-addons">
                 <span class="tag is-success">New!</span>
@@ -73,12 +84,22 @@
             <p>Add the <code>custom-class</code> prop to adjust the styling of the label.</p>
         </Example>
 
+        <Example :component="ExLabelSlot" :code="ExLabelSlotCode" title="Label slot">
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+                <span class="tag is-info">0.7.6</span>
+            </div>
+            <p>Use the <code>label</code> slot for complex labels with HTML content or components. Note it overrides the <code>label</code> prop.</p>
+        </Example>
+
         <ApiView :data="api"/>
+        <VariablesView :data="variables"/>
     </div>
 </template>
 
 <script>
     import api from './api/field'
+    import variables from './variables/field'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
@@ -110,10 +131,17 @@
     import ExCustomClass from './examples/ExCustomClass'
     import ExCustomClassCode from '!!raw-loader!./examples/ExCustomClass'
 
+    import ExLabelSlot from './examples/ExLabelSlot'
+    import ExLabelSlotCode from '!!raw-loader!./examples/ExLabelSlot'
+
+    import ExLabelPosition from './examples/ExLabelPosition'
+    import ExLabelPositionCode from '!!raw-loader!./examples/ExLabelPosition'
+
     export default {
         data() {
             return {
                 api,
+                variables,
                 ExSimple,
                 ExObjectSyntax,
                 ExAddons,
@@ -124,6 +152,8 @@
                 ExCombineAddonsGroups,
                 ExHorizontal,
                 ExCustomClass,
+                ExLabelSlot,
+                ExLabelPosition,
                 ExSimpleCode,
                 ExObjectSyntaxCode,
                 ExAddonsCode,
@@ -133,7 +163,9 @@
                 ExPositionsCode,
                 ExCombineAddonsGroupsCode,
                 ExHorizontalCode,
-                ExCustomClassCode
+                ExCustomClassCode,
+                ExLabelSlotCode,
+                ExLabelPositionCode
             }
         }
     }

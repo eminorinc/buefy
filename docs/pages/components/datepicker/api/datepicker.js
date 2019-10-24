@@ -107,6 +107,20 @@ export default [
                 default: '<code>mdi</code>'
             },
             {
+                name: '<code>icon-prev</code>',
+                description: 'Icon to use for previous month',
+                type: 'String',
+                values: '—',
+                default: '<code>chevron-left</code>'
+            },
+            {
+                name: '<code>icon-next</code>',
+                description: 'Icon to use for next month',
+                type: 'String',
+                values: '—',
+                default: '<code>chevron-right</code>'
+            },
+            {
                 name: '<code>unselectable-dates</code>',
                 description: 'Array of unselectable dates',
                 type: 'Array',
@@ -163,6 +177,69 @@ export default [
                 default: 'Bottom right'
             },
             {
+                name: '<code>open-on-focus</code>',
+                description: 'Open datepicker on input focus',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>type</code>',
+                description: 'Type of picker',
+                type: 'String',
+                values: '<code>month</code>',
+                default: '-'
+            },
+            {
+                name: '<code>years-range</code>',
+                description: 'Years range relative to selected year',
+                type: 'Array',
+                values: '-',
+                default: '<code>[-100, 3]</code>'
+            },
+            {
+                name: '<code>nearby-month-days</code>',
+                description: 'Show/Hide nearby month days (prev and next month)',
+                type: 'Boolean',
+                values: '-',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>nearby-selectable-month-days</code>',
+                description: 'When <code>nearby-month-days</code>, it allows to select/unselect nearby month days',
+                type: 'Boolean',
+                values: '-',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>show-number-week</code>',
+                description: 'Display week number',
+                type: 'Boolean',
+                values: '-',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>rules-for-first-week</code>',
+                description: 'Choose the rule to determinate the first week of Year, 4 for ISO or 1 for other',
+                type: 'Number',
+                values: '-',
+                default: '<code>4</code>'
+            },
+            {
+                name: '<code>range</code>',
+                description: 'Flag to allow choosing a range of date',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>multiple</code>',
+                description: 'Flag to allow choosing multiple dates',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',
@@ -184,11 +261,6 @@ export default [
         ],
         events: [
             {
-                name: '<code>input</code>',
-                description: 'Triggers when value is changed',
-                parameters: '<code>value: Date</code>'
-            },
-            {
                 name: '<code>change-month</code>',
                 description: 'Triggers when calendar month is changed',
                 parameters: '<code>month: Number(0-11)</code>'
@@ -197,6 +269,12 @@ export default [
                 name: '<code>change-year</code>',
                 description: 'Triggers when calendar year is changed',
                 parameters: '<code>year: Number</code>'
+            }
+        ],
+        methods: [
+            {
+                name: '<code>toggle</code>',
+                description: 'Toggle activation (picker visibility)'
             }
         ]
     }

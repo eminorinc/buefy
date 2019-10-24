@@ -24,12 +24,40 @@
             <p>You can add your custom header to the datepicker.</p>
         </Example>
 
+        <Example :component="ExMonth" :code="ExMonthCode" title="Month picker" vertical>
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+                <span class="tag is-info">0.7.7</span>
+            </div>
+        </Example>
+
+        <Example :component="ExProgrammatically" :code="ExProgrammaticallyCode" title="Programmatically opening" vertical>
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+                <span class="tag is-info">0.7.7</span>
+            </div>
+        </Example>
+
         <Example :component="ExInline" :code="ExInlineCode" title="Inline" vertical>
             <p>Datepicker can also be shown inline with the <code>inline</code> prop, input is removed, set a <code>v-model</code> to get the date.</p>
         </Example>
 
         <Example :component="ExEvents" :code="ExEventsCode" title="Events" vertical>
             <p>Dates can be passed to the datepicker with the <code>events</code> prop and shown with indicators.</p>
+        </Example>
+
+        <Example :component="ExRangeInput" :code="ExRangeInputCode" title="Select a range of dates" vertical>
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+            </div>
+            <p>Dates selected can be within a range.</p>
+        </Example>
+
+        <Example :component="ExMultipleInput" :code="ExMultipleInputCode" title="Select multiple dates" vertical>
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+            </div>
+            <p>Multiple dates can be selected and don't have to be contiguous.</p>
         </Example>
 
         <ApiView :data="api"/>
@@ -54,11 +82,23 @@
     import ExHeader from './examples/ExHeader'
     import ExHeaderCode from '!!raw-loader!./examples/ExHeader'
 
+    import ExProgrammatically from './examples/ExProgrammatically'
+    import ExProgrammaticallyCode from '!!raw-loader!./examples/ExProgrammatically'
+
+    import ExMonth from './examples/ExMonth'
+    import ExMonthCode from '!!raw-loader!./examples/ExMonth'
+
     import ExInline from './examples/ExInline'
     import ExInlineCode from '!!raw-loader!./examples/ExInline'
 
     import ExEvents from './examples/ExEvents'
     import ExEventsCode from '!!raw-loader!./examples/ExEvents'
+
+    import ExRangeInput from './examples/ExRangeInput'
+    import ExRangeInputCode from '!!raw-loader!./examples/ExRangeInput'
+
+    import ExMultipleInput from './examples/ExMultipleInput'
+    import ExMultipleInputCode from '!!raw-loader!./examples/ExMultipleInput'
 
     export default {
         data() {
@@ -74,10 +114,18 @@
                 ExFooterCode,
                 ExHeader,
                 ExHeaderCode,
+                ExProgrammatically,
+                ExProgrammaticallyCode,
                 ExInline,
                 ExInlineCode,
                 ExEvents,
-                ExEventsCode
+                ExEventsCode,
+                ExMonth,
+                ExMonthCode,
+                ExRangeInput,
+                ExRangeInputCode,
+                ExMultipleInput,
+                ExMultipleInputCode
             }
         }
     }

@@ -6,7 +6,7 @@
                 v-model="name"
                 ref="autocomplete"
                 :data="filteredDataArray"
-                placeholder="e.g. Dog"
+                placeholder="e.g. Orange"
                 @select="option => selected = option">
                 <template slot="header">
                     <a @click="showAddFruit">
@@ -48,7 +48,7 @@
         },
         methods: {
             showAddFruit() {
-                this.$dialog.prompt({
+                this.$buefy.dialog.prompt({
                     message: `Fruit`,
                     inputAttrs: {
                         placeholder: 'e.g. Watermelon',

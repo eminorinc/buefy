@@ -17,8 +17,24 @@ export default [
                     Can be used to render FontAwesome 5 icons with the
                     <a href="https://www.npmjs.com/package/@fortawesome/vue-fontawesome" target="_blank">vue-fontawesome</a> component`,
                 type: 'Component',
-                values: '<code>vue-fontawesome</code>',
-                default: '<code>null</code>'
+                values: 'FontAwesomeIcon component name',
+                default: '<code></code>'
+            },
+            {
+                name: '<code>defaultIconPrev</code>',
+                description: `Icon used internally for prev. —
+                    Used in Datepicker, Pagination and Steps for example`,
+                type: 'String',
+                values: '—',
+                default: '<code>chevron-left</code>'
+            },
+            {
+                name: '<code>defaultIconNext</code>',
+                description: `Icon used internally for next. —
+                    Used in Datepicker, Pagination and Steps for example`,
+                type: 'String',
+                values: '—',
+                default: '<code>chevron-right</code>'
             },
             {
                 name: '<code>defaultContainerElement</code>',
@@ -53,9 +69,10 @@ export default [
             {
                 name: '<code>defaultSnackbarPosition</code>',
                 description: `Default snackbar <code>position</code> attribute.`,
-                type: 'Number',
-                values: '—',
-                default: '<code></code>'
+                type: 'String',
+                values: `<code>is-top-right</code>, <code>is-top</code>, <code>is-top-left</code>,
+                    <code>is-bottom-right</code>, <code>is-bottom</code>, <code>is-bottom-left</code>`,
+                default: '<code>is-bottom-right</code>'
             },
             {
                 name: '<code>defaultToastDuration</code>',
@@ -67,9 +84,25 @@ export default [
             {
                 name: '<code>defaultToastPosition</code>',
                 description: `Default toast <code>position</code> attribute.`,
+                type: 'String',
+                values: `<code>is-top-right</code>, <code>is-top</code>, <code>is-top-left</code>,
+                    <code>is-bottom-right</code>, <code>is-bottom</code>, <code>is-bottom-left</code>`,
+                default: '<code>is-top</code>'
+            },
+            {
+                name: '<code>defaultNotificationDuration</code>',
+                description: `Default notification <code>duration</code> attribute.`,
                 type: 'Number',
                 values: '—',
-                default: '<code></code>'
+                default: '<code>2000</code>'
+            },
+            {
+                name: '<code>defaultNotificationPosition</code>',
+                description: `Default notification <code>position</code> attribute for programmatically opening.`,
+                type: 'String',
+                values: `<code>is-top-right</code>, <code>is-top</code>, <code>is-top-left</code>,
+                    <code>is-bottom-right</code>, <code>is-bottom</code>, <code>is-bottom-left</code>`,
+                default: '<code>is-bottom-right</code>'
             },
             {
                 name: '<code>defaultTooltipType</code>',
@@ -87,6 +120,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>defaultTooltipDelay</code>',
+                description: 'Default tooltip <code>delay</code> attribute.',
+                type: 'Number',
+                values: "—",
+                default: '<code>0</code>'
             },
             {
                 name: '<code>defaultInputAutocomplete</code>',
@@ -142,7 +182,7 @@ export default [
                 description: `Default datepicker <code>unselectable-days-of-week</code> attribute`,
                 type: 'Array',
                 values: '—',
-                default: '-'
+                default: '—'
             },
             {
                 name: '<code>defaultTimeFormatter</code>',
@@ -188,7 +228,7 @@ export default [
             },
             {
                 name: '<code>defaultNoticeQueue</code>',
-                description: 'Default snackbar/toast <code>queue</code> attribute',
+                description: 'Default snackbar/toast/notification <code>queue</code> attribute',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
@@ -201,12 +241,89 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>defaultTaginputHasCounter</code>',
+                description: 'Default taginput <code>has-counter</code> attribute',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>defaultUseHtml5Validation</code>',
                 description: 'Default form components <code>use-html5-validation</code> attribute',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
-            }
+            },
+            {
+                name: '<code>defaultFieldLabelPosition</code>',
+                description: 'Default field position of label',
+                type: 'String',
+                values: '<code>inside</code>,<code>on-border</code>',
+                default: '—'
+            },
+            {
+                name: '<code>defaultDatepickerYearsRange</code>',
+                description: 'Default years range relative to selected year',
+                type: 'Array',
+                values: '—',
+                default: '<code>[-100, 3]</code>'
+            },
+            {
+                name: '<code>defaultDatepickerNearbyMonthDays</code>',
+                description: 'Show/Hide nearby month days (prev and next month)',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>defaultDatepickerNearbySelectableMonthDays</code>',
+                description: 'It allows to select/unselect nearby month days',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>defaultDatepickerShowWeekNumber</code>',
+                description: 'It allows to display week number',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>customIconPacks</code>',
+                description: 'Allows you to define your own custom icon pack to be used in Buefy.',
+                type: 'Object',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>defaultClockpickerHoursLabel</code>',
+                description: `Default clockpicker <code>hours-label</code> attribute`,
+                type: 'String',
+                values: '—',
+                default: `<code>Hours</code>`
+            },
+            {
+                name: '<code>defaultClockpickerMinutesLabel</code>',
+                description: `Default clockpicker <code>minutes-label</code> attribute`,
+                type: 'String',
+                values: '—',
+                default: `<code>Min</code>`
+            },
+            {
+                name: '<code>defaultTrapFocus</code>',
+                description: 'Default config to trap focus inside components (Dialog, Dropdown and Modal).',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>defaultButtonRounded</code>',
+                description: 'Default config to to make all buttons rounded.',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
         ]
     }
 ]

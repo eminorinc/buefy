@@ -31,6 +31,20 @@ export default [
                 default: '<code>asc</code>'
             },
             {
+                name: '<code>sort-icon</code>',
+                description: `Sets the header sorting icon`,
+                type: 'String',
+                values: '-',
+                default: '<code>arrow-up</code>'
+            },
+            {
+                name: '<code>sort-icon-size</code>',
+                description: `Sets the size of the sorting icon`,
+                type: 'String',
+                values: '<code>is-small</code>, <code></code>, <code>is-medium</code>, <code>is-large</code>',
+                default: '<code>is-small</code>'
+            },
+            {
                 name: '<code>bordered</code>',
                 description: 'Border to all cells',
                 type: 'Boolean',
@@ -80,11 +94,25 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>checkbox-position</code>',
+                description: 'Position of the checkbox (if <code>checkable</code> is true)',
+                type: 'String',
+                values: '<code>left</code> or <code>right</code>',
+                default: '<code>left</code>'
+            },
+            {
                 name: '<code>checked-rows</code>',
                 description: 'Set which rows are checked, use the <code>.sync</code> modifier to make it two-way binding',
                 type: 'Array<Object>',
                 values: '—',
                 default: '—'
+            },
+            {
+                name: '<code>header-checkable</code>',
+                description: 'Show check/uncheck all checkbox in table header when <code>checkable</code>',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
             },
             {
                 name: '<code>mobile-cards</code>',
@@ -116,7 +144,7 @@ export default [
             },
             {
                 name: '<code>current-page</code>',
-                description: `Current page of table data (if <code>paginated</code>)`,
+                description: `Current page of table data (if <code>paginated</code>), use the <code>.sync</code> modifier to make it two-way binding`,
                 type: 'Number',
                 values: '—',
                 default: '<code>1</code>'
@@ -150,6 +178,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>pagination-position</code>',
+                description: 'Pagination position (if <code>paginated</code>)',
+                type: 'String',
+                values: '<code>bottom</code>, <code>top</code>, <code>both</code>',
+                default: '<code>bottom</code>'
+            },
+            {
                 name: '<code>per-page</code>',
                 description: 'How many rows per page (if <code>paginated</code>)',
                 type: 'Number',
@@ -171,7 +206,14 @@ export default [
                 default: '<code>false</code>'
             },
             {
-                name: '<code>showDetailIcon</code>',
+                name: '<code>custom-detail-row</code>',
+                description: 'Allow a custom detail row',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>show-detail-icon</code>',
                 description: 'Allow chevron icon and column to be visible',
                 type: 'Boolean',
                 values: '—',
@@ -232,6 +274,42 @@ export default [
                 type: 'String',
                 values: '-',
                 default: '-'
+            },
+            {
+                name: '<code>draggable</code>',
+                description: 'Allows rows to be draggable',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+
+            },
+            {
+                name: '<code>aria-next-label</code>',
+                description: 'Accessibility label for the next page link (if <code>paginated</code>)',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>aria-previous-label</code>',
+                description: 'Accessibility label for the previous page link (if <code>paginated</code>)',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>aria-page-label</code>',
+                description: 'Accessibility label for the page link. If passed, this text will be prepended to the number of the page (if <code>paginated</code>)',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>aria-current-label</code>',
+                description: 'Accessibility label for the current page link. If passed, this text will be prepended to the current page (if <code>paginated</code>)',
+                type: 'String',
+                values: '—',
+                default: '—'
             }
         ],
         slots: [
@@ -262,9 +340,14 @@ export default [
             },
             {
                 name: '<code>bottom-left</code>',
-                description: 'Custom bottom-left (opposite side of pagination)',
+                description: 'Custom bottom-left (opposite side of bottom pagination)',
                 props: '—'
-            }
+            },
+            {
+                name: '<code>top-left</code>',
+                description: 'Custom top-left (opposite side of top pagination)',
+                props: '—'
+            },
         ],
         events: [
             {
@@ -316,6 +399,36 @@ export default [
                 name: '<code>contextmenu</code>',
                 description: 'Triggers when right-click on a row',
                 parameters: '<code>row: Object</code>, <code>row: Object</code>'
+            },
+            {
+                name: '<code>dragstart</code>',
+                description: 'Triggers when starting to drag a row',
+                parameters: '<code> row: Object </code>, <code> dragEvent: Event </code>, <code> index: Number </code>'
+            },
+            {
+                name: '<code>dragend</code>',
+                description: 'Triggers when ending to drag a row',
+                parameters: '<code> row: Object </code>, <code> dragEvent: Event </code>, <code> index: Number </code>'
+            },
+            {
+                name: '<code>drop</code>',
+                description: 'Triggers when dropping on a row',
+                parameters: '<code> row: Object </code>, <code> drop: Event </code>, <code> index: Number </code>'
+            },
+            {
+                name: '<code>dragover</code>',
+                description: 'Triggers when dragging over a row',
+                parameters: '<code> row: Object </code>, <code> dragover: Event </code>, <code> index: Number </code>'
+            },
+            {
+                name: '<code>mouseenter</code>',
+                description: 'Triggers when mouse enters a row',
+                parameters: '<code> row: Object </code>'
+            },
+            {
+                name: '<code>mouseleave</code>',
+                description: 'Triggers when mouse leaves a row',
+                parameters: '<code> row: Object </code>'
             }
         ],
         methods: [
@@ -330,6 +443,16 @@ export default [
             {
                 name: '<code>toggleDetails</code>',
                 description: 'Toggle row detail if table is <code>detailed</code>',
+                parameters: '<code>row: Object</code>'
+            },
+            {
+                name: '<code>openDetailRow</code>',
+                description: 'Open row detail if table is <code>detailed</code>',
+                parameters: '<code>row: Object</code>'
+            },
+            {
+                name: '<code>closeDetailRow</code>',
+                description: 'Close row detail if table is <code>detailed</code>',
                 parameters: '<code>row: Object</code>'
             }
         ]
@@ -406,6 +529,25 @@ export default [
                 type: 'Function (a: Object, b: Object, isAsc: Boolean)',
                 values: '—',
                 default: '—'
+            },
+            {
+                name: '<code>searchable</code>',
+                description: 'Add a input below the header to filter data',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+        ],
+        slots: [
+            {
+                name: 'default',
+                description: '<strong>Required</strong>, table column body',
+                props: '-'
+            },
+            {
+                name: '<code>header</code>',
+                description: 'Table column custom header',
+                props: '<code>column: Vue Object</code>, <code>index: Number</code>'
             }
         ]
     }

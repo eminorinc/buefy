@@ -9,6 +9,10 @@
             :total="total"
             :per-page="perPage"
             @page-change="onPageChange"
+            aria-next-label="Next page"
+            aria-previous-label="Previous page"
+            aria-page-label="Page"
+            aria-current-label="Current page"
 
             backend-sorting
             :default-sort-direction="defaultSortOrder"
@@ -58,8 +62,8 @@
         },
         methods: {
             /*
-             * Load async data
-             */
+        * Load async data
+        */
             loadAsyncData() {
                 const params = [
                     'api_key=bb6f51bef07465653c3e553d6ab161a8',
@@ -94,23 +98,23 @@
                     })
             },
             /*
-             * Handle page-change event
-             */
+        * Handle page-change event
+        */
             onPageChange(page) {
                 this.page = page
                 this.loadAsyncData()
             },
             /*
-             * Handle sort event
-             */
+        * Handle sort event
+        */
             onSort(field, order) {
                 this.sortField = field
                 this.sortOrder = order
                 this.loadAsyncData()
             },
             /*
-             * Type style in relation to the value
-             */
+        * Type style in relation to the value
+        */
             type(value) {
                 const number = parseFloat(value)
                 if (number < 6) {
@@ -124,8 +128,8 @@
         },
         filters: {
             /**
-             * Filter to truncate string, accepts a length parameter
-             */
+        * Filter to truncate string, accepts a length parameter
+        */
             truncate(value, length) {
                 return value.length > length
                     ? value.substr(0, length) + '...'

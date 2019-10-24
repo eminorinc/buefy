@@ -31,6 +31,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>animation</code>',
+                description: 'Custom animation (transition name)',
+                type: 'String',
+                values: '—',
+                default: '<code>fade</code>'
+            },
+            {
                 name: '<code>inline</code>',
                 description: 'Dropdown content (items) are shown inline, trigger is removed',
                 type: 'Boolean',
@@ -50,6 +57,27 @@ export default [
                 type: 'String',
                 values: '<code>list</code>, <code>menu</code>',
                 default: '—'
+            },
+            {
+                name: '<code>multiple</code>',
+                description: 'Allows multiple selections',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>trap-focus</code>',
+                description: `Trap focus inside the dropdown.`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>can-close</code>',
+                description: 'Can close dropdown by pressing escape or by clicking outside',
+                type: 'Boolean, Array',
+                values: '<code>escape</code>, <code>outside</code>',
+                default: '<code>true</code>'
             }
         ],
         slots: [
@@ -106,6 +134,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>focusable</code>',
+                description: 'Item can be focused',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
             },
             {
                 name: '<code>custom</code>',

@@ -5,16 +5,10 @@
                 <div class="columns">
                     <div class="column">
                         <p>
-                            Made with
-                            <b-icon
-                                icon="heart"
-                                type="is-danger"
-                                style="vertical-align: middle;"
-                            />
-                            by
-                            <a href="https://twitter.com/rafaelpimpa" target="_blank">Rafael Beraldo</a>
-                            with great support by
+                            Maintained by
                             <a href="https://twitter.com/walter_tommasi" target="_blank">Walter Tommasi</a>.
+                            Authored by
+                            <a href="https://twitter.com/rafaelpimpa" target="_blank">Rafael Beraldo</a>
                         </p>
                         <p>
                             <small>
@@ -35,11 +29,11 @@
                             </p>
                             <p class="control">
                                 <a
-                                    class="button is-twitter"
-                                    href="https://twitter.com/rafaelpimpa"
+                                    class="button is-patreon"
+                                    href="https://www.patreon.com/jtommy"
                                     target="_blank">
-                                    <b-icon icon="twitter"/>
-                                    <span>Twitter</span>
+                                    <b-icon icon="patreon"/>
+                                    <span>Patreon</span>
                                 </a>
                             </p>
                         </b-field>
@@ -63,6 +57,12 @@
                             to="/extensions"
                             class="navbar-item has-text-weight-semibold">
                             Extensions
+                        </router-link>
+
+                        <router-link
+                            to="/expo"
+                            class="navbar-item has-text-weight-semibold">
+                            Expo
                         </router-link>
                     </div>
                 </div>

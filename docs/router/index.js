@@ -44,6 +44,7 @@ const router = new Router({
                 route('documentation/dialog', 'components/dialog/Dialog'),
                 route('documentation/toast', 'components/toast/Toast'),
                 route('documentation/snackbar', 'components/snackbar/Snackbar'),
+                route('documentation/navbar', 'components/navbar/Navbar'),
                 route('documentation/notification', 'components/notification/Notification'),
                 route('documentation/message', 'components/message/Message'),
                 route('documentation/loading', 'components/loading/Loading'),
@@ -56,20 +57,38 @@ const router = new Router({
                 route('documentation/switch', 'components/switch/Switch'),
                 route('documentation/datepicker', 'components/datepicker/Datepicker'),
                 route('documentation/timepicker', 'components/timepicker/Timepicker'),
+                route('documentation/clockpicker', 'components/clockpicker/Clockpicker'),
                 route('documentation/taginput', 'components/taginput/Taginput'),
                 route('documentation/upload', 'components/upload/Upload'),
                 route('documentation/table', 'components/table/Table'),
                 route('documentation/pagination', 'components/pagination/Pagination'),
+                route('documentation/button', 'components/button/Button'),
+                route('documentation/numberinput', 'components/numberinput/Numberinput'),
+                route('documentation/steps', 'components/steps/Steps'),
+                route('documentation/menu', 'components/menu/Menu'),
+                route('documentation/slider', 'components/slider/Slider'),
+                route('documentation/progress', 'components/progress/Progress'),
+                route('documentation/rate', 'components/rate/Rate'),
+                route('documentation/datetimepicker', 'components/datetimepicker/Datetimepicker'),
                 // Extensions
                 route('extensions', 'Extensions'),
                 route('extensions/cleavejs', 'extensions/cleavejs/Cleavejs'),
                 route('extensions/sortablejs', 'extensions/sortablejs/Sortablejs'),
-                route('extensions/veevalidate', 'extensions/veevalidate/VeeValidate')
+                route('extensions/veevalidate', 'extensions/veevalidate/VeeValidate'),
+                // Expo
+                route('expo', 'Expo')
             ]
         },
         // Global redirect
         { path: '*', redirect: '' }
-    ]
+    ],
+    scrollBehavior(to, from, savedPosition) {
+        if (to.hash) {
+            return {
+                selector: to.hash
+            }
+        }
+    }
 })
 
 router.afterEach(afterEachGlobal)

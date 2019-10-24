@@ -3,7 +3,7 @@
         <p class="content">
             Buefy is compatible with both <a href="https://materialdesignicons.com/" target="_blank">Material Design Icons</a>
             , <a href="http://fontawesome.io/" target="_blank">FontAwesome 4</a>
-            and <a href="https://fontawesome.com/" target="_blank">FontAwesome 5</a>.
+            and <a href="https://fontawesome.com/" target="_blank">FontAwesome 5</a> but you can also add your custom icon pack.<br>
             They adapt to most elements background automatically — but you can also override their colors.
         </p>
 
@@ -12,11 +12,17 @@
         <b-message type="is-info">
             Using <code>far</code> or <code>fad</code> while having FontAwesome free tier might have missing icons.
         </b-message>
+
+        <Example :component="ExFa" :code="ExFaCode" title="FontAwesome" vertical/>
+
         <b-message type="is-info">
             You can set the <code>defaultIconComponent</code> constructor option to render icons with the
             <a href="https://www.npmjs.com/package/@fortawesome/vue-fontawesome" target="_blank">vue-fontawesome</a> component.
         </b-message>
-        <Example :component="ExFa" :code="ExFaCode" title="FontAwesome" vertical/>
+
+        <div class="example is-paddingless">
+            <CodeView :code="usage | pre" lang="javascript" expanded/>
+        </div>
 
         <Example :component="ExObjectSyntax" :code="ExObjectSyntaxCode" title="Object syntax" vertical>
             <div class="tags has-addons">
@@ -24,6 +30,15 @@
                 <span class="tag is-info">0.7.0</span>
             </div>
             <p>You can also use object syntax for <code>type</code> props just like Vuejs <code>class</code>.</p>
+        </Example>
+
+        <Example :component="ExCustom" :code="ExCustomCode" title="Custom Icon Pack" vertical>
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+                <span class="tag is-info">0.8.3</span>
+            </div>
+            <p>You can also add your own custom font
+            (<a href="https://ionicons.com" target="_blank">Ionicons</a> is used in this example).</p>
         </Example>
 
         <ApiView :data="api"/>
@@ -42,6 +57,9 @@
     import ExObjectSyntax from './examples/ExObjectSyntax'
     import ExObjectSyntaxCode from '!!raw-loader!./examples/ExObjectSyntax'
 
+    import ExCustom from './examples/ExCustom'
+    import ExCustomCode from '!!raw-loader!./examples/ExCustom'
+
     export default {
         data() {
             return {
@@ -51,7 +69,29 @@
                 ExObjectSyntax,
                 ExMdiCode,
                 ExFaCode,
-                ExObjectSyntaxCode
+                ExObjectSyntaxCode,
+                ExCustom,
+                ExCustomCode,
+                usage: `
+                import { library } from '@fortawesome/fontawesome-svg-core';
+                // internal icons
+                import { faCheck, faCheckCircle, faInfoCircle, faExclamationTriangle, faExclamationCircle,
+                    faArrowUp, faAngleRight, faAngleLeft, faAngleDown,
+                    faEye, faEyeSlash, faCaretDown, faCaretUp, faUpload } from "@fortawesome/free-solid-svg-icons";
+                import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
+                library.add(faCheck, faCheckCircle, faInfoCircle, faExclamationTriangle, faExclamationCircle,
+                    faArrowUp, faAngleRight, faAngleLeft, faAngleDown,
+                    faEye, faEyeSlash, faCaretDown, faCaretUp, faUpload);
+                Vue.component('vue-fontawesome', FontAwesomeIcon);
+
+                // ...
+
+                import Buefy from 'buefy'
+                Vue.use(Buefy, {
+                  defaultIconComponent: 'vue-fontawesome',
+                  defaultIconPack: 'fas',
+                });`
             }
         }
     }

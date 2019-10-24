@@ -72,6 +72,26 @@ export declare type DialogConfig = {
      * to avoid shifting background, but will set <code>&lt;body&gt;</code> to position fixed, might break some layouts
      */
     scroll?: 'clip' | 'keep';
+
+    /**
+     * Focus on confirm or cancel button (when dialog is not prompt)
+     */
+    focusOn?: 'confirm' | 'cancel';
+
+    /**
+     * Trap focus inside the dialog.
+     */
+    trapFocus?: boolean;
+
+    /**
+     * Role attribute to be passed to modal container for better accessibility.
+     */
+    ariaRole?: 'dialog' | 'alertdialog';
+
+   /**
+    * Improve accessiblity when enabled.
+    */
+   ariaModal?: boolean;
 }
 
 type PromptDialogConfig = DialogConfig & {
@@ -81,7 +101,7 @@ type PromptDialogConfig = DialogConfig & {
     inputAttrs?: any;
 };
 
-export declare const Dialog: {
+export declare const DialogProgrammatic: {
     alert: (params: DialogConfig | string) => any;
     confirm: (params: DialogConfig) => any;
     prompt: (params: PromptDialogConfig) => any;
@@ -112,10 +132,25 @@ declare type ModalConfig = {
     canCancel?: boolean | Array<any>;
     onCancel?: () => any;
     scroll?: 'clip' | 'keep';
+
+    /**
+     * Trap focus inside the dialog.
+     */
+    trapFocus?: boolean;
+
+    /**
+     * Role attribute to be passed to modal container for better accessibility.
+     */
+    ariaRole?: 'dialog' | 'alertdialog';
+
+    /**
+     * Improve accessiblity when enabled.
+     */
+    ariaModal?: boolean;
 }
 
 export declare const ModalProgrammatic: {
-    open: (params: ModalConfig | string) => any;
+    open: (params: ModalConfig | string) => { close: () => any };
 }
 
 export declare type SnackbarConfig = {
@@ -129,8 +164,8 @@ export declare type SnackbarConfig = {
     indefinite?: boolean;
     onAction?: () => any;
 }
-export declare const Snackbar: {
-    open: (params: SnackbarConfig | string) => void;
+export declare const SnackbarProgrammatic: {
+    open: (params: SnackbarConfig | string) => { close: () => any };
 }
 
 export declare type ToastConfig = {
@@ -160,13 +195,27 @@ export declare type ToastConfig = {
      * to absolute. Meaning that the container should be fixed.
      */
     container?: string;
-    
+
     /**
      * disable queue
      */
     queue?: boolean;
 }
 
-export declare const Toast: {
-    open: (params: ToastConfig | string) => any;
+export declare const ToastProgrammatic: {
+    open: (params: ToastConfig | string) => { close: () => any };
+}
+
+export declare type NotificationConfig = {
+    message: string;
+    type?: ColorModifiers;
+    position?: GlobalPositions;
+    duration?: number;
+    container?: string;
+    queue?: boolean;
+    indefinite?: boolean;
+    hasIcon?: boolean;
+}
+export declare const NotificationProgrammatic: {
+    open: (params: NotificationConfig | string) => { close: () => any };
 }

@@ -52,6 +52,13 @@ export default [
                 default: '<code>960</code>'
             },
             {
+                name: '<code>full-screen</code>',
+                description: 'Display modal as full screen',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>has-modal-card</code>',
                 description: `If your modal content has a <code>.modal-card</code> as root, add this prop or the card might break on mobile`,
                 type: 'Boolean',
@@ -66,14 +73,14 @@ export default [
                 default: '<code>zoom-out</code>'
             },
             {
-                name: '<code>canCancel</code>',
+                name: '<code>can-cancel</code>',
                 description: `Can close Modal by clicking 'X', pressing escape or clicking outside`,
                 type: 'Boolean, Array',
                 values: '<code>escape</code>, <code>x</code>, <code>outside</code>',
                 default: `<code>['escape', 'x', 'outside']</code>`
             },
             {
-                name: '<code>onCancel</code>',
+                name: '<code>on-cancel</code>',
                 description: `Callback function to call after user canceled (clicked 'X' / pressed escape / clicked outside)`,
                 type: 'Function',
                 values: '—',
@@ -86,6 +93,34 @@ export default [
                 type: 'String',
                 values: '<code>clip</code>, <code>keep</code>',
                 default: '<code>clip</code>'
+            },
+            {
+                name: '<code>trap-focus</code>',
+                description: `Trap focus inside the modal.`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>custom-class</code>',
+                description: 'CSS classes to be applied on modal',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>aria-role</code>',
+                description: `Role attribute to be passed to modal container for better accessibility.`,
+                type: 'String',
+                values: '<code>dialog</code>, <code>alertdialog</code>',
+                default: '—'
+            },
+            {
+                name: '<code>aria-modal</code>',
+                description: `Improve accessiblity when enabled.`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             }
         ],
         events: [

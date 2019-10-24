@@ -1,4 +1,9 @@
 $snackbar-background-color: $dark !default;
+$snackbar-color: $dark-invert !default;
+$snackbar-border-radius: $radius !default;
+
+$toast-border-radius: 2em !default;
+$toast-opacity: 0.92 !default;
 
 .notices {
     position: fixed;
@@ -17,10 +22,10 @@ $snackbar-background-color: $dark !default;
         margin: 0.5em 0;
         text-align: center;
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
-        border-radius: 2em;
+        border-radius: $toast-border-radius;
         padding: 0.75em 1.5em;
         pointer-events: auto;
-        opacity: 0.92;
+        opacity: $toast-opacity;
         @each $name, $pair in $colors {
             $color: nth($pair, 1);
             $color-invert: nth($pair, 2);
@@ -37,10 +42,10 @@ $snackbar-background-color: $dark !default;
         animation-duration: $speed-slow;
         margin: 0.5em 0;
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
-        border-radius: $radius;
+        border-radius: $snackbar-border-radius;
         pointer-events: auto;
         background: $snackbar-background-color;
-        color: $dark-invert;
+        color: $snackbar-color;
         min-height: 3em;
         .text {
             padding: 0.5em 1em;
@@ -52,6 +57,14 @@ $snackbar-background-color: $dark !default;
             .button {
                 font-weight: $weight-semibold;
                 text-transform: uppercase;
+                background: $snackbar-background-color;
+                border: transparent;
+            }
+            .button:hover {
+                background: darken($snackbar-background-color, 5%);
+            }
+            .button:active {
+                background: darken($snackbar-background-color, 5%);
             }
             @each $name, $pair in $colors {
                 $color: nth($pair, 1);
@@ -73,9 +86,13 @@ $snackbar-background-color: $dark !default;
             overflow: hidden;
         }
     }
+    .notification {
+        max-width: 600px;
+    }
 
     .toast,
-    .snackbar {
+    .snackbar,
+    .notification {
         // Modifiers
         &.is-top, &.is-bottom {
             align-self: center;
@@ -87,7 +104,7 @@ $snackbar-background-color: $dark !default;
             align-self: flex-start;
         }
         &.is-toast {
-            opacity: 0.92;
+            opacity: $toast-opacity;
         }
     }
 
@@ -97,6 +114,15 @@ $snackbar-background-color: $dark !default;
     }
     &.is-bottom {
         flex-direction: column-reverse;
+
+        // Since the columns are reversed, we need to reverse the margin logic from
+        // :not(:last-child) to :not(:first-child)
+        .notification {
+            margin-bottom: 0;
+            &:not(:first-child) {
+                margin-bottom: 1.5rem;
+            }
+        }
     }
     &.has-custom-container {
         position: absolute;

@@ -10,8 +10,8 @@
 
         <div class="navbar-menu">
             <div class="navbar-end">
-                <b-dropdown position="is-bottom-left" aria-role="menu">
-                    <a  
+                <b-dropdown position="is-bottom-left" aria-role="menu" trap-focus>
+                    <a
                         class="navbar-item"
                         slot="trigger"
                         role="button">
@@ -19,7 +19,11 @@
                         <b-icon icon="menu-down"></b-icon>
                     </a>
 
-                    <b-dropdown-item aria-role="menu-item" custom paddingless>
+                    <b-dropdown-item
+                        aria-role="menu-item"
+                        :focusable="false"
+                        custom
+                        paddingless>
                         <form action="">
                             <div class="modal-card" style="width:300px;">
                                 <section class="modal-card-body">
