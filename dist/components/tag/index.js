@@ -1,2 +1,251 @@
-/*! Buefy v0.7.3 | MIT License | github.com/buefy/buefy */
-!(function(e,t){if("object"==typeof exports&&"object"==typeof module)module.exports=t();else if("function"==typeof define&&define.amd)define([],t);else{var n=t();for(var o in n)("object"==typeof exports?exports:e)[o]=n[o]}})("undefined"!=typeof self?self:this,(function(){return (function(e){function t(o){if(n[o])return n[o].exports;var s=n[o]={i:o,l:!1,exports:{}};return e[o].call(s.exports,s,s.exports,t),s.l=!0,s.exports}var n={};return t.m=e,t.c=n,t.d=function(e,n,o){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:o})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="/",t(t.s=252)})({111:function(e,t,n){var o=n(2)(n(124),n(125),null,null,null);e.exports=o.exports},12:function(e,t,n){"use strict";n.d(t,"c",(function(){return o})),n.d(t,"a",(function(){return s})),n.d(t,"b",(function(){return r}));var o=function(e){"undefined"!=typeof window&&window.Vue&&window.Vue.use(e)},s=function(e,t){e.component(t.name,t)},r=function(e,t,n){e.prototype[t]=n}},124:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default={name:"BTag",props:{attached:Boolean,closable:Boolean,type:String,size:String,rounded:Boolean,disabled:Boolean,ellipsis:Boolean,tabstop:{type:Boolean,default:!0}},methods:{close:function(){this.disabled||this.$emit("close")}}}},125:function(e,t){e.exports={render:function(){var e=this,t=e.$createElement,n=e._self._c||t;return e.attached&&e.closable?n("div",{staticClass:"tags has-addons"},[n("span",{staticClass:"tag",class:[e.type,e.size,{"is-rounded":e.rounded}]},[n("span",{class:{"has-ellipsis":e.ellipsis}},[e._t("default")],2)]),e._v(" "),n("a",{staticClass:"tag is-delete",class:[e.size,{"is-rounded":e.rounded}],attrs:{role:"button",tabindex:!!e.tabstop&&0,disabled:e.disabled},on:{click:function(t){e.close()},keyup:function(t){if(!("button"in t)&&e._k(t.keyCode,"delete",[8,46],t.key))return null;t.preventDefault(),e.close()}}})]):n("span",{staticClass:"tag",class:[e.type,e.size,{"is-rounded":e.rounded}]},[n("span",{class:{"has-ellipsis":e.ellipsis}},[e._t("default")],2),e._v(" "),e.closable?n("a",{staticClass:"delete is-small",attrs:{role:"button",disabled:e.disabled,tabindex:!!e.tabstop&&0},on:{click:function(t){e.close()},keyup:function(t){if(!("button"in t)&&e._k(t.keyCode,"delete",[8,46],t.key))return null;t.preventDefault(),e.close()}}}):e._e()])},staticRenderFns:[]}},2:function(e,t){e.exports=function(e,t,n,o,s){var r,a=e=e||{},i=typeof e.default;"object"!==i&&"function"!==i||(r=e,a=e.default);var l="function"==typeof a?a.options:a;t&&(l.render=t.render,l.staticRenderFns=t.staticRenderFns),o&&(l._scopeId=o);var u;if(s?(u=function(e){e=e||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext,e||"undefined"==typeof __VUE_SSR_CONTEXT__||(e=__VUE_SSR_CONTEXT__),n&&n.call(this,e),e&&e._registeredComponents&&e._registeredComponents.add(s)},l._ssrRegister=u):n&&(u=n),u){var c=l.functional,d=c?l.render:l.beforeCreate;c?l.render=function(e,t){return u.call(t),d(e,t)}:l.beforeCreate=d?[].concat(d,u):[u]}return{esModule:r,exports:a,options:l}}},206:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var o=n(111),s=n.n(o),r=n(207),a=n.n(r),i=n(12);n.d(t,"Tag",(function(){return s.a})),n.d(t,"Taglist",(function(){return a.a}));var l={install:function(e){Object(i.a)(e,s.a),Object(i.a)(e,a.a)}};Object(i.c)(l),t.default=l},207:function(e,t,n){var o=n(2)(n(208),n(209),null,null,null);e.exports=o.exports},208:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default={name:"BTaglist",props:{attached:Boolean}}},209:function(e,t){e.exports={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"tags",class:{"has-addons":e.attached}},[e._t("default")],2)},staticRenderFns:[]}},252:function(e,t,n){e.exports=n(206)}})}));
+/*! Buefy v0.8.6 | MIT License | github.com/buefy/buefy */
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports)
+        : typeof define === 'function' && define.amd ? define(['exports'], factory)
+            : (global = global || self, factory(global.Tag = {}))
+}(this, function (exports) {
+    'use strict'
+
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    var script = {
+        name: 'BTag',
+        props: {
+            attached: Boolean,
+            closable: Boolean,
+            type: String,
+            size: String,
+            rounded: Boolean,
+            disabled: Boolean,
+            ellipsis: Boolean,
+            tabstop: {
+                type: Boolean,
+                default: true
+            },
+            ariaCloseLabel: String
+        },
+        methods: {
+        /**
+        * Emit close event when delete button is clicked
+        * or delete key is pressed.
+        */
+            close: function close() {
+                if (this.disabled) return
+                this.$emit('close')
+            }
+        }
+    }
+
+    function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier
+    /* server only */
+        , shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
+        if (typeof shadowMode !== 'boolean') {
+            createInjectorSSR = createInjector
+            createInjector = shadowMode
+            shadowMode = false
+        } // Vue.extend constructor export interop.
+
+        var options = typeof script === 'function' ? script.options : script // render functions
+
+        if (template && template.render) {
+            options.render = template.render
+            options.staticRenderFns = template.staticRenderFns
+            options._compiled = true // functional template
+
+            if (isFunctionalTemplate) {
+                options.functional = true
+            }
+        } // scopedId
+
+        if (scopeId) {
+            options._scopeId = scopeId
+        }
+
+        var hook
+
+        if (moduleIdentifier) {
+        // server build
+            hook = function hook(context) {
+                // 2.3 injection
+                context = context || // cached call
+          this.$vnode && this.$vnode.ssrContext || // stateful
+          this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext // functional
+                // 2.2 with runInNewContext: true
+
+                if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+                    context = __VUE_SSR_CONTEXT__
+                } // inject component styles
+
+                if (style) {
+                    style.call(this, createInjectorSSR(context))
+                } // register component module identifier for async chunk inference
+
+                if (context && context._registeredComponents) {
+                    context._registeredComponents.add(moduleIdentifier)
+                }
+            } // used by ssr in case component is cached and beforeCreate
+            // never gets called
+
+            options._ssrRegister = hook
+        } else if (style) {
+            hook = shadowMode ? function () {
+                style.call(this, createInjectorShadow(this.$root.$options.shadowRoot))
+            } : function (context) {
+                style.call(this, createInjector(context))
+            }
+        }
+
+        if (hook) {
+            if (options.functional) {
+                // register for functional component in vue file
+                var originalRender = options.render
+
+                options.render = function renderWithStyleInjection(h, context) {
+                    hook.call(context)
+                    return originalRender(h, context)
+                }
+            } else {
+                // inject component registration as beforeCreate hook
+                var existing = options.beforeCreate
+                options.beforeCreate = existing ? [].concat(existing, hook) : [hook]
+            }
+        }
+
+        return script
+    }
+
+    var normalizeComponent_1 = normalizeComponent
+
+    /* script */
+    const __vue_script__ = script
+
+    /* template */
+    var __vue_render__ = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return (_vm.attached && _vm.closable) ? _c('div', {staticClass: 'tags has-addons'}, [_c('span', {staticClass: 'tag', class: [_vm.type, _vm.size, { 'is-rounded': _vm.rounded }]}, [_c('span', {class: { 'has-ellipsis': _vm.ellipsis }}, [_vm._t('default')], 2)]), _vm._v(' '), _c('a', {staticClass: 'tag is-delete', class: [_vm.size, { 'is-rounded': _vm.rounded }], attrs: {'role': 'button', 'aria-label': _vm.ariaCloseLabel, 'tabindex': _vm.tabstop ? 0 : false, 'disabled': _vm.disabled}, on: {'click': function ($event) { _vm.close() }, 'keyup': function ($event) { if (!('button' in $event) && _vm._k($event.keyCode, 'delete', [8, 46], $event.key)) { return null }$event.preventDefault(); _vm.close() }}})]) : _c('span', {staticClass: 'tag', class: [_vm.type, _vm.size, { 'is-rounded': _vm.rounded }]}, [_c('span', {class: { 'has-ellipsis': _vm.ellipsis }}, [_vm._t('default')], 2), _vm._v(' '), (_vm.closable) ? _c('a', {staticClass: 'delete is-small', attrs: {'role': 'button', 'aria-label': _vm.ariaCloseLabel, 'disabled': _vm.disabled, 'tabindex': _vm.tabstop ? 0 : false}, on: {'click': function ($event) { _vm.close() }, 'keyup': function ($event) { if (!('button' in $event) && _vm._k($event.keyCode, 'delete', [8, 46], $event.key)) { return null }$event.preventDefault(); _vm.close() }}}) : _vm._e()]) }
+    var __vue_staticRenderFns__ = []
+
+    /* style */
+    const __vue_inject_styles__ = undefined
+    /* scoped */
+    const __vue_scope_id__ = undefined
+    /* module identifier */
+    const __vue_module_identifier__ = undefined
+    /* functional template */
+    const __vue_is_functional_template__ = false
+    /* style inject */
+
+    /* style inject SSR */
+
+    var Tag = normalizeComponent_1(
+        { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+        __vue_inject_styles__,
+        __vue_script__,
+        __vue_scope_id__,
+        __vue_is_functional_template__,
+        __vue_module_identifier__,
+        undefined,
+        undefined
+    )
+
+    //
+    //
+    //
+    //
+    //
+    //
+    var script$1 = {
+        name: 'BTaglist',
+        props: {
+            attached: Boolean
+        }
+    }
+
+    /* script */
+    const __vue_script__$1 = script$1
+
+    /* template */
+    var __vue_render__$1 = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('div', {staticClass: 'tags', class: { 'has-addons': _vm.attached }}, [_vm._t('default')], 2) }
+    var __vue_staticRenderFns__$1 = []
+
+    /* style */
+    const __vue_inject_styles__$1 = undefined
+    /* scoped */
+    const __vue_scope_id__$1 = undefined
+    /* module identifier */
+    const __vue_module_identifier__$1 = undefined
+    /* functional template */
+    const __vue_is_functional_template__$1 = false
+    /* style inject */
+
+    /* style inject SSR */
+
+    var Taglist = normalizeComponent_1(
+        { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
+        __vue_inject_styles__$1,
+        __vue_script__$1,
+        __vue_scope_id__$1,
+        __vue_is_functional_template__$1,
+        __vue_module_identifier__$1,
+        undefined,
+        undefined
+    )
+
+    var use = function use(plugin) {
+        if (typeof window !== 'undefined' && window.Vue) {
+            window.Vue.use(plugin)
+        }
+    }
+    var registerComponent = function registerComponent(Vue, component) {
+        Vue.component(component.name, component)
+    }
+
+    var Plugin = {
+        install: function install(Vue) {
+            registerComponent(Vue, Tag)
+            registerComponent(Vue, Taglist)
+        }
+    }
+    use(Plugin)
+
+    exports.default = Plugin
+
+    Object.defineProperty(exports, '__esModule', { value: true })
+}))

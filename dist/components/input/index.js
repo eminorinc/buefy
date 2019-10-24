@@ -1,2 +1,761 @@
-/*! Buefy v0.7.3 | MIT License | github.com/buefy/buefy */
-!(function(e,t){if("object"==typeof exports&&"object"==typeof module)module.exports=t();else if("function"==typeof define&&define.amd)define([],t);else{var n=t();for(var i in n)("object"==typeof exports?exports:e)[i]=n[i]}})("undefined"!=typeof self?self:this,(function(){return (function(e){function t(i){if(n[i])return n[i].exports;var r=n[i]={i:i,l:!1,exports:{}};return e[i].call(r.exports,r,r.exports,t),r.l=!0,r.exports}var n={};return t.m=e,t.c=n,t.d=function(e,n,i){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:i})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="/",t(t.s=240)})({0:function(e,t,n){e.exports=!n(7)((function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a}))},1:function(e,t){var n=e.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=n)},10:function(e,t,n){var i=n(6);e.exports=function(e){if(!i(e))throw TypeError(e+" is not an object!");return e}},12:function(e,t,n){"use strict";n.d(t,"c",(function(){return i})),n.d(t,"a",(function(){return r})),n.d(t,"b",(function(){return o}));var i=function(e){"undefined"!=typeof window&&window.Vue&&window.Vue.use(e)},r=function(e,t){e.component(t.name,t)},o=function(e,t,n){e.prototype[t]=n}},13:function(e,t){e.exports=function(e,t){return{enumerable:!(1&e),configurable:!(2&e),writable:!(4&e),value:t}}},14:function(e,t,n){"use strict";var i={defaultContainerElement:null,defaultIconPack:"mdi",defaultIconComponent:null,defaultDialogConfirmText:null,defaultDialogCancelText:null,defaultSnackbarDuration:3500,defaultSnackbarPosition:null,defaultToastDuration:2e3,defaultToastPosition:null,defaultTooltipType:"is-primary",defaultTooltipAnimated:!1,defaultInputAutocomplete:"on",defaultDateFormatter:null,defaultDateParser:null,defaultDateCreator:null,defaultDayNames:null,defaultMonthNames:null,defaultFirstDayOfWeek:null,defaultUnselectableDaysOfWeek:null,defaultTimeFormatter:null,defaultTimeParser:null,defaultModalCanCancel:null,defaultModalScroll:null,defaultDatepickerMobileNative:!0,defaultTimepickerMobileNative:!0,defaultNoticeQueue:!0,defaultInputHasCounter:!0,defaultUseHtml5Validation:!0};t.a=i},15:function(e,t,n){var i=n(6);e.exports=function(e,t){if(!i(e))return e;var n,r;if(t&&"function"==typeof(n=e.toString)&&!i(r=n.call(e)))return r;if("function"==typeof(n=e.valueOf)&&!i(r=n.call(e)))return r;if(!t&&"function"==typeof(n=e.toString)&&!i(r=n.call(e)))return r;throw TypeError("Can't convert object to primitive value")}},152:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var i=n(73),r=n.n(i),o=n(12);n.d(t,"Input",(function(){return r.a}));var s={install:function(e){Object(o.a)(e,r.a)}};Object(o.c)(s),t.default=s},17:function(e,t,n){var i=n(1),r=n(3),o=n(30),s=n(9),a=n(5),u=function(e,t,n){var c,l,f,p=e&u.F,d=e&u.G,h=e&u.S,m=e&u.P,y=e&u.B,v=e&u.W,w=d?r:r[t]||(r[t]={}),g=w.prototype,x=d?i:h?i[t]:(i[t]||{}).prototype;d&&(n=t);for(c in n)(l=!p&&x&&void 0!==x[c])&&a(w,c)||(f=l?x[c]:n[c],w[c]=d&&"function"!=typeof x[c]?n[c]:y&&l?o(f,i):v&&x[c]==f?(function(e){var t=function(t,n,i){if(this instanceof e){switch(arguments.length){case 0:return new e;case 1:return new e(t);case 2:return new e(t,n)}return new e(t,n,i)}return e.apply(this,arguments)};return t.prototype=e.prototype,t})(f):m&&"function"==typeof f?o(Function.call,f):f,m&&((w.virtual||(w.virtual={}))[c]=f,e&u.R&&g&&!g[c]&&s(g,c,f)))};u.F=1,u.G=2,u.S=4,u.P=8,u.B=16,u.W=32,u.U=64,u.R=128,e.exports=u},2:function(e,t){e.exports=function(e,t,n,i,r){var o,s=e=e||{},a=typeof e.default;"object"!==a&&"function"!==a||(o=e,s=e.default);var u="function"==typeof s?s.options:s;t&&(u.render=t.render,u.staticRenderFns=t.staticRenderFns),i&&(u._scopeId=i);var c;if(r?(c=function(e){e=e||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext,e||"undefined"==typeof __VUE_SSR_CONTEXT__||(e=__VUE_SSR_CONTEXT__),n&&n.call(this,e),e&&e._registeredComponents&&e._registeredComponents.add(r)},u._ssrRegister=c):n&&(c=n),c){var l=u.functional,f=l?u.render:u.beforeCreate;l?u.render=function(e,t){return c.call(t),f(e,t)}:u.beforeCreate=f?[].concat(f,c):[c]}return{esModule:o,exports:s,options:u}}},20:function(e,t,n){e.exports=!n(0)&&!n(7)((function(){return 7!=Object.defineProperty(n(21)("div"),"a",{get:function(){return 7}}).a}))},21:function(e,t,n){var i=n(6),r=n(1).document,o=i(r)&&i(r.createElement);e.exports=function(e){return o?r.createElement(e):{}}},240:function(e,t,n){e.exports=n(152)},26:function(e,t,n){"use strict";t.__esModule=!0;var i=n(49),r=(function(e){return e&&e.__esModule?e:{default:e}})(i);t.default=function(e,t,n){return t in e?(0,r.default)(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}},3:function(e,t){var n=e.exports={version:"2.5.7"};"number"==typeof __e&&(__e=n)},30:function(e,t,n){var i=n(32);e.exports=function(e,t,n){if(i(e),void 0===t)return e;switch(n){case 1:return function(n){return e.call(t,n)};case 2:return function(n,i){return e.call(t,n,i)};case 3:return function(n,i,r){return e.call(t,n,i,r)}}return function(){return e.apply(t,arguments)}}},31:function(e,t,n){var i=n(2)(n(52),n(53),null,null,null);e.exports=i.exports},32:function(e,t){e.exports=function(e){if("function"!=typeof e)throw TypeError(e+" is not a function!");return e}},4:function(e,t,n){var i=n(10),r=n(20),o=n(15),s=Object.defineProperty;t.f=n(0)?Object.defineProperty:function(e,t,n){if(i(e),t=o(t,!0),i(n),r)try{return s(e,t,n)}catch(e){}if("get"in n||"set"in n)throw TypeError("Accessors not supported!");return"value"in n&&(e[t]=n.value),e}},46:function(e,t,n){"use strict";var i=n(14);t.a={props:{size:String,expanded:Boolean,loading:Boolean,rounded:Boolean,icon:String,iconPack:String,autocomplete:String,maxlength:[Number,String],useHtml5Validation:{type:Boolean,default:function(){return i.a.defaultUseHtml5Validation}}},data:function(){return{isValid:!0,isFocused:!1,newIconPack:this.iconPack||i.a.defaultIconPack}},computed:{parentField:function(){for(var e=this.$parent,t=0;t<3;t++)e&&!e.$data._isField&&(e=e.$parent);return e},statusType:function(){if(this.parentField&&this.parentField.newType){if("string"==typeof this.parentField.newType)return this.parentField.newType;for(var e in this.parentField.newType)if(this.parentField.newType[e])return e}},statusMessage:function(){if(this.parentField)return this.parentField.newMessage},iconSize:function(){switch(this.size){case"is-small":return this.size;case"is-medium":return;case"is-large":return"mdi"===this.newIconPack?"is-medium":""}}},methods:{focus:function(){var e=this;void 0!==this.$data._elementRef&&this.$nextTick((function(){return e.$el.querySelector(e.$data._elementRef).focus()}))},onBlur:function(e){this.isFocused=!1,this.$emit("blur",e),this.checkHtml5Validity()},onFocus:function(e){this.isFocused=!0,this.$emit("focus",e)},checkHtml5Validity:function(){var e=this;if(this.useHtml5Validation&&void 0!==this.$refs[this.$data._elementRef]){var t=this.$el.querySelector(this.$data._elementRef),n=null,i=null,r=!0;return t.checkValidity()||(n="is-danger",i=t.validationMessage,r=!1),this.isValid=r,this.$nextTick((function(){e.parentField&&(e.parentField.type||(e.parentField.newType=n),e.parentField.message||(e.parentField.newMessage=i))})),this.isValid}}}}},49:function(e,t,n){e.exports={default:n(50),__esModule:!0}},5:function(e,t){var n={}.hasOwnProperty;e.exports=function(e,t){return n.call(e,t)}},50:function(e,t,n){n(51);var i=n(3).Object;e.exports=function(e,t,n){return i.defineProperty(e,t,n)}},51:function(e,t,n){var i=n(17);i(i.S+i.F*!n(0),"Object",{defineProperty:n(4).f})},52:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var i=n(14);t.default={name:"BIcon",props:{type:[String,Object],pack:String,icon:String,size:String,customSize:String,customClass:String,both:Boolean},computed:{newIcon:function(){return"mdi"===this.newPack?this.newPack+"-"+this.icon:this.addFAPrefix(this.getEquivalentIconOf(this.icon))},newPack:function(){return this.pack||i.a.defaultIconPack},newType:function(){if(this.type){var e=[];if("string"==typeof this.type)e=this.type.split("-");else for(var t in this.type)if(this.type[t]){e=t.split("-");break}if(!(e.length<=1))return"has-text-"+e[1]}},newCustomSize:function(){return this.customSize||this.customSizeByPack},customSizeByPack:function(){var e="mdi"===this.newPack?"mdi-24px":this.addFAPrefix("lg"),t="mdi"===this.newPack?"mdi-36px":this.addFAPrefix("2x"),n="mdi"===this.newPack?"mdi-48px":this.addFAPrefix("3x");switch(this.size){case"is-small":return;case"is-medium":return t;case"is-large":return n;default:return e}},useIconComponent:function(){return i.a.defaultIconComponent}},methods:{addFAPrefix:function(e){return this.useIconComponent?e:"fa-"+e},getEquivalentIconOf:function(e){if(!this.both)return e;switch(e){case"check":return"check";case"information":return"info-circle";case"check-circle":return"check-circle";case"alert":return"exclamation-triangle";case"alert-circle":return"exclamation-circle";case"arrow-up":return"arrow-up";case"chevron-right":return"angle-right";case"chevron-left":return"angle-left";case"chevron-down":return"angle-down";case"eye":return"eye";case"eye-off":return"eye-slash";case"menu-down":return"caret-down";case"menu-up":return"caret-up";default:return e}}}}},53:function(e,t){e.exports={render:function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("span",{staticClass:"icon",class:[e.newType,e.size]},[e.useIconComponent?n(e.useIconComponent,{tag:"component",class:[e.customClass],attrs:{icon:[e.newPack,e.newIcon],size:e.newCustomSize}}):n("i",{class:[e.newPack,e.newIcon,e.newCustomSize,e.customClass]})],1)},staticRenderFns:[]}},6:function(e,t){e.exports=function(e){return"object"==typeof e?null!==e:"function"==typeof e}},7:function(e,t){e.exports=function(e){try{return!!e()}catch(e){return!0}}},73:function(e,t,n){var i=n(2)(n(85),n(86),null,null,null);e.exports=i.exports},85:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var i=n(26),r=n.n(i),o=n(31),s=n.n(o),a=n(14),u=n(46);t.default={name:"BInput",components:r()({},s.a.name,s.a),mixins:[u.a],inheritAttrs:!1,props:{value:[Number,String],type:{type:String,default:"text"},passwordReveal:Boolean,hasCounter:{type:Boolean,default:function(){return a.a.defaultInputHasCounter}},customClass:{type:String,default:""}},data:function(){return{newValue:this.value,newType:this.type,newAutocomplete:this.autocomplete||a.a.defaultInputAutocomplete,isPasswordVisible:!1,_elementRef:"textarea"===this.type?"textarea":"input"}},computed:{computedValue:{get:function(){return this.newValue},set:function(e){this.newValue=e,this.$emit("input",e),!this.isValid&&this.checkHtml5Validity()}},rootClasses:function(){return[this.iconPosition,this.size,{"is-expanded":this.expanded,"is-loading":this.loading,"is-clearfix":!this.hasMessage}]},inputClasses:function(){return[this.statusType,this.size,{"is-rounded":this.rounded}]},hasIconRight:function(){return this.passwordReveal||this.loading||this.statusType},iconPosition:function(){return this.icon&&this.hasIconRight?"has-icons-left has-icons-right":!this.icon&&this.hasIconRight?"has-icons-right":this.icon?"has-icons-left":void 0},statusTypeIcon:function(){switch(this.statusType){case"is-success":return"check";case"is-danger":return"alert-circle";case"is-info":return"information";case"is-warning":return"alert"}},hasMessage:function(){return!!this.statusMessage},passwordVisibleIcon:function(){return this.isPasswordVisible?"eye-off":"eye"},valueLength:function(){return"string"==typeof this.computedValue?this.computedValue.length:"number"==typeof this.computedValue?this.computedValue.toString().length:0}},watch:{value:function(e){this.newValue=e}},methods:{togglePasswordVisibility:function(){var e=this;this.isPasswordVisible=!this.isPasswordVisible,this.newType=this.isPasswordVisible?"text":"password",this.$nextTick((function(){e.$refs.input.focus()}))},onInput:function(e){var t=this;this.$nextTick((function(){e.target&&(t.computedValue=e.target.value)}))}}}},86:function(e,t){e.exports={render:function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("div",{staticClass:"control",class:e.rootClasses},["textarea"!==e.type?n("input",e._b({ref:"input",staticClass:"input",class:[e.inputClasses,e.customClass],attrs:{type:e.newType,autocomplete:e.newAutocomplete,maxlength:e.maxlength},domProps:{value:e.computedValue},on:{input:e.onInput,blur:e.onBlur,focus:e.onFocus}},"input",e.$attrs,!1)):n("textarea",e._b({ref:"textarea",staticClass:"textarea",class:[e.inputClasses,e.customClass],attrs:{maxlength:e.maxlength},domProps:{value:e.computedValue},on:{input:e.onInput,blur:e.onBlur,focus:e.onFocus}},"textarea",e.$attrs,!1)),e._v(" "),e.icon?n("b-icon",{staticClass:"is-left",attrs:{icon:e.icon,pack:e.iconPack,size:e.iconSize}}):e._e(),e._v(" "),e.loading||!e.passwordReveal&&!e.statusType?e._e():n("b-icon",{staticClass:"is-right",class:{"is-clickable":e.passwordReveal},attrs:{icon:e.passwordReveal?e.passwordVisibleIcon:e.statusTypeIcon,pack:e.iconPack,size:e.iconSize,type:e.passwordReveal?"is-primary":e.statusType,both:""},nativeOn:{click:function(t){e.togglePasswordVisibility(t)}}}),e._v(" "),e.maxlength&&e.hasCounter&&"number"!==e.type?n("small",{staticClass:"help counter",class:{"is-invisible":!e.isFocused}},[e._v("\n        "+e._s(e.valueLength)+" / "+e._s(e.maxlength)+"\n    ")]):e._e()],1)},staticRenderFns:[]}},9:function(e,t,n){var i=n(4),r=n(13);e.exports=n(0)?function(e,t,n){return i.f(e,t,r(1,n))}:function(e,t,n){return e[t]=n,e}}})}));
+/*! Buefy v0.8.6 | MIT License | github.com/buefy/buefy */
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports)
+        : typeof define === 'function' && define.amd ? define(['exports'], factory)
+            : (global = global || self, factory(global.Input = {}))
+}(this, function (exports) {
+    'use strict'
+
+    function _typeof(obj) {
+        if (typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol') {
+            _typeof = function (obj) {
+                return typeof obj
+            }
+        } else {
+            _typeof = function (obj) {
+                return obj && typeof Symbol === 'function' && obj.constructor === Symbol && obj !== Symbol.prototype ? 'symbol' : typeof obj
+            }
+        }
+
+        return _typeof(obj)
+    }
+
+    function _defineProperty(obj, key, value) {
+        if (key in obj) {
+            Object.defineProperty(obj, key, {
+                value: value,
+                enumerable: true,
+                configurable: true,
+                writable: true
+            })
+        } else {
+            obj[key] = value
+        }
+
+        return obj
+    }
+
+    function ownKeys(object, enumerableOnly) {
+        var keys = Object.keys(object)
+
+        if (Object.getOwnPropertySymbols) {
+            var symbols = Object.getOwnPropertySymbols(object)
+            if (enumerableOnly) {
+                symbols = symbols.filter(function (sym) {
+                    return Object.getOwnPropertyDescriptor(object, sym).enumerable
+                })
+            }
+            keys.push.apply(keys, symbols)
+        }
+
+        return keys
+    }
+
+    function _objectSpread2(target) {
+        for (var i = 1; i < arguments.length; i++) {
+            var source = arguments[i] != null ? arguments[i] : {}
+
+            if (i % 2) {
+                ownKeys(source, true).forEach(function (key) {
+                    _defineProperty(target, key, source[key])
+                })
+            } else if (Object.getOwnPropertyDescriptors) {
+                Object.defineProperties(target, Object.getOwnPropertyDescriptors(source))
+            } else {
+                ownKeys(source).forEach(function (key) {
+                    Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key))
+                })
+            }
+        }
+
+        return target
+    }
+
+    var config = {
+        defaultContainerElement: null,
+        defaultIconPack: 'mdi',
+        defaultIconComponent: null,
+        defaultIconPrev: 'chevron-left',
+        defaultIconNext: 'chevron-right',
+        defaultDialogConfirmText: null,
+        defaultDialogCancelText: null,
+        defaultSnackbarDuration: 3500,
+        defaultSnackbarPosition: null,
+        defaultToastDuration: 2000,
+        defaultToastPosition: null,
+        defaultNotificationDuration: 2000,
+        defaultNotificationPosition: null,
+        defaultTooltipType: 'is-primary',
+        defaultTooltipAnimated: false,
+        defaultTooltipDelay: 0,
+        defaultInputAutocomplete: 'on',
+        defaultDateFormatter: null,
+        defaultDateParser: null,
+        defaultDateCreator: null,
+        defaultDayNames: null,
+        defaultMonthNames: null,
+        defaultFirstDayOfWeek: null,
+        defaultUnselectableDaysOfWeek: null,
+        defaultTimeFormatter: null,
+        defaultTimeParser: null,
+        defaultModalCanCancel: ['escape', 'x', 'outside', 'button'],
+        defaultModalScroll: null,
+        defaultDatepickerMobileNative: true,
+        defaultTimepickerMobileNative: true,
+        defaultNoticeQueue: true,
+        defaultInputHasCounter: true,
+        defaultTaginputHasCounter: true,
+        defaultUseHtml5Validation: true,
+        defaultDropdownMobileModal: true,
+        defaultFieldLabelPosition: null,
+        defaultDatepickerYearsRange: [-100, 3],
+        defaultDatepickerNearbyMonthDays: true,
+        defaultDatepickerNearbySelectableMonthDays: false,
+        defaultDatepickerShowWeekNumber: false,
+        defaultTrapFocus: false,
+        defaultButtonRounded: false,
+        customIconPacks: null
+    } // TODO defaultTrapFocus to true in the next breaking change
+
+    var config$1 = config
+
+    /**
+  * Merge function to replace Object.assign with deep merging possibility
+  */
+
+    var isObject = function isObject(item) {
+        return _typeof(item) === 'object' && !Array.isArray(item)
+    }
+
+    var mergeFn = function mergeFn(target, source) {
+        var isDeep = function isDeep(prop) {
+            return isObject(source[prop]) && target.hasOwnProperty(prop) && isObject(target[prop])
+        }
+
+        var replaced = Object.getOwnPropertyNames(source).map(function (prop) {
+            return _defineProperty({}, prop, isDeep(prop) ? mergeFn(target[prop], source[prop]) : source[prop])
+        }).reduce(function (a, b) {
+            return _objectSpread2({}, a, {}, b)
+        }, {})
+        return _objectSpread2({}, target, {}, replaced)
+    }
+
+    var merge = mergeFn
+
+    var mdiIcons = {
+        sizes: {
+            'default': 'mdi-24px',
+            'is-small': null,
+            'is-medium': 'mdi-36px',
+            'is-large': 'mdi-48px'
+        },
+        iconPrefix: 'mdi-'
+    }
+
+    var faIcons = function faIcons() {
+        var faIconPrefix = config$1 && config$1.defaultIconComponent ? '' : 'fa-'
+        return {
+            sizes: {
+                'default': faIconPrefix + 'lg',
+                'is-small': null,
+                'is-medium': faIconPrefix + '2x',
+                'is-large': faIconPrefix + '3x'
+            },
+            iconPrefix: faIconPrefix,
+            internalIcons: {
+                'information': 'info-circle',
+                'alert': 'exclamation-triangle',
+                'alert-circle': 'exclamation-circle',
+                'chevron-right': 'angle-right',
+                'chevron-left': 'angle-left',
+                'chevron-down': 'angle-down',
+                'eye-off': 'eye-slash',
+                'menu-down': 'caret-down',
+                'menu-up': 'caret-up'
+            }
+        }
+    }
+
+    var getIcons = function getIcons() {
+        var icons = {
+            mdi: mdiIcons,
+            fa: faIcons(),
+            fas: faIcons(),
+            far: faIcons(),
+            fad: faIcons(),
+            fab: faIcons(),
+            fal: faIcons()
+        }
+
+        if (config$1 && config$1.customIconPacks) {
+            icons = merge(icons, config$1.customIconPacks)
+        }
+
+        return icons
+    }
+
+    //
+    var script = {
+        name: 'BIcon',
+        props: {
+            type: [String, Object],
+            component: String,
+            pack: String,
+            icon: String,
+            size: String,
+            customSize: String,
+            customClass: String,
+            both: Boolean // This is used internally to show both MDI and FA icon
+
+        },
+        computed: {
+            iconConfig: function iconConfig() {
+                var allIcons = getIcons()
+                return allIcons[this.newPack]
+            },
+            iconPrefix: function iconPrefix() {
+                if (this.iconConfig && this.iconConfig.iconPrefix) {
+                    return this.iconConfig.iconPrefix
+                }
+
+                return ''
+            },
+
+            /**
+      * Internal icon name based on the pack.
+      * If pack is 'fa', gets the equivalent FA icon name of the MDI,
+      * internal icons are always MDI.
+      */
+            newIcon: function newIcon() {
+                return ''.concat(this.iconPrefix).concat(this.getEquivalentIconOf(this.icon))
+            },
+            newPack: function newPack() {
+                return this.pack || config$1.defaultIconPack
+            },
+            newType: function newType() {
+                if (!this.type) return
+                var splitType = []
+
+                if (typeof this.type === 'string') {
+                    splitType = this.type.split('-')
+                } else {
+                    for (var key in this.type) {
+                        if (this.type[key]) {
+                            splitType = key.split('-')
+                            break
+                        }
+                    }
+                }
+
+                if (splitType.length <= 1) return
+                return 'has-text-'.concat(splitType[1])
+            },
+            newCustomSize: function newCustomSize() {
+                return this.customSize || this.customSizeByPack
+            },
+            customSizeByPack: function customSizeByPack() {
+                if (this.iconConfig && this.iconConfig.sizes) {
+                    if (this.size && this.iconConfig.sizes[this.size] !== undefined) {
+                        return this.iconConfig.sizes[this.size]
+                    } else if (this.iconConfig.sizes.default) {
+                        return this.iconConfig.sizes.default
+                    }
+                }
+
+                return null
+            },
+            useIconComponent: function useIconComponent() {
+                return this.component || config$1.defaultIconComponent
+            }
+        },
+        methods: {
+            /**
+      * Equivalent icon name of the MDI.
+      */
+            getEquivalentIconOf: function getEquivalentIconOf(value) {
+                // Only transform the class if the both prop is set to true
+                if (!this.both) {
+                    return value
+                }
+
+                if (this.iconConfig && this.iconConfig.internalIcons && this.iconConfig.internalIcons[value]) {
+                    return this.iconConfig.internalIcons[value]
+                }
+
+                return value
+            }
+        }
+    }
+
+    function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier
+        /* server only */
+        , shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
+        if (typeof shadowMode !== 'boolean') {
+            createInjectorSSR = createInjector
+            createInjector = shadowMode
+            shadowMode = false
+        } // Vue.extend constructor export interop.
+
+        var options = typeof script === 'function' ? script.options : script // render functions
+
+        if (template && template.render) {
+            options.render = template.render
+            options.staticRenderFns = template.staticRenderFns
+            options._compiled = true // functional template
+
+            if (isFunctionalTemplate) {
+                options.functional = true
+            }
+        } // scopedId
+
+        if (scopeId) {
+            options._scopeId = scopeId
+        }
+
+        var hook
+
+        if (moduleIdentifier) {
+            // server build
+            hook = function hook(context) {
+                // 2.3 injection
+                context = context || // cached call
+        this.$vnode && this.$vnode.ssrContext || // stateful
+        this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext // functional
+                // 2.2 with runInNewContext: true
+
+                if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+                    context = __VUE_SSR_CONTEXT__
+                } // inject component styles
+
+                if (style) {
+                    style.call(this, createInjectorSSR(context))
+                } // register component module identifier for async chunk inference
+
+                if (context && context._registeredComponents) {
+                    context._registeredComponents.add(moduleIdentifier)
+                }
+            } // used by ssr in case component is cached and beforeCreate
+            // never gets called
+
+            options._ssrRegister = hook
+        } else if (style) {
+            hook = shadowMode ? function () {
+                style.call(this, createInjectorShadow(this.$root.$options.shadowRoot))
+            } : function (context) {
+                style.call(this, createInjector(context))
+            }
+        }
+
+        if (hook) {
+            if (options.functional) {
+                // register for functional component in vue file
+                var originalRender = options.render
+
+                options.render = function renderWithStyleInjection(h, context) {
+                    hook.call(context)
+                    return originalRender(h, context)
+                }
+            } else {
+                // inject component registration as beforeCreate hook
+                var existing = options.beforeCreate
+                options.beforeCreate = existing ? [].concat(existing, hook) : [hook]
+            }
+        }
+
+        return script
+    }
+
+    var normalizeComponent_1 = normalizeComponent
+
+    /* script */
+    const __vue_script__ = script
+
+    /* template */
+    var __vue_render__ = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('span', {staticClass: 'icon', class: [_vm.newType, _vm.size]}, [(!_vm.useIconComponent) ? _c('i', {class: [_vm.newPack, _vm.newIcon, _vm.newCustomSize, _vm.customClass]}) : _c(_vm.useIconComponent, {tag: 'component', class: [_vm.customClass], attrs: {'icon': [_vm.newPack, _vm.newIcon], 'size': _vm.newCustomSize}})], 1) }
+    var __vue_staticRenderFns__ = []
+
+    /* style */
+    const __vue_inject_styles__ = undefined
+    /* scoped */
+    const __vue_scope_id__ = undefined
+    /* module identifier */
+    const __vue_module_identifier__ = undefined
+    /* functional template */
+    const __vue_is_functional_template__ = false
+    /* style inject */
+
+    /* style inject SSR */
+
+    var Icon = normalizeComponent_1(
+        { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+        __vue_inject_styles__,
+        __vue_script__,
+        __vue_scope_id__,
+        __vue_is_functional_template__,
+        __vue_module_identifier__,
+        undefined,
+        undefined
+    )
+
+    var FormElementMixin = {
+        props: {
+            size: String,
+            expanded: Boolean,
+            loading: Boolean,
+            rounded: Boolean,
+            icon: String,
+            iconPack: String,
+            // Native options to use in HTML5 validation
+            autocomplete: String,
+            maxlength: [Number, String],
+            useHtml5Validation: {
+                type: Boolean,
+                default: function _default() {
+                    return config$1.defaultUseHtml5Validation
+                }
+            },
+            validationMessage: String
+        },
+        data: function data() {
+            return {
+                isValid: true,
+                isFocused: false,
+                newIconPack: this.iconPack || config$1.defaultIconPack
+            }
+        },
+        computed: {
+            /**
+       * Find parent Field, max 3 levels deep.
+       */
+            parentField: function parentField() {
+                var parent = this.$parent
+
+                for (var i = 0; i < 3; i++) {
+                    if (parent && !parent.$data._isField) {
+                        parent = parent.$parent
+                    }
+                }
+
+                return parent
+            },
+
+            /**
+       * Get the type prop from parent if it's a Field.
+       */
+            statusType: function statusType() {
+                if (!this.parentField) return
+                if (!this.parentField.newType) return
+
+                if (typeof this.parentField.newType === 'string') {
+                    return this.parentField.newType
+                } else {
+                    for (var key in this.parentField.newType) {
+                        if (this.parentField.newType[key]) {
+                            return key
+                        }
+                    }
+                }
+            },
+
+            /**
+       * Get the message prop from parent if it's a Field.
+       */
+            statusMessage: function statusMessage() {
+                if (!this.parentField) return
+                return this.parentField.newMessage
+            },
+
+            /**
+       * Fix icon size for inputs, large was too big
+       */
+            iconSize: function iconSize() {
+                switch (this.size) {
+                    case 'is-small':
+                        return this.size
+
+                    case 'is-medium':
+                        return
+
+                    case 'is-large':
+                        return this.newIconPack === 'mdi' ? 'is-medium' : ''
+                }
+            }
+        },
+        methods: {
+            /**
+       * Focus method that work dynamically depending on the component.
+       */
+            focus: function focus() {
+                var _this = this
+
+                if (this.$data._elementRef === undefined) return
+                this.$nextTick(function () {
+                    var el = _this.$el.querySelector(_this.$data._elementRef)
+
+                    if (el) el.focus()
+                })
+            },
+            onBlur: function onBlur($event) {
+                this.isFocused = false
+                this.$emit('blur', $event)
+                this.checkHtml5Validity()
+            },
+            onFocus: function onFocus($event) {
+                this.isFocused = true
+                this.$emit('focus', $event)
+            },
+            getElement: function getElement() {
+                return this.$el.querySelector(this.$data._elementRef)
+            },
+            setInvalid: function setInvalid() {
+                var type = 'is-danger'
+                var message = this.validationMessage || this.getElement().validationMessage
+                this.setValidity(type, message)
+            },
+            setValidity: function setValidity(type, message) {
+                var _this2 = this
+
+                this.$nextTick(function () {
+                    if (_this2.parentField) {
+                        // Set type only if not defined
+                        if (!_this2.parentField.type) {
+                            _this2.parentField.newType = type
+                        } // Set message only if not defined
+
+                        if (!_this2.parentField.message) {
+                            _this2.parentField.newMessage = message
+                        }
+                    }
+                })
+            },
+
+            /**
+       * Check HTML5 validation, set isValid property.
+       * If validation fail, send 'is-danger' type,
+       * and error message to parent if it's a Field.
+       */
+            checkHtml5Validity: function checkHtml5Validity() {
+                if (!this.useHtml5Validation) return
+                if (this.$refs[this.$data._elementRef] === undefined) return
+
+                if (!this.getElement().checkValidity()) {
+                    this.setInvalid()
+                    this.isValid = false
+                } else {
+                    this.setValidity(null, null)
+                    this.isValid = true
+                }
+
+                return this.isValid
+            }
+        }
+    }
+
+    var script$1 = {
+        name: 'BInput',
+        components: _defineProperty({}, Icon.name, Icon),
+        mixins: [FormElementMixin],
+        inheritAttrs: false,
+        props: {
+            value: [Number, String],
+            type: {
+                type: String,
+                default: 'text'
+            },
+            passwordReveal: Boolean,
+            hasCounter: {
+                type: Boolean,
+                default: function _default() {
+                    return config$1.defaultInputHasCounter
+                }
+            },
+            customClass: {
+                type: String,
+                default: ''
+            }
+        },
+        data: function data() {
+            return {
+                newValue: this.value,
+                newType: this.type,
+                newAutocomplete: this.autocomplete || config$1.defaultInputAutocomplete,
+                isPasswordVisible: false,
+                _elementRef: this.type === 'textarea' ? 'textarea' : 'input'
+            }
+        },
+        computed: {
+            computedValue: {
+                get: function get() {
+                    return this.newValue
+                },
+                set: function set(value) {
+                    this.newValue = value
+                    this.$emit('input', value)
+                    !this.isValid && this.checkHtml5Validity()
+                }
+            },
+            rootClasses: function rootClasses() {
+                return [this.iconPosition, this.size, {
+                    'is-expanded': this.expanded,
+                    'is-loading': this.loading,
+                    'is-clearfix': !this.hasMessage
+                }]
+            },
+            inputClasses: function inputClasses() {
+                return [this.statusType, this.size, {
+                    'is-rounded': this.rounded
+                }]
+            },
+            hasIconRight: function hasIconRight() {
+                return this.passwordReveal || this.loading || this.statusTypeIcon
+            },
+
+            /**
+      * Position of the icon or if it's both sides.
+      */
+            iconPosition: function iconPosition() {
+                if (this.icon && this.hasIconRight) {
+                    return 'has-icons-left has-icons-right'
+                } else if (!this.icon && this.hasIconRight) {
+                    return 'has-icons-right'
+                } else if (this.icon) {
+                    return 'has-icons-left'
+                }
+            },
+
+            /**
+      * Icon name (MDI) based on the type.
+      */
+            statusTypeIcon: function statusTypeIcon() {
+                switch (this.statusType) {
+                    case 'is-success':
+                        return 'check'
+
+                    case 'is-danger':
+                        return 'alert-circle'
+
+                    case 'is-info':
+                        return 'information'
+
+                    case 'is-warning':
+                        return 'alert'
+                }
+            },
+
+            /**
+      * Check if have any message prop from parent if it's a Field.
+      */
+            hasMessage: function hasMessage() {
+                return !!this.statusMessage
+            },
+
+            /**
+      * Current password-reveal icon name.
+      */
+            passwordVisibleIcon: function passwordVisibleIcon() {
+                return !this.isPasswordVisible ? 'eye' : 'eye-off'
+            },
+
+            /**
+      * Get value length
+      */
+            valueLength: function valueLength() {
+                if (typeof this.computedValue === 'string') {
+                    return this.computedValue.length
+                } else if (typeof this.computedValue === 'number') {
+                    return this.computedValue.toString().length
+                }
+
+                return 0
+            }
+        },
+        watch: {
+            /**
+      * When v-model is changed:
+      *   1. Set internal value.
+      */
+            value: function value(_value) {
+                this.newValue = _value
+            }
+        },
+        methods: {
+            /**
+      * Toggle the visibility of a password-reveal input
+      * by changing the type and focus the input right away.
+      */
+            togglePasswordVisibility: function togglePasswordVisibility() {
+                var _this = this
+
+                this.isPasswordVisible = !this.isPasswordVisible
+                this.newType = this.isPasswordVisible ? 'text' : 'password'
+                this.$nextTick(function () {
+                    _this.$refs.input.focus()
+                })
+            },
+
+            /**
+      * Input's 'input' event listener, 'nextTick' is used to prevent event firing
+      * before ui update, helps when using masks (Cleavejs and potentially others).
+      */
+            onInput: function onInput(event) {
+                var _this2 = this
+
+                this.$nextTick(function () {
+                    if (event.target) {
+                        _this2.computedValue = event.target.value
+                    }
+                })
+            }
+        }
+    }
+
+    /* script */
+    const __vue_script__$1 = script$1
+
+    /* template */
+    var __vue_render__$1 = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('div', {staticClass: 'control', class: _vm.rootClasses}, [(_vm.type !== 'textarea') ? _c('input', _vm._b({ref: 'input', staticClass: 'input', class: [_vm.inputClasses, _vm.customClass], attrs: {'type': _vm.newType, 'autocomplete': _vm.newAutocomplete, 'maxlength': _vm.maxlength}, domProps: {'value': _vm.computedValue}, on: {'input': _vm.onInput, 'blur': _vm.onBlur, 'focus': _vm.onFocus}}, 'input', _vm.$attrs, false)) : _c('textarea', _vm._b({ref: 'textarea', staticClass: 'textarea', class: [_vm.inputClasses, _vm.customClass], attrs: {'maxlength': _vm.maxlength}, domProps: {'value': _vm.computedValue}, on: {'input': _vm.onInput, 'blur': _vm.onBlur, 'focus': _vm.onFocus}}, 'textarea', _vm.$attrs, false)), _vm._v(' '), (_vm.icon) ? _c('b-icon', {staticClass: 'is-left', attrs: {'icon': _vm.icon, 'pack': _vm.iconPack, 'size': _vm.iconSize}}) : _vm._e(), _vm._v(' '), (!_vm.loading && (_vm.passwordReveal || _vm.statusTypeIcon)) ? _c('b-icon', {staticClass: 'is-right', class: { 'is-clickable': _vm.passwordReveal }, attrs: {'icon': _vm.passwordReveal ? _vm.passwordVisibleIcon : _vm.statusTypeIcon, 'pack': _vm.iconPack, 'size': _vm.iconSize, 'type': !_vm.passwordReveal ? _vm.statusType : 'is-primary', 'both': ''}, nativeOn: {'click': function ($event) { _vm.togglePasswordVisibility($event) }}}) : _vm._e(), _vm._v(' '), (_vm.maxlength && _vm.hasCounter && _vm.type !== 'number') ? _c('small', {staticClass: 'help counter', class: { 'is-invisible': !_vm.isFocused }}, [_vm._v('\n        ' + _vm._s(_vm.valueLength) + ' / ' + _vm._s(_vm.maxlength) + '\n    ')]) : _vm._e()], 1) }
+    var __vue_staticRenderFns__$1 = []
+
+    /* style */
+    const __vue_inject_styles__$1 = undefined
+    /* scoped */
+    const __vue_scope_id__$1 = undefined
+    /* module identifier */
+    const __vue_module_identifier__$1 = undefined
+    /* functional template */
+    const __vue_is_functional_template__$1 = false
+    /* style inject */
+
+    /* style inject SSR */
+
+    var Input = normalizeComponent_1(
+        { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
+        __vue_inject_styles__$1,
+        __vue_script__$1,
+        __vue_scope_id__$1,
+        __vue_is_functional_template__$1,
+        __vue_module_identifier__$1,
+        undefined,
+        undefined
+    )
+
+    var use = function use(plugin) {
+        if (typeof window !== 'undefined' && window.Vue) {
+            window.Vue.use(plugin)
+        }
+    }
+    var registerComponent = function registerComponent(Vue, component) {
+        Vue.component(component.name, component)
+    }
+
+    var Plugin = {
+        install: function install(Vue) {
+            registerComponent(Vue, Input)
+        }
+    }
+    use(Plugin)
+
+    exports.default = Plugin
+
+    Object.defineProperty(exports, '__esModule', { value: true })
+}))

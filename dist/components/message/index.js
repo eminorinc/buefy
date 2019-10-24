@@ -1,2 +1,562 @@
-/*! Buefy v0.7.3 | MIT License | github.com/buefy/buefy */
-!(function(e,t){if("object"==typeof exports&&"object"==typeof module)module.exports=t();else if("function"==typeof define&&define.amd)define([],t);else{var n=t();for(var r in n)("object"==typeof exports?exports:e)[r]=n[r]}})("undefined"!=typeof self?self:this,(function(){return (function(e){function t(r){if(n[r])return n[r].exports;var i=n[r]={i:r,l:!1,exports:{}};return e[r].call(i.exports,i,i.exports,t),i.l=!0,i.exports}var n={};return t.m=e,t.c=n,t.d=function(e,n,r){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:r})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="/",t(t.s=242)})({0:function(e,t,n){e.exports=!n(7)((function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a}))},1:function(e,t){var n=e.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=n)},10:function(e,t,n){var r=n(6);e.exports=function(e){if(!r(e))throw TypeError(e+" is not an object!");return e}},108:function(e,t,n){"use strict";var r=n(26),i=n.n(r),o=n(31),u=n.n(o);t.a={components:i()({},u.a.name,u.a),props:{active:{type:Boolean,default:!0},title:String,closable:{type:Boolean,default:!0},type:String,hasIcon:Boolean,size:String,iconPack:String,iconSize:String,autoClose:{type:Boolean,default:!1},duration:{type:Number,default:5e3}},data:function(){return{isActive:this.active}},watch:{active:function(e){this.isActive=e},isActive:function(e){e?this.setAutoClose():this.timer&&clearTimeout(this.timer)}},computed:{icon:function(){switch(this.type){case"is-info":return"information";case"is-success":return"check-circle";case"is-warning":return"alert";case"is-danger":return"alert-circle";default:return null}}},methods:{close:function(){this.isActive=!1,this.$emit("close"),this.$emit("update:active",!1)},setAutoClose:function(){var e=this;this.autoClose&&(this.timer=setTimeout((function(){e.isActive&&e.close()}),this.duration))}},mounted:function(){this.setAutoClose()}}},12:function(e,t,n){"use strict";n.d(t,"c",(function(){return r})),n.d(t,"a",(function(){return i})),n.d(t,"b",(function(){return o}));var r=function(e){"undefined"!=typeof window&&window.Vue&&window.Vue.use(e)},i=function(e,t){e.component(t.name,t)},o=function(e,t,n){e.prototype[t]=n}},13:function(e,t){e.exports=function(e,t){return{enumerable:!(1&e),configurable:!(2&e),writable:!(4&e),value:t}}},14:function(e,t,n){"use strict";var r={defaultContainerElement:null,defaultIconPack:"mdi",defaultIconComponent:null,defaultDialogConfirmText:null,defaultDialogCancelText:null,defaultSnackbarDuration:3500,defaultSnackbarPosition:null,defaultToastDuration:2e3,defaultToastPosition:null,defaultTooltipType:"is-primary",defaultTooltipAnimated:!1,defaultInputAutocomplete:"on",defaultDateFormatter:null,defaultDateParser:null,defaultDateCreator:null,defaultDayNames:null,defaultMonthNames:null,defaultFirstDayOfWeek:null,defaultUnselectableDaysOfWeek:null,defaultTimeFormatter:null,defaultTimeParser:null,defaultModalCanCancel:null,defaultModalScroll:null,defaultDatepickerMobileNative:!0,defaultTimepickerMobileNative:!0,defaultNoticeQueue:!0,defaultInputHasCounter:!0,defaultUseHtml5Validation:!0};t.a=r},15:function(e,t,n){var r=n(6);e.exports=function(e,t){if(!r(e))return e;var n,i;if(t&&"function"==typeof(n=e.toString)&&!r(i=n.call(e)))return i;if("function"==typeof(n=e.valueOf)&&!r(i=n.call(e)))return i;if(!t&&"function"==typeof(n=e.toString)&&!r(i=n.call(e)))return i;throw TypeError("Can't convert object to primitive value")}},157:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=n(158),i=n.n(r),o=n(12);n.d(t,"Message",(function(){return i.a}));var u={install:function(e){Object(o.a)(e,i.a)}};Object(o.c)(u),t.default=u},158:function(e,t,n){var r=n(2)(n(159),n(160),null,null,null);e.exports=r.exports},159:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=n(108);t.default={name:"BMessage",mixins:[r.a],data:function(){return{newIconSize:this.iconSize||this.size||"is-large"}}}},160:function(e,t){e.exports={render:function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("transition",{attrs:{name:"fade"}},[e.isActive?n("article",{staticClass:"message",class:[e.type,e.size]},[e.title?n("header",{staticClass:"message-header"},[n("p",[e._v(e._s(e.title))]),e._v(" "),e.closable?n("button",{staticClass:"delete",attrs:{type:"button"},on:{click:e.close}}):e._e()]):e._e(),e._v(" "),n("section",{staticClass:"message-body"},[n("div",{staticClass:"media"},[e.icon&&e.hasIcon?n("div",{staticClass:"media-left"},[n("b-icon",{class:e.type,attrs:{icon:e.icon,pack:e.iconPack,both:"",size:e.newIconSize}})],1):e._e(),e._v(" "),n("div",{staticClass:"media-content"},[e._t("default")],2)])])]):e._e()])},staticRenderFns:[]}},17:function(e,t,n){var r=n(1),i=n(3),o=n(30),u=n(9),a=n(5),c=function(e,t,n){var s,l,f,d=e&c.F,p=e&c.G,h=e&c.S,m=e&c.P,v=e&c.B,y=e&c.W,w=p?i:i[t]||(i[t]={}),x=w.prototype,_=p?r:h?r[t]:(r[t]||{}).prototype;p&&(n=t);for(s in n)(l=!d&&_&&void 0!==_[s])&&a(w,s)||(f=l?_[s]:n[s],w[s]=p&&"function"!=typeof _[s]?n[s]:v&&l?o(f,r):y&&_[s]==f?(function(e){var t=function(t,n,r){if(this instanceof e){switch(arguments.length){case 0:return new e;case 1:return new e(t);case 2:return new e(t,n)}return new e(t,n,r)}return e.apply(this,arguments)};return t.prototype=e.prototype,t})(f):m&&"function"==typeof f?o(Function.call,f):f,m&&((w.virtual||(w.virtual={}))[s]=f,e&c.R&&x&&!x[s]&&u(x,s,f)))};c.F=1,c.G=2,c.S=4,c.P=8,c.B=16,c.W=32,c.U=64,c.R=128,e.exports=c},2:function(e,t){e.exports=function(e,t,n,r,i){var o,u=e=e||{},a=typeof e.default;"object"!==a&&"function"!==a||(o=e,u=e.default);var c="function"==typeof u?u.options:u;t&&(c.render=t.render,c.staticRenderFns=t.staticRenderFns),r&&(c._scopeId=r);var s;if(i?(s=function(e){e=e||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext,e||"undefined"==typeof __VUE_SSR_CONTEXT__||(e=__VUE_SSR_CONTEXT__),n&&n.call(this,e),e&&e._registeredComponents&&e._registeredComponents.add(i)},c._ssrRegister=s):n&&(s=n),s){var l=c.functional,f=l?c.render:c.beforeCreate;l?c.render=function(e,t){return s.call(t),f(e,t)}:c.beforeCreate=f?[].concat(f,s):[s]}return{esModule:o,exports:u,options:c}}},20:function(e,t,n){e.exports=!n(0)&&!n(7)((function(){return 7!=Object.defineProperty(n(21)("div"),"a",{get:function(){return 7}}).a}))},21:function(e,t,n){var r=n(6),i=n(1).document,o=r(i)&&r(i.createElement);e.exports=function(e){return o?i.createElement(e):{}}},242:function(e,t,n){e.exports=n(157)},26:function(e,t,n){"use strict";t.__esModule=!0;var r=n(49),i=(function(e){return e&&e.__esModule?e:{default:e}})(r);t.default=function(e,t,n){return t in e?(0,i.default)(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}},3:function(e,t){var n=e.exports={version:"2.5.7"};"number"==typeof __e&&(__e=n)},30:function(e,t,n){var r=n(32);e.exports=function(e,t,n){if(r(e),void 0===t)return e;switch(n){case 1:return function(n){return e.call(t,n)};case 2:return function(n,r){return e.call(t,n,r)};case 3:return function(n,r,i){return e.call(t,n,r,i)}}return function(){return e.apply(t,arguments)}}},31:function(e,t,n){var r=n(2)(n(52),n(53),null,null,null);e.exports=r.exports},32:function(e,t){e.exports=function(e){if("function"!=typeof e)throw TypeError(e+" is not a function!");return e}},4:function(e,t,n){var r=n(10),i=n(20),o=n(15),u=Object.defineProperty;t.f=n(0)?Object.defineProperty:function(e,t,n){if(r(e),t=o(t,!0),r(n),i)try{return u(e,t,n)}catch(e){}if("get"in n||"set"in n)throw TypeError("Accessors not supported!");return"value"in n&&(e[t]=n.value),e}},49:function(e,t,n){e.exports={default:n(50),__esModule:!0}},5:function(e,t){var n={}.hasOwnProperty;e.exports=function(e,t){return n.call(e,t)}},50:function(e,t,n){n(51);var r=n(3).Object;e.exports=function(e,t,n){return r.defineProperty(e,t,n)}},51:function(e,t,n){var r=n(17);r(r.S+r.F*!n(0),"Object",{defineProperty:n(4).f})},52:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=n(14);t.default={name:"BIcon",props:{type:[String,Object],pack:String,icon:String,size:String,customSize:String,customClass:String,both:Boolean},computed:{newIcon:function(){return"mdi"===this.newPack?this.newPack+"-"+this.icon:this.addFAPrefix(this.getEquivalentIconOf(this.icon))},newPack:function(){return this.pack||r.a.defaultIconPack},newType:function(){if(this.type){var e=[];if("string"==typeof this.type)e=this.type.split("-");else for(var t in this.type)if(this.type[t]){e=t.split("-");break}if(!(e.length<=1))return"has-text-"+e[1]}},newCustomSize:function(){return this.customSize||this.customSizeByPack},customSizeByPack:function(){var e="mdi"===this.newPack?"mdi-24px":this.addFAPrefix("lg"),t="mdi"===this.newPack?"mdi-36px":this.addFAPrefix("2x"),n="mdi"===this.newPack?"mdi-48px":this.addFAPrefix("3x");switch(this.size){case"is-small":return;case"is-medium":return t;case"is-large":return n;default:return e}},useIconComponent:function(){return r.a.defaultIconComponent}},methods:{addFAPrefix:function(e){return this.useIconComponent?e:"fa-"+e},getEquivalentIconOf:function(e){if(!this.both)return e;switch(e){case"check":return"check";case"information":return"info-circle";case"check-circle":return"check-circle";case"alert":return"exclamation-triangle";case"alert-circle":return"exclamation-circle";case"arrow-up":return"arrow-up";case"chevron-right":return"angle-right";case"chevron-left":return"angle-left";case"chevron-down":return"angle-down";case"eye":return"eye";case"eye-off":return"eye-slash";case"menu-down":return"caret-down";case"menu-up":return"caret-up";default:return e}}}}},53:function(e,t){e.exports={render:function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("span",{staticClass:"icon",class:[e.newType,e.size]},[e.useIconComponent?n(e.useIconComponent,{tag:"component",class:[e.customClass],attrs:{icon:[e.newPack,e.newIcon],size:e.newCustomSize}}):n("i",{class:[e.newPack,e.newIcon,e.newCustomSize,e.customClass]})],1)},staticRenderFns:[]}},6:function(e,t){e.exports=function(e){return"object"==typeof e?null!==e:"function"==typeof e}},7:function(e,t){e.exports=function(e){try{return!!e()}catch(e){return!0}}},9:function(e,t,n){var r=n(4),i=n(13);e.exports=n(0)?function(e,t,n){return r.f(e,t,i(1,n))}:function(e,t,n){return e[t]=n,e}}})}));
+/*! Buefy v0.8.6 | MIT License | github.com/buefy/buefy */
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports)
+        : typeof define === 'function' && define.amd ? define(['exports'], factory)
+            : (global = global || self, factory(global.Message = {}))
+}(this, function (exports) {
+    'use strict'
+
+    function _typeof(obj) {
+        if (typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol') {
+            _typeof = function (obj) {
+                return typeof obj
+            }
+        } else {
+            _typeof = function (obj) {
+                return obj && typeof Symbol === 'function' && obj.constructor === Symbol && obj !== Symbol.prototype ? 'symbol' : typeof obj
+            }
+        }
+
+        return _typeof(obj)
+    }
+
+    function _defineProperty(obj, key, value) {
+        if (key in obj) {
+            Object.defineProperty(obj, key, {
+                value: value,
+                enumerable: true,
+                configurable: true,
+                writable: true
+            })
+        } else {
+            obj[key] = value
+        }
+
+        return obj
+    }
+
+    function ownKeys(object, enumerableOnly) {
+        var keys = Object.keys(object)
+
+        if (Object.getOwnPropertySymbols) {
+            var symbols = Object.getOwnPropertySymbols(object)
+            if (enumerableOnly) {
+                symbols = symbols.filter(function (sym) {
+                    return Object.getOwnPropertyDescriptor(object, sym).enumerable
+                })
+            }
+            keys.push.apply(keys, symbols)
+        }
+
+        return keys
+    }
+
+    function _objectSpread2(target) {
+        for (var i = 1; i < arguments.length; i++) {
+            var source = arguments[i] != null ? arguments[i] : {}
+
+            if (i % 2) {
+                ownKeys(source, true).forEach(function (key) {
+                    _defineProperty(target, key, source[key])
+                })
+            } else if (Object.getOwnPropertyDescriptors) {
+                Object.defineProperties(target, Object.getOwnPropertyDescriptors(source))
+            } else {
+                ownKeys(source).forEach(function (key) {
+                    Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key))
+                })
+            }
+        }
+
+        return target
+    }
+
+    var config = {
+        defaultContainerElement: null,
+        defaultIconPack: 'mdi',
+        defaultIconComponent: null,
+        defaultIconPrev: 'chevron-left',
+        defaultIconNext: 'chevron-right',
+        defaultDialogConfirmText: null,
+        defaultDialogCancelText: null,
+        defaultSnackbarDuration: 3500,
+        defaultSnackbarPosition: null,
+        defaultToastDuration: 2000,
+        defaultToastPosition: null,
+        defaultNotificationDuration: 2000,
+        defaultNotificationPosition: null,
+        defaultTooltipType: 'is-primary',
+        defaultTooltipAnimated: false,
+        defaultTooltipDelay: 0,
+        defaultInputAutocomplete: 'on',
+        defaultDateFormatter: null,
+        defaultDateParser: null,
+        defaultDateCreator: null,
+        defaultDayNames: null,
+        defaultMonthNames: null,
+        defaultFirstDayOfWeek: null,
+        defaultUnselectableDaysOfWeek: null,
+        defaultTimeFormatter: null,
+        defaultTimeParser: null,
+        defaultModalCanCancel: ['escape', 'x', 'outside', 'button'],
+        defaultModalScroll: null,
+        defaultDatepickerMobileNative: true,
+        defaultTimepickerMobileNative: true,
+        defaultNoticeQueue: true,
+        defaultInputHasCounter: true,
+        defaultTaginputHasCounter: true,
+        defaultUseHtml5Validation: true,
+        defaultDropdownMobileModal: true,
+        defaultFieldLabelPosition: null,
+        defaultDatepickerYearsRange: [-100, 3],
+        defaultDatepickerNearbyMonthDays: true,
+        defaultDatepickerNearbySelectableMonthDays: false,
+        defaultDatepickerShowWeekNumber: false,
+        defaultTrapFocus: false,
+        defaultButtonRounded: false,
+        customIconPacks: null
+    } // TODO defaultTrapFocus to true in the next breaking change
+
+    var config$1 = config
+
+    /**
+  * Merge function to replace Object.assign with deep merging possibility
+  */
+
+    var isObject = function isObject(item) {
+        return _typeof(item) === 'object' && !Array.isArray(item)
+    }
+
+    var mergeFn = function mergeFn(target, source) {
+        var isDeep = function isDeep(prop) {
+            return isObject(source[prop]) && target.hasOwnProperty(prop) && isObject(target[prop])
+        }
+
+        var replaced = Object.getOwnPropertyNames(source).map(function (prop) {
+            return _defineProperty({}, prop, isDeep(prop) ? mergeFn(target[prop], source[prop]) : source[prop])
+        }).reduce(function (a, b) {
+            return _objectSpread2({}, a, {}, b)
+        }, {})
+        return _objectSpread2({}, target, {}, replaced)
+    }
+
+    var merge = mergeFn
+
+    var mdiIcons = {
+        sizes: {
+            'default': 'mdi-24px',
+            'is-small': null,
+            'is-medium': 'mdi-36px',
+            'is-large': 'mdi-48px'
+        },
+        iconPrefix: 'mdi-'
+    }
+
+    var faIcons = function faIcons() {
+        var faIconPrefix = config$1 && config$1.defaultIconComponent ? '' : 'fa-'
+        return {
+            sizes: {
+                'default': faIconPrefix + 'lg',
+                'is-small': null,
+                'is-medium': faIconPrefix + '2x',
+                'is-large': faIconPrefix + '3x'
+            },
+            iconPrefix: faIconPrefix,
+            internalIcons: {
+                'information': 'info-circle',
+                'alert': 'exclamation-triangle',
+                'alert-circle': 'exclamation-circle',
+                'chevron-right': 'angle-right',
+                'chevron-left': 'angle-left',
+                'chevron-down': 'angle-down',
+                'eye-off': 'eye-slash',
+                'menu-down': 'caret-down',
+                'menu-up': 'caret-up'
+            }
+        }
+    }
+
+    var getIcons = function getIcons() {
+        var icons = {
+            mdi: mdiIcons,
+            fa: faIcons(),
+            fas: faIcons(),
+            far: faIcons(),
+            fad: faIcons(),
+            fab: faIcons(),
+            fal: faIcons()
+        }
+
+        if (config$1 && config$1.customIconPacks) {
+            icons = merge(icons, config$1.customIconPacks)
+        }
+
+        return icons
+    }
+
+    //
+    var script = {
+        name: 'BIcon',
+        props: {
+            type: [String, Object],
+            component: String,
+            pack: String,
+            icon: String,
+            size: String,
+            customSize: String,
+            customClass: String,
+            both: Boolean // This is used internally to show both MDI and FA icon
+
+        },
+        computed: {
+            iconConfig: function iconConfig() {
+                var allIcons = getIcons()
+                return allIcons[this.newPack]
+            },
+            iconPrefix: function iconPrefix() {
+                if (this.iconConfig && this.iconConfig.iconPrefix) {
+                    return this.iconConfig.iconPrefix
+                }
+
+                return ''
+            },
+
+            /**
+      * Internal icon name based on the pack.
+      * If pack is 'fa', gets the equivalent FA icon name of the MDI,
+      * internal icons are always MDI.
+      */
+            newIcon: function newIcon() {
+                return ''.concat(this.iconPrefix).concat(this.getEquivalentIconOf(this.icon))
+            },
+            newPack: function newPack() {
+                return this.pack || config$1.defaultIconPack
+            },
+            newType: function newType() {
+                if (!this.type) return
+                var splitType = []
+
+                if (typeof this.type === 'string') {
+                    splitType = this.type.split('-')
+                } else {
+                    for (var key in this.type) {
+                        if (this.type[key]) {
+                            splitType = key.split('-')
+                            break
+                        }
+                    }
+                }
+
+                if (splitType.length <= 1) return
+                return 'has-text-'.concat(splitType[1])
+            },
+            newCustomSize: function newCustomSize() {
+                return this.customSize || this.customSizeByPack
+            },
+            customSizeByPack: function customSizeByPack() {
+                if (this.iconConfig && this.iconConfig.sizes) {
+                    if (this.size && this.iconConfig.sizes[this.size] !== undefined) {
+                        return this.iconConfig.sizes[this.size]
+                    } else if (this.iconConfig.sizes.default) {
+                        return this.iconConfig.sizes.default
+                    }
+                }
+
+                return null
+            },
+            useIconComponent: function useIconComponent() {
+                return this.component || config$1.defaultIconComponent
+            }
+        },
+        methods: {
+            /**
+      * Equivalent icon name of the MDI.
+      */
+            getEquivalentIconOf: function getEquivalentIconOf(value) {
+                // Only transform the class if the both prop is set to true
+                if (!this.both) {
+                    return value
+                }
+
+                if (this.iconConfig && this.iconConfig.internalIcons && this.iconConfig.internalIcons[value]) {
+                    return this.iconConfig.internalIcons[value]
+                }
+
+                return value
+            }
+        }
+    }
+
+    function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier
+        /* server only */
+        , shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
+        if (typeof shadowMode !== 'boolean') {
+            createInjectorSSR = createInjector
+            createInjector = shadowMode
+            shadowMode = false
+        } // Vue.extend constructor export interop.
+
+        var options = typeof script === 'function' ? script.options : script // render functions
+
+        if (template && template.render) {
+            options.render = template.render
+            options.staticRenderFns = template.staticRenderFns
+            options._compiled = true // functional template
+
+            if (isFunctionalTemplate) {
+                options.functional = true
+            }
+        } // scopedId
+
+        if (scopeId) {
+            options._scopeId = scopeId
+        }
+
+        var hook
+
+        if (moduleIdentifier) {
+            // server build
+            hook = function hook(context) {
+                // 2.3 injection
+                context = context || // cached call
+        this.$vnode && this.$vnode.ssrContext || // stateful
+        this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext // functional
+                // 2.2 with runInNewContext: true
+
+                if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+                    context = __VUE_SSR_CONTEXT__
+                } // inject component styles
+
+                if (style) {
+                    style.call(this, createInjectorSSR(context))
+                } // register component module identifier for async chunk inference
+
+                if (context && context._registeredComponents) {
+                    context._registeredComponents.add(moduleIdentifier)
+                }
+            } // used by ssr in case component is cached and beforeCreate
+            // never gets called
+
+            options._ssrRegister = hook
+        } else if (style) {
+            hook = shadowMode ? function () {
+                style.call(this, createInjectorShadow(this.$root.$options.shadowRoot))
+            } : function (context) {
+                style.call(this, createInjector(context))
+            }
+        }
+
+        if (hook) {
+            if (options.functional) {
+                // register for functional component in vue file
+                var originalRender = options.render
+
+                options.render = function renderWithStyleInjection(h, context) {
+                    hook.call(context)
+                    return originalRender(h, context)
+                }
+            } else {
+                // inject component registration as beforeCreate hook
+                var existing = options.beforeCreate
+                options.beforeCreate = existing ? [].concat(existing, hook) : [hook]
+            }
+        }
+
+        return script
+    }
+
+    var normalizeComponent_1 = normalizeComponent
+
+    /* script */
+    const __vue_script__ = script
+
+    /* template */
+    var __vue_render__ = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('span', {staticClass: 'icon', class: [_vm.newType, _vm.size]}, [(!_vm.useIconComponent) ? _c('i', {class: [_vm.newPack, _vm.newIcon, _vm.newCustomSize, _vm.customClass]}) : _c(_vm.useIconComponent, {tag: 'component', class: [_vm.customClass], attrs: {'icon': [_vm.newPack, _vm.newIcon], 'size': _vm.newCustomSize}})], 1) }
+    var __vue_staticRenderFns__ = []
+
+    /* style */
+    const __vue_inject_styles__ = undefined
+    /* scoped */
+    const __vue_scope_id__ = undefined
+    /* module identifier */
+    const __vue_module_identifier__ = undefined
+    /* functional template */
+    const __vue_is_functional_template__ = false
+    /* style inject */
+
+    /* style inject SSR */
+
+    var Icon = normalizeComponent_1(
+        { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+        __vue_inject_styles__,
+        __vue_script__,
+        __vue_scope_id__,
+        __vue_is_functional_template__,
+        __vue_module_identifier__,
+        undefined,
+        undefined
+    )
+
+    var MessageMixin = {
+        components: _defineProperty({}, Icon.name, Icon),
+        props: {
+            active: {
+                type: Boolean,
+                default: true
+            },
+            title: String,
+            closable: {
+                type: Boolean,
+                default: true
+            },
+            message: String,
+            type: String,
+            hasIcon: Boolean,
+            size: String,
+            iconPack: String,
+            iconSize: String,
+            autoClose: {
+                type: Boolean,
+                default: false
+            },
+            duration: {
+                type: Number,
+                default: 2000
+            }
+        },
+        data: function data() {
+            return {
+                isActive: this.active
+            }
+        },
+        watch: {
+            active: function active(value) {
+                this.isActive = value
+            },
+            isActive: function isActive(value) {
+                if (value) {
+                    this.setAutoClose()
+                } else {
+                    if (this.timer) {
+                        clearTimeout(this.timer)
+                    }
+                }
+            }
+        },
+        computed: {
+            /**
+       * Icon name (MDI) based on type.
+       */
+            icon: function icon() {
+                switch (this.type) {
+                    case 'is-info':
+                        return 'information'
+
+                    case 'is-success':
+                        return 'check-circle'
+
+                    case 'is-warning':
+                        return 'alert'
+
+                    case 'is-danger':
+                        return 'alert-circle'
+
+                    default:
+                        return null
+                }
+            }
+        },
+        methods: {
+            /**
+       * Close the Message and emit events.
+       */
+            close: function close() {
+                this.isActive = false
+                this.$emit('close')
+                this.$emit('update:active', false)
+            },
+
+            /**
+       * Set timer to auto close message
+       */
+            setAutoClose: function setAutoClose() {
+                var _this = this
+
+                if (this.autoClose) {
+                    this.timer = setTimeout(function () {
+                        if (_this.isActive) {
+                            _this.close()
+                        }
+                    }, this.duration)
+                }
+            }
+        },
+        mounted: function mounted() {
+            this.setAutoClose()
+        }
+    }
+
+    //
+    var script$1 = {
+        name: 'BMessage',
+        mixins: [MessageMixin],
+        props: {
+            ariaCloseLabel: String
+        },
+        data: function data() {
+            return {
+                newIconSize: this.iconSize || this.size || 'is-large'
+            }
+        }
+    }
+
+    /* script */
+    const __vue_script__$1 = script$1
+
+    /* template */
+    var __vue_render__$1 = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('transition', {attrs: {'name': 'fade'}}, [(_vm.isActive) ? _c('article', {staticClass: 'message', class: [_vm.type, _vm.size]}, [(_vm.title) ? _c('header', {staticClass: 'message-header'}, [_c('p', [_vm._v(_vm._s(_vm.title))]), _vm._v(' '), (_vm.closable) ? _c('button', {staticClass: 'delete', attrs: {'type': 'button', 'aria-label': _vm.ariaCloseLabel}, on: {'click': _vm.close}}) : _vm._e()]) : _vm._e(), _vm._v(' '), _c('section', {staticClass: 'message-body'}, [_c('div', {staticClass: 'media'}, [(_vm.icon && _vm.hasIcon) ? _c('div', {staticClass: 'media-left'}, [_c('b-icon', {class: _vm.type, attrs: {'icon': _vm.icon, 'pack': _vm.iconPack, 'both': '', 'size': _vm.newIconSize}})], 1) : _vm._e(), _vm._v(' '), _c('div', {staticClass: 'media-content'}, [_vm._t('default')], 2)])])]) : _vm._e()]) }
+    var __vue_staticRenderFns__$1 = []
+
+    /* style */
+    const __vue_inject_styles__$1 = undefined
+    /* scoped */
+    const __vue_scope_id__$1 = undefined
+    /* module identifier */
+    const __vue_module_identifier__$1 = undefined
+    /* functional template */
+    const __vue_is_functional_template__$1 = false
+    /* style inject */
+
+    /* style inject SSR */
+
+    var Message = normalizeComponent_1(
+        { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
+        __vue_inject_styles__$1,
+        __vue_script__$1,
+        __vue_scope_id__$1,
+        __vue_is_functional_template__$1,
+        __vue_module_identifier__$1,
+        undefined,
+        undefined
+    )
+
+    var use = function use(plugin) {
+        if (typeof window !== 'undefined' && window.Vue) {
+            window.Vue.use(plugin)
+        }
+    }
+    var registerComponent = function registerComponent(Vue, component) {
+        Vue.component(component.name, component)
+    }
+
+    var Plugin = {
+        install: function install(Vue) {
+            registerComponent(Vue, Message)
+        }
+    }
+    use(Plugin)
+
+    exports.default = Plugin
+
+    Object.defineProperty(exports, '__esModule', { value: true })
+}))

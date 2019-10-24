@@ -441,7 +441,7 @@ export default {
             firstTimeSort: true, // Used by first time initSort
             _isTable: true // Used by TableColumn
         }
-    },  
+    },
     computed: {
         /**
         * return if detailed row tabled

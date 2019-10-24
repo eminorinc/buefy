@@ -1,2 +1,756 @@
-/*! Buefy v0.7.3 | MIT License | github.com/buefy/buefy */
-!(function(t,e){if("object"==typeof exports&&"object"==typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var n=e();for(var r in n)("object"==typeof exports?exports:t)[r]=n[r]}})("undefined"!=typeof self?self:this,(function(){return (function(t){function e(r){if(n[r])return n[r].exports;var i=n[r]={i:r,l:!1,exports:{}};return t[r].call(i.exports,i,i.exports,e),i.l=!0,i.exports}var n={};return e.m=t,e.c=n,e.d=function(t,n,r){e.o(t,n)||Object.defineProperty(t,n,{configurable:!1,enumerable:!0,get:r})},e.n=function(t){var n=t&&t.__esModule?function(){return t.default}:function(){return t};return e.d(n,"a",n),n},e.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},e.p="/",e(e.s=245)})({0:function(t,e,n){t.exports=!n(7)((function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a}))},1:function(t,e){var n=t.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=n)},10:function(t,e,n){var r=n(6);t.exports=function(t){if(!r(t))throw TypeError(t+" is not an object!");return t}},109:function(t,e,n){var r=n(2)(n(120),n(121),null,null,null);t.exports=r.exports},12:function(t,e,n){"use strict";n.d(e,"c",(function(){return r})),n.d(e,"a",(function(){return i})),n.d(e,"b",(function(){return o}));var r=function(t){"undefined"!=typeof window&&window.Vue&&window.Vue.use(t)},i=function(t,e){t.component(e.name,e)},o=function(t,e,n){t.prototype[e]=n}},120:function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var r=n(26),i=n.n(r),o=n(31),u=n.n(o);e.default={name:"BPagination",components:i()({},u.a.name,u.a),props:{total:[Number,String],perPage:{type:[Number,String],default:20},current:{type:[Number,String],default:1},size:String,simple:Boolean,rounded:Boolean,order:String,iconPack:String},computed:{rootClasses:function(){return[this.order,this.size,{"is-simple":this.simple,"is-rounded":this.rounded}]},pageCount:function(){return Math.ceil(this.total/this.perPage)},firstItem:function(){var t=this.current*this.perPage-this.perPage+1;return t>=0?t:0},hasPrev:function(){return this.current>1},hasFirst:function(){return this.current>=3},hasFirstEllipsis:function(){return this.current>=4},hasLast:function(){return this.current<=this.pageCount-2},hasLastEllipsis:function(){return this.current<this.pageCount-2&&this.current<=this.pageCount-3},hasNext:function(){return this.current<this.pageCount},pagesInRange:function(){var t=this;if(!this.simple){for(var e=Math.max(1,this.current-1),n=Math.min(this.current+1,this.pageCount),r=[],i=e;i<=n;i++)!(function(e){r.push({number:e,isCurrent:t.current===e,click:function(n){t.current!==e&&(t.$emit("change",e),t.$emit("update:current",e),t.$nextTick((function(){return n.target.focus()})))}})})(i);return r}}},watch:{pageCount:function(t){this.current>t&&this.last()}},methods:{prev:function(){this.hasPrev&&(this.$emit("change",this.current-1),this.$emit("update:current",this.current-1))},first:function(){this.$emit("change",1),this.$emit("update:current",1)},last:function(){this.$emit("change",this.pageCount),this.$emit("update:current",this.pageCount)},next:function(){this.hasNext&&(this.$emit("change",this.current+1),this.$emit("update:current",this.current+1))}}}},121:function(t,e){t.exports={render:function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("div",{staticClass:"pagination",class:t.rootClasses},[n("a",{staticClass:"pagination-previous",attrs:{role:"button",href:"#",disabled:!t.hasPrev},on:{click:function(e){e.preventDefault(),t.prev(e)}}},[n("b-icon",{attrs:{icon:"chevron-left",pack:t.iconPack,both:""}})],1),t._v(" "),n("a",{staticClass:"pagination-next",attrs:{role:"button",href:"#",disabled:!t.hasNext},on:{click:function(e){e.preventDefault(),t.next(e)}}},[n("b-icon",{attrs:{icon:"chevron-right",pack:t.iconPack,both:""}})],1),t._v(" "),t.simple?t._e():n("ul",{staticClass:"pagination-list"},[t.hasFirst?n("li",[n("a",{staticClass:"pagination-link",attrs:{role:"button",href:"#"},on:{click:function(e){e.preventDefault(),t.first(e)}}},[t._v("\n                1\n            ")])]):t._e(),t._v(" "),t.hasFirstEllipsis?n("li",[n("span",{staticClass:"pagination-ellipsis"},[t._v("…")])]):t._e(),t._v(" "),t._l(t.pagesInRange,(function(e){return n("li",{key:e.number},[n("a",{staticClass:"pagination-link",class:{"is-current":e.isCurrent},attrs:{role:"button",href:"#"},on:{click:function(t){t.preventDefault(),e.click(t)}}},[t._v("\n                "+t._s(e.number)+"\n            ")])])})),t._v(" "),t.hasLastEllipsis?n("li",[n("span",{staticClass:"pagination-ellipsis"},[t._v("…")])]):t._e(),t._v(" "),t.hasLast?n("li",[n("a",{staticClass:"pagination-link",attrs:{role:"button",href:"#"},on:{click:function(e){e.preventDefault(),t.last(e)}}},[t._v("\n                "+t._s(t.pageCount)+"\n            ")])]):t._e()],2),t._v(" "),t.simple?n("small",{staticClass:"info"},[1==t.perPage?[t._v("\n            "+t._s(t.firstItem)+" / "+t._s(t.total)+"\n        ")]:[t._v("\n            "+t._s(t.firstItem)+"-"+t._s(Math.min(t.current*t.perPage,t.total))+" / "+t._s(t.total)+"\n        ")]],2):t._e()])},staticRenderFns:[]}},13:function(t,e){t.exports=function(t,e){return{enumerable:!(1&t),configurable:!(2&t),writable:!(4&t),value:e}}},14:function(t,e,n){"use strict";var r={defaultContainerElement:null,defaultIconPack:"mdi",defaultIconComponent:null,defaultDialogConfirmText:null,defaultDialogCancelText:null,defaultSnackbarDuration:3500,defaultSnackbarPosition:null,defaultToastDuration:2e3,defaultToastPosition:null,defaultTooltipType:"is-primary",defaultTooltipAnimated:!1,defaultInputAutocomplete:"on",defaultDateFormatter:null,defaultDateParser:null,defaultDateCreator:null,defaultDayNames:null,defaultMonthNames:null,defaultFirstDayOfWeek:null,defaultUnselectableDaysOfWeek:null,defaultTimeFormatter:null,defaultTimeParser:null,defaultModalCanCancel:null,defaultModalScroll:null,defaultDatepickerMobileNative:!0,defaultTimepickerMobileNative:!0,defaultNoticeQueue:!0,defaultInputHasCounter:!0,defaultUseHtml5Validation:!0};e.a=r},15:function(t,e,n){var r=n(6);t.exports=function(t,e){if(!r(t))return t;var n,i;if(e&&"function"==typeof(n=t.toString)&&!r(i=n.call(t)))return i;if("function"==typeof(n=t.valueOf)&&!r(i=n.call(t)))return i;if(!e&&"function"==typeof(n=t.toString)&&!r(i=n.call(t)))return i;throw TypeError("Can't convert object to primitive value")}},166:function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var r=n(109),i=n.n(r),o=n(12);n.d(e,"Pagination",(function(){return i.a}));var u={install:function(t){Object(o.a)(t,i.a)}};Object(o.c)(u),e.default=u},17:function(t,e,n){var r=n(1),i=n(3),o=n(30),u=n(9),a=n(5),s=function(t,e,n){var c,l,f,p=t&s.F,d=t&s.G,h=t&s.S,m=t&s.P,v=t&s.B,g=t&s.W,y=d?i:i[e]||(i[e]={}),_=y.prototype,x=d?r:h?r[e]:(r[e]||{}).prototype;d&&(n=e);for(c in n)(l=!p&&x&&void 0!==x[c])&&a(y,c)||(f=l?x[c]:n[c],y[c]=d&&"function"!=typeof x[c]?n[c]:v&&l?o(f,r):g&&x[c]==f?(function(t){var e=function(e,n,r){if(this instanceof t){switch(arguments.length){case 0:return new t;case 1:return new t(e);case 2:return new t(e,n)}return new t(e,n,r)}return t.apply(this,arguments)};return e.prototype=t.prototype,e})(f):m&&"function"==typeof f?o(Function.call,f):f,m&&((y.virtual||(y.virtual={}))[c]=f,t&s.R&&_&&!_[c]&&u(_,c,f)))};s.F=1,s.G=2,s.S=4,s.P=8,s.B=16,s.W=32,s.U=64,s.R=128,t.exports=s},2:function(t,e){t.exports=function(t,e,n,r,i){var o,u=t=t||{},a=typeof t.default;"object"!==a&&"function"!==a||(o=t,u=t.default);var s="function"==typeof u?u.options:u;e&&(s.render=e.render,s.staticRenderFns=e.staticRenderFns),r&&(s._scopeId=r);var c;if(i?(c=function(t){t=t||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext,t||"undefined"==typeof __VUE_SSR_CONTEXT__||(t=__VUE_SSR_CONTEXT__),n&&n.call(this,t),t&&t._registeredComponents&&t._registeredComponents.add(i)},s._ssrRegister=c):n&&(c=n),c){var l=s.functional,f=l?s.render:s.beforeCreate;l?s.render=function(t,e){return c.call(e),f(t,e)}:s.beforeCreate=f?[].concat(f,c):[c]}return{esModule:o,exports:u,options:s}}},20:function(t,e,n){t.exports=!n(0)&&!n(7)((function(){return 7!=Object.defineProperty(n(21)("div"),"a",{get:function(){return 7}}).a}))},21:function(t,e,n){var r=n(6),i=n(1).document,o=r(i)&&r(i.createElement);t.exports=function(t){return o?i.createElement(t):{}}},245:function(t,e,n){t.exports=n(166)},26:function(t,e,n){"use strict";e.__esModule=!0;var r=n(49),i=(function(t){return t&&t.__esModule?t:{default:t}})(r);e.default=function(t,e,n){return e in t?(0,i.default)(t,e,{value:n,enumerable:!0,configurable:!0,writable:!0}):t[e]=n,t}},3:function(t,e){var n=t.exports={version:"2.5.7"};"number"==typeof __e&&(__e=n)},30:function(t,e,n){var r=n(32);t.exports=function(t,e,n){if(r(t),void 0===e)return t;switch(n){case 1:return function(n){return t.call(e,n)};case 2:return function(n,r){return t.call(e,n,r)};case 3:return function(n,r,i){return t.call(e,n,r,i)}}return function(){return t.apply(e,arguments)}}},31:function(t,e,n){var r=n(2)(n(52),n(53),null,null,null);t.exports=r.exports},32:function(t,e){t.exports=function(t){if("function"!=typeof t)throw TypeError(t+" is not a function!");return t}},4:function(t,e,n){var r=n(10),i=n(20),o=n(15),u=Object.defineProperty;e.f=n(0)?Object.defineProperty:function(t,e,n){if(r(t),e=o(e,!0),r(n),i)try{return u(t,e,n)}catch(t){}if("get"in n||"set"in n)throw TypeError("Accessors not supported!");return"value"in n&&(t[e]=n.value),t}},49:function(t,e,n){t.exports={default:n(50),__esModule:!0}},5:function(t,e){var n={}.hasOwnProperty;t.exports=function(t,e){return n.call(t,e)}},50:function(t,e,n){n(51);var r=n(3).Object;t.exports=function(t,e,n){return r.defineProperty(t,e,n)}},51:function(t,e,n){var r=n(17);r(r.S+r.F*!n(0),"Object",{defineProperty:n(4).f})},52:function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var r=n(14);e.default={name:"BIcon",props:{type:[String,Object],pack:String,icon:String,size:String,customSize:String,customClass:String,both:Boolean},computed:{newIcon:function(){return"mdi"===this.newPack?this.newPack+"-"+this.icon:this.addFAPrefix(this.getEquivalentIconOf(this.icon))},newPack:function(){return this.pack||r.a.defaultIconPack},newType:function(){if(this.type){var t=[];if("string"==typeof this.type)t=this.type.split("-");else for(var e in this.type)if(this.type[e]){t=e.split("-");break}if(!(t.length<=1))return"has-text-"+t[1]}},newCustomSize:function(){return this.customSize||this.customSizeByPack},customSizeByPack:function(){var t="mdi"===this.newPack?"mdi-24px":this.addFAPrefix("lg"),e="mdi"===this.newPack?"mdi-36px":this.addFAPrefix("2x"),n="mdi"===this.newPack?"mdi-48px":this.addFAPrefix("3x");switch(this.size){case"is-small":return;case"is-medium":return e;case"is-large":return n;default:return t}},useIconComponent:function(){return r.a.defaultIconComponent}},methods:{addFAPrefix:function(t){return this.useIconComponent?t:"fa-"+t},getEquivalentIconOf:function(t){if(!this.both)return t;switch(t){case"check":return"check";case"information":return"info-circle";case"check-circle":return"check-circle";case"alert":return"exclamation-triangle";case"alert-circle":return"exclamation-circle";case"arrow-up":return"arrow-up";case"chevron-right":return"angle-right";case"chevron-left":return"angle-left";case"chevron-down":return"angle-down";case"eye":return"eye";case"eye-off":return"eye-slash";case"menu-down":return"caret-down";case"menu-up":return"caret-up";default:return t}}}}},53:function(t,e){t.exports={render:function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("span",{staticClass:"icon",class:[t.newType,t.size]},[t.useIconComponent?n(t.useIconComponent,{tag:"component",class:[t.customClass],attrs:{icon:[t.newPack,t.newIcon],size:t.newCustomSize}}):n("i",{class:[t.newPack,t.newIcon,t.newCustomSize,t.customClass]})],1)},staticRenderFns:[]}},6:function(t,e){t.exports=function(t){return"object"==typeof t?null!==t:"function"==typeof t}},7:function(t,e){t.exports=function(t){try{return!!t()}catch(t){return!0}}},9:function(t,e,n){var r=n(4),i=n(13);t.exports=n(0)?function(t,e,n){return r.f(t,e,i(1,n))}:function(t,e,n){return t[e]=n,t}}})}));
+/*! Buefy v0.8.6 | MIT License | github.com/buefy/buefy */
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports)
+        : typeof define === 'function' && define.amd ? define(['exports'], factory)
+            : (global = global || self, factory(global.Pagination = {}))
+}(this, function (exports) {
+    'use strict'
+
+    function _typeof(obj) {
+        if (typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol') {
+            _typeof = function (obj) {
+                return typeof obj
+            }
+        } else {
+            _typeof = function (obj) {
+                return obj && typeof Symbol === 'function' && obj.constructor === Symbol && obj !== Symbol.prototype ? 'symbol' : typeof obj
+            }
+        }
+
+        return _typeof(obj)
+    }
+
+    function _defineProperty(obj, key, value) {
+        if (key in obj) {
+            Object.defineProperty(obj, key, {
+                value: value,
+                enumerable: true,
+                configurable: true,
+                writable: true
+            })
+        } else {
+            obj[key] = value
+        }
+
+        return obj
+    }
+
+    function ownKeys(object, enumerableOnly) {
+        var keys = Object.keys(object)
+
+        if (Object.getOwnPropertySymbols) {
+            var symbols = Object.getOwnPropertySymbols(object)
+            if (enumerableOnly) {
+                symbols = symbols.filter(function (sym) {
+                    return Object.getOwnPropertyDescriptor(object, sym).enumerable
+                })
+            }
+            keys.push.apply(keys, symbols)
+        }
+
+        return keys
+    }
+
+    function _objectSpread2(target) {
+        for (var i = 1; i < arguments.length; i++) {
+            var source = arguments[i] != null ? arguments[i] : {}
+
+            if (i % 2) {
+                ownKeys(source, true).forEach(function (key) {
+                    _defineProperty(target, key, source[key])
+                })
+            } else if (Object.getOwnPropertyDescriptors) {
+                Object.defineProperties(target, Object.getOwnPropertyDescriptors(source))
+            } else {
+                ownKeys(source).forEach(function (key) {
+                    Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key))
+                })
+            }
+        }
+
+        return target
+    }
+
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    var script = {
+        name: 'BPaginationButton',
+        props: {
+            page: {
+                type: Object,
+                required: true
+            },
+            tag: {
+                type: String,
+                default: 'a',
+                validator: function validator(value) {
+                    return ['a', 'button', 'input', 'router-link', 'nuxt-link', 'n-link', 'NuxtLink', 'NLink'].indexOf(value) >= 0
+                }
+            },
+            disabled: {
+                type: Boolean,
+                default: false
+            }
+        },
+        computed: {
+            href: function href() {
+                if (this.tag === 'a') {
+                    return '#'
+                }
+            },
+            isDisabled: function isDisabled() {
+                return this.disabled || this.page.disabled
+            }
+        }
+    }
+
+    function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier
+        /* server only */
+        , shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
+        if (typeof shadowMode !== 'boolean') {
+            createInjectorSSR = createInjector
+            createInjector = shadowMode
+            shadowMode = false
+        } // Vue.extend constructor export interop.
+
+        var options = typeof script === 'function' ? script.options : script // render functions
+
+        if (template && template.render) {
+            options.render = template.render
+            options.staticRenderFns = template.staticRenderFns
+            options._compiled = true // functional template
+
+            if (isFunctionalTemplate) {
+                options.functional = true
+            }
+        } // scopedId
+
+        if (scopeId) {
+            options._scopeId = scopeId
+        }
+
+        var hook
+
+        if (moduleIdentifier) {
+            // server build
+            hook = function hook(context) {
+                // 2.3 injection
+                context = context || // cached call
+        this.$vnode && this.$vnode.ssrContext || // stateful
+        this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext // functional
+                // 2.2 with runInNewContext: true
+
+                if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+                    context = __VUE_SSR_CONTEXT__
+                } // inject component styles
+
+                if (style) {
+                    style.call(this, createInjectorSSR(context))
+                } // register component module identifier for async chunk inference
+
+                if (context && context._registeredComponents) {
+                    context._registeredComponents.add(moduleIdentifier)
+                }
+            } // used by ssr in case component is cached and beforeCreate
+            // never gets called
+
+            options._ssrRegister = hook
+        } else if (style) {
+            hook = shadowMode ? function () {
+                style.call(this, createInjectorShadow(this.$root.$options.shadowRoot))
+            } : function (context) {
+                style.call(this, createInjector(context))
+            }
+        }
+
+        if (hook) {
+            if (options.functional) {
+                // register for functional component in vue file
+                var originalRender = options.render
+
+                options.render = function renderWithStyleInjection(h, context) {
+                    hook.call(context)
+                    return originalRender(h, context)
+                }
+            } else {
+                // inject component registration as beforeCreate hook
+                var existing = options.beforeCreate
+                options.beforeCreate = existing ? [].concat(existing, hook) : [hook]
+            }
+        }
+
+        return script
+    }
+
+    var normalizeComponent_1 = normalizeComponent
+
+    /* script */
+    const __vue_script__ = script
+
+    /* template */
+    var __vue_render__ = function () {
+        var _obj
+        var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c(_vm.tag, _vm._b({tag: 'component', staticClass: 'pagination-link', class: (_obj = { 'is-current': _vm.page.isCurrent }, _obj[_vm.page.class] = true, _obj), attrs: {'role': 'button', 'href': _vm.href, 'disabled': _vm.isDisabled, 'aria-label': _vm.page['aria-label'], 'aria-current': _vm.page.isCurrent}, on: {'click': function ($event) { $event.preventDefault(); _vm.page.click($event) }}}, 'component', _vm.$attrs, false), [_vm._t('default', [_vm._v(_vm._s(_vm.page.number))])], 2)
+    }
+    var __vue_staticRenderFns__ = []
+
+    /* style */
+    const __vue_inject_styles__ = undefined
+    /* scoped */
+    const __vue_scope_id__ = undefined
+    /* module identifier */
+    const __vue_module_identifier__ = undefined
+    /* functional template */
+    const __vue_is_functional_template__ = false
+    /* style inject */
+
+    /* style inject SSR */
+
+    var PaginationButton = normalizeComponent_1(
+        { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+        __vue_inject_styles__,
+        __vue_script__,
+        __vue_scope_id__,
+        __vue_is_functional_template__,
+        __vue_module_identifier__,
+        undefined,
+        undefined
+    )
+
+    var config = {
+        defaultContainerElement: null,
+        defaultIconPack: 'mdi',
+        defaultIconComponent: null,
+        defaultIconPrev: 'chevron-left',
+        defaultIconNext: 'chevron-right',
+        defaultDialogConfirmText: null,
+        defaultDialogCancelText: null,
+        defaultSnackbarDuration: 3500,
+        defaultSnackbarPosition: null,
+        defaultToastDuration: 2000,
+        defaultToastPosition: null,
+        defaultNotificationDuration: 2000,
+        defaultNotificationPosition: null,
+        defaultTooltipType: 'is-primary',
+        defaultTooltipAnimated: false,
+        defaultTooltipDelay: 0,
+        defaultInputAutocomplete: 'on',
+        defaultDateFormatter: null,
+        defaultDateParser: null,
+        defaultDateCreator: null,
+        defaultDayNames: null,
+        defaultMonthNames: null,
+        defaultFirstDayOfWeek: null,
+        defaultUnselectableDaysOfWeek: null,
+        defaultTimeFormatter: null,
+        defaultTimeParser: null,
+        defaultModalCanCancel: ['escape', 'x', 'outside', 'button'],
+        defaultModalScroll: null,
+        defaultDatepickerMobileNative: true,
+        defaultTimepickerMobileNative: true,
+        defaultNoticeQueue: true,
+        defaultInputHasCounter: true,
+        defaultTaginputHasCounter: true,
+        defaultUseHtml5Validation: true,
+        defaultDropdownMobileModal: true,
+        defaultFieldLabelPosition: null,
+        defaultDatepickerYearsRange: [-100, 3],
+        defaultDatepickerNearbyMonthDays: true,
+        defaultDatepickerNearbySelectableMonthDays: false,
+        defaultDatepickerShowWeekNumber: false,
+        defaultTrapFocus: false,
+        defaultButtonRounded: false,
+        customIconPacks: null
+    } // TODO defaultTrapFocus to true in the next breaking change
+
+    var config$1 = config
+
+    /**
+  * Merge function to replace Object.assign with deep merging possibility
+  */
+
+    var isObject = function isObject(item) {
+        return _typeof(item) === 'object' && !Array.isArray(item)
+    }
+
+    var mergeFn = function mergeFn(target, source) {
+        var isDeep = function isDeep(prop) {
+            return isObject(source[prop]) && target.hasOwnProperty(prop) && isObject(target[prop])
+        }
+
+        var replaced = Object.getOwnPropertyNames(source).map(function (prop) {
+            return _defineProperty({}, prop, isDeep(prop) ? mergeFn(target[prop], source[prop]) : source[prop])
+        }).reduce(function (a, b) {
+            return _objectSpread2({}, a, {}, b)
+        }, {})
+        return _objectSpread2({}, target, {}, replaced)
+    }
+
+    var merge = mergeFn
+
+    var mdiIcons = {
+        sizes: {
+            'default': 'mdi-24px',
+            'is-small': null,
+            'is-medium': 'mdi-36px',
+            'is-large': 'mdi-48px'
+        },
+        iconPrefix: 'mdi-'
+    }
+
+    var faIcons = function faIcons() {
+        var faIconPrefix = config$1 && config$1.defaultIconComponent ? '' : 'fa-'
+        return {
+            sizes: {
+                'default': faIconPrefix + 'lg',
+                'is-small': null,
+                'is-medium': faIconPrefix + '2x',
+                'is-large': faIconPrefix + '3x'
+            },
+            iconPrefix: faIconPrefix,
+            internalIcons: {
+                'information': 'info-circle',
+                'alert': 'exclamation-triangle',
+                'alert-circle': 'exclamation-circle',
+                'chevron-right': 'angle-right',
+                'chevron-left': 'angle-left',
+                'chevron-down': 'angle-down',
+                'eye-off': 'eye-slash',
+                'menu-down': 'caret-down',
+                'menu-up': 'caret-up'
+            }
+        }
+    }
+
+    var getIcons = function getIcons() {
+        var icons = {
+            mdi: mdiIcons,
+            fa: faIcons(),
+            fas: faIcons(),
+            far: faIcons(),
+            fad: faIcons(),
+            fab: faIcons(),
+            fal: faIcons()
+        }
+
+        if (config$1 && config$1.customIconPacks) {
+            icons = merge(icons, config$1.customIconPacks)
+        }
+
+        return icons
+    }
+
+    //
+    var script$1 = {
+        name: 'BIcon',
+        props: {
+            type: [String, Object],
+            component: String,
+            pack: String,
+            icon: String,
+            size: String,
+            customSize: String,
+            customClass: String,
+            both: Boolean // This is used internally to show both MDI and FA icon
+
+        },
+        computed: {
+            iconConfig: function iconConfig() {
+                var allIcons = getIcons()
+                return allIcons[this.newPack]
+            },
+            iconPrefix: function iconPrefix() {
+                if (this.iconConfig && this.iconConfig.iconPrefix) {
+                    return this.iconConfig.iconPrefix
+                }
+
+                return ''
+            },
+
+            /**
+      * Internal icon name based on the pack.
+      * If pack is 'fa', gets the equivalent FA icon name of the MDI,
+      * internal icons are always MDI.
+      */
+            newIcon: function newIcon() {
+                return ''.concat(this.iconPrefix).concat(this.getEquivalentIconOf(this.icon))
+            },
+            newPack: function newPack() {
+                return this.pack || config$1.defaultIconPack
+            },
+            newType: function newType() {
+                if (!this.type) return
+                var splitType = []
+
+                if (typeof this.type === 'string') {
+                    splitType = this.type.split('-')
+                } else {
+                    for (var key in this.type) {
+                        if (this.type[key]) {
+                            splitType = key.split('-')
+                            break
+                        }
+                    }
+                }
+
+                if (splitType.length <= 1) return
+                return 'has-text-'.concat(splitType[1])
+            },
+            newCustomSize: function newCustomSize() {
+                return this.customSize || this.customSizeByPack
+            },
+            customSizeByPack: function customSizeByPack() {
+                if (this.iconConfig && this.iconConfig.sizes) {
+                    if (this.size && this.iconConfig.sizes[this.size] !== undefined) {
+                        return this.iconConfig.sizes[this.size]
+                    } else if (this.iconConfig.sizes.default) {
+                        return this.iconConfig.sizes.default
+                    }
+                }
+
+                return null
+            },
+            useIconComponent: function useIconComponent() {
+                return this.component || config$1.defaultIconComponent
+            }
+        },
+        methods: {
+            /**
+      * Equivalent icon name of the MDI.
+      */
+            getEquivalentIconOf: function getEquivalentIconOf(value) {
+                // Only transform the class if the both prop is set to true
+                if (!this.both) {
+                    return value
+                }
+
+                if (this.iconConfig && this.iconConfig.internalIcons && this.iconConfig.internalIcons[value]) {
+                    return this.iconConfig.internalIcons[value]
+                }
+
+                return value
+            }
+        }
+    }
+
+    /* script */
+    const __vue_script__$1 = script$1
+
+    /* template */
+    var __vue_render__$1 = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('span', {staticClass: 'icon', class: [_vm.newType, _vm.size]}, [(!_vm.useIconComponent) ? _c('i', {class: [_vm.newPack, _vm.newIcon, _vm.newCustomSize, _vm.customClass]}) : _c(_vm.useIconComponent, {tag: 'component', class: [_vm.customClass], attrs: {'icon': [_vm.newPack, _vm.newIcon], 'size': _vm.newCustomSize}})], 1) }
+    var __vue_staticRenderFns__$1 = []
+
+    /* style */
+    const __vue_inject_styles__$1 = undefined
+    /* scoped */
+    const __vue_scope_id__$1 = undefined
+    /* module identifier */
+    const __vue_module_identifier__$1 = undefined
+    /* functional template */
+    const __vue_is_functional_template__$1 = false
+    /* style inject */
+
+    /* style inject SSR */
+
+    var Icon = normalizeComponent_1(
+        { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
+        __vue_inject_styles__$1,
+        __vue_script__$1,
+        __vue_scope_id__$1,
+        __vue_is_functional_template__$1,
+        __vue_module_identifier__$1,
+        undefined,
+        undefined
+    )
+
+    var _components
+    var script$2 = {
+        name: 'BPagination',
+        components: (_components = {}, _defineProperty(_components, Icon.name, Icon), _defineProperty(_components, PaginationButton.name, PaginationButton), _components),
+        props: {
+            total: [Number, String],
+            perPage: {
+                type: [Number, String],
+                default: 20
+            },
+            current: {
+                type: [Number, String],
+                default: 1
+            },
+            rangeBefore: {
+                type: [Number, String],
+                default: 1
+            },
+            rangeAfter: {
+                type: [Number, String],
+                default: 1
+            },
+            size: String,
+            simple: Boolean,
+            rounded: Boolean,
+            order: String,
+            iconPack: String,
+            iconPrev: {
+                type: String,
+                default: config$1.defaultIconPrev
+            },
+            iconNext: {
+                type: String,
+                default: config$1.defaultIconNext
+            },
+            ariaNextLabel: String,
+            ariaPreviousLabel: String,
+            ariaPageLabel: String,
+            ariaCurrentLabel: String
+        },
+        computed: {
+            rootClasses: function rootClasses() {
+                return [this.order, this.size, {
+                    'is-simple': this.simple,
+                    'is-rounded': this.rounded
+                }]
+            },
+            beforeCurrent: function beforeCurrent() {
+                return parseInt(this.rangeBefore)
+            },
+            afterCurrent: function afterCurrent() {
+                return parseInt(this.rangeAfter)
+            },
+
+            /**
+      * Total page size (count).
+      */
+            pageCount: function pageCount() {
+                return Math.ceil(this.total / this.perPage)
+            },
+
+            /**
+      * First item of the page (count).
+      */
+            firstItem: function firstItem() {
+                var firstItem = this.current * this.perPage - this.perPage + 1
+                return firstItem >= 0 ? firstItem : 0
+            },
+
+            /**
+      * Check if previous button is available.
+      */
+            hasPrev: function hasPrev() {
+                return this.current > 1
+            },
+
+            /**
+      * Check if first page button should be visible.
+      */
+            hasFirst: function hasFirst() {
+                return this.current >= 2 + this.beforeCurrent
+            },
+
+            /**
+      * Check if first ellipsis should be visible.
+      */
+            hasFirstEllipsis: function hasFirstEllipsis() {
+                return this.current >= this.beforeCurrent + 4
+            },
+
+            /**
+      * Check if last page button should be visible.
+      */
+            hasLast: function hasLast() {
+                return this.current <= this.pageCount - (1 + this.afterCurrent)
+            },
+
+            /**
+      * Check if last ellipsis should be visible.
+      */
+            hasLastEllipsis: function hasLastEllipsis() {
+                return this.current < this.pageCount - (2 + this.afterCurrent)
+            },
+
+            /**
+      * Check if next button is available.
+      */
+            hasNext: function hasNext() {
+                return this.current < this.pageCount
+            },
+
+            /**
+      * Get near pages, 1 before and 1 after the current.
+      * Also add the click event to the array.
+      */
+            pagesInRange: function pagesInRange() {
+                if (this.simple) return
+                var left = Math.max(1, this.current - this.beforeCurrent)
+
+                if (left - 1 === 2) {
+                    left-- // Do not show the ellipsis if there is only one to hide
+                }
+
+                var right = Math.min(this.current + this.afterCurrent, this.pageCount)
+
+                if (this.pageCount - right === 2) {
+                    right++ // Do not show the ellipsis if there is only one to hide
+                }
+
+                var pages = []
+
+                for (var i = left; i <= right; i++) {
+                    pages.push(this.getPage(i))
+                }
+
+                return pages
+            }
+        },
+        watch: {
+            /**
+      * If current page is trying to be greater than page count, set to last.
+      */
+            pageCount: function pageCount(value) {
+                if (this.current > value) this.last()
+            }
+        },
+        methods: {
+            /**
+      * Previous button click listener.
+      */
+            prev: function prev(event) {
+                this.changePage(this.current - 1, event)
+            },
+
+            /**
+      * Next button click listener.
+      */
+            next: function next(event) {
+                this.changePage(this.current + 1, event)
+            },
+
+            /**
+      * First button click listener.
+      */
+            first: function first(event) {
+                this.changePage(1, event)
+            },
+
+            /**
+      * Last button click listener.
+      */
+            last: function last(event) {
+                this.changePage(this.pageCount, event)
+            },
+            changePage: function changePage(num, event) {
+                if (this.current === num || num < 1 || num > this.pageCount) return
+                this.$emit('change', num)
+                this.$emit('update:current', num) // Set focus on element to keep tab order
+
+                if (event && event.target) {
+                    this.$nextTick(function () {
+                        return event.target.focus()
+                    })
+                }
+            },
+            getPage: function getPage(num) {
+                var _this = this
+
+                var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {}
+                return {
+                    number: num,
+                    isCurrent: this.current === num,
+                    click: function click(event) {
+                        return _this.changePage(num, event)
+                    },
+                    disabled: options.disabled || false,
+                    class: options.class || '',
+                    'aria-label': options['aria-label'] || this.getAriaPageLabel(num, this.current === num)
+                }
+            },
+
+            /**
+      * Get text for aria-label according to page number.
+      */
+            getAriaPageLabel: function getAriaPageLabel(pageNumber, isCurrent) {
+                if (this.ariaPageLabel && (!isCurrent || !this.ariaCurrentLabel)) {
+                    return this.ariaPageLabel + ' ' + pageNumber + '.'
+                } else if (this.ariaPageLabel && isCurrent && this.ariaCurrentLabel) {
+                    return this.ariaCurrentLabel + ', ' + this.ariaPageLabel + ' ' + pageNumber + '.'
+                }
+
+                return null
+            }
+        }
+    }
+
+    /* script */
+    const __vue_script__$2 = script$2
+
+    /* template */
+    var __vue_render__$2 = function () {
+        var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('nav', {staticClass: 'pagination', class: _vm.rootClasses}, [(_vm.$scopedSlots.previous) ? _vm._t('previous', [_c('b-icon', {attrs: {'icon': _vm.iconPrev, 'pack': _vm.iconPack, 'both': '', 'aria-hidden': 'true'}})], {page: _vm.getPage(_vm.current - 1, {
+            disabled: !_vm.hasPrev,
+            class: 'pagination-previous',
+            'aria-label': _vm.ariaPreviousLabel
+        })}) : _c('BPaginationButton', {staticClass: 'pagination-previous', attrs: {'disabled': !_vm.hasPrev, 'page': _vm.getPage(_vm.current - 1)}}, [_c('b-icon', {attrs: {'icon': _vm.iconPrev, 'pack': _vm.iconPack, 'both': '', 'aria-hidden': 'true'}})], 1), _vm._v(' '), (_vm.$scopedSlots.next) ? _vm._t('next', [_c('b-icon', {attrs: {'icon': _vm.iconNext, 'pack': _vm.iconPack, 'both': '', 'aria-hidden': 'true'}})], {page: _vm.getPage(_vm.current + 1, {
+            disabled: !_vm.hasNext,
+            class: 'pagination-next',
+            'aria-label': _vm.ariaNextLabel
+        })}) : _c('BPaginationButton', {staticClass: 'pagination-next', attrs: {'disabled': !_vm.hasNext, 'page': _vm.getPage(_vm.current + 1)}}, [_c('b-icon', {attrs: {'icon': _vm.iconNext, 'pack': _vm.iconPack, 'both': '', 'aria-hidden': 'true'}})], 1), _vm._v(' '), (_vm.simple) ? _c('small', {staticClass: 'info'}, [(_vm.perPage == 1) ? [_vm._v('\n            ' + _vm._s(_vm.firstItem) + ' / ' + _vm._s(_vm.total) + '\n        ')] : [_vm._v('\n            ' + _vm._s(_vm.firstItem) + '-' + _vm._s(Math.min(_vm.current * _vm.perPage, _vm.total)) + ' / ' + _vm._s(_vm.total) + '\n        ')]], 2) : _c('ul', {staticClass: 'pagination-list'}, [(_vm.hasFirst) ? _c('li', [(_vm.$scopedSlots.default) ? _vm._t('default', null, {page: _vm.getPage(1)}) : _c('BPaginationButton', {attrs: {'page': _vm.getPage(1)}})], 2) : _vm._e(), _vm._v(' '), (_vm.hasFirstEllipsis) ? _c('li', [_c('span', {staticClass: 'pagination-ellipsis'}, [_vm._v('…')])]) : _vm._e(), _vm._v(' '), _vm._l((_vm.pagesInRange), function (page) { return _c('li', {key: page.number}, [(_vm.$scopedSlots.default) ? _vm._t('default', null, {page: page}) : _c('BPaginationButton', {attrs: {'page': page}})], 2) }), _vm._v(' '), (_vm.hasLastEllipsis) ? _c('li', [_c('span', {staticClass: 'pagination-ellipsis'}, [_vm._v('…')])]) : _vm._e(), _vm._v(' '), (_vm.hasLast) ? _c('li', [(_vm.$scopedSlots.default) ? _vm._t('default', null, {page: _vm.getPage(_vm.pageCount)}) : _c('BPaginationButton', {attrs: {'page': _vm.getPage(_vm.pageCount)}})], 2) : _vm._e()], 2)], 2)
+    }
+    var __vue_staticRenderFns__$2 = []
+
+    /* style */
+    const __vue_inject_styles__$2 = undefined
+    /* scoped */
+    const __vue_scope_id__$2 = undefined
+    /* module identifier */
+    const __vue_module_identifier__$2 = undefined
+    /* functional template */
+    const __vue_is_functional_template__$2 = false
+    /* style inject */
+
+    /* style inject SSR */
+
+    var Pagination = normalizeComponent_1(
+        { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
+        __vue_inject_styles__$2,
+        __vue_script__$2,
+        __vue_scope_id__$2,
+        __vue_is_functional_template__$2,
+        __vue_module_identifier__$2,
+        undefined,
+        undefined
+    )
+
+    var use = function use(plugin) {
+        if (typeof window !== 'undefined' && window.Vue) {
+            window.Vue.use(plugin)
+        }
+    }
+    var registerComponent = function registerComponent(Vue, component) {
+        Vue.component(component.name, component)
+    }
+
+    var Plugin = {
+        install: function install(Vue) {
+            registerComponent(Vue, Pagination)
+            registerComponent(Vue, PaginationButton)
+        }
+    }
+    use(Plugin)
+
+    exports.default = Plugin
+
+    Object.defineProperty(exports, '__esModule', { value: true })
+}))

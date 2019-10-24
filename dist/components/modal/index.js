@@ -1,2 +1,470 @@
-/*! Buefy v0.7.3 | MIT License | github.com/buefy/buefy */
-!(function(t,e){if("object"==typeof exports&&"object"==typeof module)module.exports=e(require("vue"));else if("function"==typeof define&&define.amd)define(["vue"],e);else{var n=e("object"==typeof exports?require("vue"):t.Vue);for(var o in n)("object"==typeof exports?exports:t)[o]=n[o]}})("undefined"!=typeof self?self:this,(function(t){return (function(t){function e(o){if(n[o])return n[o].exports;var r=n[o]={i:o,l:!1,exports:{}};return t[o].call(r.exports,r,r.exports,e),r.l=!0,r.exports}var n={};return e.m=t,e.c=n,e.d=function(t,n,o){e.o(t,n)||Object.defineProperty(t,n,{configurable:!1,enumerable:!0,get:o})},e.n=function(t){var n=t&&t.__esModule?function(){return t.default}:function(){return t};return e.d(n,"a",n),n},e.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},e.p="/",e(e.s=243)})({0:function(t,e,n){t.exports=!n(7)((function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a}))},1:function(t,e){var n=t.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=n)},10:function(t,e,n){var o=n(6);t.exports=function(t){if(!o(t))throw TypeError(t+" is not an object!");return t}},106:function(t,e,n){var o=n(2)(n(118),n(119),null,null,null);t.exports=o.exports},118:function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(45),r=n(14);e.default={name:"BModal",props:{active:Boolean,component:[Object,Function],content:String,programmatic:Boolean,props:Object,events:Object,width:{type:[String,Number],default:960},hasModalCard:Boolean,animation:{type:String,default:"zoom-out"},canCancel:{type:[Array,Boolean],default:function(){return r.a.defaultModalCanCancel?r.a.defaultModalCanCancel:["escape","x","outside","button"]}},onCancel:{type:Function,default:function(){}},scroll:{type:String,default:function(){return r.a.defaultModalScroll?r.a.defaultModalScroll:"clip"},validator:function(t){return["clip","keep"].indexOf(t)>=0}}},data:function(){return{isActive:this.active||!1,savedScrollTop:null,newWidth:"number"==typeof this.width?this.width+"px":this.width}},computed:{cancelOptions:function(){return"boolean"==typeof this.canCancel?this.canCancel?["escape","x","outside","button"]:[]:this.canCancel},showX:function(){return this.cancelOptions.indexOf("x")>=0}},watch:{active:function(t){this.isActive=t},isActive:function(){this.handleScroll()}},methods:{handleScroll:function(){if("undefined"!=typeof window){if("clip"===this.scroll)return void(this.isActive?document.documentElement.classList.add("is-clipped"):document.documentElement.classList.remove("is-clipped"));if(this.savedScrollTop=this.savedScrollTop?this.savedScrollTop:document.documentElement.scrollTop,this.isActive?document.body.classList.add("is-noscroll"):document.body.classList.remove("is-noscroll"),this.isActive)return void(document.body.style.top="-"+this.savedScrollTop+"px");document.documentElement.scrollTop=this.savedScrollTop,document.body.style.top=null,this.savedScrollTop=null}},cancel:function(t){this.cancelOptions.indexOf(t)<0||(this.onCancel.apply(null,arguments),this.close())},close:function(){var t=this;this.$emit("close"),this.$emit("update:active",!1),this.programmatic&&(this.isActive=!1,setTimeout((function(){t.$destroy(),Object(o.d)(t.$el)}),150))},keyPress:function(t){this.isActive&&27===t.keyCode&&this.cancel("escape")}},created:function(){"undefined"!=typeof window&&document.addEventListener("keyup",this.keyPress)},beforeMount:function(){this.programmatic&&document.body.appendChild(this.$el)},mounted:function(){this.programmatic?this.isActive=!0:this.isActive&&this.handleScroll()},beforeDestroy:function(){if("undefined"!=typeof window){document.removeEventListener("keyup",this.keyPress),document.documentElement.classList.remove("is-clipped");var t=this.savedScrollTop?this.savedScrollTop:document.documentElement.scrollTop;document.body.classList.remove("is-noscroll"),document.documentElement.scrollTop=t,document.body.style.top=null}}}},119:function(t,e){t.exports={render:function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("transition",{attrs:{name:t.animation}},[t.isActive?n("div",{staticClass:"modal is-active"},[n("div",{staticClass:"modal-background",on:{click:function(e){t.cancel("outside")}}}),t._v(" "),n("div",{staticClass:"animation-content",class:{"modal-content":!t.hasModalCard},style:{maxWidth:t.newWidth}},[t.component?n(t.component,t._g(t._b({tag:"component",on:{close:t.close}},"component",t.props,!1),t.events)):t.content?n("div",{domProps:{innerHTML:t._s(t.content)}}):t._t("default")],2),t._v(" "),t.showX?n("button",{staticClass:"modal-close is-large",attrs:{type:"button"},on:{click:function(e){t.cancel("x")}}}):t._e()]):t._e()])},staticRenderFns:[]}},12:function(t,e,n){"use strict";n.d(e,"c",(function(){return o})),n.d(e,"a",(function(){return r})),n.d(e,"b",(function(){return i}));var o=function(t){"undefined"!=typeof window&&window.Vue&&window.Vue.use(t)},r=function(t,e){t.component(e.name,e)},i=function(t,e,n){t.prototype[e]=n}},13:function(t,e){t.exports=function(t,e){return{enumerable:!(1&t),configurable:!(2&t),writable:!(4&t),value:e}}},14:function(t,e,n){"use strict";var o={defaultContainerElement:null,defaultIconPack:"mdi",defaultIconComponent:null,defaultDialogConfirmText:null,defaultDialogCancelText:null,defaultSnackbarDuration:3500,defaultSnackbarPosition:null,defaultToastDuration:2e3,defaultToastPosition:null,defaultTooltipType:"is-primary",defaultTooltipAnimated:!1,defaultInputAutocomplete:"on",defaultDateFormatter:null,defaultDateParser:null,defaultDateCreator:null,defaultDayNames:null,defaultMonthNames:null,defaultFirstDayOfWeek:null,defaultUnselectableDaysOfWeek:null,defaultTimeFormatter:null,defaultTimeParser:null,defaultModalCanCancel:null,defaultModalScroll:null,defaultDatepickerMobileNative:!0,defaultTimepickerMobileNative:!0,defaultNoticeQueue:!0,defaultInputHasCounter:!0,defaultUseHtml5Validation:!0};e.a=o},15:function(t,e,n){var o=n(6);t.exports=function(t,e){if(!o(t))return t;var n,r;if(e&&"function"==typeof(n=t.toString)&&!o(r=n.call(t)))return r;if("function"==typeof(n=t.valueOf)&&!o(r=n.call(t)))return r;if(!e&&"function"==typeof(n=t.toString)&&!o(r=n.call(t)))return r;throw TypeError("Can't convert object to primitive value")}},16:function(t,e){var n=0,o=Math.random();t.exports=function(t){return"Symbol(".concat(void 0===t?"":t,")_",(++n+o).toString(36))}},161:function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),n.d(e,"ModalProgrammatic",(function(){return l}));var o=n(69),r=n.n(o),i=n(70),u=n.n(i),c=n(106),a=n.n(c),s=n(12);n.d(e,"Modal",(function(){return a.a}));var l={open:function(t){var e=void 0,n=void 0;"string"==typeof t&&(e=t);var o={programmatic:!0,content:e};t.parent&&(n=t.parent,delete t.parent);var i=r()(o,t);return new(("undefined"!=typeof window&&window.Vue?window.Vue:u.a).extend(a.a))({parent:n,el:document.createElement("div"),propsData:i})}},f={install:function(t){Object(s.a)(t,a.a),Object(s.b)(t,"$modal",l)}};Object(s.c)(f),e.default=f},17:function(t,e,n){var o=n(1),r=n(3),i=n(30),u=n(9),c=n(5),a=function(t,e,n){var s,l,f,d=t&a.F,p=t&a.G,v=t&a.S,m=t&a.P,h=t&a.B,y=t&a.W,b=p?r:r[e]||(r[e]={}),w=b.prototype,x=p?o:v?o[e]:(o[e]||{}).prototype;p&&(n=e);for(s in n)(l=!d&&x&&void 0!==x[s])&&c(b,s)||(f=l?x[s]:n[s],b[s]=p&&"function"!=typeof x[s]?n[s]:h&&l?i(f,o):y&&x[s]==f?(function(t){var e=function(e,n,o){if(this instanceof t){switch(arguments.length){case 0:return new t;case 1:return new t(e);case 2:return new t(e,n)}return new t(e,n,o)}return t.apply(this,arguments)};return e.prototype=t.prototype,e})(f):m&&"function"==typeof f?i(Function.call,f):f,m&&((b.virtual||(b.virtual={}))[s]=f,t&a.R&&w&&!w[s]&&u(w,s,f)))};a.F=1,a.G=2,a.S=4,a.P=8,a.B=16,a.W=32,a.U=64,a.R=128,t.exports=a},18:function(t,e){t.exports=!0},19:function(t,e){var n=Math.ceil,o=Math.floor;t.exports=function(t){return isNaN(t=+t)?0:(t>0?o:n)(t)}},2:function(t,e){t.exports=function(t,e,n,o,r){var i,u=t=t||{},c=typeof t.default;"object"!==c&&"function"!==c||(i=t,u=t.default);var a="function"==typeof u?u.options:u;e&&(a.render=e.render,a.staticRenderFns=e.staticRenderFns),o&&(a._scopeId=o);var s;if(r?(s=function(t){t=t||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext,t||"undefined"==typeof __VUE_SSR_CONTEXT__||(t=__VUE_SSR_CONTEXT__),n&&n.call(this,t),t&&t._registeredComponents&&t._registeredComponents.add(r)},a._ssrRegister=s):n&&(s=n),s){var l=a.functional,f=l?a.render:a.beforeCreate;l?a.render=function(t,e){return s.call(e),f(t,e)}:a.beforeCreate=f?[].concat(f,s):[s]}return{esModule:i,exports:u,options:a}}},20:function(t,e,n){t.exports=!n(0)&&!n(7)((function(){return 7!=Object.defineProperty(n(21)("div"),"a",{get:function(){return 7}}).a}))},21:function(t,e,n){var o=n(6),r=n(1).document,i=o(r)&&o(r.createElement);t.exports=function(t){return i?r.createElement(t):{}}},22:function(t,e,n){var o=n(35),r=n(25);t.exports=Object.keys||function(t){return o(t,r)}},23:function(t,e){e.f={}.propertyIsEnumerable},24:function(t,e,n){var o=n(3),r=n(1),i=r["__core-js_shared__"]||(r["__core-js_shared__"]={});(t.exports=function(t,e){return i[t]||(i[t]=void 0!==e?e:{})})("versions",[]).push({version:o.version,mode:n(18)?"pure":"global",copyright:"© 2018 Denis Pushkarev (zloirock.ru)"})},243:function(t,e,n){t.exports=n(161)},25:function(t,e){t.exports="constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf".split(",")},27:function(t,e){t.exports=function(t){if(void 0==t)throw TypeError("Can't call method on  "+t);return t}},28:function(t,e){var n={}.toString;t.exports=function(t){return n.call(t).slice(8,-1)}},29:function(t,e,n){var o=n(24)("keys"),r=n(16);t.exports=function(t){return o[t]||(o[t]=r(t))}},3:function(t,e){var n=t.exports={version:"2.5.7"};"number"==typeof __e&&(__e=n)},30:function(t,e,n){var o=n(32);t.exports=function(t,e,n){if(o(t),void 0===e)return t;switch(n){case 1:return function(n){return t.call(e,n)};case 2:return function(n,o){return t.call(e,n,o)};case 3:return function(n,o,r){return t.call(e,n,o,r)}}return function(){return t.apply(e,arguments)}}},32:function(t,e){t.exports=function(t){if("function"!=typeof t)throw TypeError(t+" is not a function!");return t}},34:function(t,e){e.f=Object.getOwnPropertySymbols},35:function(t,e,n){var o=n(5),r=n(8),i=n(43)(!1),u=n(29)("IE_PROTO");t.exports=function(t,e){var n,c=r(t),a=0,s=[];for(n in c)n!=u&&o(c,n)&&s.push(n);for(;e.length>a;)o(c,n=e[a++])&&(~i(s,n)||s.push(n));return s}},37:function(t,e,n){var o=n(28);t.exports=Object("z").propertyIsEnumerable(0)?Object:function(t){return"String"==o(t)?t.split(""):Object(t)}},4:function(t,e,n){var o=n(10),r=n(20),i=n(15),u=Object.defineProperty;e.f=n(0)?Object.defineProperty:function(t,e,n){if(o(t),e=i(e,!0),o(n),r)try{return u(t,e,n)}catch(t){}if("get"in n||"set"in n)throw TypeError("Accessors not supported!");return"value"in n&&(t[e]=n.value),t}},41:function(t,e,n){var o=n(19),r=Math.min;t.exports=function(t){return t>0?r(o(t),9007199254740991):0}},43:function(t,e,n){var o=n(8),r=n(41),i=n(44);t.exports=function(t){return function(e,n,u){var c,a=o(e),s=r(a.length),l=i(u,s);if(t&&n!=n){for(;s>l;)if((c=a[l++])!=c)return!0}else for(;s>l;l++)if((t||l in a)&&a[l]===n)return t||l||0;return!t&&-1}}},44:function(t,e,n){var o=n(19),r=Math.max,i=Math.min;t.exports=function(t,e){return t=o(t),t<0?r(t+e,0):i(t,e)}},45:function(t,e,n){"use strict";function o(t,e){return e.split(".").reduce((function(t,e){return t[e]}),t)}function r(t,e,n){if(!t)return-1;if(!n||"function"!=typeof n)return t.indexOf(e);for(var o=0;o<t.length;o++)if(n(t[o],e))return o;return-1}function i(t){void 0!==t.remove?t.remove():void 0!==t.parentNode&&t.parentNode.removeChild(t)}e.a=o,e.b=r,n.d(e,"c",(function(){return u})),e.d=i;var u={Android:function(){return"undefined"!=typeof window&&window.navigator.userAgent.match(/Android/i)},BlackBerry:function(){return"undefined"!=typeof window&&window.navigator.userAgent.match(/BlackBerry/i)},iOS:function(){return"undefined"!=typeof window&&window.navigator.userAgent.match(/iPhone|iPad|iPod/i)},Opera:function(){return"undefined"!=typeof window&&window.navigator.userAgent.match(/Opera Mini/i)},Windows:function(){return"undefined"!=typeof window&&window.navigator.userAgent.match(/IEMobile/i)},any:function(){return u.Android()||u.BlackBerry()||u.iOS()||u.Opera()||u.Windows()}}},5:function(t,e){var n={}.hasOwnProperty;t.exports=function(t,e){return n.call(t,e)}},54:function(t,e,n){var o=n(27);t.exports=function(t){return Object(o(t))}},6:function(t,e){t.exports=function(t){return"object"==typeof t?null!==t:"function"==typeof t}},69:function(t,e,n){t.exports={default:n(87),__esModule:!0}},7:function(t,e){t.exports=function(t){try{return!!t()}catch(t){return!0}}},70:function(e,n){e.exports=t},8:function(t,e,n){var o=n(37),r=n(27);t.exports=function(t){return o(r(t))}},87:function(t,e,n){n(88),t.exports=n(3).Object.assign},88:function(t,e,n){var o=n(17);o(o.S+o.F,"Object",{assign:n(89)})},89:function(t,e,n){"use strict";var o=n(22),r=n(34),i=n(23),u=n(54),c=n(37),a=Object.assign;t.exports=!a||n(7)((function(){var t={},e={},n=Symbol(),o="abcdefghijklmnopqrst";return t[n]=7,o.split("").forEach((function(t){e[t]=t})),7!=a({},t)[n]||Object.keys(a({},e)).join("")!=o}))?function(t,e){for(var n=u(t),a=arguments.length,s=1,l=r.f,f=i.f;a>s;)for(var d,p=c(arguments[s++]),v=l?o(p).concat(l(p)):o(p),m=v.length,h=0;m>h;)f.call(p,d=v[h++])&&(n[d]=p[d]);return n}:a},9:function(t,e,n){var o=n(4),r=n(13);t.exports=n(0)?function(t,e,n){return o.f(t,e,r(1,n))}:function(t,e,n){return t[e]=n,t}}})}));
+/*! Buefy v0.8.6 | MIT License | github.com/buefy/buefy */
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('vue'))
+        : typeof define === 'function' && define.amd ? define(['exports', 'vue'], factory)
+            : (global = global || self, factory(global.Modal = {}, global.Vue))
+}(this, function (exports, Vue) {
+    'use strict'
+
+    Vue = Vue && Vue.hasOwnProperty('default') ? Vue['default'] : Vue
+
+    var findFocusable = function findFocusable(element) {
+        if (!element) {
+            return null
+        }
+
+        return element.querySelectorAll('a[href],\n                                     area[href],\n                                     input:not([disabled]),\n                                     select:not([disabled]),\n                                     textarea:not([disabled]),\n                                     button:not([disabled]),\n                                     iframe,\n                                     object,\n                                     embed,\n                                     *[tabindex],\n                                     *[contenteditable]')
+    }
+
+    var onKeyDown
+
+    var bind = function bind(el, _ref) {
+        var _ref$value = _ref.value,
+            value = _ref$value === void 0 ? true : _ref$value
+
+        if (value) {
+            var focusable = findFocusable(el)
+
+            if (focusable && focusable.length > 0) {
+                var firstFocusable = focusable[0]
+                var lastFocusable = focusable[focusable.length - 1]
+
+                onKeyDown = function onKeyDown(event) {
+                    if (event.target === firstFocusable && event.shiftKey && event.key === 'Tab') {
+                        event.preventDefault()
+                        lastFocusable.focus()
+                    } else if (event.target === lastFocusable && !event.shiftKey && event.key === 'Tab') {
+                        event.preventDefault()
+                        firstFocusable.focus()
+                    }
+                }
+
+                el.addEventListener('keydown', onKeyDown)
+                firstFocusable.focus()
+            }
+        }
+    }
+
+    var unbind = function unbind(el) {
+        el.removeEventListener('keydown', onKeyDown)
+    }
+
+    var directive = {
+        bind: bind,
+        unbind: unbind
+    }
+
+    function removeElement(el) {
+        if (typeof el.remove !== 'undefined') {
+            el.remove()
+        } else if (typeof el.parentNode !== 'undefined') {
+            el.parentNode.removeChild(el)
+        }
+    }
+
+    var config = {
+        defaultContainerElement: null,
+        defaultIconPack: 'mdi',
+        defaultIconComponent: null,
+        defaultIconPrev: 'chevron-left',
+        defaultIconNext: 'chevron-right',
+        defaultDialogConfirmText: null,
+        defaultDialogCancelText: null,
+        defaultSnackbarDuration: 3500,
+        defaultSnackbarPosition: null,
+        defaultToastDuration: 2000,
+        defaultToastPosition: null,
+        defaultNotificationDuration: 2000,
+        defaultNotificationPosition: null,
+        defaultTooltipType: 'is-primary',
+        defaultTooltipAnimated: false,
+        defaultTooltipDelay: 0,
+        defaultInputAutocomplete: 'on',
+        defaultDateFormatter: null,
+        defaultDateParser: null,
+        defaultDateCreator: null,
+        defaultDayNames: null,
+        defaultMonthNames: null,
+        defaultFirstDayOfWeek: null,
+        defaultUnselectableDaysOfWeek: null,
+        defaultTimeFormatter: null,
+        defaultTimeParser: null,
+        defaultModalCanCancel: ['escape', 'x', 'outside', 'button'],
+        defaultModalScroll: null,
+        defaultDatepickerMobileNative: true,
+        defaultTimepickerMobileNative: true,
+        defaultNoticeQueue: true,
+        defaultInputHasCounter: true,
+        defaultTaginputHasCounter: true,
+        defaultUseHtml5Validation: true,
+        defaultDropdownMobileModal: true,
+        defaultFieldLabelPosition: null,
+        defaultDatepickerYearsRange: [-100, 3],
+        defaultDatepickerNearbyMonthDays: true,
+        defaultDatepickerNearbySelectableMonthDays: false,
+        defaultDatepickerShowWeekNumber: false,
+        defaultTrapFocus: false,
+        defaultButtonRounded: false,
+        customIconPacks: null
+    } // TODO defaultTrapFocus to true in the next breaking change
+
+    var config$1 = config
+
+    //
+    var script = {
+        name: 'BModal',
+        directives: {
+            trapFocus: directive
+        },
+        props: {
+            active: Boolean,
+            component: [Object, Function],
+            content: String,
+            programmatic: Boolean,
+            props: Object,
+            events: Object,
+            width: {
+                type: [String, Number],
+                default: 960
+            },
+            hasModalCard: Boolean,
+            animation: {
+                type: String,
+                default: 'zoom-out'
+            },
+            canCancel: {
+                type: [Array, Boolean],
+                default: function _default() {
+                    return config$1.defaultModalCanCancel
+                }
+            },
+            onCancel: {
+                type: Function,
+                default: function _default() {}
+            },
+            scroll: {
+                type: String,
+                default: function _default() {
+                    return config$1.defaultModalScroll ? config$1.defaultModalScroll : 'clip'
+                },
+                validator: function validator(value) {
+                    return ['clip', 'keep'].indexOf(value) >= 0
+                }
+            },
+            fullScreen: Boolean,
+            trapFocus: {
+                type: Boolean,
+                default: config$1.defaultTrapFocus
+            },
+            customClass: String,
+            ariaRole: {
+                type: String,
+                validator: function validator(value) {
+                    return ['dialog', 'alertdialog'].indexOf(value) >= 0
+                }
+            },
+            ariaModal: Boolean
+        },
+        data: function data() {
+            return {
+                isActive: this.active || false,
+                savedScrollTop: null,
+                newWidth: typeof this.width === 'number' ? this.width + 'px' : this.width,
+                animating: true
+            }
+        },
+        computed: {
+            cancelOptions: function cancelOptions() {
+                return typeof this.canCancel === 'boolean' ? this.canCancel ? config$1.defaultModalCanCancel : [] : this.canCancel
+            },
+            showX: function showX() {
+                return this.cancelOptions.indexOf('x') >= 0
+            },
+            customStyle: function customStyle() {
+                if (!this.fullScreen) {
+                    return {
+                        maxWidth: this.newWidth
+                    }
+                }
+
+                return null
+            }
+        },
+        watch: {
+            active: function active(value) {
+                this.isActive = value
+            },
+            isActive: function isActive() {
+                this.handleScroll()
+            }
+        },
+        methods: {
+            handleScroll: function handleScroll() {
+                if (typeof window === 'undefined') return
+
+                if (this.scroll === 'clip') {
+                    if (this.isActive) {
+                        document.documentElement.classList.add('is-clipped')
+                    } else {
+                        document.documentElement.classList.remove('is-clipped')
+                    }
+
+                    return
+                }
+
+                this.savedScrollTop = !this.savedScrollTop ? document.documentElement.scrollTop : this.savedScrollTop
+
+                if (this.isActive) {
+                    document.body.classList.add('is-noscroll')
+                } else {
+                    document.body.classList.remove('is-noscroll')
+                }
+
+                if (this.isActive) {
+                    document.body.style.top = '-'.concat(this.savedScrollTop, 'px')
+                    return
+                }
+
+                document.documentElement.scrollTop = this.savedScrollTop
+                document.body.style.top = null
+                this.savedScrollTop = null
+            },
+
+            /**
+        * Close the Modal if canCancel and call the onCancel prop (function).
+        */
+            cancel: function cancel(method) {
+                if (this.cancelOptions.indexOf(method) < 0) return
+                this.onCancel.apply(null, arguments)
+                this.close()
+            },
+
+            /**
+        * Call the onCancel prop (function).
+        * Emit events, and destroy modal if it's programmatic.
+        */
+            close: function close() {
+                var _this = this
+
+                this.$emit('close')
+                this.$emit('update:active', false) // Timeout for the animation complete before destroying
+
+                if (this.programmatic) {
+                    this.isActive = false
+                    setTimeout(function () {
+                        _this.$destroy()
+
+                        removeElement(_this.$el)
+                    }, 150)
+                }
+            },
+
+            /**
+        * Keypress event that is bound to the document.
+        */
+            keyPress: function keyPress(event) {
+                // Esc key
+                if (this.isActive && event.keyCode === 27) this.cancel('escape')
+            },
+
+            /**
+        * Transition after-enter hook
+        */
+            afterEnter: function afterEnter() {
+                this.animating = false
+            },
+
+            /**
+        * Transition before-leave hook
+        */
+            beforeLeave: function beforeLeave() {
+                this.animating = true
+            }
+        },
+        created: function created() {
+            if (typeof window !== 'undefined') {
+                document.addEventListener('keyup', this.keyPress)
+            }
+        },
+        beforeMount: function beforeMount() {
+        // Insert the Modal component in body tag
+        // only if it's programmatic
+            this.programmatic && document.body.appendChild(this.$el)
+        },
+        mounted: function mounted() {
+            if (this.programmatic) this.isActive = true; else if (this.isActive) this.handleScroll()
+        },
+        beforeDestroy: function beforeDestroy() {
+            if (typeof window !== 'undefined') {
+                document.removeEventListener('keyup', this.keyPress) // reset scroll
+
+                document.documentElement.classList.remove('is-clipped')
+                var savedScrollTop = !this.savedScrollTop ? document.documentElement.scrollTop : this.savedScrollTop
+                document.body.classList.remove('is-noscroll')
+                document.documentElement.scrollTop = savedScrollTop
+                document.body.style.top = null
+            }
+        }
+    }
+
+    function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier
+    /* server only */
+        , shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
+        if (typeof shadowMode !== 'boolean') {
+            createInjectorSSR = createInjector
+            createInjector = shadowMode
+            shadowMode = false
+        } // Vue.extend constructor export interop.
+
+        var options = typeof script === 'function' ? script.options : script // render functions
+
+        if (template && template.render) {
+            options.render = template.render
+            options.staticRenderFns = template.staticRenderFns
+            options._compiled = true // functional template
+
+            if (isFunctionalTemplate) {
+                options.functional = true
+            }
+        } // scopedId
+
+        if (scopeId) {
+            options._scopeId = scopeId
+        }
+
+        var hook
+
+        if (moduleIdentifier) {
+        // server build
+            hook = function hook(context) {
+                // 2.3 injection
+                context = context || // cached call
+          this.$vnode && this.$vnode.ssrContext || // stateful
+          this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext // functional
+                // 2.2 with runInNewContext: true
+
+                if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+                    context = __VUE_SSR_CONTEXT__
+                } // inject component styles
+
+                if (style) {
+                    style.call(this, createInjectorSSR(context))
+                } // register component module identifier for async chunk inference
+
+                if (context && context._registeredComponents) {
+                    context._registeredComponents.add(moduleIdentifier)
+                }
+            } // used by ssr in case component is cached and beforeCreate
+            // never gets called
+
+            options._ssrRegister = hook
+        } else if (style) {
+            hook = shadowMode ? function () {
+                style.call(this, createInjectorShadow(this.$root.$options.shadowRoot))
+            } : function (context) {
+                style.call(this, createInjector(context))
+            }
+        }
+
+        if (hook) {
+            if (options.functional) {
+                // register for functional component in vue file
+                var originalRender = options.render
+
+                options.render = function renderWithStyleInjection(h, context) {
+                    hook.call(context)
+                    return originalRender(h, context)
+                }
+            } else {
+                // inject component registration as beforeCreate hook
+                var existing = options.beforeCreate
+                options.beforeCreate = existing ? [].concat(existing, hook) : [hook]
+            }
+        }
+
+        return script
+    }
+
+    var normalizeComponent_1 = normalizeComponent
+
+    /* script */
+    const __vue_script__ = script
+
+    /* template */
+    var __vue_render__ = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('transition', {attrs: {'name': _vm.animation}, on: {'after-enter': _vm.afterEnter, 'before-leave': _vm.beforeLeave}}, [(_vm.isActive) ? _c('div', {directives: [{name: 'trap-focus', rawName: 'v-trap-focus', value: (_vm.trapFocus), expression: 'trapFocus'}], staticClass: 'modal is-active', class: [{'is-full-screen': _vm.fullScreen}, _vm.customClass], attrs: {'role': _vm.ariaRole, 'aria-modal': _vm.ariaModal}}, [_c('div', {staticClass: 'modal-background', on: {'click': function ($event) { _vm.cancel('outside') }}}), _vm._v(' '), _c('div', {staticClass: 'animation-content', class: { 'modal-content': !_vm.hasModalCard }, style: (_vm.customStyle)}, [(_vm.component) ? _c(_vm.component, _vm._g(_vm._b({tag: 'component', on: {'close': _vm.close}}, 'component', _vm.props, false), _vm.events)) : (_vm.content) ? _c('div', {domProps: {'innerHTML': _vm._s(_vm.content)}}) : _vm._t('default'), _vm._v(' '), (_vm.showX && !_vm.animating) ? _c('button', {staticClass: 'modal-close is-large', attrs: {'type': 'button'}, on: {'click': function ($event) { _vm.cancel('x') }}}) : _vm._e()], 2)]) : _vm._e()]) }
+    var __vue_staticRenderFns__ = []
+
+    /* style */
+    const __vue_inject_styles__ = undefined
+    /* scoped */
+    const __vue_scope_id__ = undefined
+    /* module identifier */
+    const __vue_module_identifier__ = undefined
+    /* functional template */
+    const __vue_is_functional_template__ = false
+    /* style inject */
+
+    /* style inject SSR */
+
+    var Modal = normalizeComponent_1(
+        { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+        __vue_inject_styles__,
+        __vue_script__,
+        __vue_scope_id__,
+        __vue_is_functional_template__,
+        __vue_module_identifier__,
+        undefined,
+        undefined
+    )
+
+    var use = function use(plugin) {
+        if (typeof window !== 'undefined' && window.Vue) {
+            window.Vue.use(plugin)
+        }
+    }
+    var registerComponent = function registerComponent(Vue, component) {
+        Vue.component(component.name, component)
+    }
+    var registerComponentProgrammatic = function registerComponentProgrammatic(Vue, property, component) {
+        if (!Vue.prototype.$buefy) Vue.prototype.$buefy = {}
+        Vue.prototype.$buefy[property] = component
+    }
+
+    var ModalProgrammatic = {
+        open: function open(params) {
+            var content
+            var parent
+            if (typeof params === 'string') content = params
+            var defaultParam = {
+                programmatic: true,
+                content: content
+            }
+
+            if (params.parent) {
+                parent = params.parent
+                delete params.parent
+            }
+
+            var propsData = Object.assign(defaultParam, params)
+            var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : Vue
+            var ModalComponent = vm.extend(Modal)
+            return new ModalComponent({
+                parent: parent,
+                el: document.createElement('div'),
+                propsData: propsData
+            })
+        }
+    }
+    var Plugin = {
+        install: function install(Vue) {
+            registerComponent(Vue, Modal)
+            registerComponentProgrammatic(Vue, 'modal', ModalProgrammatic)
+        }
+    }
+    use(Plugin)
+
+    exports.ModalProgrammatic = ModalProgrammatic
+    exports.default = Plugin
+
+    Object.defineProperty(exports, '__esModule', { value: true })
+}))

@@ -1,2 +1,708 @@
-/*! Buefy v0.7.3 | MIT License | github.com/buefy/buefy */
-!(function(t,e){if("object"==typeof exports&&"object"==typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var n=e();for(var i in n)("object"==typeof exports?exports:t)[i]=n[i]}})("undefined"!=typeof self?self:this,(function(){return (function(t){function e(i){if(n[i])return n[i].exports;var r=n[i]={i:i,l:!1,exports:{}};return t[i].call(r.exports,r,r.exports,e),r.l=!0,r.exports}var n={};return e.m=t,e.c=n,e.d=function(t,n,i){e.o(t,n)||Object.defineProperty(t,n,{configurable:!1,enumerable:!0,get:i})},e.n=function(t){var n=t&&t.__esModule?function(){return t.default}:function(){return t};return e.d(n,"a",n),n},e.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},e.p="/",e(e.s=251)})({0:function(t,e,n){t.exports=!n(7)((function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a}))},1:function(t,e){var n=t.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=n)},10:function(t,e,n){var i=n(6);t.exports=function(t){if(!i(t))throw TypeError(t+" is not an object!");return t}},12:function(t,e,n){"use strict";n.d(e,"c",(function(){return i})),n.d(e,"a",(function(){return r})),n.d(e,"b",(function(){return o}));var i=function(t){"undefined"!=typeof window&&window.Vue&&window.Vue.use(t)},r=function(t,e){t.component(e.name,e)},o=function(t,e,n){t.prototype[e]=n}},13:function(t,e){t.exports=function(t,e){return{enumerable:!(1&t),configurable:!(2&t),writable:!(4&t),value:e}}},14:function(t,e,n){"use strict";var i={defaultContainerElement:null,defaultIconPack:"mdi",defaultIconComponent:null,defaultDialogConfirmText:null,defaultDialogCancelText:null,defaultSnackbarDuration:3500,defaultSnackbarPosition:null,defaultToastDuration:2e3,defaultToastPosition:null,defaultTooltipType:"is-primary",defaultTooltipAnimated:!1,defaultInputAutocomplete:"on",defaultDateFormatter:null,defaultDateParser:null,defaultDateCreator:null,defaultDayNames:null,defaultMonthNames:null,defaultFirstDayOfWeek:null,defaultUnselectableDaysOfWeek:null,defaultTimeFormatter:null,defaultTimeParser:null,defaultModalCanCancel:null,defaultModalScroll:null,defaultDatepickerMobileNative:!0,defaultTimepickerMobileNative:!0,defaultNoticeQueue:!0,defaultInputHasCounter:!0,defaultUseHtml5Validation:!0};e.a=i},15:function(t,e,n){var i=n(6);t.exports=function(t,e){if(!i(t))return t;var n,r;if(e&&"function"==typeof(n=t.toString)&&!i(r=n.call(t)))return r;if("function"==typeof(n=t.valueOf)&&!i(r=n.call(t)))return r;if(!e&&"function"==typeof(n=t.toString)&&!i(r=n.call(t)))return r;throw TypeError("Can't convert object to primitive value")}},17:function(t,e,n){var i=n(1),r=n(3),o=n(30),a=n(9),s=n(5),u=function(t,e,n){var c,l,f,d=t&u.F,p=t&u.G,h=t&u.S,m=t&u.P,v=t&u.B,b=t&u.W,y=p?r:r[e]||(r[e]={}),x=y.prototype,g=p?i:h?i[e]:(i[e]||{}).prototype;p&&(n=e);for(c in n)(l=!d&&g&&void 0!==g[c])&&s(y,c)||(f=l?g[c]:n[c],y[c]=p&&"function"!=typeof g[c]?n[c]:v&&l?o(f,i):b&&g[c]==f?(function(t){var e=function(e,n,i){if(this instanceof t){switch(arguments.length){case 0:return new t;case 1:return new t(e);case 2:return new t(e,n)}return new t(e,n,i)}return t.apply(this,arguments)};return e.prototype=t.prototype,e})(f):m&&"function"==typeof f?o(Function.call,f):f,m&&((y.virtual||(y.virtual={}))[c]=f,t&u.R&&x&&!x[c]&&a(x,c,f)))};u.F=1,u.G=2,u.S=4,u.P=8,u.B=16,u.W=32,u.U=64,u.R=128,t.exports=u},199:function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var i=n(200),r=n.n(i),o=n(203),a=n.n(o),s=n(12);n.d(e,"Tabs",(function(){return r.a})),n.d(e,"TabItem",(function(){return a.a}));var u={install:function(t){Object(s.a)(t,r.a),Object(s.a)(t,a.a)}};Object(s.c)(u),e.default=u},2:function(t,e){t.exports=function(t,e,n,i,r){var o,a=t=t||{},s=typeof t.default;"object"!==s&&"function"!==s||(o=t,a=t.default);var u="function"==typeof a?a.options:a;e&&(u.render=e.render,u.staticRenderFns=e.staticRenderFns),i&&(u._scopeId=i);var c;if(r?(c=function(t){t=t||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext,t||"undefined"==typeof __VUE_SSR_CONTEXT__||(t=__VUE_SSR_CONTEXT__),n&&n.call(this,t),t&&t._registeredComponents&&t._registeredComponents.add(r)},u._ssrRegister=c):n&&(c=n),c){var l=u.functional,f=l?u.render:u.beforeCreate;l?u.render=function(t,e){return c.call(e),f(t,e)}:u.beforeCreate=f?[].concat(f,c):[c]}return{esModule:o,exports:a,options:u}}},20:function(t,e,n){t.exports=!n(0)&&!n(7)((function(){return 7!=Object.defineProperty(n(21)("div"),"a",{get:function(){return 7}}).a}))},200:function(t,e,n){var i=n(2)(n(201),n(202),null,null,null);t.exports=i.exports},201:function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var i,r=n(26),o=n.n(r),a=n(31),s=n.n(a),u={name:"BSlotComponent",props:{component:{type:Object,required:!0},name:{type:String,default:"default"},tag:{type:String,default:"div"},event:{type:String,default:"hook:updated"}},methods:{refresh:function(){this.$forceUpdate()},isVueComponent:function(){return this.component&&this.component._isVue}},created:function(){this.isVueComponent()&&this.component.$on(this.event,this.refresh)},beforeDestroy:function(){this.isVueComponent()&&this.component.$off(this.event,this.refresh)},render:function(t){if(this.isVueComponent()){var e=this.component.$slots[this.name];return t(this.tag,{},e)}}};e.default={name:"BTabs",components:(i={},o()(i,s.a.name,s.a),o()(i,u.name,u),i),props:{value:Number,expanded:Boolean,type:String,size:String,position:String,animated:{type:Boolean,default:!0}},data:function(){return{activeTab:this.value||0,tabItems:[],contentHeight:0,_isTabs:!0}},computed:{navClasses:function(){return[this.type,this.size,this.position,{"is-fullwidth":this.expanded,"is-toggle-rounded is-toggle":"is-toggle-rounded"===this.type}]}},watch:{value:function(t){this.changeTab(t)},tabItems:function(){this.activeTab<this.tabItems.length&&(this.tabItems[this.activeTab].isActive=!0)}},methods:{changeTab:function(t){this.activeTab!==t&&(this.activeTab<this.tabItems.length&&this.tabItems[this.activeTab].deactivate(this.activeTab,t),this.tabItems[t].activate(this.activeTab,t),this.activeTab=t,this.$emit("change",t))},tabClick:function(t){this.$emit("input",t),this.changeTab(t)}},mounted:function(){this.activeTab<this.tabItems.length&&(this.tabItems[this.activeTab].isActive=!0)}}},202:function(t,e){t.exports={render:function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("div",{staticClass:"b-tabs",class:{"is-fullwidth":t.expanded}},[n("nav",{staticClass:"tabs",class:t.navClasses},[n("ul",t._l(t.tabItems,(function(e,i){return n("li",{directives:[{name:"show",rawName:"v-show",value:e.visible,expression:"tabItem.visible"}],key:i,class:{"is-active":t.activeTab===i,"is-disabled":e.disabled}},[n("a",{on:{click:function(e){t.tabClick(i)}}},[e.$slots.header?[n("b-slot-component",{attrs:{component:e,name:"header",tag:"span"}})]:[e.icon?n("b-icon",{attrs:{icon:e.icon,pack:e.iconPack,size:t.size}}):t._e(),t._v(" "),n("span",[t._v(t._s(e.label))])]],2)])})))]),t._v(" "),n("section",{staticClass:"tab-content"},[t._t("default")],2)])},staticRenderFns:[]}},203:function(t,e,n){var i=n(2)(n(204),n(205),null,null,null);t.exports=i.exports},204:function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.default={name:"BTabItem",props:{label:String,icon:String,iconPack:String,disabled:Boolean,visible:{type:Boolean,default:!0}},data:function(){return{isActive:!1,transitionName:null}},methods:{activate:function(t,e){this.$parent.animated?this.transitionName=e<t?"slide-next":"slide-prev":this.transitionName=null,this.isActive=!0},deactivate:function(t,e){this.$parent.animated?this.transitionName=e<t?"slide-next":"slide-prev":this.transitionName=null,this.isActive=!1}},created:function(){if(!this.$parent.$data._isTabs)throw this.$destroy(),new Error("You should wrap bTabItem on a bTabs");this.$parent.tabItems.push(this)},beforeDestroy:function(){var t=this.$parent.tabItems.indexOf(this);t>=0&&this.$parent.tabItems.splice(t,1)}}},205:function(t,e){t.exports={render:function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("transition",{attrs:{name:t.transitionName}},[n("div",{directives:[{name:"show",rawName:"v-show",value:t.isActive&&t.visible,expression:"isActive && visible"}],staticClass:"tab-item"},[t._t("default")],2)])},staticRenderFns:[]}},21:function(t,e,n){var i=n(6),r=n(1).document,o=i(r)&&i(r.createElement);t.exports=function(t){return o?r.createElement(t):{}}},251:function(t,e,n){t.exports=n(199)},26:function(t,e,n){"use strict";e.__esModule=!0;var i=n(49),r=(function(t){return t&&t.__esModule?t:{default:t}})(i);e.default=function(t,e,n){return e in t?(0,r.default)(t,e,{value:n,enumerable:!0,configurable:!0,writable:!0}):t[e]=n,t}},3:function(t,e){var n=t.exports={version:"2.5.7"};"number"==typeof __e&&(__e=n)},30:function(t,e,n){var i=n(32);t.exports=function(t,e,n){if(i(t),void 0===e)return t;switch(n){case 1:return function(n){return t.call(e,n)};case 2:return function(n,i){return t.call(e,n,i)};case 3:return function(n,i,r){return t.call(e,n,i,r)}}return function(){return t.apply(e,arguments)}}},31:function(t,e,n){var i=n(2)(n(52),n(53),null,null,null);t.exports=i.exports},32:function(t,e){t.exports=function(t){if("function"!=typeof t)throw TypeError(t+" is not a function!");return t}},4:function(t,e,n){var i=n(10),r=n(20),o=n(15),a=Object.defineProperty;e.f=n(0)?Object.defineProperty:function(t,e,n){if(i(t),e=o(e,!0),i(n),r)try{return a(t,e,n)}catch(t){}if("get"in n||"set"in n)throw TypeError("Accessors not supported!");return"value"in n&&(t[e]=n.value),t}},49:function(t,e,n){t.exports={default:n(50),__esModule:!0}},5:function(t,e){var n={}.hasOwnProperty;t.exports=function(t,e){return n.call(t,e)}},50:function(t,e,n){n(51);var i=n(3).Object;t.exports=function(t,e,n){return i.defineProperty(t,e,n)}},51:function(t,e,n){var i=n(17);i(i.S+i.F*!n(0),"Object",{defineProperty:n(4).f})},52:function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var i=n(14);e.default={name:"BIcon",props:{type:[String,Object],pack:String,icon:String,size:String,customSize:String,customClass:String,both:Boolean},computed:{newIcon:function(){return"mdi"===this.newPack?this.newPack+"-"+this.icon:this.addFAPrefix(this.getEquivalentIconOf(this.icon))},newPack:function(){return this.pack||i.a.defaultIconPack},newType:function(){if(this.type){var t=[];if("string"==typeof this.type)t=this.type.split("-");else for(var e in this.type)if(this.type[e]){t=e.split("-");break}if(!(t.length<=1))return"has-text-"+t[1]}},newCustomSize:function(){return this.customSize||this.customSizeByPack},customSizeByPack:function(){var t="mdi"===this.newPack?"mdi-24px":this.addFAPrefix("lg"),e="mdi"===this.newPack?"mdi-36px":this.addFAPrefix("2x"),n="mdi"===this.newPack?"mdi-48px":this.addFAPrefix("3x");switch(this.size){case"is-small":return;case"is-medium":return e;case"is-large":return n;default:return t}},useIconComponent:function(){return i.a.defaultIconComponent}},methods:{addFAPrefix:function(t){return this.useIconComponent?t:"fa-"+t},getEquivalentIconOf:function(t){if(!this.both)return t;switch(t){case"check":return"check";case"information":return"info-circle";case"check-circle":return"check-circle";case"alert":return"exclamation-triangle";case"alert-circle":return"exclamation-circle";case"arrow-up":return"arrow-up";case"chevron-right":return"angle-right";case"chevron-left":return"angle-left";case"chevron-down":return"angle-down";case"eye":return"eye";case"eye-off":return"eye-slash";case"menu-down":return"caret-down";case"menu-up":return"caret-up";default:return t}}}}},53:function(t,e){t.exports={render:function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("span",{staticClass:"icon",class:[t.newType,t.size]},[t.useIconComponent?n(t.useIconComponent,{tag:"component",class:[t.customClass],attrs:{icon:[t.newPack,t.newIcon],size:t.newCustomSize}}):n("i",{class:[t.newPack,t.newIcon,t.newCustomSize,t.customClass]})],1)},staticRenderFns:[]}},6:function(t,e){t.exports=function(t){return"object"==typeof t?null!==t:"function"==typeof t}},7:function(t,e){t.exports=function(t){try{return!!t()}catch(t){return!0}}},9:function(t,e,n){var i=n(4),r=n(13);t.exports=n(0)?function(t,e,n){return i.f(t,e,r(1,n))}:function(t,e,n){return t[e]=n,t}}})}));
+/*! Buefy v0.8.6 | MIT License | github.com/buefy/buefy */
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports)
+        : typeof define === 'function' && define.amd ? define(['exports'], factory)
+            : (global = global || self, factory(global.Tabs = {}))
+}(this, function (exports) {
+    'use strict'
+
+    function _typeof(obj) {
+        if (typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol') {
+            _typeof = function (obj) {
+                return typeof obj
+            }
+        } else {
+            _typeof = function (obj) {
+                return obj && typeof Symbol === 'function' && obj.constructor === Symbol && obj !== Symbol.prototype ? 'symbol' : typeof obj
+            }
+        }
+
+        return _typeof(obj)
+    }
+
+    function _defineProperty(obj, key, value) {
+        if (key in obj) {
+            Object.defineProperty(obj, key, {
+                value: value,
+                enumerable: true,
+                configurable: true,
+                writable: true
+            })
+        } else {
+            obj[key] = value
+        }
+
+        return obj
+    }
+
+    function ownKeys(object, enumerableOnly) {
+        var keys = Object.keys(object)
+
+        if (Object.getOwnPropertySymbols) {
+            var symbols = Object.getOwnPropertySymbols(object)
+            if (enumerableOnly) {
+                symbols = symbols.filter(function (sym) {
+                    return Object.getOwnPropertyDescriptor(object, sym).enumerable
+                })
+            }
+            keys.push.apply(keys, symbols)
+        }
+
+        return keys
+    }
+
+    function _objectSpread2(target) {
+        for (var i = 1; i < arguments.length; i++) {
+            var source = arguments[i] != null ? arguments[i] : {}
+
+            if (i % 2) {
+                ownKeys(source, true).forEach(function (key) {
+                    _defineProperty(target, key, source[key])
+                })
+            } else if (Object.getOwnPropertyDescriptors) {
+                Object.defineProperties(target, Object.getOwnPropertyDescriptors(source))
+            } else {
+                ownKeys(source).forEach(function (key) {
+                    Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key))
+                })
+            }
+        }
+
+        return target
+    }
+
+    var config = {
+        defaultContainerElement: null,
+        defaultIconPack: 'mdi',
+        defaultIconComponent: null,
+        defaultIconPrev: 'chevron-left',
+        defaultIconNext: 'chevron-right',
+        defaultDialogConfirmText: null,
+        defaultDialogCancelText: null,
+        defaultSnackbarDuration: 3500,
+        defaultSnackbarPosition: null,
+        defaultToastDuration: 2000,
+        defaultToastPosition: null,
+        defaultNotificationDuration: 2000,
+        defaultNotificationPosition: null,
+        defaultTooltipType: 'is-primary',
+        defaultTooltipAnimated: false,
+        defaultTooltipDelay: 0,
+        defaultInputAutocomplete: 'on',
+        defaultDateFormatter: null,
+        defaultDateParser: null,
+        defaultDateCreator: null,
+        defaultDayNames: null,
+        defaultMonthNames: null,
+        defaultFirstDayOfWeek: null,
+        defaultUnselectableDaysOfWeek: null,
+        defaultTimeFormatter: null,
+        defaultTimeParser: null,
+        defaultModalCanCancel: ['escape', 'x', 'outside', 'button'],
+        defaultModalScroll: null,
+        defaultDatepickerMobileNative: true,
+        defaultTimepickerMobileNative: true,
+        defaultNoticeQueue: true,
+        defaultInputHasCounter: true,
+        defaultTaginputHasCounter: true,
+        defaultUseHtml5Validation: true,
+        defaultDropdownMobileModal: true,
+        defaultFieldLabelPosition: null,
+        defaultDatepickerYearsRange: [-100, 3],
+        defaultDatepickerNearbyMonthDays: true,
+        defaultDatepickerNearbySelectableMonthDays: false,
+        defaultDatepickerShowWeekNumber: false,
+        defaultTrapFocus: false,
+        defaultButtonRounded: false,
+        customIconPacks: null
+    } // TODO defaultTrapFocus to true in the next breaking change
+
+    var config$1 = config
+
+    /**
+  * Merge function to replace Object.assign with deep merging possibility
+  */
+
+    var isObject = function isObject(item) {
+        return _typeof(item) === 'object' && !Array.isArray(item)
+    }
+
+    var mergeFn = function mergeFn(target, source) {
+        var isDeep = function isDeep(prop) {
+            return isObject(source[prop]) && target.hasOwnProperty(prop) && isObject(target[prop])
+        }
+
+        var replaced = Object.getOwnPropertyNames(source).map(function (prop) {
+            return _defineProperty({}, prop, isDeep(prop) ? mergeFn(target[prop], source[prop]) : source[prop])
+        }).reduce(function (a, b) {
+            return _objectSpread2({}, a, {}, b)
+        }, {})
+        return _objectSpread2({}, target, {}, replaced)
+    }
+
+    var merge = mergeFn
+
+    var mdiIcons = {
+        sizes: {
+            'default': 'mdi-24px',
+            'is-small': null,
+            'is-medium': 'mdi-36px',
+            'is-large': 'mdi-48px'
+        },
+        iconPrefix: 'mdi-'
+    }
+
+    var faIcons = function faIcons() {
+        var faIconPrefix = config$1 && config$1.defaultIconComponent ? '' : 'fa-'
+        return {
+            sizes: {
+                'default': faIconPrefix + 'lg',
+                'is-small': null,
+                'is-medium': faIconPrefix + '2x',
+                'is-large': faIconPrefix + '3x'
+            },
+            iconPrefix: faIconPrefix,
+            internalIcons: {
+                'information': 'info-circle',
+                'alert': 'exclamation-triangle',
+                'alert-circle': 'exclamation-circle',
+                'chevron-right': 'angle-right',
+                'chevron-left': 'angle-left',
+                'chevron-down': 'angle-down',
+                'eye-off': 'eye-slash',
+                'menu-down': 'caret-down',
+                'menu-up': 'caret-up'
+            }
+        }
+    }
+
+    var getIcons = function getIcons() {
+        var icons = {
+            mdi: mdiIcons,
+            fa: faIcons(),
+            fas: faIcons(),
+            far: faIcons(),
+            fad: faIcons(),
+            fab: faIcons(),
+            fal: faIcons()
+        }
+
+        if (config$1 && config$1.customIconPacks) {
+            icons = merge(icons, config$1.customIconPacks)
+        }
+
+        return icons
+    }
+
+    //
+    var script = {
+        name: 'BIcon',
+        props: {
+            type: [String, Object],
+            component: String,
+            pack: String,
+            icon: String,
+            size: String,
+            customSize: String,
+            customClass: String,
+            both: Boolean // This is used internally to show both MDI and FA icon
+
+        },
+        computed: {
+            iconConfig: function iconConfig() {
+                var allIcons = getIcons()
+                return allIcons[this.newPack]
+            },
+            iconPrefix: function iconPrefix() {
+                if (this.iconConfig && this.iconConfig.iconPrefix) {
+                    return this.iconConfig.iconPrefix
+                }
+
+                return ''
+            },
+
+            /**
+      * Internal icon name based on the pack.
+      * If pack is 'fa', gets the equivalent FA icon name of the MDI,
+      * internal icons are always MDI.
+      */
+            newIcon: function newIcon() {
+                return ''.concat(this.iconPrefix).concat(this.getEquivalentIconOf(this.icon))
+            },
+            newPack: function newPack() {
+                return this.pack || config$1.defaultIconPack
+            },
+            newType: function newType() {
+                if (!this.type) return
+                var splitType = []
+
+                if (typeof this.type === 'string') {
+                    splitType = this.type.split('-')
+                } else {
+                    for (var key in this.type) {
+                        if (this.type[key]) {
+                            splitType = key.split('-')
+                            break
+                        }
+                    }
+                }
+
+                if (splitType.length <= 1) return
+                return 'has-text-'.concat(splitType[1])
+            },
+            newCustomSize: function newCustomSize() {
+                return this.customSize || this.customSizeByPack
+            },
+            customSizeByPack: function customSizeByPack() {
+                if (this.iconConfig && this.iconConfig.sizes) {
+                    if (this.size && this.iconConfig.sizes[this.size] !== undefined) {
+                        return this.iconConfig.sizes[this.size]
+                    } else if (this.iconConfig.sizes.default) {
+                        return this.iconConfig.sizes.default
+                    }
+                }
+
+                return null
+            },
+            useIconComponent: function useIconComponent() {
+                return this.component || config$1.defaultIconComponent
+            }
+        },
+        methods: {
+            /**
+      * Equivalent icon name of the MDI.
+      */
+            getEquivalentIconOf: function getEquivalentIconOf(value) {
+                // Only transform the class if the both prop is set to true
+                if (!this.both) {
+                    return value
+                }
+
+                if (this.iconConfig && this.iconConfig.internalIcons && this.iconConfig.internalIcons[value]) {
+                    return this.iconConfig.internalIcons[value]
+                }
+
+                return value
+            }
+        }
+    }
+
+    function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier
+        /* server only */
+        , shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
+        if (typeof shadowMode !== 'boolean') {
+            createInjectorSSR = createInjector
+            createInjector = shadowMode
+            shadowMode = false
+        } // Vue.extend constructor export interop.
+
+        var options = typeof script === 'function' ? script.options : script // render functions
+
+        if (template && template.render) {
+            options.render = template.render
+            options.staticRenderFns = template.staticRenderFns
+            options._compiled = true // functional template
+
+            if (isFunctionalTemplate) {
+                options.functional = true
+            }
+        } // scopedId
+
+        if (scopeId) {
+            options._scopeId = scopeId
+        }
+
+        var hook
+
+        if (moduleIdentifier) {
+            // server build
+            hook = function hook(context) {
+                // 2.3 injection
+                context = context || // cached call
+        this.$vnode && this.$vnode.ssrContext || // stateful
+        this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext // functional
+                // 2.2 with runInNewContext: true
+
+                if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+                    context = __VUE_SSR_CONTEXT__
+                } // inject component styles
+
+                if (style) {
+                    style.call(this, createInjectorSSR(context))
+                } // register component module identifier for async chunk inference
+
+                if (context && context._registeredComponents) {
+                    context._registeredComponents.add(moduleIdentifier)
+                }
+            } // used by ssr in case component is cached and beforeCreate
+            // never gets called
+
+            options._ssrRegister = hook
+        } else if (style) {
+            hook = shadowMode ? function () {
+                style.call(this, createInjectorShadow(this.$root.$options.shadowRoot))
+            } : function (context) {
+                style.call(this, createInjector(context))
+            }
+        }
+
+        if (hook) {
+            if (options.functional) {
+                // register for functional component in vue file
+                var originalRender = options.render
+
+                options.render = function renderWithStyleInjection(h, context) {
+                    hook.call(context)
+                    return originalRender(h, context)
+                }
+            } else {
+                // inject component registration as beforeCreate hook
+                var existing = options.beforeCreate
+                options.beforeCreate = existing ? [].concat(existing, hook) : [hook]
+            }
+        }
+
+        return script
+    }
+
+    var normalizeComponent_1 = normalizeComponent
+
+    /* script */
+    const __vue_script__ = script
+
+    /* template */
+    var __vue_render__ = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('span', {staticClass: 'icon', class: [_vm.newType, _vm.size]}, [(!_vm.useIconComponent) ? _c('i', {class: [_vm.newPack, _vm.newIcon, _vm.newCustomSize, _vm.customClass]}) : _c(_vm.useIconComponent, {tag: 'component', class: [_vm.customClass], attrs: {'icon': [_vm.newPack, _vm.newIcon], 'size': _vm.newCustomSize}})], 1) }
+    var __vue_staticRenderFns__ = []
+
+    /* style */
+    const __vue_inject_styles__ = undefined
+    /* scoped */
+    const __vue_scope_id__ = undefined
+    /* module identifier */
+    const __vue_module_identifier__ = undefined
+    /* functional template */
+    const __vue_is_functional_template__ = false
+    /* style inject */
+
+    /* style inject SSR */
+
+    var Icon = normalizeComponent_1(
+        { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+        __vue_inject_styles__,
+        __vue_script__,
+        __vue_scope_id__,
+        __vue_is_functional_template__,
+        __vue_module_identifier__,
+        undefined,
+        undefined
+    )
+
+    var SlotComponent = {
+        name: 'BSlotComponent',
+        props: {
+            component: {
+                type: Object,
+                required: true
+            },
+            name: {
+                type: String,
+                default: 'default'
+            },
+            scoped: {
+                type: Boolean
+            },
+            props: {
+                type: Object
+            },
+            tag: {
+                type: String,
+                default: 'div'
+            },
+            event: {
+                type: String,
+                default: 'hook:updated'
+            }
+        },
+        methods: {
+            refresh: function refresh() {
+                this.$forceUpdate()
+            },
+            isVueComponent: function isVueComponent() {
+                return this.component && this.component._isVue
+            }
+        },
+        created: function created() {
+            if (this.isVueComponent()) {
+                this.component.$on(this.event, this.refresh)
+            }
+        },
+        beforeDestroy: function beforeDestroy() {
+            if (this.isVueComponent()) {
+                this.component.$off(this.event, this.refresh)
+            }
+        },
+        render: function render(createElement) {
+            if (this.isVueComponent()) {
+                return createElement(this.tag, {}, this.scoped ? this.component.$scopedSlots[this.name](this.props) : this.component.$slots[this.name])
+            }
+        }
+    }
+
+    var _components
+    var script$1 = {
+        name: 'BTabs',
+        components: (_components = {}, _defineProperty(_components, Icon.name, Icon), _defineProperty(_components, SlotComponent.name, SlotComponent), _components),
+        props: {
+            value: Number,
+            expanded: Boolean,
+            type: String,
+            size: String,
+            position: String,
+            animated: {
+                type: Boolean,
+                default: true
+            },
+            destroyOnHide: {
+                type: Boolean,
+                default: false
+            },
+            vertical: Boolean
+        },
+        data: function data() {
+            return {
+                activeTab: this.value || 0,
+                tabItems: [],
+                contentHeight: 0,
+                isTransitioning: false,
+                _isTabs: true // Used internally by TabItem
+
+            }
+        },
+        computed: {
+            mainClasses: function mainClasses() {
+                return _defineProperty({
+                    'is-fullwidth': this.expanded,
+                    'is-vertical': this.vertical
+                }, this.position, this.position && this.vertical)
+            },
+            navClasses: function navClasses() {
+                var _ref2
+
+                return [this.type, this.size, (_ref2 = {}, _defineProperty(_ref2, this.position, this.position && !this.vertical), _defineProperty(_ref2, 'is-fullwidth', this.expanded), _defineProperty(_ref2, 'is-toggle-rounded is-toggle', this.type === 'is-toggle-rounded'), _ref2)]
+            }
+        },
+        watch: {
+            /**
+      * When v-model is changed set the new active tab.
+      */
+            value: function value(_value) {
+                this.changeTab(_value)
+            },
+
+            /**
+      * When tab-items are updated, set active one.
+      */
+            tabItems: function tabItems() {
+                if (this.activeTab < this.tabItems.length) {
+                    this.tabItems[this.activeTab].isActive = true
+                }
+            }
+        },
+        methods: {
+            /**
+      * Change the active tab and emit change event.
+      */
+            changeTab: function changeTab(newIndex) {
+                if (this.activeTab === newIndex || this.tabItems[newIndex] === undefined) return
+
+                if (this.activeTab < this.tabItems.length) {
+                    this.tabItems[this.activeTab].deactivate(this.activeTab, newIndex)
+                }
+
+                this.tabItems[newIndex].activate(this.activeTab, newIndex)
+                this.activeTab = newIndex
+                this.$emit('change', newIndex)
+            },
+
+            /**
+      * Tab click listener, emit input event and change active tab.
+      */
+            tabClick: function tabClick(value) {
+                this.$emit('input', value)
+                this.changeTab(value)
+            }
+        },
+        mounted: function mounted() {
+            if (this.activeTab < this.tabItems.length) {
+                this.tabItems[this.activeTab].isActive = true
+            }
+        }
+    }
+
+    /* script */
+    const __vue_script__$1 = script$1
+
+    /* template */
+    var __vue_render__$1 = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('div', {staticClass: 'b-tabs', class: _vm.mainClasses}, [_c('nav', {staticClass: 'tabs', class: _vm.navClasses}, [_c('ul', _vm._l((_vm.tabItems), function (tabItem, index) { return _c('li', {directives: [{name: 'show', rawName: 'v-show', value: (tabItem.visible), expression: 'tabItem.visible'}], key: index, class: { 'is-active': _vm.activeTab === index, 'is-disabled': tabItem.disabled }}, [_c('a', {on: {'click': function ($event) { _vm.tabClick(index) }}}, [(tabItem.$slots.header) ? [_c('b-slot-component', {attrs: {'component': tabItem, 'name': 'header', 'tag': 'span'}})] : [(tabItem.icon) ? _c('b-icon', {attrs: {'icon': tabItem.icon, 'pack': tabItem.iconPack, 'size': _vm.size}}) : _vm._e(), _vm._v(' '), _c('span', [_vm._v(_vm._s(tabItem.label))])]], 2)]) }))]), _vm._v(' '), _c('section', {staticClass: 'tab-content', class: {'is-transitioning': _vm.isTransitioning}}, [_vm._t('default')], 2)]) }
+    var __vue_staticRenderFns__$1 = []
+
+    /* style */
+    const __vue_inject_styles__$1 = undefined
+    /* scoped */
+    const __vue_scope_id__$1 = undefined
+    /* module identifier */
+    const __vue_module_identifier__$1 = undefined
+    /* functional template */
+    const __vue_is_functional_template__$1 = false
+    /* style inject */
+
+    /* style inject SSR */
+
+    var Tabs = normalizeComponent_1(
+        { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
+        __vue_inject_styles__$1,
+        __vue_script__$1,
+        __vue_scope_id__$1,
+        __vue_is_functional_template__$1,
+        __vue_module_identifier__$1,
+        undefined,
+        undefined
+    )
+
+    var script$2 = {
+        name: 'BTabItem',
+        props: {
+            label: String,
+            icon: String,
+            iconPack: String,
+            disabled: Boolean,
+            visible: {
+                type: Boolean,
+                default: true
+            }
+        },
+        data: function data() {
+            return {
+                isActive: false,
+                transitionName: null
+            }
+        },
+        methods: {
+            /**
+      * Activate tab, alter animation name based on the index.
+      */
+            activate: function activate(oldIndex, index) {
+                this.transitionName = index < oldIndex ? 'slide-next' : 'slide-prev'
+                this.isActive = true
+            },
+
+            /**
+      * Deactivate tab, alter animation name based on the index.
+      */
+            deactivate: function deactivate(oldIndex, index) {
+                this.transitionName = index < oldIndex ? 'slide-next' : 'slide-prev'
+                this.isActive = false
+            }
+        },
+        created: function created() {
+            if (!this.$parent.$data._isTabs) {
+                this.$destroy()
+                throw new Error('You should wrap bTabItem on a bTabs')
+            }
+
+            this.$parent.tabItems.push(this)
+        },
+        beforeDestroy: function beforeDestroy() {
+            var index = this.$parent.tabItems.indexOf(this)
+
+            if (index >= 0) {
+                this.$parent.tabItems.splice(index, 1)
+            }
+        },
+        render: function render(createElement) {
+            var _this = this
+
+            // if destroy apply v-if
+            if (this.$parent.destroyOnHide) {
+                if (!this.isActive || !this.visible) {
+                    return
+                }
+            }
+
+            var vnode = createElement('div', {
+                directives: [{
+                    name: 'show',
+                    value: this.isActive && this.visible
+                }],
+                class: 'tab-item'
+            }, this.$slots.default) // check animated prop
+
+            if (this.$parent.animated) {
+                return createElement('transition', {
+                    props: {
+                        'name': this.transitionName
+                    },
+                    on: {
+                        'before-enter': function beforeEnter() {
+                            _this.$parent.isTransitioning = true
+                        },
+                        'after-enter': function afterEnter() {
+                            _this.$parent.isTransitioning = false
+                        }
+                    }
+                }, [vnode])
+            }
+
+            return vnode
+        }
+    }
+
+    /* script */
+    const __vue_script__$2 = script$2
+
+    /* template */
+
+    /* style */
+    const __vue_inject_styles__$2 = undefined
+    /* scoped */
+    const __vue_scope_id__$2 = undefined
+    /* module identifier */
+    const __vue_module_identifier__$2 = undefined
+    /* functional template */
+    const __vue_is_functional_template__$2 = undefined
+    /* style inject */
+
+    /* style inject SSR */
+
+    var TabItem = normalizeComponent_1(
+        {},
+        __vue_inject_styles__$2,
+        __vue_script__$2,
+        __vue_scope_id__$2,
+        __vue_is_functional_template__$2,
+        __vue_module_identifier__$2,
+        undefined,
+        undefined
+    )
+
+    var use = function use(plugin) {
+        if (typeof window !== 'undefined' && window.Vue) {
+            window.Vue.use(plugin)
+        }
+    }
+    var registerComponent = function registerComponent(Vue, component) {
+        Vue.component(component.name, component)
+    }
+
+    var Plugin = {
+        install: function install(Vue) {
+            registerComponent(Vue, Tabs)
+            registerComponent(Vue, TabItem)
+        }
+    }
+    use(Plugin)
+
+    exports.default = Plugin
+
+    Object.defineProperty(exports, '__esModule', { value: true })
+}))
