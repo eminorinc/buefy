@@ -249,7 +249,7 @@
         <div
             v-if="(checkable && hasBottomLeftSlot()) ||
             (paginated && (paginationPosition === 'bottom' || paginationPosition === 'both'))"
-            class="level">
+            class="level is-mobile">
             <div class="level-left">
                 <slot name="bottom-left"/>
             </div>
@@ -375,7 +375,8 @@ export default {
                 return [
                     'bottom',
                     'top',
-                    'both'
+                    'both',
+                    'none'
                 ].indexOf(value) >= 0
             }
         },
