@@ -555,7 +555,8 @@ export default {
                 return [
                     'bottom',
                     'top',
-                    'both'
+                    'both',
+                    'none'
                 ].indexOf(value) >= 0
             }
         },
