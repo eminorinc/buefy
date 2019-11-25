@@ -11,7 +11,7 @@
             :icon-pack="iconPack"
             :sort-icon="sortIcon"
             :sort-icon-size="sortIconSize"
-            @sort="(column) => sort(column)"
+            @sort="(column, direction) => sort(column, null, direction)"
         />
 
         <div
@@ -662,13 +662,17 @@ export default {
         * Toggle current direction on column if it's sortable
         * and not just updating the prop.
         */
-        sort(column, updatingData = false) {
+        sort(column, updatingData = false, direction) {
             if (!column || !column.sortable) return
 
             if (!updatingData) {
                 this.isAsc = column === this.currentSortColumn
                     ? !this.isAsc
                     : (this.defaultSortDirection.toLowerCase() !== 'desc')
+            }
+            // from mobile sort
+            if (direction) {
+                this.isAsc = direction === 'asc'
             }
             if (!this.firstTimeSort) {
                 this.$emit('sort', column.field, this.isAsc ? 'asc' : 'desc')
