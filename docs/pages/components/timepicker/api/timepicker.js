@@ -142,6 +142,20 @@ export default [
                 default: '-'
             },
             {
+                name: '<code>time-creator</code>',
+                description: 'Function used internally to create a new Date instance',
+                type: 'Function',
+                values: '—',
+                default: '<code>() => new Date()</code>'
+            },
+            {
+                name: '<code>focusable</code>',
+                description: 'Timepicker container can be focused',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',
