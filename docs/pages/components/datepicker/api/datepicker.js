@@ -79,7 +79,7 @@ export default [
                 default: '<code>false</code>'
             },
             {
-                name: '<code>readonly</code>',
+                name: '<code>editable</code>',
                 description: 'Enable input/typing. <b>Note that you might have to set a custom date parser</b>',
                 type: 'Boolean',
                 values: '—',
@@ -212,7 +212,7 @@ export default [
                 default: '<code>false</code>'
             },
             {
-                name: '<code>show-number-week</code>',
+                name: '<code>show-week-number</code>',
                 description: 'Display week number',
                 type: 'Boolean',
                 values: '-',
@@ -240,6 +240,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>focusable</code>',
+                description: 'Datepicker container can be focused',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',
@@ -261,6 +268,11 @@ export default [
         ],
         events: [
             {
+                name: '<code>input</code>',
+                description: 'Triggers when the value of datepicker is changed',
+                parameters: '<code>value: Number</code>'
+            },
+            {
                 name: '<code>change-month</code>',
                 description: 'Triggers when calendar month is changed',
                 parameters: '<code>month: Number(0-11)</code>'
@@ -269,6 +281,16 @@ export default [
                 name: '<code>change-year</code>',
                 description: 'Triggers when calendar year is changed',
                 parameters: '<code>year: Number</code>'
+            },
+            {
+                name: '<code>range-start</code>',
+                description: 'Triggers when user starts selecting a date range (Only when <b>range</b> prop is set)',
+                parameters: '<code>date: Date</code>'
+            },
+            {
+                name: '<code>range-end</code>',
+                description: 'Triggers when user ends selecting a date range (Only when <b>range</b> prop is set)',
+                parameters: '<code>date: Date</code>'
             }
         ],
         methods: [

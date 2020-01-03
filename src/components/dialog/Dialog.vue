@@ -3,7 +3,7 @@
         <div
             v-if="isActive"
             class="dialog modal is-active"
-            :class="size"
+            :class="dialogClass"
             v-trap-focus="trapFocus"
             :role="ariaRole"
             :aria-modal="ariaModal">
@@ -116,6 +116,10 @@ export default {
             type: Function,
             default: () => {}
         },
+        container: {
+            type: String,
+            default: config.defaultContainerElement
+        },
         focusOn: {
             type: String,
             default: 'confirm'
@@ -147,6 +151,11 @@ export default {
         }
     },
     computed: {
+        dialogClass() {
+            return [this.size, {
+                'has-custom-container': this.container !== null
+            }]
+        },
         /**
         * Icon name (MDI) based on the type.
         */
@@ -199,10 +208,11 @@ export default {
         }
     },
     beforeMount() {
-        // Insert the Dialog component in body tag
+        // Insert the Dialog component in the element container
         if (typeof window !== 'undefined') {
             this.$nextTick(() => {
-                document.body.appendChild(this.$el)
+                const container = document.querySelector(this.container) || document.body
+                container.appendChild(this.$el)
             })
         }
     },
