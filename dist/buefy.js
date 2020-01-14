@@ -9184,10 +9184,10 @@
             beforeMount: function beforeMount() {
                 var _this = this
 
-                if (!this.$parent.$data._isTable) {
-                    this.$destroy()
-                    throw new Error('You should wrap bTableColumn on a bTable')
-                }
+      if (!this.$parent.$data._isTable) {
+        this.$destroy();
+        throw new Error('You should wrap bTableColumn on a bTable');
+      }
 
                 if (this.internal) return
 

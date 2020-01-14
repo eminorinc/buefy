@@ -1,17 +1,18 @@
-import './chunk-17755bd7.js'
-import './chunk-90e31a22.js'
-import './chunk-1628b87d.js'
-import './chunk-4f8020cc.js'
-import './chunk-263f5bb7.js'
-import { r as registerComponent, u as use } from './chunk-cca88db8.js'
-import './chunk-aefb9856.js'
-import { A as Autocomplete } from './chunk-3877b2c6.js'
+import './chunk-f2006744.js';
+import './helpers.js';
+import './chunk-b76a6c1d.js';
+import './chunk-03b1476b.js';
+import './chunk-c8434a6f.js';
+import { r as registerComponent, u as use } from './chunk-cca88db8.js';
+import './chunk-70383fcd.js';
+import { A as Autocomplete } from './chunk-560cfa87.js';
+export { A as BAutocomplete } from './chunk-560cfa87.js';
 
 var Plugin = {
-    install: function install(Vue) {
-        registerComponent(Vue, Autocomplete)
-    }
-}
-use(Plugin)
+  install: function install(Vue) {
+    registerComponent(Vue, Autocomplete);
+  }
+};
+use(Plugin);
 
-export default Plugin
+export default Plugin;
