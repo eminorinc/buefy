@@ -1,18 +1,20 @@
-'use strict'
+'use strict';
 
-Object.defineProperty(exports, '__esModule', { value: true })
+Object.defineProperty(exports, '__esModule', { value: true });
 
-require('./chunk-fb310c0c.js')
-var __chunk_6 = require('./chunk-13e039f5.js')
-require('./chunk-68185b37.js')
-var __chunk_12 = require('./chunk-0aedbae5.js')
+require('./chunk-8806479f.js');
+var __chunk_5 = require('./chunk-13e039f5.js');
+require('./chunk-c5b5b708.js');
+var __chunk_12 = require('./chunk-0dbbaff2.js');
 
 var Plugin = {
-    install: function install(Vue) {
-        __chunk_6.registerComponent(Vue, __chunk_12.Dropdown)
-        __chunk_6.registerComponent(Vue, __chunk_12.DropdownItem)
-    }
-}
-__chunk_6.use(Plugin)
+  install: function install(Vue) {
+    __chunk_5.registerComponent(Vue, __chunk_12.Dropdown);
+    __chunk_5.registerComponent(Vue, __chunk_12.DropdownItem);
+  }
+};
+__chunk_5.use(Plugin);
 
-exports.default = Plugin
+exports.BDropdown = __chunk_12.Dropdown;
+exports.BDropdownItem = __chunk_12.DropdownItem;
+exports.default = Plugin;

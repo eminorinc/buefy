@@ -1,21 +1,22 @@
-import './chunk-17755bd7.js'
-import './chunk-90e31a22.js'
-import './chunk-1628b87d.js'
-import './chunk-4f8020cc.js'
-import './chunk-263f5bb7.js'
-import { r as registerComponent, u as use } from './chunk-cca88db8.js'
-import './chunk-aefb9856.js'
-import './chunk-dc5f834f.js'
-import './chunk-9ab17080.js'
-import './chunk-fc424ed4.js'
-import './chunk-7e8ddc27.js'
-import { D as Datepicker } from './chunk-67645e41.js'
+import './chunk-f2006744.js';
+import './helpers.js';
+import './chunk-b76a6c1d.js';
+import './chunk-03b1476b.js';
+import './chunk-c8434a6f.js';
+import { r as registerComponent, u as use } from './chunk-cca88db8.js';
+import './chunk-70383fcd.js';
+import './chunk-b3471279.js';
+import './chunk-b98d635b.js';
+import './chunk-169e5faa.js';
+import './chunk-9c209565.js';
+import { D as Datepicker } from './chunk-9fd67fcc.js';
+export { D as BDatepicker } from './chunk-9fd67fcc.js';
 
 var Plugin = {
-    install: function install(Vue) {
-        registerComponent(Vue, Datepicker)
-    }
-}
-use(Plugin)
+  install: function install(Vue) {
+    registerComponent(Vue, Datepicker);
+  }
+};
+use(Plugin);
 
-export default Plugin
+export default Plugin;
