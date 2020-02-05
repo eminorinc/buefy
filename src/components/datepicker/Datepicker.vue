@@ -21,7 +21,7 @@
                 :rounded="rounded"
                 :loading="loading"
                 :disabled="disabled"
-                :readonly="!editable"
+                :readonly="!editable || readonly"
                 v-bind="$attrs"
                 :use-html5-validation="useHtml5Validation"
                 @click.native="onInputClick"
