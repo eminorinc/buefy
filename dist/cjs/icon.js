@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-Object.defineProperty(exports, '__esModule', { value: true })
+Object.defineProperty(exports, '__esModule', { value: true });
 
 require('./chunk-2777282e.js')
 require('./helpers.js')

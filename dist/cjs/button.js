@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-Object.defineProperty(exports, '__esModule', { value: true })
+Object.defineProperty(exports, '__esModule', { value: true });
 
 var __chunk_1 = require('./chunk-2777282e.js')
 require('./helpers.js')
@@ -48,21 +48,44 @@ var script = {
             }
         }
     },
-    computed: {
-        iconSize: function iconSize() {
-            if (!this.size || this.size === 'is-medium') {
-                return 'is-small'
-            } else if (this.size === 'is-large') {
-                return 'is-medium'
-            }
-
-            return this.size
-        }
+    loading: Boolean,
+    outlined: Boolean,
+    expanded: Boolean,
+    inverted: Boolean,
+    focused: Boolean,
+    active: Boolean,
+    hovered: Boolean,
+    selected: Boolean,
+    nativeType: {
+      type: String,
+      default: 'button',
+      validator: function validator(value) {
+        return ['button', 'submit', 'reset'].indexOf(value) >= 0;
+      }
+    },
+    tag: {
+      type: String,
+      default: 'button',
+      validator: function validator(value) {
+        return ['button', 'a', 'input', 'router-link', 'nuxt-link', 'n-link', 'NuxtLink', 'NLink'].indexOf(value) >= 0;
+      }
     }
-}
+  },
+  computed: {
+    iconSize: function iconSize() {
+      if (!this.size || this.size === 'is-medium') {
+        return 'is-small';
+      } else if (this.size === 'is-large') {
+        return 'is-medium';
+      }
+
+      return this.size;
+    }
+  }
+};
 
 /* script */
-const __vue_script__ = script
+const __vue_script__ = script;
 
 /* template */
 var __vue_render__ = function () {
@@ -83,15 +106,18 @@ var __vue_render__ = function () {
 }
 var __vue_staticRenderFns__ = []
 
-/* style */
-const __vue_inject_styles__ = undefined
-/* scoped */
-const __vue_scope_id__ = undefined
-/* module identifier */
-const __vue_module_identifier__ = undefined
-/* functional template */
-const __vue_is_functional_template__ = false
-/* style inject */
+  /* style */
+  const __vue_inject_styles__ = undefined;
+  /* scoped */
+  const __vue_scope_id__ = undefined;
+  /* module identifier */
+  const __vue_module_identifier__ = undefined;
+  /* functional template */
+  const __vue_is_functional_template__ = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
 
 /* style inject SSR */
 
@@ -104,7 +130,7 @@ var Button = __chunk_5.__vue_normalize__(
     __vue_module_identifier__,
     undefined,
     undefined
-)
+  );
 
 var Plugin = {
     install: function install(Vue) {

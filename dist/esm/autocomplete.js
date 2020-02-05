@@ -9,10 +9,10 @@ import { A as Autocomplete } from './chunk-560cfa87.js'
 export { A as BAutocomplete } from './chunk-560cfa87.js'
 
 var Plugin = {
-    install: function install(Vue) {
-        registerComponent(Vue, Autocomplete)
-    }
-}
-use(Plugin)
+  install: function install(Vue) {
+    registerComponent(Vue, Autocomplete);
+  }
+};
+use(Plugin);
 
-export default Plugin
+export default Plugin;
