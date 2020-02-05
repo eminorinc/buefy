@@ -5,10 +5,10 @@ import { F as Field } from './chunk-169e5faa.js'
 export { F as BField } from './chunk-169e5faa.js'
 
 var Plugin = {
-  install: function install(Vue) {
-    registerComponent(Vue, Field);
-  }
-};
-use(Plugin);
+    install: function install(Vue) {
+        registerComponent(Vue, Field)
+    }
+}
+use(Plugin)
 
-export default Plugin;
+export default Plugin

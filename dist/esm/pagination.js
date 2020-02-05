@@ -7,11 +7,11 @@ import { P as Pagination, a as PaginationButton } from './chunk-4dc010ac.js'
 export { P as BPagination, a as BPaginationButton } from './chunk-4dc010ac.js'
 
 var Plugin = {
-  install: function install(Vue) {
-    registerComponent(Vue, Pagination);
-    registerComponent(Vue, PaginationButton);
-  }
-};
-use(Plugin);
+    install: function install(Vue) {
+        registerComponent(Vue, Pagination)
+        registerComponent(Vue, PaginationButton)
+    }
+}
+use(Plugin)
 
-export default Plugin;
+export default Plugin

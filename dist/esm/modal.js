@@ -35,26 +35,7 @@ var ModalProgrammatic = {
             propsData: propsData
         })
     }
-
-    var defaultParam = {
-      programmatic: true
-    };
-
-    if (params.parent) {
-      parent = params.parent;
-      delete params.parent;
-    }
-
-    var propsData = merge(defaultParam, params);
-    var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance;
-    var ModalComponent = vm.extend(Modal);
-    return new ModalComponent({
-      parent: parent,
-      el: document.createElement('div'),
-      propsData: propsData
-    });
-  }
-};
+}
 var Plugin = {
     install: function install(Vue) {
         localVueInstance = Vue
@@ -64,5 +45,5 @@ var Plugin = {
 }
 use(Plugin)
 
-export default Plugin;
-export { ModalProgrammatic };
+export default Plugin
+export { ModalProgrammatic }

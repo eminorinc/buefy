@@ -99,9 +99,7 @@ export { default as Toast, ToastProgrammatic } from './toast.js'
 export { default as Tooltip } from './tooltip.js'
 export { default as Upload } from './upload.js'
 
-
-
-var components = /*#__PURE__*/Object.freeze({
+var components = /* #__PURE__ */Object.freeze({
     Autocomplete: Plugin,
     Button: Plugin$1,
     Carousel: Plugin$2,
@@ -148,6 +146,9 @@ var Buefy = {
 
         setOptions(merge(config, options, true)) // Components
 
+        for (var componentKey in components) {
+            Vue.use(components[componentKey])
+        } // Config component
 
         var BuefyProgrammatic = {
             getOptions: function getOptions() {
@@ -162,18 +163,4 @@ var Buefy = {
 }
 use(Buefy)
 
-
-    var BuefyProgrammatic = {
-      getOptions: function getOptions() {
-        return config;
-      },
-      setOptions: function setOptions$1(options) {
-        setOptions(merge(config, options, true));
-      }
-    };
-    registerComponentProgrammatic(Vue, 'config', BuefyProgrammatic);
-  }
-};
-use(Buefy);
-
-export default Buefy;
+export default Buefy

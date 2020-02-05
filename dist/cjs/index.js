@@ -1,6 +1,6 @@
-'use strict';
+'use strict'
 
-Object.defineProperty(exports, '__esModule', { value: true });
+Object.defineProperty(exports, '__esModule', { value: true })
 
 require('./chunk-2777282e.js')
 var helpers = require('./helpers.js')
@@ -65,9 +65,7 @@ var toast = require('./toast.js')
 var tooltip = require('./tooltip.js')
 var upload = require('./upload.js')
 
-
-
-var components = /*#__PURE__*/Object.freeze({
+var components = /* #__PURE__ */Object.freeze({
     Autocomplete: autocomplete.default,
     Button: button.default,
     Carousel: carousel.default,
@@ -105,7 +103,7 @@ var components = /*#__PURE__*/Object.freeze({
     Toast: toast.default,
     Tooltip: tooltip.default,
     Upload: upload.default
-});
+})
 
 var Buefy = {
     install: function install(Vue) {
@@ -114,6 +112,9 @@ var Buefy = {
 
         __chunk_2.setOptions(helpers.merge(__chunk_2.config, options, true)) // Components
 
+        for (var componentKey in components) {
+            Vue.use(components[componentKey])
+        } // Config component
 
         var BuefyProgrammatic = {
             getOptions: function getOptions() {

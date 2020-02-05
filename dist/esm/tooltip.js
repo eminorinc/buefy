@@ -4,10 +4,10 @@ import { T as Tooltip } from './chunk-e430e8e7.js'
 export { T as BTooltip } from './chunk-e430e8e7.js'
 
 var Plugin = {
-  install: function install(Vue) {
-    registerComponent(Vue, Tooltip);
-  }
-};
-use(Plugin);
+    install: function install(Vue) {
+        registerComponent(Vue, Tooltip)
+    }
+}
+use(Plugin)
 
-export default Plugin;
+export default Plugin

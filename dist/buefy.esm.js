@@ -1,85 +1,87 @@
 /*! Buefy v0.8.9 | MIT License | github.com/buefy/buefy */
 function _typeof(obj) {
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof = function (obj) {
-      return typeof obj;
-    };
-  } else {
-    _typeof = function (obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-  }
+    if (typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol') {
+        _typeof = function (obj) {
+            return typeof obj
+        }
+    } else {
+        _typeof = function (obj) {
+            return obj && typeof Symbol === 'function' && obj.constructor === Symbol && obj !== Symbol.prototype ? 'symbol' : typeof obj
+        }
+    }
 
-  return _typeof(obj);
+    return _typeof(obj)
 }
 
 function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
+    if (key in obj) {
+        Object.defineProperty(obj, key, {
+            value: value,
+            enumerable: true,
+            configurable: true,
+            writable: true
+        })
+    } else {
+        obj[key] = value
+    }
 
-  return obj;
+    return obj
 }
 
 function ownKeys(object, enumerableOnly) {
-  var keys = Object.keys(object);
+    var keys = Object.keys(object)
 
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-    if (enumerableOnly) symbols = symbols.filter(function (sym) {
-      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-    });
-    keys.push.apply(keys, symbols);
-  }
+    if (Object.getOwnPropertySymbols) {
+        var symbols = Object.getOwnPropertySymbols(object)
+        if (enumerableOnly) {
+            symbols = symbols.filter(function (sym) {
+                return Object.getOwnPropertyDescriptor(object, sym).enumerable
+            })
+        }
+        keys.push.apply(keys, symbols)
+    }
 
-  return keys;
+    return keys
 }
 
 function _objectSpread2(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
+    for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i] != null ? arguments[i] : {}
 
-    if (i % 2) {
-      ownKeys(source, true).forEach(function (key) {
-        _defineProperty(target, key, source[key]);
-      });
-    } else if (Object.getOwnPropertyDescriptors) {
-      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-    } else {
-      ownKeys(source).forEach(function (key) {
-        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-      });
+        if (i % 2) {
+            ownKeys(source, true).forEach(function (key) {
+                _defineProperty(target, key, source[key])
+            })
+        } else if (Object.getOwnPropertyDescriptors) {
+            Object.defineProperties(target, Object.getOwnPropertyDescriptors(source))
+        } else {
+            ownKeys(source).forEach(function (key) {
+                Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key))
+            })
+        }
     }
-  }
 
-  return target;
+    return target
 }
 
 function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread()
 }
 
 function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) {
-    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
+    if (Array.isArray(arr)) {
+        for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]
 
-    return arr2;
-  }
+        return arr2
+    }
 }
 
 function _iterableToArray(iter) {
-  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+    if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === '[object Arguments]') return Array.from(iter)
 }
 
 function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance");
+    throw new TypeError('Invalid attempt to spread non-iterable instance')
 }
 
 /**
@@ -96,34 +98,34 @@ var sign = Math.sign || signPoly
  */
 
 function getValueByPath(obj, path) {
-  var value = path.split('.').reduce(function (o, i) {
-    return o ? o[i] : null;
-  }, obj);
-  return value;
+    var value = path.split('.').reduce(function (o, i) {
+        return o ? o[i] : null
+    }, obj)
+    return value
 }
 /**
  * Extension of indexOf method by equality function if specified
  */
 
 function indexOf(array, obj, fn) {
-  if (!array) return -1;
-  if (!fn || typeof fn !== 'function') return array.indexOf(obj);
+    if (!array) return -1
+    if (!fn || typeof fn !== 'function') return array.indexOf(obj)
 
-  for (var i = 0; i < array.length; i++) {
-    if (fn(array[i], obj)) {
-      return i;
+    for (var i = 0; i < array.length; i++) {
+        if (fn(array[i], obj)) {
+            return i
+        }
     }
-  }
 
-  return -1;
+    return -1
 }
 /**
  * Merge function to replace Object.assign with deep merging possibility
  */
 
 var isObject = function isObject(item) {
-  return _typeof(item) === 'object' && !Array.isArray(item);
-};
+    return _typeof(item) === 'object' && !Array.isArray(item)
+}
 
 var mergeFn = function mergeFn(target, source) {
     var deep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false
@@ -144,38 +146,38 @@ var mergeFn = function mergeFn(target, source) {
     }
 }
 
-var merge = mergeFn;
+var merge = mergeFn
 /**
  * Mobile detection
  * https://www.abeautifulsite.net/detecting-mobile-devices-with-javascript
  */
 
 var isMobile = {
-  Android: function Android() {
-    return typeof window !== 'undefined' && window.navigator.userAgent.match(/Android/i);
-  },
-  BlackBerry: function BlackBerry() {
-    return typeof window !== 'undefined' && window.navigator.userAgent.match(/BlackBerry/i);
-  },
-  iOS: function iOS() {
-    return typeof window !== 'undefined' && window.navigator.userAgent.match(/iPhone|iPad|iPod/i);
-  },
-  Opera: function Opera() {
-    return typeof window !== 'undefined' && window.navigator.userAgent.match(/Opera Mini/i);
-  },
-  Windows: function Windows() {
-    return typeof window !== 'undefined' && window.navigator.userAgent.match(/IEMobile/i);
-  },
-  any: function any() {
-    return isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows();
-  }
-};
+    Android: function Android() {
+        return typeof window !== 'undefined' && window.navigator.userAgent.match(/Android/i)
+    },
+    BlackBerry: function BlackBerry() {
+        return typeof window !== 'undefined' && window.navigator.userAgent.match(/BlackBerry/i)
+    },
+    iOS: function iOS() {
+        return typeof window !== 'undefined' && window.navigator.userAgent.match(/iPhone|iPad|iPod/i)
+    },
+    Opera: function Opera() {
+        return typeof window !== 'undefined' && window.navigator.userAgent.match(/Opera Mini/i)
+    },
+    Windows: function Windows() {
+        return typeof window !== 'undefined' && window.navigator.userAgent.match(/IEMobile/i)
+    },
+    any: function any() {
+        return isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows()
+    }
+}
 function removeElement(el) {
-  if (typeof el.remove !== 'undefined') {
-    el.remove();
-  } else if (typeof el.parentNode !== 'undefined') {
-    el.parentNode.removeChild(el);
-  }
+    if (typeof el.remove !== 'undefined') {
+        el.remove()
+    } else if (typeof el.parentNode !== 'undefined') {
+        el.parentNode.removeChild(el)
+    }
 }
 /**
  * Escape regex characters
@@ -183,9 +185,9 @@ function removeElement(el) {
  */
 
 function escapeRegExpChars(value) {
-  if (!value) return value; // eslint-disable-next-line
+    if (!value) return value // eslint-disable-next-line
 
-  return value.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
+    return value.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')
 }
 /**
  * Escape regex characters
@@ -284,140 +286,139 @@ var FormElementMixin = {
     /**
      * Find parent Field, max 3 levels deep.
      */
-    parentField: function parentField() {
-      var parent = this.$parent;
+        parentField: function parentField() {
+            var parent = this.$parent
 
-      for (var i = 0; i < 3; i++) {
-        if (parent && !parent.$data._isField) {
-          parent = parent.$parent;
-        }
-      }
+            for (var i = 0; i < 3; i++) {
+                if (parent && !parent.$data._isField) {
+                    parent = parent.$parent
+                }
+            }
 
-      return parent;
-    },
+            return parent
+        },
 
-    /**
+        /**
      * Get the type prop from parent if it's a Field.
      */
-    statusType: function statusType() {
-      if (!this.parentField) return;
-      if (!this.parentField.newType) return;
+        statusType: function statusType() {
+            if (!this.parentField) return
+            if (!this.parentField.newType) return
 
-      if (typeof this.parentField.newType === 'string') {
-        return this.parentField.newType;
-      } else {
-        for (var key in this.parentField.newType) {
-          if (this.parentField.newType[key]) {
-            return key;
-          }
-        }
-      }
-    },
+            if (typeof this.parentField.newType === 'string') {
+                return this.parentField.newType
+            } else {
+                for (var key in this.parentField.newType) {
+                    if (this.parentField.newType[key]) {
+                        return key
+                    }
+                }
+            }
+        },
 
-    /**
+        /**
      * Get the message prop from parent if it's a Field.
      */
-    statusMessage: function statusMessage() {
-      if (!this.parentField) return;
-      return this.parentField.newMessage;
-    },
+        statusMessage: function statusMessage() {
+            if (!this.parentField) return
+            return this.parentField.newMessage
+        },
 
-    /**
+        /**
      * Fix icon size for inputs, large was too big
      */
-    iconSize: function iconSize() {
-      switch (this.size) {
-        case 'is-small':
-          return this.size;
+        iconSize: function iconSize() {
+            switch (this.size) {
+                case 'is-small':
+                    return this.size
 
-        case 'is-medium':
-          return;
+                case 'is-medium':
+                    return
 
-        case 'is-large':
-          return this.newIconPack === 'mdi' ? 'is-medium' : '';
-      }
-    }
-  },
-  methods: {
+                case 'is-large':
+                    return this.newIconPack === 'mdi' ? 'is-medium' : ''
+            }
+        }
+    },
+    methods: {
     /**
      * Focus method that work dynamically depending on the component.
      */
-    focus: function focus() {
-      var _this = this;
+        focus: function focus() {
+            var _this = this
 
-      if (this.$data._elementRef === undefined) return;
-      this.$nextTick(function () {
-        var el = _this.$el.querySelector(_this.$data._elementRef);
+            if (this.$data._elementRef === undefined) return
+            this.$nextTick(function () {
+                var el = _this.$el.querySelector(_this.$data._elementRef)
 
-        if (el) el.focus();
-      });
-    },
-    onBlur: function onBlur($event) {
-      this.isFocused = false;
-      this.$emit('blur', $event);
-      this.checkHtml5Validity();
-    },
-    onFocus: function onFocus($event) {
-      this.isFocused = true;
-      this.$emit('focus', $event);
-    },
-    getElement: function getElement() {
-      return this.$el.querySelector(this.$data._elementRef);
-    },
-    setInvalid: function setInvalid() {
-      var type = 'is-danger';
-      var message = this.validationMessage || this.getElement().validationMessage;
-      this.setValidity(type, message);
-    },
-    setValidity: function setValidity(type, message) {
-      var _this2 = this;
+                if (el) el.focus()
+            })
+        },
+        onBlur: function onBlur($event) {
+            this.isFocused = false
+            this.$emit('blur', $event)
+            this.checkHtml5Validity()
+        },
+        onFocus: function onFocus($event) {
+            this.isFocused = true
+            this.$emit('focus', $event)
+        },
+        getElement: function getElement() {
+            return this.$el.querySelector(this.$data._elementRef)
+        },
+        setInvalid: function setInvalid() {
+            var type = 'is-danger'
+            var message = this.validationMessage || this.getElement().validationMessage
+            this.setValidity(type, message)
+        },
+        setValidity: function setValidity(type, message) {
+            var _this2 = this
 
-      this.$nextTick(function () {
-        if (_this2.parentField) {
-          // Set type only if not defined
-          if (!_this2.parentField.type) {
-            _this2.parentField.newType = type;
-          } // Set message only if not defined
+            this.$nextTick(function () {
+                if (_this2.parentField) {
+                    // Set type only if not defined
+                    if (!_this2.parentField.type) {
+                        _this2.parentField.newType = type
+                    } // Set message only if not defined
 
+                    if (!_this2.parentField.message) {
+                        _this2.parentField.newMessage = message
+                    }
+                }
+            })
+        },
 
-          if (!_this2.parentField.message) {
-            _this2.parentField.newMessage = message;
-          }
-        }
-      });
-    },
-
-    /**
+        /**
      * Check HTML5 validation, set isValid property.
      * If validation fail, send 'is-danger' type,
      * and error message to parent if it's a Field.
      */
-    checkHtml5Validity: function checkHtml5Validity() {
-      if (!this.useHtml5Validation) return;
-      if (this.$refs[this.$data._elementRef] === undefined) return;
+        checkHtml5Validity: function checkHtml5Validity() {
+            if (!this.useHtml5Validation) return
+            if (this.$refs[this.$data._elementRef] === undefined) return
 
-      if (!this.getElement().checkValidity()) {
-        this.setInvalid();
-        this.isValid = false;
-      } else {
-        this.setValidity(null, null);
-        this.isValid = true;
-      }
+            if (!this.getElement().checkValidity()) {
+                this.setInvalid()
+                this.isValid = false
+            } else {
+                this.setValidity(null, null)
+                this.isValid = true
+            }
 
-      return this.isValid;
+            return this.isValid
+        }
     }
-  }
-};
+}
 
 var mdiIcons = {
-  sizes: {
-    'default': 'mdi-24px',
-    'is-small': null,
-    'is-medium': 'mdi-36px',
-    'is-large': 'mdi-48px'
-  },
-  iconPrefix: 'mdi-'
-};
+    sizes: {
+        'default': 'mdi-24px',
+        'is-small': null,
+        'is-medium': 'mdi-36px',
+        'is-large': 'mdi-48px'
+    },
+    iconPrefix: 'mdi-'
+}
 
 var faIcons = function faIcons() {
     var faIconPrefix = config && config.defaultIconComponent ? '' : 'fa-'
@@ -441,55 +442,54 @@ var faIcons = function faIcons() {
             'menu-up': 'caret-up'
         }
     }
-  };
-};
+}
 
 var getIcons = function getIcons() {
-  var icons = {
-    mdi: mdiIcons,
-    fa: faIcons(),
-    fas: faIcons(),
-    far: faIcons(),
-    fad: faIcons(),
-    fab: faIcons(),
-    fal: faIcons()
-  };
+    var icons = {
+        mdi: mdiIcons,
+        fa: faIcons(),
+        fas: faIcons(),
+        far: faIcons(),
+        fad: faIcons(),
+        fab: faIcons(),
+        fal: faIcons()
+    }
 
     if (config && config.customIconPacks) {
         icons = merge(icons, config.customIconPacks, true)
     }
 
-  return icons;
-};
+    return icons
+}
 
 //
 var script = {
-  name: 'BIcon',
-  props: {
-    type: [String, Object],
-    component: String,
-    pack: String,
-    icon: String,
-    size: String,
-    customSize: String,
-    customClass: String,
-    both: Boolean // This is used internally to show both MDI and FA icon
+    name: 'BIcon',
+    props: {
+        type: [String, Object],
+        component: String,
+        pack: String,
+        icon: String,
+        size: String,
+        customSize: String,
+        customClass: String,
+        both: Boolean // This is used internally to show both MDI and FA icon
 
-  },
-  computed: {
-    iconConfig: function iconConfig() {
-      var allIcons = getIcons();
-      return allIcons[this.newPack];
     },
-    iconPrefix: function iconPrefix() {
-      if (this.iconConfig && this.iconConfig.iconPrefix) {
-        return this.iconConfig.iconPrefix;
-      }
+    computed: {
+        iconConfig: function iconConfig() {
+            var allIcons = getIcons()
+            return allIcons[this.newPack]
+        },
+        iconPrefix: function iconPrefix() {
+            if (this.iconConfig && this.iconConfig.iconPrefix) {
+                return this.iconConfig.iconPrefix
+            }
 
-      return '';
-    },
+            return ''
+        },
 
-    /**
+        /**
     * Internal icon name based on the pack.
     * If pack is 'fa', gets the equivalent FA icon name of the MDI,
     * internal icons are always MDI.
@@ -543,164 +543,157 @@ var script = {
       if (!this.type) return;
       var splitType = [];
 
-      if (typeof this.type === 'string') {
-        splitType = this.type.split('-');
-      } else {
-        for (var key in this.type) {
-          if (this.type[key]) {
-            splitType = key.split('-');
-            break;
-          }
-        }
-      }
+            if (typeof this.type === 'string') {
+                splitType = this.type.split('-')
+            } else {
+                for (var key in this.type) {
+                    if (this.type[key]) {
+                        splitType = key.split('-')
+                        break
+                    }
+                }
+            }
 
-      if (splitType.length <= 1) return;
-      return "has-text-".concat(splitType[1]);
-    },
-    newCustomSize: function newCustomSize() {
-      return this.customSize || this.customSizeByPack;
-    },
-    customSizeByPack: function customSizeByPack() {
-      if (this.iconConfig && this.iconConfig.sizes) {
-        if (this.size && this.iconConfig.sizes[this.size] !== undefined) {
-          return this.iconConfig.sizes[this.size];
-        } else if (this.iconConfig.sizes.default) {
-          return this.iconConfig.sizes.default;
-        }
-      }
+            if (splitType.length <= 1) return
+            return 'has-text-'.concat(splitType[1])
+        },
+        newCustomSize: function newCustomSize() {
+            return this.customSize || this.customSizeByPack
+        },
+        customSizeByPack: function customSizeByPack() {
+            if (this.iconConfig && this.iconConfig.sizes) {
+                if (this.size && this.iconConfig.sizes[this.size] !== undefined) {
+                    return this.iconConfig.sizes[this.size]
+                } else if (this.iconConfig.sizes.default) {
+                    return this.iconConfig.sizes.default
+                }
+            }
 
-      return null;
+            return null
+        },
+        useIconComponent: function useIconComponent() {
+            return this.component || config.defaultIconComponent
+        }
     },
-    useIconComponent: function useIconComponent() {
-      return this.component || config.defaultIconComponent;
-    }
-  },
-  methods: {
+    methods: {
     /**
     * Equivalent icon name of the MDI.
     */
-    getEquivalentIconOf: function getEquivalentIconOf(value) {
-      // Only transform the class if the both prop is set to true
-      if (!this.both) {
-        return value;
-      }
+        getEquivalentIconOf: function getEquivalentIconOf(value) {
+            // Only transform the class if the both prop is set to true
+            if (!this.both) {
+                return value
+            }
 
-      if (this.iconConfig && this.iconConfig.internalIcons && this.iconConfig.internalIcons[value]) {
-        return this.iconConfig.internalIcons[value];
-      }
+            if (this.iconConfig && this.iconConfig.internalIcons && this.iconConfig.internalIcons[value]) {
+                return this.iconConfig.internalIcons[value]
+            }
 
-      return value;
+            return value
+        }
     }
-  }
-};
+}
 
 function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier
 /* server only */
-, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
-  if (typeof shadowMode !== 'boolean') {
-    createInjectorSSR = createInjector;
-    createInjector = shadowMode;
-    shadowMode = false;
-  } // Vue.extend constructor export interop.
+    , shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
+    if (typeof shadowMode !== 'boolean') {
+        createInjectorSSR = createInjector
+        createInjector = shadowMode
+        shadowMode = false
+    } // Vue.extend constructor export interop.
 
+    var options = typeof script === 'function' ? script.options : script // render functions
 
-  var options = typeof script === 'function' ? script.options : script; // render functions
+    if (template && template.render) {
+        options.render = template.render
+        options.staticRenderFns = template.staticRenderFns
+        options._compiled = true // functional template
 
-  if (template && template.render) {
-    options.render = template.render;
-    options.staticRenderFns = template.staticRenderFns;
-    options._compiled = true; // functional template
+        if (isFunctionalTemplate) {
+            options.functional = true
+        }
+    } // scopedId
 
-    if (isFunctionalTemplate) {
-      options.functional = true;
+    if (scopeId) {
+        options._scopeId = scopeId
     }
-  } // scopedId
 
+    var hook
 
-  if (scopeId) {
-    options._scopeId = scopeId;
-  }
-
-  var hook;
-
-  if (moduleIdentifier) {
+    if (moduleIdentifier) {
     // server build
-    hook = function hook(context) {
-      // 2.3 injection
-      context = context || // cached call
+        hook = function hook(context) {
+            // 2.3 injection
+            context = context || // cached call
       this.$vnode && this.$vnode.ssrContext || // stateful
-      this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext; // functional
-      // 2.2 with runInNewContext: true
+      this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext // functional
+            // 2.2 with runInNewContext: true
 
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__;
-      } // inject component styles
+            if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+                context = __VUE_SSR_CONTEXT__
+            } // inject component styles
 
+            if (style) {
+                style.call(this, createInjectorSSR(context))
+            } // register component module identifier for async chunk inference
 
-      if (style) {
-        style.call(this, createInjectorSSR(context));
-      } // register component module identifier for async chunk inference
+            if (context && context._registeredComponents) {
+                context._registeredComponents.add(moduleIdentifier)
+            }
+        } // used by ssr in case component is cached and beforeCreate
+        // never gets called
 
-
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier);
-      }
-    }; // used by ssr in case component is cached and beforeCreate
-    // never gets called
-
-
-    options._ssrRegister = hook;
-  } else if (style) {
-    hook = shadowMode ? function () {
-      style.call(this, createInjectorShadow(this.$root.$options.shadowRoot));
-    } : function (context) {
-      style.call(this, createInjector(context));
-    };
-  }
-
-  if (hook) {
-    if (options.functional) {
-      // register for functional component in vue file
-      var originalRender = options.render;
-
-      options.render = function renderWithStyleInjection(h, context) {
-        hook.call(context);
-        return originalRender(h, context);
-      };
-    } else {
-      // inject component registration as beforeCreate hook
-      var existing = options.beforeCreate;
-      options.beforeCreate = existing ? [].concat(existing, hook) : [hook];
+        options._ssrRegister = hook
+    } else if (style) {
+        hook = shadowMode ? function () {
+            style.call(this, createInjectorShadow(this.$root.$options.shadowRoot))
+        } : function (context) {
+            style.call(this, createInjector(context))
+        }
     }
-  }
 
-  return script;
+    if (hook) {
+        if (options.functional) {
+            // register for functional component in vue file
+            var originalRender = options.render
+
+            options.render = function renderWithStyleInjection(h, context) {
+                hook.call(context)
+                return originalRender(h, context)
+            }
+        } else {
+            // inject component registration as beforeCreate hook
+            var existing = options.beforeCreate
+            options.beforeCreate = existing ? [].concat(existing, hook) : [hook]
+        }
+    }
+
+    return script
 }
 
-var normalizeComponent_1 = normalizeComponent;
+var normalizeComponent_1 = normalizeComponent
 
 /* script */
-const __vue_script__ = script;
+const __vue_script__ = script
 
 /* template */
-var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"icon",class:[_vm.newType, _vm.size]},[(!_vm.useIconComponent)?_c('i',{class:[_vm.newPack, _vm.newIcon, _vm.newCustomSize, _vm.customClass]}):_c(_vm.useIconComponent,{tag:"component",class:[_vm.customClass],attrs:{"icon":[_vm.newPack, _vm.newIcon],"size":_vm.newCustomSize}})],1)};
-var __vue_staticRenderFns__ = [];
+var __vue_render__ = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('span', {staticClass: 'icon', class: [_vm.newType, _vm.size]}, [(!_vm.useIconComponent) ? _c('i', {class: [_vm.newPack, _vm.newIcon, _vm.newCustomSize, _vm.customClass]}) : _c(_vm.useIconComponent, {tag: 'component', class: [_vm.customClass], attrs: {'icon': [_vm.newPack, _vm.newIcon], 'size': _vm.newCustomSize}})], 1) }
+var __vue_staticRenderFns__ = []
 
-  /* style */
-  const __vue_inject_styles__ = undefined;
-  /* scoped */
-  const __vue_scope_id__ = undefined;
-  /* module identifier */
-  const __vue_module_identifier__ = undefined;
-  /* functional template */
-  const __vue_is_functional_template__ = false;
-  /* style inject */
-  
-  /* style inject SSR */
-  
+/* style */
+const __vue_inject_styles__ = undefined
+/* scoped */
+const __vue_scope_id__ = undefined
+/* module identifier */
+const __vue_module_identifier__ = undefined
+/* functional template */
+const __vue_is_functional_template__ = false
+/* style inject */
 
-  
-  var Icon = normalizeComponent_1(
+/* style inject SSR */
+
+var Icon = normalizeComponent_1(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
@@ -709,7 +702,7 @@ var __vue_staticRenderFns__ = [];
     __vue_module_identifier__,
     undefined,
     undefined
-  );
+)
 
 var script$1 = {
     name: 'BInput',
@@ -744,96 +737,122 @@ var script$1 = {
             _elementRef: this.type === 'textarea' ? 'textarea' : 'input'
         }
     },
+    computed: {
+        computedValue: {
+            get: function get() {
+                return this.newValue
+            },
+            set: function set(value) {
+                this.newValue = value
+                this.$emit('input', value)
+                !this.isValid && this.checkHtml5Validity()
+            }
+        },
+        rootClasses: function rootClasses() {
+            return [this.iconPosition, this.size, {
+                'is-expanded': this.expanded,
+                'is-loading': this.loading,
+                'is-clearfix': !this.hasMessage
+            }]
+        },
+        inputClasses: function inputClasses() {
+            return [this.statusType, this.size, {
+                'is-rounded': this.rounded
+            }]
+        },
+        hasIconRight: function hasIconRight() {
+            return this.passwordReveal || this.loading || this.statusTypeIcon
+        },
 
-    /**
+        /**
     * Position of the icon or if it's both sides.
     */
-    iconPosition: function iconPosition() {
-      if (this.icon && this.hasIconRight) {
-        return 'has-icons-left has-icons-right';
-      } else if (!this.icon && this.hasIconRight) {
-        return 'has-icons-right';
-      } else if (this.icon) {
-        return 'has-icons-left';
-      }
-    },
+        iconPosition: function iconPosition() {
+            if (this.icon && this.hasIconRight) {
+                return 'has-icons-left has-icons-right'
+            } else if (!this.icon && this.hasIconRight) {
+                return 'has-icons-right'
+            } else if (this.icon) {
+                return 'has-icons-left'
+            }
+        },
 
-    /**
+        /**
     * Icon name (MDI) based on the type.
     */
-    statusTypeIcon: function statusTypeIcon() {
-      switch (this.statusType) {
-        case 'is-success':
-          return 'check';
+        statusTypeIcon: function statusTypeIcon() {
+            switch (this.statusType) {
+                case 'is-success':
+                    return 'check'
 
-        case 'is-danger':
-          return 'alert-circle';
+                case 'is-danger':
+                    return 'alert-circle'
 
-        case 'is-info':
-          return 'information';
+                case 'is-info':
+                    return 'information'
 
-        case 'is-warning':
-          return 'alert';
-      }
-    },
+                case 'is-warning':
+                    return 'alert'
+            }
+        },
 
-    /**
+        /**
     * Check if have any message prop from parent if it's a Field.
     */
-    hasMessage: function hasMessage() {
-      return !!this.statusMessage;
-    },
+        hasMessage: function hasMessage() {
+            return !!this.statusMessage
+        },
 
-    /**
+        /**
     * Current password-reveal icon name.
     */
-    passwordVisibleIcon: function passwordVisibleIcon() {
-      return !this.isPasswordVisible ? 'eye' : 'eye-off';
-    },
+        passwordVisibleIcon: function passwordVisibleIcon() {
+            return !this.isPasswordVisible ? 'eye' : 'eye-off'
+        },
 
-    /**
+        /**
     * Get value length
     */
-    valueLength: function valueLength() {
-      if (typeof this.computedValue === 'string') {
-        return this.computedValue.length;
-      } else if (typeof this.computedValue === 'number') {
-        return this.computedValue.toString().length;
-      }
+        valueLength: function valueLength() {
+            if (typeof this.computedValue === 'string') {
+                return this.computedValue.length
+            } else if (typeof this.computedValue === 'number') {
+                return this.computedValue.toString().length
+            }
 
-      return 0;
-    }
-  },
-  watch: {
+            return 0
+        }
+    },
+    watch: {
     /**
     * When v-model is changed:
     *   1. Set internal value.
     */
-    value: function value(_value) {
-      this.newValue = _value;
-    }
-  },
-  methods: {
+        value: function value(_value) {
+            this.newValue = _value
+        }
+    },
+    methods: {
     /**
     * Toggle the visibility of a password-reveal input
     * by changing the type and focus the input right away.
     */
-    togglePasswordVisibility: function togglePasswordVisibility() {
-      var _this = this;
+        togglePasswordVisibility: function togglePasswordVisibility() {
+            var _this = this
 
-      this.isPasswordVisible = !this.isPasswordVisible;
-      this.newType = this.isPasswordVisible ? 'text' : 'password';
-      this.$nextTick(function () {
-        _this.$refs.input.focus();
-      });
-    },
+            this.isPasswordVisible = !this.isPasswordVisible
+            this.newType = this.isPasswordVisible ? 'text' : 'password'
+            this.$nextTick(function () {
+                _this.$refs.input.focus()
+            })
+        },
 
-    /**
+        /**
     * Input's 'input' event listener, 'nextTick' is used to prevent event firing
     * before ui update, helps when using masks (Cleavejs and potentially others).
     */
-    onInput: function onInput(event) {
-      var _this2 = this;
+        onInput: function onInput(event) {
+            var _this2 = this
 
             this.$nextTick(function () {
                 if (event.target) {
@@ -849,41 +868,29 @@ var script$1 = {
                 _this3.$refs.input.focus()
             })
         }
-      });
-    },
-    iconClick: function iconClick(event) {
-      var _this3 = this;
-
-      this.$emit('icon-click', event);
-      this.$nextTick(function () {
-        _this3.$refs.input.focus();
-      });
     }
-  }
-};
+}
 
 /* script */
-const __vue_script__$1 = script$1;
+const __vue_script__$1 = script$1
 
 /* template */
 var __vue_render__$1 = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('div', {staticClass: 'control', class: _vm.rootClasses}, [(_vm.type !== 'textarea') ? _c('input', _vm._b({ref: 'input', staticClass: 'input', class: [_vm.inputClasses, _vm.customClass], attrs: {'type': _vm.newType, 'autocomplete': _vm.newAutocomplete, 'maxlength': _vm.maxlength}, domProps: {'value': _vm.computedValue}, on: {'input': _vm.onInput, 'blur': _vm.onBlur, 'focus': _vm.onFocus}}, 'input', _vm.$attrs, false)) : _c('textarea', _vm._b({ref: 'textarea', staticClass: 'textarea', class: [_vm.inputClasses, _vm.customClass], attrs: {'maxlength': _vm.maxlength}, domProps: {'value': _vm.computedValue}, on: {'input': _vm.onInput, 'blur': _vm.onBlur, 'focus': _vm.onFocus}}, 'textarea', _vm.$attrs, false)), _vm._v(' '), (_vm.icon) ? _c('b-icon', {staticClass: 'is-left', class: {'is-clickable': _vm.iconClickable}, attrs: {'icon': _vm.icon, 'pack': _vm.iconPack, 'size': _vm.iconSize}, nativeOn: {'click': function ($event) { _vm.iconClick($event) }}}) : _vm._e(), _vm._v(' '), (!_vm.loading && (_vm.passwordReveal || _vm.statusTypeIcon)) ? _c('b-icon', {staticClass: 'is-right', class: { 'is-clickable': _vm.passwordReveal }, attrs: {'icon': _vm.passwordReveal ? _vm.passwordVisibleIcon : _vm.statusTypeIcon, 'pack': _vm.iconPack, 'size': _vm.iconSize, 'type': !_vm.passwordReveal ? _vm.statusType : 'is-primary', 'both': ''}, nativeOn: {'click': function ($event) { _vm.togglePasswordVisibility($event) }}}) : _vm._e(), _vm._v(' '), (_vm.maxlength && _vm.hasCounter && _vm.type !== 'number') ? _c('small', {staticClass: 'help counter', class: { 'is-invisible': !_vm.isFocused }}, [_vm._v('\n        ' + _vm._s(_vm.valueLength) + ' / ' + _vm._s(_vm.maxlength) + '\n    ')]) : _vm._e()], 1) }
 var __vue_staticRenderFns__$1 = []
 
-  /* style */
-  const __vue_inject_styles__$1 = undefined;
-  /* scoped */
-  const __vue_scope_id__$1 = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$1 = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$1 = false;
-  /* style inject */
-  
-  /* style inject SSR */
-  
+/* style */
+const __vue_inject_styles__$1 = undefined
+/* scoped */
+const __vue_scope_id__$1 = undefined
+/* module identifier */
+const __vue_module_identifier__$1 = undefined
+/* functional template */
+const __vue_is_functional_template__$1 = false
+/* style inject */
 
-  
-  var Input = normalizeComponent_1(
+/* style inject SSR */
+
+var Input = normalizeComponent_1(
     { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
     __vue_inject_styles__$1,
     __vue_script__$1,
@@ -892,7 +899,7 @@ var __vue_staticRenderFns__$1 = []
     __vue_module_identifier__$1,
     undefined,
     undefined
-  );
+)
 
 var script$2 = {
     name: 'BAutocomplete',
@@ -917,280 +924,269 @@ var script$2 = {
         customFormatter: Function,
         checkInfiniteScroll: Boolean
     },
-    field: {
-      type: String,
-      default: 'value'
+    data: function data() {
+        return {
+            selected: null,
+            hovered: null,
+            isActive: false,
+            newValue: this.value,
+            newAutocomplete: this.autocomplete || 'off',
+            isListInViewportVertically: true,
+            hasFocus: false,
+            _isAutocomplete: true,
+            _elementRef: 'input'
+        }
     },
-    keepFirst: Boolean,
-    clearOnSelect: Boolean,
-    openOnFocus: Boolean,
-    customFormatter: Function,
-    checkInfiniteScroll: Boolean
-  },
-  data: function data() {
-    return {
-      selected: null,
-      hovered: null,
-      isActive: false,
-      newValue: this.value,
-      newAutocomplete: this.autocomplete || 'off',
-      isListInViewportVertically: true,
-      hasFocus: false,
-      _isAutocomplete: true,
-      _elementRef: 'input'
-    };
-  },
-  computed: {
+    computed: {
     /**
      * White-listed items to not close when clicked.
      * Add input, dropdown and all children.
      */
-    whiteList: function whiteList() {
-      var whiteList = [];
-      whiteList.push(this.$refs.input.$el.querySelector('input'));
-      whiteList.push(this.$refs.dropdown); // Add all chidren from dropdown
+        whiteList: function whiteList() {
+            var whiteList = []
+            whiteList.push(this.$refs.input.$el.querySelector('input'))
+            whiteList.push(this.$refs.dropdown) // Add all chidren from dropdown
 
-      if (this.$refs.dropdown !== undefined) {
-        var children = this.$refs.dropdown.querySelectorAll('*');
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
+            if (this.$refs.dropdown !== undefined) {
+                var children = this.$refs.dropdown.querySelectorAll('*')
+                var _iteratorNormalCompletion = true
+                var _didIteratorError = false
+                var _iteratorError = undefined
 
-        try {
-          for (var _iterator = children[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var child = _step.value;
-            whiteList.push(child);
-          }
-        } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-              _iterator.return();
+                try {
+                    for (var _iterator = children[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var child = _step.value
+                        whiteList.push(child)
+                    }
+                } catch (err) {
+                    _didIteratorError = true
+                    _iteratorError = err
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return != null) {
+                            _iterator.return()
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError
+                        }
+                    }
+                }
             }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
+
+            if (this.$parent.$data._isTaginput) {
+                // Add taginput container
+                whiteList.push(this.$parent.$el) // Add .tag and .delete
+
+                var tagInputChildren = this.$parent.$el.querySelectorAll('*')
+                var _iteratorNormalCompletion2 = true
+                var _didIteratorError2 = false
+                var _iteratorError2 = undefined
+
+                try {
+                    for (var _iterator2 = tagInputChildren[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                        var tagInputChild = _step2.value
+                        whiteList.push(tagInputChild)
+                    }
+                } catch (err) {
+                    _didIteratorError2 = true
+                    _iteratorError2 = err
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+                            _iterator2.return()
+                        }
+                    } finally {
+                        if (_didIteratorError2) {
+                            throw _iteratorError2
+                        }
+                    }
+                }
             }
-          }
-        }
-      }
 
-      if (this.$parent.$data._isTaginput) {
-        // Add taginput container
-        whiteList.push(this.$parent.$el); // Add .tag and .delete
+            return whiteList
+        },
 
-        var tagInputChildren = this.$parent.$el.querySelectorAll('*');
-        var _iteratorNormalCompletion2 = true;
-        var _didIteratorError2 = false;
-        var _iteratorError2 = undefined;
-
-        try {
-          for (var _iterator2 = tagInputChildren[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-            var tagInputChild = _step2.value;
-            whiteList.push(tagInputChild);
-          }
-        } catch (err) {
-          _didIteratorError2 = true;
-          _iteratorError2 = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-              _iterator2.return();
-            }
-          } finally {
-            if (_didIteratorError2) {
-              throw _iteratorError2;
-            }
-          }
-        }
-      }
-
-      return whiteList;
-    },
-
-    /**
+        /**
      * Check if exists default slot
      */
-    hasDefaultSlot: function hasDefaultSlot() {
-      return !!this.$scopedSlots.default;
-    },
+        hasDefaultSlot: function hasDefaultSlot() {
+            return !!this.$scopedSlots.default
+        },
 
-    /**
+        /**
      * Check if exists "empty" slot
      */
-    hasEmptySlot: function hasEmptySlot() {
-      return !!this.$slots.empty;
-    },
+        hasEmptySlot: function hasEmptySlot() {
+            return !!this.$slots.empty
+        },
 
-    /**
+        /**
      * Check if exists "header" slot
      */
-    hasHeaderSlot: function hasHeaderSlot() {
-      return !!this.$slots.header;
-    },
+        hasHeaderSlot: function hasHeaderSlot() {
+            return !!this.$slots.header
+        },
 
-    /**
+        /**
      * Check if exists "footer" slot
      */
-    hasFooterSlot: function hasFooterSlot() {
-      return !!this.$slots.footer;
-    }
-  },
-  watch: {
+        hasFooterSlot: function hasFooterSlot() {
+            return !!this.$slots.footer
+        }
+    },
+    watch: {
     /**
      * When dropdown is toggled, check the visibility to know when
      * to open upwards.
      */
-    isActive: function isActive(active) {
-      var _this = this;
+        isActive: function isActive(active) {
+            var _this = this
 
-      if (active) {
-        this.calcDropdownInViewportVertical();
-      } else {
-        this.$nextTick(function () {
-          return _this.setHovered(null);
-        }); // Timeout to wait for the animation to finish before recalculating
+            if (active) {
+                this.calcDropdownInViewportVertical()
+            } else {
+                this.$nextTick(function () {
+                    return _this.setHovered(null)
+                }) // Timeout to wait for the animation to finish before recalculating
 
-        setTimeout(function () {
-          _this.calcDropdownInViewportVertical();
-        }, 100);
-      }
-    },
+                setTimeout(function () {
+                    _this.calcDropdownInViewportVertical()
+                }, 100)
+            }
+        },
 
-    /**
+        /**
      * When updating input's value
      *   1. Emit changes
      *   2. If value isn't the same as selected, set null
      *   3. Close dropdown if value is clear or else open it
      */
-    newValue: function newValue(value) {
-      this.$emit('input', value); // Check if selected is invalid
+        newValue: function newValue(value) {
+            this.$emit('input', value) // Check if selected is invalid
 
-      var currentValue = this.getValue(this.selected);
+            var currentValue = this.getValue(this.selected)
 
-      if (currentValue && currentValue !== value) {
-        this.setSelected(null, false);
-      } // Close dropdown if input is clear or else open it
+            if (currentValue && currentValue !== value) {
+                this.setSelected(null, false)
+            } // Close dropdown if input is clear or else open it
 
+            if (this.hasFocus && (!this.openOnFocus || value)) {
+                this.isActive = !!value
+            }
+        },
 
-      if (this.hasFocus && (!this.openOnFocus || value)) {
-        this.isActive = !!value;
-      }
-    },
-
-    /**
+        /**
      * When v-model is changed:
      *   1. Update internal value.
      *   2. If it's invalid, validate again.
      */
-    value: function value(_value) {
-      this.newValue = _value;
-      !this.isValid && this.$refs.input.checkHtml5Validity();
-    },
+        value: function value(_value) {
+            this.newValue = _value
+            !this.isValid && this.$refs.input.checkHtml5Validity()
+        },
 
-    /**
+        /**
      * Select first option if "keep-first
      */
-    data: function data(value) {
-      // Keep first option always pre-selected
-      if (this.keepFirst) {
-        this.selectFirstOption(value);
-      }
-    }
-  },
-  methods: {
+        data: function data(value) {
+            // Keep first option always pre-selected
+            if (this.keepFirst) {
+                this.selectFirstOption(value)
+            }
+        }
+    },
+    methods: {
     /**
      * Set which option is currently hovered.
      */
-    setHovered: function setHovered(option) {
-      if (option === undefined) return;
-      this.hovered = option;
-    },
+        setHovered: function setHovered(option) {
+            if (option === undefined) return
+            this.hovered = option
+        },
 
-    /**
+        /**
      * Set which option is currently selected, update v-model,
      * update input value and close dropdown.
      */
-    setSelected: function setSelected(option) {
-      var _this2 = this;
+        setSelected: function setSelected(option) {
+            var _this2 = this
 
-      var closeDropdown = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-      if (option === undefined) return;
-      this.selected = option;
-      this.$emit('select', this.selected);
+            var closeDropdown = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true
+            if (option === undefined) return
+            this.selected = option
+            this.$emit('select', this.selected)
 
-      if (this.selected !== null) {
-        this.newValue = this.clearOnSelect ? '' : this.getValue(this.selected);
-      }
+            if (this.selected !== null) {
+                this.newValue = this.clearOnSelect ? '' : this.getValue(this.selected)
+            }
 
-      closeDropdown && this.$nextTick(function () {
-        _this2.isActive = false;
-      });
-    },
+            closeDropdown && this.$nextTick(function () {
+                _this2.isActive = false
+            })
+        },
 
-    /**
+        /**
      * Select first option
      */
-    selectFirstOption: function selectFirstOption(options) {
-      var _this3 = this;
+        selectFirstOption: function selectFirstOption(options) {
+            var _this3 = this
 
-      this.$nextTick(function () {
-        if (options.length) {
-          // If has visible data or open on focus, keep updating the hovered
-          if (_this3.openOnFocus || _this3.newValue !== '' && _this3.hovered !== options[0]) {
-            _this3.setHovered(options[0]);
-          }
-        } else {
-          _this3.setHovered(null);
-        }
-      });
-    },
+            this.$nextTick(function () {
+                if (options.length) {
+                    // If has visible data or open on focus, keep updating the hovered
+                    if (_this3.openOnFocus || _this3.newValue !== '' && _this3.hovered !== options[0]) {
+                        _this3.setHovered(options[0])
+                    }
+                } else {
+                    _this3.setHovered(null)
+                }
+            })
+        },
 
-    /**
+        /**
      * Enter key listener.
      * Select the hovered option.
      */
-    enterPressed: function enterPressed() {
-      if (this.hovered === null) return;
-      this.setSelected(this.hovered);
-    },
+        enterPressed: function enterPressed() {
+            if (this.hovered === null) return
+            this.setSelected(this.hovered)
+        },
 
-    /**
+        /**
      * Tab key listener.
      * Select hovered option if it exists, close dropdown, then allow
      * native handling to move to next tabbable element.
      */
-    tabPressed: function tabPressed() {
-      if (this.hovered === null) {
-        this.isActive = false;
-        return;
-      }
+        tabPressed: function tabPressed() {
+            if (this.hovered === null) {
+                this.isActive = false
+                return
+            }
 
-      this.setSelected(this.hovered);
-    },
+            this.setSelected(this.hovered)
+        },
 
-    /**
+        /**
      * Close dropdown if clicked outside.
      */
-    clickedOutside: function clickedOutside(event) {
-      if (this.whiteList.indexOf(event.target) < 0) this.isActive = false;
-    },
+        clickedOutside: function clickedOutside(event) {
+            if (this.whiteList.indexOf(event.target) < 0) this.isActive = false
+        },
 
-    /**
+        /**
      * Return display text for the input.
      * If object, get value from path, or else just the value.
      */
-    getValue: function getValue(option) {
-      if (option === null) return;
+        getValue: function getValue(option) {
+            if (option === null) return
 
-      if (typeof this.customFormatter !== 'undefined') {
-        return this.customFormatter(option);
-      }
+            if (typeof this.customFormatter !== 'undefined') {
+                return this.customFormatter(option)
+            }
 
-      return _typeof(option) === 'object' ? getValueByPath(option, this.field) : option;
-    },
+            return _typeof(option) === 'object' ? getValueByPath(option, this.field) : option
+        },
 
         /**
      * Check if the scroll list inside the dropdown
@@ -1206,77 +1202,83 @@ var script$2 = {
      * Calculate if the dropdown is vertically visible when activated,
      * otherwise it is openened upwards.
      */
-    calcDropdownInViewportVertical: function calcDropdownInViewportVertical() {
-      var _this4 = this;
+        calcDropdownInViewportVertical: function calcDropdownInViewportVertical() {
+            var _this4 = this
 
-      this.$nextTick(function () {
-        /**
+            this.$nextTick(function () {
+                /**
         * this.$refs.dropdown may be undefined
         * when Autocomplete is conditional rendered
         */
-        if (_this4.$refs.dropdown === undefined) return;
+                if (_this4.$refs.dropdown === undefined) return
 
-        var rect = _this4.$refs.dropdown.getBoundingClientRect();
+                var rect = _this4.$refs.dropdown.getBoundingClientRect()
 
-        _this4.isListInViewportVertically = rect.top >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight);
-      });
-    },
+                _this4.isListInViewportVertically = rect.top >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+            })
+        },
 
-    /**
+        /**
      * Arrows keys listener.
      * If dropdown is active, set hovered option, or else just open.
      */
-    keyArrows: function keyArrows(direction) {
-      var sum = direction === 'down' ? 1 : -1;
+        keyArrows: function keyArrows(direction) {
+            var sum = direction === 'down' ? 1 : -1
 
-      if (this.isActive) {
-        var index = this.data.indexOf(this.hovered) + sum;
-        index = index > this.data.length - 1 ? this.data.length : index;
-        index = index < 0 ? 0 : index;
-        this.setHovered(this.data[index]);
-        var list = this.$refs.dropdown.querySelector('.dropdown-content');
-        var element = list.querySelectorAll('a.dropdown-item:not(.is-disabled)')[index];
-        if (!element) return;
-        var visMin = list.scrollTop;
-        var visMax = list.scrollTop + list.clientHeight - element.clientHeight;
+            if (this.isActive) {
+                var index = this.data.indexOf(this.hovered) + sum
+                index = index > this.data.length - 1 ? this.data.length : index
+                index = index < 0 ? 0 : index
+                this.setHovered(this.data[index])
+                var list = this.$refs.dropdown.querySelector('.dropdown-content')
+                var element = list.querySelectorAll('a.dropdown-item:not(.is-disabled)')[index]
+                if (!element) return
+                var visMin = list.scrollTop
+                var visMax = list.scrollTop + list.clientHeight - element.clientHeight
 
-        if (element.offsetTop < visMin) {
-          list.scrollTop = element.offsetTop;
-        } else if (element.offsetTop >= visMax) {
-          list.scrollTop = element.offsetTop - list.clientHeight + element.clientHeight;
-        }
-      } else {
-        this.isActive = true;
-      }
-    },
+                if (element.offsetTop < visMin) {
+                    list.scrollTop = element.offsetTop
+                } else if (element.offsetTop >= visMax) {
+                    list.scrollTop = element.offsetTop - list.clientHeight + element.clientHeight
+                }
+            } else {
+                this.isActive = true
+            }
+        },
 
-    /**
+        /**
      * Focus listener.
      * If value is the same as selected, select all text.
      */
-    focused: function focused(event) {
-      if (this.getValue(this.selected) === this.newValue) {
-        this.$el.querySelector('input').select();
-      }
+        focused: function focused(event) {
+            if (this.getValue(this.selected) === this.newValue) {
+                this.$el.querySelector('input').select()
+            }
 
-      if (this.openOnFocus) {
-        this.isActive = true;
+            if (this.openOnFocus) {
+                this.isActive = true
 
-        if (this.keepFirst) {
-          this.selectFirstOption(this.data);
-        }
-      }
+                if (this.keepFirst) {
+                    this.selectFirstOption(this.data)
+                }
+            }
 
-      this.hasFocus = true;
-      this.$emit('focus', event);
-    },
+            this.hasFocus = true
+            this.$emit('focus', event)
+        },
 
-    /**
+        /**
     * Blur listener.
     */
-    onBlur: function onBlur(event) {
-      this.hasFocus = false;
-      this.$emit('blur', event);
+        onBlur: function onBlur(event) {
+            this.hasFocus = false
+            this.$emit('blur', event)
+        },
+        onInput: function onInput(event) {
+            var currentValue = this.getValue(this.selected)
+            if (currentValue && currentValue === this.newValue) return
+            this.$emit('typing', this.newValue)
+        }
     },
     created: function created() {
         if (typeof window !== 'undefined') {
@@ -1315,48 +1317,46 @@ var script$2 = {
   mounted: function mounted() {
     var _this5 = this;
 
-    if (this.checkInfiniteScroll && this.$refs.dropdown && this.$refs.dropdown.querySelector('.dropdown-content')) {
-      var list = this.$refs.dropdown.querySelector('.dropdown-content');
-      list.addEventListener('scroll', function () {
-        return _this5.checkIfReachedTheEndOfScroll(list);
-      });
-    }
-  },
-  beforeDestroy: function beforeDestroy() {
-    if (typeof window !== 'undefined') {
-      document.removeEventListener('click', this.clickedOutside);
-      window.removeEventListener('resize', this.calcDropdownInViewportVertical);
-    }
+        if (this.checkInfiniteScroll && this.$refs.dropdown && this.$refs.dropdown.querySelector('.dropdown-content')) {
+            var list = this.$refs.dropdown.querySelector('.dropdown-content')
+            list.addEventListener('scroll', function () {
+                return _this5.checkIfReachedTheEndOfScroll(list)
+            })
+        }
+    },
+    beforeDestroy: function beforeDestroy() {
+        if (typeof window !== 'undefined') {
+            document.removeEventListener('click', this.clickedOutside)
+            window.removeEventListener('resize', this.calcDropdownInViewportVertical)
+        }
 
-    if (this.checkInfiniteScroll && this.$refs.dropdown && this.$refs.dropdown.querySelector('.dropdown-content')) {
-      var list = this.$refs.dropdown.querySelector('.dropdown-content');
-      list.removeEventListener('scroll', this.checkIfReachedTheEndOfScroll);
+        if (this.checkInfiniteScroll && this.$refs.dropdown && this.$refs.dropdown.querySelector('.dropdown-content')) {
+            var list = this.$refs.dropdown.querySelector('.dropdown-content')
+            list.removeEventListener('scroll', this.checkIfReachedTheEndOfScroll)
+        }
     }
-  }
-};
+}
 
 /* script */
-const __vue_script__$2 = script$2;
+const __vue_script__$2 = script$2
 
 /* template */
-var __vue_render__$2 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"autocomplete control",class:{'is-expanded': _vm.expanded}},[_c('b-input',_vm._b({ref:"input",attrs:{"type":"text","size":_vm.size,"loading":_vm.loading,"rounded":_vm.rounded,"icon":_vm.icon,"icon-pack":_vm.iconPack,"maxlength":_vm.maxlength,"autocomplete":_vm.newAutocomplete,"use-html5-validation":_vm.useHtml5Validation},on:{"input":_vm.onInput,"focus":_vm.focused,"blur":_vm.onBlur},nativeOn:{"keyup":function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"esc",27,$event.key)){ return null; }$event.preventDefault();_vm.isActive = false;},"keydown":[function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"tab",9,$event.key)){ return null; }_vm.tabPressed($event);},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"enter",13,$event.key)){ return null; }$event.preventDefault();_vm.enterPressed($event);},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"up",38,$event.key)){ return null; }$event.preventDefault();_vm.keyArrows('up');},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"down",40,$event.key)){ return null; }$event.preventDefault();_vm.keyArrows('down');}]},model:{value:(_vm.newValue),callback:function ($$v) {_vm.newValue=$$v;},expression:"newValue"}},'b-input',_vm.$attrs,false)),_vm._v(" "),_c('transition',{attrs:{"name":"fade"}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isActive && (_vm.data.length > 0 || _vm.hasEmptySlot || _vm.hasHeaderSlot)),expression:"isActive && (data.length > 0 || hasEmptySlot || hasHeaderSlot)"}],ref:"dropdown",staticClass:"dropdown-menu",class:{ 'is-opened-top': !_vm.isListInViewportVertically }},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isActive),expression:"isActive"}],staticClass:"dropdown-content"},[(_vm.hasHeaderSlot)?_c('div',{staticClass:"dropdown-item"},[_vm._t("header")],2):_vm._e(),_vm._v(" "),_vm._l((_vm.data),function(option,index){return _c('a',{key:index,staticClass:"dropdown-item",class:{ 'is-hovered': option === _vm.hovered },on:{"click":function($event){_vm.setSelected(option);}}},[(_vm.hasDefaultSlot)?_vm._t("default",null,{option:option,index:index}):_c('span',[_vm._v("\n                        "+_vm._s(_vm.getValue(option, true))+"\n                    ")])],2)}),_vm._v(" "),(_vm.data.length === 0 && _vm.hasEmptySlot)?_c('div',{staticClass:"dropdown-item is-disabled"},[_vm._t("empty")],2):_vm._e(),_vm._v(" "),(_vm.hasFooterSlot)?_c('div',{staticClass:"dropdown-item"},[_vm._t("footer")],2):_vm._e()],2)])])],1)};
-var __vue_staticRenderFns__$2 = [];
+var __vue_render__$2 = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('div', {staticClass: 'autocomplete control', class: {'is-expanded': _vm.expanded}}, [_c('b-input', _vm._b({ref: 'input', attrs: {'type': 'text', 'size': _vm.size, 'loading': _vm.loading, 'rounded': _vm.rounded, 'icon': _vm.icon, 'icon-pack': _vm.iconPack, 'maxlength': _vm.maxlength, 'autocomplete': _vm.newAutocomplete, 'use-html5-validation': _vm.useHtml5Validation}, on: {'input': _vm.onInput, 'focus': _vm.focused, 'blur': _vm.onBlur}, nativeOn: {'keyup': function ($event) { if (!('button' in $event) && _vm._k($event.keyCode, 'esc', 27, $event.key)) { return null }$event.preventDefault(); _vm.isActive = false }, 'keydown': [function ($event) { if (!('button' in $event) && _vm._k($event.keyCode, 'tab', 9, $event.key)) { return null }_vm.tabPressed($event) }, function ($event) { if (!('button' in $event) && _vm._k($event.keyCode, 'enter', 13, $event.key)) { return null }$event.preventDefault(); _vm.enterPressed($event) }, function ($event) { if (!('button' in $event) && _vm._k($event.keyCode, 'up', 38, $event.key)) { return null }$event.preventDefault(); _vm.keyArrows('up') }, function ($event) { if (!('button' in $event) && _vm._k($event.keyCode, 'down', 40, $event.key)) { return null }$event.preventDefault(); _vm.keyArrows('down') }]}, model: {value: (_vm.newValue), callback: function ($$v) { _vm.newValue = $$v }, expression: 'newValue'}}, 'b-input', _vm.$attrs, false)), _vm._v(' '), _c('transition', {attrs: {'name': 'fade'}}, [_c('div', {directives: [{name: 'show', rawName: 'v-show', value: (_vm.isActive && (_vm.data.length > 0 || _vm.hasEmptySlot || _vm.hasHeaderSlot)), expression: 'isActive && (data.length > 0 || hasEmptySlot || hasHeaderSlot)'}], ref: 'dropdown', staticClass: 'dropdown-menu', class: { 'is-opened-top': !_vm.isListInViewportVertically }}, [_c('div', {directives: [{name: 'show', rawName: 'v-show', value: (_vm.isActive), expression: 'isActive'}], staticClass: 'dropdown-content'}, [(_vm.hasHeaderSlot) ? _c('div', {staticClass: 'dropdown-item'}, [_vm._t('header')], 2) : _vm._e(), _vm._v(' '), _vm._l((_vm.data), function (option, index) { return _c('a', {key: index, staticClass: 'dropdown-item', class: { 'is-hovered': option === _vm.hovered }, on: {'click': function ($event) { _vm.setSelected(option) }}}, [(_vm.hasDefaultSlot) ? _vm._t('default', null, {option: option, index: index}) : _c('span', [_vm._v('\n                        ' + _vm._s(_vm.getValue(option, true)) + '\n                    ')])], 2) }), _vm._v(' '), (_vm.data.length === 0 && _vm.hasEmptySlot) ? _c('div', {staticClass: 'dropdown-item is-disabled'}, [_vm._t('empty')], 2) : _vm._e(), _vm._v(' '), (_vm.hasFooterSlot) ? _c('div', {staticClass: 'dropdown-item'}, [_vm._t('footer')], 2) : _vm._e()], 2)])])], 1) }
+var __vue_staticRenderFns__$2 = []
 
-  /* style */
-  const __vue_inject_styles__$2 = undefined;
-  /* scoped */
-  const __vue_scope_id__$2 = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$2 = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$2 = false;
-  /* style inject */
-  
-  /* style inject SSR */
-  
+/* style */
+const __vue_inject_styles__$2 = undefined
+/* scoped */
+const __vue_scope_id__$2 = undefined
+/* module identifier */
+const __vue_module_identifier__$2 = undefined
+/* functional template */
+const __vue_is_functional_template__$2 = false
+/* style inject */
 
-  
-  var Autocomplete = normalizeComponent_1(
+/* style inject SSR */
+
+var Autocomplete = normalizeComponent_1(
     { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
     __vue_inject_styles__$2,
     __vue_script__$2,
@@ -1365,27 +1365,27 @@ var __vue_staticRenderFns__$2 = [];
     __vue_module_identifier__$2,
     undefined,
     undefined
-  );
+)
 
 var use = function use(plugin) {
-  if (typeof window !== 'undefined' && window.Vue) {
-    window.Vue.use(plugin);
-  }
-};
+    if (typeof window !== 'undefined' && window.Vue) {
+        window.Vue.use(plugin)
+    }
+}
 var registerComponent = function registerComponent(Vue, component) {
-  Vue.component(component.name, component);
-};
+    Vue.component(component.name, component)
+}
 var registerComponentProgrammatic = function registerComponentProgrammatic(Vue, property, component) {
-  if (!Vue.prototype.$buefy) Vue.prototype.$buefy = {};
-  Vue.prototype.$buefy[property] = component;
-};
+    if (!Vue.prototype.$buefy) Vue.prototype.$buefy = {}
+    Vue.prototype.$buefy[property] = component
+}
 
 var Plugin = {
-  install: function install(Vue) {
-    registerComponent(Vue, Autocomplete);
-  }
-};
-use(Plugin);
+    install: function install(Vue) {
+        registerComponent(Vue, Autocomplete)
+    }
+}
+use(Plugin)
 
 var script$3 = {
     name: 'BButton',
@@ -1427,44 +1427,21 @@ var script$3 = {
             }
         }
     },
-    loading: Boolean,
-    outlined: Boolean,
-    expanded: Boolean,
-    inverted: Boolean,
-    focused: Boolean,
-    active: Boolean,
-    hovered: Boolean,
-    selected: Boolean,
-    nativeType: {
-      type: String,
-      default: 'button',
-      validator: function validator(value) {
-        return ['button', 'submit', 'reset'].indexOf(value) >= 0;
-      }
-    },
-    tag: {
-      type: String,
-      default: 'button',
-      validator: function validator(value) {
-        return ['button', 'a', 'input', 'router-link', 'nuxt-link', 'n-link', 'NuxtLink', 'NLink'].indexOf(value) >= 0;
-      }
-    }
-  },
-  computed: {
-    iconSize: function iconSize() {
-      if (!this.size || this.size === 'is-medium') {
-        return 'is-small';
-      } else if (this.size === 'is-large') {
-        return 'is-medium';
-      }
+    computed: {
+        iconSize: function iconSize() {
+            if (!this.size || this.size === 'is-medium') {
+                return 'is-small'
+            } else if (this.size === 'is-large') {
+                return 'is-medium'
+            }
 
-      return this.size;
+            return this.size
+        }
     }
-  }
-};
+}
 
 /* script */
-const __vue_script__$3 = script$3;
+const __vue_script__$3 = script$3
 
 /* template */
 var __vue_render__$3 = function () {
@@ -1485,21 +1462,19 @@ var __vue_render__$3 = function () {
 }
 var __vue_staticRenderFns__$3 = []
 
-  /* style */
-  const __vue_inject_styles__$3 = undefined;
-  /* scoped */
-  const __vue_scope_id__$3 = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$3 = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$3 = false;
-  /* style inject */
-  
-  /* style inject SSR */
-  
+/* style */
+const __vue_inject_styles__$3 = undefined
+/* scoped */
+const __vue_scope_id__$3 = undefined
+/* module identifier */
+const __vue_module_identifier__$3 = undefined
+/* functional template */
+const __vue_is_functional_template__$3 = false
+/* style inject */
 
-  
-  var Button = normalizeComponent_1(
+/* style inject SSR */
+
+var Button = normalizeComponent_1(
     { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
     __vue_inject_styles__$3,
     __vue_script__$3,
@@ -1508,14 +1483,14 @@ var __vue_staticRenderFns__$3 = []
     __vue_module_identifier__$3,
     undefined,
     undefined
-  );
+)
 
 var Plugin$1 = {
-  install: function install(Vue) {
-    registerComponent(Vue, Button);
-  }
-};
-use(Plugin$1);
+    install: function install(Vue) {
+        registerComponent(Vue, Button)
+    }
+}
+use(Plugin$1)
 
 var script$4 = {
     name: 'BCarousel',
@@ -2118,14 +2093,24 @@ var CheckRadioMixin = {
         name: String,
         size: String
     },
-    animated: {
-      type: String,
-      default: 'slide'
+    data: function data() {
+        return {
+            _isCarousel: true,
+            activeItem: this.value,
+            carouselItems: [],
+            isPause: false,
+            dragX: 0,
+            timer: null
+        }
     },
-    interval: Number,
-    hasDrag: {
-      type: Boolean,
-      default: true
+    computed: {
+        indicatorClasses: function indicatorClasses() {
+            return [{
+                'has-background': this.indicatorBackground,
+                'has-custom': this.indicatorCustom,
+                'is-inside': this.indicatorInside
+            }, this.indicatorCustom && this.indicatorCustomSize, this.indicatorInside && this.indicatorPosition]
+        }
     },
     watch: {
     /**
@@ -2230,120 +2215,120 @@ var CheckRadioMixin = {
     /**
      * When v-model is changed set the new active item.
      */
-    value: function value(_value) {
-      if (_value < this.activeItem) {
-        this.changeItem(_value);
-      } else {
-        this.changeItem(_value, false);
-      }
-    },
+        value: function value(_value) {
+            if (_value < this.activeItem) {
+                this.changeItem(_value)
+            } else {
+                this.changeItem(_value, false)
+            }
+        },
 
-    /**
+        /**
      * When carousel-items are updated, set active one.
      */
-    carouselItems: function carouselItems() {
-      if (this.activeItem < this.carouselItems.length) {
-        this.carouselItems[this.activeItem].status(true, false);
-      }
-    },
+        carouselItems: function carouselItems() {
+            if (this.activeItem < this.carouselItems.length) {
+                this.carouselItems[this.activeItem].status(true, false)
+            }
+        },
 
-    /**
+        /**
      *  When autoplay is change, set by status
      */
-    autoplay: function autoplay(status) {
-      status ? this.startTimer() : this.pauseTimer();
-    }
-  },
-  methods: {
-    startTimer: function startTimer() {
-      var _this = this;
-
-      if (!this.autoplay || this.timer) return;
-      this.isPause = false;
-      this.timer = setInterval(function () {
-        _this.next();
-      }, this.interval || config.defaultCarouselInterval);
+        autoplay: function autoplay(status) {
+            status ? this.startTimer() : this.pauseTimer()
+        }
     },
-    pauseTimer: function pauseTimer() {
-      if (!this.pauseHover && this.autoplay) return;
-      this.isPause = true;
+    methods: {
+        startTimer: function startTimer() {
+            var _this = this
 
-      if (this.timer) {
-        clearInterval(this.timer);
-        this.timer = null;
-      }
-    },
+            if (!this.autoplay || this.timer) return
+            this.isPause = false
+            this.timer = setInterval(function () {
+                _this.next()
+            }, this.interval || config.defaultCarouselInterval)
+        },
+        pauseTimer: function pauseTimer() {
+            if (!this.pauseHover && this.autoplay) return
+            this.isPause = true
 
-    /**
+            if (this.timer) {
+                clearInterval(this.timer)
+                this.timer = null
+            }
+        },
+
+        /**
      * Change the active item and emit change event.
      * action only for animated slide, there true = next, false = prev
      */
-    changeItem: function changeItem(newIndex) {
-      var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-      if (this.activeItem === newIndex) return;
-      this.carouselItems[this.activeItem].status(false, action);
-      this.carouselItems[newIndex].status(true, action);
-      this.activeItem = newIndex;
-      this.$emit('change', newIndex);
-    },
-    // Indicator trigger when change active item.
-    modeChange: function modeChange(trigger, value) {
-      if (this.indicatorMode === trigger) {
-        this.$emit('input', value);
-        return value < this.activeItem ? this.changeItem(value) : this.changeItem(value, false);
-      }
-    },
-    prev: function prev() {
-      return this.activeItem === 0 ? this.changeItem(this.carouselItems.length - 1) : this.changeItem(this.activeItem - 1);
-    },
-    next: function next() {
-      return this.activeItem === this.carouselItems.length - 1 ? this.changeItem(0, false) : this.changeItem(this.activeItem + 1, false);
-    },
-    // checking arrow between both
-    checkArrow: function checkArrow(value) {
-      if (this.arrowBoth) return true;
-      if (this.activeItem !== value) return true;
-    },
-    // handle drag event
-    dragStart: function dragStart(event) {
-      if (!this.hasDrag) return;
-      this.dragx = event.touches ? event.changedTouches[0].pageX : event.pageX;
+        changeItem: function changeItem(newIndex) {
+            var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true
+            if (this.activeItem === newIndex) return
+            this.carouselItems[this.activeItem].status(false, action)
+            this.carouselItems[newIndex].status(true, action)
+            this.activeItem = newIndex
+            this.$emit('change', newIndex)
+        },
+        // Indicator trigger when change active item.
+        modeChange: function modeChange(trigger, value) {
+            if (this.indicatorMode === trigger) {
+                this.$emit('input', value)
+                return value < this.activeItem ? this.changeItem(value) : this.changeItem(value, false)
+            }
+        },
+        prev: function prev() {
+            return this.activeItem === 0 ? this.changeItem(this.carouselItems.length - 1) : this.changeItem(this.activeItem - 1)
+        },
+        next: function next() {
+            return this.activeItem === this.carouselItems.length - 1 ? this.changeItem(0, false) : this.changeItem(this.activeItem + 1, false)
+        },
+        // checking arrow between both
+        checkArrow: function checkArrow(value) {
+            if (this.arrowBoth) return true
+            if (this.activeItem !== value) return true
+        },
+        // handle drag event
+        dragStart: function dragStart(event) {
+            if (!this.hasDrag) return
+            this.dragx = event.touches ? event.changedTouches[0].pageX : event.pageX
 
-      if (event.touches) {
-        this.pauseTimer();
-      } else {
-        event.preventDefault();
-      }
-    },
-    dragEnd: function dragEnd(event) {
-      if (!this.hasDrag) return;
-      var detected = event.touches ? event.changedTouches[0].pageX : event.pageX;
-      var diffX = detected - this.dragx;
+            if (event.touches) {
+                this.pauseTimer()
+            } else {
+                event.preventDefault()
+            }
+        },
+        dragEnd: function dragEnd(event) {
+            if (!this.hasDrag) return
+            var detected = event.touches ? event.changedTouches[0].pageX : event.pageX
+            var diffX = detected - this.dragx
 
-      if (Math.abs(diffX) > 50) {
-        if (diffX < 0) {
-          this.next();
-        } else {
-          this.prev();
+            if (Math.abs(diffX) > 50) {
+                if (diffX < 0) {
+                    this.next()
+                } else {
+                    this.prev()
+                }
+            }
+
+            if (event.touches) {
+                this.startTimer()
+            }
         }
-      }
+    },
+    mounted: function mounted() {
+        if (this.activeItem < this.carouselItems.length) {
+            this.carouselItems[this.activeItem].status(true, false)
+        }
 
-      if (event.touches) {
-        this.startTimer();
-      }
+        this.startTimer()
+    },
+    beforeDestroy: function beforeDestroy() {
+        this.pauseTimer()
     }
-  },
-  mounted: function mounted() {
-    if (this.activeItem < this.carouselItems.length) {
-      this.carouselItems[this.activeItem].status(true, false);
-    }
-
-    this.startTimer();
-  },
-  beforeDestroy: function beforeDestroy() {
-    this.pauseTimer();
-  }
-};
+}
 
 //
 var script$7 = {
@@ -2390,7 +2375,7 @@ var Checkbox = normalizeComponent_1(
     __vue_module_identifier__$7,
     undefined,
     undefined
-  );
+)
 
 //
 var script$8 = {
@@ -2422,27 +2407,27 @@ var script$8 = {
     /**
     * Status of item, alter animation name based on action.
     */
-    status: function status(value, action) {
-      this.transitionName = action ? 'slide-next' : 'slide-prev';
-      this.isActive = value;
-    }
-  },
-  created: function created() {
-    if (!this.$parent.$data._isCarousel) {
-      this.$destroy();
-      throw new Error('You should wrap bCarouselItem on a bCarousel');
-    }
+        status: function status(value, action) {
+            this.transitionName = action ? 'slide-next' : 'slide-prev'
+            this.isActive = value
+        }
+    },
+    created: function created() {
+        if (!this.$parent.$data._isCarousel) {
+            this.$destroy()
+            throw new Error('You should wrap bCarouselItem on a bCarousel')
+        }
 
-    this.$parent.carouselItems.push(this);
-  },
-  beforeDestroy: function beforeDestroy() {
-    var index = this.$parent.carouselItems.indexOf(this);
+        this.$parent.carouselItems.push(this)
+    },
+    beforeDestroy: function beforeDestroy() {
+        var index = this.$parent.carouselItems.indexOf(this)
 
-    if (index >= 0) {
-      this.$parent.carouselItems.splice(index, 1);
+        if (index >= 0) {
+            this.$parent.carouselItems.splice(index, 1)
+        }
     }
-  }
-};
+}
 
 /* script */
 const __vue_script__$8 = script$8
@@ -2514,212 +2499,166 @@ var script$9 = {
             }
         }
     },
-    data: {
-      type: Array,
-      default: function _default() {
-        return [];
-      }
+    data: function data() {
+        return {
+            activeItem: this.value,
+            breakpoints: {},
+            delta: 0,
+            dragging: false,
+            hold: 0,
+            itemWidth: 0,
+            total: 0,
+            settings: {}
+        }
     },
-    value: {
-      type: Number,
-      default: 0
+    computed: {
+        listClass: function listClass() {
+            return [{
+                'has-grayscale': this.settings.hasGrayscale || this.hasGrayscale,
+                'has-opacity': this.settings.hasOpacity || this.hasOpacity,
+                'is-dragging': this.dragging
+            }]
+        },
+        itemStyle: function itemStyle() {
+            return 'width: '.concat(this.itemWidth, 'px;')
+        },
+        transformStyle: function transformStyle() {
+            var translate = this.delta + 1 * (this.activeItem * this.itemWidth)
+            var result = this.dragging ? -translate : -Math.abs(translate)
+            return 'transform: translateX('.concat(result, 'px);')
+        }
     },
-    hasDrag: {
-      type: Boolean,
-      default: true
-    },
-    hasGrayscale: Boolean,
-    hasOpacity: Boolean,
-    repeat: Boolean,
-    itemsToShow: {
-      type: Number,
-      default: 4
-    },
-    itemsToList: {
-      type: Number,
-      default: 1
-    },
-    asIndicator: Boolean,
-    arrow: {
-      type: Boolean,
-      default: true
-    },
-    arrowHover: {
-      type: Boolean,
-      default: true
-    },
-    iconPack: String,
-    iconSize: String,
-    iconPrev: {
-      type: String,
-      default: config.defaultIconPrev
-    },
-    iconNext: {
-      type: String,
-      default: config.defaultIconNext
-    },
-    refresh: Boolean
-  },
-  data: function data() {
-    return {
-      activeItem: this.value,
-      breakpoints: {},
-      delta: 0,
-      dragging: false,
-      hold: 0,
-      itemWidth: 0,
-      total: 0,
-      settings: {}
-    };
-  },
-  computed: {
-    listClass: function listClass() {
-      return [{
-        'has-grayscale': this.settings.hasGrayscale || this.hasGrayscale,
-        'has-opacity': this.settings.hasOpacity || this.hasOpacity,
-        'is-dragging': this.dragging
-      }];
-    },
-    itemStyle: function itemStyle() {
-      return "width: ".concat(this.itemWidth, "px;");
-    },
-    transformStyle: function transformStyle() {
-      var translate = this.delta + 1 * (this.activeItem * this.itemWidth);
-      var result = this.dragging ? -translate : -Math.abs(translate);
-      return "transform: translateX(".concat(result, "px);");
-    }
-  },
-  watch: {
+    watch: {
     /**
      * When v-model is changed set the new active item.
      */
-    value: function value(_value) {
-      this.switchTo(_value);
-    },
+        value: function value(_value) {
+            this.switchTo(_value)
+        },
 
-    /**
+        /**
      * Only for overlay and as indicator.
      * when call overlay with click.
      */
-    refresh: function refresh(status) {
-      if (status && this.asIndicator) {
-        this.getWidth();
-      }
-    }
-  },
-  methods: {
-    initConfig: function initConfig() {
-      this.breakpoints = this.config.breakpoints;
-      this.settings = merge(this.$props, this.config, true);
-    },
-    getWidth: function getWidth() {
-      var rect = this.$el.getBoundingClientRect();
-      this.itemWidth = rect.width / this.settings.itemsToShow;
-    },
-    update: function update() {
-      if (this.breakpoints) {
-        this.updateConfig();
-      }
-
-      this.getWidth();
-    },
-    updateConfig: function updateConfig() {
-      var _this = this;
-
-      var breakpoints = Object.keys(this.breakpoints).sort(function (a, b) {
-        return b - a;
-      });
-      var checking;
-      breakpoints.some(function (breakpoint) {
-        checking = window.matchMedia("(min-width: ".concat(breakpoint, "px)")).matches;
-
-        if (checking) {
-          _this.settings = _this.config.breakpoints[breakpoint];
-          return true;
+        refresh: function refresh(status) {
+            if (status && this.asIndicator) {
+                this.getWidth()
+            }
         }
-      });
+    },
+    methods: {
+        initConfig: function initConfig() {
+            this.breakpoints = this.config.breakpoints
+            this.settings = merge(this.$props, this.config, true)
+        },
+        getWidth: function getWidth() {
+            var rect = this.$el.getBoundingClientRect()
+            this.itemWidth = rect.width / this.settings.itemsToShow
+        },
+        update: function update() {
+            if (this.breakpoints) {
+                this.updateConfig()
+            }
 
-      if (!checking) {
-        this.settings = this.config;
-      }
-    },
-    switchTo: function switchTo(newIndex) {
-      if (newIndex < 0 || this.activeItem === newIndex || !this.repeat && newIndex > this.total) return;
-      var result = this.repeat && newIndex > this.total ? 0 : newIndex;
-      this.activeItem = result;
-      this.$emit('switch', result);
-    },
-    next: function next() {
-      this.switchTo(this.activeItem + this.itemsToList);
-    },
-    prev: function prev() {
-      this.switchTo(this.activeItem - this.itemsToList);
-    },
-    checkArrow: function checkArrow(value) {
-      if (this.repeat || this.activeItem !== value) return true;
-    },
-    checkAsIndicator: function checkAsIndicator(value, e) {
-      if (!this.asIndicator) return;
-      var timeCheck = new Date().getTime(); // al solution: holding, 100 - 400 not 100% but 200 is better!
+            this.getWidth()
+        },
+        updateConfig: function updateConfig() {
+            var _this = this
 
-      if (!e.touches && timeCheck - this.hold > 200) return;
-      this.switchTo(value);
-    },
-    // handle drag event
-    dragStart: function dragStart(event) {
-      if (!this.hasDrag || event.button !== 0 && event.type !== 'touchstart') return;
-      this.hold = new Date().getTime();
-      this.dragging = true;
-      this.dragStartX = event.touches ? event.touches[0].clientX : event.clientX;
-      window.addEventListener(event.touches ? 'touchmove' : 'mousemove', this.dragMove);
-      window.addEventListener(event.touches ? 'touchend' : 'mouseup', this.dragEnd);
-    },
-    dragMove: function dragMove(event) {
-      this.dragEndX = event.touches ? event.touches[0].clientX : event.clientX;
-      var deltaX = this.dragEndX - this.dragStartX;
-      this.delta = deltaX < 0 ? Math.abs(deltaX) : -Math.abs(deltaX);
+            var breakpoints = Object.keys(this.breakpoints).sort(function (a, b) {
+                return b - a
+            })
+            var checking
+            breakpoints.some(function (breakpoint) {
+                checking = window.matchMedia('(min-width: '.concat(breakpoint, 'px)')).matches
 
-      if (!event.touches) {
-        event.preventDefault();
-      }
-    },
-    dragEnd: function dragEnd(event) {
-      var signCheck = 1 * sign(this.delta);
-      var results = Math.round(Math.abs(this.delta / this.itemWidth) + 0.15); // Hack
+                if (checking) {
+                    _this.settings = _this.config.breakpoints[breakpoint]
+                    return true
+                }
+            })
 
-      this.switchTo(this.activeItem + signCheck * results);
-      this.dragging = false;
-      this.delta = 0;
-      window.removeEventListener(event.touches ? 'touchmove' : 'mousemove', this.dragMove);
-      window.removeEventListener(event.touches ? 'touchend' : 'mouseup', this.dragEnd);
+            if (!checking) {
+                this.settings = this.config
+            }
+        },
+        switchTo: function switchTo(newIndex) {
+            if (newIndex < 0 || this.activeItem === newIndex || !this.repeat && newIndex > this.total) return
+            var result = this.repeat && newIndex > this.total ? 0 : newIndex
+            this.activeItem = result
+            this.$emit('switch', result)
+        },
+        next: function next() {
+            this.switchTo(this.activeItem + this.itemsToList)
+        },
+        prev: function prev() {
+            this.switchTo(this.activeItem - this.itemsToList)
+        },
+        checkArrow: function checkArrow(value) {
+            if (this.repeat || this.activeItem !== value) return true
+        },
+        checkAsIndicator: function checkAsIndicator(value, e) {
+            if (!this.asIndicator) return
+            var timeCheck = new Date().getTime() // al solution: holding, 100 - 400 not 100% but 200 is better!
+
+            if (!e.touches && timeCheck - this.hold > 200) return
+            this.switchTo(value)
+        },
+        // handle drag event
+        dragStart: function dragStart(event) {
+            if (!this.hasDrag || event.button !== 0 && event.type !== 'touchstart') return
+            this.hold = new Date().getTime()
+            this.dragging = true
+            this.dragStartX = event.touches ? event.touches[0].clientX : event.clientX
+            window.addEventListener(event.touches ? 'touchmove' : 'mousemove', this.dragMove)
+            window.addEventListener(event.touches ? 'touchend' : 'mouseup', this.dragEnd)
+        },
+        dragMove: function dragMove(event) {
+            this.dragEndX = event.touches ? event.touches[0].clientX : event.clientX
+            var deltaX = this.dragEndX - this.dragStartX
+            this.delta = deltaX < 0 ? Math.abs(deltaX) : -Math.abs(deltaX)
+
+            if (!event.touches) {
+                event.preventDefault()
+            }
+        },
+        dragEnd: function dragEnd(event) {
+            var signCheck = 1 * sign(this.delta)
+            var results = Math.round(Math.abs(this.delta / this.itemWidth) + 0.15) // Hack
+
+            this.switchTo(this.activeItem + signCheck * results)
+            this.dragging = false
+            this.delta = 0
+            window.removeEventListener(event.touches ? 'touchmove' : 'mousemove', this.dragMove)
+            window.removeEventListener(event.touches ? 'touchend' : 'mouseup', this.dragEnd)
+        }
+    },
+    created: function created() {
+        this.initConfig()
+
+        if (typeof window !== 'undefined') {
+            window.addEventListener('resize', this.update)
+        }
+    },
+    mounted: function mounted() {
+        var _this2 = this
+
+        this.total = this.data.length - 1
+        this.$nextTick(function () {
+            _this2.update()
+        })
+    },
+    beforeDestroy: function beforeDestroy() {
+        window.removeEventListener('resize', this.update)
     }
-  },
-  created: function created() {
-    this.initConfig();
-
-    if (typeof window !== 'undefined') {
-      window.addEventListener('resize', this.update);
-    }
-  },
-  mounted: function mounted() {
-    var _this2 = this;
-
-    this.total = this.data.length - 1;
-    this.$nextTick(function () {
-      _this2.update();
-    });
-  },
-  beforeDestroy: function beforeDestroy() {
-    window.removeEventListener('resize', this.update);
-  }
-};
+}
 
 /* script */
 const __vue_script__$9 = script$9
 
 /* template */
-var __vue_render__$6 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"carousel-list",class:{'has-shadow': _vm.activeItem > 0},on:{"mousedown":function($event){$event.stopPropagation();$event.preventDefault();_vm.dragStart($event);},"touchstart":_vm.dragStart}},[_c('div',{staticClass:"carousel-slides",class:_vm.listClass,style:(_vm.transformStyle)},_vm._l((_vm.data),function(list,index){return _c('div',{key:index,staticClass:"carousel-slide",class:{'is-active': _vm.activeItem === index},style:(_vm.itemStyle),on:{"click":function($event){$event.preventDefault();_vm.checkAsIndicator(index, $event);}}},[_vm._t("item",[_c('figure',{staticClass:"image"},[_c('img',{attrs:{"src":list.image,"title":list.title}})])],{list:list,index:index,active:_vm.activeItem})],2)})),_vm._v(" "),(_vm.arrow)?_c('div',{staticClass:"carousel-arrow",class:{'is-hovered': _vm.arrowHover}},[_c('b-icon',{directives:[{name:"show",rawName:"v-show",value:(_vm.activeItem > 0),expression:"activeItem > 0"}],staticClass:"has-icons-left",attrs:{"pack":_vm.iconPack,"icon":_vm.iconPrev,"size":_vm.iconSize,"both":""},nativeOn:{"click":function($event){$event.preventDefault();_vm.prev($event);}}}),_vm._v(" "),_c('b-icon',{directives:[{name:"show",rawName:"v-show",value:(_vm.checkArrow(_vm.total)),expression:"checkArrow(total)"}],staticClass:"has-icons-right",attrs:{"pack":_vm.iconPack,"icon":_vm.iconNext,"size":_vm.iconSize,"both":""},nativeOn:{"click":function($event){$event.preventDefault();_vm.next($event);}}})],1):_vm._e()])};
-var __vue_staticRenderFns__$6 = [];
+var __vue_render__$6 = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('div', {staticClass: 'carousel-list', class: {'has-shadow': _vm.activeItem > 0}, on: {'mousedown': function ($event) { $event.stopPropagation(); $event.preventDefault(); _vm.dragStart($event) }, 'touchstart': _vm.dragStart}}, [_c('div', {staticClass: 'carousel-slides', class: _vm.listClass, style: (_vm.transformStyle)}, _vm._l((_vm.data), function (list, index) { return _c('div', {key: index, staticClass: 'carousel-slide', class: {'is-active': _vm.activeItem === index}, style: (_vm.itemStyle), on: {'click': function ($event) { $event.preventDefault(); _vm.checkAsIndicator(index, $event) }}}, [_vm._t('item', [_c('figure', {staticClass: 'image'}, [_c('img', {attrs: {'src': list.image, 'title': list.title}})])], {list: list, index: index, active: _vm.activeItem})], 2) })), _vm._v(' '), (_vm.arrow) ? _c('div', {staticClass: 'carousel-arrow', class: {'is-hovered': _vm.arrowHover}}, [_c('b-icon', {directives: [{name: 'show', rawName: 'v-show', value: (_vm.activeItem > 0), expression: 'activeItem > 0'}], staticClass: 'has-icons-left', attrs: {'pack': _vm.iconPack, 'icon': _vm.iconPrev, 'size': _vm.iconSize, 'both': ''}, nativeOn: {'click': function ($event) { $event.preventDefault(); _vm.prev($event) }}}), _vm._v(' '), _c('b-icon', {directives: [{name: 'show', rawName: 'v-show', value: (_vm.checkArrow(_vm.total)), expression: 'checkArrow(total)'}], staticClass: 'has-icons-right', attrs: {'pack': _vm.iconPack, 'icon': _vm.iconNext, 'size': _vm.iconSize, 'both': ''}, nativeOn: {'click': function ($event) { $event.preventDefault(); _vm.next($event) }}})], 1) : _vm._e()]) }
+var __vue_staticRenderFns__$6 = []
 
 /* style */
 const __vue_inject_styles__$9 = undefined
@@ -2742,7 +2681,7 @@ var Collapse = normalizeComponent_1(
     __vue_module_identifier__$9,
     undefined,
     undefined
-  );
+)
 
 var Plugin$4 = {
     install: function install(Vue) {
@@ -3638,8 +3577,7 @@ var script$a = {
             document.removeEventListener('keyup', this.keyPress)
         }
     }
-  }
-};
+}
 
 /* script */
 const __vue_script__$a = script$a
@@ -3669,7 +3607,7 @@ var Dropdown = normalizeComponent_1(
     __vue_module_identifier__$a,
     undefined,
     undefined
-  );
+)
 
 //
 //
@@ -3713,23 +3651,21 @@ var script$b = {
             default: ''
         }
     },
-    expanded: Boolean
-  },
-  data: function data() {
-    return {
-      isFocused: false
-    };
-  },
-  computed: {
-    checked: function checked() {
-      if (Array.isArray(this.newValue)) {
-        return this.newValue.indexOf(this.nativeValue) >= 0;
-      }
+    data: function data() {
+        return {
+            isFocused: false
+        }
+    },
+    computed: {
+        checked: function checked() {
+            if (Array.isArray(this.newValue)) {
+                return this.newValue.indexOf(this.nativeValue) >= 0
+            }
 
-      return this.newValue === this.nativeValue;
+            return this.newValue === this.nativeValue
+        }
     }
-  }
-};
+}
 
 /* script */
 const __vue_script__$b = script$b
@@ -3759,15 +3695,15 @@ var DropdownItem = normalizeComponent_1(
     __vue_module_identifier__$b,
     undefined,
     undefined
-  );
+)
 
 var Plugin$3 = {
-  install: function install(Vue) {
-    registerComponent(Vue, Checkbox);
-    registerComponent(Vue, CheckboxButton);
-  }
-};
-use(Plugin$3);
+    install: function install(Vue) {
+        registerComponent(Vue, Checkbox)
+        registerComponent(Vue, CheckboxButton)
+    }
+}
+use(Plugin$3)
 
 var script$c = {
     name: 'BFieldBody',
@@ -3779,71 +3715,55 @@ var script$c = {
             type: [String, Object]
         }
     },
-    animation: {
-      type: String,
-      default: 'fade'
+    data: function data() {
+        return {
+            isOpen: this.open
+        }
     },
-    ariaId: {
-      type: String,
-      default: ''
+    watch: {
+        open: function open(value) {
+            this.isOpen = value
+        }
     },
-    position: {
-      type: String,
-      default: 'is-top',
-      validator: function validator(value) {
-        return ['is-top', 'is-bottom'].indexOf(value) > -1;
-      }
-    }
-  },
-  data: function data() {
-    return {
-      isOpen: this.open
-    };
-  },
-  watch: {
-    open: function open(value) {
-      this.isOpen = value;
-    }
-  },
-  methods: {
+    methods: {
     /**
     * Toggle and emit events
     */
-    toggle: function toggle() {
-      this.isOpen = !this.isOpen;
-      this.$emit('update:open', this.isOpen);
-      this.$emit(this.isOpen ? 'open' : 'close');
+        toggle: function toggle() {
+            this.isOpen = !this.isOpen
+            this.$emit('update:open', this.isOpen)
+            this.$emit(this.isOpen ? 'open' : 'close')
+        }
+    },
+    render: function render(createElement) {
+        var trigger = createElement('div', {
+            staticClass: 'collapse-trigger',
+            on: {
+                click: this.toggle
+            }
+        }, this.$scopedSlots.trigger ? [this.$scopedSlots.trigger({
+            open: this.isOpen
+        })] : [this.$slots.trigger])
+        var content = createElement('transition', {
+            props: {
+                name: this.animation
+            }
+        }, [createElement('div', {
+            staticClass: 'collapse-content',
+            attrs: {
+                'id': this.ariaId,
+                'aria-expanded': this.isOpen
+            },
+            directives: [{
+                name: 'show',
+                value: this.isOpen
+            }]
+        }, this.$slots.default)])
+        return createElement('div', {
+            staticClass: 'collapse'
+        }, this.position === 'is-top' ? [trigger, content] : [content, trigger])
     }
-  },
-  render: function render(createElement) {
-    var trigger = createElement('div', {
-      staticClass: 'collapse-trigger',
-      on: {
-        click: this.toggle
-      }
-    }, this.$scopedSlots.trigger ? [this.$scopedSlots.trigger({
-      open: this.isOpen
-    })] : [this.$slots.trigger]);
-    var content = createElement('transition', {
-      props: {
-        name: this.animation
-      }
-    }, [createElement('div', {
-      staticClass: 'collapse-content',
-      attrs: {
-        'id': this.ariaId,
-        'aria-expanded': this.isOpen
-      },
-      directives: [{
-        name: 'show',
-        value: this.isOpen
-      }]
-    }, this.$slots.default)]);
-    return createElement('div', {
-      staticClass: 'collapse'
-    }, this.position === 'is-top' ? [trigger, content] : [content, trigger]);
-  }
-};
+}
 
 /* script */
 const __vue_script__$c = script$c
@@ -3860,8 +3780,9 @@ const __vue_module_identifier__$c = undefined
 const __vue_is_functional_template__$c = undefined
 /* style inject */
 
-  
-  var Collapse = normalizeComponent_1(
+/* style inject SSR */
+
+var Collapse = normalizeComponent_1(
     {},
     __vue_inject_styles__$c,
     __vue_script__$c,
@@ -3870,7 +3791,7 @@ const __vue_is_functional_template__$c = undefined
     __vue_module_identifier__$c,
     undefined,
     undefined
-  );
+)
 
 var script$d = {
     name: 'BField',
@@ -3904,895 +3825,894 @@ var script$d = {
             fieldLabelSize: null,
             _isField: true // Used internally by Input and Select
 
-var AM = 'AM';
-var PM = 'PM';
-var HOUR_FORMAT_24 = '24';
-var HOUR_FORMAT_12 = '12';
+var AM = 'AM'
+var PM = 'PM'
+var HOUR_FORMAT_24 = '24'
+var HOUR_FORMAT_12 = '12'
 
 var defaultTimeFormatter = function defaultTimeFormatter(date, vm) {
-  var hours = date.getHours();
-  var minutes = date.getMinutes();
-  var seconds = date.getSeconds();
-  var period = '';
+    var hours = date.getHours()
+    var minutes = date.getMinutes()
+    var seconds = date.getSeconds()
+    var period = ''
 
-  if (vm.hourFormat === HOUR_FORMAT_12) {
-    period = ' ' + (hours < 12 ? AM : PM);
+    if (vm.hourFormat === HOUR_FORMAT_12) {
+        period = ' ' + (hours < 12 ? AM : PM)
 
-    if (hours > 12) {
-      hours -= 12;
-    } else if (hours === 0) {
-      hours = 12;
+        if (hours > 12) {
+            hours -= 12
+        } else if (hours === 0) {
+            hours = 12
+        }
     }
-  }
 
-  return vm.pad(hours) + ':' + vm.pad(minutes) + (vm.enableSeconds ? ':' + vm.pad(seconds) : '') + period;
-};
+    return vm.pad(hours) + ':' + vm.pad(minutes) + (vm.enableSeconds ? ':' + vm.pad(seconds) : '') + period
+}
 
 var defaultTimeParser = function defaultTimeParser(timeString, vm) {
-  if (timeString) {
-    var am = false;
+    if (timeString) {
+        var am = false
 
-    if (vm.hourFormat === HOUR_FORMAT_12) {
-      var dateString12 = timeString.split(' ');
-      timeString = dateString12[0];
-      am = dateString12[1] === AM;
+        if (vm.hourFormat === HOUR_FORMAT_12) {
+            var dateString12 = timeString.split(' ')
+            timeString = dateString12[0]
+            am = dateString12[1] === AM
+        }
+
+        var time = timeString.split(':')
+        var hours = parseInt(time[0], 10)
+        var minutes = parseInt(time[1], 10)
+        var seconds = vm.enableSeconds ? parseInt(time[2], 10) : 0
+
+        if (isNaN(hours) || hours < 0 || hours > 23 || vm.hourFormat === HOUR_FORMAT_12 && (hours < 1 || hours > 12) || isNaN(minutes) || minutes < 0 || minutes > 59) {
+            return null
+        }
+
+        var d = null
+
+        if (vm.computedValue && !isNaN(vm.computedValue)) {
+            d = new Date(vm.computedValue)
+        } else {
+            d = vm.timeCreator()
+            d.setMilliseconds(0)
+        }
+
+        d.setSeconds(seconds)
+        d.setMinutes(minutes)
+
+        if (vm.hourFormat === HOUR_FORMAT_12) {
+            if (am && hours === 12) {
+                hours = 0
+            } else if (!am && hours !== 12) {
+                hours += 12
+            }
+        }
+
+        d.setHours(hours)
+        return new Date(d.getTime())
     }
 
-    var time = timeString.split(':');
-    var hours = parseInt(time[0], 10);
-    var minutes = parseInt(time[1], 10);
-    var seconds = vm.enableSeconds ? parseInt(time[2], 10) : 0;
-
-    if (isNaN(hours) || hours < 0 || hours > 23 || vm.hourFormat === HOUR_FORMAT_12 && (hours < 1 || hours > 12) || isNaN(minutes) || minutes < 0 || minutes > 59) {
-      return null;
-    }
-
-    var d = null;
-
-    if (vm.computedValue && !isNaN(vm.computedValue)) {
-      d = new Date(vm.computedValue);
-    } else {
-      d = vm.timeCreator();
-      d.setMilliseconds(0);
-    }
-
-    d.setSeconds(seconds);
-    d.setMinutes(minutes);
-
-    if (vm.hourFormat === HOUR_FORMAT_12) {
-      if (am && hours === 12) {
-        hours = 0;
-      } else if (!am && hours !== 12) {
-        hours += 12;
-      }
-    }
-
-    d.setHours(hours);
-    return new Date(d.getTime());
-  }
-
-  return null;
-};
+    return null
+}
 
 var TimepickerMixin = {
-  mixins: [FormElementMixin],
-  inheritAttrs: false,
-  props: {
-    value: Date,
-    inline: Boolean,
-    minTime: Date,
-    maxTime: Date,
-    placeholder: String,
-    editable: Boolean,
-    disabled: Boolean,
-    hourFormat: {
-      type: String,
-      default: HOUR_FORMAT_24,
-      validator: function validator(value) {
-        return value === HOUR_FORMAT_24 || value === HOUR_FORMAT_12;
-      }
-    },
-    incrementMinutes: {
-      type: Number,
-      default: 1
-    },
-    incrementSeconds: {
-      type: Number,
-      default: 1
-    },
-    timeFormatter: {
-      type: Function,
-      default: function _default(date, vm) {
-        if (typeof config.defaultTimeFormatter === 'function') {
-          return config.defaultTimeFormatter(date);
-        } else {
-          return defaultTimeFormatter(date, vm);
-        }
-      }
-    },
-    timeParser: {
-      type: Function,
-      default: function _default(date, vm) {
-        if (typeof config.defaultTimeParser === 'function') {
-          return config.defaultTimeParser(date);
-        } else {
-          return defaultTimeParser(date, vm);
-        }
-      }
-    },
-    mobileNative: {
-      type: Boolean,
-      default: function _default() {
-        return config.defaultTimepickerMobileNative;
-      }
-    },
-    timeCreator: {
-      type: Function,
-      default: function _default() {
-        if (typeof config.defaultTimeCreator === 'function') {
-          return config.defaultTimeCreator();
-        } else {
-          return new Date();
-        }
-      }
-    },
-    position: String,
-    unselectableTimes: Array,
-    openOnFocus: Boolean,
-    enableSeconds: Boolean,
-    defaultMinutes: Number,
-    defaultSeconds: Number,
-    focusable: {
-      type: Boolean,
-      default: true
-    }
-  },
-  data: function data() {
-    return {
-      dateSelected: this.value,
-      hoursSelected: null,
-      minutesSelected: null,
-      secondsSelected: null,
-      meridienSelected: null,
-      _elementRef: 'input',
-      AM: AM,
-      PM: PM,
-      HOUR_FORMAT_24: HOUR_FORMAT_24,
-      HOUR_FORMAT_12: HOUR_FORMAT_12
-    };
-  },
-  computed: {
-    computedValue: {
-      get: function get() {
-        return this.dateSelected;
-      },
-      set: function set(value) {
-        this.dateSelected = value;
-        this.$emit('input', value);
-      }
-    },
-    hours: function hours() {
-      var hours = [];
-      var numberOfHours = this.isHourFormat24 ? 24 : 12;
-
-      for (var i = 0; i < numberOfHours; i++) {
-        var value = i;
-        var label = value;
-
-        if (!this.isHourFormat24) {
-          value = i + 1;
-          label = value;
-
-          if (this.meridienSelected === this.AM) {
-            if (value === 12) {
-              value = 0;
+    mixins: [FormElementMixin],
+    inheritAttrs: false,
+    props: {
+        value: Date,
+        inline: Boolean,
+        minTime: Date,
+        maxTime: Date,
+        placeholder: String,
+        editable: Boolean,
+        disabled: Boolean,
+        hourFormat: {
+            type: String,
+            default: HOUR_FORMAT_24,
+            validator: function validator(value) {
+                return value === HOUR_FORMAT_24 || value === HOUR_FORMAT_12
             }
-          } else if (this.meridienSelected === this.PM) {
-            if (value !== 12) {
-              value += 12;
+        },
+        incrementMinutes: {
+            type: Number,
+            default: 1
+        },
+        incrementSeconds: {
+            type: Number,
+            default: 1
+        },
+        timeFormatter: {
+            type: Function,
+            default: function _default(date, vm) {
+                if (typeof config.defaultTimeFormatter === 'function') {
+                    return config.defaultTimeFormatter(date)
+                } else {
+                    return defaultTimeFormatter(date, vm)
+                }
             }
-          }
+        },
+        timeParser: {
+            type: Function,
+            default: function _default(date, vm) {
+                if (typeof config.defaultTimeParser === 'function') {
+                    return config.defaultTimeParser(date)
+                } else {
+                    return defaultTimeParser(date, vm)
+                }
+            }
+        },
+        mobileNative: {
+            type: Boolean,
+            default: function _default() {
+                return config.defaultTimepickerMobileNative
+            }
+        },
+        timeCreator: {
+            type: Function,
+            default: function _default() {
+                if (typeof config.defaultTimeCreator === 'function') {
+                    return config.defaultTimeCreator()
+                } else {
+                    return new Date()
+                }
+            }
+        },
+        position: String,
+        unselectableTimes: Array,
+        openOnFocus: Boolean,
+        enableSeconds: Boolean,
+        defaultMinutes: Number,
+        defaultSeconds: Number,
+        focusable: {
+            type: Boolean,
+            default: true
         }
-
-        hours.push({
-          label: this.formatNumber(label),
-          value: value
-        });
-      }
-
-      return hours;
     },
-    minutes: function minutes() {
-      if (!this.incrementMinutes || this.incrementMinutes < 1) throw new Error('Minute increment cannot be null or less than 1.');
-      var minutes = [];
-
-      for (var i = 0; i < 60; i += this.incrementMinutes) {
-        minutes.push({
-          label: this.formatNumber(i, true),
-          value: i
-        });
-      }
-
-      return minutes;
+    data: function data() {
+        return {
+            dateSelected: this.value,
+            hoursSelected: null,
+            minutesSelected: null,
+            secondsSelected: null,
+            meridienSelected: null,
+            _elementRef: 'input',
+            AM: AM,
+            PM: PM,
+            HOUR_FORMAT_24: HOUR_FORMAT_24,
+            HOUR_FORMAT_12: HOUR_FORMAT_12
+        }
     },
-    seconds: function seconds() {
-      if (!this.incrementSeconds || this.incrementSeconds < 1) throw new Error('Second increment cannot be null or less than 1.');
-      var seconds = [];
+    computed: {
+        computedValue: {
+            get: function get() {
+                return this.dateSelected
+            },
+            set: function set(value) {
+                this.dateSelected = value
+                this.$emit('input', value)
+            }
+        },
+        hours: function hours() {
+            var hours = []
+            var numberOfHours = this.isHourFormat24 ? 24 : 12
 
-      for (var i = 0; i < 60; i += this.incrementSeconds) {
-        seconds.push({
-          label: this.formatNumber(i, true),
-          value: i
-        });
-      }
+            for (var i = 0; i < numberOfHours; i++) {
+                var value = i
+                var label = value
 
-      return seconds;
-    },
-    meridiens: function meridiens() {
-      return [AM, PM];
-    },
-    isMobile: function isMobile$1() {
-      return this.mobileNative && isMobile.any();
-    },
-    isHourFormat24: function isHourFormat24() {
-      return this.hourFormat === HOUR_FORMAT_24;
-    }
-  },
-  watch: {
-    hourFormat: function hourFormat() {
-      if (this.hoursSelected !== null) {
-        this.meridienSelected = this.hoursSelected >= 12 ? PM : AM;
-      }
-    },
+                if (!this.isHourFormat24) {
+                    value = i + 1
+                    label = value
 
-    /**
+                    if (this.meridienSelected === this.AM) {
+                        if (value === 12) {
+                            value = 0
+                        }
+                    } else if (this.meridienSelected === this.PM) {
+                        if (value !== 12) {
+                            value += 12
+                        }
+                    }
+                }
+
+                hours.push({
+                    label: this.formatNumber(label),
+                    value: value
+                })
+            }
+
+            return hours
+        },
+        minutes: function minutes() {
+            if (!this.incrementMinutes || this.incrementMinutes < 1) throw new Error('Minute increment cannot be null or less than 1.')
+            var minutes = []
+
+            for (var i = 0; i < 60; i += this.incrementMinutes) {
+                minutes.push({
+                    label: this.formatNumber(i, true),
+                    value: i
+                })
+            }
+
+            return minutes
+        },
+        seconds: function seconds() {
+            if (!this.incrementSeconds || this.incrementSeconds < 1) throw new Error('Second increment cannot be null or less than 1.')
+            var seconds = []
+
+            for (var i = 0; i < 60; i += this.incrementSeconds) {
+                seconds.push({
+                    label: this.formatNumber(i, true),
+                    value: i
+                })
+            }
+
+            return seconds
+        },
+        meridiens: function meridiens() {
+            return [AM, PM]
+        },
+        isMobile: function isMobile$1() {
+            return this.mobileNative && isMobile.any()
+        },
+        isHourFormat24: function isHourFormat24() {
+            return this.hourFormat === HOUR_FORMAT_24
+        }
+    },
+    watch: {
+        hourFormat: function hourFormat() {
+            if (this.hoursSelected !== null) {
+                this.meridienSelected = this.hoursSelected >= 12 ? PM : AM
+            }
+        },
+
+        /**
      * When v-model is changed:
      *   1. Update internal value.
      *   2. If it's invalid, validate again.
      */
-    value: {
-      handler: function handler(value) {
-        this.updateInternalState(value);
-        !this.isValid && this.$refs.input.checkHtml5Validity();
-      },
-      immediate: true
-    }
-  },
-  methods: {
-    onMeridienChange: function onMeridienChange(value) {
-      if (this.hoursSelected !== null) {
-        if (value === PM) {
-          this.hoursSelected += 12;
-        } else if (value === AM) {
-          this.hoursSelected -= 12;
+        value: {
+            handler: function handler(value) {
+                this.updateInternalState(value)
+                !this.isValid && this.$refs.input.checkHtml5Validity()
+            },
+            immediate: true
         }
-      }
-
-      this.updateDateSelected(this.hoursSelected, this.minutesSelected, this.enableSeconds ? this.secondsSelected : 0, value);
     },
-    onHoursChange: function onHoursChange(value) {
-      if (!this.minutesSelected && typeof this.defaultMinutes !== 'undefined') {
-        this.minutesSelected = this.defaultMinutes;
-      }
+    methods: {
+        onMeridienChange: function onMeridienChange(value) {
+            if (this.hoursSelected !== null) {
+                if (value === PM) {
+                    this.hoursSelected += 12
+                } else if (value === AM) {
+                    this.hoursSelected -= 12
+                }
+            }
 
-      if (!this.secondsSelected && typeof this.defaultSeconds !== 'undefined') {
-        this.secondsSelected = this.defaultSeconds;
-      }
+            this.updateDateSelected(this.hoursSelected, this.minutesSelected, this.enableSeconds ? this.secondsSelected : 0, value)
+        },
+        onHoursChange: function onHoursChange(value) {
+            if (!this.minutesSelected && typeof this.defaultMinutes !== 'undefined') {
+                this.minutesSelected = this.defaultMinutes
+            }
 
-      this.updateDateSelected(parseInt(value, 10), this.minutesSelected, this.enableSeconds ? this.secondsSelected : 0, this.meridienSelected);
-    },
-    onMinutesChange: function onMinutesChange(value) {
-      if (!this.secondsSelected && this.defaultSeconds) {
-        this.secondsSelected = this.defaultSeconds;
-      }
+            if (!this.secondsSelected && typeof this.defaultSeconds !== 'undefined') {
+                this.secondsSelected = this.defaultSeconds
+            }
 
-      this.updateDateSelected(this.hoursSelected, parseInt(value, 10), this.enableSeconds ? this.secondsSelected : 0, this.meridienSelected);
-    },
-    onSecondsChange: function onSecondsChange(value) {
-      this.updateDateSelected(this.hoursSelected, this.minutesSelected, parseInt(value, 10), this.meridienSelected);
-    },
-    updateDateSelected: function updateDateSelected(hours, minutes, seconds, meridiens) {
-      if (hours != null && minutes != null && (!this.isHourFormat24 && meridiens !== null || this.isHourFormat24)) {
-        var time = null;
+            this.updateDateSelected(parseInt(value, 10), this.minutesSelected, this.enableSeconds ? this.secondsSelected : 0, this.meridienSelected)
+        },
+        onMinutesChange: function onMinutesChange(value) {
+            if (!this.secondsSelected && this.defaultSeconds) {
+                this.secondsSelected = this.defaultSeconds
+            }
 
-        if (this.computedValue && !isNaN(this.computedValue)) {
-          time = new Date(this.computedValue);
-        } else {
-          time = this.timeCreator();
-          time.setMilliseconds(0);
-        }
+            this.updateDateSelected(this.hoursSelected, parseInt(value, 10), this.enableSeconds ? this.secondsSelected : 0, this.meridienSelected)
+        },
+        onSecondsChange: function onSecondsChange(value) {
+            this.updateDateSelected(this.hoursSelected, this.minutesSelected, parseInt(value, 10), this.meridienSelected)
+        },
+        updateDateSelected: function updateDateSelected(hours, minutes, seconds, meridiens) {
+            if (hours != null && minutes != null && (!this.isHourFormat24 && meridiens !== null || this.isHourFormat24)) {
+                var time = null
 
-        time.setHours(hours);
-        time.setMinutes(minutes);
-        time.setSeconds(seconds);
-        this.computedValue = new Date(time.getTime());
-      }
-    },
-    updateInternalState: function updateInternalState(value) {
-      if (value) {
-        this.hoursSelected = value.getHours();
-        this.minutesSelected = value.getMinutes();
-        this.secondsSelected = value.getSeconds();
-        this.meridienSelected = value.getHours() >= 12 ? PM : AM;
-      } else {
-        this.hoursSelected = null;
-        this.minutesSelected = null;
-        this.secondsSelected = null;
-        this.meridienSelected = AM;
-      }
+                if (this.computedValue && !isNaN(this.computedValue)) {
+                    time = new Date(this.computedValue)
+                } else {
+                    time = this.timeCreator()
+                    time.setMilliseconds(0)
+                }
 
-      this.dateSelected = value;
-    },
-    isHourDisabled: function isHourDisabled(hour) {
-      var _this = this;
-
-      var disabled = false;
-
-      if (this.minTime) {
-        var minHours = this.minTime.getHours();
-        var noMinutesAvailable = this.minutes.every(function (minute) {
-          return _this.isMinuteDisabledForHour(hour, minute.value);
-        });
-        disabled = hour < minHours || noMinutesAvailable;
-      }
-
-      if (this.maxTime) {
-        if (!disabled) {
-          var maxHours = this.maxTime.getHours();
-          disabled = hour > maxHours;
-        }
-      }
-
-      if (this.unselectableTimes) {
-        if (!disabled) {
-          var unselectable = this.unselectableTimes.filter(function (time) {
-            if (_this.enableSeconds && _this.secondsSelected !== null) {
-              return time.getHours() === hour && time.getMinutes() === _this.minutesSelected && time.getSeconds() === _this.secondsSelected;
-            } else if (_this.minutesSelected !== null) {
-              return time.getHours() === hour && time.getMinutes() === _this.minutesSelected;
+                time.setHours(hours)
+                time.setMinutes(minutes)
+                time.setSeconds(seconds)
+                this.computedValue = new Date(time.getTime())
+            }
+        },
+        updateInternalState: function updateInternalState(value) {
+            if (value) {
+                this.hoursSelected = value.getHours()
+                this.minutesSelected = value.getMinutes()
+                this.secondsSelected = value.getSeconds()
+                this.meridienSelected = value.getHours() >= 12 ? PM : AM
             } else {
-              return time.getHours() === hour;
+                this.hoursSelected = null
+                this.minutesSelected = null
+                this.secondsSelected = null
+                this.meridienSelected = AM
             }
-          });
-          disabled = unselectable.length > 0;
-        }
-      }
 
-      return disabled;
-    },
-    isMinuteDisabledForHour: function isMinuteDisabledForHour(hour, minute) {
-      var disabled = false;
+            this.dateSelected = value
+        },
+        isHourDisabled: function isHourDisabled(hour) {
+            var _this = this
 
-      if (this.minTime) {
-        var minHours = this.minTime.getHours();
-        var minMinutes = this.minTime.getMinutes();
-        disabled = hour === minHours && minute < minMinutes;
-      }
+            var disabled = false
 
-      if (this.maxTime) {
-        if (!disabled) {
-          var maxHours = this.maxTime.getHours();
-          var maxMinutes = this.maxTime.getMinutes();
-          disabled = hour === maxHours && minute > maxMinutes;
-        }
-      }
-
-      return disabled;
-    },
-    isMinuteDisabled: function isMinuteDisabled(minute) {
-      var _this2 = this;
-
-      var disabled = false;
-
-      if (this.hoursSelected !== null) {
-        if (this.isHourDisabled(this.hoursSelected)) {
-          disabled = true;
-        } else {
-          disabled = this.isMinuteDisabledForHour(this.hoursSelected, minute);
-        }
-
-        if (this.unselectableTimes) {
-          if (!disabled) {
-            var unselectable = this.unselectableTimes.filter(function (time) {
-              if (_this2.enableSeconds && _this2.secondsSelected !== null) {
-                return time.getHours() === _this2.hoursSelected && time.getMinutes() === minute && time.getSeconds() === _this2.secondsSelected;
-              } else {
-                return time.getHours() === _this2.hoursSelected && time.getMinutes() === minute;
-              }
-            });
-            disabled = unselectable.length > 0;
-          }
-        }
-      }
-
-      return disabled;
-    },
-    isSecondDisabled: function isSecondDisabled(second) {
-      var _this3 = this;
-
-      var disabled = false;
-
-      if (this.minutesSelected !== null) {
-        if (this.isMinuteDisabled(this.minutesSelected)) {
-          disabled = true;
-        } else {
-          if (this.minTime) {
-            var minHours = this.minTime.getHours();
-            var minMinutes = this.minTime.getMinutes();
-            var minSeconds = this.minTime.getSeconds();
-            disabled = this.hoursSelected === minHours && this.minutesSelected === minMinutes && second < minSeconds;
-          }
-
-          if (this.maxTime) {
-            if (!disabled) {
-              var maxHours = this.maxTime.getHours();
-              var maxMinutes = this.maxTime.getMinutes();
-              var maxSeconds = this.maxTime.getSeconds();
-              disabled = this.hoursSelected === maxHours && this.minutesSelected === maxMinutes && second > maxSeconds;
+            if (this.minTime) {
+                var minHours = this.minTime.getHours()
+                var noMinutesAvailable = this.minutes.every(function (minute) {
+                    return _this.isMinuteDisabledForHour(hour, minute.value)
+                })
+                disabled = hour < minHours || noMinutesAvailable
             }
-          }
-        }
 
-        if (this.unselectableTimes) {
-          if (!disabled) {
-            var unselectable = this.unselectableTimes.filter(function (time) {
-              return time.getHours() === _this3.hoursSelected && time.getMinutes() === _this3.minutesSelected && time.getSeconds() === second;
-            });
-            disabled = unselectable.length > 0;
-          }
-        }
-      }
+            if (this.maxTime) {
+                if (!disabled) {
+                    var maxHours = this.maxTime.getHours()
+                    disabled = hour > maxHours
+                }
+            }
 
-      return disabled;
-    },
+            if (this.unselectableTimes) {
+                if (!disabled) {
+                    var unselectable = this.unselectableTimes.filter(function (time) {
+                        if (_this.enableSeconds && _this.secondsSelected !== null) {
+                            return time.getHours() === hour && time.getMinutes() === _this.minutesSelected && time.getSeconds() === _this.secondsSelected
+                        } else if (_this.minutesSelected !== null) {
+                            return time.getHours() === hour && time.getMinutes() === _this.minutesSelected
+                        } else {
+                            return time.getHours() === hour
+                        }
+                    })
+                    disabled = unselectable.length > 0
+                }
+            }
 
-    /*
+            return disabled
+        },
+        isMinuteDisabledForHour: function isMinuteDisabledForHour(hour, minute) {
+            var disabled = false
+
+            if (this.minTime) {
+                var minHours = this.minTime.getHours()
+                var minMinutes = this.minTime.getMinutes()
+                disabled = hour === minHours && minute < minMinutes
+            }
+
+            if (this.maxTime) {
+                if (!disabled) {
+                    var maxHours = this.maxTime.getHours()
+                    var maxMinutes = this.maxTime.getMinutes()
+                    disabled = hour === maxHours && minute > maxMinutes
+                }
+            }
+
+            return disabled
+        },
+        isMinuteDisabled: function isMinuteDisabled(minute) {
+            var _this2 = this
+
+            var disabled = false
+
+            if (this.hoursSelected !== null) {
+                if (this.isHourDisabled(this.hoursSelected)) {
+                    disabled = true
+                } else {
+                    disabled = this.isMinuteDisabledForHour(this.hoursSelected, minute)
+                }
+
+                if (this.unselectableTimes) {
+                    if (!disabled) {
+                        var unselectable = this.unselectableTimes.filter(function (time) {
+                            if (_this2.enableSeconds && _this2.secondsSelected !== null) {
+                                return time.getHours() === _this2.hoursSelected && time.getMinutes() === minute && time.getSeconds() === _this2.secondsSelected
+                            } else {
+                                return time.getHours() === _this2.hoursSelected && time.getMinutes() === minute
+                            }
+                        })
+                        disabled = unselectable.length > 0
+                    }
+                }
+            }
+
+            return disabled
+        },
+        isSecondDisabled: function isSecondDisabled(second) {
+            var _this3 = this
+
+            var disabled = false
+
+            if (this.minutesSelected !== null) {
+                if (this.isMinuteDisabled(this.minutesSelected)) {
+                    disabled = true
+                } else {
+                    if (this.minTime) {
+                        var minHours = this.minTime.getHours()
+                        var minMinutes = this.minTime.getMinutes()
+                        var minSeconds = this.minTime.getSeconds()
+                        disabled = this.hoursSelected === minHours && this.minutesSelected === minMinutes && second < minSeconds
+                    }
+
+                    if (this.maxTime) {
+                        if (!disabled) {
+                            var maxHours = this.maxTime.getHours()
+                            var maxMinutes = this.maxTime.getMinutes()
+                            var maxSeconds = this.maxTime.getSeconds()
+                            disabled = this.hoursSelected === maxHours && this.minutesSelected === maxMinutes && second > maxSeconds
+                        }
+                    }
+                }
+
+                if (this.unselectableTimes) {
+                    if (!disabled) {
+                        var unselectable = this.unselectableTimes.filter(function (time) {
+                            return time.getHours() === _this3.hoursSelected && time.getMinutes() === _this3.minutesSelected && time.getSeconds() === second
+                        })
+                        disabled = unselectable.length > 0
+                    }
+                }
+            }
+
+            return disabled
+        },
+
+        /*
     * Parse string into date
     */
-    onChange: function onChange(value) {
-      var date = this.timeParser(value, this);
-      this.updateInternalState(date);
+        onChange: function onChange(value) {
+            var date = this.timeParser(value, this)
+            this.updateInternalState(date)
 
-      if (date && !isNaN(date)) {
-        this.computedValue = date;
-      } else {
-        // Force refresh input value when not valid date
-        this.computedValue = null;
-        this.$refs.input.newValue = this.computedValue;
-      }
-    },
+            if (date && !isNaN(date)) {
+                this.computedValue = date
+            } else {
+                // Force refresh input value when not valid date
+                this.computedValue = null
+                this.$refs.input.newValue = this.computedValue
+            }
+        },
 
-    /*
+        /*
     * Toggle timepicker
     */
-    toggle: function toggle(active) {
-      if (this.$refs.dropdown) {
-        this.$refs.dropdown.isActive = typeof active === 'boolean' ? active : !this.$refs.dropdown.isActive;
-      }
-    },
+        toggle: function toggle(active) {
+            if (this.$refs.dropdown) {
+                this.$refs.dropdown.isActive = typeof active === 'boolean' ? active : !this.$refs.dropdown.isActive
+            }
+        },
 
-    /*
+        /*
     * Close timepicker
     */
-    close: function close() {
-      this.toggle(false);
-    },
+        close: function close() {
+            this.toggle(false)
+        },
 
-    /*
+        /*
     * Call default onFocus method and show timepicker
     */
-    handleOnFocus: function handleOnFocus() {
-      this.onFocus();
+        handleOnFocus: function handleOnFocus() {
+            this.onFocus()
 
-      if (this.openOnFocus) {
-        this.toggle(true);
-      }
-    },
+            if (this.openOnFocus) {
+                this.toggle(true)
+            }
+        },
 
-    /*
+        /*
     * Format date into string 'HH-MM-SS'
     */
-    formatHHMMSS: function formatHHMMSS(value) {
-      var date = new Date(value);
+        formatHHMMSS: function formatHHMMSS(value) {
+            var date = new Date(value)
 
-      if (value && !isNaN(date)) {
-        var hours = date.getHours();
-        var minutes = date.getMinutes();
-        var seconds = date.getSeconds();
-        return this.formatNumber(hours, true) + ':' + this.formatNumber(minutes, true) + ':' + this.formatNumber(seconds, true);
-      }
+            if (value && !isNaN(date)) {
+                var hours = date.getHours()
+                var minutes = date.getMinutes()
+                var seconds = date.getSeconds()
+                return this.formatNumber(hours, true) + ':' + this.formatNumber(minutes, true) + ':' + this.formatNumber(seconds, true)
+            }
 
-      return '';
-    },
+            return ''
+        },
 
-    /*
+        /*
     * Parse time from string
     */
-    onChangeNativePicker: function onChangeNativePicker(event) {
-      var date = event.target.value;
+        onChangeNativePicker: function onChangeNativePicker(event) {
+            var date = event.target.value
 
-      if (date) {
-        var time = null;
+            if (date) {
+                var time = null
 
-        if (this.computedValue && !isNaN(this.computedValue)) {
-          time = new Date(this.computedValue);
-        } else {
-          time = new Date();
-          time.setMilliseconds(0);
-        }
+                if (this.computedValue && !isNaN(this.computedValue)) {
+                    time = new Date(this.computedValue)
+                } else {
+                    time = new Date()
+                    time.setMilliseconds(0)
+                }
 
-        var t = date.split(':');
-        time.setHours(parseInt(t[0], 10));
-        time.setMinutes(parseInt(t[1], 10));
-        time.setSeconds(t[2] ? parseInt(t[2], 10) : 0);
-        this.computedValue = new Date(time.getTime());
-      } else {
-        this.computedValue = null;
-      }
-    },
-    formatNumber: function formatNumber(value, prependZero) {
-      return this.isHourFormat24 || prependZero ? this.pad(value) : value;
-    },
-    pad: function pad(value) {
-      return (value < 10 ? '0' : '') + value;
-    },
+                var t = date.split(':')
+                time.setHours(parseInt(t[0], 10))
+                time.setMinutes(parseInt(t[1], 10))
+                time.setSeconds(t[2] ? parseInt(t[2], 10) : 0)
+                this.computedValue = new Date(time.getTime())
+            } else {
+                this.computedValue = null
+            }
+        },
+        formatNumber: function formatNumber(value, prependZero) {
+            return this.isHourFormat24 || prependZero ? this.pad(value) : value
+        },
+        pad: function pad(value) {
+            return (value < 10 ? '0' : '') + value
+        },
 
-    /*
+        /*
     * Format date into string
     */
-    formatValue: function formatValue(date) {
-      if (date && !isNaN(date)) {
-        return this.timeFormatter(date, this);
-      } else {
-        return null;
-      }
-    },
+        formatValue: function formatValue(date) {
+            if (date && !isNaN(date)) {
+                return this.timeFormatter(date, this)
+            } else {
+                return null
+            }
+        },
 
-    /**
+        /**
      * Keypress event that is bound to the document.
      */
-    keyPress: function keyPress(event) {
-      // Esc key
-      if (this.$refs.dropdown && this.$refs.dropdown.isActive && event.keyCode === 27) {
-        this.toggle(false);
-      }
-    },
+        keyPress: function keyPress(event) {
+            // Esc key
+            if (this.$refs.dropdown && this.$refs.dropdown.isActive && event.keyCode === 27) {
+                this.toggle(false)
+            }
+        },
 
-    /**
+        /**
      * Emit 'blur' event on dropdown is not active (closed)
      */
-    onActiveChange: function onActiveChange(value) {
-      if (!value) {
-        this.onBlur();
-      }
+        onActiveChange: function onActiveChange(value) {
+            if (!value) {
+                this.onBlur()
+            }
+        }
+    },
+    created: function created() {
+        if (typeof window !== 'undefined') {
+            document.addEventListener('keyup', this.keyPress)
+        }
+    },
+    beforeDestroy: function beforeDestroy() {
+        if (typeof window !== 'undefined') {
+            document.removeEventListener('keyup', this.keyPress)
+        }
     }
-  },
-  created: function created() {
-    if (typeof window !== 'undefined') {
-      document.addEventListener('keyup', this.keyPress);
-    }
-  },
-  beforeDestroy: function beforeDestroy() {
-    if (typeof window !== 'undefined') {
-      document.removeEventListener('keyup', this.keyPress);
-    }
-  }
-};
+}
 
 var findFocusable = function findFocusable(element) {
-  if (!element) {
-    return null;
-  }
+    if (!element) {
+        return null
+    }
 
-  return element.querySelectorAll("a[href],\n                                     area[href],\n                                     input:not([disabled]),\n                                     select:not([disabled]),\n                                     textarea:not([disabled]),\n                                     button:not([disabled]),\n                                     iframe,\n                                     object,\n                                     embed,\n                                     *[tabindex],\n                                     *[contenteditable]");
-};
+    return element.querySelectorAll('a[href],\n                                     area[href],\n                                     input:not([disabled]),\n                                     select:not([disabled]),\n                                     textarea:not([disabled]),\n                                     button:not([disabled]),\n                                     iframe,\n                                     object,\n                                     embed,\n                                     *[tabindex],\n                                     *[contenteditable]')
+}
 
-var onKeyDown;
+var onKeyDown
 
 var bind = function bind(el, _ref) {
-  var _ref$value = _ref.value,
-      value = _ref$value === void 0 ? true : _ref$value;
+    var _ref$value = _ref.value,
+        value = _ref$value === void 0 ? true : _ref$value
 
-  if (value) {
-    var focusable = findFocusable(el);
+    if (value) {
+        var focusable = findFocusable(el)
 
-    if (focusable && focusable.length > 0) {
-      var firstFocusable = focusable[0];
-      var lastFocusable = focusable[focusable.length - 1];
+        if (focusable && focusable.length > 0) {
+            var firstFocusable = focusable[0]
+            var lastFocusable = focusable[focusable.length - 1]
 
-      onKeyDown = function onKeyDown(event) {
-        if (event.target === firstFocusable && event.shiftKey && event.key === 'Tab') {
-          event.preventDefault();
-          lastFocusable.focus();
-        } else if (event.target === lastFocusable && !event.shiftKey && event.key === 'Tab') {
-          event.preventDefault();
-          firstFocusable.focus();
+            onKeyDown = function onKeyDown(event) {
+                if (event.target === firstFocusable && event.shiftKey && event.key === 'Tab') {
+                    event.preventDefault()
+                    lastFocusable.focus()
+                } else if (event.target === lastFocusable && !event.shiftKey && event.key === 'Tab') {
+                    event.preventDefault()
+                    firstFocusable.focus()
+                }
+            }
+
+            el.addEventListener('keydown', onKeyDown)
         }
-      };
-
-      el.addEventListener('keydown', onKeyDown);
     }
-  }
-};
+}
 
 var unbind = function unbind(el) {
-  el.removeEventListener('keydown', onKeyDown);
-};
+    el.removeEventListener('keydown', onKeyDown)
+}
 
 var directive = {
-  bind: bind,
-  unbind: unbind
-};
+    bind: bind,
+    unbind: unbind
+}
 
 //
-var DEFAULT_CLOSE_OPTIONS = ['escape', 'outside'];
+var DEFAULT_CLOSE_OPTIONS = ['escape', 'outside']
 var script$a = {
-  name: 'BDropdown',
-  directives: {
-    trapFocus: directive
-  },
-  props: {
-    value: {
-      type: [String, Number, Boolean, Object, Array, Function],
-      default: null
+    name: 'BDropdown',
+    directives: {
+        trapFocus: directive
     },
-    disabled: Boolean,
-    hoverable: Boolean,
-    inline: Boolean,
-    position: {
-      type: String,
-      validator: function validator(value) {
-        return ['is-top-right', 'is-top-left', 'is-bottom-left'].indexOf(value) > -1;
-      }
+    props: {
+        value: {
+            type: [String, Number, Boolean, Object, Array, Function],
+            default: null
+        },
+        disabled: Boolean,
+        hoverable: Boolean,
+        inline: Boolean,
+        position: {
+            type: String,
+            validator: function validator(value) {
+                return ['is-top-right', 'is-top-left', 'is-bottom-left'].indexOf(value) > -1
+            }
+        },
+        mobileModal: {
+            type: Boolean,
+            default: function _default() {
+                return config.defaultDropdownMobileModal
+            }
+        },
+        ariaRole: {
+            type: String,
+            default: ''
+        },
+        animation: {
+            type: String,
+            default: 'fade'
+        },
+        multiple: Boolean,
+        trapFocus: {
+            type: Boolean,
+            default: config.defaultTrapFocus
+        },
+        closeOnClick: {
+            type: Boolean,
+            default: true
+        },
+        canClose: {
+            type: [Array, Boolean],
+            default: true
+        },
+        expanded: Boolean
     },
-    mobileModal: {
-      type: Boolean,
-      default: function _default() {
-        return config.defaultDropdownMobileModal;
-      }
-    },
-    ariaRole: {
-      type: String,
-      default: ''
-    },
-    animation: {
-      type: String,
-      default: 'fade'
-    },
-    multiple: Boolean,
-    trapFocus: {
-      type: Boolean,
-      default: config.defaultTrapFocus
-    },
-    closeOnClick: {
-      type: Boolean,
-      default: true
-    },
-    canClose: {
-      type: [Array, Boolean],
-      default: true
-    },
-    expanded: Boolean
-  },
-  data: function data() {
-    return {
-      selected: this.value,
-      isActive: false,
-      isHoverable: this.hoverable,
-      _isDropdown: true // Used internally by DropdownItem
+    data: function data() {
+        return {
+            selected: this.value,
+            isActive: false,
+            isHoverable: this.hoverable,
+            _isDropdown: true // Used internally by DropdownItem
 
-    };
-  },
-  computed: {
-    rootClasses: function rootClasses() {
-      return [this.position, {
-        'is-disabled': this.disabled,
-        'is-hoverable': this.hoverable,
-        'is-inline': this.inline,
-        'is-active': this.isActive || this.inline,
-        'is-mobile-modal': this.isMobileModal,
-        'is-expanded': this.expanded
-      }];
+        }
     },
-    isMobileModal: function isMobileModal() {
-      return this.mobileModal && !this.inline && !this.hoverable;
+    computed: {
+        rootClasses: function rootClasses() {
+            return [this.position, {
+                'is-disabled': this.disabled,
+                'is-hoverable': this.hoverable,
+                'is-inline': this.inline,
+                'is-active': this.isActive || this.inline,
+                'is-mobile-modal': this.isMobileModal,
+                'is-expanded': this.expanded
+            }]
+        },
+        isMobileModal: function isMobileModal() {
+            return this.mobileModal && !this.inline && !this.hoverable
+        },
+        cancelOptions: function cancelOptions() {
+            return typeof this.canClose === 'boolean' ? this.canClose ? DEFAULT_CLOSE_OPTIONS : [] : this.canClose
+        },
+        ariaRoleMenu: function ariaRoleMenu() {
+            return this.ariaRole === 'menu' || this.ariaRole === 'list' ? this.ariaRole : null
+        }
     },
-    cancelOptions: function cancelOptions() {
-      return typeof this.canClose === 'boolean' ? this.canClose ? DEFAULT_CLOSE_OPTIONS : [] : this.canClose;
-    },
-    ariaRoleMenu: function ariaRoleMenu() {
-      return this.ariaRole === 'menu' || this.ariaRole === 'list' ? this.ariaRole : null;
-    }
-  },
-  watch: {
+    watch: {
     /**
     * When v-model is changed set the new selected item.
     */
-    value: function value(_value) {
-      this.selected = _value;
-    },
+        value: function value(_value) {
+            this.selected = _value
+        },
 
-    /**
+        /**
     * Emit event when isActive value is changed.
     */
-    isActive: function isActive(value) {
-      this.$emit('active-change', value);
-    }
-  },
-  methods: {
+        isActive: function isActive(value) {
+            this.$emit('active-change', value)
+        }
+    },
+    methods: {
     /**
     * Click listener from DropdownItem.
     *   1. Set new selected item.
     *   2. Emit input event to update the user v-model.
     *   3. Close the dropdown.
     */
-    selectItem: function selectItem(value) {
-      if (this.multiple) {
-        if (this.selected) {
-          var index = this.selected.indexOf(value);
+        selectItem: function selectItem(value) {
+            if (this.multiple) {
+                if (this.selected) {
+                    var index = this.selected.indexOf(value)
 
-          if (index === -1) {
-            this.selected.push(value);
-          } else {
-            this.selected.splice(index, 1);
-          }
-        } else {
-          this.selected = [value];
-        }
+                    if (index === -1) {
+                        this.selected.push(value)
+                    } else {
+                        this.selected.splice(index, 1)
+                    }
+                } else {
+                    this.selected = [value]
+                }
 
-        this.$emit('change', this.selected);
-      } else {
-        if (this.selected !== value) {
-          this.selected = value;
-          this.$emit('change', this.selected);
-        }
-      }
+                this.$emit('change', this.selected)
+            } else {
+                if (this.selected !== value) {
+                    this.selected = value
+                    this.$emit('change', this.selected)
+                }
+            }
 
-      this.$emit('input', this.selected);
+            this.$emit('input', this.selected)
 
-      if (!this.multiple) {
-        this.isActive = !this.closeOnClick;
+            if (!this.multiple) {
+                this.isActive = !this.closeOnClick
 
-        if (this.hoverable && this.closeOnClick) {
-          this.isHoverable = false;
-        }
-      }
-    },
+                if (this.hoverable && this.closeOnClick) {
+                    this.isHoverable = false
+                }
+            }
+        },
 
-    /**
+        /**
     * White-listed items to not close when clicked.
     */
-    isInWhiteList: function isInWhiteList(el) {
-      if (el === this.$refs.dropdownMenu) return true;
-      if (el === this.$refs.trigger) return true; // All chidren from dropdown
+        isInWhiteList: function isInWhiteList(el) {
+            if (el === this.$refs.dropdownMenu) return true
+            if (el === this.$refs.trigger) return true // All chidren from dropdown
 
-      if (this.$refs.dropdownMenu !== undefined) {
-        var children = this.$refs.dropdownMenu.querySelectorAll('*');
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
+            if (this.$refs.dropdownMenu !== undefined) {
+                var children = this.$refs.dropdownMenu.querySelectorAll('*')
+                var _iteratorNormalCompletion = true
+                var _didIteratorError = false
+                var _iteratorError = undefined
 
-        try {
-          for (var _iterator = children[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var child = _step.value;
+                try {
+                    for (var _iterator = children[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var child = _step.value
 
-            if (el === child) {
-              return true;
+                        if (el === child) {
+                            return true
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError = true
+                    _iteratorError = err
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return != null) {
+                            _iterator.return()
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError
+                        }
+                    }
+                }
+            } // All children from trigger
+
+            if (this.$refs.trigger !== undefined) {
+                var _children = this.$refs.trigger.querySelectorAll('*')
+
+                var _iteratorNormalCompletion2 = true
+                var _didIteratorError2 = false
+                var _iteratorError2 = undefined
+
+                try {
+                    for (var _iterator2 = _children[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                        var _child = _step2.value
+
+                        if (el === _child) {
+                            return true
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError2 = true
+                    _iteratorError2 = err
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+                            _iterator2.return()
+                        }
+                    } finally {
+                        if (_didIteratorError2) {
+                            throw _iteratorError2
+                        }
+                    }
+                }
             }
-          }
-        } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-              _iterator.return();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
-          }
-        }
-      } // All children from trigger
 
+            return false
+        },
 
-      if (this.$refs.trigger !== undefined) {
-        var _children = this.$refs.trigger.querySelectorAll('*');
-
-        var _iteratorNormalCompletion2 = true;
-        var _didIteratorError2 = false;
-        var _iteratorError2 = undefined;
-
-        try {
-          for (var _iterator2 = _children[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-            var _child = _step2.value;
-
-            if (el === _child) {
-              return true;
-            }
-          }
-        } catch (err) {
-          _didIteratorError2 = true;
-          _iteratorError2 = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-              _iterator2.return();
-            }
-          } finally {
-            if (_didIteratorError2) {
-              throw _iteratorError2;
-            }
-          }
-        }
-      }
-
-      return false;
-    },
-
-    /**
+        /**
     * Close dropdown if clicked outside.
     */
-    clickedOutside: function clickedOutside(event) {
-      if (this.cancelOptions.indexOf('outside') < 0) return;
-      if (this.inline) return;
-      if (!this.isInWhiteList(event.target)) this.isActive = false;
-    },
+        clickedOutside: function clickedOutside(event) {
+            if (this.cancelOptions.indexOf('outside') < 0) return
+            if (this.inline) return
+            if (!this.isInWhiteList(event.target)) this.isActive = false
+        },
 
-    /**
+        /**
      * Keypress event that is bound to the document
      */
-    keyPress: function keyPress(event) {
-      // Esc key
-      if (this.isActive && event.keyCode === 27) {
-        if (this.cancelOptions.indexOf('escape') < 0) return;
-        this.isActive = false;
-      }
-    },
+        keyPress: function keyPress(event) {
+            // Esc key
+            if (this.isActive && event.keyCode === 27) {
+                if (this.cancelOptions.indexOf('escape') < 0) return
+                this.isActive = false
+            }
+        },
 
-    /**
+        /**
     * Toggle dropdown if it's not disabled.
     */
-    toggle: function toggle() {
-      var _this = this;
+        toggle: function toggle() {
+            var _this = this
 
-      if (this.disabled) return;
+            if (this.disabled) return
 
-      if (!this.isActive) {
-        // if not active, toggle after clickOutside event
-        // this fixes toggling programmatic
-        this.$nextTick(function () {
-          var value = !_this.isActive;
-          _this.isActive = value; // Vue 2.6.x ???
+            if (!this.isActive) {
+                // if not active, toggle after clickOutside event
+                // this fixes toggling programmatic
+                this.$nextTick(function () {
+                    var value = !_this.isActive
+                    _this.isActive = value // Vue 2.6.x ???
 
-          setTimeout(function () {
-            return _this.isActive = value;
-          });
-        });
-      } else {
-        this.isActive = !this.isActive;
-      }
+                    setTimeout(function () {
+                        return _this.isActive = value
+                    })
+                })
+            } else {
+                this.isActive = !this.isActive
+            }
+        },
+        checkHoverable: function checkHoverable() {
+            if (this.hoverable) {
+                this.isHoverable = true
+            }
+        }
     },
-    checkHoverable: function checkHoverable() {
-      if (this.hoverable) {
-        this.isHoverable = true;
-      }
+    created: function created() {
+        if (typeof window !== 'undefined') {
+            document.addEventListener('click', this.clickedOutside)
+            document.addEventListener('keyup', this.keyPress)
+        }
+    },
+    beforeDestroy: function beforeDestroy() {
+        if (typeof window !== 'undefined') {
+            document.removeEventListener('click', this.clickedOutside)
+            document.removeEventListener('keyup', this.keyPress)
+        }
     }
-  },
-  created: function created() {
-    if (typeof window !== 'undefined') {
-      document.addEventListener('click', this.clickedOutside);
-      document.addEventListener('keyup', this.keyPress);
-    }
-  },
-  beforeDestroy: function beforeDestroy() {
-    if (typeof window !== 'undefined') {
-      document.removeEventListener('click', this.clickedOutside);
-      document.removeEventListener('keyup', this.keyPress);
-    }
-  }
-};
+}
 
 /* script */
 const __vue_script__$d = script$d
@@ -4822,7 +4742,7 @@ var Field = normalizeComponent_1(
     __vue_module_identifier__$d,
     undefined,
     undefined
-  );
+)
 
 //
 //
@@ -4846,99 +4766,97 @@ var Field = normalizeComponent_1(
 //
 //
 var script$b = {
-  name: 'BDropdownItem',
-  props: {
-    value: {
-      type: [String, Number, Boolean, Object, Array, Function],
-      default: null
+    name: 'BDropdownItem',
+    props: {
+        value: {
+            type: [String, Number, Boolean, Object, Array, Function],
+            default: null
+        },
+        separator: Boolean,
+        disabled: Boolean,
+        custom: Boolean,
+        focusable: {
+            type: Boolean,
+            default: true
+        },
+        paddingless: Boolean,
+        hasLink: Boolean,
+        ariaRole: {
+            type: String,
+            default: ''
+        }
     },
-    separator: Boolean,
-    disabled: Boolean,
-    custom: Boolean,
-    focusable: {
-      type: Boolean,
-      default: true
-    },
-    paddingless: Boolean,
-    hasLink: Boolean,
-    ariaRole: {
-      type: String,
-      default: ''
-    }
-  },
-  computed: {
-    anchorClasses: function anchorClasses() {
-      return {
-        'is-disabled': this.$parent.disabled || this.disabled,
-        'is-paddingless': this.paddingless,
-        'is-active': this.isActive
-      };
-    },
-    itemClasses: function itemClasses() {
-      return {
-        'dropdown-item': !this.hasLink,
-        'is-disabled': this.disabled,
-        'is-paddingless': this.paddingless,
-        'is-active': this.isActive,
-        'has-link': this.hasLink
-      };
-    },
-    ariaRoleItem: function ariaRoleItem() {
-      return this.ariaRole === 'menuitem' || this.ariaRole === 'listitem' ? this.ariaRole : null;
-    },
+    computed: {
+        anchorClasses: function anchorClasses() {
+            return {
+                'is-disabled': this.$parent.disabled || this.disabled,
+                'is-paddingless': this.paddingless,
+                'is-active': this.isActive
+            }
+        },
+        itemClasses: function itemClasses() {
+            return {
+                'dropdown-item': !this.hasLink,
+                'is-disabled': this.disabled,
+                'is-paddingless': this.paddingless,
+                'is-active': this.isActive,
+                'has-link': this.hasLink
+            }
+        },
+        ariaRoleItem: function ariaRoleItem() {
+            return this.ariaRole === 'menuitem' || this.ariaRole === 'listitem' ? this.ariaRole : null
+        },
 
-    /**
+        /**
     * Check if item can be clickable.
     */
-    isClickable: function isClickable() {
-      return !this.$parent.disabled && !this.separator && !this.disabled && !this.custom;
+        isClickable: function isClickable() {
+            return !this.$parent.disabled && !this.separator && !this.disabled && !this.custom
+        },
+        isActive: function isActive() {
+            if (this.$parent.selected === null) return false
+            if (this.$parent.multiple) return this.$parent.selected.indexOf(this.value) >= 0
+            return this.value === this.$parent.selected
+        }
     },
-    isActive: function isActive() {
-      if (this.$parent.selected === null) return false;
-      if (this.$parent.multiple) return this.$parent.selected.indexOf(this.value) >= 0;
-      return this.value === this.$parent.selected;
-    }
-  },
-  methods: {
+    methods: {
     /**
     * Click listener, select the item.
     */
-    selectItem: function selectItem() {
-      if (!this.isClickable) return;
-      this.$parent.selectItem(this.value);
-      this.$emit('click');
+        selectItem: function selectItem() {
+            if (!this.isClickable) return
+            this.$parent.selectItem(this.value)
+            this.$emit('click')
+        }
+    },
+    created: function created() {
+        if (!this.$parent.$data._isDropdown) {
+            this.$destroy()
+            throw new Error('You should wrap bDropdownItem on a bDropdown')
+        }
     }
-  },
-  created: function created() {
-    if (!this.$parent.$data._isDropdown) {
-      this.$destroy();
-      throw new Error('You should wrap bDropdownItem on a bDropdown');
-    }
-  }
-};
+}
 
 /* script */
-const __vue_script__$b = script$b;
+const __vue_script__$b = script$b
 
 /* template */
-var __vue_render__$a = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.separator)?_c('hr',{staticClass:"dropdown-divider"}):(!_vm.custom && !_vm.hasLink)?_c('a',{staticClass:"dropdown-item",class:_vm.anchorClasses,attrs:{"role":_vm.ariaRoleItem,"tabindex":_vm.focusable ? 0 : null},on:{"click":_vm.selectItem}},[_vm._t("default")],2):_c('div',{class:_vm.itemClasses,attrs:{"role":_vm.ariaRoleItem,"tabindex":_vm.focusable ? 0 : null},on:{"click":_vm.selectItem}},[_vm._t("default")],2)};
-var __vue_staticRenderFns__$a = [];
+var __vue_render__$a = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return (_vm.separator) ? _c('hr', {staticClass: 'dropdown-divider'}) : (!_vm.custom && !_vm.hasLink) ? _c('a', {staticClass: 'dropdown-item', class: _vm.anchorClasses, attrs: {'role': _vm.ariaRoleItem, 'tabindex': _vm.focusable ? 0 : null}, on: {'click': _vm.selectItem}}, [_vm._t('default')], 2) : _c('div', {class: _vm.itemClasses, attrs: {'role': _vm.ariaRoleItem, 'tabindex': _vm.focusable ? 0 : null}, on: {'click': _vm.selectItem}}, [_vm._t('default')], 2) }
+var __vue_staticRenderFns__$a = []
 
-  /* style */
-  const __vue_inject_styles__$b = undefined;
-  /* scoped */
-  const __vue_scope_id__$b = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$b = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$b = false;
-  /* style inject */
-  
-  /* style inject SSR */
-  
+/* style */
+const __vue_inject_styles__$b = undefined
+/* scoped */
+const __vue_scope_id__$b = undefined
+/* module identifier */
+const __vue_module_identifier__$b = undefined
+/* functional template */
+const __vue_is_functional_template__$b = false
+/* style inject */
 
-  
-  var DropdownItem = normalizeComponent_1(
+/* style inject SSR */
+
+var DropdownItem = normalizeComponent_1(
     { render: __vue_render__$a, staticRenderFns: __vue_staticRenderFns__$a },
     __vue_inject_styles__$b,
     __vue_script__$b,
@@ -4947,69 +4865,67 @@ var __vue_staticRenderFns__$a = [];
     __vue_module_identifier__$b,
     undefined,
     undefined
-  );
+)
 
 var script$c = {
-  name: 'BFieldBody',
-  props: {
-    message: {
-      type: String
-    },
-    type: {
-      type: [String, Object]
-    }
-  },
-  render: function render(createElement) {
-    var _this = this;
-
-    return createElement('div', {
-      attrs: {
-        'class': 'field-body'
-      }
-    }, this.$slots.default.map(function (element) {
-      // skip returns and comments
-      if (!element.tag) {
-        return element;
-      }
-
-      if (_this.message) {
-        return createElement('b-field', {
-          attrs: {
-            message: _this.message,
-            'type': _this.type
-          }
-        }, [element]);
-      }
-
-      return createElement('b-field', {
-        attrs: {
-          'type': _this.type
+    name: 'BFieldBody',
+    props: {
+        message: {
+            type: String
+        },
+        type: {
+            type: [String, Object]
         }
-      }, [element]);
-    }));
-  }
-};
+    },
+    render: function render(createElement) {
+        var _this = this
+
+        return createElement('div', {
+            attrs: {
+                'class': 'field-body'
+            }
+        }, this.$slots.default.map(function (element) {
+            // skip returns and comments
+            if (!element.tag) {
+                return element
+            }
+
+            if (_this.message) {
+                return createElement('b-field', {
+                    attrs: {
+                        message: _this.message,
+                        'type': _this.type
+                    }
+                }, [element])
+            }
+
+            return createElement('b-field', {
+                attrs: {
+                    'type': _this.type
+                }
+            }, [element])
+        }))
+    }
+}
 
 /* script */
-const __vue_script__$c = script$c;
+const __vue_script__$c = script$c
 
 /* template */
 
-  /* style */
-  const __vue_inject_styles__$c = undefined;
-  /* scoped */
-  const __vue_scope_id__$c = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$c = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$c = undefined;
-  /* style inject */
-  
-  /* style inject SSR */
-  
+/* style */
+const __vue_inject_styles__$c = undefined
+/* scoped */
+const __vue_scope_id__$c = undefined
+/* module identifier */
+const __vue_module_identifier__$c = undefined
+/* functional template */
+const __vue_is_functional_template__$c = undefined
+/* style inject */
 
-  
-  var FieldBody = normalizeComponent_1(
+/* style inject SSR */
+
+var FieldBody = normalizeComponent_1(
     {},
     __vue_inject_styles__$c,
     __vue_script__$c,
@@ -5018,203 +4934,201 @@ const __vue_script__$c = script$c;
     __vue_module_identifier__$c,
     undefined,
     undefined
-  );
+)
 
 var script$d = {
-  name: 'BField',
-  components: _defineProperty({}, FieldBody.name, FieldBody),
-  props: {
-    type: [String, Object],
-    label: String,
-    labelFor: String,
-    message: [String, Array, Object],
-    grouped: Boolean,
-    groupMultiline: Boolean,
-    position: String,
-    expanded: Boolean,
-    horizontal: Boolean,
-    addons: {
-      type: Boolean,
-      default: true
+    name: 'BField',
+    components: _defineProperty({}, FieldBody.name, FieldBody),
+    props: {
+        type: [String, Object],
+        label: String,
+        labelFor: String,
+        message: [String, Array, Object],
+        grouped: Boolean,
+        groupMultiline: Boolean,
+        position: String,
+        expanded: Boolean,
+        horizontal: Boolean,
+        addons: {
+            type: Boolean,
+            default: true
+        },
+        customClass: String,
+        labelPosition: {
+            type: String,
+            default: function _default() {
+                return config.defaultFieldLabelPosition
+            }
+        }
     },
-    customClass: String,
-    labelPosition: {
-      type: String,
-      default: function _default() {
-        return config.defaultFieldLabelPosition;
-      }
-    }
-  },
-  data: function data() {
-    return {
-      newType: this.type,
-      newMessage: this.message,
-      fieldLabelSize: null,
-      _isField: true // Used internally by Input and Select
+    data: function data() {
+        return {
+            newType: this.type,
+            newMessage: this.message,
+            fieldLabelSize: null,
+            _isField: true // Used internally by Input and Select
 
-    };
-  },
-  computed: {
-    rootClasses: function rootClasses() {
-      return [this.newPosition, {
-        'is-expanded': this.expanded,
-        'is-grouped-multiline': this.groupMultiline,
-        'is-horizontal': this.horizontal,
-        'is-floating-in-label': this.hasLabel && !this.horizontal && this.labelPosition === 'inside',
-        'is-floating-label': this.hasLabel && !this.horizontal && this.labelPosition === 'on-border'
-      }, this.numberInputClasses];
+        }
     },
+    computed: {
+        rootClasses: function rootClasses() {
+            return [this.newPosition, {
+                'is-expanded': this.expanded,
+                'is-grouped-multiline': this.groupMultiline,
+                'is-horizontal': this.horizontal,
+                'is-floating-in-label': this.hasLabel && !this.horizontal && this.labelPosition === 'inside',
+                'is-floating-label': this.hasLabel && !this.horizontal && this.labelPosition === 'on-border'
+            }, this.numberInputClasses]
+        },
 
-    /**
+        /**
     * Correct Bulma class for the side of the addon or group.
     *
     * This is not kept like the others (is-small, etc.),
     * because since 'has-addons' is set automatically it
     * doesn't make sense to teach users what addons are exactly.
     */
-    newPosition: function newPosition() {
-      if (this.position === undefined) return;
-      var position = this.position.split('-');
-      if (position.length < 1) return;
-      var prefix = this.grouped ? 'is-grouped-' : 'has-addons-';
-      if (this.position) return prefix + position[1];
-    },
+        newPosition: function newPosition() {
+            if (this.position === undefined) return
+            var position = this.position.split('-')
+            if (position.length < 1) return
+            var prefix = this.grouped ? 'is-grouped-' : 'has-addons-'
+            if (this.position) return prefix + position[1]
+        },
 
-    /**
+        /**
     * Formatted message in case it's an array
     * (each element is separated by <br> tag)
     */
-    formattedMessage: function formattedMessage() {
-      if (typeof this.newMessage === 'string') {
-        return this.newMessage;
-      } else {
-        var messages = [];
-
-        if (Array.isArray(this.newMessage)) {
-          this.newMessage.forEach(function (message) {
-            if (typeof message === 'string') {
-              messages.push(message);
+        formattedMessage: function formattedMessage() {
+            if (typeof this.newMessage === 'string') {
+                return this.newMessage
             } else {
-              for (var key in message) {
-                if (message[key]) {
-                  messages.push(key);
+                var messages = []
+
+                if (Array.isArray(this.newMessage)) {
+                    this.newMessage.forEach(function (message) {
+                        if (typeof message === 'string') {
+                            messages.push(message)
+                        } else {
+                            for (var key in message) {
+                                if (message[key]) {
+                                    messages.push(key)
+                                }
+                            }
+                        }
+                    })
+                } else {
+                    for (var key in this.newMessage) {
+                        if (this.newMessage[key]) {
+                            messages.push(key)
+                        }
+                    }
                 }
-              }
+
+                return messages.filter(function (m) {
+                    if (m) return m
+                }).join(' <br> ')
             }
-          });
-        } else {
-          for (var key in this.newMessage) {
-            if (this.newMessage[key]) {
-              messages.push(key);
+        },
+        hasLabel: function hasLabel() {
+            return this.label || this.$slots.label
+        },
+        numberInputClasses: function numberInputClasses() {
+            if (this.$slots.default) {
+                var numberinput = this.$slots.default.filter(function (node) {
+                    return node.tag && node.tag.toLowerCase().indexOf('numberinput') >= 0
+                })[0]
+
+                if (numberinput) {
+                    var classes = ['has-numberinput']
+                    var controlsPosition = numberinput.componentOptions.propsData.controlsPosition
+                    var size = numberinput.componentOptions.propsData.size
+
+                    if (controlsPosition) {
+                        classes.push('has-numberinput-'.concat(controlsPosition))
+                    }
+
+                    if (size) {
+                        classes.push('has-numberinput-'.concat(size))
+                    }
+
+                    return classes
+                }
             }
-          }
+
+            return null
         }
-
-        return messages.filter(function (m) {
-          if (m) return m;
-        }).join(' <br> ');
-      }
     },
-    hasLabel: function hasLabel() {
-      return this.label || this.$slots.label;
-    },
-    numberInputClasses: function numberInputClasses() {
-      if (this.$slots.default) {
-        var numberinput = this.$slots.default.filter(function (node) {
-          return node.tag && node.tag.toLowerCase().indexOf('numberinput') >= 0;
-        })[0];
-
-        if (numberinput) {
-          var classes = ['has-numberinput'];
-          var controlsPosition = numberinput.componentOptions.propsData.controlsPosition;
-          var size = numberinput.componentOptions.propsData.size;
-
-          if (controlsPosition) {
-            classes.push("has-numberinput-".concat(controlsPosition));
-          }
-
-          if (size) {
-            classes.push("has-numberinput-".concat(size));
-          }
-
-          return classes;
-        }
-      }
-
-      return null;
-    }
-  },
-  watch: {
+    watch: {
     /**
     * Set internal type when prop change.
     */
-    type: function type(value) {
-      this.newType = value;
-    },
+        type: function type(value) {
+            this.newType = value
+        },
 
-    /**
+        /**
     * Set internal message when prop change.
     */
-    message: function message(value) {
-      this.newMessage = value;
-    }
-  },
-  methods: {
+        message: function message(value) {
+            this.newMessage = value
+        }
+    },
+    methods: {
     /**
     * Field has addons if there are more than one slot
     * (element / component) in the Field.
     * Or is grouped when prop is set.
     * Is a method to be called when component re-render.
     */
-    fieldType: function fieldType() {
-      if (this.grouped) return 'is-grouped';
-      var renderedNode = 0;
+        fieldType: function fieldType() {
+            if (this.grouped) return 'is-grouped'
+            var renderedNode = 0
 
-      if (this.$slots.default) {
-        renderedNode = this.$slots.default.reduce(function (i, node) {
-          return node.tag ? i + 1 : i;
-        }, 0);
-      }
+            if (this.$slots.default) {
+                renderedNode = this.$slots.default.reduce(function (i, node) {
+                    return node.tag ? i + 1 : i
+                }, 0)
+            }
 
-      if (renderedNode > 1 && this.addons && !this.horizontal) {
-        return 'has-addons';
-      }
+            if (renderedNode > 1 && this.addons && !this.horizontal) {
+                return 'has-addons'
+            }
+        }
+    },
+    mounted: function mounted() {
+        if (this.horizontal) {
+            // Bulma docs: .is-normal for any .input or .button
+            var elements = this.$el.querySelectorAll('.input, .select, .button, .textarea, .b-slider')
+
+            if (elements.length > 0) {
+                this.fieldLabelSize = 'is-normal'
+            }
+        }
     }
-  },
-  mounted: function mounted() {
-    if (this.horizontal) {
-      // Bulma docs: .is-normal for any .input or .button
-      var elements = this.$el.querySelectorAll('.input, .select, .button, .textarea, .b-slider');
-
-      if (elements.length > 0) {
-        this.fieldLabelSize = 'is-normal';
-      }
-    }
-  }
-};
+}
 
 /* script */
-const __vue_script__$d = script$d;
+const __vue_script__$d = script$d
 
 /* template */
-var __vue_render__$b = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"field",class:[_vm.rootClasses, _vm.fieldType()]},[(_vm.horizontal)?_c('div',{staticClass:"field-label",class:[_vm.customClass, _vm.fieldLabelSize]},[(_vm.hasLabel)?_c('label',{staticClass:"label",class:_vm.customClass,attrs:{"for":_vm.labelFor}},[(_vm.$slots.label)?_vm._t("label"):[_vm._v(_vm._s(_vm.label))]],2):_vm._e()]):[(_vm.hasLabel)?_c('label',{staticClass:"label",class:_vm.customClass,attrs:{"for":_vm.labelFor}},[(_vm.$slots.label)?_vm._t("label"):[_vm._v(_vm._s(_vm.label))]],2):_vm._e()],_vm._v(" "),(_vm.horizontal)?_c('b-field-body',{attrs:{"message":_vm.newMessage ? _vm.formattedMessage : '',"type":_vm.newType}},[_vm._t("default")],2):[_vm._t("default")],_vm._v(" "),(_vm.newMessage && !_vm.horizontal)?_c('p',{staticClass:"help",class:_vm.newType,domProps:{"innerHTML":_vm._s(_vm.formattedMessage)}}):_vm._e()],2)};
-var __vue_staticRenderFns__$b = [];
+var __vue_render__$b = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('div', {staticClass: 'field', class: [_vm.rootClasses, _vm.fieldType()]}, [(_vm.horizontal) ? _c('div', {staticClass: 'field-label', class: [_vm.customClass, _vm.fieldLabelSize]}, [(_vm.hasLabel) ? _c('label', {staticClass: 'label', class: _vm.customClass, attrs: {'for': _vm.labelFor}}, [(_vm.$slots.label) ? _vm._t('label') : [_vm._v(_vm._s(_vm.label))]], 2) : _vm._e()]) : [(_vm.hasLabel) ? _c('label', {staticClass: 'label', class: _vm.customClass, attrs: {'for': _vm.labelFor}}, [(_vm.$slots.label) ? _vm._t('label') : [_vm._v(_vm._s(_vm.label))]], 2) : _vm._e()], _vm._v(' '), (_vm.horizontal) ? _c('b-field-body', {attrs: {'message': _vm.newMessage ? _vm.formattedMessage : '', 'type': _vm.newType}}, [_vm._t('default')], 2) : [_vm._t('default')], _vm._v(' '), (_vm.newMessage && !_vm.horizontal) ? _c('p', {staticClass: 'help', class: _vm.newType, domProps: {'innerHTML': _vm._s(_vm.formattedMessage)}}) : _vm._e()], 2) }
+var __vue_staticRenderFns__$b = []
 
-  /* style */
-  const __vue_inject_styles__$d = undefined;
-  /* scoped */
-  const __vue_scope_id__$d = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$d = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$d = false;
-  /* style inject */
-  
-  /* style inject SSR */
-  
+/* style */
+const __vue_inject_styles__$d = undefined
+/* scoped */
+const __vue_scope_id__$d = undefined
+/* module identifier */
+const __vue_module_identifier__$d = undefined
+/* functional template */
+const __vue_is_functional_template__$d = false
+/* style inject */
 
-  
-  var Field = normalizeComponent_1(
+/* style inject SSR */
+
+var Field = normalizeComponent_1(
     { render: __vue_render__$b, staticRenderFns: __vue_staticRenderFns__$b },
     __vue_inject_styles__$d,
     __vue_script__$d,
@@ -5223,7 +5137,7 @@ var __vue_staticRenderFns__$b = [];
     __vue_module_identifier__$d,
     undefined,
     undefined
-  );
+)
 
 //
 //
@@ -5277,225 +5191,202 @@ var script$e = {
     /**
     * How many number indicators are shown on the face
     */
-    count: function count() {
-      return this.max - this.min + 1;
-    },
+        count: function count() {
+            return this.max - this.min + 1
+        },
 
     /**
     * How many number indicators are shown per ring on the face
     */
-    countPerRing: function countPerRing() {
-      return this.double ? this.count / 2 : this.count;
-    },
-
     /**
     * Radius of the clock face
     */
-    radius: function radius() {
-      return this.pickerSize / 2;
-    },
+        radius: function radius() {
+            return this.pickerSize / 2
+        },
 
     /**
     * Radius of the outer ring of number indicators
     */
-    outerRadius: function outerRadius() {
-      return this.radius - paddingInner - indicatorSize / 2;
-    },
+        outerRadius: function outerRadius() {
+            return this.radius - paddingInner - indicatorSize / 2
+        },
 
     /**
     * Radius of the inner ring of number indicators
     */
-    innerRadius: function innerRadius() {
-      return Math.max(this.outerRadius * 0.6, this.outerRadius - paddingInner - indicatorSize); // 48px gives enough room for the outer ring of numbers
-    },
+        innerRadius: function innerRadius() {
+            return Math.max(this.outerRadius * 0.6, this.outerRadius - paddingInner - indicatorSize) // 48px gives enough room for the outer ring of numbers
+        },
 
     /**
     * The angle for each selectable value
     * For hours this ends up being 30 degrees, for minutes 6 degrees
-    */
-    degreesPerUnit: function degreesPerUnit() {
-      return 360 / this.countPerRing;
-    },
-
     /**
     * Used for calculating x/y grid location based on degrees
     */
-    degrees: function degrees() {
-      return this.degreesPerUnit * Math.PI / 180;
-    },
+        degrees: function degrees() {
+            return this.degreesPerUnit * Math.PI / 180
+        },
 
     /**
     * Calculates the angle the clock hand should be rotated for the
     * selected value
     */
-    handRotateAngle: function handRotateAngle() {
-      var currentAngle = this.prevAngle;
+        handRotateAngle: function handRotateAngle() {
+            var currentAngle = this.prevAngle
 
-      while (currentAngle < 0) {
-        currentAngle += 360;
-      }
+            while (currentAngle < 0) {
+                currentAngle += 360
+            }
 
-      var targetAngle = this.calcHandAngle(this.displayedValue);
-      var degreesDiff = this.shortestDistanceDegrees(currentAngle, targetAngle);
-      var angle = this.prevAngle + degreesDiff;
-      return angle;
-    },
+            var targetAngle = this.calcHandAngle(this.displayedValue)
+            var degreesDiff = this.shortestDistanceDegrees(currentAngle, targetAngle)
+            var angle = this.prevAngle + degreesDiff
+            return angle
+        },
 
     /**
     * Determines how long the selector hand is based on if the
     * selected value is located along the outer or inner ring
     */
-    handScale: function handScale() {
-      return this.calcHandScale(this.displayedValue);
-    },
-    handStyle: function handStyle() {
-      return {
-        transform: "rotate(".concat(this.handRotateAngle, "deg) scaleY(").concat(this.handScale, ")"),
-        transition: '.3s cubic-bezier(.25,.8,.50,1)'
-      };
-    },
+        handScale: function handScale() {
+            return this.calcHandScale(this.displayedValue)
+        },
+        handStyle: function handStyle() {
+            return {
+                transform: 'rotate('.concat(this.handRotateAngle, 'deg) scaleY(').concat(this.handScale, ')'),
+                transition: '.3s cubic-bezier(.25,.8,.50,1)'
+            }
+        },
 
     /**
     * The value the hand should be pointing at
     */
-    displayedValue: function displayedValue() {
-      return this.inputValue == null ? this.min : this.inputValue;
-    }
-  },
-  watch: {
-    value: function value(_value) {
-      if (_value !== this.inputValue) {
-        this.prevAngle = this.handRotateAngle;
-      }
-
-      this.inputValue = _value;
-    }
-  },
-  methods: {
-    isDisabled: function isDisabled(value) {
-      return this.disabledValues && this.disabledValues(value);
+        displayedValue: function displayedValue() {
+            return this.inputValue == null ? this.min : this.inputValue
+        }
     },
+    watch: {
+        value: function value(_value) {
+            if (_value !== this.inputValue) {
+                this.prevAngle = this.handRotateAngle
+            }
 
     /**
     * Calculates the distance between two points
     */
-    euclidean: function euclidean(p0, p1) {
-      var dx = p1.x - p0.x;
-      var dy = p1.y - p0.y;
-      return Math.sqrt(dx * dx + dy * dy);
-    },
-    shortestDistanceDegrees: function shortestDistanceDegrees(start, stop) {
-      var modDiff = (stop - start) % 360;
-      var shortestDistance = 180 - Math.abs(Math.abs(modDiff) - 180);
-      return (modDiff + 360) % 360 < 180 ? shortestDistance * 1 : shortestDistance * -1;
-    },
+        euclidean: function euclidean(p0, p1) {
+            var dx = p1.x - p0.x
+            var dy = p1.y - p0.y
+            return Math.sqrt(dx * dx + dy * dy)
+        },
+        shortestDistanceDegrees: function shortestDistanceDegrees(start, stop) {
+            var modDiff = (stop - start) % 360
+            var shortestDistance = 180 - Math.abs(Math.abs(modDiff) - 180)
+            return (modDiff + 360) % 360 < 180 ? shortestDistance * 1 : shortestDistance * -1
+        },
 
     /**
     * Calculates the angle of the line from the center point
     * to the given point.
     */
-    coordToAngle: function coordToAngle(center, p1) {
-      var value = 2 * Math.atan2(p1.y - center.y - this.euclidean(center, p1), p1.x - center.x);
-      return Math.abs(value * 180 / Math.PI);
-    },
+        coordToAngle: function coordToAngle(center, p1) {
+            var value = 2 * Math.atan2(p1.y - center.y - this.euclidean(center, p1), p1.x - center.x)
+            return Math.abs(value * 180 / Math.PI)
+        },
 
     /**
     * Generates the inline style translate() property for a
     * number indicator, which determines it's location on the
     * clock face
-    */
-    getNumberTranslate: function getNumberTranslate(value) {
-      var _this$getNumberCoords = this.getNumberCoords(value),
-          x = _this$getNumberCoords.x,
-          y = _this$getNumberCoords.y;
-
-      return "translate(".concat(x, "px, ").concat(y, "px)");
-    },
+            return 'translate('.concat(x, 'px, ').concat(y, 'px)')
+        },
 
     /***
     * Calculates the coordinates on the clock face for a number
     * indicator value
     */
-    getNumberCoords: function getNumberCoords(value) {
-      var radius = this.isInnerRing(value) ? this.innerRadius : this.outerRadius;
-      return {
-        x: Math.round(radius * Math.sin((value - this.min) * this.degrees)),
-        y: Math.round(-radius * Math.cos((value - this.min) * this.degrees))
-      };
-    },
-    getFaceNumberClasses: function getFaceNumberClasses(num) {
-      return {
-        'active': num.value === this.displayedValue,
-        'disabled': this.isDisabled(num.value)
-      };
-    },
+        getNumberCoords: function getNumberCoords(value) {
+            var radius = this.isInnerRing(value) ? this.innerRadius : this.outerRadius
+            return {
+                x: Math.round(radius * Math.sin((value - this.min) * this.degrees)),
+                y: Math.round(-radius * Math.cos((value - this.min) * this.degrees))
+            }
+        },
+        getFaceNumberClasses: function getFaceNumberClasses(num) {
+            return {
+                'active': num.value === this.displayedValue,
+                'disabled': this.isDisabled(num.value)
+            }
+        },
 
     /**
     * Determines if a value resides on the inner ring
     */
-    isInnerRing: function isInnerRing(value) {
-      return this.double && value - this.min >= this.countPerRing;
-    },
-    calcHandAngle: function calcHandAngle(value) {
-      var angle = this.degreesPerUnit * (value - this.min);
-      if (this.isInnerRing(value)) angle -= 360;
-      return angle;
-    },
-    calcHandScale: function calcHandScale(value) {
-      return this.isInnerRing(value) ? this.innerRadius / this.outerRadius : 1;
-    },
-    onMouseDown: function onMouseDown(e) {
-      e.preventDefault();
-      this.isDragging = true;
-      this.onDragMove(e);
-    },
-    onMouseUp: function onMouseUp() {
-      this.isDragging = false;
+        isInnerRing: function isInnerRing(value) {
+            return this.double && value - this.min >= this.countPerRing
+        },
+        calcHandAngle: function calcHandAngle(value) {
+            var angle = this.degreesPerUnit * (value - this.min)
+            if (this.isInnerRing(value)) angle -= 360
+            return angle
+        },
+        calcHandScale: function calcHandScale(value) {
+            return this.isInnerRing(value) ? this.innerRadius / this.outerRadius : 1
+        },
+        onMouseDown: function onMouseDown(e) {
+            e.preventDefault()
+            this.isDragging = true
+            this.onDragMove(e)
+        },
+        onMouseUp: function onMouseUp() {
+            this.isDragging = false
 
-      if (!this.isDisabled(this.inputValue)) {
-        this.$emit('change', this.inputValue);
-      }
-    },
-    onDragMove: function onDragMove(e) {
-      e.preventDefault();
-      if (!this.isDragging && e.type !== 'click') return;
+            if (!this.isDisabled(this.inputValue)) {
+                this.$emit('change', this.inputValue)
+            }
+        },
+        onDragMove: function onDragMove(e) {
+            e.preventDefault()
+            if (!this.isDragging && e.type !== 'click') return
 
-      var _this$$refs$clock$get = this.$refs.clock.getBoundingClientRect(),
-          width = _this$$refs$clock$get.width,
-          top = _this$$refs$clock$get.top,
-          left = _this$$refs$clock$get.left;
+            var _this$$refs$clock$get = this.$refs.clock.getBoundingClientRect(),
+                width = _this$$refs$clock$get.width,
+                top = _this$$refs$clock$get.top,
+                left = _this$$refs$clock$get.left
 
-      var _ref = 'touches' in e ? e.touches[0] : e,
-          clientX = _ref.clientX,
-          clientY = _ref.clientY;
+            var _ref = 'touches' in e ? e.touches[0] : e,
+                clientX = _ref.clientX,
+                clientY = _ref.clientY
 
-      var center = {
-        x: width / 2,
-        y: -width / 2
-      };
-      var coords = {
-        x: clientX - left,
-        y: top - clientY
-      };
-      var handAngle = Math.round(this.coordToAngle(center, coords) + 360) % 360;
-      var insideClick = this.double && this.euclidean(center, coords) < (this.outerRadius + this.innerRadius) / 2 - 16;
-      var value = Math.round(handAngle / this.degreesPerUnit) + this.min + (insideClick ? this.countPerRing : 0); // Necessary to fix edge case when selecting left part of max value
+            var center = {
+                x: width / 2,
+                y: -width / 2
+            }
+            var coords = {
+                x: clientX - left,
+                y: top - clientY
+            }
+            var handAngle = Math.round(this.coordToAngle(center, coords) + 360) % 360
+            var insideClick = this.double && this.euclidean(center, coords) < (this.outerRadius + this.innerRadius) / 2 - 16
+            var value = Math.round(handAngle / this.degreesPerUnit) + this.min + (insideClick ? this.countPerRing : 0) // Necessary to fix edge case when selecting left part of max value
 
-      if (handAngle >= 360 - this.degreesPerUnit / 2) {
-        value = insideClick ? this.max : this.min;
-      }
+            if (handAngle >= 360 - this.degreesPerUnit / 2) {
+                value = insideClick ? this.max : this.min
+            }
 
-      this.update(value);
-    },
-    update: function update(value) {
-      if (this.inputValue !== value && !this.isDisabled(value)) {
-        this.prevAngle = this.handRotateAngle;
-        this.inputValue = value;
-        this.$emit('input', value);
-      }
+            this.update(value)
+        },
+        update: function update(value) {
+            if (this.inputValue !== value && !this.isDisabled(value)) {
+                this.prevAngle = this.handRotateAngle
+                this.inputValue = value
+                this.$emit('input', value)
+            }
+        }
     }
-  }
-};
+}
 
 /* script */
 const __vue_script__$e = script$e
@@ -6069,16 +5960,37 @@ var script$i = {
         range: Boolean,
         multiple: Boolean
     },
-    hourFormat: {
-      type: String,
-      default: '12',
-      validator: function validator(value) {
-        return value === '24' || value === '12';
-      }
+    data: function data() {
+        return {
+            isSelectingHour: true,
+            isDragging: false,
+            _isClockpicker: true
+        }
     },
-    incrementMinutes: {
-      type: Number,
-      default: 5
+    computed: {
+        hoursDisplay: function hoursDisplay() {
+            if (this.hoursSelected == null) return '--'
+            if (this.isHourFormat24) return this.pad(this.hoursSelected)
+            var display = this.hoursSelected
+            if (this.meridienSelected === this.PM) display -= 12
+            if (display === 0) display = 12
+            return display
+        },
+        minutesDisplay: function minutesDisplay() {
+            return this.minutesSelected == null ? '--' : this.pad(this.minutesSelected)
+        },
+        minFaceValue: function minFaceValue() {
+            return this.isSelectingHour && !this.isHourFormat24 && this.meridienSelected === this.PM ? 12 : 0
+        },
+        maxFaceValue: function maxFaceValue() {
+            return this.isSelectingHour ? !this.isHourFormat24 && this.meridienSelected === this.AM ? 11 : 23 : 59
+        },
+        faceSize: function faceSize() {
+            return this.pickerSize - outerPadding * 2
+        },
+        faceDisabledValues: function faceDisabledValues() {
+            return this.isSelectingHour ? this.isHourDisabled : this.isMinuteDisabled
+        }
     },
     methods: {
     /*
@@ -6179,62 +6091,7 @@ var script$i = {
             this.hoveredEndDate = day
         }
     }
-  },
-  data: function data() {
-    return {
-      isSelectingHour: true,
-      isDragging: false,
-      _isClockpicker: true
-    };
-  },
-  computed: {
-    hoursDisplay: function hoursDisplay() {
-      if (this.hoursSelected == null) return '--';
-      if (this.isHourFormat24) return this.pad(this.hoursSelected);
-      var display = this.hoursSelected;
-      if (this.meridienSelected === this.PM) display -= 12;
-      if (display === 0) display = 12;
-      return display;
-    },
-    minutesDisplay: function minutesDisplay() {
-      return this.minutesSelected == null ? '--' : this.pad(this.minutesSelected);
-    },
-    minFaceValue: function minFaceValue() {
-      return this.isSelectingHour && !this.isHourFormat24 && this.meridienSelected === this.PM ? 12 : 0;
-    },
-    maxFaceValue: function maxFaceValue() {
-      return this.isSelectingHour ? !this.isHourFormat24 && this.meridienSelected === this.AM ? 11 : 23 : 59;
-    },
-    faceSize: function faceSize() {
-      return this.pickerSize - outerPadding * 2;
-    },
-    faceDisabledValues: function faceDisabledValues() {
-      return this.isSelectingHour ? this.isHourDisabled : this.isMinuteDisabled;
-    }
-  },
-  methods: {
-    onClockInput: function onClockInput(value) {
-      if (this.isSelectingHour) {
-        this.hoursSelected = value;
-        this.onHoursChange(value);
-      } else {
-        this.minutesSelected = value;
-        this.onMinutesChange(value);
-      }
-    },
-    onClockChange: function onClockChange(value) {
-      if (this.autoSwitch && this.isSelectingHour) {
-        this.isSelectingHour = !this.isSelectingHour;
-      }
-    },
-    onMeridienClick: function onMeridienClick(value) {
-      if (this.meridienSelected !== value) {
-        this.meridienSelected = value;
-        this.onMeridienChange(value);
-      }
-    }
-  }
-};
+}
 
 /* script */
 const __vue_script__$i = script$i
@@ -6264,14 +6121,14 @@ var DatepickerTable = normalizeComponent_1(
     __vue_module_identifier__$i,
     undefined,
     undefined
-  );
+)
 
 var Plugin$5 = {
-  install: function install(Vue) {
-    registerComponent(Vue, Clockpicker);
-  }
-};
-use(Plugin$5);
+    install: function install(Vue) {
+        registerComponent(Vue, Clockpicker)
+    }
+}
+use(Plugin$5)
 
 //
 //
@@ -6339,27 +6196,11 @@ var script$j = {
             multipleSelectedDates: []
         }
     },
-    placeholder: String,
-    multiple: Boolean,
-    nativeSize: [String, Number],
-    customStyle: String
-  },
-  data: function data() {
-    return {
-      selected: this.value,
-      _elementRef: 'select'
-    };
-  },
-  computed: {
-    computedValue: {
-      get: function get() {
-        return this.selected;
-      },
-      set: function set(value) {
-        this.selected = value;
-        this.$emit('input', value);
-        !this.isValid && this.checkHtml5Validity();
-      }
+    data: function data() {
+        return {
+            selected: this.value,
+            _elementRef: 'select'
+        }
     },
     methods: {
         selectMultipleDates: function selectMultipleDates(date) {
@@ -6488,12 +6329,12 @@ var script$j = {
     *   1. Set the selected option.
     *   2. If it's invalid, validate again.
     */
-    value: function value(_value) {
-      this.selected = _value;
-      !this.isValid && this.checkHtml5Validity();
+        value: function value(_value) {
+            this.selected = _value
+            !this.isValid && this.checkHtml5Validity()
+        }
     }
-  }
-};
+}
 
 /* script */
 const __vue_script__$j = script$j
@@ -6535,7 +6376,7 @@ var DatepickerMonth = normalizeComponent_1(
     __vue_module_identifier__$j,
     undefined,
     undefined
-  );
+)
 
 var script$k = {
     name: 'BDatepicker',
@@ -6701,111 +6542,75 @@ var script$k = {
             default: true
         }
     },
-    hoveredDateRange: Array,
-    week: {
-      type: Array,
-      required: true
-    },
-    month: {
-      type: Number,
-      required: true
-    },
-    minDate: Date,
-    maxDate: Date,
-    disabled: Boolean,
-    unselectableDates: Array,
-    unselectableDaysOfWeek: Array,
-    selectableDates: Array,
-    events: Array,
-    indicators: String,
-    dateCreator: Function,
-    nearbyMonthDays: Boolean,
-    nearbySelectableMonthDays: Boolean,
-    showWeekNumber: {
-      type: Boolean,
-      default: function _default() {
-        return false;
-      }
-    },
-    range: Boolean,
-    multiple: Boolean,
-    rulesForFirstWeek: {
-      type: Number,
-      default: function _default() {
-        return 4;
-      }
-    },
-    firstDayOfWeek: Number
-  },
-  methods: {
-    firstWeekOffset: function firstWeekOffset(year, dow, doy) {
-      // first-week day -- which january is always in the first week (4 for iso, 1 for other)
-      var fwd = 7 + dow - doy; // first-week day local weekday -- which local weekday is fwd
+    methods: {
+        firstWeekOffset: function firstWeekOffset(year, dow, doy) {
+            // first-week day -- which january is always in the first week (4 for iso, 1 for other)
+            var fwd = 7 + dow - doy // first-week day local weekday -- which local weekday is fwd
 
-      var firstJanuary = new Date(year, 0, fwd);
-      var fwdlw = (7 + firstJanuary.getDay() - dow) % 7;
-      return -fwdlw + fwd - 1;
-    },
-    daysInYear: function daysInYear(year) {
-      return this.isLeapYear(year) ? 366 : 365;
-    },
-    isLeapYear: function isLeapYear(year) {
-      return year % 4 === 0 && year % 100 !== 0 || year % 400 === 0;
-    },
-    getSetDayOfYear: function getSetDayOfYear(input) {
-      return Math.round((input - new Date(input.getFullYear(), 0, 1)) / 864e5) + 1;
-    },
-    weeksInYear: function weeksInYear(year, dow, doy) {
-      var weekOffset = this.firstWeekOffset(year, dow, doy);
-      var weekOffsetNext = this.firstWeekOffset(year + 1, dow, doy);
-      return (this.daysInYear(year) - weekOffset + weekOffsetNext) / 7;
-    },
-    getWeekNumber: function getWeekNumber(mom) {
-      var dow = this.firstDayOfWeek; // first day of week
-      // Rules for the first week : 1 for the 1st January, 4 for the 4th January
+            var firstJanuary = new Date(year, 0, fwd)
+            var fwdlw = (7 + firstJanuary.getDay() - dow) % 7
+            return -fwdlw + fwd - 1
+        },
+        daysInYear: function daysInYear(year) {
+            return this.isLeapYear(year) ? 366 : 365
+        },
+        isLeapYear: function isLeapYear(year) {
+            return year % 4 === 0 && year % 100 !== 0 || year % 400 === 0
+        },
+        getSetDayOfYear: function getSetDayOfYear(input) {
+            return Math.round((input - new Date(input.getFullYear(), 0, 1)) / 864e5) + 1
+        },
+        weeksInYear: function weeksInYear(year, dow, doy) {
+            var weekOffset = this.firstWeekOffset(year, dow, doy)
+            var weekOffsetNext = this.firstWeekOffset(year + 1, dow, doy)
+            return (this.daysInYear(year) - weekOffset + weekOffsetNext) / 7
+        },
+        getWeekNumber: function getWeekNumber(mom) {
+            var dow = this.firstDayOfWeek // first day of week
+            // Rules for the first week : 1 for the 1st January, 4 for the 4th January
 
-      var doy = this.rulesForFirstWeek;
-      var weekOffset = this.firstWeekOffset(mom.getFullYear(), dow, doy);
-      var week = Math.floor((this.getSetDayOfYear(mom) - weekOffset - 1) / 7) + 1;
-      var resWeek;
-      var resYear;
+            var doy = this.rulesForFirstWeek
+            var weekOffset = this.firstWeekOffset(mom.getFullYear(), dow, doy)
+            var week = Math.floor((this.getSetDayOfYear(mom) - weekOffset - 1) / 7) + 1
+            var resWeek
+            var resYear
 
-      if (week < 1) {
-        resYear = mom.getFullYear() - 1;
-        resWeek = week + this.weeksInYear(resYear, dow, doy);
-      } else if (week > this.weeksInYear(mom.getFullYear(), dow, doy)) {
-        resWeek = week - this.weeksInYear(mom.getFullYear(), dow, doy);
-        resYear = mom.getFullYear() + 1;
-      } else {
-        resYear = mom.getFullYear();
-        resWeek = week;
-      }
+            if (week < 1) {
+                resYear = mom.getFullYear() - 1
+                resWeek = week + this.weeksInYear(resYear, dow, doy)
+            } else if (week > this.weeksInYear(mom.getFullYear(), dow, doy)) {
+                resWeek = week - this.weeksInYear(mom.getFullYear(), dow, doy)
+                resYear = mom.getFullYear() + 1
+            } else {
+                resYear = mom.getFullYear()
+                resWeek = week
+            }
 
-      return resWeek;
-    },
+            return resWeek
+        },
 
-    /*
+        /*
     * Check that selected day is within earliest/latest params and
     * is within this month
     */
-    selectableDate: function selectableDate(day) {
-      var validity = [];
+        selectableDate: function selectableDate(day) {
+            var validity = []
 
-      if (this.minDate) {
-        validity.push(day >= this.minDate);
-      }
+            if (this.minDate) {
+                validity.push(day >= this.minDate)
+            }
 
-      if (this.maxDate) {
-        validity.push(day <= this.maxDate);
-      }
+            if (this.maxDate) {
+                validity.push(day <= this.maxDate)
+            }
 
-      if (this.nearbyMonthDays && !this.nearbySelectableMonthDays) {
-        validity.push(day.getMonth() === this.month);
-      }
+            if (this.nearbyMonthDays && !this.nearbySelectableMonthDays) {
+                validity.push(day.getMonth() === this.month)
+            }
 
-      if (this.selectableDates) {
-        for (var i = 0; i < this.selectableDates.length; i++) {
-          var enabledDate = this.selectableDates[i];
+            if (this.selectableDates) {
+                for (var i = 0; i < this.selectableDates.length; i++) {
+                    var enabledDate = this.selectableDates[i]
 
             if (this.isTypeMonth) {
                 this.focusedDateData.year -= 1
@@ -6953,101 +6758,101 @@ var script$k = {
         }
       }
 
-      if (this.unselectableDates) {
-        for (var _i = 0; _i < this.unselectableDates.length; _i++) {
-          var disabledDate = this.unselectableDates[_i];
-          validity.push(day.getDate() !== disabledDate.getDate() || day.getFullYear() !== disabledDate.getFullYear() || day.getMonth() !== disabledDate.getMonth());
-        }
-      }
+            if (this.unselectableDates) {
+                for (var _i = 0; _i < this.unselectableDates.length; _i++) {
+                    var disabledDate = this.unselectableDates[_i]
+                    validity.push(day.getDate() !== disabledDate.getDate() || day.getFullYear() !== disabledDate.getFullYear() || day.getMonth() !== disabledDate.getMonth())
+                }
+            }
 
-      if (this.unselectableDaysOfWeek) {
-        for (var _i2 = 0; _i2 < this.unselectableDaysOfWeek.length; _i2++) {
-          var dayOfWeek = this.unselectableDaysOfWeek[_i2];
-          validity.push(day.getDay() !== dayOfWeek);
-        }
-      }
+            if (this.unselectableDaysOfWeek) {
+                for (var _i2 = 0; _i2 < this.unselectableDaysOfWeek.length; _i2++) {
+                    var dayOfWeek = this.unselectableDaysOfWeek[_i2]
+                    validity.push(day.getDay() !== dayOfWeek)
+                }
+            }
 
-      return validity.indexOf(false) < 0;
-    },
+            return validity.indexOf(false) < 0
+        },
 
-    /*
+        /*
     * Emit select event with chosen date as payload
     */
-    emitChosenDate: function emitChosenDate(day) {
-      if (this.disabled) return;
+        emitChosenDate: function emitChosenDate(day) {
+            if (this.disabled) return
 
-      if (this.selectableDate(day)) {
-        this.$emit('select', day);
-      }
-    },
-    eventsDateMatch: function eventsDateMatch(day) {
-      if (!this.events || !this.events.length) return false;
-      var dayEvents = [];
+            if (this.selectableDate(day)) {
+                this.$emit('select', day)
+            }
+        },
+        eventsDateMatch: function eventsDateMatch(day) {
+            if (!this.events || !this.events.length) return false
+            var dayEvents = []
 
-      for (var i = 0; i < this.events.length; i++) {
-        if (this.events[i].date.getDay() === day.getDay()) {
-          dayEvents.push(this.events[i]);
-        }
-      }
+            for (var i = 0; i < this.events.length; i++) {
+                if (this.events[i].date.getDay() === day.getDay()) {
+                    dayEvents.push(this.events[i])
+                }
+            }
 
-      if (!dayEvents.length) {
-        return false;
-      }
+            if (!dayEvents.length) {
+                return false
+            }
 
-      return dayEvents;
-    },
+            return dayEvents
+        },
 
-    /*
+        /*
     * Build classObject for cell using validations
     */
-    classObject: function classObject(day) {
-      function dateMatch(dateOne, dateTwo, multiple) {
-        // if either date is null or undefined, return false
-        // if using multiple flag, return false
-        if (!dateOne || !dateTwo || multiple) {
-          return false;
+        classObject: function classObject(day) {
+            function dateMatch(dateOne, dateTwo, multiple) {
+                // if either date is null or undefined, return false
+                // if using multiple flag, return false
+                if (!dateOne || !dateTwo || multiple) {
+                    return false
+                }
+
+                if (Array.isArray(dateTwo)) {
+                    return dateTwo.some(function (date) {
+                        return dateOne.getDate() === date.getDate() && dateOne.getFullYear() === date.getFullYear() && dateOne.getMonth() === date.getMonth()
+                    })
+                }
+
+                return dateOne.getDate() === dateTwo.getDate() && dateOne.getFullYear() === dateTwo.getFullYear() && dateOne.getMonth() === dateTwo.getMonth()
+            }
+
+            function dateWithin(dateOne, dates, multiple) {
+                if (!Array.isArray(dates) || multiple) {
+                    return false
+                }
+
+                return dateOne > dates[0] && dateOne < dates[1]
+            }
+
+            return {
+                'is-selected': dateMatch(day, this.selectedDate) || dateWithin(day, this.selectedDate, this.multiple),
+                'is-first-selected': dateMatch(day, Array.isArray(this.selectedDate) && this.selectedDate[0], this.multiple),
+                'is-within-selected': dateWithin(day, this.selectedDate, this.multiple),
+                'is-last-selected': dateMatch(day, Array.isArray(this.selectedDate) && this.selectedDate[1], this.multiple),
+                'is-within-hovered-range': this.hoveredDateRange && this.hoveredDateRange.length === 2 && (dateMatch(day, this.hoveredDateRange) || dateWithin(day, this.hoveredDateRange)),
+                'is-first-hovered': dateMatch(day, Array.isArray(this.hoveredDateRange) && this.hoveredDateRange[0]),
+                'is-within-hovered': dateWithin(day, this.hoveredDateRange),
+                'is-last-hovered': dateMatch(day, Array.isArray(this.hoveredDateRange) && this.hoveredDateRange[1]),
+                'is-today': dateMatch(day, this.dateCreator()),
+                'is-selectable': this.selectableDate(day) && !this.disabled,
+                'is-unselectable': !this.selectableDate(day) || this.disabled,
+                'is-invisible': !this.nearbyMonthDays && day.getMonth() !== this.month,
+                'is-nearby': this.nearbySelectableMonthDays && day.getMonth() !== this.month
+            }
+        },
+        setRangeHoverEndDate: function setRangeHoverEndDate(day) {
+            if (this.range) {
+                this.$emit('rangeHoverEndDate', day)
+            }
         }
-
-        if (Array.isArray(dateTwo)) {
-          return dateTwo.some(function (date) {
-            return dateOne.getDate() === date.getDate() && dateOne.getFullYear() === date.getFullYear() && dateOne.getMonth() === date.getMonth();
-          });
-        }
-
-        return dateOne.getDate() === dateTwo.getDate() && dateOne.getFullYear() === dateTwo.getFullYear() && dateOne.getMonth() === dateTwo.getMonth();
-      }
-
-      function dateWithin(dateOne, dates, multiple) {
-        if (!Array.isArray(dates) || multiple) {
-          return false;
-        }
-
-        return dateOne > dates[0] && dateOne < dates[1];
-      }
-
-      return {
-        'is-selected': dateMatch(day, this.selectedDate) || dateWithin(day, this.selectedDate, this.multiple),
-        'is-first-selected': dateMatch(day, Array.isArray(this.selectedDate) && this.selectedDate[0], this.multiple),
-        'is-within-selected': dateWithin(day, this.selectedDate, this.multiple),
-        'is-last-selected': dateMatch(day, Array.isArray(this.selectedDate) && this.selectedDate[1], this.multiple),
-        'is-within-hovered-range': this.hoveredDateRange && this.hoveredDateRange.length === 2 && (dateMatch(day, this.hoveredDateRange) || dateWithin(day, this.hoveredDateRange)),
-        'is-first-hovered': dateMatch(day, Array.isArray(this.hoveredDateRange) && this.hoveredDateRange[0]),
-        'is-within-hovered': dateWithin(day, this.hoveredDateRange),
-        'is-last-hovered': dateMatch(day, Array.isArray(this.hoveredDateRange) && this.hoveredDateRange[1]),
-        'is-today': dateMatch(day, this.dateCreator()),
-        'is-selectable': this.selectableDate(day) && !this.disabled,
-        'is-unselectable': !this.selectableDate(day) || this.disabled,
-        'is-invisible': !this.nearbyMonthDays && day.getMonth() !== this.month,
-        'is-nearby': this.nearbySelectableMonthDays && day.getMonth() !== this.month
-      };
-    },
-    setRangeHoverEndDate: function setRangeHoverEndDate(day) {
-      if (this.range) {
-        this.$emit('rangeHoverEndDate', day);
-      }
     }
-  }
-};
+}
 
 /* script */
 const __vue_script__$k = script$k
@@ -7077,7 +6882,7 @@ var Datepicker = normalizeComponent_1(
     __vue_module_identifier__$k,
     undefined,
     undefined
-  );
+)
 
 var Plugin$6 = {
     install: function install(Vue) {
@@ -7097,223 +6902,193 @@ var script$l = {
             _isTimepicker: true
         }
     },
-    dayNames: Array,
-    monthNames: Array,
-    firstDayOfWeek: Number,
-    events: Array,
-    indicators: String,
-    minDate: Date,
-    maxDate: Date,
-    focused: Object,
-    disabled: Boolean,
-    dateCreator: Function,
-    unselectableDates: Array,
-    unselectableDaysOfWeek: Array,
-    selectableDates: Array,
-    nearbyMonthDays: Boolean,
-    nearbySelectableMonthDays: Boolean,
-    showWeekNumber: {
-      type: Boolean,
-      default: function _default() {
-        return false;
-      }
+    data: function data() {
+        return {
+            selectedBeginDate: undefined,
+            selectedEndDate: undefined,
+            hoveredEndDate: undefined,
+            multipleSelectedDates: []
+        }
     },
-    rulesForFirstWeek: {
-      type: Number,
-      default: function _default() {
-        return 4;
-      }
-    },
-    range: Boolean,
-    multiple: Boolean
-  },
-  data: function data() {
-    return {
-      selectedBeginDate: undefined,
-      selectedEndDate: undefined,
-      hoveredEndDate: undefined,
-      multipleSelectedDates: []
-    };
-  },
-  computed: {
-    visibleDayNames: function visibleDayNames() {
-      var visibleDayNames = [];
-      var index = this.firstDayOfWeek;
+    computed: {
+        visibleDayNames: function visibleDayNames() {
+            var visibleDayNames = []
+            var index = this.firstDayOfWeek
 
-      while (visibleDayNames.length < this.dayNames.length) {
-        var currentDayName = this.dayNames[index % this.dayNames.length];
-        visibleDayNames.push(currentDayName);
-        index++;
-      }
+            while (visibleDayNames.length < this.dayNames.length) {
+                var currentDayName = this.dayNames[index % this.dayNames.length]
+                visibleDayNames.push(currentDayName)
+                index++
+            }
 
-      if (this.showWeekNumber) visibleDayNames.unshift('');
-      return visibleDayNames;
-    },
-    hasEvents: function hasEvents() {
-      return this.events && this.events.length;
-    },
+            if (this.showWeekNumber) visibleDayNames.unshift('')
+            return visibleDayNames
+        },
+        hasEvents: function hasEvents() {
+            return this.events && this.events.length
+        },
 
-    /*
+        /*
     * Return array of all events in the specified month
     */
-    eventsInThisMonth: function eventsInThisMonth() {
-      if (!this.events) return [];
-      var monthEvents = [];
+        eventsInThisMonth: function eventsInThisMonth() {
+            if (!this.events) return []
+            var monthEvents = []
 
-      for (var i = 0; i < this.events.length; i++) {
-        var event = this.events[i];
+            for (var i = 0; i < this.events.length; i++) {
+                var event = this.events[i]
 
-        if (!event.hasOwnProperty('date')) {
-          event = {
-            date: event
-          };
-        }
+                if (!event.hasOwnProperty('date')) {
+                    event = {
+                        date: event
+                    }
+                }
 
-        if (!event.hasOwnProperty('type')) {
-          event.type = 'is-primary';
-        }
+                if (!event.hasOwnProperty('type')) {
+                    event.type = 'is-primary'
+                }
 
-        if (event.date.getMonth() === this.focused.month && event.date.getFullYear() === this.focused.year) {
-          monthEvents.push(event);
-        }
-      }
+                if (event.date.getMonth() === this.focused.month && event.date.getFullYear() === this.focused.year) {
+                    monthEvents.push(event)
+                }
+            }
 
-      return monthEvents;
-    },
+            return monthEvents
+        },
 
-    /*
+        /*
     * Return array of all weeks in the specified month
     */
-    weeksInThisMonth: function weeksInThisMonth() {
-      var month = this.focused.month;
-      var year = this.focused.year;
-      var weeksInThisMonth = [];
-      var startingDay = 1;
+        weeksInThisMonth: function weeksInThisMonth() {
+            var month = this.focused.month
+            var year = this.focused.year
+            var weeksInThisMonth = []
+            var startingDay = 1
 
-      while (weeksInThisMonth.length < 6) {
-        var newWeek = this.weekBuilder(startingDay, month, year);
-        weeksInThisMonth.push(newWeek);
-        startingDay += 7;
-      }
+            while (weeksInThisMonth.length < 6) {
+                var newWeek = this.weekBuilder(startingDay, month, year)
+                weeksInThisMonth.push(newWeek)
+                startingDay += 7
+            }
 
-      return weeksInThisMonth;
+            return weeksInThisMonth
+        },
+        hoveredDateRange: function hoveredDateRange() {
+            if (!this.range) {
+                return []
+            }
+
+            if (!isNaN(this.selectedEndDate)) {
+                return []
+            }
+
+            if (this.hoveredEndDate < this.selectedBeginDate) {
+                return [this.hoveredEndDate, this.selectedBeginDate].filter(isDefined)
+            }
+
+            return [this.selectedBeginDate, this.hoveredEndDate].filter(isDefined)
+        }
     },
-    hoveredDateRange: function hoveredDateRange() {
-      if (!this.range) {
-        return [];
-      }
-
-      if (!isNaN(this.selectedEndDate)) {
-        return [];
-      }
-
-      if (this.hoveredEndDate < this.selectedBeginDate) {
-        return [this.hoveredEndDate, this.selectedBeginDate].filter(isDefined);
-      }
-
-      return [this.selectedBeginDate, this.hoveredEndDate].filter(isDefined);
-    }
-  },
-  methods: {
+    methods: {
     /*
     * Emit input event with selected date as payload for v-model in parent
     */
-    updateSelectedDate: function updateSelectedDate(date) {
-      if (!this.range && !this.multiple) {
-        this.$emit('input', date);
-      } else if (this.range) {
-        this.handleSelectRangeDate(date);
-      } else if (this.multiple) {
-        this.handleSelectMultipleDates(date);
-      }
-    },
+        updateSelectedDate: function updateSelectedDate(date) {
+            if (!this.range && !this.multiple) {
+                this.$emit('input', date)
+            } else if (this.range) {
+                this.handleSelectRangeDate(date)
+            } else if (this.multiple) {
+                this.handleSelectMultipleDates(date)
+            }
+        },
 
-    /*
+        /*
     * If both begin and end dates are set, reset the end date and set the begin date.
     * If only begin date is selected, emit an array of the begin date and the new date.
     * If not set, only set the begin date.
     */
-    handleSelectRangeDate: function handleSelectRangeDate(date) {
-      if (this.selectedBeginDate && this.selectedEndDate) {
-        this.selectedBeginDate = date;
-        this.selectedEndDate = undefined;
-        this.$emit('range-start', date);
-      } else if (this.selectedBeginDate && !this.selectedEndDate) {
-        if (this.selectedBeginDate > date) {
-          this.selectedEndDate = this.selectedBeginDate;
-          this.selectedBeginDate = date;
-        } else {
-          this.selectedEndDate = date;
-        }
+        handleSelectRangeDate: function handleSelectRangeDate(date) {
+            if (this.selectedBeginDate && this.selectedEndDate) {
+                this.selectedBeginDate = date
+                this.selectedEndDate = undefined
+                this.$emit('range-start', date)
+            } else if (this.selectedBeginDate && !this.selectedEndDate) {
+                if (this.selectedBeginDate > date) {
+                    this.selectedEndDate = this.selectedBeginDate
+                    this.selectedBeginDate = date
+                } else {
+                    this.selectedEndDate = date
+                }
 
-        this.$emit('range-end', date);
-        this.$emit('input', [this.selectedBeginDate, this.selectedEndDate]);
-      } else {
-        this.selectedBeginDate = date;
-        this.$emit('range-start', date);
-      }
-    },
+                this.$emit('range-end', date)
+                this.$emit('input', [this.selectedBeginDate, this.selectedEndDate])
+            } else {
+                this.selectedBeginDate = date
+                this.$emit('range-start', date)
+            }
+        },
 
-    /*
+        /*
     * If selected date already exists list of selected dates, remove it from the list
     * Otherwise, add date to list of selected dates
     */
-    handleSelectMultipleDates: function handleSelectMultipleDates(date) {
-      var multipleSelect = this.multipleSelectedDates.filter(function (selectedDate) {
-        return selectedDate.getTime() === date.getTime();
-      });
+        handleSelectMultipleDates: function handleSelectMultipleDates(date) {
+            var multipleSelect = this.multipleSelectedDates.filter(function (selectedDate) {
+                return selectedDate.getTime() === date.getTime()
+            })
 
-      if (multipleSelect.length) {
-        this.multipleSelectedDates = this.multipleSelectedDates.filter(function (selectedDate) {
-          return selectedDate.getTime() !== date.getTime();
-        });
-      } else {
-        this.multipleSelectedDates.push(date);
-      }
+            if (multipleSelect.length) {
+                this.multipleSelectedDates = this.multipleSelectedDates.filter(function (selectedDate) {
+                    return selectedDate.getTime() !== date.getTime()
+                })
+            } else {
+                this.multipleSelectedDates.push(date)
+            }
 
-      this.$emit('input', this.multipleSelectedDates);
-    },
+            this.$emit('input', this.multipleSelectedDates)
+        },
 
-    /*
+        /*
     * Return array of all days in the week that the startingDate is within
     */
-    weekBuilder: function weekBuilder(startingDate, month, year) {
-      var thisMonth = new Date(year, month);
-      var thisWeek = [];
-      var dayOfWeek = new Date(year, month, startingDate).getDay();
-      var end = dayOfWeek >= this.firstDayOfWeek ? dayOfWeek - this.firstDayOfWeek : 7 - this.firstDayOfWeek + dayOfWeek;
-      var daysAgo = 1;
+        weekBuilder: function weekBuilder(startingDate, month, year) {
+            var thisMonth = new Date(year, month)
+            var thisWeek = []
+            var dayOfWeek = new Date(year, month, startingDate).getDay()
+            var end = dayOfWeek >= this.firstDayOfWeek ? dayOfWeek - this.firstDayOfWeek : 7 - this.firstDayOfWeek + dayOfWeek
+            var daysAgo = 1
 
-      for (var i = 0; i < end; i++) {
-        thisWeek.unshift(new Date(thisMonth.getFullYear(), thisMonth.getMonth(), startingDate - daysAgo));
-        daysAgo++;
-      }
+            for (var i = 0; i < end; i++) {
+                thisWeek.unshift(new Date(thisMonth.getFullYear(), thisMonth.getMonth(), startingDate - daysAgo))
+                daysAgo++
+            }
 
-      thisWeek.push(new Date(year, month, startingDate));
-      var daysForward = 1;
+            thisWeek.push(new Date(year, month, startingDate))
+            var daysForward = 1
 
-      while (thisWeek.length < 7) {
-        thisWeek.push(new Date(year, month, startingDate + daysForward));
-        daysForward++;
-      }
+            while (thisWeek.length < 7) {
+                thisWeek.push(new Date(year, month, startingDate + daysForward))
+                daysForward++
+            }
 
-      return thisWeek;
-    },
-    eventsInThisWeek: function eventsInThisWeek(week) {
-      return this.eventsInThisMonth.filter(function (event) {
-        var stripped = new Date(Date.parse(event.date));
-        stripped.setHours(0, 0, 0, 0);
-        var timed = stripped.getTime();
-        return week.some(function (weekDate) {
-          return weekDate.getTime() === timed;
-        });
-      });
-    },
-    setRangeHoverEndDate: function setRangeHoverEndDate(day) {
-      this.hoveredEndDate = day;
+            return thisWeek
+        },
+        eventsInThisWeek: function eventsInThisWeek(week) {
+            return this.eventsInThisMonth.filter(function (event) {
+                var stripped = new Date(Date.parse(event.date))
+                stripped.setHours(0, 0, 0, 0)
+                var timed = stripped.getTime()
+                return week.some(function (weekDate) {
+                    return weekDate.getTime() === timed
+                })
+            })
+        },
+        setRangeHoverEndDate: function setRangeHoverEndDate(day) {
+            this.hoveredEndDate = day
+        }
     }
-  }
-};
+}
 
 /* script */
 const __vue_script__$l = script$l
@@ -7343,7 +7118,7 @@ var Timepicker = normalizeComponent_1(
     __vue_module_identifier__$l,
     undefined,
     undefined
-  );
+)
 
 var _components$3
 var script$m = {
@@ -7395,28 +7170,15 @@ var script$m = {
             default: true
         }
     },
-    monthNames: Array,
-    events: Array,
-    indicators: String,
-    minDate: Date,
-    maxDate: Date,
-    focused: Object,
-    disabled: Boolean,
-    dateCreator: Function,
-    unselectableDates: Array,
-    unselectableDaysOfWeek: Array,
-    selectableDates: Array,
-    multiple: Boolean
-  },
-  data: function data() {
-    return {
-      multipleSelectedDates: []
-    };
-  },
-  computed: {
-    hasEvents: function hasEvents() {
-      return this.events && this.events.length;
+    data: function data() {
+        return {
+            multipleSelectedDates: []
+        }
     },
+    computed: {
+        hasEvents: function hasEvents() {
+            return this.events && this.events.length
+        },
 
                     if (this.newValue) {
                         // restore time part
@@ -7514,164 +7276,164 @@ var script$m = {
         /*
     * Parse date from string
     */
-    eventsInThisYear: function eventsInThisYear() {
-      if (!this.events) return [];
-      var yearEvents = [];
+        eventsInThisYear: function eventsInThisYear() {
+            if (!this.events) return []
+            var yearEvents = []
 
-      for (var i = 0; i < this.events.length; i++) {
-        var event = this.events[i];
+            for (var i = 0; i < this.events.length; i++) {
+                var event = this.events[i]
 
-        if (!event.hasOwnProperty('date')) {
-          event = {
-            date: event
-          };
+                if (!event.hasOwnProperty('date')) {
+                    event = {
+                        date: event
+                    }
+                }
+
+                if (!event.hasOwnProperty('type')) {
+                    event.type = 'is-primary'
+                }
+
+                if (event.date.getFullYear() === this.focused.year) {
+                    yearEvents.push(event)
+                }
+            }
+
+            return yearEvents
+        },
+        monthDates: function monthDates() {
+            var year = this.focused.year
+            var months = []
+
+            for (var i = 0; i < 12; i++) {
+                var d = new Date(year, i, 1)
+                d.setHours(0, 0, 0, 0)
+                months.push(d)
+            }
+
+            return months
         }
-
-        if (!event.hasOwnProperty('type')) {
-          event.type = 'is-primary';
-        }
-
-        if (event.date.getFullYear() === this.focused.year) {
-          yearEvents.push(event);
-        }
-      }
-
-      return yearEvents;
     },
-    monthDates: function monthDates() {
-      var year = this.focused.year;
-      var months = [];
+    methods: {
+        selectMultipleDates: function selectMultipleDates(date) {
+            var multipleSelct = this.multipleSelectedDates.find(function (selectedDate) {
+                return selectedDate.getTime() === date.getTime()
+            })
 
-      for (var i = 0; i < 12; i++) {
-        var d = new Date(year, i, 1);
-        d.setHours(0, 0, 0, 0);
-        months.push(d);
-      }
+            if (multipleSelct) {
+                this.multipleSelectedDates = this.multipleSelectedDates.filter(function (selectedDate) {
+                    return selectedDate.getTime() !== date.getTime()
+                })
+            } else {
+                this.multipleSelectedDates.push(date)
+            }
 
-      return months;
-    }
-  },
-  methods: {
-    selectMultipleDates: function selectMultipleDates(date) {
-      var multipleSelct = this.multipleSelectedDates.find(function (selectedDate) {
-        return selectedDate.getTime() === date.getTime();
-      });
+            this.$emit('input', this.multipleSelectedDates)
+        },
+        selectableDate: function selectableDate(day) {
+            var validity = []
 
-      if (multipleSelct) {
-        this.multipleSelectedDates = this.multipleSelectedDates.filter(function (selectedDate) {
-          return selectedDate.getTime() !== date.getTime();
-        });
-      } else {
-        this.multipleSelectedDates.push(date);
-      }
+            if (this.minDate) {
+                validity.push(day >= this.minDate)
+            }
 
-      this.$emit('input', this.multipleSelectedDates);
-    },
-    selectableDate: function selectableDate(day) {
-      var validity = [];
+            if (this.maxDate) {
+                validity.push(day <= this.maxDate)
+            }
 
-      if (this.minDate) {
-        validity.push(day >= this.minDate);
-      }
+            validity.push(day.getFullYear() === this.focused.year)
 
-      if (this.maxDate) {
-        validity.push(day <= this.maxDate);
-      }
+            if (this.selectableDates) {
+                for (var i = 0; i < this.selectableDates.length; i++) {
+                    var enabledDate = this.selectableDates[i]
 
-      validity.push(day.getFullYear() === this.focused.year);
+                    if (day.getFullYear() === enabledDate.getFullYear() && day.getMonth() === enabledDate.getMonth()) {
+                        return true
+                    } else {
+                        validity.push(false)
+                    }
+                }
+            }
 
-      if (this.selectableDates) {
-        for (var i = 0; i < this.selectableDates.length; i++) {
-          var enabledDate = this.selectableDates[i];
+            if (this.unselectableDates) {
+                for (var _i = 0; _i < this.unselectableDates.length; _i++) {
+                    var disabledDate = this.unselectableDates[_i]
+                    validity.push(day.getFullYear() !== disabledDate.getFullYear() || day.getMonth() !== disabledDate.getMonth())
+                }
+            }
 
-          if (day.getFullYear() === enabledDate.getFullYear() && day.getMonth() === enabledDate.getMonth()) {
-            return true;
-          } else {
-            validity.push(false);
-          }
-        }
-      }
+            if (this.unselectableDaysOfWeek) {
+                for (var _i2 = 0; _i2 < this.unselectableDaysOfWeek.length; _i2++) {
+                    var dayOfWeek = this.unselectableDaysOfWeek[_i2]
+                    validity.push(day.getDay() !== dayOfWeek)
+                }
+            }
 
-      if (this.unselectableDates) {
-        for (var _i = 0; _i < this.unselectableDates.length; _i++) {
-          var disabledDate = this.unselectableDates[_i];
-          validity.push(day.getFullYear() !== disabledDate.getFullYear() || day.getMonth() !== disabledDate.getMonth());
-        }
-      }
+            return validity.indexOf(false) < 0
+        },
+        eventsDateMatch: function eventsDateMatch(day) {
+            if (!this.eventsInThisYear.length) return false
+            var monthEvents = []
 
-      if (this.unselectableDaysOfWeek) {
-        for (var _i2 = 0; _i2 < this.unselectableDaysOfWeek.length; _i2++) {
-          var dayOfWeek = this.unselectableDaysOfWeek[_i2];
-          validity.push(day.getDay() !== dayOfWeek);
-        }
-      }
+            for (var i = 0; i < this.eventsInThisYear.length; i++) {
+                if (this.eventsInThisYear[i].date.getMonth() === day.getMonth()) {
+                    monthEvents.push(this.events[i])
+                }
+            }
 
-      return validity.indexOf(false) < 0;
-    },
-    eventsDateMatch: function eventsDateMatch(day) {
-      if (!this.eventsInThisYear.length) return false;
-      var monthEvents = [];
+            if (!monthEvents.length) {
+                return false
+            }
 
-      for (var i = 0; i < this.eventsInThisYear.length; i++) {
-        if (this.eventsInThisYear[i].date.getMonth() === day.getMonth()) {
-          monthEvents.push(this.events[i]);
-        }
-      }
+            return monthEvents
+        },
 
-      if (!monthEvents.length) {
-        return false;
-      }
-
-      return monthEvents;
-    },
-
-    /*
+        /*
     * Build classObject for cell using validations
     */
-    classObject: function classObject(day) {
-      function dateMatch(dateOne, dateTwo, multiple) {
-        // if either date is null or undefined, return false
-        if (!dateOne || !dateTwo || multiple) {
-          return false;
-        }
+        classObject: function classObject(day) {
+            function dateMatch(dateOne, dateTwo, multiple) {
+                // if either date is null or undefined, return false
+                if (!dateOne || !dateTwo || multiple) {
+                    return false
+                }
 
-        return dateOne.getFullYear() === dateTwo.getFullYear() && dateOne.getMonth() === dateTwo.getMonth();
-      }
+                return dateOne.getFullYear() === dateTwo.getFullYear() && dateOne.getMonth() === dateTwo.getMonth()
+            }
 
-      function dateMultipleSelected(dateOne, dates, multiple) {
-        if (!Array.isArray(dates) || !multiple) {
-          return false;
-        }
+            function dateMultipleSelected(dateOne, dates, multiple) {
+                if (!Array.isArray(dates) || !multiple) {
+                    return false
+                }
 
-        return dates.some(function (date) {
-          return dateOne.getDate() === date.getDate() && dateOne.getFullYear() === date.getFullYear() && dateOne.getMonth() === date.getMonth();
-        });
-      }
+                return dates.some(function (date) {
+                    return dateOne.getDate() === date.getDate() && dateOne.getFullYear() === date.getFullYear() && dateOne.getMonth() === date.getMonth()
+                })
+            }
 
-      return {
-        'is-selected': dateMatch(day, this.value, this.multiple) || dateMultipleSelected(day, this.multipleSelectedDates, this.multiple),
-        'is-today': dateMatch(day, this.dateCreator()),
-        'is-selectable': this.selectableDate(day) && !this.disabled,
-        'is-unselectable': !this.selectableDate(day) || this.disabled
-      };
-    },
+            return {
+                'is-selected': dateMatch(day, this.value, this.multiple) || dateMultipleSelected(day, this.multipleSelectedDates, this.multiple),
+                'is-today': dateMatch(day, this.dateCreator()),
+                'is-selectable': this.selectableDate(day) && !this.disabled,
+                'is-unselectable': !this.selectableDate(day) || this.disabled
+            }
+        },
 
-    /*
+        /*
     * Emit select event with chosen date as payload
     */
-    emitChosenDate: function emitChosenDate(day) {
-      if (this.disabled) return;
+        emitChosenDate: function emitChosenDate(day) {
+            if (this.disabled) return
 
-      if (!this.multiple) {
-        if (this.selectableDate(day)) {
-          this.$emit('input', day);
+            if (!this.multiple) {
+                if (this.selectableDate(day)) {
+                    this.$emit('input', day)
+                }
+            } else {
+                this.selectMultipleDates(day)
+            }
         }
-      } else {
-        this.selectMultipleDates(day);
-      }
     }
-  }
-};
+}
 
 /* script */
 const __vue_script__$m = script$m
@@ -7701,7 +7463,7 @@ var Datetimepicker = normalizeComponent_1(
     __vue_module_identifier__$m,
     undefined,
     undefined
-  );
+)
 
 var Plugin$7 = {
     install: function install(Vue) {
@@ -7790,7 +7552,6 @@ var script$n = {
 
             return null
         }
-      }
     },
     watch: {
         active: function active(value) {
@@ -8015,284 +7776,295 @@ var script$n = {
         this.$emit('input', value);
       }
     },
+    computed: {
+        computedValue: {
+            get: function get() {
+                return this.dateSelected
+            },
+            set: function set(value) {
+                this.updateInternalState(value)
+                if (!this.multiple) this.togglePicker(false)
+                this.$emit('input', value)
+            }
+        },
 
-    /*
+        /*
     * Returns an array of years for the year dropdown. If earliest/latest
     * dates are set by props, range of years will fall within those dates.
     */
-    listOfYears: function listOfYears() {
-      var latestYear = this.focusedDateData.year + this.yearsRange[1];
+        listOfYears: function listOfYears() {
+            var latestYear = this.focusedDateData.year + this.yearsRange[1]
 
-      if (this.maxDate && this.maxDate.getFullYear() < latestYear) {
-        latestYear = Math.max(this.maxDate.getFullYear(), this.focusedDateData.year);
-      }
+            if (this.maxDate && this.maxDate.getFullYear() < latestYear) {
+                latestYear = Math.max(this.maxDate.getFullYear(), this.focusedDateData.year)
+            }
 
-      var earliestYear = this.focusedDateData.year + this.yearsRange[0];
+            var earliestYear = this.focusedDateData.year + this.yearsRange[0]
 
-      if (this.minDate && this.minDate.getFullYear() > earliestYear) {
-        earliestYear = Math.min(this.minDate.getFullYear(), this.focusedDateData.year);
-      }
+            if (this.minDate && this.minDate.getFullYear() > earliestYear) {
+                earliestYear = Math.min(this.minDate.getFullYear(), this.focusedDateData.year)
+            }
 
-      var arrayOfYears = [];
+            var arrayOfYears = []
 
-      for (var i = earliestYear; i <= latestYear; i++) {
-        arrayOfYears.push(i);
-      }
+            for (var i = earliestYear; i <= latestYear; i++) {
+                arrayOfYears.push(i)
+            }
 
-      return arrayOfYears.reverse();
+            return arrayOfYears.reverse()
+        },
+        showPrev: function showPrev() {
+            if (!this.minDate) return false
+
+            if (this.isTypeMonth) {
+                return this.focusedDateData.year <= this.minDate.getFullYear()
+            }
+
+            var dateToCheck = new Date(this.focusedDateData.year, this.focusedDateData.month)
+            var date = new Date(this.minDate.getFullYear(), this.minDate.getMonth())
+            return dateToCheck <= date
+        },
+        showNext: function showNext() {
+            if (!this.maxDate) return false
+
+            if (this.isTypeMonth) {
+                return this.focusedDateData.year >= this.maxDate.getFullYear()
+            }
+
+            var dateToCheck = new Date(this.focusedDateData.year, this.focusedDateData.month)
+            var date = new Date(this.maxDate.getFullYear(), this.maxDate.getMonth())
+            return dateToCheck >= date
+        },
+        isMobile: function isMobile$1() {
+            return this.mobileNative && isMobile.any()
+        },
+        isTypeMonth: function isTypeMonth() {
+            return this.type === 'month'
+        }
     },
-    showPrev: function showPrev() {
-      if (!this.minDate) return false;
-
-      if (this.isTypeMonth) {
-        return this.focusedDateData.year <= this.minDate.getFullYear();
-      }
-
-      var dateToCheck = new Date(this.focusedDateData.year, this.focusedDateData.month);
-      var date = new Date(this.minDate.getFullYear(), this.minDate.getMonth());
-      return dateToCheck <= date;
-    },
-    showNext: function showNext() {
-      if (!this.maxDate) return false;
-
-      if (this.isTypeMonth) {
-        return this.focusedDateData.year >= this.maxDate.getFullYear();
-      }
-
-      var dateToCheck = new Date(this.focusedDateData.year, this.focusedDateData.month);
-      var date = new Date(this.maxDate.getFullYear(), this.maxDate.getMonth());
-      return dateToCheck >= date;
-    },
-    isMobile: function isMobile$1() {
-      return this.mobileNative && isMobile.any();
-    },
-    isTypeMonth: function isTypeMonth() {
-      return this.type === 'month';
-    }
-  },
-  watch: {
+    watch: {
     /**
     * When v-model is changed:
     *   1. Update internal value.
     *   2. If it's invalid, validate again.
     */
-    value: function value(_value) {
-      this.updateInternalState(_value);
-      if (!this.multiple) this.togglePicker(false);
-      !this.isValid && this.$refs.input.checkHtml5Validity();
-    },
-    focusedDate: function focusedDate(value) {
-      if (value) {
-        this.focusedDateData = {
-          month: value.getMonth(),
-          year: value.getFullYear()
-        };
-      }
-    },
+        value: function value(_value) {
+            this.updateInternalState(_value)
+            if (!this.multiple) this.togglePicker(false)
+            !this.isValid && this.$refs.input.checkHtml5Validity()
+        },
+        focusedDate: function focusedDate(value) {
+            if (value) {
+                this.focusedDateData = {
+                    month: value.getMonth(),
+                    year: value.getFullYear()
+                }
+            }
+        },
 
-    /*
+        /*
     * Emit input event on month and/or year change
     */
-    'focusedDateData.month': function focusedDateDataMonth(value) {
-      this.$emit('change-month', value);
+        'focusedDateData.month': function focusedDateDataMonth(value) {
+            this.$emit('change-month', value)
+        },
+        'focusedDateData.year': function focusedDateDataYear(value) {
+            this.$emit('change-year', value)
+        }
     },
-    'focusedDateData.year': function focusedDateDataYear(value) {
-      this.$emit('change-year', value);
-    }
-  },
-  methods: {
+    methods: {
     /*
     * Parse string into date
     */
-    onChange: function onChange(value) {
-      var date = this.dateParser(value, this);
+        onChange: function onChange(value) {
+            var date = this.dateParser(value, this)
 
-      if (date && (!isNaN(date) || Array.isArray(date) && date.length === 2 && !isNaN(date[0]) && !isNaN(date[1]))) {
-        this.computedValue = date;
-      } else {
-        // Force refresh input value when not valid date
-        this.computedValue = null;
-        this.$refs.input.newValue = this.computedValue;
-      }
-    },
+            if (date && (!isNaN(date) || Array.isArray(date) && date.length === 2 && !isNaN(date[0]) && !isNaN(date[1]))) {
+                this.computedValue = date
+            } else {
+                // Force refresh input value when not valid date
+                this.computedValue = null
+                this.$refs.input.newValue = this.computedValue
+            }
+        },
 
-    /*
+        /*
     * Format date into string
     */
-    formatValue: function formatValue(value) {
-      if (Array.isArray(value)) {
-        var isArrayWithValidDates = Array.isArray(value) && value.every(function (v) {
-          return !isNaN(v);
-        });
-        return isArrayWithValidDates ? this.dateFormatter(value, this) : null;
-      }
+        formatValue: function formatValue(value) {
+            if (Array.isArray(value)) {
+                var isArrayWithValidDates = Array.isArray(value) && value.every(function (v) {
+                    return !isNaN(v)
+                })
+                return isArrayWithValidDates ? this.dateFormatter(value, this) : null
+            }
 
-      return value && !isNaN(value) ? this.dateFormatter(value, this) : null;
-    },
+            return value && !isNaN(value) ? this.dateFormatter(value, this) : null
+        },
 
-    /*
+        /*
     * Either decrement month by 1 if not January or decrement year by 1
     * and set month to 11 (December) or decrement year when 'month'
     */
-    prev: function prev() {
-      if (this.disabled) return;
+        prev: function prev() {
+            if (this.disabled) return
 
-      if (this.isTypeMonth) {
-        this.focusedDateData.year -= 1;
-      } else {
-        if (this.focusedDateData.month > 0) {
-          this.focusedDateData.month -= 1;
-        } else {
-          this.focusedDateData.month = 11;
-          this.focusedDateData.year -= 1;
-        }
-      }
-    },
+            if (this.isTypeMonth) {
+                this.focusedDateData.year -= 1
+            } else {
+                if (this.focusedDateData.month > 0) {
+                    this.focusedDateData.month -= 1
+                } else {
+                    this.focusedDateData.month = 11
+                    this.focusedDateData.year -= 1
+                }
+            }
+        },
 
-    /*
+        /*
     * Either increment month by 1 if not December or increment year by 1
     * and set month to 0 (January) or increment year when 'month'
     */
-    next: function next() {
-      if (this.disabled) return;
+        next: function next() {
+            if (this.disabled) return
 
-      if (this.isTypeMonth) {
-        this.focusedDateData.year += 1;
-      } else {
-        if (this.focusedDateData.month < 11) {
-          this.focusedDateData.month += 1;
-        } else {
-          this.focusedDateData.month = 0;
-          this.focusedDateData.year += 1;
-        }
-      }
-    },
-    formatNative: function formatNative(value) {
-      return this.isTypeMonth ? this.formatYYYYMM(value) : this.formatYYYYMMDD(value);
-    },
+            if (this.isTypeMonth) {
+                this.focusedDateData.year += 1
+            } else {
+                if (this.focusedDateData.month < 11) {
+                    this.focusedDateData.month += 1
+                } else {
+                    this.focusedDateData.month = 0
+                    this.focusedDateData.year += 1
+                }
+            }
+        },
+        formatNative: function formatNative(value) {
+            return this.isTypeMonth ? this.formatYYYYMM(value) : this.formatYYYYMMDD(value)
+        },
 
-    /*
+        /*
     * Format date into string 'YYYY-MM-DD'
     */
-    formatYYYYMMDD: function formatYYYYMMDD(value) {
-      var date = new Date(value);
+        formatYYYYMMDD: function formatYYYYMMDD(value) {
+            var date = new Date(value)
 
-      if (value && !isNaN(date)) {
-        var year = date.getFullYear();
-        var month = date.getMonth() + 1;
-        var day = date.getDate();
-        return year + '-' + ((month < 10 ? '0' : '') + month) + '-' + ((day < 10 ? '0' : '') + day);
-      }
+            if (value && !isNaN(date)) {
+                var year = date.getFullYear()
+                var month = date.getMonth() + 1
+                var day = date.getDate()
+                return year + '-' + ((month < 10 ? '0' : '') + month) + '-' + ((day < 10 ? '0' : '') + day)
+            }
 
-      return '';
-    },
+            return ''
+        },
 
-    /*
+        /*
     * Format date into string 'YYYY-MM'
     */
-    formatYYYYMM: function formatYYYYMM(value) {
-      var date = new Date(value);
+        formatYYYYMM: function formatYYYYMM(value) {
+            var date = new Date(value)
 
-      if (value && !isNaN(date)) {
-        var year = date.getFullYear();
-        var month = date.getMonth() + 1;
-        return year + '-' + ((month < 10 ? '0' : '') + month);
-      }
+            if (value && !isNaN(date)) {
+                var year = date.getFullYear()
+                var month = date.getMonth() + 1
+                return year + '-' + ((month < 10 ? '0' : '') + month)
+            }
 
-      return '';
-    },
+            return ''
+        },
 
-    /*
+        /*
     * Parse date from string
     */
-    onChangeNativePicker: function onChangeNativePicker(event) {
-      var date = event.target.value;
-      this.computedValue = date ? new Date(date + 'T00:00:00') : null;
-    },
-    updateInternalState: function updateInternalState(value) {
-      var currentDate = Array.isArray(value) ? !value.length ? this.dateCreator() : value[0] : !value ? this.dateCreator() : value;
-      this.focusedDateData = {
-        month: currentDate.getMonth(),
-        year: currentDate.getFullYear()
-      };
-      this.dateSelected = value;
-    },
+        onChangeNativePicker: function onChangeNativePicker(event) {
+            var date = event.target.value
+            this.computedValue = date ? new Date(date + 'T00:00:00') : null
+        },
+        updateInternalState: function updateInternalState(value) {
+            var currentDate = Array.isArray(value) ? !value.length ? this.dateCreator() : value[0] : !value ? this.dateCreator() : value
+            this.focusedDateData = {
+                month: currentDate.getMonth(),
+                year: currentDate.getFullYear()
+            }
+            this.dateSelected = value
+        },
 
-    /*
+        /*
     * Toggle datepicker
     */
-    togglePicker: function togglePicker(active) {
-      if (this.$refs.dropdown) {
-        if (this.closeOnClick) {
-          this.$refs.dropdown.isActive = typeof active === 'boolean' ? active : !this.$refs.dropdown.isActive;
-        }
-      }
-    },
+        togglePicker: function togglePicker(active) {
+            if (this.$refs.dropdown) {
+                if (this.closeOnClick) {
+                    this.$refs.dropdown.isActive = typeof active === 'boolean' ? active : !this.$refs.dropdown.isActive
+                }
+            }
+        },
 
-    /*
+        /*
     * Call default onFocus method and show datepicker
     */
-    handleOnFocus: function handleOnFocus(event) {
-      this.onFocus(event);
+        handleOnFocus: function handleOnFocus(event) {
+            this.onFocus(event)
 
-      if (this.openOnFocus) {
-        this.togglePicker(true);
-      }
-    },
+            if (this.openOnFocus) {
+                this.togglePicker(true)
+            }
+        },
 
-    /*
+        /*
     * Toggle dropdown
     */
-    toggle: function toggle() {
-      if (this.mobileNative && this.isMobile) {
-        var input = this.$refs.input.$refs.input;
-        input.focus();
-        input.click();
-        return;
-      }
+        toggle: function toggle() {
+            if (this.mobileNative && this.isMobile) {
+                var input = this.$refs.input.$refs.input
+                input.focus()
+                input.click()
+                return
+            }
 
-      this.$refs.dropdown.toggle();
-    },
+            this.$refs.dropdown.toggle()
+        },
 
-    /*
+        /*
     * Avoid dropdown toggle when is already visible
     */
-    onInputClick: function onInputClick(event) {
-      if (this.$refs.dropdown.isActive) {
-        event.stopPropagation();
-      }
-    },
+        onInputClick: function onInputClick(event) {
+            if (this.$refs.dropdown.isActive) {
+                event.stopPropagation()
+            }
+        },
 
-    /**
+        /**
      * Keypress event that is bound to the document.
      */
-    keyPress: function keyPress(event) {
-      // Esc key
-      if (this.$refs.dropdown && this.$refs.dropdown.isActive && event.keyCode === 27) {
-        this.togglePicker(false);
-      }
-    },
+        keyPress: function keyPress(event) {
+            // Esc key
+            if (this.$refs.dropdown && this.$refs.dropdown.isActive && event.keyCode === 27) {
+                this.togglePicker(false)
+            }
+        },
 
-    /**
+        /**
      * Emit 'blur' event on dropdown is not active (closed)
      */
-    onActiveChange: function onActiveChange(value) {
-      if (!value) {
-        this.onBlur();
-      }
+        onActiveChange: function onActiveChange(value) {
+            if (!value) {
+                this.onBlur()
+            }
+        }
+    },
+    created: function created() {
+        if (typeof window !== 'undefined') {
+            document.addEventListener('keyup', this.keyPress)
+        }
+    },
+    beforeDestroy: function beforeDestroy() {
+        if (typeof window !== 'undefined') {
+            document.removeEventListener('keyup', this.keyPress)
+        }
     }
-  },
-  created: function created() {
-    if (typeof window !== 'undefined') {
-      document.addEventListener('keyup', this.keyPress);
-    }
-  },
-  beforeDestroy: function beforeDestroy() {
-    if (typeof window !== 'undefined') {
-      document.removeEventListener('keyup', this.keyPress);
-    }
-  }
-};
+}
 
 /* script */
 const __vue_script__$n = script$n
@@ -8322,7 +8094,7 @@ var Modal = normalizeComponent_1(
     __vue_module_identifier__$n,
     undefined,
     undefined
-  );
+)
 
 var script$o = {
     name: 'BDialog',
@@ -8494,8 +8266,26 @@ var script$o = {
             }
         })
     }
-  }
-};
+}
+use(Plugin$6)
+
+var _components$2
+var script$l = {
+    name: 'BTimepicker',
+    components: (_components$2 = {}, _defineProperty(_components$2, Input.name, Input), _defineProperty(_components$2, Field.name, Field), _defineProperty(_components$2, Select.name, Select), _defineProperty(_components$2, Icon.name, Icon), _defineProperty(_components$2, Dropdown.name, Dropdown), _defineProperty(_components$2, DropdownItem.name, DropdownItem), _components$2),
+    mixins: [TimepickerMixin],
+    inheritAttrs: false,
+    data: function data() {
+        return {
+            _isTimepicker: true
+        }
+    },
+    computed: {
+        nativeStep: function nativeStep() {
+            if (this.enableSeconds) return '1'
+        }
+    }
+}
 
 /* script */
 const __vue_script__$o = script$o
@@ -8525,7 +8315,7 @@ var Dialog = normalizeComponent_1(
     __vue_module_identifier__$o,
     undefined,
     undefined
-  );
+)
 
 var localVueInstance
 
@@ -8692,128 +8482,154 @@ var script$p = {
             if ((value.getDate() !== this.newValue.getDate() || value.getMonth() !== this.newValue.getMonth() || value.getFullYear() !== this.newValue.getFullYear()) && value.getHours() === 0 && value.getMinutes() === 0 && value.getSeconds() === 0) {
               val.setHours(this.newValue.getHours(), this.newValue.getMinutes(), this.newValue.getSeconds(), 0);
             }
-          } else {
-            val = this.datetimeCreator(value);
-          } // check min and max range
-
-
-          if (this.minDatetime && val < this.minDatetime) {
-            val = this.minDatetime;
-          } else if (this.maxDatetime && val > this.maxDatetime) {
-            val = this.maxDatetime;
-          }
-
-          this.newValue = new Date(val.getTime());
-        } else {
-          this.newValue = value;
+        },
+        datepicker: Object,
+        timepicker: Object,
+        focusable: {
+            type: Boolean,
+            default: true
         }
-
-        this.$emit('input', this.newValue);
-      }
     },
-    isMobile: function isMobile$1() {
-      return this.mobileNative && isMobile.any();
-    },
-    minDate: function minDate() {
-      if (!this.minDatetime) return this.datepicker ? this.datepicker.minDate : null;
-      return new Date(this.minDatetime.getFullYear(), this.minDatetime.getMonth(), this.minDatetime.getDate(), 0, 0, 0, 0);
-    },
-    maxDate: function maxDate() {
-      if (!this.maxDatetime) return this.datepicker ? this.datepicker.maxDate : null;
-      return new Date(this.maxDatetime.getFullYear(), this.maxDatetime.getMonth(), this.maxDatetime.getDate(), 0, 0, 0, 0);
-    },
-    minTime: function minTime() {
-      if (!this.minDatetime || this.newValue === null || typeof this.newValue === 'undefined') {
-        return this.timepicker ? this.timepicker.minTime : null;
-      }
-
-      if (this.minDatetime.getFullYear() === this.newValue.getFullYear() && this.minDatetime.getMonth() === this.newValue.getMonth() && this.minDatetime.getDate() === this.newValue.getDate()) {
-        return this.minDatetime;
-      }
-    },
-    maxTime: function maxTime() {
-      if (!this.maxDatetime || this.newValue === null || typeof this.newValue === 'undefined') {
-        return this.timepicker ? this.timepicker.maxTime : null;
-      }
-
-      if (this.maxDatetime.getFullYear() === this.newValue.getFullYear() && this.maxDatetime.getMonth() === this.newValue.getMonth() && this.maxDatetime.getDate() === this.newValue.getDate()) {
-        return this.maxDatetime;
-      }
-    },
-    datepickerSize: function datepickerSize() {
-      return this.datepicker && this.datepicker.size ? this.datepicker.size : this.size;
-    },
-    timepickerSize: function timepickerSize() {
-      return this.timepicker && this.timepicker.size ? this.timepicker.size : this.size;
-    },
-    timepickerDisabled: function timepickerDisabled() {
-      return this.timepicker && this.timepicker.disabled ? this.timepicker.disabled : this.disabled;
-    }
-  },
-  watch: {
-    value: function value(_value) {
-      this.newValue = _value;
-    }
-  },
-  methods: {
-    defaultDatetimeParser: function defaultDatetimeParser(date) {
-      if (typeof this.datetimeParser === 'function') {
-        return this.datetimeParser(date);
-      } else if (typeof config.defaultDatetimeParser === 'function') {
-        return config.defaultDatetimeParser(date);
-      } else {
-        return new Date(Date.parse(date));
-      }
-    },
-    defaultDatetimeFormatter: function defaultDatetimeFormatter(date) {
-      if (typeof this.datetimeFormatter === 'function') {
-        return this.datetimeFormatter(date);
-      } else if (typeof config.defaultDatetimeParser === 'function') {
-        return config.defaultDatetimeParser(date);
-      } else {
-        if (this.$refs.timepicker) {
-          var yyyyMMdd = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
-          var d = new Date(yyyyMMdd);
-          return d.toLocaleDateString() + ' ' + this.$refs.timepicker.timeFormatter(date, this.$refs.timepicker);
+    data: function data() {
+        return {
+            newValue: this.value
         }
-
-        return null;
-      }
     },
+    computed: {
+        computedValue: {
+            get: function get() {
+                return this.newValue
+            },
+            set: function set(value) {
+                if (value) {
+                    var val = new Date(value.getTime())
 
-    /*
+                    if (this.newValue) {
+                        // restore time part
+                        if ((value.getDate() !== this.newValue.getDate() || value.getMonth() !== this.newValue.getMonth() || value.getFullYear() !== this.newValue.getFullYear()) && value.getHours() === 0 && value.getMinutes() === 0 && value.getSeconds() === 0) {
+                            val.setHours(this.newValue.getHours(), this.newValue.getMinutes(), this.newValue.getSeconds(), 0)
+                        }
+                    } else {
+                        val = this.datetimeCreator(value)
+                    } // check min and max range
+
+                    if (this.minDatetime && val < this.minDatetime) {
+                        val = this.minDatetime
+                    } else if (this.maxDatetime && val > this.maxDatetime) {
+                        val = this.maxDatetime
+                    }
+
+                    this.newValue = new Date(val.getTime())
+                } else {
+                    this.newValue = value
+                }
+
+                this.$emit('input', this.newValue)
+            }
+        },
+        isMobile: function isMobile$1() {
+            return this.mobileNative && isMobile.any()
+        },
+        minDate: function minDate() {
+            if (!this.minDatetime) return this.datepicker ? this.datepicker.minDate : null
+            return new Date(this.minDatetime.getFullYear(), this.minDatetime.getMonth(), this.minDatetime.getDate(), 0, 0, 0, 0)
+        },
+        maxDate: function maxDate() {
+            if (!this.maxDatetime) return this.datepicker ? this.datepicker.maxDate : null
+            return new Date(this.maxDatetime.getFullYear(), this.maxDatetime.getMonth(), this.maxDatetime.getDate(), 0, 0, 0, 0)
+        },
+        minTime: function minTime() {
+            if (!this.minDatetime || this.newValue === null || typeof this.newValue === 'undefined') {
+                return this.timepicker ? this.timepicker.minTime : null
+            }
+
+            if (this.minDatetime.getFullYear() === this.newValue.getFullYear() && this.minDatetime.getMonth() === this.newValue.getMonth() && this.minDatetime.getDate() === this.newValue.getDate()) {
+                return this.minDatetime
+            }
+        },
+        maxTime: function maxTime() {
+            if (!this.maxDatetime || this.newValue === null || typeof this.newValue === 'undefined') {
+                return this.timepicker ? this.timepicker.maxTime : null
+            }
+
+            if (this.maxDatetime.getFullYear() === this.newValue.getFullYear() && this.maxDatetime.getMonth() === this.newValue.getMonth() && this.maxDatetime.getDate() === this.newValue.getDate()) {
+                return this.maxDatetime
+            }
+        },
+        datepickerSize: function datepickerSize() {
+            return this.datepicker && this.datepicker.size ? this.datepicker.size : this.size
+        },
+        timepickerSize: function timepickerSize() {
+            return this.timepicker && this.timepicker.size ? this.timepicker.size : this.size
+        },
+        timepickerDisabled: function timepickerDisabled() {
+            return this.timepicker && this.timepicker.disabled ? this.timepicker.disabled : this.disabled
+        }
+    },
+    watch: {
+        value: function value(_value) {
+            this.newValue = _value
+        }
+    },
+    methods: {
+        defaultDatetimeParser: function defaultDatetimeParser(date) {
+            if (typeof this.datetimeParser === 'function') {
+                return this.datetimeParser(date)
+            } else if (typeof config.defaultDatetimeParser === 'function') {
+                return config.defaultDatetimeParser(date)
+            } else {
+                return new Date(Date.parse(date))
+            }
+        },
+        defaultDatetimeFormatter: function defaultDatetimeFormatter(date) {
+            if (typeof this.datetimeFormatter === 'function') {
+                return this.datetimeFormatter(date)
+            } else if (typeof config.defaultDatetimeParser === 'function') {
+                return config.defaultDatetimeParser(date)
+            } else {
+                if (this.$refs.timepicker) {
+                    var yyyyMMdd = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate()
+                    var d = new Date(yyyyMMdd)
+                    return d.toLocaleDateString() + ' ' + this.$refs.timepicker.timeFormatter(date, this.$refs.timepicker)
+                }
+
+                return null
+            }
+        },
+
+        /*
     * Parse date from string
     */
-    onChangeNativePicker: function onChangeNativePicker(event) {
-      var date = event.target.value;
-      this.computedValue = date ? new Date(date) : null;
-    },
-    formatNative: function formatNative(value) {
-      var date = new Date(value);
+        onChangeNativePicker: function onChangeNativePicker(event) {
+            var date = event.target.value
+            this.computedValue = date ? new Date(date) : null
+        },
+        formatNative: function formatNative(value) {
+            var date = new Date(value)
 
-      if (value && !isNaN(date)) {
-        var year = date.getFullYear();
-        var month = date.getMonth() + 1;
-        var day = date.getDate();
-        var hours = date.getHours();
-        var minutes = date.getMinutes();
-        var seconds = date.getSeconds();
-        return year + '-' + ((month < 10 ? '0' : '') + month) + '-' + ((day < 10 ? '0' : '') + day) + 'T' + ((hours < 10 ? '0' : '') + hours) + ':' + ((minutes < 10 ? '0' : '') + minutes) + ':' + ((seconds < 10 ? '0' : '') + seconds);
-      }
+            if (value && !isNaN(date)) {
+                var year = date.getFullYear()
+                var month = date.getMonth() + 1
+                var day = date.getDate()
+                var hours = date.getHours()
+                var minutes = date.getMinutes()
+                var seconds = date.getSeconds()
+                return year + '-' + ((month < 10 ? '0' : '') + month) + '-' + ((day < 10 ? '0' : '') + day) + 'T' + ((hours < 10 ? '0' : '') + hours) + ':' + ((minutes < 10 ? '0' : '') + minutes) + ':' + ((seconds < 10 ? '0' : '') + seconds)
+            }
 
-      return '';
+            return ''
+        },
+        toggle: function toggle() {
+            this.$refs.datepicker.toggle()
+        }
     },
-    toggle: function toggle() {
-      this.$refs.datepicker.toggle();
-    }
-  },
-  mounted: function mounted() {
+    mounted: function mounted() {
     // $refs attached, it's time to refresh datepicker (input)
-    if (this.newValue) {
-      this.$refs.datepicker.$forceUpdate();
+        if (this.newValue) {
+            this.$refs.datepicker.$forceUpdate()
+        }
     }
-  }
-};
+}
 
 /* script */
 const __vue_script__$p = script$p
@@ -8843,7 +8659,7 @@ var Loading = normalizeComponent_1(
     __vue_module_identifier__$p,
     undefined,
     undefined
-  );
+)
 
 var localVueInstance$1
 var LoadingProgrammatic = {
@@ -8919,7 +8735,7 @@ var Menu = normalizeComponent_1(
     __vue_module_identifier__$q,
     undefined,
     undefined
-  );
+)
 
 var script$r = {
     name: 'BMenuList',
@@ -8933,108 +8749,114 @@ var script$r = {
             default: ''
         }
     },
+    computed: {
+        dialogClass: function dialogClass() {
+            return [this.size, {
+                'has-custom-container': this.container !== null
+            }]
+        },
 
-    /**
+        /**
     * Icon name (MDI) based on the type.
     */
-    iconByType: function iconByType() {
-      switch (this.type) {
-        case 'is-info':
-          return 'information';
+        iconByType: function iconByType() {
+            switch (this.type) {
+                case 'is-info':
+                    return 'information'
 
-        case 'is-success':
-          return 'check-circle';
+                case 'is-success':
+                    return 'check-circle'
 
-        case 'is-warning':
-          return 'alert';
+                case 'is-warning':
+                    return 'alert'
 
-        case 'is-danger':
-          return 'alert-circle';
+                case 'is-danger':
+                    return 'alert-circle'
 
-        default:
-          return null;
-      }
+                default:
+                    return null
+            }
+        },
+        showCancel: function showCancel() {
+            return this.cancelOptions.indexOf('button') >= 0
+        }
     },
-    showCancel: function showCancel() {
-      return this.cancelOptions.indexOf('button') >= 0;
-    }
-  },
-  methods: {
+    methods: {
     /**
     * If it's a prompt Dialog, validate the input.
     * Call the onConfirm prop (function) and close the Dialog.
     */
-    confirm: function confirm() {
-      var _this = this;
+        confirm: function confirm() {
+            var _this = this
 
-      if (this.$refs.input !== undefined) {
-        if (!this.$refs.input.checkValidity()) {
-          this.validationMessage = this.$refs.input.validationMessage;
-          this.$nextTick(function () {
-            return _this.$refs.input.select();
-          });
-          return;
-        }
-      }
+            if (this.$refs.input !== undefined) {
+                if (!this.$refs.input.checkValidity()) {
+                    this.validationMessage = this.$refs.input.validationMessage
+                    this.$nextTick(function () {
+                        return _this.$refs.input.select()
+                    })
+                    return
+                }
+            }
 
-      this.onConfirm(this.prompt);
-      this.close();
-    },
+            this.onConfirm(this.prompt)
+            this.close()
+        },
 
-    /**
+        /**
     * Close the Dialog.
     */
-    close: function close() {
-      var _this2 = this;
+        close: function close() {
+            var _this2 = this
 
-      this.isActive = false; // Timeout for the animation complete before destroying
+            this.isActive = false // Timeout for the animation complete before destroying
 
-      setTimeout(function () {
-        _this2.$destroy();
+            setTimeout(function () {
+                _this2.$destroy()
 
-        removeElement(_this2.$el);
-      }, 150);
+                removeElement(_this2.$el)
+            }, 150)
+        }
+    },
+    beforeMount: function beforeMount() {
+        var _this3 = this
+
+        // Insert the Dialog component in the element container
+        if (typeof window !== 'undefined') {
+            this.$nextTick(function () {
+                var container = document.querySelector(_this3.container) || document.body
+                container.appendChild(_this3.$el)
+            })
+        }
+    },
+    mounted: function mounted() {
+        var _this4 = this
+
+        this.isActive = true
+
+        if (typeof this.inputAttrs.required === 'undefined') {
+            this.$set(this.inputAttrs, 'required', true)
+        }
+
+        this.$nextTick(function () {
+            // Handle which element receives focus
+            if (_this4.hasInput) {
+                _this4.$refs.input.focus()
+            } else if (_this4.focusOn === 'cancel' && _this4.showCancel) {
+                _this4.$refs.cancelButton.focus()
+            } else {
+                _this4.$refs.confirmButton.focus()
+            }
+        })
     }
-  },
-  beforeMount: function beforeMount() {
-    var _this3 = this;
-
-    // Insert the Dialog component in the element container
-    if (typeof window !== 'undefined') {
-      this.$nextTick(function () {
-        var container = document.querySelector(_this3.container) || document.body;
-        container.appendChild(_this3.$el);
-      });
-    }
-  },
-  mounted: function mounted() {
-    var _this4 = this;
-
-    this.isActive = true;
-
-    if (typeof this.inputAttrs.required === 'undefined') {
-      this.$set(this.inputAttrs, 'required', true);
-    }
-
-    this.$nextTick(function () {
-      // Handle which element receives focus
-      if (_this4.hasInput) {
-        _this4.$refs.input.focus();
-      } else if (_this4.focusOn === 'cancel' && _this4.showCancel) {
-        _this4.$refs.cancelButton.focus();
-      } else {
-        _this4.$refs.confirmButton.focus();
-      }
-    });
-  }
-};
+}
 
 /* script */
 const __vue_script__$r = script$r
 
 /* template */
-var __vue_render__$m = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('transition',{attrs:{"name":_vm.animation}},[(_vm.isActive)?_c('div',{directives:[{name:"trap-focus",rawName:"v-trap-focus",value:(_vm.trapFocus),expression:"trapFocus"}],staticClass:"dialog modal is-active",class:_vm.dialogClass,attrs:{"role":_vm.ariaRole,"aria-modal":_vm.ariaModal}},[_c('div',{staticClass:"modal-background",on:{"click":function($event){_vm.cancel('outside');}}}),_vm._v(" "),_c('div',{staticClass:"modal-card animation-content"},[(_vm.title)?_c('header',{staticClass:"modal-card-head"},[_c('div',{staticClass:"modal-card-title"},[_vm._v(_vm._s(_vm.title))]),_vm._v(" "),_c('button',{staticClass:"delete",attrs:{"aria-label":"close"},on:{"click":function($event){_vm.cancel('button');}}})]):_vm._e(),_vm._v(" "),_c('section',{staticClass:"modal-card-body",class:{ 'is-titleless': !_vm.title, 'is-flex': _vm.hasIcon }},[_c('div',{staticClass:"media"},[(_vm.hasIcon && (_vm.icon || _vm.iconByType))?_c('div',{staticClass:"media-left"},[_c('b-icon',{attrs:{"icon":_vm.icon ? _vm.icon : _vm.iconByType,"pack":_vm.iconPack,"type":_vm.type,"both":!_vm.icon,"size":"is-large"}})],1):_vm._e(),_vm._v(" "),_c('div',{staticClass:"media-content"},[_c('p',{domProps:{"innerHTML":_vm._s(_vm.message)}}),_vm._v(" "),(_vm.hasInput)?_c('div',{staticClass:"field"},[_c('div',{staticClass:"control"},[_c('input',_vm._b({directives:[{name:"model",rawName:"v-model",value:(_vm.prompt),expression:"prompt"}],ref:"input",staticClass:"input",class:{ 'is-danger': _vm.validationMessage },domProps:{"value":(_vm.prompt)},on:{"keyup":function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"enter",13,$event.key)){ return null; }_vm.confirm($event);},"input":function($event){if($event.target.composing){ return; }_vm.prompt=$event.target.value;}}},'input',_vm.inputAttrs,false))]),_vm._v(" "),_c('p',{staticClass:"help is-danger"},[_vm._v(_vm._s(_vm.validationMessage))])]):_vm._e()])])]),_vm._v(" "),_c('footer',{staticClass:"modal-card-foot"},[_c('button',{ref:"confirmButton",staticClass:"button",class:_vm.type,on:{"click":_vm.confirm}},[_vm._v("\n                    "+_vm._s(_vm.confirmText)+"\n                ")])])])]):_vm._e()])};
-var __vue_staticRenderFns__$m = [];
+var __vue_render__$m = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('transition', {attrs: {'name': _vm.animation}}, [(_vm.isActive) ? _c('div', {directives: [{name: 'trap-focus', rawName: 'v-trap-focus', value: (_vm.trapFocus), expression: 'trapFocus'}], staticClass: 'dialog modal is-active', class: _vm.dialogClass, attrs: {'role': _vm.ariaRole, 'aria-modal': _vm.ariaModal}}, [_c('div', {staticClass: 'modal-background', on: {'click': function ($event) { _vm.cancel('outside') }}}), _vm._v(' '), _c('div', {staticClass: 'modal-card animation-content'}, [(_vm.title) ? _c('header', {staticClass: 'modal-card-head'}, [_c('div', {staticClass: 'modal-card-title'}, [_vm._v(_vm._s(_vm.title))]), _vm._v(' '), _c('button', {staticClass: 'delete', attrs: {'aria-label': 'close'}, on: {'click': function ($event) { _vm.cancel('button') }}})]) : _vm._e(), _vm._v(' '), _c('section', {staticClass: 'modal-card-body', class: { 'is-titleless': !_vm.title, 'is-flex': _vm.hasIcon }}, [_c('div', {staticClass: 'media'}, [(_vm.hasIcon && (_vm.icon || _vm.iconByType)) ? _c('div', {staticClass: 'media-left'}, [_c('b-icon', {attrs: {'icon': _vm.icon ? _vm.icon : _vm.iconByType, 'pack': _vm.iconPack, 'type': _vm.type, 'both': !_vm.icon, 'size': 'is-large'}})], 1) : _vm._e(), _vm._v(' '), _c('div', {staticClass: 'media-content'}, [_c('p', {domProps: {'innerHTML': _vm._s(_vm.message)}}), _vm._v(' '), (_vm.hasInput) ? _c('div', {staticClass: 'field'}, [_c('div', {staticClass: 'control'}, [_c('input', _vm._b({directives: [{name: 'model', rawName: 'v-model', value: (_vm.prompt), expression: 'prompt'}], ref: 'input', staticClass: 'input', class: { 'is-danger': _vm.validationMessage }, domProps: {'value': (_vm.prompt)}, on: {'keyup': function ($event) { if (!('button' in $event) && _vm._k($event.keyCode, 'enter', 13, $event.key)) { return null }_vm.confirm($event) }, 'input': function ($event) { if ($event.target.composing) { return }_vm.prompt = $event.target.value }}}, 'input', _vm.inputAttrs, false))]), _vm._v(' '), _c('p', {staticClass: 'help is-danger'}, [_vm._v(_vm._s(_vm.validationMessage))])]) : _vm._e()])])]), _vm._v(' '), _c('footer', {staticClass: 'modal-card-foot'}, [_c('button', {ref: 'confirmButton', staticClass: 'button', class: _vm.type, on: {'click': _vm.confirm}}, [_vm._v('\n                    ' + _vm._s(_vm.confirmText) + '\n                ')])])])]) : _vm._e()]) }
+var __vue_staticRenderFns__$m = []
 
 /* style */
 const __vue_inject_styles__$r = undefined
@@ -9057,7 +8879,7 @@ var MenuList = normalizeComponent_1(
     __vue_module_identifier__$r,
     undefined,
     undefined
-  );
+)
 
 var script$s = {
     name: 'BMenuItem',
@@ -9139,173 +8961,173 @@ var script$s = {
 }
 
 var DialogProgrammatic = {
-  alert: function alert(params) {
-    if (typeof params === 'string') {
-      params = {
-        message: params
-      };
-    }
+    alert: function alert(params) {
+        if (typeof params === 'string') {
+            params = {
+                message: params
+            }
+        }
 
-    var defaultParam = {
-      canCancel: false
-    };
-    var propsData = merge(defaultParam, params);
-    return open(propsData);
-  },
-  confirm: function confirm(params) {
-    var defaultParam = {};
-    var propsData = merge(defaultParam, params);
-    return open(propsData);
-  },
-  prompt: function prompt(params) {
-    var defaultParam = {
-      hasInput: true,
-      confirmText: 'Done'
-    };
-    var propsData = merge(defaultParam, params);
-    return open(propsData);
-  }
-};
+        var defaultParam = {
+            canCancel: false
+        }
+        var propsData = merge(defaultParam, params)
+        return open(propsData)
+    },
+    confirm: function confirm(params) {
+        var defaultParam = {}
+        var propsData = merge(defaultParam, params)
+        return open(propsData)
+    },
+    prompt: function prompt(params) {
+        var defaultParam = {
+            hasInput: true,
+            confirmText: 'Done'
+        }
+        var propsData = merge(defaultParam, params)
+        return open(propsData)
+    }
+}
 var Plugin$8 = {
-  install: function install(Vue) {
-    localVueInstance = Vue;
-    registerComponent(Vue, Dialog);
-    registerComponentProgrammatic(Vue, 'dialog', DialogProgrammatic);
-  }
-};
-use(Plugin$8);
+    install: function install(Vue) {
+        localVueInstance = Vue
+        registerComponent(Vue, Dialog)
+        registerComponentProgrammatic(Vue, 'dialog', DialogProgrammatic)
+    }
+}
+use(Plugin$8)
 
 var Plugin$9 = {
-  install: function install(Vue) {
-    registerComponent(Vue, Dropdown);
-    registerComponent(Vue, DropdownItem);
-  }
-};
-use(Plugin$9);
+    install: function install(Vue) {
+        registerComponent(Vue, Dropdown)
+        registerComponent(Vue, DropdownItem)
+    }
+}
+use(Plugin$9)
 
 var Plugin$a = {
-  install: function install(Vue) {
-    registerComponent(Vue, Field);
-  }
-};
-use(Plugin$a);
+    install: function install(Vue) {
+        registerComponent(Vue, Field)
+    }
+}
+use(Plugin$a)
 
 var Plugin$b = {
-  install: function install(Vue) {
-    registerComponent(Vue, Icon);
-  }
-};
-use(Plugin$b);
+    install: function install(Vue) {
+        registerComponent(Vue, Icon)
+    }
+}
+use(Plugin$b)
 
 var Plugin$c = {
-  install: function install(Vue) {
-    registerComponent(Vue, Input);
-  }
-};
-use(Plugin$c);
+    install: function install(Vue) {
+        registerComponent(Vue, Input)
+    }
+}
+use(Plugin$c)
 
 // Polyfills for SSR
-var isSSR = typeof window === 'undefined';
-var HTMLElement = isSSR ? Object : window.HTMLElement;
-var File = isSSR ? Object : window.File;
+var isSSR = typeof window === 'undefined'
+var HTMLElement = isSSR ? Object : window.HTMLElement
+var File = isSSR ? Object : window.File
 
 //
 var script$p = {
-  name: 'BLoading',
-  props: {
-    active: Boolean,
-    programmatic: Boolean,
-    container: [Object, Function, HTMLElement],
-    isFullPage: {
-      type: Boolean,
-      default: true
+    name: 'BLoading',
+    props: {
+        active: Boolean,
+        programmatic: Boolean,
+        container: [Object, Function, HTMLElement],
+        isFullPage: {
+            type: Boolean,
+            default: true
+        },
+        animation: {
+            type: String,
+            default: 'fade'
+        },
+        canCancel: {
+            type: Boolean,
+            default: false
+        },
+        onCancel: {
+            type: Function,
+            default: function _default() {}
+        }
     },
-    animation: {
-      type: String,
-      default: 'fade'
+    data: function data() {
+        return {
+            isActive: this.active || false
+        }
     },
-    canCancel: {
-      type: Boolean,
-      default: false
+    watch: {
+        active: function active(value) {
+            this.isActive = value
+        }
     },
-    onCancel: {
-      type: Function,
-      default: function _default() {}
-    }
-  },
-  data: function data() {
-    return {
-      isActive: this.active || false
-    };
-  },
-  watch: {
-    active: function active(value) {
-      this.isActive = value;
-    }
-  },
-  methods: {
+    methods: {
     /**
     * Close the Modal if canCancel.
     */
-    cancel: function cancel() {
-      if (!this.canCancel || !this.isActive) return;
-      this.close();
-    },
+        cancel: function cancel() {
+            if (!this.canCancel || !this.isActive) return
+            this.close()
+        },
 
-    /**
+        /**
     * Emit events, and destroy modal if it's programmatic.
     */
-    close: function close() {
-      var _this = this;
+        close: function close() {
+            var _this = this
 
-      this.onCancel.apply(null, arguments);
-      this.$emit('close');
-      this.$emit('update:active', false); // Timeout for the animation complete before destroying
+            this.onCancel.apply(null, arguments)
+            this.$emit('close')
+            this.$emit('update:active', false) // Timeout for the animation complete before destroying
 
-      if (this.programmatic) {
-        this.isActive = false;
-        setTimeout(function () {
-          _this.$destroy();
+            if (this.programmatic) {
+                this.isActive = false
+                setTimeout(function () {
+                    _this.$destroy()
 
-          removeElement(_this.$el);
-        }, 150);
-      }
-    },
+                    removeElement(_this.$el)
+                }, 150)
+            }
+        },
 
-    /**
+        /**
     * Keypress event that is bound to the document.
     */
-    keyPress: function keyPress(event) {
-      // Esc key
-      if (event.keyCode === 27) this.cancel();
-    }
-  },
-  created: function created() {
-    if (typeof window !== 'undefined') {
-      document.addEventListener('keyup', this.keyPress);
-    }
-  },
-  beforeMount: function beforeMount() {
+        keyPress: function keyPress(event) {
+            // Esc key
+            if (event.keyCode === 27) this.cancel()
+        }
+    },
+    created: function created() {
+        if (typeof window !== 'undefined') {
+            document.addEventListener('keyup', this.keyPress)
+        }
+    },
+    beforeMount: function beforeMount() {
     // Insert the Loading component in body tag
     // only if it's programmatic
-    if (this.programmatic) {
-      if (!this.container) {
-        document.body.appendChild(this.$el);
-      } else {
-        this.isFullPage = false;
-        this.container.appendChild(this.$el);
-      }
+        if (this.programmatic) {
+            if (!this.container) {
+                document.body.appendChild(this.$el)
+            } else {
+                this.isFullPage = false
+                this.container.appendChild(this.$el)
+            }
+        }
+    },
+    mounted: function mounted() {
+        if (this.programmatic) this.isActive = true
+    },
+    beforeDestroy: function beforeDestroy() {
+        if (typeof window !== 'undefined') {
+            document.removeEventListener('keyup', this.keyPress)
+        }
     }
-  },
-  mounted: function mounted() {
-    if (this.programmatic) this.isActive = true;
-  },
-  beforeDestroy: function beforeDestroy() {
-    if (typeof window !== 'undefined') {
-      document.removeEventListener('keyup', this.keyPress);
-    }
-  }
-};
+}
 
 /* script */
 const __vue_script__$s = script$s
@@ -9343,7 +9165,7 @@ var MenuItem = normalizeComponent_1(
     __vue_module_identifier__$s,
     undefined,
     undefined
-  );
+)
 
 var Plugin$e = {
     install: function install(Vue) {
@@ -9470,9 +9292,9 @@ var script$t = {
     return {
       _isMenu: true // Used by MenuItem
 
-    };
-  }
-};
+        }
+    }
+}
 
 /* script */
 const __vue_script__$t = script$t
@@ -9502,7 +9324,7 @@ var Message = normalizeComponent_1(
     __vue_module_identifier__$t,
     undefined,
     undefined
-  );
+)
 
 var Plugin$f = {
     install: function install(Vue) {
@@ -9568,24 +9390,34 @@ var script$u = {
         attrs: {
           'class': 'menu-label'
         }
-      }, context.props.label ? context.props.icon ? [createElement('b-icon', {
-        props: {
-          'icon': context.props.icon,
-          'pack': context.props.iconPack,
-          'size': 'is-small'
-        }
-      }), createElement('span', {}, context.props.label)] : context.props.label : slots.label);
-    }
+    },
+    render: function render(createElement, context) {
+        var vlabel = null
+        var slots = context.slots()
 
-    var vnode = createElement('ul', {
-      attrs: {
-        'class': 'menu-list',
-        'role': context.props.ariaRole === 'menu' ? context.props.ariaRole : null
-      }
-    }, slots.default);
-    return vlabel ? [vlabel, vnode] : vnode;
-  }
-};
+        if (context.props.label || slots.label) {
+            vlabel = createElement('p', {
+                attrs: {
+                    'class': 'menu-label'
+                }
+            }, context.props.label ? context.props.icon ? [createElement('b-icon', {
+                props: {
+                    'icon': context.props.icon,
+                    'pack': context.props.iconPack,
+                    'size': 'is-small'
+                }
+            }), createElement('span', {}, context.props.label)] : context.props.label : slots.label)
+        }
+
+        var vnode = createElement('ul', {
+            attrs: {
+                'class': 'menu-list',
+                'role': context.props.ariaRole === 'menu' ? context.props.ariaRole : null
+            }
+        }, slots.default)
+        return vlabel ? [vlabel, vnode] : vnode
+    }
+}
 
 /* script */
 const __vue_script__$u = script$u
@@ -9615,7 +9447,7 @@ var Notification = normalizeComponent_1(
     __vue_module_identifier__$u,
     undefined,
     undefined
-  );
+)
 
 var NoticeMixin = {
     props: {
@@ -9815,10 +9647,8 @@ var script$v = {
           item.newActive = false;
           item.$emit('update:active', item.newActive);
         }
-      });
     }
-  }
-};
+}
 
 /* script */
 const __vue_script__$v = script$v
@@ -9848,7 +9678,7 @@ var NotificationNotice = normalizeComponent_1(
     __vue_module_identifier__$v,
     undefined,
     undefined
-  );
+)
 
 var localVueInstance$3
 var NotificationProgrammatic = {
@@ -9928,53 +9758,53 @@ var NavbarBurger = normalizeComponent_1(
     __vue_module_identifier__$w,
     undefined,
     undefined
-  );
+)
 
 var Plugin$f = {
-  install: function install(Vue) {
-    registerComponent(Vue, Message);
-  }
-};
-use(Plugin$f);
+    install: function install(Vue) {
+        registerComponent(Vue, Message)
+    }
+}
+use(Plugin$f)
 
-var localVueInstance$2;
+var localVueInstance$2
 var ModalProgrammatic = {
-  open: function open(params) {
-    var parent;
+    open: function open(params) {
+        var parent
 
-    if (typeof params === 'string') {
-      params = {
-        content: params
-      };
+        if (typeof params === 'string') {
+            params = {
+                content: params
+            }
+        }
+
+        var defaultParam = {
+            programmatic: true
+        }
+
+        if (params.parent) {
+            parent = params.parent
+            delete params.parent
+        }
+
+        var propsData = merge(defaultParam, params)
+        var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance$2 || VueInstance
+        var ModalComponent = vm.extend(Modal)
+        return new ModalComponent({
+            parent: parent,
+            el: document.createElement('div'),
+            propsData: propsData
+        })
     }
-
-    var defaultParam = {
-      programmatic: true
-    };
-
-    if (params.parent) {
-      parent = params.parent;
-      delete params.parent;
-    }
-
-    var propsData = merge(defaultParam, params);
-    var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance$2 || VueInstance;
-    var ModalComponent = vm.extend(Modal);
-    return new ModalComponent({
-      parent: parent,
-      el: document.createElement('div'),
-      propsData: propsData
-    });
-  }
-};
+}
 var Plugin$g = {
-  install: function install(Vue) {
-    localVueInstance$2 = Vue;
-    registerComponent(Vue, Modal);
-    registerComponentProgrammatic(Vue, 'modal', ModalProgrammatic);
-  }
-};
-use(Plugin$g);
+    install: function install(Vue) {
+        localVueInstance$2 = Vue
+        registerComponent(Vue, Modal)
+        registerComponentProgrammatic(Vue, 'modal', ModalProgrammatic)
+    }
+}
+use(Plugin$g)
 
 var script$x = {
     name: 'BNavbar',
@@ -10171,8 +10001,8 @@ var script$x = {
 const __vue_script__$x = script$x
 
 /* template */
-var __vue_render__$r = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('transition',{attrs:{"name":"fade"}},[_c('article',{directives:[{name:"show",rawName:"v-show",value:(_vm.isActive),expression:"isActive"}],staticClass:"notification",class:[_vm.type, _vm.position]},[(_vm.closable)?_c('button',{staticClass:"delete",attrs:{"type":"button","aria-label":_vm.ariaCloseLabel},on:{"click":_vm.close}}):_vm._e(),_vm._v(" "),_c('div',{staticClass:"media"},[(_vm.icon && _vm.hasIcon)?_c('div',{staticClass:"media-left"},[_c('b-icon',{attrs:{"icon":_vm.icon,"pack":_vm.iconPack,"both":"","size":"is-large","aria-hidden":""}})],1):_vm._e(),_vm._v(" "),_c('div',{staticClass:"media-content"},[(_vm.message)?_c('p',{staticClass:"text",domProps:{"innerHTML":_vm._s(_vm.message)}}):_vm._t("default")],2)])])])};
-var __vue_staticRenderFns__$r = [];
+var __vue_render__$r = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('transition', {attrs: {'name': 'fade'}}, [_c('article', {directives: [{name: 'show', rawName: 'v-show', value: (_vm.isActive), expression: 'isActive'}], staticClass: 'notification', class: [_vm.type, _vm.position]}, [(_vm.closable) ? _c('button', {staticClass: 'delete', attrs: {'type': 'button', 'aria-label': _vm.ariaCloseLabel}, on: {'click': _vm.close}}) : _vm._e(), _vm._v(' '), _c('div', {staticClass: 'media'}, [(_vm.icon && _vm.hasIcon) ? _c('div', {staticClass: 'media-left'}, [_c('b-icon', {attrs: {'icon': _vm.icon, 'pack': _vm.iconPack, 'both': '', 'size': 'is-large', 'aria-hidden': ''}})], 1) : _vm._e(), _vm._v(' '), _c('div', {staticClass: 'media-content'}, [(_vm.message) ? _c('p', {staticClass: 'text', domProps: {'innerHTML': _vm._s(_vm.message)}}) : _vm._t('default')], 2)])])]) }
+var __vue_staticRenderFns__$r = []
 
 /* style */
 const __vue_inject_styles__$x = undefined
@@ -10195,7 +10025,7 @@ var Navbar = normalizeComponent_1(
     __vue_module_identifier__$x,
     undefined,
     undefined
-  );
+)
 
 //
 //
@@ -10221,151 +10051,136 @@ var script$y = {
         },
         active: Boolean
     },
-    message: String,
-    duration: Number,
-    queue: {
-      type: Boolean,
-      default: undefined
+    data: function data() {
+        return {
+            isActive: false,
+            parentTop: null,
+            parentBottom: null,
+            newContainer: this.container || config.defaultContainerElement
+        }
     },
-    position: {
-      type: String,
-      default: 'is-top',
-      validator: function validator(value) {
-        return ['is-top-right', 'is-top', 'is-top-left', 'is-bottom-right', 'is-bottom', 'is-bottom-left'].indexOf(value) > -1;
-      }
-    },
-    container: String
-  },
-  data: function data() {
-    return {
-      isActive: false,
-      parentTop: null,
-      parentBottom: null,
-      newContainer: this.container || config.defaultContainerElement
-    };
-  },
-  computed: {
-    correctParent: function correctParent() {
-      switch (this.position) {
-        case 'is-top-right':
-        case 'is-top':
-        case 'is-top-left':
-          return this.parentTop;
+    computed: {
+        correctParent: function correctParent() {
+            switch (this.position) {
+                case 'is-top-right':
+                case 'is-top':
+                case 'is-top-left':
+                    return this.parentTop
 
-        case 'is-bottom-right':
-        case 'is-bottom':
-        case 'is-bottom-left':
-          return this.parentBottom;
-      }
-    },
-    transition: function transition() {
-      switch (this.position) {
-        case 'is-top-right':
-        case 'is-top':
-        case 'is-top-left':
-          return {
-            enter: 'fadeInDown',
-            leave: 'fadeOut'
-          };
+                case 'is-bottom-right':
+                case 'is-bottom':
+                case 'is-bottom-left':
+                    return this.parentBottom
+            }
+        },
+        transition: function transition() {
+            switch (this.position) {
+                case 'is-top-right':
+                case 'is-top':
+                case 'is-top-left':
+                    return {
+                        enter: 'fadeInDown',
+                        leave: 'fadeOut'
+                    }
 
-        case 'is-bottom-right':
-        case 'is-bottom':
-        case 'is-bottom-left':
-          return {
-            enter: 'fadeInUp',
-            leave: 'fadeOut'
-          };
-      }
+                case 'is-bottom-right':
+                case 'is-bottom':
+                case 'is-bottom-left':
+                    return {
+                        enter: 'fadeInUp',
+                        leave: 'fadeOut'
+                    }
+            }
+        }
+    },
+    methods: {
+        shouldQueue: function shouldQueue() {
+            var queue = this.queue !== undefined ? this.queue : config.defaultNoticeQueue
+            if (!queue) return false
+            return this.parentTop.childElementCount > 0 || this.parentBottom.childElementCount > 0
+        },
+        close: function close() {
+            var _this = this
+
+            clearTimeout(this.timer)
+            this.isActive = false
+            this.$emit('close') // Timeout for the animation complete before destroying
+
+            setTimeout(function () {
+                _this.$destroy()
+
+                removeElement(_this.$el)
+            }, 150)
+        },
+        showNotice: function showNotice() {
+            var _this2 = this
+
+            if (this.shouldQueue()) {
+                // Call recursively if should queue
+                setTimeout(function () {
+                    return _this2.showNotice()
+                }, 250)
+                return
+            }
+
+            this.correctParent.insertAdjacentElement('afterbegin', this.$el)
+            this.isActive = true
+
+            if (!this.indefinite) {
+                this.timer = setTimeout(function () {
+                    return _this2.close()
+                }, this.newDuration)
+            }
+        },
+        setupContainer: function setupContainer() {
+            this.parentTop = document.querySelector((this.newContainer ? this.newContainer : 'body') + '>.notices.is-top')
+            this.parentBottom = document.querySelector((this.newContainer ? this.newContainer : 'body') + '>.notices.is-bottom')
+            if (this.parentTop && this.parentBottom) return
+
+            if (!this.parentTop) {
+                this.parentTop = document.createElement('div')
+                this.parentTop.className = 'notices is-top'
+            }
+
+            if (!this.parentBottom) {
+                this.parentBottom = document.createElement('div')
+                this.parentBottom.className = 'notices is-bottom'
+            }
+
+            var container = document.querySelector(this.newContainer) || document.body
+            container.appendChild(this.parentTop)
+            container.appendChild(this.parentBottom)
+
+            if (this.newContainer) {
+                this.parentTop.classList.add('has-custom-container')
+                this.parentBottom.classList.add('has-custom-container')
+            }
+        }
+    },
+    beforeMount: function beforeMount() {
+        this.setupContainer()
+    },
+    mounted: function mounted() {
+        this.showNotice()
     }
-  },
-  methods: {
-    shouldQueue: function shouldQueue() {
-      var queue = this.queue !== undefined ? this.queue : config.defaultNoticeQueue;
-      if (!queue) return false;
-      return this.parentTop.childElementCount > 0 || this.parentBottom.childElementCount > 0;
-    },
-    close: function close() {
-      var _this = this;
-
-      clearTimeout(this.timer);
-      this.isActive = false;
-      this.$emit('close'); // Timeout for the animation complete before destroying
-
-      setTimeout(function () {
-        _this.$destroy();
-
-        removeElement(_this.$el);
-      }, 150);
-    },
-    showNotice: function showNotice() {
-      var _this2 = this;
-
-      if (this.shouldQueue()) {
-        // Call recursively if should queue
-        setTimeout(function () {
-          return _this2.showNotice();
-        }, 250);
-        return;
-      }
-
-      this.correctParent.insertAdjacentElement('afterbegin', this.$el);
-      this.isActive = true;
-
-      if (!this.indefinite) {
-        this.timer = setTimeout(function () {
-          return _this2.close();
-        }, this.newDuration);
-      }
-    },
-    setupContainer: function setupContainer() {
-      this.parentTop = document.querySelector((this.newContainer ? this.newContainer : 'body') + '>.notices.is-top');
-      this.parentBottom = document.querySelector((this.newContainer ? this.newContainer : 'body') + '>.notices.is-bottom');
-      if (this.parentTop && this.parentBottom) return;
-
-      if (!this.parentTop) {
-        this.parentTop = document.createElement('div');
-        this.parentTop.className = 'notices is-top';
-      }
-
-      if (!this.parentBottom) {
-        this.parentBottom = document.createElement('div');
-        this.parentBottom.className = 'notices is-bottom';
-      }
-
-      var container = document.querySelector(this.newContainer) || document.body;
-      container.appendChild(this.parentTop);
-      container.appendChild(this.parentBottom);
-
-      if (this.newContainer) {
-        this.parentTop.classList.add('has-custom-container');
-        this.parentBottom.classList.add('has-custom-container');
-      }
-    }
-  },
-  beforeMount: function beforeMount() {
-    this.setupContainer();
-  },
-  mounted: function mounted() {
-    this.showNotice();
-  }
-};
+}
 
 //
 var script$v = {
-  name: 'BNotificationNotice',
-  mixins: [NoticeMixin],
-  props: {
-    indefinite: {
-      type: Boolean,
-      default: false
+    name: 'BNotificationNotice',
+    mixins: [NoticeMixin],
+    props: {
+        indefinite: {
+            type: Boolean,
+            default: false
+        }
+    },
+    data: function data() {
+        return {
+            newDuration: this.duration || config.defaultNotificationDuration
+        }
     }
-  },
-  data: function data() {
-    return {
-      newDuration: this.duration || config.defaultNotificationDuration
-    };
-  }
-};
+}
 
 /* script */
 const __vue_script__$y = script$y
@@ -10401,46 +10216,46 @@ var NavbarItem = normalizeComponent_1(
     __vue_module_identifier__$y,
     undefined,
     undefined
-  );
+)
 
-var localVueInstance$3;
+var localVueInstance$3
 var NotificationProgrammatic = {
-  open: function open(params) {
-    var parent;
+    open: function open(params) {
+        var parent
 
-    if (typeof params === 'string') {
-      params = {
-        message: params
-      };
+        if (typeof params === 'string') {
+            params = {
+                message: params
+            }
+        }
+
+        var defaultParam = {
+            position: config.defaultNotificationPosition || 'is-top-right'
+        }
+
+        if (params.parent) {
+            parent = params.parent
+            delete params.parent
+        }
+
+        var propsData = merge(defaultParam, params)
+        var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance$3 || VueInstance
+        var NotificationNoticeComponent = vm.extend(NotificationNotice)
+        return new NotificationNoticeComponent({
+            parent: parent,
+            el: document.createElement('div'),
+            propsData: propsData
+        })
     }
-
-    var defaultParam = {
-      position: config.defaultNotificationPosition || 'is-top-right'
-    };
-
-    if (params.parent) {
-      parent = params.parent;
-      delete params.parent;
-    }
-
-    var propsData = merge(defaultParam, params);
-    var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance$3 || VueInstance;
-    var NotificationNoticeComponent = vm.extend(NotificationNotice);
-    return new NotificationNoticeComponent({
-      parent: parent,
-      el: document.createElement('div'),
-      propsData: propsData
-    });
-  }
-};
+}
 var Plugin$h = {
-  install: function install(Vue) {
-    localVueInstance$3 = Vue;
-    registerComponent(Vue, Notification);
-    registerComponentProgrammatic(Vue, 'notification', NotificationProgrammatic);
-  }
-};
-use(Plugin$h);
+    install: function install(Vue) {
+        localVueInstance$3 = Vue
+        registerComponent(Vue, Notification)
+        registerComponentProgrammatic(Vue, 'notification', NotificationProgrammatic)
+    }
+}
+use(Plugin$h)
 
 //
 var script$z = {
@@ -10480,8 +10295,7 @@ var script$z = {
             this.newActive = false
         }
     }
-  }
-};
+}
 
 /* script */
 const __vue_script__$z = script$z
@@ -10526,7 +10340,7 @@ var NavbarDropdown = normalizeComponent_1(
     __vue_module_identifier__$z,
     undefined,
     undefined
-  );
+)
 
 var Plugin$i = {
     install: function install(Vue) {
@@ -10567,9 +10381,8 @@ var script$A = {
         },
         controlsPosition: String
     },
-    fixedTop: {
-      type: Boolean,
-      default: false
+    directives: {
+        clickOutside: directive$1
     },
     computed: {
         computedValue: {
@@ -10747,56 +10560,182 @@ var script$A = {
           role: 'navigation',
           'aria-label': 'main navigation'
         },
-        directives: [{
-          name: 'click-outside',
-          value: this.closeMenu
-        }]
-      }, slots);
+        fixedTop: {
+            type: Boolean,
+            default: false
+        },
+        fixedBottom: {
+            type: Boolean,
+            default: false
+        },
+        isActive: {
+            type: Boolean,
+            default: false
+        },
+        wrapperClass: {
+            type: String
+        },
+        closeOnClick: {
+            type: Boolean,
+            default: true
+        },
+        mobileBurger: {
+            type: Boolean,
+            default: true
+        },
+        spaced: Boolean,
+        shadow: Boolean
     },
-    genNavbarBrandNode: function genNavbarBrandNode(createElement) {
-      return createElement('div', {
-        class: 'navbar-brand'
-      }, [this.$slots.brand, this.genBurgerNode(createElement)]);
-    },
-    genBurgerNode: function genBurgerNode(createElement) {
-      if (this.mobileBurger) {
-        var defaultBurgerNode = createElement('navbar-burger', {
-          props: {
-            isOpened: this.isOpened
-          },
-          on: {
-            click: this.toggleActive
-          }
-        });
-        var hasBurgerSlot = !!this.$scopedSlots.burger;
-        return hasBurgerSlot ? this.$scopedSlots.burger({
-          isOpened: this.isOpened,
-          toggleActive: this.toggleActive
-        }) : defaultBurgerNode;
-      }
-    },
-    genNavbarSlotsNode: function genNavbarSlotsNode(createElement) {
-      return createElement('div', {
-        staticClass: 'navbar-menu',
-        class: {
-          'is-active': this.isOpened
+    data: function data() {
+        return {
+            internalIsActive: this.isActive
         }
-      }, [this.genMenuPosition(createElement, 'start'), this.genMenuPosition(createElement, 'end')]);
     },
-    genMenuPosition: function genMenuPosition(createElement, positionName) {
-      return createElement('div', {
-        staticClass: "navbar-".concat(positionName)
-      }, this.$slots[positionName]);
+    computed: {
+        isOpened: function isOpened() {
+            return this.internalIsActive
+        },
+        computedClasses: function computedClasses() {
+            var _ref
+
+            return [this.type, (_ref = {}, _defineProperty(_ref, FIXED_TOP_CLASS, this.fixedTop), _defineProperty(_ref, FIXED_BOTTOM_CLASS, this.fixedBottom), _defineProperty(_ref, 'is-spaced', this.spaced), _defineProperty(_ref, 'has-shadow', this.shadow), _defineProperty(_ref, 'is-transparent', this.transparent), _ref)]
+        }
+    },
+    watch: {
+        isActive: {
+            handler: function handler(isActive) {
+                this.internalIsActive = isActive
+            },
+            immediate: true
+        },
+        fixedTop: {
+            handler: function handler(isSet) {
+                this.checkIfFixedPropertiesAreColliding()
+                var className = this.spaced ? BODY_SPACED_FIXED_TOP_CLASS : BODY_FIXED_TOP_CLASS
+
+                if (isSet) {
+                    return this.setBodyClass(className)
+                }
+
+                this.removeBodyClass(className)
+            },
+            immediate: true
+        },
+        fixedBottom: {
+            handler: function handler(isSet) {
+                this.checkIfFixedPropertiesAreColliding()
+                var className = this.spaced ? BODY_SPACED_FIXED_BOTTOM_CLASS : BODY_FIXED_BOTTOM_CLASS
+
+                if (isSet) {
+                    return this.setBodyClass(className)
+                }
+
+                this.removeBodyClass(className)
+            },
+            immediate: true
+        }
+    },
+    methods: {
+        toggleActive: function toggleActive() {
+            this.internalIsActive = !this.internalIsActive
+            this.emitUpdateParentEvent()
+        },
+        closeMenu: function closeMenu() {
+            if (this.closeOnClick) {
+                this.internalIsActive = false
+                this.emitUpdateParentEvent()
+            }
+        },
+        emitUpdateParentEvent: function emitUpdateParentEvent() {
+            this.$emit('update:isActive', this.internalIsActive)
+        },
+        setBodyClass: function setBodyClass(className) {
+            if (typeof window !== 'undefined') {
+                document.body.classList.add(className)
+            }
+        },
+        removeBodyClass: function removeBodyClass(className) {
+            if (typeof window !== 'undefined') {
+                document.body.classList.remove(className)
+            }
+        },
+        checkIfFixedPropertiesAreColliding: function checkIfFixedPropertiesAreColliding() {
+            var areColliding = this.fixedTop && this.fixedBottom
+
+            if (areColliding) {
+                throw new Error('You should choose if the BNavbar is fixed bottom or fixed top, but not both')
+            }
+        },
+        genNavbar: function genNavbar(createElement) {
+            var navBarSlots = [this.genNavbarBrandNode(createElement), this.genNavbarSlotsNode(createElement)]
+
+            if (!isFilled(this.wrapperClass)) {
+                return this.genNavbarSlots(createElement, navBarSlots)
+            } // It wraps the slots into a div with the provided wrapperClass prop
+
+            var navWrapper = createElement('div', {
+                class: this.wrapperClass
+            }, navBarSlots)
+            return this.genNavbarSlots(createElement, [navWrapper])
+        },
+        genNavbarSlots: function genNavbarSlots(createElement, slots) {
+            return createElement('nav', {
+                staticClass: 'navbar',
+                class: this.computedClasses,
+                attrs: {
+                    role: 'navigation',
+                    'aria-label': 'main navigation'
+                },
+                directives: [{
+                    name: 'click-outside',
+                    value: this.closeMenu
+                }]
+            }, slots)
+        },
+        genNavbarBrandNode: function genNavbarBrandNode(createElement) {
+            return createElement('div', {
+                class: 'navbar-brand'
+            }, [this.$slots.brand, this.genBurgerNode(createElement)])
+        },
+        genBurgerNode: function genBurgerNode(createElement) {
+            if (this.mobileBurger) {
+                var defaultBurgerNode = createElement('navbar-burger', {
+                    props: {
+                        isOpened: this.isOpened
+                    },
+                    on: {
+                        click: this.toggleActive
+                    }
+                })
+                var hasBurgerSlot = !!this.$scopedSlots.burger
+                return hasBurgerSlot ? this.$scopedSlots.burger({
+                    isOpened: this.isOpened,
+                    toggleActive: this.toggleActive
+                }) : defaultBurgerNode
+            }
+        },
+        genNavbarSlotsNode: function genNavbarSlotsNode(createElement) {
+            return createElement('div', {
+                staticClass: 'navbar-menu',
+                class: {
+                    'is-active': this.isOpened
+                }
+            }, [this.genMenuPosition(createElement, 'start'), this.genMenuPosition(createElement, 'end')])
+        },
+        genMenuPosition: function genMenuPosition(createElement, positionName) {
+            return createElement('div', {
+                staticClass: 'navbar-'.concat(positionName)
+            }, this.$slots[positionName])
+        }
+    },
+    beforeDestroy: function beforeDestroy() {
+        this.removeBodyClass(FIXED_BOTTOM_CLASS)
+        this.removeBodyClass(FIXED_TOP_CLASS)
+    },
+    render: function render(createElement, fn) {
+        return this.genNavbar(createElement)
     }
-  },
-  beforeDestroy: function beforeDestroy() {
-    this.removeBodyClass(FIXED_BOTTOM_CLASS);
-    this.removeBodyClass(FIXED_TOP_CLASS);
-  },
-  render: function render(createElement, fn) {
-    return this.genNavbar(createElement);
-  }
-};
+}
 
 /* script */
 const __vue_script__$A = script$A
@@ -10870,52 +10809,50 @@ var script$B = {
             default: false
         }
     },
-    active: Boolean
-  },
-  methods: {
+    methods: {
     /**
      * Keypress event that is bound to the document
      */
-    keyPress: function keyPress(event) {
-      // Esc key
-      // TODO: use code instead (because keyCode is actually deprecated)
-      // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
-      if (event.keyCode === 27) {
-        this.$parent.closeMenu();
-      }
-    },
+        keyPress: function keyPress(event) {
+            // Esc key
+            // TODO: use code instead (because keyCode is actually deprecated)
+            // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
+            if (event.keyCode === 27) {
+                this.$parent.closeMenu()
+            }
+        },
 
-    /**
+        /**
      * Close parent if clicked outside.
      */
-    handleClickEvent: function handleClickEvent(event) {
-      var isOnWhiteList = clickableWhiteList.some(function (item) {
-        return item === event.target.localName;
-      });
+        handleClickEvent: function handleClickEvent(event) {
+            var isOnWhiteList = clickableWhiteList.some(function (item) {
+                return item === event.target.localName
+            })
 
-      if (!isOnWhiteList) {
-        if (this.$parent.$data._isNavDropdown) {
-          this.$parent.closeMenu();
-          this.$parent.$parent.closeMenu();
-        } else {
-          this.$parent.closeMenu();
+            if (!isOnWhiteList) {
+                if (this.$parent.$data._isNavDropdown) {
+                    this.$parent.closeMenu()
+                    this.$parent.$parent.closeMenu()
+                } else {
+                    this.$parent.closeMenu()
+                }
+            }
         }
-      }
+    },
+    mounted: function mounted() {
+        if (typeof window !== 'undefined') {
+            this.$el.addEventListener('click', this.handleClickEvent)
+            document.addEventListener('keyup', this.keyPress)
+        }
+    },
+    beforeDestroy: function beforeDestroy() {
+        if (typeof window !== 'undefined') {
+            this.$el.removeEventListener('click', this.handleClickEvent)
+            document.removeEventListener('keyup', this.keyPress)
+        }
     }
-  },
-  mounted: function mounted() {
-    if (typeof window !== 'undefined') {
-      this.$el.addEventListener('click', this.handleClickEvent);
-      document.addEventListener('keyup', this.keyPress);
-    }
-  },
-  beforeDestroy: function beforeDestroy() {
-    if (typeof window !== 'undefined') {
-      this.$el.removeEventListener('click', this.handleClickEvent);
-      document.removeEventListener('keyup', this.keyPress);
-    }
-  }
-};
+}
 
 /* script */
 const __vue_script__$B = script$B
@@ -10948,7 +10885,7 @@ var PaginationButton = normalizeComponent_1(
     __vue_module_identifier__$B,
     undefined,
     undefined
-  );
+)
 
 var _components$5
 var script$C = {
@@ -11015,15 +10952,39 @@ var script$C = {
     showMenu: function showMenu() {
       this.newActive = true;
     },
+    props: {
+        label: String,
+        hoverable: Boolean,
+        active: Boolean,
+        right: Boolean,
+        arrowless: Boolean,
+        boxed: Boolean
+    },
+    data: function data() {
+        return {
+            newActive: this.active,
+            _isNavDropdown: true // Used internally by NavbarItem
 
-    /**
+        }
+    },
+    watch: {
+        active: function active(value) {
+            this.newActive = value
+        }
+    },
+    methods: {
+        showMenu: function showMenu() {
+            this.newActive = true
+        },
+
+        /**
     * See naming convetion of navbaritem
     */
-    closeMenu: function closeMenu() {
-      this.newActive = false;
+        closeMenu: function closeMenu() {
+            this.newActive = false
+        }
     }
-  }
-};
+}
 
 /* script */
 const __vue_script__$C = script$C
@@ -11063,7 +11024,7 @@ var Pagination = normalizeComponent_1(
     __vue_module_identifier__$C,
     undefined,
     undefined
-  );
+)
 
 var Plugin$k = {
     install: function install(Vue) {
@@ -11199,57 +11160,153 @@ var script$D = {
 
       return 0;
     }
-  },
-  watch: {
+}
+use(Plugin$i)
+
+var _components$4
+var script$A = {
+    name: 'BNumberinput',
+    components: (_components$4 = {}, _defineProperty(_components$4, Icon.name, Icon), _defineProperty(_components$4, Input.name, Input), _components$4),
+    mixins: [FormElementMixin],
+    inheritAttrs: false,
+    props: {
+        value: Number,
+        min: [Number, String],
+        max: [Number, String],
+        step: [Number, String],
+        disabled: Boolean,
+        type: {
+            type: String,
+            default: 'is-primary'
+        },
+        editable: {
+            type: Boolean,
+            default: true
+        },
+        controls: {
+            type: Boolean,
+            default: true
+        },
+        controlsRounded: {
+            type: Boolean,
+            default: false
+        },
+        controlsPosition: String
+    },
+    data: function data() {
+        return {
+            newValue: !isNaN(this.value) ? this.value : parseFloat(this.min) || 0,
+            newStep: this.step || 1,
+            _elementRef: 'input'
+        }
+    },
+    computed: {
+        computedValue: {
+            get: function get() {
+                return this.newValue
+            },
+            set: function set(value) {
+                var newValue = value
+
+                if (value === '') {
+                    newValue = parseFloat(this.min) || null
+                }
+
+                this.newValue = newValue
+                this.$emit('input', newValue)
+                !this.isValid && this.$refs.input.checkHtml5Validity()
+            }
+        },
+        fieldClasses: function fieldClasses() {
+            return [{
+                'has-addons': this.controlsPosition === 'compact'
+            }, {
+                'is-grouped': this.controlsPosition !== 'compact'
+            }, {
+                'is-expanded': this.expanded
+            }]
+        },
+        buttonClasses: function buttonClasses() {
+            return [this.type, this.size, {
+                'is-rounded': this.controlsRounded
+            }]
+        },
+        minNumber: function minNumber() {
+            return typeof this.min === 'string' ? parseFloat(this.min) : this.min
+        },
+        maxNumber: function maxNumber() {
+            return typeof this.max === 'string' ? parseFloat(this.max) : this.max
+        },
+        stepNumber: function stepNumber() {
+            return typeof this.newStep === 'string' ? parseFloat(this.newStep) : this.newStep
+        },
+        disabledMin: function disabledMin() {
+            return this.computedValue - this.stepNumber < this.minNumber
+        },
+        disabledMax: function disabledMax() {
+            return this.computedValue + this.stepNumber > this.maxNumber
+        },
+        stepDecimals: function stepDecimals() {
+            var step = this.stepNumber.toString()
+            var index = step.indexOf('.')
+
+            if (index >= 0) {
+                return step.substring(index + 1).length
+            }
+
+            return 0
+        }
+    },
+    watch: {
     /**
     * When v-model is changed:
     *   1. Set internal value.
     */
-    value: function value(_value) {
-      this.newValue = _value;
+        value: function value(_value) {
+            this.newValue = _value
+        }
+    },
+    methods: {
+        decrement: function decrement() {
+            if (typeof this.minNumber === 'undefined' || this.computedValue - this.stepNumber >= this.minNumber) {
+                var value = this.computedValue - this.stepNumber
+                this.computedValue = parseFloat(value.toFixed(this.stepDecimals))
+            }
+        },
+        increment: function increment() {
+            if (typeof this.maxNumber === 'undefined' || this.computedValue + this.stepNumber <= this.maxNumber) {
+                var value = this.computedValue + this.stepNumber
+                this.computedValue = parseFloat(value.toFixed(this.stepDecimals))
+            }
+        },
+        onControlClick: function onControlClick(event, inc) {
+            // IE 11 -> filter click event
+            if (event.detail !== 0 || event.type === 'click') return
+            if (inc) this.increment(); else this.decrement()
+        },
+        onStartLongPress: function onStartLongPress(event, inc) {
+            var _this = this
+
+            if (event.button !== 0 && event.type !== 'touchstart') return
+            this._$intervalTime = new Date()
+            clearInterval(this._$intervalRef)
+            this._$intervalRef = setInterval(function () {
+                if (inc) _this.increment(); else _this.decrement()
+            }, 250)
+        },
+        onStopLongPress: function onStopLongPress(inc) {
+            if (!this._$intervalRef) return
+            var d = new Date()
+
+            if (d - this._$intervalTime < 250) {
+                if (inc) this.increment(); else this.decrement()
+            }
+
+            clearInterval(this._$intervalRef)
+            this._$intervalRef = null
+        }
     }
-  },
-  methods: {
-    decrement: function decrement() {
-      if (typeof this.minNumber === 'undefined' || this.computedValue - this.stepNumber >= this.minNumber) {
-        var value = this.computedValue - this.stepNumber;
-        this.computedValue = parseFloat(value.toFixed(this.stepDecimals));
-      }
-    },
-    increment: function increment() {
-      if (typeof this.maxNumber === 'undefined' || this.computedValue + this.stepNumber <= this.maxNumber) {
-        var value = this.computedValue + this.stepNumber;
-        this.computedValue = parseFloat(value.toFixed(this.stepDecimals));
-      }
-    },
-    onControlClick: function onControlClick(event, inc) {
-      // IE 11 -> filter click event
-      if (event.detail !== 0 || event.type === 'click') return;
-      if (inc) this.increment();else this.decrement();
-    },
-    onStartLongPress: function onStartLongPress(event, inc) {
-      var _this = this;
-
-      if (event.button !== 0 && event.type !== 'touchstart') return;
-      this._$intervalTime = new Date();
-      clearInterval(this._$intervalRef);
-      this._$intervalRef = setInterval(function () {
-        if (inc) _this.increment();else _this.decrement();
-      }, 250);
-    },
-    onStopLongPress: function onStopLongPress(inc) {
-      if (!this._$intervalRef) return;
-      var d = new Date();
-
-      if (d - this._$intervalTime < 250) {
-        if (inc) this.increment();else this.decrement();
-      }
-
-      clearInterval(this._$intervalRef);
-      this._$intervalRef = null;
-    }
-  }
-};
+}
 
 /* script */
 const __vue_script__$D = script$D
@@ -11279,7 +11336,7 @@ var Progress = normalizeComponent_1(
     __vue_module_identifier__$D,
     undefined,
     undefined
-  );
+)
 
 var Plugin$l = {
     install: function install(Vue) {
@@ -11322,7 +11379,7 @@ var Radio = normalizeComponent_1(
     __vue_module_identifier__$E,
     undefined,
     undefined
-  );
+)
 
 //
 var script$F = {
@@ -11345,79 +11402,79 @@ var script$F = {
     /**
     * If current page is trying to be greater than page count, set to last.
     */
-    pageCount: function pageCount(value) {
-      if (this.current > value) this.last();
-    }
-  },
-  methods: {
+        pageCount: function pageCount(value) {
+            if (this.current > value) this.last()
+        }
+    },
+    methods: {
     /**
     * Previous button click listener.
     */
-    prev: function prev(event) {
-      this.changePage(this.current - 1, event);
-    },
+        prev: function prev(event) {
+            this.changePage(this.current - 1, event)
+        },
 
-    /**
+        /**
     * Next button click listener.
     */
-    next: function next(event) {
-      this.changePage(this.current + 1, event);
-    },
+        next: function next(event) {
+            this.changePage(this.current + 1, event)
+        },
 
-    /**
+        /**
     * First button click listener.
     */
-    first: function first(event) {
-      this.changePage(1, event);
-    },
+        first: function first(event) {
+            this.changePage(1, event)
+        },
 
-    /**
+        /**
     * Last button click listener.
     */
-    last: function last(event) {
-      this.changePage(this.pageCount, event);
-    },
-    changePage: function changePage(num, event) {
-      if (this.current === num || num < 1 || num > this.pageCount) return;
-      this.$emit('change', num);
-      this.$emit('update:current', num); // Set focus on element to keep tab order
-
-      if (event && event.target) {
-        this.$nextTick(function () {
-          return event.target.focus();
-        });
-      }
-    },
-    getPage: function getPage(num) {
-      var _this = this;
-
-      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      return {
-        number: num,
-        isCurrent: this.current === num,
-        click: function click(event) {
-          return _this.changePage(num, event);
+        last: function last(event) {
+            this.changePage(this.pageCount, event)
         },
-        disabled: options.disabled || false,
-        class: options.class || '',
-        'aria-label': options['aria-label'] || this.getAriaPageLabel(num, this.current === num)
-      };
-    },
+        changePage: function changePage(num, event) {
+            if (this.current === num || num < 1 || num > this.pageCount) return
+            this.$emit('change', num)
+            this.$emit('update:current', num) // Set focus on element to keep tab order
 
-    /**
+            if (event && event.target) {
+                this.$nextTick(function () {
+                    return event.target.focus()
+                })
+            }
+        },
+        getPage: function getPage(num) {
+            var _this = this
+
+            var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {}
+            return {
+                number: num,
+                isCurrent: this.current === num,
+                click: function click(event) {
+                    return _this.changePage(num, event)
+                },
+                disabled: options.disabled || false,
+                class: options.class || '',
+                'aria-label': options['aria-label'] || this.getAriaPageLabel(num, this.current === num)
+            }
+        },
+
+        /**
     * Get text for aria-label according to page number.
     */
-    getAriaPageLabel: function getAriaPageLabel(pageNumber, isCurrent) {
-      if (this.ariaPageLabel && (!isCurrent || !this.ariaCurrentLabel)) {
-        return this.ariaPageLabel + ' ' + pageNumber + '.';
-      } else if (this.ariaPageLabel && isCurrent && this.ariaCurrentLabel) {
-        return this.ariaCurrentLabel + ', ' + this.ariaPageLabel + ' ' + pageNumber + '.';
-      }
+        getAriaPageLabel: function getAriaPageLabel(pageNumber, isCurrent) {
+            if (this.ariaPageLabel && (!isCurrent || !this.ariaCurrentLabel)) {
+                return this.ariaPageLabel + ' ' + pageNumber + '.'
+            } else if (this.ariaPageLabel && isCurrent && this.ariaCurrentLabel) {
+                return this.ariaCurrentLabel + ', ' + this.ariaPageLabel + ' ' + pageNumber + '.'
+            }
 
-      return null;
+            return null
+        }
     }
-  }
-};
+}
 
 /* script */
 const __vue_script__$F = script$F
@@ -11456,7 +11513,7 @@ var RadioButton = normalizeComponent_1(
     __vue_module_identifier__$F,
     undefined,
     undefined
-  );
+)
 
 var Plugin$m = {
     install: function install(Vue) {
@@ -11492,89 +11549,60 @@ var script$G = {
         customText: String,
         texts: Array
     },
-    size: String,
-    value: {
-      type: Number,
-      default: undefined
-    },
-    max: {
-      type: Number,
-      default: 100
-    },
-    showValue: {
-      type: Boolean,
-      default: false
-    },
-    format: {
-      type: String,
-      default: 'raw',
-      validator: function validator(value) {
-        return ['raw', 'percent'].indexOf(value) >= 0;
-      }
-    },
-    precision: {
-      type: Number,
-      default: 2
-    },
-    keepTrailingZeroes: {
-      type: Boolean,
-      default: false
-    }
-  },
-  computed: {
-    isIndeterminate: function isIndeterminate() {
-      return this.value === undefined || this.value === null;
-    },
-    newType: function newType() {
-      return [this.size, this.type];
-    },
-    newValue: function newValue() {
-      if (this.value === undefined || this.value === null || isNaN(this.value)) {
-        return undefined;
-      }
+    computed: {
+        isIndeterminate: function isIndeterminate() {
+            return this.value === undefined || this.value === null
+        },
+        newType: function newType() {
+            return [this.size, this.type]
+        },
+        newValue: function newValue() {
+            if (this.value === undefined || this.value === null || isNaN(this.value)) {
+                return undefined
+            }
 
-      if (this.format === 'percent') {
-        var _val = this.toFixed(this.value * this.max / 100);
+            if (this.format === 'percent') {
+                var _val = this.toFixed(this.value * this.max / 100)
 
-        return "".concat(_val, "%");
-      }
+                return ''.concat(_val, '%')
+            }
 
-      var val = this.toFixed(this.value);
-      return val;
-    }
-  },
-  watch: {
-    value: function value(_value) {
-      this.setValue(_value);
-    }
-  },
-  methods: {
+            var val = this.toFixed(this.value)
+            return val
+        }
+    },
+    watch: {
+        value: function value(_value) {
+            this.setValue(_value)
+        }
+    },
+    methods: {
     /**
     * When value is changed back to undefined, value of native progress get reset to 0.
     * Need to add and remove the value attribute to have the indeterminate or not.
     */
-    setValue: function setValue(value) {
-      if (this.isIndeterminate) {
-        this.$refs.progress.removeAttribute('value');
-      } else {
-        this.$refs.progress.setAttribute('value', value);
-      }
+        setValue: function setValue(value) {
+            if (this.isIndeterminate) {
+                this.$refs.progress.removeAttribute('value')
+            } else {
+                this.$refs.progress.setAttribute('value', value)
+            }
+        },
+        // Custom function that imitate the javascript toFixed method with improved rounding
+        toFixed: function toFixed(num) {
+            var fixed = (+''.concat(Math.round(+''.concat(num, 'e').concat(this.precision)), 'e').concat(-this.precision)).toFixed(this.precision)
+
+            if (!this.keepTrailingZeroes) {
+                fixed = fixed.replace(/\.?0+$/, '')
+            }
+
+            return fixed
+        }
     },
-    // Custom function that imitate the javascript toFixed method with improved rounding
-    toFixed: function toFixed(num) {
-      var fixed = (+"".concat(Math.round(+"".concat(num, "e").concat(this.precision)), "e").concat(-this.precision)).toFixed(this.precision);
-
-      if (!this.keepTrailingZeroes) {
-        fixed = fixed.replace(/\.?0+$/, '');
-      }
-
-      return fixed;
+    mounted: function mounted() {
+        this.setValue(this.value)
     }
-  },
-  mounted: function mounted() {
-    this.setValue(this.value);
-  }
-};
+}
 
 /* script */
 const __vue_script__$G = script$G
@@ -11604,7 +11632,7 @@ var Rate = normalizeComponent_1(
     __vue_module_identifier__$G,
     undefined,
     undefined
-  );
+)
 
 var Plugin$n = {
     install: function install(Vue) {
@@ -11700,7 +11728,7 @@ var Tooltip = normalizeComponent_1(
     __vue_module_identifier__$H,
     undefined,
     undefined
-  );
+)
 
 var script$I = {
     name: 'BSliderThumb',
@@ -11721,14 +11749,12 @@ var script$I = {
         },
         customFormatter: Function
     },
-    expanded: Boolean
-  },
-  data: function data() {
-    return {
-      isFocused: false
-    };
-  }
-};
+    data: function data() {
+        return {
+            isFocused: false
+        }
+    }
+}
 
 /* script */
 const __vue_script__$I = script$I
@@ -11758,15 +11784,15 @@ var SliderThumb = normalizeComponent_1(
     __vue_module_identifier__$I,
     undefined,
     undefined
-  );
+)
 
 var Plugin$m = {
-  install: function install(Vue) {
-    registerComponent(Vue, Radio);
-    registerComponent(Vue, RadioButton);
-  }
-};
-use(Plugin$m);
+    install: function install(Vue) {
+        registerComponent(Vue, Radio)
+        registerComponent(Vue, RadioButton)
+    }
+}
+use(Plugin$m)
 
 //
 //
@@ -11787,90 +11813,72 @@ var script$J = {
             default: 0
         }
     },
-    max: {
-      type: Number,
-      default: 5
+    data: function data() {
+        return {
+            newValue: this.value,
+            hoverValue: 0
+        }
     },
-    icon: {
-      type: String,
-      default: 'star'
-    },
-    iconPack: String,
-    size: String,
-    spaced: Boolean,
-    rtl: Boolean,
-    disabled: Boolean,
-    showScore: Boolean,
-    showText: Boolean,
-    customText: String,
-    texts: Array
-  },
-  data: function data() {
-    return {
-      newValue: this.value,
-      hoverValue: 0
-    };
-  },
-  computed: {
-    halfStyle: function halfStyle() {
-      return "width:".concat(this.valueDecimal, "%");
-    },
-    showMe: function showMe() {
-      var result = '';
+    computed: {
+        halfStyle: function halfStyle() {
+            return 'width:'.concat(this.valueDecimal, '%')
+        },
+        showMe: function showMe() {
+            var result = ''
 
-      if (this.showScore) {
-        result = this.disabled ? this.value : this.newValue;
-        if (result === 0) result = '';
-      } else if (this.showText) {
-        result = this.texts[Math.ceil(this.newValue) - 1];
-      }
+            if (this.showScore) {
+                result = this.disabled ? this.value : this.newValue
+                if (result === 0) result = ''
+            } else if (this.showText) {
+                result = this.texts[Math.ceil(this.newValue) - 1]
+            }
 
-      return result;
+            return result
+        },
+        valueDecimal: function valueDecimal() {
+            return this.value * 100 - Math.floor(this.value) * 100
+        }
     },
-    valueDecimal: function valueDecimal() {
-      return this.value * 100 - Math.floor(this.value) * 100;
-    }
-  },
-  watch: {
+    watch: {
     // When v-model is changed set the new value.
-    value: function value(_value) {
-      this.newValue = _value;
-    }
-  },
-  methods: {
-    resetNewValue: function resetNewValue() {
-      if (this.disabled) return;
-      this.hoverValue = 0;
+        value: function value(_value) {
+            this.newValue = _value
+        }
     },
-    previewRate: function previewRate(index, event) {
-      if (this.disabled) return;
-      this.hoverValue = index;
-      event.stopPropagation();
-    },
-    confirmValue: function confirmValue(index) {
-      if (this.disabled) return;
-      this.newValue = index;
-      this.$emit('change', this.newValue);
-      this.$emit('input', this.newValue);
-    },
-    checkHalf: function checkHalf(index) {
-      var showWhenDisabled = this.disabled && this.valueDecimal > 0 && index - 1 < this.value && index > this.value;
-      return showWhenDisabled;
-    },
-    rateClass: function rateClass(index) {
-      var output = '';
-      var currentValue = this.hoverValue !== 0 ? this.hoverValue : this.newValue;
+    methods: {
+        resetNewValue: function resetNewValue() {
+            if (this.disabled) return
+            this.hoverValue = 0
+        },
+        previewRate: function previewRate(index, event) {
+            if (this.disabled) return
+            this.hoverValue = index
+            event.stopPropagation()
+        },
+        confirmValue: function confirmValue(index) {
+            if (this.disabled) return
+            this.newValue = index
+            this.$emit('change', this.newValue)
+            this.$emit('input', this.newValue)
+        },
+        checkHalf: function checkHalf(index) {
+            var showWhenDisabled = this.disabled && this.valueDecimal > 0 && index - 1 < this.value && index > this.value
+            return showWhenDisabled
+        },
+        rateClass: function rateClass(index) {
+            var output = ''
+            var currentValue = this.hoverValue !== 0 ? this.hoverValue : this.newValue
 
-      if (index <= currentValue) {
-        output = 'set-on';
-      } else if (this.disabled && Math.ceil(this.value) === index) {
-        output = 'set-half';
-      }
+            if (index <= currentValue) {
+                output = 'set-on'
+            } else if (this.disabled && Math.ceil(this.value) === index) {
+                output = 'set-half'
+            }
 
-      return output;
+            return output
+        }
     }
-  }
-};
+}
 
 /* script */
 const __vue_script__$J = script$J
@@ -11900,7 +11908,7 @@ var SliderTick = normalizeComponent_1(
     __vue_module_identifier__$J,
     undefined,
     undefined
-  );
+)
 
 var _components$6
 var script$K = {
@@ -11952,38 +11960,18 @@ var script$K = {
         customFormatter: Function,
         ariaLabel: [String, Array]
     },
-    type: String,
-    label: String,
-    position: {
-      type: String,
-      default: 'is-top',
-      validator: function validator(value) {
-        return ['is-top', 'is-bottom', 'is-left', 'is-right'].indexOf(value) > -1;
-      }
-    },
-    always: Boolean,
-    animated: Boolean,
-    square: Boolean,
-    dashed: Boolean,
-    multilined: Boolean,
-    size: {
-      type: String,
-      default: 'is-medium'
-    },
-    delay: Number
-  },
-  computed: {
-    newType: function newType() {
-      return this.type || config.defaultTooltipType;
-    },
-    newAnimated: function newAnimated() {
-      return this.animated || config.defaultTooltipAnimated;
-    },
-    newDelay: function newDelay() {
-      return this.delay || config.defaultTooltipDelay;
+    computed: {
+        newType: function newType() {
+            return this.type || config.defaultTooltipType
+        },
+        newAnimated: function newAnimated() {
+            return this.animated || config.defaultTooltipAnimated
+        },
+        newDelay: function newDelay() {
+            return this.delay || config.defaultTooltipDelay
+        }
     }
-  }
-};
+}
 
 /* script */
 const __vue_script__$K = script$K
@@ -12013,7 +12001,7 @@ var Slider = normalizeComponent_1(
     __vue_module_identifier__$K,
     undefined,
     undefined
-  );
+)
 
 var Plugin$p = {
     install: function install(Vue) {
@@ -12124,51 +12112,141 @@ var script$L = {
         if (event.type === 'touchmove') {
           event.clientX = event.touches[0].clientX;
         }
-
-        var diff = (event.clientX - this.startX) / this.$parent.sliderSize * 100;
-        this.newPosition = this.startPosition + diff;
-        this.setPosition(this.newPosition);
-      }
     },
-    onDragEnd: function onDragEnd() {
-      this.dragging = false;
-      this.$emit('dragend');
-
-      if (this.value !== this.oldValue) {
-        this.$parent.emitValue('change');
-      }
-
-      this.setPosition(this.newPosition);
-
-      if (typeof window !== 'undefined') {
-        document.removeEventListener('mousemove', this.onDragging);
-        document.removeEventListener('touchmove', this.onDragging);
-        document.removeEventListener('mouseup', this.onDragEnd);
-        document.removeEventListener('touchend', this.onDragEnd);
-        document.removeEventListener('contextmenu', this.onDragEnd);
-      }
+    computed: {
+        disabled: function disabled() {
+            return this.$parent.disabled
+        },
+        max: function max() {
+            return this.$parent.max
+        },
+        min: function min() {
+            return this.$parent.min
+        },
+        step: function step() {
+            return this.$parent.step
+        },
+        precision: function precision() {
+            return this.$parent.precision
+        },
+        currentPosition: function currentPosition() {
+            return ''.concat((this.value - this.min) / (this.max - this.min) * 100, '%')
+        },
+        wrapperStyle: function wrapperStyle() {
+            return {
+                left: this.currentPosition
+            }
+        },
+        tooltipLabel: function tooltipLabel() {
+            return typeof this.customFormatter !== 'undefined' ? this.customFormatter(this.value) : this.value.toString()
+        }
     },
-    setPosition: function setPosition(percent) {
-      if (percent === null || isNaN(percent)) return;
+    methods: {
+        onFocus: function onFocus() {
+            this.isFocused = true
+        },
+        onBlur: function onBlur() {
+            this.isFocused = false
+        },
+        onButtonDown: function onButtonDown(event) {
+            if (this.disabled) return
+            event.preventDefault()
+            this.onDragStart(event)
 
-      if (percent < 0) {
-        percent = 0;
-      } else if (percent > 100) {
-        percent = 100;
-      }
+            if (typeof window !== 'undefined') {
+                document.addEventListener('mousemove', this.onDragging)
+                document.addEventListener('touchmove', this.onDragging)
+                document.addEventListener('mouseup', this.onDragEnd)
+                document.addEventListener('touchend', this.onDragEnd)
+                document.addEventListener('contextmenu', this.onDragEnd)
+            }
+        },
+        onLeftKeyDown: function onLeftKeyDown() {
+            if (this.disabled || this.value === this.min) return
+            this.newPosition = parseFloat(this.currentPosition) - this.step / (this.max - this.min) * 100
+            this.setPosition(this.newPosition)
+            this.$parent.emitValue('change')
+        },
+        onRightKeyDown: function onRightKeyDown() {
+            if (this.disabled || this.value === this.max) return
+            this.newPosition = parseFloat(this.currentPosition) + this.step / (this.max - this.min) * 100
+            this.setPosition(this.newPosition)
+            this.$parent.emitValue('change')
+        },
+        onHomeKeyDown: function onHomeKeyDown() {
+            if (this.disabled || this.value === this.min) return
+            this.newPosition = 0
+            this.setPosition(this.newPosition)
+            this.$parent.emitValue('change')
+        },
+        onEndKeyDown: function onEndKeyDown() {
+            if (this.disabled || this.value === this.max) return
+            this.newPosition = 100
+            this.setPosition(this.newPosition)
+            this.$parent.emitValue('change')
+        },
+        onDragStart: function onDragStart(event) {
+            this.dragging = true
+            this.$emit('dragstart')
 
-      var stepLength = 100 / ((this.max - this.min) / this.step);
-      var steps = Math.round(percent / stepLength);
-      var value = steps * stepLength / 100 * (this.max - this.min) + this.min;
-      value = parseFloat(value.toFixed(this.precision));
-      this.$emit('input', value);
+            if (event.type === 'touchstart') {
+                event.clientX = event.touches[0].clientX
+            }
 
-      if (!this.dragging && value !== this.oldValue) {
-        this.oldValue = value;
-      }
+            this.startX = event.clientX
+            this.startPosition = parseFloat(this.currentPosition)
+            this.newPosition = this.startPosition
+        },
+        onDragging: function onDragging(event) {
+            if (this.dragging) {
+                if (event.type === 'touchmove') {
+                    event.clientX = event.touches[0].clientX
+                }
+
+                var diff = (event.clientX - this.startX) / this.$parent.sliderSize * 100
+                this.newPosition = this.startPosition + diff
+                this.setPosition(this.newPosition)
+            }
+        },
+        onDragEnd: function onDragEnd() {
+            this.dragging = false
+            this.$emit('dragend')
+
+            if (this.value !== this.oldValue) {
+                this.$parent.emitValue('change')
+            }
+
+            this.setPosition(this.newPosition)
+
+            if (typeof window !== 'undefined') {
+                document.removeEventListener('mousemove', this.onDragging)
+                document.removeEventListener('touchmove', this.onDragging)
+                document.removeEventListener('mouseup', this.onDragEnd)
+                document.removeEventListener('touchend', this.onDragEnd)
+                document.removeEventListener('contextmenu', this.onDragEnd)
+            }
+        },
+        setPosition: function setPosition(percent) {
+            if (percent === null || isNaN(percent)) return
+
+            if (percent < 0) {
+                percent = 0
+            } else if (percent > 100) {
+                percent = 100
+            }
+
+            var stepLength = 100 / ((this.max - this.min) / this.step)
+            var steps = Math.round(percent / stepLength)
+            var value = steps * stepLength / 100 * (this.max - this.min) + this.min
+            value = parseFloat(value.toFixed(this.precision))
+            this.$emit('input', value)
+
+            if (!this.dragging && value !== this.oldValue) {
+                this.oldValue = value
+            }
+        }
     }
-  }
-};
+}
 
 var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase())
 function createInjector(context) {
@@ -12249,7 +12327,7 @@ var Snackbar = normalizeComponent_1(
     __vue_module_identifier__$L,
     browser,
     undefined
-  );
+)
 
 var localVueInstance$4
 var SnackbarProgrammatic = {
@@ -12551,24 +12629,29 @@ var script$M = {
       var pos = (this.value - this.$parent.min) / (this.$parent.max - this.$parent.min) * 100;
       return pos >= 0 && pos <= 100 ? pos : 0;
     },
-    hidden: function hidden() {
-      return this.value === this.$parent.min || this.value === this.$parent.max;
+    computed: {
+        position: function position() {
+            var pos = (this.value - this.$parent.min) / (this.$parent.max - this.$parent.min) * 100
+            return pos >= 0 && pos <= 100 ? pos : 0
+        },
+        hidden: function hidden() {
+            return this.value === this.$parent.min || this.value === this.$parent.max
+        }
+    },
+    methods: {
+        getTickStyle: function getTickStyle(position) {
+            return {
+                'left': position + '%'
+            }
+        }
+    },
+    created: function created() {
+        if (!this.$parent.$data._isSlider) {
+            this.$destroy()
+            throw new Error('You should wrap bSliderTick on a bSlider')
+        }
     }
-  },
-  methods: {
-    getTickStyle: function getTickStyle(position) {
-      return {
-        'left': position + '%'
-      };
-    }
-  },
-  created: function created() {
-    if (!this.$parent.$data._isSlider) {
-      this.$destroy();
-      throw new Error('You should wrap bSliderTick on a bSlider');
-    }
-  }
-};
+}
 
 /* script */
 const __vue_script__$M = script$M
@@ -12608,7 +12691,7 @@ var Steps = normalizeComponent_1(
     __vue_module_identifier__$M,
     undefined,
     undefined
-  );
+)
 
 var script$N = {
     name: 'BStepItem',
@@ -12682,169 +12765,169 @@ var script$N = {
       isRange: false,
       _isSlider: true // Used by Thumb and Tick
 
-    };
-  },
-  computed: {
-    newTooltipType: function newTooltipType() {
-      return this.tooltipType ? this.tooltipType : this.type;
+        }
     },
-    tickValues: function tickValues() {
-      if (!this.ticks || this.min > this.max || this.step === 0) return [];
-      var result = [];
+    computed: {
+        newTooltipType: function newTooltipType() {
+            return this.tooltipType ? this.tooltipType : this.type
+        },
+        tickValues: function tickValues() {
+            if (!this.ticks || this.min > this.max || this.step === 0) return []
+            var result = []
 
-      for (var i = this.min + this.step; i < this.max; i = i + this.step) {
-        result.push(i);
-      }
+            for (var i = this.min + this.step; i < this.max; i = i + this.step) {
+                result.push(i)
+            }
 
-      return result;
+            return result
+        },
+        minValue: function minValue() {
+            return Math.min(this.value1, this.value2)
+        },
+        maxValue: function maxValue() {
+            return Math.max(this.value1, this.value2)
+        },
+        barSize: function barSize() {
+            return this.isRange ? ''.concat(100 * (this.maxValue - this.minValue) / (this.max - this.min), '%') : ''.concat(100 * (this.value1 - this.min) / (this.max - this.min), '%')
+        },
+        barStart: function barStart() {
+            return this.isRange ? ''.concat(100 * (this.minValue - this.min) / (this.max - this.min), '%') : '0%'
+        },
+        precision: function precision() {
+            var precisions = [this.min, this.max, this.step].map(function (item) {
+                var decimal = ('' + item).split('.')[1]
+                return decimal ? decimal.length : 0
+            })
+            return Math.max.apply(Math, _toConsumableArray(precisions))
+        },
+        barStyle: function barStyle() {
+            return {
+                width: this.barSize,
+                left: this.barStart
+            }
+        },
+        sliderSize: function sliderSize() {
+            return this.$refs.slider['clientWidth']
+        },
+        rootClasses: function rootClasses() {
+            return {
+                'is-rounded': this.rounded,
+                'is-dragging': this.dragging,
+                'is-disabled': this.disabled
+            }
+        }
     },
-    minValue: function minValue() {
-      return Math.min(this.value1, this.value2);
-    },
-    maxValue: function maxValue() {
-      return Math.max(this.value1, this.value2);
-    },
-    barSize: function barSize() {
-      return this.isRange ? "".concat(100 * (this.maxValue - this.minValue) / (this.max - this.min), "%") : "".concat(100 * (this.value1 - this.min) / (this.max - this.min), "%");
-    },
-    barStart: function barStart() {
-      return this.isRange ? "".concat(100 * (this.minValue - this.min) / (this.max - this.min), "%") : '0%';
-    },
-    precision: function precision() {
-      var precisions = [this.min, this.max, this.step].map(function (item) {
-        var decimal = ('' + item).split('.')[1];
-        return decimal ? decimal.length : 0;
-      });
-      return Math.max.apply(Math, _toConsumableArray(precisions));
-    },
-    barStyle: function barStyle() {
-      return {
-        width: this.barSize,
-        left: this.barStart
-      };
-    },
-    sliderSize: function sliderSize() {
-      return this.$refs.slider['clientWidth'];
-    },
-    rootClasses: function rootClasses() {
-      return {
-        'is-rounded': this.rounded,
-        'is-dragging': this.dragging,
-        'is-disabled': this.disabled
-      };
-    }
-  },
-  watch: {
+    watch: {
     /**
     * When v-model is changed set the new active step.
     */
-    value: function value(_value) {
-      this.setValues(_value);
-    },
-    value1: function value1() {
-      this.onInternalValueUpdate();
-    },
-    value2: function value2() {
-      this.onInternalValueUpdate();
-    },
-    min: function min() {
-      this.setValues(this.value);
-    },
-    max: function max() {
-      this.setValues(this.value);
-    }
-  },
-  methods: {
-    setValues: function setValues(newValue) {
-      if (this.min > this.max) {
-        return;
-      }
-
-      if (Array.isArray(newValue)) {
-        this.isRange = true;
-        var smallValue = typeof newValue[0] !== 'number' || isNaN(newValue[0]) ? this.min : Math.min(Math.max(this.min, newValue[0]), this.max);
-        var largeValue = typeof newValue[1] !== 'number' || isNaN(newValue[1]) ? this.max : Math.max(Math.min(this.max, newValue[1]), this.min);
-        this.value1 = this.isThumbReversed ? largeValue : smallValue;
-        this.value2 = this.isThumbReversed ? smallValue : largeValue;
-      } else {
-        this.isRange = false;
-        this.value1 = isNaN(newValue) ? this.min : Math.min(this.max, Math.max(this.min, newValue));
-        this.value2 = null;
-      }
-    },
-    onInternalValueUpdate: function onInternalValueUpdate() {
-      if (this.isRange) {
-        this.isThumbReversed = this.value1 > this.value2;
-      }
-
-      if (!this.lazy || !this.dragging) {
-        this.emitValue('input');
-      }
-
-      if (this.dragging) {
-        this.emitValue('dragging');
-      }
-    },
-    onSliderClick: function onSliderClick(event) {
-      if (this.disabled || this.isTrackClickDisabled) return;
-      var sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left;
-      var percent = (event.clientX - sliderOffsetLeft) / this.sliderSize * 100;
-      var targetValue = this.min + percent * (this.max - this.min) / 100;
-      var diffFirst = Math.abs(targetValue - this.value1);
-
-      if (!this.isRange) {
-        if (diffFirst < this.step / 2) return;
-        this.$refs.button1.setPosition(percent);
-      } else {
-        var diffSecond = Math.abs(targetValue - this.value2);
-
-        if (diffFirst <= diffSecond) {
-          if (diffFirst < this.step / 2) return;
-          this.$refs['button1'].setPosition(percent);
-        } else {
-          if (diffSecond < this.step / 2) return;
-          this.$refs['button2'].setPosition(percent);
+        value: function value(_value) {
+            this.setValues(_value)
+        },
+        value1: function value1() {
+            this.onInternalValueUpdate()
+        },
+        value2: function value2() {
+            this.onInternalValueUpdate()
+        },
+        min: function min() {
+            this.setValues(this.value)
+        },
+        max: function max() {
+            this.setValues(this.value)
         }
-      }
-
-      this.emitValue('change');
     },
-    onDragStart: function onDragStart() {
-      this.dragging = true;
-      this.$emit('dragstart');
-    },
-    onDragEnd: function onDragEnd() {
-      var _this = this;
+    methods: {
+        setValues: function setValues(newValue) {
+            if (this.min > this.max) {
+                return
+            }
 
-      this.isTrackClickDisabled = true;
-      setTimeout(function () {
-        // avoid triggering onSliderClick after dragend
-        _this.isTrackClickDisabled = false;
-      }, 0);
-      this.dragging = false;
-      this.$emit('dragend');
+            if (Array.isArray(newValue)) {
+                this.isRange = true
+                var smallValue = typeof newValue[0] !== 'number' || isNaN(newValue[0]) ? this.min : Math.min(Math.max(this.min, newValue[0]), this.max)
+                var largeValue = typeof newValue[1] !== 'number' || isNaN(newValue[1]) ? this.max : Math.max(Math.min(this.max, newValue[1]), this.min)
+                this.value1 = this.isThumbReversed ? largeValue : smallValue
+                this.value2 = this.isThumbReversed ? smallValue : largeValue
+            } else {
+                this.isRange = false
+                this.value1 = isNaN(newValue) ? this.min : Math.min(this.max, Math.max(this.min, newValue))
+                this.value2 = null
+            }
+        },
+        onInternalValueUpdate: function onInternalValueUpdate() {
+            if (this.isRange) {
+                this.isThumbReversed = this.value1 > this.value2
+            }
 
-      if (this.lazy) {
-        this.emitValue('input');
-      }
+            if (!this.lazy || !this.dragging) {
+                this.emitValue('input')
+            }
+
+            if (this.dragging) {
+                this.emitValue('dragging')
+            }
+        },
+        onSliderClick: function onSliderClick(event) {
+            if (this.disabled || this.isTrackClickDisabled) return
+            var sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left
+            var percent = (event.clientX - sliderOffsetLeft) / this.sliderSize * 100
+            var targetValue = this.min + percent * (this.max - this.min) / 100
+            var diffFirst = Math.abs(targetValue - this.value1)
+
+            if (!this.isRange) {
+                if (diffFirst < this.step / 2) return
+                this.$refs.button1.setPosition(percent)
+            } else {
+                var diffSecond = Math.abs(targetValue - this.value2)
+
+                if (diffFirst <= diffSecond) {
+                    if (diffFirst < this.step / 2) return
+                    this.$refs['button1'].setPosition(percent)
+                } else {
+                    if (diffSecond < this.step / 2) return
+                    this.$refs['button2'].setPosition(percent)
+                }
+            }
+
+            this.emitValue('change')
+        },
+        onDragStart: function onDragStart() {
+            this.dragging = true
+            this.$emit('dragstart')
+        },
+        onDragEnd: function onDragEnd() {
+            var _this = this
+
+            this.isTrackClickDisabled = true
+            setTimeout(function () {
+                // avoid triggering onSliderClick after dragend
+                _this.isTrackClickDisabled = false
+            }, 0)
+            this.dragging = false
+            this.$emit('dragend')
+
+            if (this.lazy) {
+                this.emitValue('input')
+            }
+        },
+        emitValue: function emitValue(type) {
+            this.$emit(type, this.isRange ? [this.minValue, this.maxValue] : this.value1)
+        }
     },
-    emitValue: function emitValue(type) {
-      this.$emit(type, this.isRange ? [this.minValue, this.maxValue] : this.value1);
+    created: function created() {
+        this.isThumbReversed = false
+        this.isTrackClickDisabled = false
+        this.setValues(this.value)
     }
-  },
-  created: function created() {
-    this.isThumbReversed = false;
-    this.isTrackClickDisabled = false;
-    this.setValues(this.value);
-  }
-};
+}
 
 /* script */
 const __vue_script__$N = script$N
 
 /* template */
-var __vue_render__$G = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"b-slider",class:[_vm.size, _vm.type, _vm.rootClasses]},[_c('div',{ref:"slider",staticClass:"b-slider-track",on:{"click":_vm.onSliderClick}},[_c('div',{staticClass:"b-slider-fill",style:(_vm.barStyle)}),_vm._v(" "),(_vm.ticks)?_vm._l((_vm.tickValues),function(val,key){return _c('b-slider-tick',{key:key,attrs:{"value":val}})}):_vm._e(),_vm._v(" "),_vm._t("default"),_vm._v(" "),_c('b-slider-thumb',{ref:"button1",attrs:{"type":_vm.newTooltipType,"tooltip":_vm.tooltip,"custom-formatter":_vm.customFormatter,"role":"slider","aria-valuenow":_vm.value1,"aria-valuemin":_vm.min,"aria-valuemax":_vm.max,"aria-orientation":"horizontal","aria-label":Array.isArray(_vm.ariaLabel) ? _vm.ariaLabel[0] : _vm.ariaLabel,"aria-disabled":_vm.disabled},on:{"dragstart":_vm.onDragStart,"dragend":_vm.onDragEnd},model:{value:(_vm.value1),callback:function ($$v) {_vm.value1=$$v;},expression:"value1"}}),_vm._v(" "),(_vm.isRange)?_c('b-slider-thumb',{ref:"button2",attrs:{"type":_vm.newTooltipType,"tooltip":_vm.tooltip,"custom-formatter":_vm.customFormatter,"role":"slider","aria-valuenow":_vm.value2,"aria-valuemin":_vm.min,"aria-valuemax":_vm.max,"aria-orientation":"horizontal","aria-label":Array.isArray(_vm.ariaLabel) ? _vm.ariaLabel[1] : '',"aria-disabled":_vm.disabled},on:{"dragstart":_vm.onDragStart,"dragend":_vm.onDragEnd},model:{value:(_vm.value2),callback:function ($$v) {_vm.value2=$$v;},expression:"value2"}}):_vm._e()],2)])};
-var __vue_staticRenderFns__$G = [];
+var __vue_render__$G = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('div', {staticClass: 'b-slider', class: [_vm.size, _vm.type, _vm.rootClasses]}, [_c('div', {ref: 'slider', staticClass: 'b-slider-track', on: {'click': _vm.onSliderClick}}, [_c('div', {staticClass: 'b-slider-fill', style: (_vm.barStyle)}), _vm._v(' '), (_vm.ticks) ? _vm._l((_vm.tickValues), function (val, key) { return _c('b-slider-tick', {key: key, attrs: {'value': val}}) }) : _vm._e(), _vm._v(' '), _vm._t('default'), _vm._v(' '), _c('b-slider-thumb', {ref: 'button1', attrs: {'type': _vm.newTooltipType, 'tooltip': _vm.tooltip, 'custom-formatter': _vm.customFormatter, 'role': 'slider', 'aria-valuenow': _vm.value1, 'aria-valuemin': _vm.min, 'aria-valuemax': _vm.max, 'aria-orientation': 'horizontal', 'aria-label': Array.isArray(_vm.ariaLabel) ? _vm.ariaLabel[0] : _vm.ariaLabel, 'aria-disabled': _vm.disabled}, on: {'dragstart': _vm.onDragStart, 'dragend': _vm.onDragEnd}, model: {value: (_vm.value1), callback: function ($$v) { _vm.value1 = $$v }, expression: 'value1'}}), _vm._v(' '), (_vm.isRange) ? _c('b-slider-thumb', {ref: 'button2', attrs: {'type': _vm.newTooltipType, 'tooltip': _vm.tooltip, 'custom-formatter': _vm.customFormatter, 'role': 'slider', 'aria-valuenow': _vm.value2, 'aria-valuemin': _vm.min, 'aria-valuemax': _vm.max, 'aria-orientation': 'horizontal', 'aria-label': Array.isArray(_vm.ariaLabel) ? _vm.ariaLabel[1] : '', 'aria-disabled': _vm.disabled}, on: {'dragstart': _vm.onDragStart, 'dragend': _vm.onDragEnd}, model: {value: (_vm.value2), callback: function ($$v) { _vm.value2 = $$v }, expression: 'value2'}}) : _vm._e()], 2)]) }
+var __vue_staticRenderFns__$G = []
 
 /* style */
 const __vue_inject_styles__$N = undefined
@@ -12867,7 +12950,7 @@ var StepItem = normalizeComponent_1(
     __vue_module_identifier__$N,
     undefined,
     undefined
-  );
+)
 
 var Plugin$r = {
     install: function install(Vue) {
@@ -12932,31 +13015,22 @@ var script$O = {
             default: false
         }
     },
-    onAction: {
-      type: Function,
-      default: function _default() {}
+    data: function data() {
+        return {
+            newDuration: this.duration || config.defaultSnackbarDuration
+        }
     },
-    indefinite: {
-      type: Boolean,
-      default: false
-    }
-  },
-  data: function data() {
-    return {
-      newDuration: this.duration || config.defaultSnackbarDuration
-    };
-  },
-  methods: {
+    methods: {
     /**
     * Click listener.
     * Call action prop before closing (from Mixin).
     */
-    action: function action() {
-      this.onAction();
-      this.close();
+        action: function action() {
+            this.onAction()
+            this.close()
+        }
     }
-  }
-};
+}
 
 /* script */
 const __vue_script__$O = script$O
@@ -12986,7 +13060,7 @@ var Switch = normalizeComponent_1(
     __vue_module_identifier__$O,
     undefined,
     undefined
-  );
+)
 
 var Plugin$s = {
     install: function install(Vue) {
@@ -13000,247 +13074,259 @@ var script$P = {
     name: 'BTableMobileSort',
     components: (_components$8 = {}, _defineProperty(_components$8, Select.name, Select), _defineProperty(_components$8, Icon.name, Icon), _components$8),
     props: {
-      type: Object
+        component: {
+            type: Object,
+            required: true
+        },
+        name: {
+            type: String,
+            default: 'default'
+        },
+        scoped: {
+            type: Boolean
+        },
+        props: {
+            type: Object
+        },
+        tag: {
+            type: String,
+            default: 'div'
+        },
+        event: {
+            type: String,
+            default: 'hook:updated'
+        }
     },
-    tag: {
-      type: String,
-      default: 'div'
+    methods: {
+        refresh: function refresh() {
+            this.$forceUpdate()
+        },
+        isVueComponent: function isVueComponent() {
+            return this.component && this.component._isVue
+        }
     },
-    event: {
-      type: String,
-      default: 'hook:updated'
-    }
-  },
-  methods: {
-    refresh: function refresh() {
-      this.$forceUpdate();
+    created: function created() {
+        if (this.isVueComponent()) {
+            this.component.$on(this.event, this.refresh)
+        }
     },
-    isVueComponent: function isVueComponent() {
-      return this.component && this.component._isVue;
+    beforeDestroy: function beforeDestroy() {
+        if (this.isVueComponent()) {
+            this.component.$off(this.event, this.refresh)
+        }
+    },
+    render: function render(createElement) {
+        if (this.isVueComponent()) {
+            return createElement(this.tag, {}, this.scoped ? this.component.$scopedSlots[this.name](this.props) : this.component.$slots[this.name])
+        }
     }
-  },
-  created: function created() {
-    if (this.isVueComponent()) {
-      this.component.$on(this.event, this.refresh);
-    }
-  },
-  beforeDestroy: function beforeDestroy() {
-    if (this.isVueComponent()) {
-      this.component.$off(this.event, this.refresh);
-    }
-  },
-  render: function render(createElement) {
-    if (this.isVueComponent()) {
-      return createElement(this.tag, {}, this.scoped ? this.component.$scopedSlots[this.name](this.props) : this.component.$slots[this.name]);
-    }
-  }
-};
+}
 
-var _components$7;
+var _components$7
 var script$M = {
-  name: 'BSteps',
-  components: (_components$7 = {}, _defineProperty(_components$7, Icon.name, Icon), _defineProperty(_components$7, SlotComponent.name, SlotComponent), _components$7),
-  props: {
-    value: Number,
-    type: [String, Object],
-    size: String,
-    animated: {
-      type: Boolean,
-      default: true
+    name: 'BSteps',
+    components: (_components$7 = {}, _defineProperty(_components$7, Icon.name, Icon), _defineProperty(_components$7, SlotComponent.name, SlotComponent), _components$7),
+    props: {
+        value: Number,
+        type: [String, Object],
+        size: String,
+        animated: {
+            type: Boolean,
+            default: true
+        },
+        destroyOnHide: {
+            type: Boolean,
+            default: false
+        },
+        iconPack: String,
+        iconPrev: {
+            type: String,
+            default: config.defaultIconPrev
+        },
+        iconNext: {
+            type: String,
+            default: config.defaultIconNext
+        },
+        hasNavigation: {
+            type: Boolean,
+            default: true
+        },
+        ariaNextLabel: String,
+        ariaPreviousLabel: String
     },
-    destroyOnHide: {
-      type: Boolean,
-      default: false
-    },
-    iconPack: String,
-    iconPrev: {
-      type: String,
-      default: config.defaultIconPrev
-    },
-    iconNext: {
-      type: String,
-      default: config.defaultIconNext
-    },
-    hasNavigation: {
-      type: Boolean,
-      default: true
-    },
-    ariaNextLabel: String,
-    ariaPreviousLabel: String
-  },
-  data: function data() {
-    return {
-      activeStep: this.value || 0,
-      defaultSlots: [],
-      contentHeight: 0,
-      isTransitioning: false,
-      _isSteps: true // Used internally by StepItem
+    data: function data() {
+        return {
+            activeStep: this.value || 0,
+            defaultSlots: [],
+            contentHeight: 0,
+            isTransitioning: false,
+            _isSteps: true // Used internally by StepItem
 
-    };
-  },
-  computed: {
-    mainClasses: function mainClasses() {
-      return [this.type, this.size];
+        }
     },
-    stepItems: function stepItems() {
-      return this.defaultSlots.filter(function (vnode) {
-        return vnode.componentInstance && vnode.componentInstance.$data && vnode.componentInstance.$data._isStepItem;
-      }).map(function (vnode) {
-        return vnode.componentInstance;
-      });
-    },
-    reversedStepItems: function reversedStepItems() {
-      return this.stepItems.slice().reverse();
-    },
+    computed: {
+        mainClasses: function mainClasses() {
+            return [this.type, this.size]
+        },
+        stepItems: function stepItems() {
+            return this.defaultSlots.filter(function (vnode) {
+                return vnode.componentInstance && vnode.componentInstance.$data && vnode.componentInstance.$data._isStepItem
+            }).map(function (vnode) {
+                return vnode.componentInstance
+            })
+        },
+        reversedStepItems: function reversedStepItems() {
+            return this.stepItems.slice().reverse()
+        },
 
-    /**
+        /**
      * Check the first visible step index.
      */
-    firstVisibleStepIndex: function firstVisibleStepIndex() {
-      return this.stepItems.map(function (step, idx) {
-        return step.visible;
-      }).indexOf(true);
-    },
+        firstVisibleStepIndex: function firstVisibleStepIndex() {
+            return this.stepItems.map(function (step, idx) {
+                return step.visible
+            }).indexOf(true)
+        },
 
-    /**
+        /**
      * Check if previous button is available.
      */
-    hasPrev: function hasPrev() {
-      return this.firstVisibleStepIndex >= 0 && this.activeStep > this.firstVisibleStepIndex;
-    },
+        hasPrev: function hasPrev() {
+            return this.firstVisibleStepIndex >= 0 && this.activeStep > this.firstVisibleStepIndex
+        },
 
-    /**
+        /**
      * Check the last visible step index.
      */
-    lastVisibleStepIndex: function lastVisibleStepIndex() {
-      var idx = this.reversedStepItems.map(function (step, idx) {
-        return step.visible;
-      }).indexOf(true);
+        lastVisibleStepIndex: function lastVisibleStepIndex() {
+            var idx = this.reversedStepItems.map(function (step, idx) {
+                return step.visible
+            }).indexOf(true)
 
-      if (idx >= 0) {
-        return this.stepItems.length - 1 - idx;
-      }
+            if (idx >= 0) {
+                return this.stepItems.length - 1 - idx
+            }
 
-      return idx;
-    },
+            return idx
+        },
 
-    /**
+        /**
      * Check if next button is available.
      */
-    hasNext: function hasNext() {
-      return this.lastVisibleStepIndex >= 0 && this.activeStep < this.lastVisibleStepIndex;
-    },
-    navigationProps: function navigationProps() {
-      return {
-        previous: {
-          disabled: !this.hasPrev,
-          action: this.prev
+        hasNext: function hasNext() {
+            return this.lastVisibleStepIndex >= 0 && this.activeStep < this.lastVisibleStepIndex
         },
-        next: {
-          disabled: !this.hasNext,
-          action: this.next
+        navigationProps: function navigationProps() {
+            return {
+                previous: {
+                    disabled: !this.hasPrev,
+                    action: this.prev
+                },
+                next: {
+                    disabled: !this.hasNext,
+                    action: this.next
+                }
+            }
         }
-      };
-    }
-  },
-  watch: {
+    },
+    watch: {
     /**
     * When v-model is changed set the new active step.
     */
-    value: function value(_value) {
-      this.changeStep(_value);
-    },
+        value: function value(_value) {
+            this.changeStep(_value)
+        },
 
-    /**
+        /**
     * When step-items are updated, set active one.
     */
-    stepItems: function stepItems() {
-      if (this.activeStep < this.stepItems.length) {
-        this.stepItems[this.activeStep].isActive = true;
-      }
-    }
-  },
-  methods: {
-    refreshSlots: function refreshSlots() {
-      this.defaultSlots = this.$slots.default;
+        stepItems: function stepItems() {
+            if (this.activeStep < this.stepItems.length) {
+                this.stepItems[this.activeStep].isActive = true
+            }
+        }
     },
+    methods: {
+        refreshSlots: function refreshSlots() {
+            this.defaultSlots = this.$slots.default
+        },
 
-    /**
+        /**
      * Change the active step and emit change event.
      */
-    changeStep: function changeStep(newIndex) {
-      if (this.activeStep === newIndex) return;
-      if (newIndex > this.stepItems.length) throw new Error('The index you trying to set is bigger than the steps length');
+        changeStep: function changeStep(newIndex) {
+            if (this.activeStep === newIndex) return
+            if (newIndex > this.stepItems.length) throw new Error('The index you trying to set is bigger than the steps length')
 
-      if (this.activeStep < this.stepItems.length) {
-        this.stepItems[this.activeStep].deactivate(this.activeStep, newIndex);
-      }
+            if (this.activeStep < this.stepItems.length) {
+                this.stepItems[this.activeStep].deactivate(this.activeStep, newIndex)
+            }
 
-      this.stepItems[newIndex].activate(this.activeStep, newIndex);
-      this.activeStep = newIndex;
-      this.$emit('change', newIndex);
-    },
+            this.stepItems[newIndex].activate(this.activeStep, newIndex)
+            this.activeStep = newIndex
+            this.$emit('change', newIndex)
+        },
 
-    /**
+        /**
      * Return if the step should be clickable or not.
      */
-    isItemClickable: function isItemClickable(stepItem, index) {
-      if (stepItem.clickable === undefined) {
-        return this.activeStep > index;
-      }
+        isItemClickable: function isItemClickable(stepItem, index) {
+            if (stepItem.clickable === undefined) {
+                return this.activeStep > index
+            }
 
-      return stepItem.clickable;
-    },
+            return stepItem.clickable
+        },
 
-    /**
+        /**
      * Step click listener, emit input event and change active step.
      */
-    stepClick: function stepClick(value) {
-      this.$emit('input', value);
-      this.changeStep(value);
-    },
+        stepClick: function stepClick(value) {
+            this.$emit('input', value)
+            this.changeStep(value)
+        },
 
-    /**
+        /**
      * Previous button click listener.
      */
-    prev: function prev() {
-      var _this = this;
+        prev: function prev() {
+            var _this = this
 
-      if (!this.hasPrev) return;
-      var prevItemIdx = this.reversedStepItems.map(function (step, idx) {
-        return _this.stepItems.length - 1 - idx < _this.activeStep && step.visible;
-      }).indexOf(true);
+            if (!this.hasPrev) return
+            var prevItemIdx = this.reversedStepItems.map(function (step, idx) {
+                return _this.stepItems.length - 1 - idx < _this.activeStep && step.visible
+            }).indexOf(true)
 
-      if (prevItemIdx >= 0) {
-        prevItemIdx = this.stepItems.length - 1 - prevItemIdx;
-      }
+            if (prevItemIdx >= 0) {
+                prevItemIdx = this.stepItems.length - 1 - prevItemIdx
+            }
 
-      this.$emit('input', prevItemIdx);
-      this.changeStep(prevItemIdx);
-    },
+            this.$emit('input', prevItemIdx)
+            this.changeStep(prevItemIdx)
+        },
 
-    /**
+        /**
      * Previous button click listener.
      */
-    next: function next() {
-      var _this2 = this;
+        next: function next() {
+            var _this2 = this
 
-      if (!this.hasNext) return;
-      var nextItemIdx = this.stepItems.map(function (step, idx) {
-        return idx > _this2.activeStep && step.visible;
-      }).indexOf(true);
-      this.$emit('input', nextItemIdx);
-      this.changeStep(nextItemIdx);
-    }
-  },
-  mounted: function mounted() {
-    if (this.activeStep < this.stepItems.length) {
-      this.stepItems[this.activeStep].isActive = true;
-    }
+            if (!this.hasNext) return
+            var nextItemIdx = this.stepItems.map(function (step, idx) {
+                return idx > _this2.activeStep && step.visible
+            }).indexOf(true)
+            this.$emit('input', nextItemIdx)
+            this.changeStep(nextItemIdx)
+        }
+    },
+    mounted: function mounted() {
+        if (this.activeStep < this.stepItems.length) {
+            this.stepItems[this.activeStep].isActive = true
+        }
 
-    this.refreshSlots();
-  }
-};
+        this.refreshSlots()
+    }
+}
 
 /* script */
 const __vue_script__$P = script$P
@@ -13270,7 +13356,7 @@ var TableMobileSort = normalizeComponent_1(
     __vue_module_identifier__$P,
     undefined,
     undefined
-  );
+)
 
 //
 //
@@ -13355,75 +13441,75 @@ var script$Q = {
       transitionName: null,
       _isStepItem: true // Used internally by Step
 
-    };
-  },
-  methods: {
+        }
+    },
+    methods: {
     /**
     * Activate step, alter animation name based on the index.
     */
-    activate: function activate(oldIndex, index) {
-      this.transitionName = index < oldIndex ? 'slide-next' : 'slide-prev';
-      this.isActive = true;
-    },
+        activate: function activate(oldIndex, index) {
+            this.transitionName = index < oldIndex ? 'slide-next' : 'slide-prev'
+            this.isActive = true
+        },
 
-    /**
+        /**
     * Deactivate step, alter animation name based on the index.
     */
-    deactivate: function deactivate(oldIndex, index) {
-      this.transitionName = index < oldIndex ? 'slide-next' : 'slide-prev';
-      this.isActive = false;
-    }
-  },
-  created: function created() {
-    if (!this.$parent.$data._isSteps) {
-      this.$destroy();
-      throw new Error('You should wrap bStepItem on a bSteps');
-    }
-
-    this.$parent.refreshSlots();
-  },
-  beforeDestroy: function beforeDestroy() {
-    this.$parent.refreshSlots();
-  },
-  render: function render(createElement) {
-    var _this = this;
-
-    // if destroy apply v-if
-    if (this.$parent.destroyOnHide) {
-      if (!this.isActive || !this.visible) {
-        return;
-      }
-    }
-
-    var vnode = createElement('div', {
-      directives: [{
-        name: 'show',
-        value: this.isActive && this.visible
-      }],
-      attrs: {
-        'class': 'step-item'
-      }
-    }, this.$slots.default); // check animated prop
-
-    if (this.$parent.animated) {
-      return createElement('transition', {
-        props: {
-          'name': this.transitionName
-        },
-        on: {
-          'before-enter': function beforeEnter() {
-            _this.$parent.isTransitioning = true;
-          },
-          'after-enter': function afterEnter() {
-            _this.$parent.isTransitioning = false;
-          }
+        deactivate: function deactivate(oldIndex, index) {
+            this.transitionName = index < oldIndex ? 'slide-next' : 'slide-prev'
+            this.isActive = false
         }
-      }, [vnode]);
-    }
+    },
+    created: function created() {
+        if (!this.$parent.$data._isSteps) {
+            this.$destroy()
+            throw new Error('You should wrap bStepItem on a bSteps')
+        }
 
-    return vnode;
-  }
-};
+        this.$parent.refreshSlots()
+    },
+    beforeDestroy: function beforeDestroy() {
+        this.$parent.refreshSlots()
+    },
+    render: function render(createElement) {
+        var _this = this
+
+        // if destroy apply v-if
+        if (this.$parent.destroyOnHide) {
+            if (!this.isActive || !this.visible) {
+                return
+            }
+        }
+
+        var vnode = createElement('div', {
+            directives: [{
+                name: 'show',
+                value: this.isActive && this.visible
+            }],
+            attrs: {
+                'class': 'step-item'
+            }
+        }, this.$slots.default) // check animated prop
+
+        if (this.$parent.animated) {
+            return createElement('transition', {
+                props: {
+                    'name': this.transitionName
+                },
+                on: {
+                    'before-enter': function beforeEnter() {
+                        _this.$parent.isTransitioning = true
+                    },
+                    'after-enter': function afterEnter() {
+                        _this.$parent.isTransitioning = false
+                    }
+                }
+            }, [vnode])
+        }
+
+        return vnode
+    }
+}
 
 /* script */
 const __vue_script__$Q = script$Q
@@ -13453,7 +13539,7 @@ var TableColumn = normalizeComponent_1(
     __vue_module_identifier__$Q,
     undefined,
     undefined
-  );
+)
 
 var _components$9
 var script$R = {
@@ -13596,9 +13682,11 @@ var script$R = {
         ariaPageLabel: String,
         ariaCurrentLabel: String
     },
-    falseValue: {
-      type: [String, Number, Boolean, Function, Object, Array, Date],
-      default: false
+    data: function data() {
+        return {
+            newValue: this.value,
+            isMouseDown: false
+        }
     },
     computed: {
     /**
@@ -14200,17 +14288,17 @@ var script$R = {
     /**
     * When v-model change, set internal value.
     */
-    value: function value(_value) {
-      this.newValue = _value;
+        value: function value(_value) {
+            this.newValue = _value
+        }
+    },
+    methods: {
+        focus: function focus() {
+            // MacOS FireFox and Safari do not focus when clicked
+            this.$refs.input.focus()
+        }
     }
-  },
-  methods: {
-    focus: function focus() {
-      // MacOS FireFox and Safari do not focus when clicked
-      this.$refs.input.focus();
-    }
-  }
-};
+}
 
 /* script */
 const __vue_script__$R = script$R
@@ -14280,7 +14368,7 @@ var Table = normalizeComponent_1(
     __vue_module_identifier__$R,
     undefined,
     undefined
-  );
+)
 
 var Plugin$t = {
     install: function install(Vue) {
@@ -14413,12 +14501,50 @@ var script$S = {
         } else {
           return "".concat(column.label, ": ").concat(column.mobileSortOptions[1]);
         }
-      }
+    },
+    computed: {
+        calculateParsedColumns: function calculateParsedColumns() {
+            if (this.columns) {
+                return this.columns.reduce(function (res, current) {
+                    return [].concat(_toConsumableArray(res), [current, current])
+                }, [])
+            }
 
-      return column.label;
+            return []
+        },
+        showPlaceholder: function showPlaceholder() {
+            var _this = this
+
+            return !this.columns || !this.columns.some(function (column) {
+                return column === _this.mobileSort
+            })
+        }
+    },
+    watch: {
+        mobileSort: function mobileSort(newVal, oldVal) {
+            if (newVal.column !== oldVal.column || newVal.index !== oldVal.index) {
+                if (this.currentSortColumn === newVal.column && newVal.index === oldVal.index) return
+                this.$emit('sort', newVal.column, newVal.index % 2 === 0 ? 'asc' : 'desc')
+            }
+        },
+        currentSortColumn: function currentSortColumn(column) {
+            this.mobileSort.column = column
+        }
+    },
+    methods: {
+        calculateLabel: function calculateLabel(column, index) {
+            if (column.mobileSortOptions) {
+                if (index % 2 === 0) {
+                    return ''.concat(column.label, ': ').concat(column.mobileSortOptions[0])
+                } else {
+                    return ''.concat(column.label, ': ').concat(column.mobileSortOptions[1])
+                }
+            }
+
+            return column.label
+        }
     }
-  }
-};
+}
 
 /* script */
 const __vue_script__$S = script$S
@@ -14448,7 +14574,7 @@ var Tabs = normalizeComponent_1(
     __vue_module_identifier__$S,
     undefined,
     undefined
-  );
+)
 
 var script$T = {
     name: 'BTabItem',
@@ -14534,46 +14660,14 @@ var script$T = {
 
         return vnode
     }
-  },
-  beforeMount: function beforeMount() {
-    var _this = this;
-
-    if (!this.$parent.$data._isTable) {
-      this.$destroy();
-      throw new Error('You should wrap bTableColumn on a bTable');
-    }
-
-    if (this.internal) return; // Since we're using scoped prop the columns gonna be multiplied,
-    // this finds when to stop based on the newKey property.
-
-    var repeated = this.$parent.newColumns.some(function (column) {
-      return column.newKey === _this.newKey;
-    });
-    !repeated && this.$parent.newColumns.push(this);
-  },
-  beforeDestroy: function beforeDestroy() {
-    var _this2 = this;
-
-    if (!this.$parent.visibleData.length) return;
-    if (this.$parent.$children.filter(function (vm) {
-      return vm.$data._isTableColumn && vm.$data.newKey === _this2.newKey;
-    }).length !== 1) return;
-    var index = this.$parent.newColumns.map(function (column) {
-      return column.newKey;
-    }).indexOf(this.newKey);
-
-    if (index >= 0) {
-      this.$parent.newColumns.splice(index, 1);
-    }
-  }
-};
+}
 
 /* script */
 const __vue_script__$T = script$T
 
 /* template */
-var __vue_render__$L = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.visible)?_c('td',{class:_vm.rootClasses,attrs:{"data-label":_vm.label}},[_vm._t("default")],2):_vm._e()};
-var __vue_staticRenderFns__$L = [];
+var __vue_render__$L = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return (_vm.visible) ? _c('td', {class: _vm.rootClasses, attrs: {'data-label': _vm.label}}, [_vm._t('default')], 2) : _vm._e() }
+var __vue_staticRenderFns__$L = []
 
 /* style */
 const __vue_inject_styles__$T = undefined
@@ -14596,7 +14690,7 @@ var TabItem = normalizeComponent_1(
     __vue_module_identifier__$T,
     undefined,
     undefined
-  );
+)
 
 var Plugin$u = {
     install: function install(Vue) {
@@ -14663,263 +14757,133 @@ var script$U = {
         },
         ariaCloseLabel: String
     },
-    columns: {
-      type: Array,
-      default: function _default() {
-        return [];
-      }
-    },
-    bordered: Boolean,
-    striped: Boolean,
-    narrowed: Boolean,
-    hoverable: Boolean,
-    loading: Boolean,
-    detailed: Boolean,
-    checkable: Boolean,
-    headerCheckable: {
-      type: Boolean,
-      default: true
-    },
-    checkboxPosition: {
-      type: String,
-      default: 'left',
-      validator: function validator(value) {
-        return ['left', 'right'].indexOf(value) >= 0;
-      }
-    },
-    selected: Object,
-    focusable: Boolean,
-    customIsChecked: Function,
-    isRowCheckable: {
-      type: Function,
-      default: function _default() {
-        return true;
-      }
-    },
-    checkedRows: {
-      type: Array,
-      default: function _default() {
-        return [];
-      }
-    },
-    mobileCards: {
-      type: Boolean,
-      default: true
-    },
-    defaultSort: [String, Array],
-    defaultSortDirection: {
-      type: String,
-      default: 'asc'
-    },
-    sortIcon: {
-      type: String,
-      default: 'arrow-up'
-    },
-    sortIconSize: {
-      type: String,
-      default: 'is-small'
-    },
-    paginated: Boolean,
-    currentPage: {
-      type: Number,
-      default: 1
-    },
-    perPage: {
-      type: [Number, String],
-      default: 20
-    },
-    showDetailIcon: {
-      type: Boolean,
-      default: true
-    },
-    paginationSimple: Boolean,
-    paginationSize: String,
-    paginationPosition: {
-      type: String,
-      default: 'bottom',
-      validator: function validator(value) {
-        return ['bottom', 'top', 'both', 'none'].indexOf(value) >= 0;
-      }
-    },
-    backendSorting: Boolean,
-    rowClass: {
-      type: Function,
-      default: function _default() {
-        return '';
-      }
-    },
-    openedDetailed: {
-      type: Array,
-      default: function _default() {
-        return [];
-      }
-    },
-    hasDetailedVisible: {
-      type: Function,
-      default: function _default() {
-        return true;
-      }
-    },
-    detailKey: {
-      type: String,
-      default: ''
-    },
-    customDetailRow: {
-      type: Boolean,
-      default: false
-    },
-    backendPagination: Boolean,
-    total: {
-      type: [Number, String],
-      default: 0
-    },
-    customStyle: {
-      type: String,
-      default: ''
-    },
-    customSelectStyle: {
-      type: String,
-      default: ''
-    },
-    iconPack: String,
-    mobileSortPlaceholder: String,
-    customRowKey: String,
-    draggable: {
-      type: Boolean,
-      default: false
-    },
-    ariaNextLabel: String,
-    ariaPreviousLabel: String,
-    ariaPageLabel: String,
-    ariaCurrentLabel: String
-  },
-  data: function data() {
-    return {
-      getValueByPath: getValueByPath,
-      newColumns: _toConsumableArray(this.columns),
-      visibleDetailRows: this.openedDetailed,
-      newData: this.data,
-      newDataTotal: this.backendPagination ? this.total : this.data.length,
-      newCheckedRows: _toConsumableArray(this.checkedRows),
-      lastCheckedRowIndex: null,
-      newCurrentPage: this.currentPage,
-      currentSortColumn: {},
-      isAsc: true,
-      filters: {},
-      firstTimeSort: true,
-      // Used by first time initSort
-      _isTable: true // Used by TableColumn
+    data: function data() {
+        return {
+            getValueByPath: getValueByPath,
+            newColumns: _toConsumableArray(this.columns),
+            visibleDetailRows: this.openedDetailed,
+            newData: this.data,
+            newDataTotal: this.backendPagination ? this.total : this.data.length,
+            newCheckedRows: _toConsumableArray(this.checkedRows),
+            lastCheckedRowIndex: null,
+            newCurrentPage: this.currentPage,
+            currentSortColumn: {},
+            isAsc: true,
+            filters: {},
+            firstTimeSort: true,
+            // Used by first time initSort
+            _isTable: true // Used by TableColumn
 
-    };
-  },
-  computed: {
+        }
+    },
+    computed: {
     /**
     * return if detailed row tabled
     * will be with chevron column & icon or not
     */
-    showDetailRowIcon: function showDetailRowIcon() {
-      return this.detailed && this.showDetailIcon;
-    },
-    tableClasses: function tableClasses() {
-      return {
-        'is-bordered': this.bordered,
-        'is-striped': this.striped,
-        'is-narrow': this.narrowed,
-        'has-mobile-cards': this.mobileCards,
-        'is-hoverable': (this.hoverable || this.focusable) && this.visibleData.length
-      };
-    },
+        showDetailRowIcon: function showDetailRowIcon() {
+            return this.detailed && this.showDetailIcon
+        },
+        tableClasses: function tableClasses() {
+            return {
+                'is-bordered': this.bordered,
+                'is-striped': this.striped,
+                'is-narrow': this.narrowed,
+                'has-mobile-cards': this.mobileCards,
+                'is-hoverable': (this.hoverable || this.focusable) && this.visibleData.length
+            }
+        },
 
-    /**
+        /**
     * Splitted data based on the pagination.
     */
-    visibleData: function visibleData() {
-      if (!this.paginated) return this.newData;
-      var currentPage = this.newCurrentPage;
-      var perPage = this.perPage;
+        visibleData: function visibleData() {
+            if (!this.paginated) return this.newData
+            var currentPage = this.newCurrentPage
+            var perPage = this.perPage
 
-      if (this.newData.length <= perPage) {
-        return this.newData;
-      } else {
-        var start = (currentPage - 1) * perPage;
-        var end = parseInt(start, 10) + parseInt(perPage, 10);
-        return this.newData.slice(start, end);
-      }
-    },
-    visibleColumns: function visibleColumns() {
-      if (!this.newColumns) return this.newColumns;
-      return this.newColumns.filter(function (column) {
-        return column.visible || column.visible === undefined;
-      });
-    },
+            if (this.newData.length <= perPage) {
+                return this.newData
+            } else {
+                var start = (currentPage - 1) * perPage
+                var end = parseInt(start, 10) + parseInt(perPage, 10)
+                return this.newData.slice(start, end)
+            }
+        },
+        visibleColumns: function visibleColumns() {
+            if (!this.newColumns) return this.newColumns
+            return this.newColumns.filter(function (column) {
+                return column.visible || column.visible === undefined
+            })
+        },
 
-    /**
+        /**
     * Check if all rows in the page are checked.
     */
-    isAllChecked: function isAllChecked() {
-      var _this = this;
+        isAllChecked: function isAllChecked() {
+            var _this = this
 
-      var validVisibleData = this.visibleData.filter(function (row) {
-        return _this.isRowCheckable(row);
-      });
-      if (validVisibleData.length === 0) return false;
-      var isAllChecked = validVisibleData.some(function (currentVisibleRow) {
-        return indexOf(_this.newCheckedRows, currentVisibleRow, _this.customIsChecked) < 0;
-      });
-      return !isAllChecked;
-    },
+            var validVisibleData = this.visibleData.filter(function (row) {
+                return _this.isRowCheckable(row)
+            })
+            if (validVisibleData.length === 0) return false
+            var isAllChecked = validVisibleData.some(function (currentVisibleRow) {
+                return indexOf(_this.newCheckedRows, currentVisibleRow, _this.customIsChecked) < 0
+            })
+            return !isAllChecked
+        },
 
-    /**
+        /**
     * Check if all rows in the page are checkable.
     */
-    isAllUncheckable: function isAllUncheckable() {
-      var _this2 = this;
+        isAllUncheckable: function isAllUncheckable() {
+            var _this2 = this
 
-      var validVisibleData = this.visibleData.filter(function (row) {
-        return _this2.isRowCheckable(row);
-      });
-      return validVisibleData.length === 0;
-    },
+            var validVisibleData = this.visibleData.filter(function (row) {
+                return _this2.isRowCheckable(row)
+            })
+            return validVisibleData.length === 0
+        },
 
-    /**
+        /**
     * Check if has any sortable column.
     */
-    hasSortablenewColumns: function hasSortablenewColumns() {
-      return this.newColumns.some(function (column) {
-        return column.sortable;
-      });
-    },
+        hasSortablenewColumns: function hasSortablenewColumns() {
+            return this.newColumns.some(function (column) {
+                return column.sortable
+            })
+        },
 
-    /**
+        /**
     * Check if has any searchable column.
     */
-    hasSearchablenewColumns: function hasSearchablenewColumns() {
-      return this.newColumns.some(function (column) {
-        return column.searchable;
-      });
-    },
+        hasSearchablenewColumns: function hasSearchablenewColumns() {
+            return this.newColumns.some(function (column) {
+                return column.searchable
+            })
+        },
 
-    /**
+        /**
     * Check if has any column using subheading.
     */
-    hasCustomSubheadings: function hasCustomSubheadings() {
-      if (this.$scopedSlots && this.$scopedSlots.subheading) return true;
-      return this.newColumns.some(function (column) {
-        return column.subheading || column.$scopedSlots && column.$scopedSlots.subheading;
-      });
-    },
+        hasCustomSubheadings: function hasCustomSubheadings() {
+            if (this.$scopedSlots && this.$scopedSlots.subheading) return true
+            return this.newColumns.some(function (column) {
+                return column.subheading || column.$scopedSlots && column.$scopedSlots.subheading
+            })
+        },
 
-    /**
+        /**
     * Return total column count based if it's checkable or expanded
     */
-    columnCount: function columnCount() {
-      var count = this.newColumns.length;
-      count += this.checkable ? 1 : 0;
-      count += this.detailed ? 1 : 0;
-      return count;
-    }
-  },
-  watch: {
+        columnCount: function columnCount() {
+            var count = this.newColumns.length
+            count += this.checkable ? 1 : 0
+            count += this.detailed ? 1 : 0
+            return count
+        }
+    },
+    watch: {
     /**
     * When data prop change:
     *   1. Update internal value.
@@ -14927,463 +14891,461 @@ var script$U = {
     *   3. Sort again if it's not backend-sort.
     *   4. Set new total if it's not backend-paginated.
     */
-    data: function data(value) {
-      var _this3 = this;
+        data: function data(value) {
+            var _this3 = this
 
-      // Save newColumns before resetting
-      var newColumns = this.newColumns;
-      this.newColumns = [];
-      this.newData = value; // Prevent table from being headless, data could change and created hook
-      // on column might not trigger
+            // Save newColumns before resetting
+            var newColumns = this.newColumns
+            this.newColumns = []
+            this.newData = value // Prevent table from being headless, data could change and created hook
+            // on column might not trigger
 
-      this.$nextTick(function () {
-        if (!_this3.newColumns.length) _this3.newColumns = newColumns;
-      });
+            this.$nextTick(function () {
+                if (!_this3.newColumns.length) _this3.newColumns = newColumns
+            })
 
-      if (!this.backendSorting) {
-        this.sort(this.currentSortColumn, true);
-      }
+            if (!this.backendSorting) {
+                this.sort(this.currentSortColumn, true)
+            }
 
-      if (!this.backendPagination) {
-        this.newDataTotal = value.length;
-      }
-    },
+            if (!this.backendPagination) {
+                this.newDataTotal = value.length
+            }
+        },
 
-    /**
+        /**
     * When Pagination total change, update internal total
     * only if it's backend-paginated.
     */
-    total: function total(newTotal) {
-      if (!this.backendPagination) return;
-      this.newDataTotal = newTotal;
-    },
+        total: function total(newTotal) {
+            if (!this.backendPagination) return
+            this.newDataTotal = newTotal
+        },
 
-    /**
+        /**
     * When checkedRows prop change, update internal value without
     * mutating original data.
     */
-    checkedRows: function checkedRows(rows) {
-      this.newCheckedRows = _toConsumableArray(rows);
-    },
-    columns: function columns(value) {
-      this.newColumns = _toConsumableArray(value);
-    },
-    newColumns: function newColumns(value) {
-      this.checkSort();
-    },
-    filters: {
-      handler: function handler(value) {
-        var _this4 = this;
+        checkedRows: function checkedRows(rows) {
+            this.newCheckedRows = _toConsumableArray(rows)
+        },
+        columns: function columns(value) {
+            this.newColumns = _toConsumableArray(value)
+        },
+        newColumns: function newColumns(value) {
+            this.checkSort()
+        },
+        filters: {
+            handler: function handler(value) {
+                var _this4 = this
 
-        this.newData = this.data.filter(function (row) {
-          return _this4.isRowFiltered(row);
-        });
+                this.newData = this.data.filter(function (row) {
+                    return _this4.isRowFiltered(row)
+                })
 
-        if (!this.backendPagination) {
-          this.newDataTotal = this.newData.length;
-        }
-      },
-      deep: true
-    },
+                if (!this.backendPagination) {
+                    this.newDataTotal = this.newData.length
+                }
+            },
+            deep: true
+        },
 
-    /**
+        /**
     * When the user wants to control the detailed rows via props.
     * Or wants to open the details of certain row with the router for example.
     */
-    openedDetailed: function openedDetailed(expandedRows) {
-      this.visibleDetailRows = expandedRows;
+        openedDetailed: function openedDetailed(expandedRows) {
+            this.visibleDetailRows = expandedRows
+        },
+        currentPage: function currentPage(newVal) {
+            this.newCurrentPage = newVal
+        }
     },
-    currentPage: function currentPage(newVal) {
-      this.newCurrentPage = newVal;
-    }
-  },
-  methods: {
+    methods: {
     /**
     * Sort an array by key without mutating original data.
     * Call the user sort function if it was passed.
     */
-    sortBy: function sortBy(array, key, fn, isAsc) {
-      var sorted = []; // Sorting without mutating original data
+        sortBy: function sortBy(array, key, fn, isAsc) {
+            var sorted = [] // Sorting without mutating original data
 
-      if (fn && typeof fn === 'function') {
-        sorted = _toConsumableArray(array).sort(function (a, b) {
-          return fn(a, b, isAsc);
-        });
-      } else {
-        sorted = _toConsumableArray(array).sort(function (a, b) {
-          // Get nested values from objects
-          var newA = getValueByPath(a, key);
-          var newB = getValueByPath(b, key); // sort boolean type
+            if (fn && typeof fn === 'function') {
+                sorted = _toConsumableArray(array).sort(function (a, b) {
+                    return fn(a, b, isAsc)
+                })
+            } else {
+                sorted = _toConsumableArray(array).sort(function (a, b) {
+                    // Get nested values from objects
+                    var newA = getValueByPath(a, key)
+                    var newB = getValueByPath(b, key) // sort boolean type
 
-          if (typeof newA === 'boolean' && typeof newB === 'boolean') {
-            return isAsc ? newA - newB : newB - newA;
-          }
+                    if (typeof newA === 'boolean' && typeof newB === 'boolean') {
+                        return isAsc ? newA - newB : newB - newA
+                    }
 
-          if (!newA && newA !== 0) return 1;
-          if (!newB && newB !== 0) return -1;
-          if (newA === newB) return 0;
-          newA = typeof newA === 'string' ? newA.toUpperCase() : newA;
-          newB = typeof newB === 'string' ? newB.toUpperCase() : newB;
-          return isAsc ? newA > newB ? 1 : -1 : newA > newB ? -1 : 1;
-        });
-      }
+                    if (!newA && newA !== 0) return 1
+                    if (!newB && newB !== 0) return -1
+                    if (newA === newB) return 0
+                    newA = typeof newA === 'string' ? newA.toUpperCase() : newA
+                    newB = typeof newB === 'string' ? newB.toUpperCase() : newB
+                    return isAsc ? newA > newB ? 1 : -1 : newA > newB ? -1 : 1
+                })
+            }
 
-      return sorted;
-    },
+            return sorted
+        },
 
-    /**
+        /**
     * Sort the column.
     * Toggle current direction on column if it's sortable
     * and not just updating the prop.
     */
-    sort: function sort(column) {
-      var updatingData = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-      var direction = arguments.length > 2 ? arguments[2] : undefined;
-      if (!column || !column.sortable) return;
+        sort: function sort(column) {
+            var updatingData = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false
+            var direction = arguments.length > 2 ? arguments[2] : undefined
+            if (!column || !column.sortable) return
 
-      if (!updatingData) {
-        this.isAsc = column === this.currentSortColumn ? !this.isAsc : this.defaultSortDirection.toLowerCase() !== 'desc';
-      } // from mobile sort
+            if (!updatingData) {
+                this.isAsc = column === this.currentSortColumn ? !this.isAsc : this.defaultSortDirection.toLowerCase() !== 'desc'
+            } // from mobile sort
 
+            if (direction) {
+                this.isAsc = direction === 'asc'
+            }
 
-      if (direction) {
-        this.isAsc = direction === 'asc';
-      }
+            if (!this.firstTimeSort) {
+                this.$emit('sort', column.field, this.isAsc ? 'asc' : 'desc')
+            }
 
-      if (!this.firstTimeSort) {
-        this.$emit('sort', column.field, this.isAsc ? 'asc' : 'desc');
-      }
+            if (!this.backendSorting) {
+                this.newData = this.sortBy(this.newData, column.field, column.customSort, this.isAsc)
+            }
 
-      if (!this.backendSorting) {
-        this.newData = this.sortBy(this.newData, column.field, column.customSort, this.isAsc);
-      }
+            this.currentSortColumn = column
+        },
 
-      this.currentSortColumn = column;
-    },
-
-    /**
+        /**
     * Check if the row is checked (is added to the array).
     */
-    isRowChecked: function isRowChecked(row) {
-      return indexOf(this.newCheckedRows, row, this.customIsChecked) >= 0;
-    },
+        isRowChecked: function isRowChecked(row) {
+            return indexOf(this.newCheckedRows, row, this.customIsChecked) >= 0
+        },
 
-    /**
+        /**
     * Remove a checked row from the array.
     */
-    removeCheckedRow: function removeCheckedRow(row) {
-      var index = indexOf(this.newCheckedRows, row, this.customIsChecked);
+        removeCheckedRow: function removeCheckedRow(row) {
+            var index = indexOf(this.newCheckedRows, row, this.customIsChecked)
 
-      if (index >= 0) {
-        this.newCheckedRows.splice(index, 1);
-      }
-    },
+            if (index >= 0) {
+                this.newCheckedRows.splice(index, 1)
+            }
+        },
 
-    /**
+        /**
     * Header checkbox click listener.
     * Add or remove all rows in current page.
     */
-    checkAll: function checkAll() {
-      var _this5 = this;
+        checkAll: function checkAll() {
+            var _this5 = this
 
-      var isAllChecked = this.isAllChecked;
-      this.visibleData.forEach(function (currentRow) {
-        _this5.removeCheckedRow(currentRow);
+            var isAllChecked = this.isAllChecked
+            this.visibleData.forEach(function (currentRow) {
+                _this5.removeCheckedRow(currentRow)
 
-        if (!isAllChecked) {
-          if (_this5.isRowCheckable(currentRow)) {
-            _this5.newCheckedRows.push(currentRow);
-          }
-        }
-      });
-      this.$emit('check', this.newCheckedRows);
-      this.$emit('check-all', this.newCheckedRows); // Emit checked rows to update user variable
+                if (!isAllChecked) {
+                    if (_this5.isRowCheckable(currentRow)) {
+                        _this5.newCheckedRows.push(currentRow)
+                    }
+                }
+            })
+            this.$emit('check', this.newCheckedRows)
+            this.$emit('check-all', this.newCheckedRows) // Emit checked rows to update user variable
 
-      this.$emit('update:checkedRows', this.newCheckedRows);
-    },
+            this.$emit('update:checkedRows', this.newCheckedRows)
+        },
 
-    /**
+        /**
     * Row checkbox click listener.
     */
-    checkRow: function checkRow(row, index, event) {
-      if (!this.isRowCheckable(row)) return;
-      var lastIndex = this.lastCheckedRowIndex;
-      this.lastCheckedRowIndex = index;
+        checkRow: function checkRow(row, index, event) {
+            if (!this.isRowCheckable(row)) return
+            var lastIndex = this.lastCheckedRowIndex
+            this.lastCheckedRowIndex = index
 
-      if (event.shiftKey && lastIndex !== null && index !== lastIndex) {
-        this.shiftCheckRow(row, index, lastIndex);
-      } else if (!this.isRowChecked(row)) {
-        this.newCheckedRows.push(row);
-      } else {
-        this.removeCheckedRow(row);
-      }
+            if (event.shiftKey && lastIndex !== null && index !== lastIndex) {
+                this.shiftCheckRow(row, index, lastIndex)
+            } else if (!this.isRowChecked(row)) {
+                this.newCheckedRows.push(row)
+            } else {
+                this.removeCheckedRow(row)
+            }
 
-      this.$emit('check', this.newCheckedRows, row); // Emit checked rows to update user variable
+            this.$emit('check', this.newCheckedRows, row) // Emit checked rows to update user variable
 
-      this.$emit('update:checkedRows', this.newCheckedRows);
-    },
+            this.$emit('update:checkedRows', this.newCheckedRows)
+        },
 
-    /**
+        /**
      * Check row when shift is pressed.
      */
-    shiftCheckRow: function shiftCheckRow(row, index, lastCheckedRowIndex) {
-      var _this6 = this;
+        shiftCheckRow: function shiftCheckRow(row, index, lastCheckedRowIndex) {
+            var _this6 = this
 
-      // Get the subset of the list between the two indicies
-      var subset = this.visibleData.slice(Math.min(index, lastCheckedRowIndex), Math.max(index, lastCheckedRowIndex) + 1); // Determine the operation based on the state of the clicked checkbox
+            // Get the subset of the list between the two indicies
+            var subset = this.visibleData.slice(Math.min(index, lastCheckedRowIndex), Math.max(index, lastCheckedRowIndex) + 1) // Determine the operation based on the state of the clicked checkbox
 
-      var shouldCheck = !this.isRowChecked(row);
-      subset.forEach(function (item) {
-        _this6.removeCheckedRow(item);
+            var shouldCheck = !this.isRowChecked(row)
+            subset.forEach(function (item) {
+                _this6.removeCheckedRow(item)
 
-        if (shouldCheck && _this6.isRowCheckable(item)) {
-          _this6.newCheckedRows.push(item);
-        }
-      });
-    },
+                if (shouldCheck && _this6.isRowCheckable(item)) {
+                    _this6.newCheckedRows.push(item)
+                }
+            })
+        },
 
-    /**
+        /**
     * Row click listener.
     * Emit all necessary events.
     */
-    selectRow: function selectRow(row, index) {
-      this.$emit('click', row);
-      if (this.selected === row) return; // Emit new and old row
+        selectRow: function selectRow(row, index) {
+            this.$emit('click', row)
+            if (this.selected === row) return // Emit new and old row
 
-      this.$emit('select', row, this.selected); // Emit new row to update user variable
+            this.$emit('select', row, this.selected) // Emit new row to update user variable
 
-      this.$emit('update:selected', row);
-    },
+            this.$emit('update:selected', row)
+        },
 
-    /**
+        /**
     * Paginator change listener.
     */
-    pageChanged: function pageChanged(page) {
-      this.newCurrentPage = page > 0 ? page : 1;
-      this.$emit('page-change', this.newCurrentPage);
-      this.$emit('update:currentPage', this.newCurrentPage);
-    },
+        pageChanged: function pageChanged(page) {
+            this.newCurrentPage = page > 0 ? page : 1
+            this.$emit('page-change', this.newCurrentPage)
+            this.$emit('update:currentPage', this.newCurrentPage)
+        },
 
-    /**
+        /**
     * Toggle to show/hide details slot
     */
-    toggleDetails: function toggleDetails(obj) {
-      var found = this.isVisibleDetailRow(obj);
+        toggleDetails: function toggleDetails(obj) {
+            var found = this.isVisibleDetailRow(obj)
 
-      if (found) {
-        this.closeDetailRow(obj);
-        this.$emit('details-close', obj);
-      } else {
-        this.openDetailRow(obj);
-        this.$emit('details-open', obj);
-      } // Syncs the detailed rows with the parent component
+            if (found) {
+                this.closeDetailRow(obj)
+                this.$emit('details-close', obj)
+            } else {
+                this.openDetailRow(obj)
+                this.$emit('details-open', obj)
+            } // Syncs the detailed rows with the parent component
 
+            this.$emit('update:openedDetailed', this.visibleDetailRows)
+        },
+        openDetailRow: function openDetailRow(obj) {
+            var index = this.handleDetailKey(obj)
+            this.visibleDetailRows.push(index)
+        },
+        closeDetailRow: function closeDetailRow(obj) {
+            var index = this.handleDetailKey(obj)
+            var i = this.visibleDetailRows.indexOf(index)
+            this.visibleDetailRows.splice(i, 1)
+        },
+        isVisibleDetailRow: function isVisibleDetailRow(obj) {
+            var index = this.handleDetailKey(obj)
+            var result = this.visibleDetailRows.indexOf(index) >= 0
+            return result
+        },
+        isActiveDetailRow: function isActiveDetailRow(row) {
+            return this.detailed && !this.customDetailRow && this.isVisibleDetailRow(row)
+        },
+        isActiveCustomDetailRow: function isActiveCustomDetailRow(row) {
+            return this.detailed && this.customDetailRow && this.isVisibleDetailRow(row)
+        },
+        isRowFiltered: function isRowFiltered(row) {
+            for (var key in this.filters) {
+                // remove key if empty
+                if (!this.filters[key]) {
+                    delete this.filters[key]
+                    return true
+                }
 
-      this.$emit('update:openedDetailed', this.visibleDetailRows);
-    },
-    openDetailRow: function openDetailRow(obj) {
-      var index = this.handleDetailKey(obj);
-      this.visibleDetailRows.push(index);
-    },
-    closeDetailRow: function closeDetailRow(obj) {
-      var index = this.handleDetailKey(obj);
-      var i = this.visibleDetailRows.indexOf(index);
-      this.visibleDetailRows.splice(i, 1);
-    },
-    isVisibleDetailRow: function isVisibleDetailRow(obj) {
-      var index = this.handleDetailKey(obj);
-      var result = this.visibleDetailRows.indexOf(index) >= 0;
-      return result;
-    },
-    isActiveDetailRow: function isActiveDetailRow(row) {
-      return this.detailed && !this.customDetailRow && this.isVisibleDetailRow(row);
-    },
-    isActiveCustomDetailRow: function isActiveCustomDetailRow(row) {
-      return this.detailed && this.customDetailRow && this.isVisibleDetailRow(row);
-    },
-    isRowFiltered: function isRowFiltered(row) {
-      for (var key in this.filters) {
-        // remove key if empty
-        if (!this.filters[key]) {
-          delete this.filters[key];
-          return true;
-        }
+                var value = this.getValueByPath(row, key)
+                if (value == null) return false
 
-        var value = this.getValueByPath(row, key);
-        if (value == null) return false;
+                if (Number.isInteger(value)) {
+                    if (value !== Number(this.filters[key])) return false
+                } else {
+                    var re = new RegExp(this.filters[key], 'i')
+                    if (typeof value === 'boolean') value = ''.concat(value)
+                    if (!value.match(re)) return false
+                }
+            }
 
-        if (Number.isInteger(value)) {
-          if (value !== Number(this.filters[key])) return false;
-        } else {
-          var re = new RegExp(this.filters[key], 'i');
-          if (typeof value === 'boolean') value = "".concat(value);
-          if (!value.match(re)) return false;
-        }
-      }
+            return true
+        },
 
-      return true;
-    },
-
-    /**
+        /**
         * When the detailKey is defined we use the object[detailKey] as index.
         * If not, use the object reference by default.
         */
-    handleDetailKey: function handleDetailKey(index) {
-      var key = this.detailKey;
-      return !key.length || !index ? index : index[key];
-    },
-    checkPredefinedDetailedRows: function checkPredefinedDetailedRows() {
-      var defaultExpandedRowsDefined = this.openedDetailed.length > 0;
+        handleDetailKey: function handleDetailKey(index) {
+            var key = this.detailKey
+            return !key.length || !index ? index : index[key]
+        },
+        checkPredefinedDetailedRows: function checkPredefinedDetailedRows() {
+            var defaultExpandedRowsDefined = this.openedDetailed.length > 0
 
-      if (defaultExpandedRowsDefined && !this.detailKey.length) {
-        throw new Error('If you set a predefined opened-detailed, you must provide a unique key using the prop "detail-key"');
-      }
-    },
+            if (defaultExpandedRowsDefined && !this.detailKey.length) {
+                throw new Error('If you set a predefined opened-detailed, you must provide a unique key using the prop "detail-key"')
+            }
+        },
 
-    /**
+        /**
     * Call initSort only first time (For example async data).
     */
-    checkSort: function checkSort() {
-      if (this.newColumns.length && this.firstTimeSort) {
-        this.initSort();
-        this.firstTimeSort = false;
-      } else if (this.newColumns.length) {
-        if (this.currentSortColumn.field) {
-          for (var i = 0; i < this.newColumns.length; i++) {
-            if (this.newColumns[i].field === this.currentSortColumn.field) {
-              this.currentSortColumn = this.newColumns[i];
-              break;
+        checkSort: function checkSort() {
+            if (this.newColumns.length && this.firstTimeSort) {
+                this.initSort()
+                this.firstTimeSort = false
+            } else if (this.newColumns.length) {
+                if (this.currentSortColumn.field) {
+                    for (var i = 0; i < this.newColumns.length; i++) {
+                        if (this.newColumns[i].field === this.currentSortColumn.field) {
+                            this.currentSortColumn = this.newColumns[i]
+                            break
+                        }
+                    }
+                }
             }
-          }
-        }
-      }
-    },
+        },
 
-    /**
+        /**
     * Check if footer slot has custom content.
     */
-    hasCustomFooterSlot: function hasCustomFooterSlot() {
-      if (this.$slots.footer.length > 1) return true;
-      var tag = this.$slots.footer[0].tag;
-      if (tag !== 'th' && tag !== 'td') return false;
-      return true;
-    },
+        hasCustomFooterSlot: function hasCustomFooterSlot() {
+            if (this.$slots.footer.length > 1) return true
+            var tag = this.$slots.footer[0].tag
+            if (tag !== 'th' && tag !== 'td') return false
+            return true
+        },
 
-    /**
+        /**
     * Check if bottom-left slot exists.
     */
-    hasBottomLeftSlot: function hasBottomLeftSlot() {
-      return typeof this.$slots['bottom-left'] !== 'undefined';
-    },
+        hasBottomLeftSlot: function hasBottomLeftSlot() {
+            return typeof this.$slots['bottom-left'] !== 'undefined'
+        },
 
-    /**
+        /**
     * Table arrow keys listener, change selection.
     */
-    pressedArrow: function pressedArrow(pos) {
-      if (!this.visibleData.length) return;
-      var index = this.visibleData.indexOf(this.selected) + pos; // Prevent from going up from first and down from last
+        pressedArrow: function pressedArrow(pos) {
+            if (!this.visibleData.length) return
+            var index = this.visibleData.indexOf(this.selected) + pos // Prevent from going up from first and down from last
 
-      index = index < 0 ? 0 : index > this.visibleData.length - 1 ? this.visibleData.length - 1 : index;
-      this.selectRow(this.visibleData[index]);
-    },
+            index = index < 0 ? 0 : index > this.visibleData.length - 1 ? this.visibleData.length - 1 : index
+            this.selectRow(this.visibleData[index])
+        },
 
-    /**
+        /**
     * Focus table element if has selected prop.
     */
-    focus: function focus() {
-      if (!this.focusable) return;
-      this.$el.querySelector('table').focus();
-    },
+        focus: function focus() {
+            if (!this.focusable) return
+            this.$el.querySelector('table').focus()
+        },
 
-    /**
+        /**
     * Initial sorted column based on the default-sort prop.
     */
-    initSort: function initSort() {
-      var _this7 = this;
+        initSort: function initSort() {
+            var _this7 = this
 
-      if (!this.defaultSort) return;
-      var sortField = '';
-      var sortDirection = this.defaultSortDirection;
+            if (!this.defaultSort) return
+            var sortField = ''
+            var sortDirection = this.defaultSortDirection
 
-      if (Array.isArray(this.defaultSort)) {
-        sortField = this.defaultSort[0];
+            if (Array.isArray(this.defaultSort)) {
+                sortField = this.defaultSort[0]
 
-        if (this.defaultSort[1]) {
-          sortDirection = this.defaultSort[1];
-        }
-      } else {
-        sortField = this.defaultSort;
-      }
+                if (this.defaultSort[1]) {
+                    sortDirection = this.defaultSort[1]
+                }
+            } else {
+                sortField = this.defaultSort
+            }
 
-      this.newColumns.forEach(function (column) {
-        if (column.field === sortField) {
-          _this7.isAsc = sortDirection.toLowerCase() !== 'desc';
+            this.newColumns.forEach(function (column) {
+                if (column.field === sortField) {
+                    _this7.isAsc = sortDirection.toLowerCase() !== 'desc'
 
-          _this7.sort(column, true);
-        }
-      });
-    },
+                    _this7.sort(column, true)
+                }
+            })
+        },
 
-    /**
+        /**
     * Emits drag start event
     */
-    handleDragStart: function handleDragStart(event, row, index) {
-      this.$emit('dragstart', {
-        event: event,
-        row: row,
-        index: index
-      });
-    },
+        handleDragStart: function handleDragStart(event, row, index) {
+            this.$emit('dragstart', {
+                event: event,
+                row: row,
+                index: index
+            })
+        },
 
-    /**
+        /**
     * Emits drag leave event
     */
-    handleDragEnd: function handleDragEnd(event, row, index) {
-      this.$emit('dragend', {
-        event: event,
-        row: row,
-        index: index
-      });
-    },
+        handleDragEnd: function handleDragEnd(event, row, index) {
+            this.$emit('dragend', {
+                event: event,
+                row: row,
+                index: index
+            })
+        },
 
-    /**
+        /**
     * Emits drop event
     */
-    handleDrop: function handleDrop(event, row, index) {
-      this.$emit('drop', {
-        event: event,
-        row: row,
-        index: index
-      });
-    },
+        handleDrop: function handleDrop(event, row, index) {
+            this.$emit('drop', {
+                event: event,
+                row: row,
+                index: index
+            })
+        },
 
-    /**
+        /**
     * Emits drag over event
     */
-    handleDragOver: function handleDragOver(event, row, index) {
-      this.$emit('dragover', {
-        event: event,
-        row: row,
-        index: index
-      });
-    },
+        handleDragOver: function handleDragOver(event, row, index) {
+            this.$emit('dragover', {
+                event: event,
+                row: row,
+                index: index
+            })
+        },
 
-    /**
+        /**
     * Emits drag leave event
     */
-    handleDragLeave: function handleDragLeave(event, row, index) {
-      this.$emit('dragleave', {
-        event: event,
-        row: row,
-        index: index
-      });
+        handleDragLeave: function handleDragLeave(event, row, index) {
+            this.$emit('dragleave', {
+                event: event,
+                row: row,
+                index: index
+            })
+        }
+    },
+    mounted: function mounted() {
+        this.checkPredefinedDetailedRows()
+        this.checkSort()
     }
-  },
-  mounted: function mounted() {
-    this.checkPredefinedDetailedRows();
-    this.checkSort();
-  }
-};
+}
 
 /* script */
 const __vue_script__$U = script$U
@@ -15413,7 +15375,7 @@ var Tag = normalizeComponent_1(
     __vue_module_identifier__$U,
     undefined,
     undefined
-  );
+)
 
 //
 //
@@ -15426,61 +15388,113 @@ var script$V = {
     props: {
         attached: Boolean
     }
-  },
-  watch: {
+}
+use(Plugin$t)
+
+var _components$a
+var script$S = {
+    name: 'BTabs',
+    components: (_components$a = {}, _defineProperty(_components$a, Icon.name, Icon), _defineProperty(_components$a, SlotComponent.name, SlotComponent), _components$a),
+    props: {
+        value: Number,
+        expanded: Boolean,
+        type: String,
+        size: String,
+        position: String,
+        animated: {
+            type: Boolean,
+            default: true
+        },
+        destroyOnHide: {
+            type: Boolean,
+            default: false
+        },
+        vertical: Boolean
+    },
+    data: function data() {
+        return {
+            activeTab: this.value || 0,
+            defaultSlots: [],
+            contentHeight: 0,
+            isTransitioning: false,
+            _isTabs: true // Used internally by TabItem
+
+        }
+    },
+    computed: {
+        mainClasses: function mainClasses() {
+            return _defineProperty({
+                'is-fullwidth': this.expanded,
+                'is-vertical': this.vertical
+            }, this.position, this.position && this.vertical)
+        },
+        navClasses: function navClasses() {
+            var _ref2
+
+            return [this.type, this.size, (_ref2 = {}, _defineProperty(_ref2, this.position, this.position && !this.vertical), _defineProperty(_ref2, 'is-fullwidth', this.expanded), _defineProperty(_ref2, 'is-toggle-rounded is-toggle', this.type === 'is-toggle-rounded'), _ref2)]
+        },
+        tabItems: function tabItems() {
+            return this.defaultSlots.filter(function (vnode) {
+                return vnode.componentInstance && vnode.componentInstance.$data && vnode.componentInstance.$data._isTabItem
+            }).map(function (vnode) {
+                return vnode.componentInstance
+            })
+        }
+    },
+    watch: {
     /**
     * When v-model is changed set the new active tab.
     */
-    value: function value(_value) {
-      this.changeTab(_value);
-    },
+        value: function value(_value) {
+            this.changeTab(_value)
+        },
 
-    /**
+        /**
     * When tab-items are updated, set active one.
     */
-    tabItems: function tabItems() {
-      if (this.activeTab < this.tabItems.length) {
-        this.tabItems[this.activeTab].isActive = true;
-      }
-    }
-  },
-  methods: {
-    refreshSlots: function refreshSlots() {
-      this.defaultSlots = this.$slots.default;
+        tabItems: function tabItems() {
+            if (this.activeTab < this.tabItems.length) {
+                this.tabItems[this.activeTab].isActive = true
+            }
+        }
     },
+    methods: {
+        refreshSlots: function refreshSlots() {
+            this.defaultSlots = this.$slots.default
+        },
 
-    /**
+        /**
     * Change the active tab and emit change event.
     */
-    changeTab: function changeTab(newIndex) {
-      if (this.activeTab === newIndex || this.tabItems[newIndex] === undefined) return;
+        changeTab: function changeTab(newIndex) {
+            if (this.activeTab === newIndex || this.tabItems[newIndex] === undefined) return
 
-      if (this.activeTab < this.tabItems.length) {
-        this.tabItems[this.activeTab].deactivate(this.activeTab, newIndex);
-      }
+            if (this.activeTab < this.tabItems.length) {
+                this.tabItems[this.activeTab].deactivate(this.activeTab, newIndex)
+            }
 
-      this.tabItems[newIndex].activate(this.activeTab, newIndex);
-      this.activeTab = newIndex;
-      this.$emit('change', newIndex);
-    },
+            this.tabItems[newIndex].activate(this.activeTab, newIndex)
+            this.activeTab = newIndex
+            this.$emit('change', newIndex)
+        },
 
-    /**
+        /**
     * Tab click listener, emit input event and change active tab.
     */
-    tabClick: function tabClick(value) {
-      if (this.activeTab === value) return;
-      this.$emit('input', value);
-      this.changeTab(value);
-    }
-  },
-  mounted: function mounted() {
-    if (this.activeTab < this.tabItems.length) {
-      this.tabItems[this.activeTab].isActive = true;
-    }
+        tabClick: function tabClick(value) {
+            if (this.activeTab === value) return
+            this.$emit('input', value)
+            this.changeTab(value)
+        }
+    },
+    mounted: function mounted() {
+        if (this.activeTab < this.tabItems.length) {
+            this.tabItems[this.activeTab].isActive = true
+        }
 
-    this.refreshSlots();
-  }
-};
+        this.refreshSlots()
+    }
+}
 
 /* script */
 const __vue_script__$V = script$V
@@ -15510,7 +15524,7 @@ var Taglist = normalizeComponent_1(
     __vue_module_identifier__$V,
     undefined,
     undefined
-  );
+)
 
 var Plugin$v = {
     install: function install(Vue) {
@@ -15772,73 +15786,73 @@ var script$W = {
       transitionName: null,
       _isTabItem: true // Used internally by Tab
 
-    };
-  },
-  methods: {
+        }
+    },
+    methods: {
     /**
     * Activate tab, alter animation name based on the index.
     */
-    activate: function activate(oldIndex, index) {
-      this.transitionName = index < oldIndex ? 'slide-next' : 'slide-prev';
-      this.isActive = true;
-    },
+        activate: function activate(oldIndex, index) {
+            this.transitionName = index < oldIndex ? 'slide-next' : 'slide-prev'
+            this.isActive = true
+        },
 
-    /**
+        /**
     * Deactivate tab, alter animation name based on the index.
     */
-    deactivate: function deactivate(oldIndex, index) {
-      this.transitionName = index < oldIndex ? 'slide-next' : 'slide-prev';
-      this.isActive = false;
-    }
-  },
-  created: function created() {
-    if (!this.$parent.$data._isTabs) {
-      this.$destroy();
-      throw new Error('You should wrap bTabItem on a bTabs');
-    }
-
-    this.$parent.refreshSlots();
-  },
-  beforeDestroy: function beforeDestroy() {
-    this.$parent.refreshSlots();
-  },
-  render: function render(createElement) {
-    var _this = this;
-
-    // if destroy apply v-if
-    if (this.$parent.destroyOnHide) {
-      if (!this.isActive || !this.visible) {
-        return;
-      }
-    }
-
-    var vnode = createElement('div', {
-      directives: [{
-        name: 'show',
-        value: this.isActive && this.visible
-      }],
-      class: 'tab-item'
-    }, this.$slots.default); // check animated prop
-
-    if (this.$parent.animated) {
-      return createElement('transition', {
-        props: {
-          'name': this.transitionName
-        },
-        on: {
-          'before-enter': function beforeEnter() {
-            _this.$parent.isTransitioning = true;
-          },
-          'after-enter': function afterEnter() {
-            _this.$parent.isTransitioning = false;
-          }
+        deactivate: function deactivate(oldIndex, index) {
+            this.transitionName = index < oldIndex ? 'slide-next' : 'slide-prev'
+            this.isActive = false
         }
-      }, [vnode]);
-    }
+    },
+    created: function created() {
+        if (!this.$parent.$data._isTabs) {
+            this.$destroy()
+            throw new Error('You should wrap bTabItem on a bTabs')
+        }
 
-    return vnode;
-  }
-};
+        this.$parent.refreshSlots()
+    },
+    beforeDestroy: function beforeDestroy() {
+        this.$parent.refreshSlots()
+    },
+    render: function render(createElement) {
+        var _this = this
+
+        // if destroy apply v-if
+        if (this.$parent.destroyOnHide) {
+            if (!this.isActive || !this.visible) {
+                return
+            }
+        }
+
+        var vnode = createElement('div', {
+            directives: [{
+                name: 'show',
+                value: this.isActive && this.visible
+            }],
+            class: 'tab-item'
+        }, this.$slots.default) // check animated prop
+
+        if (this.$parent.animated) {
+            return createElement('transition', {
+                props: {
+                    'name': this.transitionName
+                },
+                on: {
+                    'before-enter': function beforeEnter() {
+                        _this.$parent.isTransitioning = true
+                    },
+                    'after-enter': function afterEnter() {
+                        _this.$parent.isTransitioning = false
+                    }
+                }
+            }, [vnode])
+        }
+
+        return vnode
+    }
+}
 
 /* script */
 const __vue_script__$W = script$W
@@ -15868,7 +15882,7 @@ var Taginput = normalizeComponent_1(
     __vue_module_identifier__$W,
     undefined,
     undefined
-  );
+)
 
 var Plugin$w = {
     install: function install(Vue) {
@@ -15893,8 +15907,7 @@ var script$X = {
             newDuration: this.duration || config.defaultToastDuration
         }
     }
-  }
-};
+}
 
 /* script */
 const __vue_script__$X = script$X
@@ -16163,287 +16176,283 @@ var Upload = normalizeComponent_1(
     __vue_module_identifier__$Y,
     undefined,
     undefined
-  );
+)
 
 var Plugin$v = {
-  install: function install(Vue) {
-    registerComponent(Vue, Tag);
-    registerComponent(Vue, Taglist);
-  }
-};
-use(Plugin$v);
-
-var _components$b;
-var script$W = {
-  name: 'BTaginput',
-  components: (_components$b = {}, _defineProperty(_components$b, Autocomplete.name, Autocomplete), _defineProperty(_components$b, Tag.name, Tag), _components$b),
-  mixins: [FormElementMixin],
-  inheritAttrs: false,
-  props: {
-    value: {
-      type: Array,
-      default: function _default() {
-        return [];
-      }
-    },
-    data: {
-      type: Array,
-      default: function _default() {
-        return [];
-      }
-    },
-    type: String,
-    rounded: {
-      type: Boolean,
-      default: false
-    },
-    attached: {
-      type: Boolean,
-      default: false
-    },
-    maxtags: {
-      type: [Number, String],
-      required: false
-    },
-    hasCounter: {
-      type: Boolean,
-      default: function _default() {
-        return config.defaultTaginputHasCounter;
-      }
-    },
-    field: {
-      type: String,
-      default: 'value'
-    },
-    autocomplete: Boolean,
-    nativeAutocomplete: String,
-    disabled: Boolean,
-    ellipsis: Boolean,
-    closable: {
-      type: Boolean,
-      default: true
-    },
-    confirmKeyCodes: {
-      type: Array,
-      default: function _default() {
-        return [13, 188];
-      }
-    },
-    removeOnKeys: {
-      type: Array,
-      default: function _default() {
-        return [8];
-      }
-    },
-    allowNew: Boolean,
-    onPasteSeparators: {
-      type: Array,
-      default: function _default() {
-        return [','];
-      }
-    },
-    beforeAdding: {
-      type: Function,
-      default: function _default() {
-        return true;
-      }
-    },
-    allowDuplicates: {
-      type: Boolean,
-      default: false
-    },
-    checkInfiniteScroll: {
-      type: Boolean,
-      default: false
+    install: function install(Vue) {
+        registerComponent(Vue, Tag)
+        registerComponent(Vue, Taglist)
     }
-  },
-  data: function data() {
-    return {
-      tags: Array.isArray(this.value) ? this.value.slice(0) : this.value || [],
-      newTag: '',
-      _elementRef: 'input',
-      _isTaginput: true
-    };
-  },
-  computed: {
-    rootClasses: function rootClasses() {
-      return {
-        'is-expanded': this.expanded
-      };
-    },
-    containerClasses: function containerClasses() {
-      return {
-        'is-focused': this.isFocused,
-        'is-focusable': this.hasInput
-      };
-    },
-    valueLength: function valueLength() {
-      return this.newTag.trim().length;
-    },
-    defaultSlotName: function defaultSlotName() {
-      return this.hasDefaultSlot ? 'default' : 'dontrender';
-    },
-    emptySlotName: function emptySlotName() {
-      return this.hasEmptySlot ? 'empty' : 'dontrender';
-    },
-    headerSlotName: function headerSlotName() {
-      return this.hasHeaderSlot ? 'header' : 'dontrender';
-    },
-    footerSlotName: function footerSlotName() {
-      return this.hasFooterSlot ? 'footer' : 'dontrender';
-    },
-    hasDefaultSlot: function hasDefaultSlot() {
-      return !!this.$scopedSlots.default;
-    },
-    hasEmptySlot: function hasEmptySlot() {
-      return !!this.$slots.empty;
-    },
-    hasHeaderSlot: function hasHeaderSlot() {
-      return !!this.$slots.header;
-    },
-    hasFooterSlot: function hasFooterSlot() {
-      return !!this.$slots.footer;
-    },
+}
+use(Plugin$v)
 
-    /**
+var _components$b
+var script$W = {
+    name: 'BTaginput',
+    components: (_components$b = {}, _defineProperty(_components$b, Autocomplete.name, Autocomplete), _defineProperty(_components$b, Tag.name, Tag), _components$b),
+    mixins: [FormElementMixin],
+    inheritAttrs: false,
+    props: {
+        value: {
+            type: Array,
+            default: function _default() {
+                return []
+            }
+        },
+        data: {
+            type: Array,
+            default: function _default() {
+                return []
+            }
+        },
+        type: String,
+        rounded: {
+            type: Boolean,
+            default: false
+        },
+        attached: {
+            type: Boolean,
+            default: false
+        },
+        maxtags: {
+            type: [Number, String],
+            required: false
+        },
+        hasCounter: {
+            type: Boolean,
+            default: function _default() {
+                return config.defaultTaginputHasCounter
+            }
+        },
+        field: {
+            type: String,
+            default: 'value'
+        },
+        autocomplete: Boolean,
+        nativeAutocomplete: String,
+        disabled: Boolean,
+        ellipsis: Boolean,
+        closable: {
+            type: Boolean,
+            default: true
+        },
+        confirmKeyCodes: {
+            type: Array,
+            default: function _default() {
+                return [13, 188]
+            }
+        },
+        removeOnKeys: {
+            type: Array,
+            default: function _default() {
+                return [8]
+            }
+        },
+        allowNew: Boolean,
+        onPasteSeparators: {
+            type: Array,
+            default: function _default() {
+                return [',']
+            }
+        },
+        beforeAdding: {
+            type: Function,
+            default: function _default() {
+                return true
+            }
+        },
+        allowDuplicates: {
+            type: Boolean,
+            default: false
+        },
+        checkInfiniteScroll: {
+            type: Boolean,
+            default: false
+        }
+    },
+    data: function data() {
+        return {
+            tags: Array.isArray(this.value) ? this.value.slice(0) : this.value || [],
+            newTag: '',
+            _elementRef: 'input',
+            _isTaginput: true
+        }
+    },
+    computed: {
+        rootClasses: function rootClasses() {
+            return {
+                'is-expanded': this.expanded
+            }
+        },
+        containerClasses: function containerClasses() {
+            return {
+                'is-focused': this.isFocused,
+                'is-focusable': this.hasInput
+            }
+        },
+        valueLength: function valueLength() {
+            return this.newTag.trim().length
+        },
+        defaultSlotName: function defaultSlotName() {
+            return this.hasDefaultSlot ? 'default' : 'dontrender'
+        },
+        emptySlotName: function emptySlotName() {
+            return this.hasEmptySlot ? 'empty' : 'dontrender'
+        },
+        headerSlotName: function headerSlotName() {
+            return this.hasHeaderSlot ? 'header' : 'dontrender'
+        },
+        footerSlotName: function footerSlotName() {
+            return this.hasFooterSlot ? 'footer' : 'dontrender'
+        },
+        hasDefaultSlot: function hasDefaultSlot() {
+            return !!this.$scopedSlots.default
+        },
+        hasEmptySlot: function hasEmptySlot() {
+            return !!this.$slots.empty
+        },
+        hasHeaderSlot: function hasHeaderSlot() {
+            return !!this.$slots.header
+        },
+        hasFooterSlot: function hasFooterSlot() {
+            return !!this.$slots.footer
+        },
+
+        /**
      * Show the input field if a maxtags hasn't been set or reached.
      */
-    hasInput: function hasInput() {
-      return this.maxtags == null || this.tagsLength < this.maxtags;
-    },
-    tagsLength: function tagsLength() {
-      return this.tags.length;
-    },
+        hasInput: function hasInput() {
+            return this.maxtags == null || this.tagsLength < this.maxtags
+        },
+        tagsLength: function tagsLength() {
+            return this.tags.length
+        },
 
-    /**
+        /**
      * If Taginput has onPasteSeparators prop,
      * returning new RegExp used to split pasted string.
      */
-    separatorsAsRegExp: function separatorsAsRegExp() {
-      var sep = this.onPasteSeparators;
-      return sep.length ? new RegExp(sep.map(function (s) {
-        return s ? s.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&') : null;
-      }).join('|'), 'g') : null;
-    }
-  },
-  watch: {
+        separatorsAsRegExp: function separatorsAsRegExp() {
+            var sep = this.onPasteSeparators
+            return sep.length ? new RegExp(sep.map(function (s) {
+                return s ? s.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&') : null
+            }).join('|'), 'g') : null
+        }
+    },
+    watch: {
     /**
      * When v-model is changed set internal value.
      */
-    value: function value(_value) {
-      this.tags = _value;
-    },
-    hasInput: function hasInput() {
-      if (!this.hasInput) this.onBlur();
-    }
-  },
-  methods: {
-    addTag: function addTag(tag) {
-      var tagToAdd = tag || this.newTag.trim();
-
-      if (tagToAdd) {
-        if (!this.autocomplete) {
-          var reg = this.separatorsAsRegExp;
-
-          if (reg && tagToAdd.match(reg)) {
-            tagToAdd.split(reg).map(function (t) {
-              return t.trim();
-            }).filter(function (t) {
-              return t.length !== 0;
-            }).map(this.addTag);
-            return;
-          }
-        } // Add the tag input if it is not blank
-        // or previously added (if not allowDuplicates).
-
-
-        var add = !this.allowDuplicates ? this.tags.indexOf(tagToAdd) === -1 : true;
-
-        if (add && this.beforeAdding(tagToAdd)) {
-          this.tags.push(tagToAdd);
-          this.$emit('input', this.tags);
-          this.$emit('add', tagToAdd);
+        value: function value(_value) {
+            this.tags = _value
+        },
+        hasInput: function hasInput() {
+            if (!this.hasInput) this.onBlur()
         }
-      }
+    },
+    methods: {
+        addTag: function addTag(tag) {
+            var tagToAdd = tag || this.newTag.trim()
 
-      this.newTag = '';
-    },
-    getNormalizedTagText: function getNormalizedTagText(tag) {
-      if (_typeof(tag) === 'object') {
-        return getValueByPath(tag, this.field);
-      }
+            if (tagToAdd) {
+                if (!this.autocomplete) {
+                    var reg = this.separatorsAsRegExp
 
-      return tag;
-    },
-    customOnBlur: function customOnBlur($event) {
-      // Add tag on-blur if not select only
-      if (!this.autocomplete) this.addTag();
-      this.onBlur($event);
-    },
-    onSelect: function onSelect(option) {
-      var _this = this;
+                    if (reg && tagToAdd.match(reg)) {
+                        tagToAdd.split(reg).map(function (t) {
+                            return t.trim()
+                        }).filter(function (t) {
+                            return t.length !== 0
+                        }).map(this.addTag)
+                        return
+                    }
+                } // Add the tag input if it is not blank
+                // or previously added (if not allowDuplicates).
 
-      if (!option) return;
-      this.addTag(option);
-      this.$nextTick(function () {
-        _this.newTag = '';
-      });
-    },
-    removeTag: function removeTag(index) {
-      var tag = this.tags.splice(index, 1)[0];
-      this.$emit('input', this.tags);
-      this.$emit('remove', tag);
-      return tag;
-    },
-    removeLastTag: function removeLastTag() {
-      if (this.tagsLength > 0) {
-        this.removeTag(this.tagsLength - 1);
-      }
-    },
-    keydown: function keydown(event) {
-      if (this.removeOnKeys.indexOf(event.keyCode) !== -1 && !this.newTag.length) {
-        this.removeLastTag();
-      } // Stop if is to accept select only
+                var add = !this.allowDuplicates ? this.tags.indexOf(tagToAdd) === -1 : true
 
+                if (add && this.beforeAdding(tagToAdd)) {
+                    this.tags.push(tagToAdd)
+                    this.$emit('input', this.tags)
+                    this.$emit('add', tagToAdd)
+                }
+            }
 
-      if (this.autocomplete && !this.allowNew) return;
+            this.newTag = ''
+        },
+        getNormalizedTagText: function getNormalizedTagText(tag) {
+            if (_typeof(tag) === 'object') {
+                return getValueByPath(tag, this.field)
+            }
 
-      if (this.confirmKeyCodes.indexOf(event.keyCode) >= 0) {
-        event.preventDefault();
-        this.addTag();
-      }
-    },
-    onTyping: function onTyping($event) {
-      this.$emit('typing', $event.trim());
-    },
-    emitInfiniteScroll: function emitInfiniteScroll() {
-      this.$emit('infinite-scroll');
+            return tag
+        },
+        customOnBlur: function customOnBlur($event) {
+            // Add tag on-blur if not select only
+            if (!this.autocomplete) this.addTag()
+            this.onBlur($event)
+        },
+        onSelect: function onSelect(option) {
+            var _this = this
+
+            if (!option) return
+            this.addTag(option)
+            this.$nextTick(function () {
+                _this.newTag = ''
+            })
+        },
+        removeTag: function removeTag(index) {
+            var tag = this.tags.splice(index, 1)[0]
+            this.$emit('input', this.tags)
+            this.$emit('remove', tag)
+            return tag
+        },
+        removeLastTag: function removeLastTag() {
+            if (this.tagsLength > 0) {
+                this.removeTag(this.tagsLength - 1)
+            }
+        },
+        keydown: function keydown(event) {
+            if (this.removeOnKeys.indexOf(event.keyCode) !== -1 && !this.newTag.length) {
+                this.removeLastTag()
+            } // Stop if is to accept select only
+
+            if (this.autocomplete && !this.allowNew) return
+
+            if (this.confirmKeyCodes.indexOf(event.keyCode) >= 0) {
+                event.preventDefault()
+                this.addTag()
+            }
+        },
+        onTyping: function onTyping($event) {
+            this.$emit('typing', $event.trim())
+        },
+        emitInfiniteScroll: function emitInfiniteScroll() {
+            this.$emit('infinite-scroll')
+        }
     }
-  }
-};
+}
 
 /* script */
-const __vue_script__$W = script$W;
+const __vue_script__$W = script$W
 
 /* template */
-var __vue_render__$Q = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"taginput control",class:_vm.rootClasses},[_c('div',{staticClass:"taginput-container",class:[_vm.statusType, _vm.size, _vm.containerClasses],attrs:{"disabled":_vm.disabled},on:{"click":function($event){_vm.hasInput && _vm.focus($event);}}},[_vm._l((_vm.tags),function(tag,index){return _c('b-tag',{key:index,attrs:{"type":_vm.type,"size":_vm.size,"rounded":_vm.rounded,"attached":_vm.attached,"tabstop":false,"disabled":_vm.disabled,"ellipsis":_vm.ellipsis,"closable":_vm.closable,"title":_vm.ellipsis && _vm.getNormalizedTagText(tag)},on:{"close":function($event){_vm.removeTag(index);}}},[_vm._v("\n            "+_vm._s(_vm.getNormalizedTagText(tag))+"\n        ")])}),_vm._v(" "),(_vm.hasInput)?_c('b-autocomplete',_vm._b({ref:"autocomplete",attrs:{"data":_vm.data,"field":_vm.field,"icon":_vm.icon,"icon-pack":_vm.iconPack,"maxlength":_vm.maxlength,"has-counter":false,"size":_vm.size,"disabled":_vm.disabled,"loading":_vm.loading,"autocomplete":_vm.nativeAutocomplete,"keep-first":!_vm.allowNew,"use-html5-validation":_vm.useHtml5Validation,"check-infinite-scroll":_vm.checkInfiniteScroll},on:{"typing":_vm.onTyping,"focus":_vm.onFocus,"blur":_vm.customOnBlur,"select":_vm.onSelect,"infinite-scroll":_vm.emitInfiniteScroll},nativeOn:{"keydown":function($event){_vm.keydown($event);}},scopedSlots:_vm._u([{key:_vm.defaultSlotName,fn:function(props){return [_vm._t("default",null,{option:props.option,index:props.index})]}}]),model:{value:(_vm.newTag),callback:function ($$v) {_vm.newTag=$$v;},expression:"newTag"}},'b-autocomplete',_vm.$attrs,false),[_c('template',{slot:_vm.headerSlotName},[_vm._t("header")],2),_vm._v(" "),_c('template',{slot:_vm.emptySlotName},[_vm._t("empty")],2),_vm._v(" "),_c('template',{slot:_vm.footerSlotName},[_vm._t("footer")],2)],2):_vm._e()],2),_vm._v(" "),(_vm.hasCounter && (_vm.maxtags || _vm.maxlength))?_c('small',{staticClass:"help counter"},[(_vm.maxlength && _vm.valueLength > 0)?[_vm._v("\n            "+_vm._s(_vm.valueLength)+" / "+_vm._s(_vm.maxlength)+"\n        ")]:(_vm.maxtags)?[_vm._v("\n            "+_vm._s(_vm.tagsLength)+" / "+_vm._s(_vm.maxtags)+"\n        ")]:_vm._e()],2):_vm._e()])};
-var __vue_staticRenderFns__$Q = [];
+var __vue_render__$Q = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('div', {staticClass: 'taginput control', class: _vm.rootClasses}, [_c('div', {staticClass: 'taginput-container', class: [_vm.statusType, _vm.size, _vm.containerClasses], attrs: {'disabled': _vm.disabled}, on: {'click': function ($event) { _vm.hasInput && _vm.focus($event) }}}, [_vm._l((_vm.tags), function (tag, index) { return _c('b-tag', {key: index, attrs: {'type': _vm.type, 'size': _vm.size, 'rounded': _vm.rounded, 'attached': _vm.attached, 'tabstop': false, 'disabled': _vm.disabled, 'ellipsis': _vm.ellipsis, 'closable': _vm.closable, 'title': _vm.ellipsis && _vm.getNormalizedTagText(tag)}, on: {'close': function ($event) { _vm.removeTag(index) }}}, [_vm._v('\n            ' + _vm._s(_vm.getNormalizedTagText(tag)) + '\n        ')]) }), _vm._v(' '), (_vm.hasInput) ? _c('b-autocomplete', _vm._b({ref: 'autocomplete', attrs: {'data': _vm.data, 'field': _vm.field, 'icon': _vm.icon, 'icon-pack': _vm.iconPack, 'maxlength': _vm.maxlength, 'has-counter': false, 'size': _vm.size, 'disabled': _vm.disabled, 'loading': _vm.loading, 'autocomplete': _vm.nativeAutocomplete, 'keep-first': !_vm.allowNew, 'use-html5-validation': _vm.useHtml5Validation, 'check-infinite-scroll': _vm.checkInfiniteScroll}, on: {'typing': _vm.onTyping, 'focus': _vm.onFocus, 'blur': _vm.customOnBlur, 'select': _vm.onSelect, 'infinite-scroll': _vm.emitInfiniteScroll}, nativeOn: {'keydown': function ($event) { _vm.keydown($event) }}, scopedSlots: _vm._u([{key: _vm.defaultSlotName, fn: function (props) { return [_vm._t('default', null, {option: props.option, index: props.index})] }}]), model: {value: (_vm.newTag), callback: function ($$v) { _vm.newTag = $$v }, expression: 'newTag'}}, 'b-autocomplete', _vm.$attrs, false), [_c('template', {slot: _vm.headerSlotName}, [_vm._t('header')], 2), _vm._v(' '), _c('template', {slot: _vm.emptySlotName}, [_vm._t('empty')], 2), _vm._v(' '), _c('template', {slot: _vm.footerSlotName}, [_vm._t('footer')], 2)], 2) : _vm._e()], 2), _vm._v(' '), (_vm.hasCounter && (_vm.maxtags || _vm.maxlength)) ? _c('small', {staticClass: 'help counter'}, [(_vm.maxlength && _vm.valueLength > 0) ? [_vm._v('\n            ' + _vm._s(_vm.valueLength) + ' / ' + _vm._s(_vm.maxlength) + '\n        ')] : (_vm.maxtags) ? [_vm._v('\n            ' + _vm._s(_vm.tagsLength) + ' / ' + _vm._s(_vm.maxtags) + '\n        ')] : _vm._e()], 2) : _vm._e()]) }
+var __vue_staticRenderFns__$Q = []
 
-  /* style */
-  const __vue_inject_styles__$W = undefined;
-  /* scoped */
-  const __vue_scope_id__$W = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$W = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$W = false;
-  /* style inject */
-  
-  /* style inject SSR */
-  
+/* style */
+const __vue_inject_styles__$W = undefined
+/* scoped */
+const __vue_scope_id__$W = undefined
+/* module identifier */
+const __vue_module_identifier__$W = undefined
+/* functional template */
+const __vue_is_functional_template__$W = false
+/* style inject */
 
-  
-  var Taginput = normalizeComponent_1(
+/* style inject SSR */
+
+var Taginput = normalizeComponent_1(
     { render: __vue_render__$Q, staticRenderFns: __vue_staticRenderFns__$Q },
     __vue_inject_styles__$W,
     __vue_script__$W,
@@ -16452,55 +16461,53 @@ var __vue_staticRenderFns__$Q = [];
     __vue_module_identifier__$W,
     undefined,
     undefined
-  );
+)
 
 var Plugin$w = {
-  install: function install(Vue) {
-    registerComponent(Vue, Taginput);
-  }
-};
-use(Plugin$w);
+    install: function install(Vue) {
+        registerComponent(Vue, Taginput)
+    }
+}
+use(Plugin$w)
 
 var Plugin$x = {
-  install: function install(Vue) {
-    registerComponent(Vue, Timepicker);
-  }
-};
-use(Plugin$x);
+    install: function install(Vue) {
+        registerComponent(Vue, Timepicker)
+    }
+}
+use(Plugin$x)
 
 //
 var script$X = {
-  name: 'BToast',
-  mixins: [NoticeMixin],
-  data: function data() {
-    return {
-      newDuration: this.duration || config.defaultToastDuration
-    };
-  }
-};
+    name: 'BToast',
+    mixins: [NoticeMixin],
+    data: function data() {
+        return {
+            newDuration: this.duration || config.defaultToastDuration
+        }
+    }
+}
 
 /* script */
-const __vue_script__$X = script$X;
+const __vue_script__$X = script$X
 
 /* template */
-var __vue_render__$R = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('transition',{attrs:{"enter-active-class":_vm.transition.enter,"leave-active-class":_vm.transition.leave}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isActive),expression:"isActive"}],staticClass:"toast",class:[_vm.type, _vm.position],attrs:{"aria-hidden":!_vm.isActive,"role":"alert"}},[_c('div',{domProps:{"innerHTML":_vm._s(_vm.message)}})])])};
-var __vue_staticRenderFns__$R = [];
+var __vue_render__$R = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('transition', {attrs: {'enter-active-class': _vm.transition.enter, 'leave-active-class': _vm.transition.leave}}, [_c('div', {directives: [{name: 'show', rawName: 'v-show', value: (_vm.isActive), expression: 'isActive'}], staticClass: 'toast', class: [_vm.type, _vm.position], attrs: {'aria-hidden': !_vm.isActive, 'role': 'alert'}}, [_c('div', {domProps: {'innerHTML': _vm._s(_vm.message)}})])]) }
+var __vue_staticRenderFns__$R = []
 
-  /* style */
-  const __vue_inject_styles__$X = undefined;
-  /* scoped */
-  const __vue_scope_id__$X = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$X = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$X = false;
-  /* style inject */
-  
-  /* style inject SSR */
-  
+/* style */
+const __vue_inject_styles__$X = undefined
+/* scoped */
+const __vue_scope_id__$X = undefined
+/* module identifier */
+const __vue_module_identifier__$X = undefined
+/* functional template */
+const __vue_is_functional_template__$X = false
+/* style inject */
 
-  
-  var Toast = normalizeComponent_1(
+/* style inject SSR */
+
+var Toast = normalizeComponent_1(
     { render: __vue_render__$R, staticRenderFns: __vue_staticRenderFns__$R },
     __vue_inject_styles__$X,
     __vue_script__$X,
@@ -16509,45 +16516,45 @@ var __vue_staticRenderFns__$R = [];
     __vue_module_identifier__$X,
     undefined,
     undefined
-  );
+)
 
-var localVueInstance$5;
+var localVueInstance$5
 var ToastProgrammatic = {
-  open: function open(params) {
-    var parent;
+    open: function open(params) {
+        var parent
 
-    if (typeof params === 'string') {
-      params = {
-        message: params
-      };
+        if (typeof params === 'string') {
+            params = {
+                message: params
+            }
+        }
+
+        var defaultParam = {
+            position: config.defaultToastPosition || 'is-top'
+        }
+
+        if (params.parent) {
+            parent = params.parent
+            delete params.parent
+        }
+
+        var propsData = merge(defaultParam, params)
+        var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance$5 || VueInstance
+        var ToastComponent = vm.extend(Toast)
+        return new ToastComponent({
+            parent: parent,
+            el: document.createElement('div'),
+            propsData: propsData
+        })
     }
-
-    var defaultParam = {
-      position: config.defaultToastPosition || 'is-top'
-    };
-
-    if (params.parent) {
-      parent = params.parent;
-      delete params.parent;
-    }
-
-    var propsData = merge(defaultParam, params);
-    var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance$5 || VueInstance;
-    var ToastComponent = vm.extend(Toast);
-    return new ToastComponent({
-      parent: parent,
-      el: document.createElement('div'),
-      propsData: propsData
-    });
-  }
-};
+}
 var Plugin$y = {
-  install: function install(Vue) {
-    localVueInstance$5 = Vue;
-    registerComponentProgrammatic(Vue, 'toast', ToastProgrammatic);
-  }
-};
-use(Plugin$y);
+    install: function install(Vue) {
+        localVueInstance$5 = Vue
+        registerComponentProgrammatic(Vue, 'toast', ToastProgrammatic)
+    }
+}
+use(Plugin$y)
 
 var Plugin$A = {
     install: function install(Vue) {
@@ -16603,6 +16610,9 @@ var Buefy = {
 
         setOptions(merge(config, options, true)) // Components
 
+        for (var componentKey in components) {
+            Vue.use(components[componentKey])
+        } // Config component
 
         var BuefyProgrammatic = {
             getOptions: function getOptions() {

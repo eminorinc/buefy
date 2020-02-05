@@ -1,6 +1,6 @@
-'use strict';
+'use strict'
 
-Object.defineProperty(exports, '__esModule', { value: true });
+Object.defineProperty(exports, '__esModule', { value: true })
 
 require('./chunk-2777282e.js')
 var helpers = require('./helpers.js')
@@ -38,26 +38,7 @@ var ModalProgrammatic = {
             propsData: propsData
         })
     }
-
-    var defaultParam = {
-      programmatic: true
-    };
-
-    if (params.parent) {
-      parent = params.parent;
-      delete params.parent;
-    }
-
-    var propsData = helpers.merge(defaultParam, params);
-    var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || __chunk_2.VueInstance;
-    var ModalComponent = vm.extend(__chunk_17.Modal);
-    return new ModalComponent({
-      parent: parent,
-      el: document.createElement('div'),
-      propsData: propsData
-    });
-  }
-};
+}
 var Plugin = {
     install: function install(Vue) {
         localVueInstance = Vue

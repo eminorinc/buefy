@@ -14,10 +14,10 @@ import { T as Timepicker } from './chunk-fed5b1a3.js'
 export { T as BTimepicker } from './chunk-fed5b1a3.js'
 
 var Plugin = {
-  install: function install(Vue) {
-    registerComponent(Vue, Timepicker);
-  }
-};
-use(Plugin);
+    install: function install(Vue) {
+        registerComponent(Vue, Timepicker)
+    }
+}
+use(Plugin)
 
-export default Plugin;
+export default Plugin

@@ -8,10 +8,10 @@ import { I as Input } from './chunk-70383fcd.js'
 export { I as BInput } from './chunk-70383fcd.js'
 
 var Plugin = {
-  install: function install(Vue) {
-    registerComponent(Vue, Input);
-  }
-};
-use(Plugin);
+    install: function install(Vue) {
+        registerComponent(Vue, Input)
+    }
+}
+use(Plugin)
 
-export default Plugin;
+export default Plugin

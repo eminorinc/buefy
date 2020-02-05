@@ -5,11 +5,11 @@ import { D as Dropdown, a as DropdownItem } from './chunk-b98d635b.js'
 export { D as BDropdown, a as BDropdownItem } from './chunk-b98d635b.js'
 
 var Plugin = {
-  install: function install(Vue) {
-    registerComponent(Vue, Dropdown);
-    registerComponent(Vue, DropdownItem);
-  }
-};
-use(Plugin);
+    install: function install(Vue) {
+        registerComponent(Vue, Dropdown)
+        registerComponent(Vue, DropdownItem)
+    }
+}
+use(Plugin)
 
-export default Plugin;
+export default Plugin

@@ -8,10 +8,10 @@ import { S as Select } from './chunk-9c209565.js'
 export { S as BSelect } from './chunk-9c209565.js'
 
 var Plugin = {
-  install: function install(Vue) {
-    registerComponent(Vue, Select);
-  }
-};
-use(Plugin);
+    install: function install(Vue) {
+        registerComponent(Vue, Select)
+    }
+}
+use(Plugin)
 
-export default Plugin;
+export default Plugin
