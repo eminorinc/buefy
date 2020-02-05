@@ -99,7 +99,9 @@ export { default as Toast, ToastProgrammatic } from './toast.js'
 export { default as Tooltip } from './tooltip.js'
 export { default as Upload } from './upload.js'
 
-var components = /* #__PURE__ */Object.freeze({
+
+
+var components = /*#__PURE__*/Object.freeze({
     Autocomplete: Plugin,
     Button: Plugin$1,
     Carousel: Plugin$2,
@@ -137,30 +139,32 @@ var components = /* #__PURE__ */Object.freeze({
     Toast: Plugin$y,
     Tooltip: Plugin$z,
     Upload: Plugin$A
-})
+});
 
 var Buefy = {
-    install: function install(Vue) {
-        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {}
-        setVueInstance(Vue) // Options
+  install: function install(Vue) {
+    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    setVueInstance(Vue); // Options
 
-        setOptions(merge(config, options, true)) // Components
+    setOptions(merge(config, options, true)); // Components
 
-        for (var componentKey in components) {
-            Vue.use(components[componentKey])
-        } // Config component
 
-        var BuefyProgrammatic = {
-            getOptions: function getOptions() {
-                return config
-            },
-            setOptions: function setOptions$1(options) {
-                setOptions(merge(config, options, true))
-            }
-        }
-        registerComponentProgrammatic(Vue, 'config', BuefyProgrammatic)
-    }
-}
-use(Buefy)
+    for (var componentKey in components) {
+      Vue.use(components[componentKey]);
+    } // Config component
 
-export default Buefy
+
+    var BuefyProgrammatic = {
+      getOptions: function getOptions() {
+        return config;
+      },
+      setOptions: function setOptions$1(options) {
+        setOptions(merge(config, options, true));
+      }
+    };
+    registerComponentProgrammatic(Vue, 'config', BuefyProgrammatic);
+  }
+};
+use(Buefy);
+
+export default Buefy;

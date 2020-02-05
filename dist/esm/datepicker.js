@@ -13,10 +13,10 @@ import { D as Datepicker } from './chunk-63756a23.js'
 export { D as BDatepicker } from './chunk-63756a23.js'
 
 var Plugin = {
-    install: function install(Vue) {
-        registerComponent(Vue, Datepicker)
-    }
-}
-use(Plugin)
+  install: function install(Vue) {
+    registerComponent(Vue, Datepicker);
+  }
+};
+use(Plugin);
 
-export default Plugin
+export default Plugin;

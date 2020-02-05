@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-Object.defineProperty(exports, '__esModule', { value: true })
+Object.defineProperty(exports, '__esModule', { value: true });
 
 require('./chunk-2777282e.js')
 require('./helpers.js')
@@ -16,11 +16,11 @@ require('./chunk-611c489f.js')
 var __chunk_15 = require('./chunk-e2dbd9f4.js')
 
 var Plugin = {
-    install: function install(Vue) {
-        __chunk_5.registerComponent(Vue, __chunk_15.Datepicker)
-    }
-}
-__chunk_5.use(Plugin)
+  install: function install(Vue) {
+    __chunk_5.registerComponent(Vue, __chunk_15.Datepicker);
+  }
+};
+__chunk_5.use(Plugin);
 
-exports.BDatepicker = __chunk_15.Datepicker
-exports.default = Plugin
+exports.BDatepicker = __chunk_15.Datepicker;
+exports.default = Plugin;
