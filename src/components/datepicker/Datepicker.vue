@@ -21,7 +21,7 @@
                 :rounded="rounded"
                 :loading="loading"
                 :disabled="disabled"
-                :readonly="!editable"
+                :readonly="!editable || readonly"
                 v-bind="$attrs"
                 :use-html5-validation="useHtml5Validation"
                 @click.native="onInputClick"
@@ -173,7 +173,7 @@
             :max="formatNative(maxDate)"
             :min="formatNative(minDate)"
             :disabled="disabled"
-            :readonly="false"
+            :readonly="readonly"
             v-bind="$attrs"
             :use-html5-validation="useHtml5Validation"
             @change.native="onChangeNativePicker"
@@ -298,6 +298,7 @@ export default {
         focusedDate: Date,
         placeholder: String,
         editable: Boolean,
+        readonly: Boolean,
         disabled: Boolean,
         unselectableDates: Array,
         unselectableDaysOfWeek: {
