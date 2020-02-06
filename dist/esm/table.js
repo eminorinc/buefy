@@ -1,13 +1,14 @@
-import { a as _defineProperty, c as _toConsumableArray } from './chunk-17755bd7.js'
-import { g as getValueByPath, a as indexOf } from './chunk-90e31a22.js'
-import './chunk-1628b87d.js'
-import './chunk-4f8020cc.js'
-import { I as Icon } from './chunk-263f5bb7.js'
+import { _ as _defineProperty, c as _toConsumableArray } from './chunk-f2006744.js'
+import { getValueByPath, indexOf } from './helpers.js'
+import './chunk-b76a6c1d.js'
+import './chunk-03b1476b.js'
+import { I as Icon } from './chunk-c8434a6f.js'
 import { _ as __vue_normalize__, r as registerComponent, u as use } from './chunk-cca88db8.js'
-import { I as Input } from './chunk-aefb9856.js'
-import { C as Checkbox } from './chunk-6e198005.js'
-import { S as Select } from './chunk-7e8ddc27.js'
-import { P as Pagination } from './chunk-f53f88bc.js'
+import { I as Input } from './chunk-70383fcd.js'
+import './chunk-a1a77ea5.js'
+import { C as Checkbox } from './chunk-8c4d25c9.js'
+import { S as Select } from './chunk-9c209565.js'
+import { P as Pagination } from './chunk-4dc010ac.js'
 import { S as SlotComponent } from './chunk-0e3f4fb5.js'
 
 var _components
@@ -129,6 +130,7 @@ var script$1 = {
             type: Boolean,
             default: true
         },
+        subheading: [String, Number],
         customSort: Function,
         internal: Boolean,
         // Used internally by Table
@@ -136,7 +138,8 @@ var script$1 = {
     },
     data: function data() {
         return {
-            newKey: this.customKey || this.label
+            newKey: this.customKey || this.label,
+            _isTableColumn: true
         }
     },
     computed: {
@@ -147,31 +150,29 @@ var script$1 = {
             }
         }
     },
-    methods: {
-        addRefToTable: function addRefToTable() {
-            var _this = this
-
-            if (!this.$parent.$data._isTable) {
-                this.$destroy()
-                throw new Error('You should wrap bTableColumn on a bTable')
-            }
-
-            if (this.internal) return // Since we're using scoped prop the columns gonna be multiplied,
-            // this finds when to stop based on the newKey property.
-
-            var repeated = this.$parent.newColumns.some(function (column) {
-                return column.newKey === _this.newKey
-            })
-            !repeated && this.$parent.newColumns.push(this)
-        }
-    },
     beforeMount: function beforeMount() {
-        this.addRefToTable()
-    },
-    beforeUpdate: function beforeUpdate() {
-        this.addRefToTable()
+        var _this = this
+
+        if (!this.$parent.$data._isTable) {
+            this.$destroy()
+            throw new Error('You should wrap bTableColumn on a bTable')
+        }
+
+        if (this.internal) return // Since we're using scoped prop the columns gonna be multiplied,
+        // this finds when to stop based on the newKey property.
+
+        var repeated = this.$parent.newColumns.some(function (column) {
+            return column.newKey === _this.newKey
+        })
+        !repeated && this.$parent.newColumns.push(this)
     },
     beforeDestroy: function beforeDestroy() {
+        var _this2 = this
+
+        if (!this.$parent.visibleData.length) return
+        if (this.$parent.$children.filter(function (vm) {
+            return vm.$data._isTableColumn && vm.$data.newKey === _this2.newKey
+        }).length !== 1) return
         var index = this.$parent.newColumns.map(function (column) {
             return column.newKey
         }).indexOf(this.newKey)
@@ -346,7 +347,7 @@ var script$2 = {
         customRowKey: String,
         draggable: {
             type: Boolean,
-            defualt: false
+            default: false
         },
         ariaNextLabel: String,
         ariaPreviousLabel: String,
@@ -460,6 +461,16 @@ var script$2 = {
         },
 
         /**
+    * Check if has any column using subheading.
+    */
+        hasCustomSubheadings: function hasCustomSubheadings() {
+            if (this.$scopedSlots && this.$scopedSlots.subheading) return true
+            return this.newColumns.some(function (column) {
+                return column.subheading || column.$scopedSlots && column.$scopedSlots.subheading
+            })
+        },
+
+        /**
     * Return total column count based if it's checkable or expanded
     */
         columnCount: function columnCount() {
@@ -528,6 +539,10 @@ var script$2 = {
                 this.newData = this.data.filter(function (row) {
                     return _this4.isRowFiltered(row)
                 })
+
+                if (!this.backendPagination) {
+                    this.newDataTotal = this.newData.length
+                }
             },
             deep: true
         },
@@ -651,6 +666,7 @@ var script$2 = {
     * Row checkbox click listener.
     */
         checkRow: function checkRow(row, index, event) {
+            if (!this.isRowCheckable(row)) return
             var lastIndex = this.lastCheckedRowIndex
             this.lastCheckedRowIndex = index
 
@@ -752,11 +768,15 @@ var script$2 = {
                     return true
                 }
 
-                if (Number.isInteger(row[key])) {
-                    if (row[key] !== Number(this.filters[key])) return false
+                var value = this.getValueByPath(row, key)
+                if (value == null) return false
+
+                if (Number.isInteger(value)) {
+                    if (value !== Number(this.filters[key])) return false
                 } else {
-                    var re = new RegExp(this.filters[key])
-                    if (!row[key].match(re)) return false
+                    var re = new RegExp(this.filters[key], 'i')
+                    if (typeof value === 'boolean') value = ''.concat(value)
+                    if (!value.match(re)) return false
                 }
             }
 
@@ -769,7 +789,7 @@ var script$2 = {
         */
         handleDetailKey: function handleDetailKey(index) {
             var key = this.detailKey
-            return !key.length ? index : index[key]
+            return !key.length || !index ? index : index[key]
         },
         checkPredefinedDetailedRows: function checkPredefinedDetailedRows() {
             var defaultExpandedRowsDefined = this.openedDetailed.length > 0
@@ -944,12 +964,21 @@ var __vue_render__$2 = function () {
                 'is-numeric': column.numeric,
                 'is-centered': column.centered
             }}, [(column.$scopedSlots && column.$scopedSlots.header) ? [_c('b-slot-component', {attrs: {'component': column, 'scoped': true, 'name': 'header', 'tag': 'span', 'props': { column: column, index: index }}})] : (_vm.$scopedSlots.header) ? [_vm._t('header', null, {column: column, index: index})] : [_vm._v(_vm._s(column.label))], _vm._v(' '), _c('b-icon', {directives: [{name: 'show', rawName: 'v-show', value: (_vm.currentSortColumn === column), expression: 'currentSortColumn === column'}], class: { 'is-desc': !_vm.isAsc }, attrs: {'icon': _vm.sortIcon, 'pack': _vm.iconPack, 'both': '', 'size': _vm.sortIconSize}})], 2)])
-    }), _vm._v(' '), (_vm.checkable && _vm.checkboxPosition === 'right') ? _c('th', {staticClass: 'checkbox-cell'}, [(_vm.headerCheckable) ? [_c('b-checkbox', {attrs: {'value': _vm.isAllChecked, 'disabled': _vm.isAllUncheckable}, nativeOn: {'change': function ($event) { _vm.checkAll($event) }}})] : _vm._e()], 2) : _vm._e()], 2), _vm._v(' '), (_vm.hasSearchablenewColumns) ? _c('tr', _vm._l((_vm.visibleColumns), function (column, index) {
+    }), _vm._v(' '), (_vm.checkable && _vm.checkboxPosition === 'right') ? _c('th', {staticClass: 'checkbox-cell'}, [(_vm.headerCheckable) ? [_c('b-checkbox', {attrs: {'value': _vm.isAllChecked, 'disabled': _vm.isAllUncheckable}, nativeOn: {'change': function ($event) { _vm.checkAll($event) }}})] : _vm._e()], 2) : _vm._e()], 2), _vm._v(' '), (_vm.hasCustomSubheadings) ? _c('tr', {staticClass: 'is-subheading'}, [(_vm.showDetailRowIcon) ? _c('th', {attrs: {'width': '40px'}}) : _vm._e(), _vm._v(' '), (_vm.checkable && _vm.checkboxPosition === 'left') ? _c('th') : _vm._e(), _vm._v(' '), _vm._l((_vm.visibleColumns), function (column, index) {
+        return _c('th', {key: index,
+            style: ({
+                width: column.width === undefined ? null
+                    : (isNaN(column.width) ? column.width : column.width + 'px') })}, [_c('div', {staticClass: 'th-wrap',
+            class: {
+                'is-numeric': column.numeric,
+                'is-centered': column.centered
+            }}, [(column.$scopedSlots && column.$scopedSlots.subheading) ? [_c('b-slot-component', {attrs: {'component': column, 'scoped': true, 'name': 'subheading', 'tag': 'span', 'props': { column: column, index: index }}})] : (_vm.$scopedSlots.subheading) ? [_vm._t('subheading', null, {column: column, index: index})] : [_vm._v(_vm._s(column.subheading))]], 2)])
+    }), _vm._v(' '), (_vm.checkable && _vm.checkboxPosition === 'right') ? _c('th') : _vm._e()], 2) : _vm._e(), _vm._v(' '), (_vm.hasSearchablenewColumns) ? _c('tr', [(_vm.showDetailRowIcon) ? _c('th', {attrs: {'width': '40px'}}) : _vm._e(), _vm._v(' '), (_vm.checkable && _vm.checkboxPosition === 'left') ? _c('th') : _vm._e(), _vm._v(' '), _vm._l((_vm.visibleColumns), function (column, index) {
         return _c('th', {key: index,
             style: ({
                 width: column.width === undefined ? null
                     : (isNaN(column.width) ? column.width : column.width + 'px') })}, [_c('div', {staticClass: 'th-wrap'}, [(column.searchable) ? [_c('b-input', {attrs: {'type': column.numeric ? 'number' : 'text'}, model: {value: (_vm.filters[column.field]), callback: function ($$v) { _vm.$set(_vm.filters, column.field, $$v) }, expression: 'filters[column.field]'}})] : _vm._e()], 2)])
-    })) : _vm._e()]) : _vm._e(), _vm._v(' '), (_vm.visibleData.length) ? _c('tbody', [_vm._l((_vm.visibleData), function (row, index) {
+    }), _vm._v(' '), (_vm.checkable && _vm.checkboxPosition === 'right') ? _c('th') : _vm._e()], 2) : _vm._e()]) : _vm._e(), _vm._v(' '), (_vm.visibleData.length) ? _c('tbody', [_vm._l((_vm.visibleData), function (row, index) {
         return [_c('tr', {key: _vm.customRowKey ? row[_vm.customRowKey] : index,
             class: [_vm.rowClass(row, index), {
                 'is-selected': row === _vm.selected,
@@ -994,3 +1023,4 @@ var Plugin = {
 use(Plugin)
 
 export default Plugin
+export { Table as BTable, TableColumn as BTableColumn }

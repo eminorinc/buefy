@@ -2,7 +2,7 @@
 
 Object.defineProperty(exports, '__esModule', { value: true })
 
-var __chunk_6 = require('./chunk-13e039f5.js')
+var __chunk_5 = require('./chunk-13e039f5.js')
 
 //
 //
@@ -35,19 +35,19 @@ var __chunk_6 = require('./chunk-13e039f5.js')
 var script = {
     name: 'BSwitch',
     props: {
-        value: [String, Number, Boolean, Function, Object, Array],
-        nativeValue: [String, Number, Boolean, Function, Object, Array],
+        value: [String, Number, Boolean, Function, Object, Array, Date],
+        nativeValue: [String, Number, Boolean, Function, Object, Array, Date],
         disabled: Boolean,
         type: String,
         name: String,
         required: Boolean,
         size: String,
         trueValue: {
-            type: [String, Number, Boolean, Function, Object, Array],
+            type: [String, Number, Boolean, Function, Object, Array, Date],
             default: true
         },
         falseValue: {
-            type: [String, Number, Boolean, Function, Object, Array],
+            type: [String, Number, Boolean, Function, Object, Array, Date],
             default: false
         },
         rounded: {
@@ -120,7 +120,7 @@ const __vue_is_functional_template__ = false
 
 /* style inject SSR */
 
-var Switch = __chunk_6.__vue_normalize__(
+var Switch = __chunk_5.__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
@@ -133,9 +133,10 @@ var Switch = __chunk_6.__vue_normalize__(
 
 var Plugin = {
     install: function install(Vue) {
-        __chunk_6.registerComponent(Vue, Switch)
+        __chunk_5.registerComponent(Vue, Switch)
     }
 }
-__chunk_6.use(Plugin)
+__chunk_5.use(Plugin)
 
+exports.BSwitch = Switch
 exports.default = Plugin

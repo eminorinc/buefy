@@ -1,4 +1,4 @@
-import { b as _typeof, a as _defineProperty } from './chunk-17755bd7.js'
+import { b as _typeof, _ as _defineProperty } from './chunk-f2006744.js'
 import { _ as __vue_normalize__, r as registerComponent, u as use } from './chunk-cca88db8.js'
 
 //
@@ -608,3 +608,4 @@ var Plugin = {
 use(Plugin)
 
 export default Plugin
+export { Navbar as BNavbar, NavbarDropdown as BNavbarDropdown, NavbarItem as BNavbarItem }

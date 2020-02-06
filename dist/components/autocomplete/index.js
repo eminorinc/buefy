@@ -1,4 +1,4 @@
-/*! Buefy v0.8.6 | MIT License | github.com/buefy/buefy */
+/*! Buefy v0.8.9 | MIT License | github.com/buefy/buefy */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports)
         : typeof define === 'function' && define.amd ? define(['exports'], factory)
@@ -74,6 +74,7 @@
     /**
    * Get value of an object property/path even if it's nested
    */
+
     function getValueByPath(obj, path) {
         var value = path.split('.').reduce(function (o, i) {
             return o ? o[i] : null
@@ -81,24 +82,30 @@
         return value
     }
     /**
-  * Merge function to replace Object.assign with deep merging possibility
-  */
+   * Merge function to replace Object.assign with deep merging possibility
+   */
 
     var isObject = function isObject(item) {
         return _typeof(item) === 'object' && !Array.isArray(item)
     }
 
     var mergeFn = function mergeFn(target, source) {
-        var isDeep = function isDeep(prop) {
-            return isObject(source[prop]) && target.hasOwnProperty(prop) && isObject(target[prop])
-        }
+        var deep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false
 
-        var replaced = Object.getOwnPropertyNames(source).map(function (prop) {
-            return _defineProperty({}, prop, isDeep(prop) ? mergeFn(target[prop], source[prop]) : source[prop])
-        }).reduce(function (a, b) {
-            return _objectSpread2({}, a, {}, b)
-        }, {})
-        return _objectSpread2({}, target, {}, replaced)
+        if (deep || !Object.assign) {
+            var isDeep = function isDeep(prop) {
+                return isObject(source[prop]) && target !== null && target.hasOwnProperty(prop) && isObject(target[prop])
+            }
+
+            var replaced = Object.getOwnPropertyNames(source).map(function (prop) {
+                return _defineProperty({}, prop, isDeep(prop) ? mergeFn(target[prop], source[prop], deep) : source[prop])
+            }).reduce(function (a, b) {
+                return _objectSpread2({}, a, {}, b)
+            }, {})
+            return _objectSpread2({}, target, {}, replaced)
+        } else {
+            return Object.assign(target, source)
+        }
     }
 
     var merge = mergeFn
@@ -124,6 +131,7 @@
         defaultDateFormatter: null,
         defaultDateParser: null,
         defaultDateCreator: null,
+        defaultTimeCreator: null,
         defaultDayNames: null,
         defaultMonthNames: null,
         defaultFirstDayOfWeek: null,
@@ -144,12 +152,12 @@
         defaultDatepickerNearbyMonthDays: true,
         defaultDatepickerNearbySelectableMonthDays: false,
         defaultDatepickerShowWeekNumber: false,
+        defaultDatepickerMobileModal: true,
         defaultTrapFocus: false,
         defaultButtonRounded: false,
+        defaultCarouselInterval: 3500,
         customIconPacks: null
     } // TODO defaultTrapFocus to true in the next breaking change
-
-    var config$1 = config
 
     var FormElementMixin = {
         props: {
@@ -165,7 +173,7 @@
             useHtml5Validation: {
                 type: Boolean,
                 default: function _default() {
-                    return config$1.defaultUseHtml5Validation
+                    return config.defaultUseHtml5Validation
                 }
             },
             validationMessage: String
@@ -174,7 +182,7 @@
             return {
                 isValid: true,
                 isFocused: false,
-                newIconPack: this.iconPack || config$1.defaultIconPack
+                newIconPack: this.iconPack || config.defaultIconPack
             }
         },
         computed: {
@@ -316,7 +324,7 @@
     }
 
     var faIcons = function faIcons() {
-        var faIconPrefix = config$1 && config$1.defaultIconComponent ? '' : 'fa-'
+        var faIconPrefix = config && config.defaultIconComponent ? '' : 'fa-'
         return {
             sizes: {
                 'default': faIconPrefix + 'lg',
@@ -350,8 +358,8 @@
             fal: faIcons()
         }
 
-        if (config$1 && config$1.customIconPacks) {
-            icons = merge(icons, config$1.customIconPacks)
+        if (config && config.customIconPacks) {
+            icons = merge(icons, config.customIconPacks, true)
         }
 
         return icons
@@ -393,7 +401,7 @@
                 return ''.concat(this.iconPrefix).concat(this.getEquivalentIconOf(this.icon))
             },
             newPack: function newPack() {
-                return this.pack || config$1.defaultIconPack
+                return this.pack || config.defaultIconPack
             },
             newType: function newType() {
                 if (!this.type) return
@@ -428,7 +436,7 @@
                 return null
             },
             useIconComponent: function useIconComponent() {
-                return this.component || config$1.defaultIconComponent
+                return this.component || config.defaultIconComponent
             }
         },
         methods: {
@@ -572,10 +580,11 @@
                 default: 'text'
             },
             passwordReveal: Boolean,
+            iconClickable: Boolean,
             hasCounter: {
                 type: Boolean,
                 default: function _default() {
-                    return config$1.defaultInputHasCounter
+                    return config.defaultInputHasCounter
                 }
             },
             customClass: {
@@ -587,7 +596,7 @@
             return {
                 newValue: this.value,
                 newType: this.type,
-                newAutocomplete: this.autocomplete || config$1.defaultInputAutocomplete,
+                newAutocomplete: this.autocomplete || config.defaultInputAutocomplete,
                 isPasswordVisible: false,
                 _elementRef: this.type === 'textarea' ? 'textarea' : 'input'
             }
@@ -714,6 +723,14 @@
                         _this2.computedValue = event.target.value
                     }
                 })
+            },
+            iconClick: function iconClick(event) {
+                var _this3 = this
+
+                this.$emit('icon-click', event)
+                this.$nextTick(function () {
+                    _this3.$refs.input.focus()
+                })
             }
         }
     }
@@ -722,7 +739,7 @@
     const __vue_script__$1 = script$1
 
     /* template */
-    var __vue_render__$1 = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('div', {staticClass: 'control', class: _vm.rootClasses}, [(_vm.type !== 'textarea') ? _c('input', _vm._b({ref: 'input', staticClass: 'input', class: [_vm.inputClasses, _vm.customClass], attrs: {'type': _vm.newType, 'autocomplete': _vm.newAutocomplete, 'maxlength': _vm.maxlength}, domProps: {'value': _vm.computedValue}, on: {'input': _vm.onInput, 'blur': _vm.onBlur, 'focus': _vm.onFocus}}, 'input', _vm.$attrs, false)) : _c('textarea', _vm._b({ref: 'textarea', staticClass: 'textarea', class: [_vm.inputClasses, _vm.customClass], attrs: {'maxlength': _vm.maxlength}, domProps: {'value': _vm.computedValue}, on: {'input': _vm.onInput, 'blur': _vm.onBlur, 'focus': _vm.onFocus}}, 'textarea', _vm.$attrs, false)), _vm._v(' '), (_vm.icon) ? _c('b-icon', {staticClass: 'is-left', attrs: {'icon': _vm.icon, 'pack': _vm.iconPack, 'size': _vm.iconSize}}) : _vm._e(), _vm._v(' '), (!_vm.loading && (_vm.passwordReveal || _vm.statusTypeIcon)) ? _c('b-icon', {staticClass: 'is-right', class: { 'is-clickable': _vm.passwordReveal }, attrs: {'icon': _vm.passwordReveal ? _vm.passwordVisibleIcon : _vm.statusTypeIcon, 'pack': _vm.iconPack, 'size': _vm.iconSize, 'type': !_vm.passwordReveal ? _vm.statusType : 'is-primary', 'both': ''}, nativeOn: {'click': function ($event) { _vm.togglePasswordVisibility($event) }}}) : _vm._e(), _vm._v(' '), (_vm.maxlength && _vm.hasCounter && _vm.type !== 'number') ? _c('small', {staticClass: 'help counter', class: { 'is-invisible': !_vm.isFocused }}, [_vm._v('\n        ' + _vm._s(_vm.valueLength) + ' / ' + _vm._s(_vm.maxlength) + '\n    ')]) : _vm._e()], 1) }
+    var __vue_render__$1 = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('div', {staticClass: 'control', class: _vm.rootClasses}, [(_vm.type !== 'textarea') ? _c('input', _vm._b({ref: 'input', staticClass: 'input', class: [_vm.inputClasses, _vm.customClass], attrs: {'type': _vm.newType, 'autocomplete': _vm.newAutocomplete, 'maxlength': _vm.maxlength}, domProps: {'value': _vm.computedValue}, on: {'input': _vm.onInput, 'blur': _vm.onBlur, 'focus': _vm.onFocus}}, 'input', _vm.$attrs, false)) : _c('textarea', _vm._b({ref: 'textarea', staticClass: 'textarea', class: [_vm.inputClasses, _vm.customClass], attrs: {'maxlength': _vm.maxlength}, domProps: {'value': _vm.computedValue}, on: {'input': _vm.onInput, 'blur': _vm.onBlur, 'focus': _vm.onFocus}}, 'textarea', _vm.$attrs, false)), _vm._v(' '), (_vm.icon) ? _c('b-icon', {staticClass: 'is-left', class: {'is-clickable': _vm.iconClickable}, attrs: {'icon': _vm.icon, 'pack': _vm.iconPack, 'size': _vm.iconSize}, nativeOn: {'click': function ($event) { _vm.iconClick($event) }}}) : _vm._e(), _vm._v(' '), (!_vm.loading && (_vm.passwordReveal || _vm.statusTypeIcon)) ? _c('b-icon', {staticClass: 'is-right', class: { 'is-clickable': _vm.passwordReveal }, attrs: {'icon': _vm.passwordReveal ? _vm.passwordVisibleIcon : _vm.statusTypeIcon, 'pack': _vm.iconPack, 'size': _vm.iconSize, 'type': !_vm.passwordReveal ? _vm.statusType : 'is-primary', 'both': ''}, nativeOn: {'click': function ($event) { _vm.togglePasswordVisibility($event) }}}) : _vm._e(), _vm._v(' '), (_vm.maxlength && _vm.hasCounter && _vm.type !== 'number') ? _c('small', {staticClass: 'help counter', class: { 'is-invisible': !_vm.isFocused }}, [_vm._v('\n        ' + _vm._s(_vm.valueLength) + ' / ' + _vm._s(_vm.maxlength) + '\n    ')]) : _vm._e()], 1) }
     var __vue_staticRenderFns__$1 = []
 
     /* style */
@@ -768,7 +785,8 @@
             keepFirst: Boolean,
             clearOnSelect: Boolean,
             openOnFocus: Boolean,
-            customFormatter: Function
+            customFormatter: Function,
+            checkInfiniteScroll: Boolean
         },
         data: function data() {
             return {
@@ -1035,6 +1053,16 @@
             },
 
             /**
+       * Check if the scroll list inside the dropdown
+       * reached it's end.
+       */
+            checkIfReachedTheEndOfScroll: function checkIfReachedTheEndOfScroll(list) {
+                if (list.clientHeight !== list.scrollHeight && list.scrollTop + list.clientHeight >= list.scrollHeight) {
+                    this.$emit('infinite-scroll')
+                }
+            },
+
+            /**
        * Calculate if the dropdown is vertically visible when activated,
        * otherwise it is openened upwards.
        */
@@ -1122,10 +1150,25 @@
                 window.addEventListener('resize', this.calcDropdownInViewportVertical)
             }
         },
+        mounted: function mounted() {
+            var _this5 = this
+
+            if (this.checkInfiniteScroll && this.$refs.dropdown && this.$refs.dropdown.querySelector('.dropdown-content')) {
+                var list = this.$refs.dropdown.querySelector('.dropdown-content')
+                list.addEventListener('scroll', function () {
+                    return _this5.checkIfReachedTheEndOfScroll(list)
+                })
+            }
+        },
         beforeDestroy: function beforeDestroy() {
             if (typeof window !== 'undefined') {
                 document.removeEventListener('click', this.clickedOutside)
                 window.removeEventListener('resize', this.calcDropdownInViewportVertical)
+            }
+
+            if (this.checkInfiniteScroll && this.$refs.dropdown && this.$refs.dropdown.querySelector('.dropdown-content')) {
+                var list = this.$refs.dropdown.querySelector('.dropdown-content')
+                list.removeEventListener('scroll', this.checkIfReachedTheEndOfScroll)
             }
         }
     }
@@ -1176,6 +1219,7 @@
     }
     use(Plugin)
 
+    exports.BAutocomplete = Autocomplete
     exports.default = Plugin
 
     Object.defineProperty(exports, '__esModule', { value: true })

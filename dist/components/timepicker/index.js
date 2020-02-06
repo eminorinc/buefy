@@ -1,4 +1,4 @@
-/*! Buefy v0.8.6 | MIT License | github.com/buefy/buefy */
+/*! Buefy v0.8.9 | MIT License | github.com/buefy/buefy */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports)
         : typeof define === 'function' && define.amd ? define(['exports'], factory)
@@ -92,6 +92,7 @@
         defaultDateFormatter: null,
         defaultDateParser: null,
         defaultDateCreator: null,
+        defaultTimeCreator: null,
         defaultDayNames: null,
         defaultMonthNames: null,
         defaultFirstDayOfWeek: null,
@@ -112,12 +113,12 @@
         defaultDatepickerNearbyMonthDays: true,
         defaultDatepickerNearbySelectableMonthDays: false,
         defaultDatepickerShowWeekNumber: false,
+        defaultDatepickerMobileModal: true,
         defaultTrapFocus: false,
         defaultButtonRounded: false,
+        defaultCarouselInterval: 3500,
         customIconPacks: null
     } // TODO defaultTrapFocus to true in the next breaking change
-
-    var config$1 = config
 
     var FormElementMixin = {
         props: {
@@ -133,7 +134,7 @@
             useHtml5Validation: {
                 type: Boolean,
                 default: function _default() {
-                    return config$1.defaultUseHtml5Validation
+                    return config.defaultUseHtml5Validation
                 }
             },
             validationMessage: String
@@ -142,7 +143,7 @@
             return {
                 isValid: true,
                 isFocused: false,
-                newIconPack: this.iconPack || config$1.defaultIconPack
+                newIconPack: this.iconPack || config.defaultIconPack
             }
         },
         computed: {
@@ -274,24 +275,30 @@
     }
 
     /**
-  * Merge function to replace Object.assign with deep merging possibility
-  */
+   * Merge function to replace Object.assign with deep merging possibility
+   */
 
     var isObject = function isObject(item) {
         return _typeof(item) === 'object' && !Array.isArray(item)
     }
 
     var mergeFn = function mergeFn(target, source) {
-        var isDeep = function isDeep(prop) {
-            return isObject(source[prop]) && target.hasOwnProperty(prop) && isObject(target[prop])
-        }
+        var deep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false
 
-        var replaced = Object.getOwnPropertyNames(source).map(function (prop) {
-            return _defineProperty({}, prop, isDeep(prop) ? mergeFn(target[prop], source[prop]) : source[prop])
-        }).reduce(function (a, b) {
-            return _objectSpread2({}, a, {}, b)
-        }, {})
-        return _objectSpread2({}, target, {}, replaced)
+        if (deep || !Object.assign) {
+            var isDeep = function isDeep(prop) {
+                return isObject(source[prop]) && target !== null && target.hasOwnProperty(prop) && isObject(target[prop])
+            }
+
+            var replaced = Object.getOwnPropertyNames(source).map(function (prop) {
+                return _defineProperty({}, prop, isDeep(prop) ? mergeFn(target[prop], source[prop], deep) : source[prop])
+            }).reduce(function (a, b) {
+                return _objectSpread2({}, a, {}, b)
+            }, {})
+            return _objectSpread2({}, target, {}, replaced)
+        } else {
+            return Object.assign(target, source)
+        }
     }
 
     var merge = mergeFn
@@ -369,7 +376,7 @@
             if (vm.computedValue && !isNaN(vm.computedValue)) {
                 d = new Date(vm.computedValue)
             } else {
-                d = new Date()
+                d = vm.timeCreator()
                 d.setMilliseconds(0)
             }
 
@@ -420,8 +427,8 @@
             timeFormatter: {
                 type: Function,
                 default: function _default(date, vm) {
-                    if (typeof config$1.defaultTimeFormatter === 'function') {
-                        return config$1.defaultTimeFormatter(date)
+                    if (typeof config.defaultTimeFormatter === 'function') {
+                        return config.defaultTimeFormatter(date)
                     } else {
                         return defaultTimeFormatter(date, vm)
                     }
@@ -430,8 +437,8 @@
             timeParser: {
                 type: Function,
                 default: function _default(date, vm) {
-                    if (typeof config$1.defaultTimeParser === 'function') {
-                        return config$1.defaultTimeParser(date)
+                    if (typeof config.defaultTimeParser === 'function') {
+                        return config.defaultTimeParser(date)
                     } else {
                         return defaultTimeParser(date, vm)
                     }
@@ -440,7 +447,17 @@
             mobileNative: {
                 type: Boolean,
                 default: function _default() {
-                    return config$1.defaultTimepickerMobileNative
+                    return config.defaultTimepickerMobileNative
+                }
+            },
+            timeCreator: {
+                type: Function,
+                default: function _default() {
+                    if (typeof config.defaultTimeCreator === 'function') {
+                        return config.defaultTimeCreator()
+                    } else {
+                        return new Date()
+                    }
                 }
             },
             position: String,
@@ -448,7 +465,11 @@
             openOnFocus: Boolean,
             enableSeconds: Boolean,
             defaultMinutes: Number,
-            defaultSeconds: Number
+            defaultSeconds: Number,
+            focusable: {
+                type: Boolean,
+                default: true
+            }
         },
         data: function data() {
             return {
@@ -506,6 +527,7 @@
                 return hours
             },
             minutes: function minutes() {
+                if (!this.incrementMinutes || this.incrementMinutes < 1) throw new Error('Minute increment cannot be null or less than 1.')
                 var minutes = []
 
                 for (var i = 0; i < 60; i += this.incrementMinutes) {
@@ -518,6 +540,7 @@
                 return minutes
             },
             seconds: function seconds() {
+                if (!this.incrementSeconds || this.incrementSeconds < 1) throw new Error('Second increment cannot be null or less than 1.')
                 var seconds = []
 
                 for (var i = 0; i < 60; i += this.incrementSeconds) {
@@ -599,7 +622,7 @@
                     if (this.computedValue && !isNaN(this.computedValue)) {
                         time = new Date(this.computedValue)
                     } else {
-                        time = new Date()
+                        time = this.timeCreator()
                         time.setMilliseconds(0)
                     }
 
@@ -857,6 +880,15 @@
                 if (this.$refs.dropdown && this.$refs.dropdown.isActive && event.keyCode === 27) {
                     this.toggle(false)
                 }
+            },
+
+            /**
+       * Emit 'blur' event on dropdown is not active (closed)
+       */
+            onActiveChange: function onActiveChange(value) {
+                if (!value) {
+                    this.onBlur()
+                }
             }
         },
         created: function created() {
@@ -903,7 +935,6 @@
                 }
 
                 el.addEventListener('keydown', onKeyDown)
-                firstFocusable.focus()
             }
         }
     }
@@ -941,7 +972,7 @@
             mobileModal: {
                 type: Boolean,
                 default: function _default() {
-                    return config$1.defaultDropdownMobileModal
+                    return config.defaultDropdownMobileModal
                 }
             },
             ariaRole: {
@@ -955,7 +986,7 @@
             multiple: Boolean,
             trapFocus: {
                 type: Boolean,
-                default: config$1.defaultTrapFocus
+                default: config.defaultTrapFocus
             },
             closeOnClick: {
                 type: Boolean,
@@ -1020,8 +1051,6 @@
       *   3. Close the dropdown.
       */
             selectItem: function selectItem(value) {
-                var _this = this
-
                 if (this.multiple) {
                     if (this.selected) {
                         var index = this.selected.indexOf(value)
@@ -1049,11 +1078,7 @@
                     this.isActive = !this.closeOnClick
 
                     if (this.hoverable && this.closeOnClick) {
-                        this.isHoverable = false // Timeout for the animation complete before destroying
-
-                        setTimeout(function () {
-                            _this.isHoverable = true
-                        }, 250)
+                        this.isHoverable = false
                     }
                 }
             },
@@ -1153,7 +1178,7 @@
       * Toggle dropdown if it's not disabled.
       */
             toggle: function toggle() {
-                var _this2 = this
+                var _this = this
 
                 if (this.disabled) return
 
@@ -1161,15 +1186,20 @@
                     // if not active, toggle after clickOutside event
                     // this fixes toggling programmatic
                     this.$nextTick(function () {
-                        var value = !_this2.isActive
-                        _this2.isActive = value // Vue 2.6.x ???
+                        var value = !_this.isActive
+                        _this.isActive = value // Vue 2.6.x ???
 
                         setTimeout(function () {
-                            return _this2.isActive = value
+                            return _this.isActive = value
                         })
                     })
                 } else {
                     this.isActive = !this.isActive
+                }
+            },
+            checkHoverable: function checkHoverable() {
+                if (this.hoverable) {
+                    this.isHoverable = true
                 }
             }
         },
@@ -1271,7 +1301,7 @@
     const __vue_script__ = script
 
     /* template */
-    var __vue_render__ = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('div', {staticClass: 'dropdown', class: _vm.rootClasses}, [(!_vm.inline) ? _c('div', {ref: 'trigger', staticClass: 'dropdown-trigger', attrs: {'role': 'button', 'aria-haspopup': 'true'}, on: {'click': _vm.toggle}}, [_vm._t('trigger')], 2) : _vm._e(), _vm._v(' '), _c('transition', {attrs: {'name': _vm.animation}}, [(_vm.isMobileModal) ? _c('div', {directives: [{name: 'show', rawName: 'v-show', value: (_vm.isActive), expression: 'isActive'}], staticClass: 'background', attrs: {'aria-hidden': !_vm.isActive}}) : _vm._e()]), _vm._v(' '), _c('transition', {attrs: {'name': _vm.animation}}, [_c('div', {directives: [{name: 'show', rawName: 'v-show', value: ((!_vm.disabled && (_vm.isActive || _vm.isHoverable)) || _vm.inline), expression: '(!disabled && (isActive || isHoverable)) || inline'}, {name: 'trap-focus', rawName: 'v-trap-focus', value: (_vm.trapFocus), expression: 'trapFocus'}], ref: 'dropdownMenu', staticClass: 'dropdown-menu', attrs: {'aria-hidden': !_vm.isActive}}, [_c('div', {staticClass: 'dropdown-content', attrs: {'role': _vm.ariaRoleMenu}}, [_vm._t('default')], 2)])])], 1) }
+    var __vue_render__ = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('div', {staticClass: 'dropdown', class: _vm.rootClasses}, [(!_vm.inline) ? _c('div', {ref: 'trigger', staticClass: 'dropdown-trigger', attrs: {'role': 'button', 'aria-haspopup': 'true'}, on: {'click': _vm.toggle, 'mouseenter': _vm.checkHoverable}}, [_vm._t('trigger')], 2) : _vm._e(), _vm._v(' '), _c('transition', {attrs: {'name': _vm.animation}}, [(_vm.isMobileModal) ? _c('div', {directives: [{name: 'show', rawName: 'v-show', value: (_vm.isActive), expression: 'isActive'}], staticClass: 'background', attrs: {'aria-hidden': !_vm.isActive}}) : _vm._e()]), _vm._v(' '), _c('transition', {attrs: {'name': _vm.animation}}, [_c('div', {directives: [{name: 'show', rawName: 'v-show', value: ((!_vm.disabled && (_vm.isActive || _vm.isHoverable)) || _vm.inline), expression: '(!disabled && (isActive || isHoverable)) || inline'}, {name: 'trap-focus', rawName: 'v-trap-focus', value: (_vm.trapFocus), expression: 'trapFocus'}], ref: 'dropdownMenu', staticClass: 'dropdown-menu', attrs: {'aria-hidden': !_vm.isActive}}, [_c('div', {staticClass: 'dropdown-content', attrs: {'role': _vm.ariaRoleMenu}}, [_vm._t('default')], 2)])])], 1) }
     var __vue_staticRenderFns__ = []
 
     /* style */
@@ -1431,7 +1461,7 @@
     }
 
     var faIcons = function faIcons() {
-        var faIconPrefix = config$1 && config$1.defaultIconComponent ? '' : 'fa-'
+        var faIconPrefix = config && config.defaultIconComponent ? '' : 'fa-'
         return {
             sizes: {
                 'default': faIconPrefix + 'lg',
@@ -1465,8 +1495,8 @@
             fal: faIcons()
         }
 
-        if (config$1 && config$1.customIconPacks) {
-            icons = merge(icons, config$1.customIconPacks)
+        if (config && config.customIconPacks) {
+            icons = merge(icons, config.customIconPacks, true)
         }
 
         return icons
@@ -1508,7 +1538,7 @@
                 return ''.concat(this.iconPrefix).concat(this.getEquivalentIconOf(this.icon))
             },
             newPack: function newPack() {
-                return this.pack || config$1.defaultIconPack
+                return this.pack || config.defaultIconPack
             },
             newType: function newType() {
                 if (!this.type) return
@@ -1543,7 +1573,7 @@
                 return null
             },
             useIconComponent: function useIconComponent() {
-                return this.component || config$1.defaultIconComponent
+                return this.component || config.defaultIconComponent
             }
         },
         methods: {
@@ -1607,10 +1637,11 @@
                 default: 'text'
             },
             passwordReveal: Boolean,
+            iconClickable: Boolean,
             hasCounter: {
                 type: Boolean,
                 default: function _default() {
-                    return config$1.defaultInputHasCounter
+                    return config.defaultInputHasCounter
                 }
             },
             customClass: {
@@ -1622,7 +1653,7 @@
             return {
                 newValue: this.value,
                 newType: this.type,
-                newAutocomplete: this.autocomplete || config$1.defaultInputAutocomplete,
+                newAutocomplete: this.autocomplete || config.defaultInputAutocomplete,
                 isPasswordVisible: false,
                 _elementRef: this.type === 'textarea' ? 'textarea' : 'input'
             }
@@ -1749,6 +1780,14 @@
                         _this2.computedValue = event.target.value
                     }
                 })
+            },
+            iconClick: function iconClick(event) {
+                var _this3 = this
+
+                this.$emit('icon-click', event)
+                this.$nextTick(function () {
+                    _this3.$refs.input.focus()
+                })
             }
         }
     }
@@ -1757,7 +1796,7 @@
     const __vue_script__$3 = script$3
 
     /* template */
-    var __vue_render__$3 = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('div', {staticClass: 'control', class: _vm.rootClasses}, [(_vm.type !== 'textarea') ? _c('input', _vm._b({ref: 'input', staticClass: 'input', class: [_vm.inputClasses, _vm.customClass], attrs: {'type': _vm.newType, 'autocomplete': _vm.newAutocomplete, 'maxlength': _vm.maxlength}, domProps: {'value': _vm.computedValue}, on: {'input': _vm.onInput, 'blur': _vm.onBlur, 'focus': _vm.onFocus}}, 'input', _vm.$attrs, false)) : _c('textarea', _vm._b({ref: 'textarea', staticClass: 'textarea', class: [_vm.inputClasses, _vm.customClass], attrs: {'maxlength': _vm.maxlength}, domProps: {'value': _vm.computedValue}, on: {'input': _vm.onInput, 'blur': _vm.onBlur, 'focus': _vm.onFocus}}, 'textarea', _vm.$attrs, false)), _vm._v(' '), (_vm.icon) ? _c('b-icon', {staticClass: 'is-left', attrs: {'icon': _vm.icon, 'pack': _vm.iconPack, 'size': _vm.iconSize}}) : _vm._e(), _vm._v(' '), (!_vm.loading && (_vm.passwordReveal || _vm.statusTypeIcon)) ? _c('b-icon', {staticClass: 'is-right', class: { 'is-clickable': _vm.passwordReveal }, attrs: {'icon': _vm.passwordReveal ? _vm.passwordVisibleIcon : _vm.statusTypeIcon, 'pack': _vm.iconPack, 'size': _vm.iconSize, 'type': !_vm.passwordReveal ? _vm.statusType : 'is-primary', 'both': ''}, nativeOn: {'click': function ($event) { _vm.togglePasswordVisibility($event) }}}) : _vm._e(), _vm._v(' '), (_vm.maxlength && _vm.hasCounter && _vm.type !== 'number') ? _c('small', {staticClass: 'help counter', class: { 'is-invisible': !_vm.isFocused }}, [_vm._v('\n        ' + _vm._s(_vm.valueLength) + ' / ' + _vm._s(_vm.maxlength) + '\n    ')]) : _vm._e()], 1) }
+    var __vue_render__$3 = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('div', {staticClass: 'control', class: _vm.rootClasses}, [(_vm.type !== 'textarea') ? _c('input', _vm._b({ref: 'input', staticClass: 'input', class: [_vm.inputClasses, _vm.customClass], attrs: {'type': _vm.newType, 'autocomplete': _vm.newAutocomplete, 'maxlength': _vm.maxlength}, domProps: {'value': _vm.computedValue}, on: {'input': _vm.onInput, 'blur': _vm.onBlur, 'focus': _vm.onFocus}}, 'input', _vm.$attrs, false)) : _c('textarea', _vm._b({ref: 'textarea', staticClass: 'textarea', class: [_vm.inputClasses, _vm.customClass], attrs: {'maxlength': _vm.maxlength}, domProps: {'value': _vm.computedValue}, on: {'input': _vm.onInput, 'blur': _vm.onBlur, 'focus': _vm.onFocus}}, 'textarea', _vm.$attrs, false)), _vm._v(' '), (_vm.icon) ? _c('b-icon', {staticClass: 'is-left', class: {'is-clickable': _vm.iconClickable}, attrs: {'icon': _vm.icon, 'pack': _vm.iconPack, 'size': _vm.iconSize}, nativeOn: {'click': function ($event) { _vm.iconClick($event) }}}) : _vm._e(), _vm._v(' '), (!_vm.loading && (_vm.passwordReveal || _vm.statusTypeIcon)) ? _c('b-icon', {staticClass: 'is-right', class: { 'is-clickable': _vm.passwordReveal }, attrs: {'icon': _vm.passwordReveal ? _vm.passwordVisibleIcon : _vm.statusTypeIcon, 'pack': _vm.iconPack, 'size': _vm.iconSize, 'type': !_vm.passwordReveal ? _vm.statusType : 'is-primary', 'both': ''}, nativeOn: {'click': function ($event) { _vm.togglePasswordVisibility($event) }}}) : _vm._e(), _vm._v(' '), (_vm.maxlength && _vm.hasCounter && _vm.type !== 'number') ? _c('small', {staticClass: 'help counter', class: { 'is-invisible': !_vm.isFocused }}, [_vm._v('\n        ' + _vm._s(_vm.valueLength) + ' / ' + _vm._s(_vm.maxlength) + '\n    ')]) : _vm._e()], 1) }
     var __vue_staticRenderFns__$3 = []
 
     /* style */
@@ -1873,7 +1912,7 @@
             labelPosition: {
                 type: String,
                 default: function _default() {
-                    return config$1.defaultFieldLabelPosition
+                    return config.defaultFieldLabelPosition
                 }
             }
         },
@@ -2162,7 +2201,7 @@
     const __vue_script__$7 = script$7
 
     /* template */
-    var __vue_render__$6 = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('div', {staticClass: 'timepicker control', class: [_vm.size, {'is-expanded': _vm.expanded}]}, [(!_vm.isMobile || _vm.inline) ? _c('b-dropdown', {ref: 'dropdown', attrs: {'position': _vm.position, 'disabled': _vm.disabled, 'inline': _vm.inline}}, [(!_vm.inline) ? _c('b-input', _vm._b({ref: 'input', attrs: {'slot': 'trigger', 'autocomplete': 'off', 'value': _vm.formatValue(_vm.computedValue), 'placeholder': _vm.placeholder, 'size': _vm.size, 'icon': _vm.icon, 'icon-pack': _vm.iconPack, 'loading': _vm.loading, 'disabled': _vm.disabled, 'readonly': !_vm.editable, 'rounded': _vm.rounded, 'use-html5-validation': _vm.useHtml5Validation}, on: {'focus': _vm.handleOnFocus, 'blur': function ($event) { _vm.onBlur() && _vm.checkHtml5Validity() }}, nativeOn: {'keyup': function ($event) { if (!('button' in $event) && _vm._k($event.keyCode, 'enter', 13, $event.key)) { return null }_vm.toggle(true) }, 'change': function ($event) { _vm.onChange($event.target.value) }}, slot: 'trigger'}, 'b-input', _vm.$attrs, false)) : _vm._e(), _vm._v(' '), _c('b-dropdown-item', {attrs: {'disabled': _vm.disabled, 'custom': ''}}, [_c('b-field', {attrs: {'grouped': '', 'position': 'is-centered'}}, [_c('b-select', {attrs: {'disabled': _vm.disabled, 'placeholder': '00'}, nativeOn: {'change': function ($event) { _vm.onHoursChange($event.target.value) }}, model: {value: (_vm.hoursSelected), callback: function ($$v) { _vm.hoursSelected = $$v }, expression: 'hoursSelected'}}, _vm._l((_vm.hours), function (hour) { return _c('option', {key: hour.value, attrs: {'disabled': _vm.isHourDisabled(hour.value)}, domProps: {'value': hour.value}}, [_vm._v('\n                        ' + _vm._s(hour.label) + '\n                    ')]) })), _vm._v(' '), _c('span', {staticClass: 'control is-colon'}, [_vm._v(':')]), _vm._v(' '), _c('b-select', {attrs: {'disabled': _vm.disabled, 'placeholder': '00'}, nativeOn: {'change': function ($event) { _vm.onMinutesChange($event.target.value) }}, model: {value: (_vm.minutesSelected), callback: function ($$v) { _vm.minutesSelected = $$v }, expression: 'minutesSelected'}}, _vm._l((_vm.minutes), function (minute) { return _c('option', {key: minute.value, attrs: {'disabled': _vm.isMinuteDisabled(minute.value)}, domProps: {'value': minute.value}}, [_vm._v('\n                        ' + _vm._s(minute.label) + '\n                    ')]) })), _vm._v(' '), (_vm.enableSeconds) ? [_c('span', {staticClass: 'control is-colon'}, [_vm._v(':')]), _vm._v(' '), _c('b-select', {attrs: {'disabled': _vm.disabled, 'placeholder': '00'}, nativeOn: {'change': function ($event) { _vm.onSecondsChange($event.target.value) }}, model: {value: (_vm.secondsSelected), callback: function ($$v) { _vm.secondsSelected = $$v }, expression: 'secondsSelected'}}, _vm._l((_vm.seconds), function (second) { return _c('option', {key: second.value, attrs: {'disabled': _vm.isSecondDisabled(second.value)}, domProps: {'value': second.value}}, [_vm._v('\n                            ' + _vm._s(second.label) + '\n                        ')]) }))] : _vm._e(), _vm._v(' '), (!_vm.isHourFormat24) ? _c('b-select', {attrs: {'disabled': _vm.disabled}, nativeOn: {'change': function ($event) { _vm.onMeridienChange($event.target.value) }}, model: {value: (_vm.meridienSelected), callback: function ($$v) { _vm.meridienSelected = $$v }, expression: 'meridienSelected'}}, _vm._l((_vm.meridiens), function (meridien) { return _c('option', {key: meridien, domProps: {'value': meridien}}, [_vm._v('\n                        ' + _vm._s(meridien) + '\n                    ')]) })) : _vm._e()], 2), _vm._v(' '), (_vm.$slots.default !== undefined && _vm.$slots.default.length) ? _c('footer', {staticClass: 'timepicker-footer'}, [_vm._t('default')], 2) : _vm._e()], 1)], 1) : _c('b-input', _vm._b({ref: 'input', attrs: {'type': 'time', 'step': _vm.nativeStep, 'autocomplete': 'off', 'value': _vm.formatHHMMSS(_vm.computedValue), 'placeholder': _vm.placeholder, 'size': _vm.size, 'icon': _vm.icon, 'icon-pack': _vm.iconPack, 'loading': _vm.loading, 'max': _vm.formatHHMMSS(_vm.maxTime), 'min': _vm.formatHHMMSS(_vm.minTime), 'disabled': _vm.disabled, 'readonly': false, 'use-html5-validation': _vm.useHtml5Validation}, on: {'focus': _vm.handleOnFocus, 'blur': function ($event) { _vm.onBlur() && _vm.checkHtml5Validity() }}, nativeOn: {'change': function ($event) { _vm.onChange($event.target.value) }}}, 'b-input', _vm.$attrs, false))], 1) }
+    var __vue_render__$6 = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('div', {staticClass: 'timepicker control', class: [_vm.size, {'is-expanded': _vm.expanded}]}, [(!_vm.isMobile || _vm.inline) ? _c('b-dropdown', {ref: 'dropdown', attrs: {'position': _vm.position, 'disabled': _vm.disabled, 'inline': _vm.inline}, on: {'active-change': _vm.onActiveChange}}, [(!_vm.inline) ? _c('b-input', _vm._b({ref: 'input', attrs: {'slot': 'trigger', 'autocomplete': 'off', 'value': _vm.formatValue(_vm.computedValue), 'placeholder': _vm.placeholder, 'size': _vm.size, 'icon': _vm.icon, 'icon-pack': _vm.iconPack, 'loading': _vm.loading, 'disabled': _vm.disabled, 'readonly': !_vm.editable, 'rounded': _vm.rounded, 'use-html5-validation': _vm.useHtml5Validation}, on: {'focus': _vm.handleOnFocus, 'blur': function ($event) { _vm.onBlur() && _vm.checkHtml5Validity() }}, nativeOn: {'keyup': function ($event) { if (!('button' in $event) && _vm._k($event.keyCode, 'enter', 13, $event.key)) { return null }_vm.toggle(true) }, 'change': function ($event) { _vm.onChange($event.target.value) }}, slot: 'trigger'}, 'b-input', _vm.$attrs, false)) : _vm._e(), _vm._v(' '), _c('b-dropdown-item', {attrs: {'disabled': _vm.disabled, 'focusable': _vm.focusable, 'custom': ''}}, [_c('b-field', {attrs: {'grouped': '', 'position': 'is-centered'}}, [_c('b-select', {attrs: {'disabled': _vm.disabled, 'placeholder': '00'}, nativeOn: {'change': function ($event) { _vm.onHoursChange($event.target.value) }}, model: {value: (_vm.hoursSelected), callback: function ($$v) { _vm.hoursSelected = $$v }, expression: 'hoursSelected'}}, _vm._l((_vm.hours), function (hour) { return _c('option', {key: hour.value, attrs: {'disabled': _vm.isHourDisabled(hour.value)}, domProps: {'value': hour.value}}, [_vm._v('\n                        ' + _vm._s(hour.label) + '\n                    ')]) })), _vm._v(' '), _c('span', {staticClass: 'control is-colon'}, [_vm._v(':')]), _vm._v(' '), _c('b-select', {attrs: {'disabled': _vm.disabled, 'placeholder': '00'}, nativeOn: {'change': function ($event) { _vm.onMinutesChange($event.target.value) }}, model: {value: (_vm.minutesSelected), callback: function ($$v) { _vm.minutesSelected = $$v }, expression: 'minutesSelected'}}, _vm._l((_vm.minutes), function (minute) { return _c('option', {key: minute.value, attrs: {'disabled': _vm.isMinuteDisabled(minute.value)}, domProps: {'value': minute.value}}, [_vm._v('\n                        ' + _vm._s(minute.label) + '\n                    ')]) })), _vm._v(' '), (_vm.enableSeconds) ? [_c('span', {staticClass: 'control is-colon'}, [_vm._v(':')]), _vm._v(' '), _c('b-select', {attrs: {'disabled': _vm.disabled, 'placeholder': '00'}, nativeOn: {'change': function ($event) { _vm.onSecondsChange($event.target.value) }}, model: {value: (_vm.secondsSelected), callback: function ($$v) { _vm.secondsSelected = $$v }, expression: 'secondsSelected'}}, _vm._l((_vm.seconds), function (second) { return _c('option', {key: second.value, attrs: {'disabled': _vm.isSecondDisabled(second.value)}, domProps: {'value': second.value}}, [_vm._v('\n                            ' + _vm._s(second.label) + '\n                        ')]) }))] : _vm._e(), _vm._v(' '), (!_vm.isHourFormat24) ? _c('b-select', {attrs: {'disabled': _vm.disabled}, nativeOn: {'change': function ($event) { _vm.onMeridienChange($event.target.value) }}, model: {value: (_vm.meridienSelected), callback: function ($$v) { _vm.meridienSelected = $$v }, expression: 'meridienSelected'}}, _vm._l((_vm.meridiens), function (meridien) { return _c('option', {key: meridien, domProps: {'value': meridien}}, [_vm._v('\n                        ' + _vm._s(meridien) + '\n                    ')]) })) : _vm._e()], 2), _vm._v(' '), (_vm.$slots.default !== undefined && _vm.$slots.default.length) ? _c('footer', {staticClass: 'timepicker-footer'}, [_vm._t('default')], 2) : _vm._e()], 1)], 1) : _c('b-input', _vm._b({ref: 'input', attrs: {'type': 'time', 'step': _vm.nativeStep, 'autocomplete': 'off', 'value': _vm.formatHHMMSS(_vm.computedValue), 'placeholder': _vm.placeholder, 'size': _vm.size, 'icon': _vm.icon, 'icon-pack': _vm.iconPack, 'loading': _vm.loading, 'max': _vm.formatHHMMSS(_vm.maxTime), 'min': _vm.formatHHMMSS(_vm.minTime), 'disabled': _vm.disabled, 'readonly': false, 'use-html5-validation': _vm.useHtml5Validation}, on: {'focus': _vm.handleOnFocus, 'blur': function ($event) { _vm.onBlur() && _vm.checkHtml5Validity() }}, nativeOn: {'change': function ($event) { _vm.onChange($event.target.value) }}}, 'b-input', _vm.$attrs, false))], 1) }
     var __vue_staticRenderFns__$6 = []
 
     /* style */
@@ -2204,6 +2243,7 @@
     }
     use(Plugin)
 
+    exports.BTimepicker = Timepicker
     exports.default = Plugin
 
     Object.defineProperty(exports, '__esModule', { value: true })

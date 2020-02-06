@@ -1,7 +1,7 @@
-import { a as _defineProperty } from './chunk-17755bd7.js'
-import './chunk-90e31a22.js'
-import './chunk-1628b87d.js'
-import { I as Icon } from './chunk-263f5bb7.js'
+import { _ as _defineProperty } from './chunk-f2006744.js'
+import './helpers.js'
+import './chunk-b76a6c1d.js'
+import { I as Icon } from './chunk-c8434a6f.js'
 import { _ as __vue_normalize__, r as registerComponent, u as use } from './chunk-cca88db8.js'
 
 //
@@ -11,7 +11,19 @@ import { _ as __vue_normalize__, r as registerComponent, u as use } from './chun
 //
 //
 var script = {
-    name: 'BMenu'
+    name: 'BMenu',
+    props: {
+        accordion: {
+            type: Boolean,
+            default: true
+        }
+    },
+    data: function data() {
+        return {
+            _isMenu: true // Used by MenuItem
+
+        }
+    }
 }
 
 /* script */
@@ -178,8 +190,11 @@ var script$2 = {
                 if (item !== _this) {
                     _this.reset(item)
 
-                    item.newExpanded = false
-                    item.$emit('update:expanded', item.newActive)
+                    if (!parent.$data._isMenu || parent.$data._isMenu && parent.accordion) {
+                        item.newExpanded = false
+                        item.$emit('update:expanded', item.newActive)
+                    }
+
                     item.newActive = false
                     item.$emit('update:active', item.newActive)
                 }
@@ -236,3 +251,4 @@ var Plugin = {
 use(Plugin)
 
 export default Plugin
+export { Menu as BMenu, MenuItem as BMenuItem, MenuList as BMenuList }

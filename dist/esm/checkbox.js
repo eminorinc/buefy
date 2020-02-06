@@ -1,85 +1,31 @@
 import { _ as __vue_normalize__, r as registerComponent, u as use } from './chunk-cca88db8.js'
-import { C as Checkbox } from './chunk-6e198005.js'
+import { C as CheckRadioMixin } from './chunk-a1a77ea5.js'
+import { C as Checkbox } from './chunk-8c4d25c9.js'
+export { C as BCheckbox } from './chunk-8c4d25c9.js'
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 var script = {
     name: 'BCheckboxButton',
+    mixins: [CheckRadioMixin],
     props: {
-        value: [String, Number, Boolean, Function, Object, Array],
-        nativeValue: [String, Number, Boolean, Function, Object, Array],
-        disabled: Boolean,
-        required: Boolean,
-        expanded: Boolean,
-        name: String,
-        size: String,
         type: {
             type: String,
             default: 'is-primary'
-        }
+        },
+        expanded: Boolean
     },
     data: function data() {
         return {
-            newValue: this.value,
             isFocused: false
         }
     },
     computed: {
-        computedValue: {
-            get: function get() {
-                return this.newValue
-            },
-            set: function set(value) {
-                this.newValue = value
-                this.$emit('input', value)
-            }
-        },
         checked: function checked() {
             if (Array.isArray(this.newValue)) {
                 return this.newValue.indexOf(this.nativeValue) >= 0
             }
 
             return this.newValue === this.nativeValue
-        }
-    },
-    watch: {
-    /**
-     * When v-model change, set internal value.
-     */
-        value: function value(_value) {
-            this.newValue = _value
-        }
-    },
-    methods: {
-        focus: function focus() {
-            // MacOS FireFox and Safari do not focus when clicked
-            this.$refs.input.focus()
         }
     }
 }
@@ -132,3 +78,4 @@ var Plugin = {
 use(Plugin)
 
 export default Plugin
+export { CheckboxButton as BCheckboxButton }

@@ -3,14 +3,14 @@
 Object.defineProperty(exports, '__esModule', { value: true })
 
 var __chunk_1 = require('./chunk-2777282e.js')
-require('./chunk-6ce6eb64.js')
-var __chunk_3 = require('./chunk-fb310c0c.js')
-var __chunk_5 = require('./chunk-d4aef657.js')
-var __chunk_6 = require('./chunk-13e039f5.js')
+require('./helpers.js')
+var __chunk_2 = require('./chunk-8806479f.js')
+var __chunk_4 = require('./chunk-acfb68f5.js')
+var __chunk_5 = require('./chunk-13e039f5.js')
 
 var script = {
     name: 'BButton',
-    components: __chunk_1._defineProperty({}, __chunk_5.Icon.name, __chunk_5.Icon),
+    components: __chunk_1._defineProperty({}, __chunk_4.Icon.name, __chunk_4.Icon),
     inheritAttrs: false,
     props: {
         type: [String, Object],
@@ -22,7 +22,7 @@ var script = {
         rounded: {
             type: Boolean,
             default: function _default() {
-                return __chunk_3.config.defaultButtonRounded
+                return __chunk_2.config.defaultButtonRounded
             }
         },
         loading: Boolean,
@@ -66,7 +66,7 @@ const __vue_script__ = script
 
 /* template */
 var __vue_render__ = function () {
-    var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c(_vm.tag, _vm._b({tag: 'component',
+    var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c(_vm.tag, _vm._g(_vm._b({tag: 'component',
         staticClass: 'button',
         class: [_vm.size, _vm.type, {
             'is-rounded': _vm.rounded,
@@ -79,8 +79,7 @@ var __vue_render__ = function () {
             'is-hovered': _vm.hovered,
             'is-selected': _vm.selected
         }],
-        attrs: {'type': _vm.nativeType},
-        on: {'click': function ($event) { _vm.$emit('click', $event) }}}, 'component', _vm.$attrs, false), [(_vm.iconLeft) ? _c('b-icon', {attrs: {'pack': _vm.iconPack, 'icon': _vm.iconLeft, 'size': _vm.iconSize}}) : _vm._e(), _vm._v(' '), (_vm.label) ? _c('span', [_vm._v(_vm._s(_vm.label))]) : (_vm.$slots.default) ? _c('span', [_vm._t('default')], 2) : _vm._e(), _vm._v(' '), (_vm.iconRight) ? _c('b-icon', {attrs: {'pack': _vm.iconPack, 'icon': _vm.iconRight, 'size': _vm.iconSize}}) : _vm._e()], 1)
+        attrs: {'type': _vm.nativeType}}, 'component', _vm.$attrs, false), _vm.$listeners), [(_vm.iconLeft) ? _c('b-icon', {attrs: {'pack': _vm.iconPack, 'icon': _vm.iconLeft, 'size': _vm.iconSize}}) : _vm._e(), _vm._v(' '), (_vm.label) ? _c('span', [_vm._v(_vm._s(_vm.label))]) : (_vm.$slots.default) ? _c('span', [_vm._t('default')], 2) : _vm._e(), _vm._v(' '), (_vm.iconRight) ? _c('b-icon', {attrs: {'pack': _vm.iconPack, 'icon': _vm.iconRight, 'size': _vm.iconSize}}) : _vm._e()], 1)
 }
 var __vue_staticRenderFns__ = []
 
@@ -96,7 +95,7 @@ const __vue_is_functional_template__ = false
 
 /* style inject SSR */
 
-var Button = __chunk_6.__vue_normalize__(
+var Button = __chunk_5.__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
@@ -109,9 +108,10 @@ var Button = __chunk_6.__vue_normalize__(
 
 var Plugin = {
     install: function install(Vue) {
-        __chunk_6.registerComponent(Vue, Button)
+        __chunk_5.registerComponent(Vue, Button)
     }
 }
-__chunk_6.use(Plugin)
+__chunk_5.use(Plugin)
 
+exports.BButton = Button
 exports.default = Plugin

@@ -1,68 +1,10 @@
 import { _ as __vue_normalize__, r as registerComponent, u as use } from './chunk-cca88db8.js'
+import { C as CheckRadioMixin } from './chunk-a1a77ea5.js'
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 var script = {
     name: 'BRadio',
-    props: {
-        value: [String, Number, Boolean, Function, Object, Array],
-        nativeValue: [String, Number, Boolean, Function, Object, Array],
-        type: String,
-        disabled: Boolean,
-        required: Boolean,
-        name: String,
-        size: String
-    },
-    data: function data() {
-        return {
-            newValue: this.value
-        }
-    },
-    computed: {
-        computedValue: {
-            get: function get() {
-                return this.newValue
-            },
-            set: function set(value) {
-                this.newValue = value
-                this.$emit('input', value)
-            }
-        }
-    },
-    watch: {
-    /**
-    * When v-model change, set internal value.
-    */
-        value: function value(_value) {
-            this.newValue = _value
-        }
-    },
-    methods: {
-        focus: function focus() {
-            // MacOS FireFox and Safari do not focus when clicked
-            this.$refs.input.focus()
-        }
-    }
+    mixins: [CheckRadioMixin]
 }
 
 /* script */
@@ -96,77 +38,19 @@ var Radio = __vue_normalize__(
 )
 
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var script$1 = {
     name: 'BRadioButton',
+    mixins: [CheckRadioMixin],
     props: {
-        value: [String, Number, Boolean, Function, Object, Array],
-        nativeValue: [String, Number, Boolean, Function, Object, Array],
         type: {
             type: String,
             default: 'is-primary'
         },
-        disabled: Boolean,
-        required: Boolean,
-        expanded: Boolean,
-        name: String,
-        size: String
+        expanded: Boolean
     },
     data: function data() {
         return {
-            newValue: this.value,
             isFocused: false
-        }
-    },
-    computed: {
-        computedValue: {
-            get: function get() {
-                return this.newValue
-            },
-            set: function set(value) {
-                this.newValue = value
-                this.$emit('input', value)
-            }
-        }
-    },
-    watch: {
-    /**
-    * When v-model change, set internal value.
-    */
-        value: function value(_value) {
-            this.newValue = _value
-        }
-    },
-    methods: {
-        focus: function focus() {
-            // MacOS FireFox and Safari do not focus when clicked
-            this.$refs.input.focus()
         }
     }
 }
@@ -219,3 +103,4 @@ var Plugin = {
 use(Plugin)
 
 export default Plugin
+export { Radio as BRadio, RadioButton as BRadioButton }

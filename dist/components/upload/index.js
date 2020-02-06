@@ -1,4 +1,4 @@
-/*! Buefy v0.8.6 | MIT License | github.com/buefy/buefy */
+/*! Buefy v0.8.9 | MIT License | github.com/buefy/buefy */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports)
         : typeof define === 'function' && define.amd ? define(['exports'], factory)
@@ -27,6 +27,7 @@
         defaultDateFormatter: null,
         defaultDateParser: null,
         defaultDateCreator: null,
+        defaultTimeCreator: null,
         defaultDayNames: null,
         defaultMonthNames: null,
         defaultFirstDayOfWeek: null,
@@ -47,12 +48,12 @@
         defaultDatepickerNearbyMonthDays: true,
         defaultDatepickerNearbySelectableMonthDays: false,
         defaultDatepickerShowWeekNumber: false,
+        defaultDatepickerMobileModal: true,
         defaultTrapFocus: false,
         defaultButtonRounded: false,
+        defaultCarouselInterval: 3500,
         customIconPacks: null
     } // TODO defaultTrapFocus to true in the next breaking change
-
-    var config$1 = config
 
     var FormElementMixin = {
         props: {
@@ -68,7 +69,7 @@
             useHtml5Validation: {
                 type: Boolean,
                 default: function _default() {
-                    return config$1.defaultUseHtml5Validation
+                    return config.defaultUseHtml5Validation
                 }
             },
             validationMessage: String
@@ -77,7 +78,7 @@
             return {
                 isValid: true,
                 isFocused: false,
-                newIconPack: this.iconPack || config$1.defaultIconPack
+                newIconPack: this.iconPack || config.defaultIconPack
             }
         },
         computed: {
@@ -503,6 +504,7 @@
     }
     use(Plugin)
 
+    exports.BUpload = Upload
     exports.default = Plugin
 
     Object.defineProperty(exports, '__esModule', { value: true })

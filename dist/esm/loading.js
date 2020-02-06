@@ -1,7 +1,7 @@
-import './chunk-17755bd7.js'
-import { r as removeElement } from './chunk-90e31a22.js'
+import './chunk-f2006744.js'
+import { removeElement, merge } from './helpers.js'
+import { V as VueInstance } from './chunk-b76a6c1d.js'
 import { _ as __vue_normalize__, r as registerComponent, a as registerComponentProgrammatic, u as use } from './chunk-cca88db8.js'
-import Vue from 'vue'
 import { H as HTMLElement } from './chunk-b9bdb0e4.js'
 
 //
@@ -132,13 +132,14 @@ var Loading = __vue_normalize__(
     undefined
 )
 
+var localVueInstance
 var LoadingProgrammatic = {
     open: function open(params) {
         var defaultParam = {
             programmatic: true
         }
-        var propsData = Object.assign(defaultParam, params)
-        var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : Vue
+        var propsData = merge(defaultParam, params)
+        var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance
         var LoadingComponent = vm.extend(Loading)
         return new LoadingComponent({
             el: document.createElement('div'),
@@ -148,6 +149,7 @@ var LoadingProgrammatic = {
 }
 var Plugin = {
     install: function install(Vue) {
+        localVueInstance = Vue
         registerComponent(Vue, Loading)
         registerComponentProgrammatic(Vue, 'loading', LoadingProgrammatic)
     }
@@ -155,4 +157,4 @@ var Plugin = {
 use(Plugin)
 
 export default Plugin
-export { LoadingProgrammatic }
+export { Loading as BLoading, LoadingProgrammatic }

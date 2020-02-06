@@ -2,15 +2,15 @@
 
 Object.defineProperty(exports, '__esModule', { value: true })
 
-require('./chunk-fb310c0c.js')
-var __chunk_4 = require('./chunk-c5724c2f.js')
-var __chunk_6 = require('./chunk-13e039f5.js')
+require('./chunk-8806479f.js')
+var __chunk_3 = require('./chunk-f45d15e3.js')
+var __chunk_5 = require('./chunk-13e039f5.js')
 var __chunk_18 = require('./chunk-f1df1c63.js')
 
 //
 var script = {
     name: 'BUpload',
-    mixins: [__chunk_4.FormElementMixin],
+    mixins: [__chunk_3.FormElementMixin],
     inheritAttrs: false,
     props: {
         value: {
@@ -190,7 +190,7 @@ const __vue_is_functional_template__ = false
 
 /* style inject SSR */
 
-var Upload = __chunk_6.__vue_normalize__(
+var Upload = __chunk_5.__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
@@ -203,9 +203,10 @@ var Upload = __chunk_6.__vue_normalize__(
 
 var Plugin = {
     install: function install(Vue) {
-        __chunk_6.registerComponent(Vue, Upload)
+        __chunk_5.registerComponent(Vue, Upload)
     }
 }
-__chunk_6.use(Plugin)
+__chunk_5.use(Plugin)
 
+exports.BUpload = Upload
 exports.default = Plugin

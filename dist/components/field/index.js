@@ -1,4 +1,4 @@
-/*! Buefy v0.8.6 | MIT License | github.com/buefy/buefy */
+/*! Buefy v0.8.9 | MIT License | github.com/buefy/buefy */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports)
         : typeof define === 'function' && define.amd ? define(['exports'], factory)
@@ -42,6 +42,7 @@
         defaultDateFormatter: null,
         defaultDateParser: null,
         defaultDateCreator: null,
+        defaultTimeCreator: null,
         defaultDayNames: null,
         defaultMonthNames: null,
         defaultFirstDayOfWeek: null,
@@ -62,12 +63,12 @@
         defaultDatepickerNearbyMonthDays: true,
         defaultDatepickerNearbySelectableMonthDays: false,
         defaultDatepickerShowWeekNumber: false,
+        defaultDatepickerMobileModal: true,
         defaultTrapFocus: false,
         defaultButtonRounded: false,
+        defaultCarouselInterval: 3500,
         customIconPacks: null
     } // TODO defaultTrapFocus to true in the next breaking change
-
-    var config$1 = config
 
     var script = {
         name: 'BFieldBody',
@@ -239,7 +240,7 @@
             labelPosition: {
                 type: String,
                 default: function _default() {
-                    return config$1.defaultFieldLabelPosition
+                    return config.defaultFieldLabelPosition
                 }
             }
         },
@@ -437,6 +438,7 @@
     }
     use(Plugin)
 
+    exports.BField = Field
     exports.default = Plugin
 
     Object.defineProperty(exports, '__esModule', { value: true })

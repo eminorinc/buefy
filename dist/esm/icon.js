@@ -1,8 +1,9 @@
-import './chunk-17755bd7.js'
-import './chunk-90e31a22.js'
-import './chunk-1628b87d.js'
-import { I as Icon } from './chunk-263f5bb7.js'
+import './chunk-f2006744.js'
+import './helpers.js'
+import './chunk-b76a6c1d.js'
+import { I as Icon } from './chunk-c8434a6f.js'
 import { r as registerComponent, u as use } from './chunk-cca88db8.js'
+export { I as BIcon } from './chunk-c8434a6f.js'
 
 var Plugin = {
     install: function install(Vue) {

@@ -1,4 +1,4 @@
-/*! Buefy v0.8.6 | MIT License | github.com/buefy/buefy */
+/*! Buefy v0.8.9 | MIT License | github.com/buefy/buefy */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports)
         : typeof define === 'function' && define.amd ? define(['exports'], factory)
@@ -6,30 +6,7 @@
 }(this, function (exports) {
     'use strict'
 
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    var script = {
-        name: 'BRadio',
+    var CheckRadioMixin = {
         props: {
             value: [String, Number, Boolean, Function, Object, Array],
             nativeValue: [String, Number, Boolean, Function, Object, Array],
@@ -69,6 +46,12 @@
                 this.$refs.input.focus()
             }
         }
+    }
+
+    //
+    var script = {
+        name: 'BRadio',
+        mixins: [CheckRadioMixin]
     }
 
     function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier
@@ -182,77 +165,19 @@
     )
 
     //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
     var script$1 = {
         name: 'BRadioButton',
+        mixins: [CheckRadioMixin],
         props: {
-            value: [String, Number, Boolean, Function, Object, Array],
-            nativeValue: [String, Number, Boolean, Function, Object, Array],
             type: {
                 type: String,
                 default: 'is-primary'
             },
-            disabled: Boolean,
-            required: Boolean,
-            expanded: Boolean,
-            name: String,
-            size: String
+            expanded: Boolean
         },
         data: function data() {
             return {
-                newValue: this.value,
                 isFocused: false
-            }
-        },
-        computed: {
-            computedValue: {
-                get: function get() {
-                    return this.newValue
-                },
-                set: function set(value) {
-                    this.newValue = value
-                    this.$emit('input', value)
-                }
-            }
-        },
-        watch: {
-        /**
-        * When v-model change, set internal value.
-        */
-            value: function value(_value) {
-                this.newValue = _value
-            }
-        },
-        methods: {
-            focus: function focus() {
-                // MacOS FireFox and Safari do not focus when clicked
-                this.$refs.input.focus()
             }
         }
     }
@@ -313,6 +238,8 @@
     }
     use(Plugin)
 
+    exports.BRadio = Radio
+    exports.BRadioButton = RadioButton
     exports.default = Plugin
 
     Object.defineProperty(exports, '__esModule', { value: true })

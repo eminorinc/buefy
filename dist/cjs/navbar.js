@@ -3,7 +3,7 @@
 Object.defineProperty(exports, '__esModule', { value: true })
 
 var __chunk_1 = require('./chunk-2777282e.js')
-var __chunk_6 = require('./chunk-13e039f5.js')
+var __chunk_5 = require('./chunk-13e039f5.js')
 
 //
 //
@@ -49,7 +49,7 @@ const __vue_is_functional_template__ = false
 
 /* style inject SSR */
 
-var NavbarBurger = __chunk_6.__vue_normalize__(
+var NavbarBurger = __chunk_5.__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
@@ -401,7 +401,7 @@ const __vue_is_functional_template__$1 = undefined
 
 /* style inject SSR */
 
-var Navbar = __chunk_6.__vue_normalize__(
+var Navbar = __chunk_5.__vue_normalize__(
     {},
     __vue_inject_styles__$1,
     __vue_script__$1,
@@ -506,7 +506,7 @@ const __vue_is_functional_template__$2 = false
 
 /* style inject SSR */
 
-var NavbarItem = __chunk_6.__vue_normalize__(
+var NavbarItem = __chunk_5.__vue_normalize__(
     { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
     __vue_inject_styles__$2,
     __vue_script__$2,
@@ -591,7 +591,7 @@ const __vue_is_functional_template__$3 = false
 
 /* style inject SSR */
 
-var NavbarDropdown = __chunk_6.__vue_normalize__(
+var NavbarDropdown = __chunk_5.__vue_normalize__(
     { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
     __vue_inject_styles__$3,
     __vue_script__$3,
@@ -604,11 +604,14 @@ var NavbarDropdown = __chunk_6.__vue_normalize__(
 
 var Plugin = {
     install: function install(Vue) {
-        __chunk_6.registerComponent(Vue, Navbar)
-        __chunk_6.registerComponent(Vue, NavbarItem)
-        __chunk_6.registerComponent(Vue, NavbarDropdown)
+        __chunk_5.registerComponent(Vue, Navbar)
+        __chunk_5.registerComponent(Vue, NavbarItem)
+        __chunk_5.registerComponent(Vue, NavbarDropdown)
     }
 }
-__chunk_6.use(Plugin)
+__chunk_5.use(Plugin)
 
+exports.BNavbar = Navbar
+exports.BNavbarDropdown = NavbarDropdown
+exports.BNavbarItem = NavbarItem
 exports.default = Plugin

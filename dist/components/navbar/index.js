@@ -1,4 +1,4 @@
-/*! Buefy v0.8.6 | MIT License | github.com/buefy/buefy */
+/*! Buefy v0.8.9 | MIT License | github.com/buefy/buefy */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports)
         : typeof define === 'function' && define.amd ? define(['exports'], factory)
@@ -730,6 +730,9 @@
     }
     use(Plugin)
 
+    exports.BNavbar = Navbar
+    exports.BNavbarDropdown = NavbarDropdown
+    exports.BNavbarItem = NavbarItem
     exports.default = Plugin
 
     Object.defineProperty(exports, '__esModule', { value: true })

@@ -1,11 +1,10 @@
-import { a as _defineProperty } from './chunk-17755bd7.js'
-import { r as removeElement } from './chunk-90e31a22.js'
-import { c as config } from './chunk-1628b87d.js'
-import { I as Icon } from './chunk-263f5bb7.js'
+import { _ as _defineProperty } from './chunk-f2006744.js'
+import { removeElement, merge } from './helpers.js'
+import { c as config, V as VueInstance } from './chunk-b76a6c1d.js'
+import { I as Icon } from './chunk-c8434a6f.js'
 import { _ as __vue_normalize__, r as registerComponent, a as registerComponentProgrammatic, u as use } from './chunk-cca88db8.js'
-import { t as trapFocus } from './chunk-dc5f834f.js'
-import Vue from 'vue'
-import { M as Modal } from './chunk-9a93b6f5.js'
+import { t as trapFocus } from './chunk-b3471279.js'
+import { M as Modal } from './chunk-195d9c58.js'
 
 var script = {
     name: 'BDialog',
@@ -49,6 +48,10 @@ var script = {
             type: Function,
             default: function _default() {}
         },
+        container: {
+            type: String,
+            default: config.defaultContainerElement
+        },
         focusOn: {
             type: String,
             default: 'confirm'
@@ -74,7 +77,13 @@ var script = {
         }
     },
     computed: {
-    /**
+        dialogClass: function dialogClass() {
+            return [this.size, {
+                'has-custom-container': this.container !== null
+            }]
+        },
+
+        /**
     * Icon name (MDI) based on the type.
     */
         iconByType: function iconByType() {
@@ -139,10 +148,11 @@ var script = {
     beforeMount: function beforeMount() {
         var _this3 = this
 
-        // Insert the Dialog component in body tag
+        // Insert the Dialog component in the element container
         if (typeof window !== 'undefined') {
             this.$nextTick(function () {
-                document.body.appendChild(_this3.$el)
+                var container = document.querySelector(_this3.container) || document.body
+                container.appendChild(_this3.$el)
             })
         }
     },
@@ -172,7 +182,7 @@ var script = {
 const __vue_script__ = script
 
 /* template */
-var __vue_render__ = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('transition', {attrs: {'name': _vm.animation}}, [(_vm.isActive) ? _c('div', {directives: [{name: 'trap-focus', rawName: 'v-trap-focus', value: (_vm.trapFocus), expression: 'trapFocus'}], staticClass: 'dialog modal is-active', class: _vm.size, attrs: {'role': _vm.ariaRole, 'aria-modal': _vm.ariaModal}}, [_c('div', {staticClass: 'modal-background', on: {'click': function ($event) { _vm.cancel('outside') }}}), _vm._v(' '), _c('div', {staticClass: 'modal-card animation-content'}, [(_vm.title) ? _c('header', {staticClass: 'modal-card-head'}, [_c('div', {staticClass: 'modal-card-title'}, [_vm._v(_vm._s(_vm.title))]), _vm._v(' '), _c('button', {staticClass: 'delete', attrs: {'aria-label': 'close'}, on: {'click': function ($event) { _vm.cancel('button') }}})]) : _vm._e(), _vm._v(' '), _c('section', {staticClass: 'modal-card-body', class: { 'is-titleless': !_vm.title, 'is-flex': _vm.hasIcon }}, [_c('div', {staticClass: 'media'}, [(_vm.hasIcon && (_vm.icon || _vm.iconByType)) ? _c('div', {staticClass: 'media-left'}, [_c('b-icon', {attrs: {'icon': _vm.icon ? _vm.icon : _vm.iconByType, 'pack': _vm.iconPack, 'type': _vm.type, 'both': !_vm.icon, 'size': 'is-large'}})], 1) : _vm._e(), _vm._v(' '), _c('div', {staticClass: 'media-content'}, [_c('p', {domProps: {'innerHTML': _vm._s(_vm.message)}}), _vm._v(' '), (_vm.hasInput) ? _c('div', {staticClass: 'field'}, [_c('div', {staticClass: 'control'}, [_c('input', _vm._b({directives: [{name: 'model', rawName: 'v-model', value: (_vm.prompt), expression: 'prompt'}], ref: 'input', staticClass: 'input', class: { 'is-danger': _vm.validationMessage }, domProps: {'value': (_vm.prompt)}, on: {'keyup': function ($event) { if (!('button' in $event) && _vm._k($event.keyCode, 'enter', 13, $event.key)) { return null }_vm.confirm($event) }, 'input': function ($event) { if ($event.target.composing) { return }_vm.prompt = $event.target.value }}}, 'input', _vm.inputAttrs, false))]), _vm._v(' '), _c('p', {staticClass: 'help is-danger'}, [_vm._v(_vm._s(_vm.validationMessage))])]) : _vm._e()])])]), _vm._v(' '), _c('footer', {staticClass: 'modal-card-foot'}, [_c('button', {ref: 'confirmButton', staticClass: 'button', class: _vm.type, on: {'click': _vm.confirm}}, [_vm._v('\n                    ' + _vm._s(_vm.confirmText) + '\n                ')])])])]) : _vm._e()]) }
+var __vue_render__ = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('transition', {attrs: {'name': _vm.animation}}, [(_vm.isActive) ? _c('div', {directives: [{name: 'trap-focus', rawName: 'v-trap-focus', value: (_vm.trapFocus), expression: 'trapFocus'}], staticClass: 'dialog modal is-active', class: _vm.dialogClass, attrs: {'role': _vm.ariaRole, 'aria-modal': _vm.ariaModal}}, [_c('div', {staticClass: 'modal-background', on: {'click': function ($event) { _vm.cancel('outside') }}}), _vm._v(' '), _c('div', {staticClass: 'modal-card animation-content'}, [(_vm.title) ? _c('header', {staticClass: 'modal-card-head'}, [_c('div', {staticClass: 'modal-card-title'}, [_vm._v(_vm._s(_vm.title))]), _vm._v(' '), _c('button', {staticClass: 'delete', attrs: {'aria-label': 'close'}, on: {'click': function ($event) { _vm.cancel('button') }}})]) : _vm._e(), _vm._v(' '), _c('section', {staticClass: 'modal-card-body', class: { 'is-titleless': !_vm.title, 'is-flex': _vm.hasIcon }}, [_c('div', {staticClass: 'media'}, [(_vm.hasIcon && (_vm.icon || _vm.iconByType)) ? _c('div', {staticClass: 'media-left'}, [_c('b-icon', {attrs: {'icon': _vm.icon ? _vm.icon : _vm.iconByType, 'pack': _vm.iconPack, 'type': _vm.type, 'both': !_vm.icon, 'size': 'is-large'}})], 1) : _vm._e(), _vm._v(' '), _c('div', {staticClass: 'media-content'}, [_c('p', {domProps: {'innerHTML': _vm._s(_vm.message)}}), _vm._v(' '), (_vm.hasInput) ? _c('div', {staticClass: 'field'}, [_c('div', {staticClass: 'control'}, [_c('input', _vm._b({directives: [{name: 'model', rawName: 'v-model', value: (_vm.prompt), expression: 'prompt'}], ref: 'input', staticClass: 'input', class: { 'is-danger': _vm.validationMessage }, domProps: {'value': (_vm.prompt)}, on: {'keyup': function ($event) { if (!('button' in $event) && _vm._k($event.keyCode, 'enter', 13, $event.key)) { return null }_vm.confirm($event) }, 'input': function ($event) { if ($event.target.composing) { return }_vm.prompt = $event.target.value }}}, 'input', _vm.inputAttrs, false))]), _vm._v(' '), _c('p', {staticClass: 'help is-danger'}, [_vm._v(_vm._s(_vm.validationMessage))])]) : _vm._e()])])]), _vm._v(' '), _c('footer', {staticClass: 'modal-card-foot'}, [_c('button', {ref: 'confirmButton', staticClass: 'button', class: _vm.type, on: {'click': _vm.confirm}}, [_vm._v('\n                    ' + _vm._s(_vm.confirmText) + '\n                ')])])])]) : _vm._e()]) }
 var __vue_staticRenderFns__ = []
 
 /* style */
@@ -198,8 +208,10 @@ var Dialog = __vue_normalize__(
     undefined
 )
 
+var localVueInstance
+
 function open(propsData) {
-    var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : Vue
+    var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance
     var DialogComponent = vm.extend(Dialog)
     return new DialogComponent({
         el: document.createElement('div'),
@@ -209,18 +221,21 @@ function open(propsData) {
 
 var DialogProgrammatic = {
     alert: function alert(params) {
-        var message
-        if (typeof params === 'string') message = params
-        var defaultParam = {
-            canCancel: false,
-            message: message
+        if (typeof params === 'string') {
+            params = {
+                message: params
+            }
         }
-        var propsData = Object.assign(defaultParam, params)
+
+        var defaultParam = {
+            canCancel: false
+        }
+        var propsData = merge(defaultParam, params)
         return open(propsData)
     },
     confirm: function confirm(params) {
         var defaultParam = {}
-        var propsData = Object.assign(defaultParam, params)
+        var propsData = merge(defaultParam, params)
         return open(propsData)
     },
     prompt: function prompt(params) {
@@ -228,12 +243,13 @@ var DialogProgrammatic = {
             hasInput: true,
             confirmText: 'Done'
         }
-        var propsData = Object.assign(defaultParam, params)
+        var propsData = merge(defaultParam, params)
         return open(propsData)
     }
 }
 var Plugin = {
     install: function install(Vue) {
+        localVueInstance = Vue
         registerComponent(Vue, Dialog)
         registerComponentProgrammatic(Vue, 'dialog', DialogProgrammatic)
     }
@@ -241,4 +257,4 @@ var Plugin = {
 use(Plugin)
 
 export default Plugin
-export { DialogProgrammatic }
+export { Dialog as BDialog, DialogProgrammatic }

@@ -3,19 +3,20 @@
 Object.defineProperty(exports, '__esModule', { value: true })
 
 require('./chunk-2777282e.js')
-require('./chunk-6ce6eb64.js')
-require('./chunk-fb310c0c.js')
-require('./chunk-c5724c2f.js')
-require('./chunk-d4aef657.js')
-var __chunk_6 = require('./chunk-13e039f5.js')
-require('./chunk-fdfc3ef2.js')
-var __chunk_8 = require('./chunk-012ec96d.js')
+require('./helpers.js')
+require('./chunk-8806479f.js')
+require('./chunk-f45d15e3.js')
+require('./chunk-acfb68f5.js')
+var __chunk_5 = require('./chunk-13e039f5.js')
+require('./chunk-e79d8d75.js')
+var __chunk_7 = require('./chunk-dfc41c37.js')
 
 var Plugin = {
     install: function install(Vue) {
-        __chunk_6.registerComponent(Vue, __chunk_8.Autocomplete)
+        __chunk_5.registerComponent(Vue, __chunk_7.Autocomplete)
     }
 }
-__chunk_6.use(Plugin)
+__chunk_5.use(Plugin)
 
+exports.BAutocomplete = __chunk_7.Autocomplete
 exports.default = Plugin

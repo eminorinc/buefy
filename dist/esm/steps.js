@@ -1,7 +1,7 @@
-import { a as _defineProperty } from './chunk-17755bd7.js'
-import './chunk-90e31a22.js'
-import { c as config } from './chunk-1628b87d.js'
-import { I as Icon } from './chunk-263f5bb7.js'
+import { _ as _defineProperty } from './chunk-f2006744.js'
+import './helpers.js'
+import { c as config } from './chunk-b76a6c1d.js'
+import { I as Icon } from './chunk-c8434a6f.js'
 import { _ as __vue_normalize__, r as registerComponent, u as use } from './chunk-cca88db8.js'
 import { S as SlotComponent } from './chunk-0e3f4fb5.js'
 
@@ -40,7 +40,7 @@ var script = {
     data: function data() {
         return {
             activeStep: this.value || 0,
-            stepItems: [],
+            defaultSlots: [],
             contentHeight: 0,
             isTransitioning: false,
             _isSteps: true // Used internally by StepItem
@@ -50,6 +50,13 @@ var script = {
     computed: {
         mainClasses: function mainClasses() {
             return [this.type, this.size]
+        },
+        stepItems: function stepItems() {
+            return this.defaultSlots.filter(function (vnode) {
+                return vnode.componentInstance && vnode.componentInstance.$data && vnode.componentInstance.$data._isStepItem
+            }).map(function (vnode) {
+                return vnode.componentInstance
+            })
         },
         reversedStepItems: function reversedStepItems() {
             return this.stepItems.slice().reverse()
@@ -123,11 +130,16 @@ var script = {
         }
     },
     methods: {
-    /**
-    * Change the active step and emit change event.
-    */
+        refreshSlots: function refreshSlots() {
+            this.defaultSlots = this.$slots.default
+        },
+
+        /**
+     * Change the active step and emit change event.
+     */
         changeStep: function changeStep(newIndex) {
             if (this.activeStep === newIndex) return
+            if (newIndex > this.stepItems.length) throw new Error('The index you trying to set is bigger than the steps length')
 
             if (this.activeStep < this.stepItems.length) {
                 this.stepItems[this.activeStep].deactivate(this.activeStep, newIndex)
@@ -139,8 +151,8 @@ var script = {
         },
 
         /**
-        * Return if the step should be clickable or not.
-        */
+     * Return if the step should be clickable or not.
+     */
         isItemClickable: function isItemClickable(stepItem, index) {
             if (stepItem.clickable === undefined) {
                 return this.activeStep > index
@@ -150,8 +162,8 @@ var script = {
         },
 
         /**
-    * Step click listener, emit input event and change active step.
-    */
+     * Step click listener, emit input event and change active step.
+     */
         stepClick: function stepClick(value) {
             this.$emit('input', value)
             this.changeStep(value)
@@ -194,6 +206,8 @@ var script = {
         if (this.activeStep < this.stepItems.length) {
             this.stepItems[this.activeStep].isActive = true
         }
+
+        this.refreshSlots()
     }
 }
 
@@ -256,7 +270,9 @@ var script$1 = {
     data: function data() {
         return {
             isActive: false,
-            transitionName: null
+            transitionName: null,
+            _isStepItem: true // Used internally by Step
+
         }
     },
     methods: {
@@ -282,14 +298,10 @@ var script$1 = {
             throw new Error('You should wrap bStepItem on a bSteps')
         }
 
-        this.$parent.stepItems.push(this)
+        this.$parent.refreshSlots()
     },
     beforeDestroy: function beforeDestroy() {
-        var index = this.$parent.stepItems.indexOf(this)
-
-        if (index >= 0) {
-            this.$parent.stepItems.splice(index, 1)
-        }
+        this.$parent.refreshSlots()
     },
     render: function render(createElement) {
         var _this = this
@@ -368,3 +380,4 @@ var Plugin = {
 use(Plugin)
 
 export default Plugin
+export { StepItem as BStepItem, Steps as BSteps }

@@ -1,4 +1,4 @@
-/*! Buefy v0.8.6 | MIT License | github.com/buefy/buefy */
+/*! Buefy v0.8.9 | MIT License | github.com/buefy/buefy */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports)
         : typeof define === 'function' && define.amd ? define(['exports'], factory)
@@ -37,19 +37,19 @@
     var script = {
         name: 'BSwitch',
         props: {
-            value: [String, Number, Boolean, Function, Object, Array],
-            nativeValue: [String, Number, Boolean, Function, Object, Array],
+            value: [String, Number, Boolean, Function, Object, Array, Date],
+            nativeValue: [String, Number, Boolean, Function, Object, Array, Date],
             disabled: Boolean,
             type: String,
             name: String,
             required: Boolean,
             size: String,
             trueValue: {
-                type: [String, Number, Boolean, Function, Object, Array],
+                type: [String, Number, Boolean, Function, Object, Array, Date],
                 default: true
             },
             falseValue: {
-                type: [String, Number, Boolean, Function, Object, Array],
+                type: [String, Number, Boolean, Function, Object, Array, Date],
                 default: false
             },
             rounded: {
@@ -229,6 +229,7 @@
     }
     use(Plugin)
 
+    exports.BSwitch = Switch
     exports.default = Plugin
 
     Object.defineProperty(exports, '__esModule', { value: true })

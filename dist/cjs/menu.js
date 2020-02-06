@@ -3,10 +3,10 @@
 Object.defineProperty(exports, '__esModule', { value: true })
 
 var __chunk_1 = require('./chunk-2777282e.js')
-require('./chunk-6ce6eb64.js')
-require('./chunk-fb310c0c.js')
-var __chunk_5 = require('./chunk-d4aef657.js')
-var __chunk_6 = require('./chunk-13e039f5.js')
+require('./helpers.js')
+require('./chunk-8806479f.js')
+var __chunk_4 = require('./chunk-acfb68f5.js')
+var __chunk_5 = require('./chunk-13e039f5.js')
 
 //
 //
@@ -15,7 +15,19 @@ var __chunk_6 = require('./chunk-13e039f5.js')
 //
 //
 var script = {
-    name: 'BMenu'
+    name: 'BMenu',
+    props: {
+        accordion: {
+            type: Boolean,
+            default: true
+        }
+    },
+    data: function data() {
+        return {
+            _isMenu: true // Used by MenuItem
+
+        }
+    }
 }
 
 /* script */
@@ -37,7 +49,7 @@ const __vue_is_functional_template__ = false
 
 /* style inject SSR */
 
-var Menu = __chunk_6.__vue_normalize__(
+var Menu = __chunk_5.__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
@@ -105,7 +117,7 @@ const __vue_is_functional_template__$1 = undefined
 
 /* style inject SSR */
 
-var MenuList = __chunk_6.__vue_normalize__(
+var MenuList = __chunk_5.__vue_normalize__(
     {},
     __vue_inject_styles__$1,
     __vue_script__$1,
@@ -118,7 +130,7 @@ var MenuList = __chunk_6.__vue_normalize__(
 
 var script$2 = {
     name: 'BMenuItem',
-    components: __chunk_1._defineProperty({}, __chunk_5.Icon.name, __chunk_5.Icon),
+    components: __chunk_1._defineProperty({}, __chunk_4.Icon.name, __chunk_4.Icon),
     inheritAttrs: false,
     props: {
         label: String,
@@ -182,8 +194,11 @@ var script$2 = {
                 if (item !== _this) {
                     _this.reset(item)
 
-                    item.newExpanded = false
-                    item.$emit('update:expanded', item.newActive)
+                    if (!parent.$data._isMenu || parent.$data._isMenu && parent.accordion) {
+                        item.newExpanded = false
+                        item.$emit('update:expanded', item.newActive)
+                    }
+
                     item.newActive = false
                     item.$emit('update:active', item.newActive)
                 }
@@ -219,7 +234,7 @@ const __vue_is_functional_template__$2 = false
 
 /* style inject SSR */
 
-var MenuItem = __chunk_6.__vue_normalize__(
+var MenuItem = __chunk_5.__vue_normalize__(
     { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
     __vue_inject_styles__$2,
     __vue_script__$2,
@@ -232,11 +247,14 @@ var MenuItem = __chunk_6.__vue_normalize__(
 
 var Plugin = {
     install: function install(Vue) {
-        __chunk_6.registerComponent(Vue, Menu)
-        __chunk_6.registerComponent(Vue, MenuList)
-        __chunk_6.registerComponent(Vue, MenuItem)
+        __chunk_5.registerComponent(Vue, Menu)
+        __chunk_5.registerComponent(Vue, MenuList)
+        __chunk_5.registerComponent(Vue, MenuItem)
     }
 }
-__chunk_6.use(Plugin)
+__chunk_5.use(Plugin)
 
+exports.BMenu = Menu
+exports.BMenuItem = MenuItem
+exports.BMenuList = MenuList
 exports.default = Plugin

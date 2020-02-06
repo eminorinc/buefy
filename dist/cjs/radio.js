@@ -2,71 +2,13 @@
 
 Object.defineProperty(exports, '__esModule', { value: true })
 
-var __chunk_6 = require('./chunk-13e039f5.js')
+var __chunk_5 = require('./chunk-13e039f5.js')
+var __chunk_8 = require('./chunk-1f7d7e31.js')
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 var script = {
     name: 'BRadio',
-    props: {
-        value: [String, Number, Boolean, Function, Object, Array],
-        nativeValue: [String, Number, Boolean, Function, Object, Array],
-        type: String,
-        disabled: Boolean,
-        required: Boolean,
-        name: String,
-        size: String
-    },
-    data: function data() {
-        return {
-            newValue: this.value
-        }
-    },
-    computed: {
-        computedValue: {
-            get: function get() {
-                return this.newValue
-            },
-            set: function set(value) {
-                this.newValue = value
-                this.$emit('input', value)
-            }
-        }
-    },
-    watch: {
-    /**
-    * When v-model change, set internal value.
-    */
-        value: function value(_value) {
-            this.newValue = _value
-        }
-    },
-    methods: {
-        focus: function focus() {
-            // MacOS FireFox and Safari do not focus when clicked
-            this.$refs.input.focus()
-        }
-    }
+    mixins: [__chunk_8.CheckRadioMixin]
 }
 
 /* script */
@@ -88,7 +30,7 @@ const __vue_is_functional_template__ = false
 
 /* style inject SSR */
 
-var Radio = __chunk_6.__vue_normalize__(
+var Radio = __chunk_5.__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
@@ -100,77 +42,19 @@ var Radio = __chunk_6.__vue_normalize__(
 )
 
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var script$1 = {
     name: 'BRadioButton',
+    mixins: [__chunk_8.CheckRadioMixin],
     props: {
-        value: [String, Number, Boolean, Function, Object, Array],
-        nativeValue: [String, Number, Boolean, Function, Object, Array],
         type: {
             type: String,
             default: 'is-primary'
         },
-        disabled: Boolean,
-        required: Boolean,
-        expanded: Boolean,
-        name: String,
-        size: String
+        expanded: Boolean
     },
     data: function data() {
         return {
-            newValue: this.value,
             isFocused: false
-        }
-    },
-    computed: {
-        computedValue: {
-            get: function get() {
-                return this.newValue
-            },
-            set: function set(value) {
-                this.newValue = value
-                this.$emit('input', value)
-            }
-        }
-    },
-    watch: {
-    /**
-    * When v-model change, set internal value.
-    */
-        value: function value(_value) {
-            this.newValue = _value
-        }
-    },
-    methods: {
-        focus: function focus() {
-            // MacOS FireFox and Safari do not focus when clicked
-            this.$refs.input.focus()
         }
     }
 }
@@ -203,7 +87,7 @@ const __vue_is_functional_template__$1 = false
 
 /* style inject SSR */
 
-var RadioButton = __chunk_6.__vue_normalize__(
+var RadioButton = __chunk_5.__vue_normalize__(
     { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
     __vue_inject_styles__$1,
     __vue_script__$1,
@@ -216,10 +100,12 @@ var RadioButton = __chunk_6.__vue_normalize__(
 
 var Plugin = {
     install: function install(Vue) {
-        __chunk_6.registerComponent(Vue, Radio)
-        __chunk_6.registerComponent(Vue, RadioButton)
+        __chunk_5.registerComponent(Vue, Radio)
+        __chunk_5.registerComponent(Vue, RadioButton)
     }
 }
-__chunk_6.use(Plugin)
+__chunk_5.use(Plugin)
 
+exports.BRadio = Radio
+exports.BRadioButton = RadioButton
 exports.default = Plugin

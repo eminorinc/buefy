@@ -1,7 +1,7 @@
-import { a as _defineProperty, c as _toConsumableArray } from './chunk-17755bd7.js'
-import './chunk-1628b87d.js'
+import { _ as _defineProperty, c as _toConsumableArray } from './chunk-f2006744.js'
+import './chunk-b76a6c1d.js'
 import { _ as __vue_normalize__, r as registerComponent, u as use } from './chunk-cca88db8.js'
-import { T as Tooltip } from './chunk-241c72c5.js'
+import { T as Tooltip } from './chunk-e430e8e7.js'
 
 var script = {
     name: 'BSliderThumb',
@@ -524,3 +524,4 @@ var Plugin = {
 use(Plugin)
 
 export default Plugin
+export { Slider as BSlider, SliderTick as BSliderTick }

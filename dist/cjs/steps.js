@@ -3,16 +3,16 @@
 Object.defineProperty(exports, '__esModule', { value: true })
 
 var __chunk_1 = require('./chunk-2777282e.js')
-require('./chunk-6ce6eb64.js')
-var __chunk_3 = require('./chunk-fb310c0c.js')
-var __chunk_5 = require('./chunk-d4aef657.js')
-var __chunk_6 = require('./chunk-13e039f5.js')
+require('./helpers.js')
+var __chunk_2 = require('./chunk-8806479f.js')
+var __chunk_4 = require('./chunk-acfb68f5.js')
+var __chunk_5 = require('./chunk-13e039f5.js')
 var __chunk_23 = require('./chunk-3dffe6e7.js')
 
 var _components
 var script = {
     name: 'BSteps',
-    components: (_components = {}, __chunk_1._defineProperty(_components, __chunk_5.Icon.name, __chunk_5.Icon), __chunk_1._defineProperty(_components, __chunk_23.SlotComponent.name, __chunk_23.SlotComponent), _components),
+    components: (_components = {}, __chunk_1._defineProperty(_components, __chunk_4.Icon.name, __chunk_4.Icon), __chunk_1._defineProperty(_components, __chunk_23.SlotComponent.name, __chunk_23.SlotComponent), _components),
     props: {
         value: Number,
         type: [String, Object],
@@ -28,11 +28,11 @@ var script = {
         iconPack: String,
         iconPrev: {
             type: String,
-            default: __chunk_3.config.defaultIconPrev
+            default: __chunk_2.config.defaultIconPrev
         },
         iconNext: {
             type: String,
-            default: __chunk_3.config.defaultIconNext
+            default: __chunk_2.config.defaultIconNext
         },
         hasNavigation: {
             type: Boolean,
@@ -44,7 +44,7 @@ var script = {
     data: function data() {
         return {
             activeStep: this.value || 0,
-            stepItems: [],
+            defaultSlots: [],
             contentHeight: 0,
             isTransitioning: false,
             _isSteps: true // Used internally by StepItem
@@ -54,6 +54,13 @@ var script = {
     computed: {
         mainClasses: function mainClasses() {
             return [this.type, this.size]
+        },
+        stepItems: function stepItems() {
+            return this.defaultSlots.filter(function (vnode) {
+                return vnode.componentInstance && vnode.componentInstance.$data && vnode.componentInstance.$data._isStepItem
+            }).map(function (vnode) {
+                return vnode.componentInstance
+            })
         },
         reversedStepItems: function reversedStepItems() {
             return this.stepItems.slice().reverse()
@@ -127,11 +134,16 @@ var script = {
         }
     },
     methods: {
-    /**
-    * Change the active step and emit change event.
-    */
+        refreshSlots: function refreshSlots() {
+            this.defaultSlots = this.$slots.default
+        },
+
+        /**
+     * Change the active step and emit change event.
+     */
         changeStep: function changeStep(newIndex) {
             if (this.activeStep === newIndex) return
+            if (newIndex > this.stepItems.length) throw new Error('The index you trying to set is bigger than the steps length')
 
             if (this.activeStep < this.stepItems.length) {
                 this.stepItems[this.activeStep].deactivate(this.activeStep, newIndex)
@@ -143,8 +155,8 @@ var script = {
         },
 
         /**
-        * Return if the step should be clickable or not.
-        */
+     * Return if the step should be clickable or not.
+     */
         isItemClickable: function isItemClickable(stepItem, index) {
             if (stepItem.clickable === undefined) {
                 return this.activeStep > index
@@ -154,8 +166,8 @@ var script = {
         },
 
         /**
-    * Step click listener, emit input event and change active step.
-    */
+     * Step click listener, emit input event and change active step.
+     */
         stepClick: function stepClick(value) {
             this.$emit('input', value)
             this.changeStep(value)
@@ -198,6 +210,8 @@ var script = {
         if (this.activeStep < this.stepItems.length) {
             this.stepItems[this.activeStep].isActive = true
         }
+
+        this.refreshSlots()
     }
 }
 
@@ -230,7 +244,7 @@ const __vue_is_functional_template__ = false
 
 /* style inject SSR */
 
-var Steps = __chunk_6.__vue_normalize__(
+var Steps = __chunk_5.__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
@@ -260,7 +274,9 @@ var script$1 = {
     data: function data() {
         return {
             isActive: false,
-            transitionName: null
+            transitionName: null,
+            _isStepItem: true // Used internally by Step
+
         }
     },
     methods: {
@@ -286,14 +302,10 @@ var script$1 = {
             throw new Error('You should wrap bStepItem on a bSteps')
         }
 
-        this.$parent.stepItems.push(this)
+        this.$parent.refreshSlots()
     },
     beforeDestroy: function beforeDestroy() {
-        var index = this.$parent.stepItems.indexOf(this)
-
-        if (index >= 0) {
-            this.$parent.stepItems.splice(index, 1)
-        }
+        this.$parent.refreshSlots()
     },
     render: function render(createElement) {
         var _this = this
@@ -352,7 +364,7 @@ const __vue_is_functional_template__$1 = undefined
 
 /* style inject SSR */
 
-var StepItem = __chunk_6.__vue_normalize__(
+var StepItem = __chunk_5.__vue_normalize__(
     {},
     __vue_inject_styles__$1,
     __vue_script__$1,
@@ -365,10 +377,12 @@ var StepItem = __chunk_6.__vue_normalize__(
 
 var Plugin = {
     install: function install(Vue) {
-        __chunk_6.registerComponent(Vue, Steps)
-        __chunk_6.registerComponent(Vue, StepItem)
+        __chunk_5.registerComponent(Vue, Steps)
+        __chunk_5.registerComponent(Vue, StepItem)
     }
 }
-__chunk_6.use(Plugin)
+__chunk_5.use(Plugin)
 
+exports.BStepItem = StepItem
+exports.BSteps = Steps
 exports.default = Plugin

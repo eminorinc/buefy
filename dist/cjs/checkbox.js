@@ -2,88 +2,33 @@
 
 Object.defineProperty(exports, '__esModule', { value: true })
 
-var __chunk_6 = require('./chunk-13e039f5.js')
-var __chunk_9 = require('./chunk-be05f1e8.js')
+var __chunk_5 = require('./chunk-13e039f5.js')
+var __chunk_8 = require('./chunk-1f7d7e31.js')
+var __chunk_9 = require('./chunk-9bb707ee.js')
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 var script = {
     name: 'BCheckboxButton',
+    mixins: [__chunk_8.CheckRadioMixin],
     props: {
-        value: [String, Number, Boolean, Function, Object, Array],
-        nativeValue: [String, Number, Boolean, Function, Object, Array],
-        disabled: Boolean,
-        required: Boolean,
-        expanded: Boolean,
-        name: String,
-        size: String,
         type: {
             type: String,
             default: 'is-primary'
-        }
+        },
+        expanded: Boolean
     },
     data: function data() {
         return {
-            newValue: this.value,
             isFocused: false
         }
     },
     computed: {
-        computedValue: {
-            get: function get() {
-                return this.newValue
-            },
-            set: function set(value) {
-                this.newValue = value
-                this.$emit('input', value)
-            }
-        },
         checked: function checked() {
             if (Array.isArray(this.newValue)) {
                 return this.newValue.indexOf(this.nativeValue) >= 0
             }
 
             return this.newValue === this.nativeValue
-        }
-    },
-    watch: {
-    /**
-     * When v-model change, set internal value.
-     */
-        value: function value(_value) {
-            this.newValue = _value
-        }
-    },
-    methods: {
-        focus: function focus() {
-            // MacOS FireFox and Safari do not focus when clicked
-            this.$refs.input.focus()
         }
     }
 }
@@ -116,7 +61,7 @@ const __vue_is_functional_template__ = false
 
 /* style inject SSR */
 
-var CheckboxButton = __chunk_6.__vue_normalize__(
+var CheckboxButton = __chunk_5.__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
@@ -129,10 +74,12 @@ var CheckboxButton = __chunk_6.__vue_normalize__(
 
 var Plugin = {
     install: function install(Vue) {
-        __chunk_6.registerComponent(Vue, __chunk_9.Checkbox)
-        __chunk_6.registerComponent(Vue, CheckboxButton)
+        __chunk_5.registerComponent(Vue, __chunk_9.Checkbox)
+        __chunk_5.registerComponent(Vue, CheckboxButton)
     }
 }
-__chunk_6.use(Plugin)
+__chunk_5.use(Plugin)
 
+exports.BCheckbox = __chunk_9.Checkbox
+exports.BCheckboxButton = CheckboxButton
 exports.default = Plugin

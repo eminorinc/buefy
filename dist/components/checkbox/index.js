@@ -1,4 +1,4 @@
-/*! Buefy v0.8.6 | MIT License | github.com/buefy/buefy */
+/*! Buefy v0.8.9 | MIT License | github.com/buefy/buefy */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports)
         : typeof define === 'function' && define.amd ? define(['exports'], factory)
@@ -6,50 +6,15 @@
 }(this, function (exports) {
     'use strict'
 
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    var script = {
-        name: 'BCheckbox',
+    var CheckRadioMixin = {
         props: {
             value: [String, Number, Boolean, Function, Object, Array],
             nativeValue: [String, Number, Boolean, Function, Object, Array],
-            indeterminate: Boolean,
             type: String,
             disabled: Boolean,
             required: Boolean,
             name: String,
-            size: String,
-            trueValue: {
-                type: [String, Number, Boolean, Function, Object, Array],
-                default: true
-            },
-            falseValue: {
-                type: [String, Number, Boolean, Function, Object, Array],
-                default: false
-            }
+            size: String
         },
         data: function data() {
             return {
@@ -69,8 +34,8 @@
         },
         watch: {
         /**
-         * When v-model change, set internal value.
-         */
+        * When v-model change, set internal value.
+        */
             value: function value(_value) {
                 this.newValue = _value
             }
@@ -79,6 +44,23 @@
             focus: function focus() {
                 // MacOS FireFox and Safari do not focus when clicked
                 this.$refs.input.focus()
+            }
+        }
+    }
+
+    //
+    var script = {
+        name: 'BCheckbox',
+        mixins: [CheckRadioMixin],
+        props: {
+            indeterminate: Boolean,
+            trueValue: {
+                type: [String, Number, Boolean, Function, Object, Array],
+                default: true
+            },
+            falseValue: {
+                type: [String, Number, Boolean, Function, Object, Array],
+                default: false
             }
         }
     }
@@ -194,84 +176,28 @@
     )
 
     //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
     var script$1 = {
         name: 'BCheckboxButton',
+        mixins: [CheckRadioMixin],
         props: {
-            value: [String, Number, Boolean, Function, Object, Array],
-            nativeValue: [String, Number, Boolean, Function, Object, Array],
-            disabled: Boolean,
-            required: Boolean,
-            expanded: Boolean,
-            name: String,
-            size: String,
             type: {
                 type: String,
                 default: 'is-primary'
-            }
+            },
+            expanded: Boolean
         },
         data: function data() {
             return {
-                newValue: this.value,
                 isFocused: false
             }
         },
         computed: {
-            computedValue: {
-                get: function get() {
-                    return this.newValue
-                },
-                set: function set(value) {
-                    this.newValue = value
-                    this.$emit('input', value)
-                }
-            },
             checked: function checked() {
                 if (Array.isArray(this.newValue)) {
                     return this.newValue.indexOf(this.nativeValue) >= 0
                 }
 
                 return this.newValue === this.nativeValue
-            }
-        },
-        watch: {
-        /**
-         * When v-model change, set internal value.
-         */
-            value: function value(_value) {
-                this.newValue = _value
-            }
-        },
-        methods: {
-            focus: function focus() {
-                // MacOS FireFox and Safari do not focus when clicked
-                this.$refs.input.focus()
             }
         }
     }
@@ -332,6 +258,8 @@
     }
     use(Plugin)
 
+    exports.BCheckbox = Checkbox
+    exports.BCheckboxButton = CheckboxButton
     exports.default = Plugin
 
     Object.defineProperty(exports, '__esModule', { value: true })

@@ -3,16 +3,16 @@
 Object.defineProperty(exports, '__esModule', { value: true })
 
 var __chunk_1 = require('./chunk-2777282e.js')
-require('./chunk-6ce6eb64.js')
-require('./chunk-fb310c0c.js')
-var __chunk_5 = require('./chunk-d4aef657.js')
-var __chunk_6 = require('./chunk-13e039f5.js')
+require('./helpers.js')
+require('./chunk-8806479f.js')
+var __chunk_4 = require('./chunk-acfb68f5.js')
+var __chunk_5 = require('./chunk-13e039f5.js')
 var __chunk_23 = require('./chunk-3dffe6e7.js')
 
 var _components
 var script = {
     name: 'BTabs',
-    components: (_components = {}, __chunk_1._defineProperty(_components, __chunk_5.Icon.name, __chunk_5.Icon), __chunk_1._defineProperty(_components, __chunk_23.SlotComponent.name, __chunk_23.SlotComponent), _components),
+    components: (_components = {}, __chunk_1._defineProperty(_components, __chunk_4.Icon.name, __chunk_4.Icon), __chunk_1._defineProperty(_components, __chunk_23.SlotComponent.name, __chunk_23.SlotComponent), _components),
     props: {
         value: Number,
         expanded: Boolean,
@@ -32,7 +32,7 @@ var script = {
     data: function data() {
         return {
             activeTab: this.value || 0,
-            tabItems: [],
+            defaultSlots: [],
             contentHeight: 0,
             isTransitioning: false,
             _isTabs: true // Used internally by TabItem
@@ -50,6 +50,13 @@ var script = {
             var _ref2
 
             return [this.type, this.size, (_ref2 = {}, __chunk_1._defineProperty(_ref2, this.position, this.position && !this.vertical), __chunk_1._defineProperty(_ref2, 'is-fullwidth', this.expanded), __chunk_1._defineProperty(_ref2, 'is-toggle-rounded is-toggle', this.type === 'is-toggle-rounded'), _ref2)]
+        },
+        tabItems: function tabItems() {
+            return this.defaultSlots.filter(function (vnode) {
+                return vnode.componentInstance && vnode.componentInstance.$data && vnode.componentInstance.$data._isTabItem
+            }).map(function (vnode) {
+                return vnode.componentInstance
+            })
         }
     },
     watch: {
@@ -70,7 +77,11 @@ var script = {
         }
     },
     methods: {
-    /**
+        refreshSlots: function refreshSlots() {
+            this.defaultSlots = this.$slots.default
+        },
+
+        /**
     * Change the active tab and emit change event.
     */
         changeTab: function changeTab(newIndex) {
@@ -89,6 +100,7 @@ var script = {
     * Tab click listener, emit input event and change active tab.
     */
         tabClick: function tabClick(value) {
+            if (this.activeTab === value) return
             this.$emit('input', value)
             this.changeTab(value)
         }
@@ -97,6 +109,8 @@ var script = {
         if (this.activeTab < this.tabItems.length) {
             this.tabItems[this.activeTab].isActive = true
         }
+
+        this.refreshSlots()
     }
 }
 
@@ -119,7 +133,7 @@ const __vue_is_functional_template__ = false
 
 /* style inject SSR */
 
-var Tabs = __chunk_6.__vue_normalize__(
+var Tabs = __chunk_5.__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
@@ -145,7 +159,9 @@ var script$1 = {
     data: function data() {
         return {
             isActive: false,
-            transitionName: null
+            transitionName: null,
+            _isTabItem: true // Used internally by Tab
+
         }
     },
     methods: {
@@ -171,14 +187,10 @@ var script$1 = {
             throw new Error('You should wrap bTabItem on a bTabs')
         }
 
-        this.$parent.tabItems.push(this)
+        this.$parent.refreshSlots()
     },
     beforeDestroy: function beforeDestroy() {
-        var index = this.$parent.tabItems.indexOf(this)
-
-        if (index >= 0) {
-            this.$parent.tabItems.splice(index, 1)
-        }
+        this.$parent.refreshSlots()
     },
     render: function render(createElement) {
         var _this = this
@@ -235,7 +247,7 @@ const __vue_is_functional_template__$1 = undefined
 
 /* style inject SSR */
 
-var TabItem = __chunk_6.__vue_normalize__(
+var TabItem = __chunk_5.__vue_normalize__(
     {},
     __vue_inject_styles__$1,
     __vue_script__$1,
@@ -248,10 +260,12 @@ var TabItem = __chunk_6.__vue_normalize__(
 
 var Plugin = {
     install: function install(Vue) {
-        __chunk_6.registerComponent(Vue, Tabs)
-        __chunk_6.registerComponent(Vue, TabItem)
+        __chunk_5.registerComponent(Vue, Tabs)
+        __chunk_5.registerComponent(Vue, TabItem)
     }
 }
-__chunk_6.use(Plugin)
+__chunk_5.use(Plugin)
 
+exports.BTabItem = TabItem
+exports.BTabs = Tabs
 exports.default = Plugin

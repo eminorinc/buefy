@@ -3,9 +3,9 @@
 Object.defineProperty(exports, '__esModule', { value: true })
 
 var __chunk_1 = require('./chunk-2777282e.js')
-require('./chunk-fb310c0c.js')
-var __chunk_6 = require('./chunk-13e039f5.js')
-var __chunk_22 = require('./chunk-e1340b6d.js')
+require('./chunk-8806479f.js')
+var __chunk_5 = require('./chunk-13e039f5.js')
+var __chunk_22 = require('./chunk-f1b9bbd3.js')
 
 var script = {
     name: 'BSliderThumb',
@@ -190,7 +190,7 @@ const __vue_is_functional_template__ = false
 
 /* style inject SSR */
 
-var SliderThumb = __chunk_6.__vue_normalize__(
+var SliderThumb = __chunk_5.__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
@@ -263,7 +263,7 @@ const __vue_is_functional_template__$1 = false
 
 /* style inject SSR */
 
-var SliderTick = __chunk_6.__vue_normalize__(
+var SliderTick = __chunk_5.__vue_normalize__(
     { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
     __vue_inject_styles__$1,
     __vue_script__$1,
@@ -508,7 +508,7 @@ const __vue_is_functional_template__$2 = false
 
 /* style inject SSR */
 
-var Slider = __chunk_6.__vue_normalize__(
+var Slider = __chunk_5.__vue_normalize__(
     { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
     __vue_inject_styles__$2,
     __vue_script__$2,
@@ -521,10 +521,12 @@ var Slider = __chunk_6.__vue_normalize__(
 
 var Plugin = {
     install: function install(Vue) {
-        __chunk_6.registerComponent(Vue, Slider)
-        __chunk_6.registerComponent(Vue, SliderTick)
+        __chunk_5.registerComponent(Vue, Slider)
+        __chunk_5.registerComponent(Vue, SliderTick)
     }
 }
-__chunk_6.use(Plugin)
+__chunk_5.use(Plugin)
 
+exports.BSlider = Slider
+exports.BSliderTick = SliderTick
 exports.default = Plugin

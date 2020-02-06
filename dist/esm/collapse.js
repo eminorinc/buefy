@@ -109,3 +109,4 @@ var Plugin = {
 use(Plugin)
 
 export default Plugin
+export { Collapse as BCollapse }

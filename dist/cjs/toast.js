@@ -2,14 +2,11 @@
 
 Object.defineProperty(exports, '__esModule', { value: true })
 
-function _interopDefault(ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex }
-
 require('./chunk-2777282e.js')
-require('./chunk-6ce6eb64.js')
-var __chunk_3 = require('./chunk-fb310c0c.js')
-var __chunk_6 = require('./chunk-13e039f5.js')
-var Vue = _interopDefault(require('vue'))
-var __chunk_20 = require('./chunk-6254af2a.js')
+var helpers = require('./helpers.js')
+var __chunk_2 = require('./chunk-8806479f.js')
+var __chunk_5 = require('./chunk-13e039f5.js')
+var __chunk_20 = require('./chunk-3e4462e4.js')
 
 //
 var script = {
@@ -17,7 +14,7 @@ var script = {
     mixins: [__chunk_20.NoticeMixin],
     data: function data() {
         return {
-            newDuration: this.duration || __chunk_3.config.defaultToastDuration
+            newDuration: this.duration || __chunk_2.config.defaultToastDuration
         }
     }
 }
@@ -41,7 +38,7 @@ const __vue_is_functional_template__ = false
 
 /* style inject SSR */
 
-var Toast = __chunk_6.__vue_normalize__(
+var Toast = __chunk_5.__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
@@ -52,14 +49,19 @@ var Toast = __chunk_6.__vue_normalize__(
     undefined
 )
 
+var localVueInstance
 var ToastProgrammatic = {
     open: function open(params) {
-        var message
         var parent
-        if (typeof params === 'string') message = params
+
+        if (typeof params === 'string') {
+            params = {
+                message: params
+            }
+        }
+
         var defaultParam = {
-            message: message,
-            position: __chunk_3.config.defaultToastPosition || 'is-top'
+            position: __chunk_2.config.defaultToastPosition || 'is-top'
         }
 
         if (params.parent) {
@@ -67,8 +69,8 @@ var ToastProgrammatic = {
             delete params.parent
         }
 
-        var propsData = Object.assign(defaultParam, params)
-        var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : Vue
+        var propsData = helpers.merge(defaultParam, params)
+        var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || __chunk_2.VueInstance
         var ToastComponent = vm.extend(Toast)
         return new ToastComponent({
             parent: parent,
@@ -79,10 +81,12 @@ var ToastProgrammatic = {
 }
 var Plugin = {
     install: function install(Vue) {
-        __chunk_6.registerComponentProgrammatic(Vue, 'toast', ToastProgrammatic)
+        localVueInstance = Vue
+        __chunk_5.registerComponentProgrammatic(Vue, 'toast', ToastProgrammatic)
     }
 }
-__chunk_6.use(Plugin)
+__chunk_5.use(Plugin)
 
+exports.BToast = Toast
 exports.ToastProgrammatic = ToastProgrammatic
 exports.default = Plugin

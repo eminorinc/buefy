@@ -1,5 +1,5 @@
-import './chunk-1628b87d.js'
-import { F as FormElementMixin } from './chunk-4f8020cc.js'
+import './chunk-b76a6c1d.js'
+import { F as FormElementMixin } from './chunk-03b1476b.js'
 import { _ as __vue_normalize__, r as registerComponent, u as use } from './chunk-cca88db8.js'
 import { F as File } from './chunk-b9bdb0e4.js'
 
@@ -205,3 +205,4 @@ var Plugin = {
 use(Plugin)
 
 export default Plugin
+export { Upload as BUpload }

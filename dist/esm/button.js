@@ -1,7 +1,7 @@
-import { a as _defineProperty } from './chunk-17755bd7.js'
-import './chunk-90e31a22.js'
-import { c as config } from './chunk-1628b87d.js'
-import { I as Icon } from './chunk-263f5bb7.js'
+import { _ as _defineProperty } from './chunk-f2006744.js'
+import './helpers.js'
+import { c as config } from './chunk-b76a6c1d.js'
+import { I as Icon } from './chunk-c8434a6f.js'
 import { _ as __vue_normalize__, r as registerComponent, u as use } from './chunk-cca88db8.js'
 
 var script = {
@@ -62,7 +62,7 @@ const __vue_script__ = script
 
 /* template */
 var __vue_render__ = function () {
-    var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c(_vm.tag, _vm._b({tag: 'component',
+    var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c(_vm.tag, _vm._g(_vm._b({tag: 'component',
         staticClass: 'button',
         class: [_vm.size, _vm.type, {
             'is-rounded': _vm.rounded,
@@ -75,8 +75,7 @@ var __vue_render__ = function () {
             'is-hovered': _vm.hovered,
             'is-selected': _vm.selected
         }],
-        attrs: {'type': _vm.nativeType},
-        on: {'click': function ($event) { _vm.$emit('click', $event) }}}, 'component', _vm.$attrs, false), [(_vm.iconLeft) ? _c('b-icon', {attrs: {'pack': _vm.iconPack, 'icon': _vm.iconLeft, 'size': _vm.iconSize}}) : _vm._e(), _vm._v(' '), (_vm.label) ? _c('span', [_vm._v(_vm._s(_vm.label))]) : (_vm.$slots.default) ? _c('span', [_vm._t('default')], 2) : _vm._e(), _vm._v(' '), (_vm.iconRight) ? _c('b-icon', {attrs: {'pack': _vm.iconPack, 'icon': _vm.iconRight, 'size': _vm.iconSize}}) : _vm._e()], 1)
+        attrs: {'type': _vm.nativeType}}, 'component', _vm.$attrs, false), _vm.$listeners), [(_vm.iconLeft) ? _c('b-icon', {attrs: {'pack': _vm.iconPack, 'icon': _vm.iconLeft, 'size': _vm.iconSize}}) : _vm._e(), _vm._v(' '), (_vm.label) ? _c('span', [_vm._v(_vm._s(_vm.label))]) : (_vm.$slots.default) ? _c('span', [_vm._t('default')], 2) : _vm._e(), _vm._v(' '), (_vm.iconRight) ? _c('b-icon', {attrs: {'pack': _vm.iconPack, 'icon': _vm.iconRight, 'size': _vm.iconSize}}) : _vm._e()], 1)
 }
 var __vue_staticRenderFns__ = []
 
@@ -111,3 +110,4 @@ var Plugin = {
 use(Plugin)
 
 export default Plugin
+export { Button as BButton }

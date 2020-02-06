@@ -1,12 +1,10 @@
-/*! Buefy v0.8.6 | MIT License | github.com/buefy/buefy */
+/*! Buefy v0.8.9 | MIT License | github.com/buefy/buefy */
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('vue'))
-        : typeof define === 'function' && define.amd ? define(['exports', 'vue'], factory)
-            : (global = global || self, factory(global.Snackbar = {}, global.Vue))
-}(this, function (exports, Vue) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports)
+        : typeof define === 'function' && define.amd ? define(['exports'], factory)
+            : (global = global || self, factory(global.Snackbar = {}))
+}(this, function (exports) {
     'use strict'
-
-    Vue = Vue && Vue.hasOwnProperty('default') ? Vue['default'] : Vue
 
     var config = {
         defaultContainerElement: null,
@@ -29,6 +27,7 @@
         defaultDateFormatter: null,
         defaultDateParser: null,
         defaultDateCreator: null,
+        defaultTimeCreator: null,
         defaultDayNames: null,
         defaultMonthNames: null,
         defaultFirstDayOfWeek: null,
@@ -49,13 +48,107 @@
         defaultDatepickerNearbyMonthDays: true,
         defaultDatepickerNearbySelectableMonthDays: false,
         defaultDatepickerShowWeekNumber: false,
+        defaultDatepickerMobileModal: true,
         defaultTrapFocus: false,
         defaultButtonRounded: false,
+        defaultCarouselInterval: 3500,
         customIconPacks: null
     } // TODO defaultTrapFocus to true in the next breaking change
+    var VueInstance
 
-    var config$1 = config
+    function _typeof(obj) {
+        if (typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol') {
+            _typeof = function (obj) {
+                return typeof obj
+            }
+        } else {
+            _typeof = function (obj) {
+                return obj && typeof Symbol === 'function' && obj.constructor === Symbol && obj !== Symbol.prototype ? 'symbol' : typeof obj
+            }
+        }
 
+        return _typeof(obj)
+    }
+
+    function _defineProperty(obj, key, value) {
+        if (key in obj) {
+            Object.defineProperty(obj, key, {
+                value: value,
+                enumerable: true,
+                configurable: true,
+                writable: true
+            })
+        } else {
+            obj[key] = value
+        }
+
+        return obj
+    }
+
+    function ownKeys(object, enumerableOnly) {
+        var keys = Object.keys(object)
+
+        if (Object.getOwnPropertySymbols) {
+            var symbols = Object.getOwnPropertySymbols(object)
+            if (enumerableOnly) {
+                symbols = symbols.filter(function (sym) {
+                    return Object.getOwnPropertyDescriptor(object, sym).enumerable
+                })
+            }
+            keys.push.apply(keys, symbols)
+        }
+
+        return keys
+    }
+
+    function _objectSpread2(target) {
+        for (var i = 1; i < arguments.length; i++) {
+            var source = arguments[i] != null ? arguments[i] : {}
+
+            if (i % 2) {
+                ownKeys(source, true).forEach(function (key) {
+                    _defineProperty(target, key, source[key])
+                })
+            } else if (Object.getOwnPropertyDescriptors) {
+                Object.defineProperties(target, Object.getOwnPropertyDescriptors(source))
+            } else {
+                ownKeys(source).forEach(function (key) {
+                    Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key))
+                })
+            }
+        }
+
+        return target
+    }
+
+    /**
+     * Merge function to replace Object.assign with deep merging possibility
+     */
+
+    var isObject = function isObject(item) {
+        return _typeof(item) === 'object' && !Array.isArray(item)
+    }
+
+    var mergeFn = function mergeFn(target, source) {
+        var deep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false
+
+        if (deep || !Object.assign) {
+            var isDeep = function isDeep(prop) {
+                return isObject(source[prop]) && target !== null && target.hasOwnProperty(prop) && isObject(target[prop])
+            }
+
+            var replaced = Object.getOwnPropertyNames(source).map(function (prop) {
+                return _defineProperty({}, prop, isDeep(prop) ? mergeFn(target[prop], source[prop], deep) : source[prop])
+            }).reduce(function (a, b) {
+                return _objectSpread2({}, a, {}, b)
+            }, {})
+            return _objectSpread2({}, target, {}, replaced)
+        } else {
+            return Object.assign(target, source)
+        }
+    }
+
+    var merge = mergeFn
     function removeElement(el) {
         if (typeof el.remove !== 'undefined') {
             el.remove()
@@ -90,7 +183,7 @@
                 isActive: false,
                 parentTop: null,
                 parentBottom: null,
-                newContainer: this.container || config$1.defaultContainerElement
+                newContainer: this.container || config.defaultContainerElement
             }
         },
         computed: {
@@ -129,7 +222,7 @@
         },
         methods: {
             shouldQueue: function shouldQueue() {
-                var queue = this.queue !== undefined ? this.queue : config$1.defaultNoticeQueue
+                var queue = this.queue !== undefined ? this.queue : config.defaultNoticeQueue
                 if (!queue) return false
                 return this.parentTop.childElementCount > 0 || this.parentBottom.childElementCount > 0
             },
@@ -137,7 +230,8 @@
                 var _this = this
 
                 clearTimeout(this.timer)
-                this.isActive = false // Timeout for the animation complete before destroying
+                this.isActive = false
+                this.$emit('close') // Timeout for the animation complete before destroying
 
                 setTimeout(function () {
                     _this.$destroy()
@@ -214,11 +308,17 @@
             indefinite: {
                 type: Boolean,
                 default: false
+            },
+            buttons: {
+                type: Array,
+                default: function _default() {
+                    return []
+                }
             }
         },
         data: function data() {
             return {
-                newDuration: this.duration || config$1.defaultSnackbarDuration
+                newDuration: this.duration || config.defaultSnackbarDuration
             }
         },
         methods: {
@@ -226,8 +326,8 @@
         * Click listener.
         * Call action prop before closing (from Mixin).
         */
-            action: function action() {
-                this.onAction()
+            action: function action(cb) {
+                cb()
                 this.close()
             }
         }
@@ -313,23 +413,74 @@
 
     var normalizeComponent_1 = normalizeComponent
 
+    var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase())
+    function createInjector(context) {
+        return function (id, style) {
+            return addStyle(id, style)
+        }
+    }
+    var HEAD = document.head || document.getElementsByTagName('head')[0]
+    var styles = {}
+
+    function addStyle(id, css) {
+        var group = isOldIE ? css.media || 'default' : id
+        var style = styles[group] || (styles[group] = {
+            ids: new Set(),
+            styles: []
+        })
+
+        if (!style.ids.has(id)) {
+            style.ids.add(id)
+            var code = css.source
+
+            if (css.map) {
+                // https://developer.chrome.com/devtools/docs/javascript-debugging
+                // this makes source maps inside style tags work properly in Chrome
+                code += '\n/*# sourceURL=' + css.map.sources[0] + ' */' // http://stackoverflow.com/a/26603875
+
+                code += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(css.map)))) + ' */'
+            }
+
+            if (!style.element) {
+                style.element = document.createElement('style')
+                style.element.type = 'text/css'
+                if (css.media) style.element.setAttribute('media', css.media)
+                HEAD.appendChild(style.element)
+            }
+
+            if ('styleSheet' in style.element) {
+                style.styles.push(code)
+                style.element.styleSheet.cssText = style.styles.filter(Boolean).join('\n')
+            } else {
+                var index = style.ids.size - 1
+                var textNode = document.createTextNode(code)
+                var nodes = style.element.childNodes
+                if (nodes[index]) style.element.removeChild(nodes[index])
+                if (nodes.length) style.element.insertBefore(textNode, nodes[index]); else style.element.appendChild(textNode)
+            }
+        }
+    }
+
+    var browser = createInjector
+
     /* script */
     const __vue_script__ = script
 
     /* template */
-    var __vue_render__ = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('transition', {attrs: {'enter-active-class': _vm.transition.enter, 'leave-active-class': _vm.transition.leave}}, [_c('div', {directives: [{name: 'show', rawName: 'v-show', value: (_vm.isActive), expression: 'isActive'}], staticClass: 'snackbar', class: [_vm.type, _vm.position]}, [_c('div', {staticClass: 'text', domProps: {'innerHTML': _vm._s(_vm.message)}}), _vm._v(' '), (_vm.actionText) ? _c('div', {staticClass: 'action', class: _vm.type, on: {'click': _vm.action}}, [_c('button', {staticClass: 'button'}, [_vm._v(_vm._s(_vm.actionText))])]) : _vm._e()])]) }
+    var __vue_render__ = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('transition', {attrs: {'enter-active-class': _vm.transition.enter, 'leave-active-class': _vm.transition.leave}}, [_c('div', {directives: [{name: 'show', rawName: 'v-show', value: (_vm.isActive), expression: 'isActive'}], staticClass: 'snackbar', class: [_vm.type, _vm.position], attrs: {'role': _vm.actionText ? 'alertdialog' : 'alert'}}, [_c('div', {staticClass: 'text', domProps: {'innerHTML': _vm._s(_vm.message)}}), _vm._v(' '), (_vm.actionText) ? _c('div', {staticClass: 'action', class: _vm.type, on: {'click': function ($event) { _vm.action(_vm.onAction) }}}, [_c('button', {staticClass: 'button'}, [_vm._v(_vm._s(_vm.actionText))])]) : _vm._e(), _vm._v(' '), (_vm.buttons && _vm.buttons.length > 0) ? _c('div', {staticStyle: {'margin-left': '1em'}}, _vm._l((_vm.buttons), function (button, i) { return _c('button', {key: i, staticClass: 'button is-small', class: button.classes, staticStyle: {'margin-right': '1em'}, on: {'click': function ($event) { _vm.action(button.action) }}}, [(button.icon) ? _c('span', {staticClass: 'icon'}, [_c('b-icon', {attrs: {'icon': button.icon, 'size': 'is-small'}})], 1) : _vm._e(), _vm._v(' '), _c('span', [_vm._v(_vm._s(button.text))])]) })) : _vm._e()])]) }
     var __vue_staticRenderFns__ = []
 
     /* style */
-    const __vue_inject_styles__ = undefined
+    const __vue_inject_styles__ = function (inject) {
+        if (!inject) return
+        inject('data-v-35b15e68_0', { source: '.button.is-text[data-v-35b15e68]:focus,.button.is-text[data-v-35b15e68]:hover{background-color:initial}', map: undefined, media: undefined })
+    }
     /* scoped */
-    const __vue_scope_id__ = undefined
+    const __vue_scope_id__ = 'data-v-35b15e68'
     /* module identifier */
     const __vue_module_identifier__ = undefined
     /* functional template */
     const __vue_is_functional_template__ = false
-    /* style inject */
-
     /* style inject SSR */
 
     var Snackbar = normalizeComponent_1(
@@ -339,7 +490,7 @@
         __vue_scope_id__,
         __vue_is_functional_template__,
         __vue_module_identifier__,
-        undefined,
+        browser,
         undefined
     )
 
@@ -353,15 +504,20 @@
         Vue.prototype.$buefy[property] = component
     }
 
+    var localVueInstance
     var SnackbarProgrammatic = {
         open: function open(params) {
-            var message
             var parent
-            if (typeof params === 'string') message = params
+
+            if (typeof params === 'string') {
+                params = {
+                    message: params
+                }
+            }
+
             var defaultParam = {
                 type: 'is-success',
-                position: config$1.defaultSnackbarPosition || 'is-bottom-right',
-                message: message
+                position: config.defaultSnackbarPosition || 'is-bottom-right'
             }
 
             if (params.parent) {
@@ -369,8 +525,8 @@
                 delete params.parent
             }
 
-            var propsData = Object.assign(defaultParam, params)
-            var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : Vue
+            var propsData = merge(defaultParam, params)
+            var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance
             var SnackbarComponent = vm.extend(Snackbar)
             return new SnackbarComponent({
                 parent: parent,
@@ -381,11 +537,13 @@
     }
     var Plugin = {
         install: function install(Vue) {
+            localVueInstance = Vue
             registerComponentProgrammatic(Vue, 'snackbar', SnackbarProgrammatic)
         }
     }
     use(Plugin)
 
+    exports.BSnackbar = Snackbar
     exports.SnackbarProgrammatic = SnackbarProgrammatic
     exports.default = Plugin
 

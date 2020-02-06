@@ -1,10 +1,11 @@
-import './chunk-17755bd7.js'
-import './chunk-90e31a22.js'
-import './chunk-1628b87d.js'
-import './chunk-4f8020cc.js'
-import './chunk-263f5bb7.js'
+import './chunk-f2006744.js'
+import './helpers.js'
+import './chunk-b76a6c1d.js'
+import './chunk-03b1476b.js'
+import './chunk-c8434a6f.js'
 import { r as registerComponent, u as use } from './chunk-cca88db8.js'
-import { S as Select } from './chunk-7e8ddc27.js'
+import { S as Select } from './chunk-9c209565.js'
+export { S as BSelect } from './chunk-9c209565.js'
 
 var Plugin = {
     install: function install(Vue) {

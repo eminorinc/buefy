@@ -3,20 +3,20 @@
 Object.defineProperty(exports, '__esModule', { value: true })
 
 var __chunk_1 = require('./chunk-2777282e.js')
-var __chunk_2 = require('./chunk-6ce6eb64.js')
-var __chunk_3 = require('./chunk-fb310c0c.js')
-var __chunk_4 = require('./chunk-c5724c2f.js')
-require('./chunk-d4aef657.js')
-var __chunk_6 = require('./chunk-13e039f5.js')
-require('./chunk-fdfc3ef2.js')
-var __chunk_8 = require('./chunk-012ec96d.js')
-var __chunk_24 = require('./chunk-6fd4d8b3.js')
+var helpers = require('./helpers.js')
+var __chunk_2 = require('./chunk-8806479f.js')
+var __chunk_3 = require('./chunk-f45d15e3.js')
+require('./chunk-acfb68f5.js')
+var __chunk_5 = require('./chunk-13e039f5.js')
+require('./chunk-e79d8d75.js')
+var __chunk_7 = require('./chunk-dfc41c37.js')
+var __chunk_24 = require('./chunk-e7e96257.js')
 
 var _components
 var script = {
     name: 'BTaginput',
-    components: (_components = {}, __chunk_1._defineProperty(_components, __chunk_8.Autocomplete.name, __chunk_8.Autocomplete), __chunk_1._defineProperty(_components, __chunk_24.Tag.name, __chunk_24.Tag), _components),
-    mixins: [__chunk_4.FormElementMixin],
+    components: (_components = {}, __chunk_1._defineProperty(_components, __chunk_7.Autocomplete.name, __chunk_7.Autocomplete), __chunk_1._defineProperty(_components, __chunk_24.Tag.name, __chunk_24.Tag), _components),
+    mixins: [__chunk_3.FormElementMixin],
     inheritAttrs: false,
     props: {
         value: {
@@ -47,7 +47,7 @@ var script = {
         hasCounter: {
             type: Boolean,
             default: function _default() {
-                return __chunk_3.config.defaultTaginputHasCounter
+                return __chunk_2.config.defaultTaginputHasCounter
             }
         },
         field: {
@@ -88,6 +88,10 @@ var script = {
             }
         },
         allowDuplicates: {
+            type: Boolean,
+            default: false
+        },
+        checkInfiniteScroll: {
             type: Boolean,
             default: false
         }
@@ -204,7 +208,7 @@ var script = {
         },
         getNormalizedTagText: function getNormalizedTagText(tag) {
             if (__chunk_1._typeof(tag) === 'object') {
-                return __chunk_2.getValueByPath(tag, this.field)
+                return helpers.getValueByPath(tag, this.field)
             }
 
             return tag
@@ -248,6 +252,9 @@ var script = {
         },
         onTyping: function onTyping($event) {
             this.$emit('typing', $event.trim())
+        },
+        emitInfiniteScroll: function emitInfiniteScroll() {
+            this.$emit('infinite-scroll')
         }
     }
 }
@@ -256,7 +263,7 @@ var script = {
 const __vue_script__ = script
 
 /* template */
-var __vue_render__ = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('div', {staticClass: 'taginput control', class: _vm.rootClasses}, [_c('div', {staticClass: 'taginput-container', class: [_vm.statusType, _vm.size, _vm.containerClasses], attrs: {'disabled': _vm.disabled}, on: {'click': function ($event) { _vm.hasInput && _vm.focus($event) }}}, [_vm._l((_vm.tags), function (tag, index) { return _c('b-tag', {key: index, attrs: {'type': _vm.type, 'size': _vm.size, 'rounded': _vm.rounded, 'attached': _vm.attached, 'tabstop': false, 'disabled': _vm.disabled, 'ellipsis': _vm.ellipsis, 'closable': _vm.closable, 'title': _vm.ellipsis && _vm.getNormalizedTagText(tag)}, on: {'close': function ($event) { _vm.removeTag(index) }}}, [_vm._v('\n            ' + _vm._s(_vm.getNormalizedTagText(tag)) + '\n        ')]) }), _vm._v(' '), (_vm.hasInput) ? _c('b-autocomplete', _vm._b({ref: 'autocomplete', attrs: {'data': _vm.data, 'field': _vm.field, 'icon': _vm.icon, 'icon-pack': _vm.iconPack, 'maxlength': _vm.maxlength, 'has-counter': false, 'size': _vm.size, 'disabled': _vm.disabled, 'loading': _vm.loading, 'autocomplete': _vm.nativeAutocomplete, 'keep-first': !_vm.allowNew, 'use-html5-validation': _vm.useHtml5Validation}, on: {'typing': _vm.onTyping, 'focus': _vm.onFocus, 'blur': _vm.customOnBlur, 'select': _vm.onSelect}, nativeOn: {'keydown': function ($event) { _vm.keydown($event) }}, scopedSlots: _vm._u([{key: _vm.defaultSlotName, fn: function (props) { return [_vm._t('default', null, {option: props.option, index: props.index})] }}]), model: {value: (_vm.newTag), callback: function ($$v) { _vm.newTag = $$v }, expression: 'newTag'}}, 'b-autocomplete', _vm.$attrs, false), [_c('template', {slot: _vm.headerSlotName}, [_vm._t('header')], 2), _vm._v(' '), _c('template', {slot: _vm.emptySlotName}, [_vm._t('empty')], 2), _vm._v(' '), _c('template', {slot: _vm.footerSlotName}, [_vm._t('footer')], 2)], 2) : _vm._e()], 2), _vm._v(' '), (_vm.hasCounter && (_vm.maxtags || _vm.maxlength)) ? _c('small', {staticClass: 'help counter'}, [(_vm.maxlength && _vm.valueLength > 0) ? [_vm._v('\n            ' + _vm._s(_vm.valueLength) + ' / ' + _vm._s(_vm.maxlength) + '\n        ')] : (_vm.maxtags) ? [_vm._v('\n            ' + _vm._s(_vm.tagsLength) + ' / ' + _vm._s(_vm.maxtags) + '\n        ')] : _vm._e()], 2) : _vm._e()]) }
+var __vue_render__ = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('div', {staticClass: 'taginput control', class: _vm.rootClasses}, [_c('div', {staticClass: 'taginput-container', class: [_vm.statusType, _vm.size, _vm.containerClasses], attrs: {'disabled': _vm.disabled}, on: {'click': function ($event) { _vm.hasInput && _vm.focus($event) }}}, [_vm._l((_vm.tags), function (tag, index) { return _c('b-tag', {key: index, attrs: {'type': _vm.type, 'size': _vm.size, 'rounded': _vm.rounded, 'attached': _vm.attached, 'tabstop': false, 'disabled': _vm.disabled, 'ellipsis': _vm.ellipsis, 'closable': _vm.closable, 'title': _vm.ellipsis && _vm.getNormalizedTagText(tag)}, on: {'close': function ($event) { _vm.removeTag(index) }}}, [_vm._v('\n            ' + _vm._s(_vm.getNormalizedTagText(tag)) + '\n        ')]) }), _vm._v(' '), (_vm.hasInput) ? _c('b-autocomplete', _vm._b({ref: 'autocomplete', attrs: {'data': _vm.data, 'field': _vm.field, 'icon': _vm.icon, 'icon-pack': _vm.iconPack, 'maxlength': _vm.maxlength, 'has-counter': false, 'size': _vm.size, 'disabled': _vm.disabled, 'loading': _vm.loading, 'autocomplete': _vm.nativeAutocomplete, 'keep-first': !_vm.allowNew, 'use-html5-validation': _vm.useHtml5Validation, 'check-infinite-scroll': _vm.checkInfiniteScroll}, on: {'typing': _vm.onTyping, 'focus': _vm.onFocus, 'blur': _vm.customOnBlur, 'select': _vm.onSelect, 'infinite-scroll': _vm.emitInfiniteScroll}, nativeOn: {'keydown': function ($event) { _vm.keydown($event) }}, scopedSlots: _vm._u([{key: _vm.defaultSlotName, fn: function (props) { return [_vm._t('default', null, {option: props.option, index: props.index})] }}]), model: {value: (_vm.newTag), callback: function ($$v) { _vm.newTag = $$v }, expression: 'newTag'}}, 'b-autocomplete', _vm.$attrs, false), [_c('template', {slot: _vm.headerSlotName}, [_vm._t('header')], 2), _vm._v(' '), _c('template', {slot: _vm.emptySlotName}, [_vm._t('empty')], 2), _vm._v(' '), _c('template', {slot: _vm.footerSlotName}, [_vm._t('footer')], 2)], 2) : _vm._e()], 2), _vm._v(' '), (_vm.hasCounter && (_vm.maxtags || _vm.maxlength)) ? _c('small', {staticClass: 'help counter'}, [(_vm.maxlength && _vm.valueLength > 0) ? [_vm._v('\n            ' + _vm._s(_vm.valueLength) + ' / ' + _vm._s(_vm.maxlength) + '\n        ')] : (_vm.maxtags) ? [_vm._v('\n            ' + _vm._s(_vm.tagsLength) + ' / ' + _vm._s(_vm.maxtags) + '\n        ')] : _vm._e()], 2) : _vm._e()]) }
 var __vue_staticRenderFns__ = []
 
 /* style */
@@ -271,7 +278,7 @@ const __vue_is_functional_template__ = false
 
 /* style inject SSR */
 
-var Taginput = __chunk_6.__vue_normalize__(
+var Taginput = __chunk_5.__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
@@ -284,9 +291,9 @@ var Taginput = __chunk_6.__vue_normalize__(
 
 var Plugin = {
     install: function install(Vue) {
-        __chunk_6.registerComponent(Vue, Taginput)
+        __chunk_5.registerComponent(Vue, Taginput)
     }
 }
-__chunk_6.use(Plugin)
+__chunk_5.use(Plugin)
 
 exports.default = Plugin
