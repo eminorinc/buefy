@@ -1,103 +1,103 @@
-'use strict'
+'use strict';
 
-Object.defineProperty(exports, '__esModule', { value: true })
+Object.defineProperty(exports, '__esModule', { value: true });
 
-var __chunk_1 = require('./chunk-2777282e.js')
+var __chunk_1 = require('./chunk-2777282e.js');
 
 /**
  * +/- function to native math sign
  */
 function signPoly(value) {
-    if (value < 0) return -1
-    return value > 0 ? 1 : 0
+  if (value < 0) return -1;
+  return value > 0 ? 1 : 0;
 }
 
-var sign = Math.sign || signPoly
+var sign = Math.sign || signPoly;
 /**
  * Get value of an object property/path even if it's nested
  */
 
 function getValueByPath(obj, path) {
-    var value = path.split('.').reduce(function (o, i) {
-        return o ? o[i] : null
-    }, obj)
-    return value
+  var value = path.split('.').reduce(function (o, i) {
+    return o ? o[i] : null;
+  }, obj);
+  return value;
 }
 /**
  * Extension of indexOf method by equality function if specified
  */
 
 function indexOf(array, obj, fn) {
-    if (!array) return -1
-    if (!fn || typeof fn !== 'function') return array.indexOf(obj)
+  if (!array) return -1;
+  if (!fn || typeof fn !== 'function') return array.indexOf(obj);
 
-    for (var i = 0; i < array.length; i++) {
-        if (fn(array[i], obj)) {
-            return i
-        }
+  for (var i = 0; i < array.length; i++) {
+    if (fn(array[i], obj)) {
+      return i;
     }
+  }
 
-    return -1
+  return -1;
 }
 /**
  * Merge function to replace Object.assign with deep merging possibility
  */
 
 var isObject = function isObject(item) {
-    return __chunk_1._typeof(item) === 'object' && !Array.isArray(item)
-}
+  return __chunk_1._typeof(item) === 'object' && !Array.isArray(item);
+};
 
 var mergeFn = function mergeFn(target, source) {
-    var deep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false
+  var deep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
-    if (deep || !Object.assign) {
-        var isDeep = function isDeep(prop) {
-            return isObject(source[prop]) && target !== null && target.hasOwnProperty(prop) && isObject(target[prop])
-        }
+  if (deep || !Object.assign) {
+    var isDeep = function isDeep(prop) {
+      return isObject(source[prop]) && target !== null && target.hasOwnProperty(prop) && isObject(target[prop]);
+    };
 
-        var replaced = Object.getOwnPropertyNames(source).map(function (prop) {
-            return __chunk_1._defineProperty({}, prop, isDeep(prop) ? mergeFn(target[prop], source[prop], deep) : source[prop])
-        }).reduce(function (a, b) {
-            return __chunk_1._objectSpread2({}, a, {}, b)
-        }, {})
-        return __chunk_1._objectSpread2({}, target, {}, replaced)
-    } else {
-        return Object.assign(target, source)
-    }
-}
+    var replaced = Object.getOwnPropertyNames(source).map(function (prop) {
+      return __chunk_1._defineProperty({}, prop, isDeep(prop) ? mergeFn(target[prop], source[prop], deep) : source[prop]);
+    }).reduce(function (a, b) {
+      return __chunk_1._objectSpread2({}, a, {}, b);
+    }, {});
+    return __chunk_1._objectSpread2({}, target, {}, replaced);
+  } else {
+    return Object.assign(target, source);
+  }
+};
 
-var merge = mergeFn
+var merge = mergeFn;
 /**
  * Mobile detection
  * https://www.abeautifulsite.net/detecting-mobile-devices-with-javascript
  */
 
 var isMobile = {
-    Android: function Android() {
-        return typeof window !== 'undefined' && window.navigator.userAgent.match(/Android/i)
-    },
-    BlackBerry: function BlackBerry() {
-        return typeof window !== 'undefined' && window.navigator.userAgent.match(/BlackBerry/i)
-    },
-    iOS: function iOS() {
-        return typeof window !== 'undefined' && window.navigator.userAgent.match(/iPhone|iPad|iPod/i)
-    },
-    Opera: function Opera() {
-        return typeof window !== 'undefined' && window.navigator.userAgent.match(/Opera Mini/i)
-    },
-    Windows: function Windows() {
-        return typeof window !== 'undefined' && window.navigator.userAgent.match(/IEMobile/i)
-    },
-    any: function any() {
-        return isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows()
-    }
-}
+  Android: function Android() {
+    return typeof window !== 'undefined' && window.navigator.userAgent.match(/Android/i);
+  },
+  BlackBerry: function BlackBerry() {
+    return typeof window !== 'undefined' && window.navigator.userAgent.match(/BlackBerry/i);
+  },
+  iOS: function iOS() {
+    return typeof window !== 'undefined' && window.navigator.userAgent.match(/iPhone|iPad|iPod/i);
+  },
+  Opera: function Opera() {
+    return typeof window !== 'undefined' && window.navigator.userAgent.match(/Opera Mini/i);
+  },
+  Windows: function Windows() {
+    return typeof window !== 'undefined' && window.navigator.userAgent.match(/IEMobile/i);
+  },
+  any: function any() {
+    return isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows();
+  }
+};
 function removeElement(el) {
-    if (typeof el.remove !== 'undefined') {
-        el.remove()
-    } else if (typeof el.parentNode !== 'undefined') {
-        el.parentNode.removeChild(el)
-    }
+  if (typeof el.remove !== 'undefined') {
+    el.remove();
+  } else if (typeof el.parentNode !== 'undefined') {
+    el.parentNode.removeChild(el);
+  }
 }
 /**
  * Escape regex characters
@@ -105,15 +105,15 @@ function removeElement(el) {
  */
 
 function escapeRegExpChars(value) {
-    if (!value) return value // eslint-disable-next-line
+  if (!value) return value; // eslint-disable-next-line
 
-    return value.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')
+  return value.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
 }
 
-exports.escapeRegExpChars = escapeRegExpChars
-exports.getValueByPath = getValueByPath
-exports.indexOf = indexOf
-exports.isMobile = isMobile
-exports.merge = merge
-exports.removeElement = removeElement
-exports.sign = sign
+exports.escapeRegExpChars = escapeRegExpChars;
+exports.getValueByPath = getValueByPath;
+exports.indexOf = indexOf;
+exports.isMobile = isMobile;
+exports.merge = merge;
+exports.removeElement = removeElement;
+exports.sign = sign;
