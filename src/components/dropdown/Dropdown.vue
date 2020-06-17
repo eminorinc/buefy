@@ -125,6 +125,12 @@ export default {
         },
         ariaRoleMenu() {
             return this.ariaRole === 'menu' || this.ariaRole === 'list' ? this.ariaRole : null
+        },
+        clickEvent() {
+            if ('ontouchstart' in document.documentElement === true) {
+                return 'touchstart'
+            }
+            return 'click'
         }
     },
     watch: {
@@ -254,13 +260,13 @@ export default {
     },
     created() {
         if (typeof window !== 'undefined') {
-            document.addEventListener('click', this.clickedOutside)
+            document.addEventListener(this.clickEvent, this.clickedOutside)
             document.addEventListener('keyup', this.keyPress)
         }
     },
     beforeDestroy() {
         if (typeof window !== 'undefined') {
-            document.removeEventListener('click', this.clickedOutside)
+            document.removeEventListener(this.clickEvent, this.clickedOutside)
             document.removeEventListener('keyup', this.keyPress)
         }
     }
