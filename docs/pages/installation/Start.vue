@@ -40,12 +40,12 @@
                         Even though this is gonna import <strong>ALL</strong> components to your application,
                         Buefy full bundle is optimized and still pretty small:
                         <ul>
-                            <li><strong>script</strong> is <strong>32KB</strong> min+gzip</li>
-                            <li><strong>style</strong> is <strong>28KB</strong> min+gzip (with bulma included)</li>
+                            <li><strong>script</strong> is <strong>48KB</strong> min+gzip</li>
+                            <li><strong>style</strong> is <strong>39KB</strong> min+gzip (with bulma included)</li>
                         </ul>
                     </div>
                 </b-message>
-                <CodeView title="Full bundle (recommended)" :code="importingBundle | pre" lang="javascript" expanded/>
+                <CodeView title="Full bundle" :code="importingBundle | pre" lang="javascript" expanded/>
                 <CodeView title="Individual components as Vue plugins" :code="importingComponentsAsVuePlugins | pre" lang="javascript" expanded/>
                 <b-message type="is-info">
                     To include individual styles, see <router-link to="/documentation/customization">Customization</router-link> section.
@@ -169,7 +169,7 @@
                     </\script>
                 </body>
                 </html>`,
-                materialIcons: '<link rel="stylesheet" href="https://cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css">',
+                materialIcons: '<link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.3.45/css/materialdesignicons.min.css">',
                 fontAwesome5: '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">'
             }
         }

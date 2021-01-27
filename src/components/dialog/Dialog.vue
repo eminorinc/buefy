@@ -52,12 +52,15 @@
 
                 <footer class="modal-card-foot">
                     <button
+                        v-if="showCancel"
+                        class="button"
+                        ref="cancelButton"
+                        @click="cancel('button')">{{ cancelText }}</button>
+                    <button
                         class="button"
                         :class="type"
                         ref="confirmButton"
-                        @click="confirm">
-                        {{ confirmText }}
-                    </button>
+                        @click="confirm">{{ confirmText }}</button>
                 </footer>
             </div>
         </div>
@@ -116,9 +119,15 @@ export default {
             type: Function,
             default: () => {}
         },
+        closeOnConfirm: {
+            type: Boolean,
+            default: true
+        },
         container: {
             type: String,
-            default: config.defaultContainerElement
+            default: () => {
+                return config.defaultContainerElement
+            }
         },
         focusOn: {
             type: String,
@@ -126,7 +135,9 @@ export default {
         },
         trapFocus: {
             type: Boolean,
-            default: config.defaultTrapFocus
+            default: () => {
+                return config.defaultTrapFocus
+            }
         },
         ariaRole: {
             type: String,
@@ -190,9 +201,8 @@ export default {
                     return
                 }
             }
-
-            this.onConfirm(this.prompt)
-            this.close()
+            this.onConfirm(this.prompt, this)
+            if (this.closeOnConfirm) this.close()
         },
 
         /**

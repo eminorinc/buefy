@@ -247,6 +247,34 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>trap-focus</code>',
+                description: `Trap focus inside the datepicker.`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>append-to-body</code>',
+                description: 'Append datepicker calendar to body',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>aria-next-label</code>',
+                description: 'Accessibility label for the next month button.',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>aria-previous-label</code>',
+                description: 'Accessibility label for the previous month button.',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',
@@ -270,7 +298,7 @@ export default [
             {
                 name: '<code>input</code>',
                 description: 'Triggers when the value of datepicker is changed',
-                parameters: '<code>value: Number</code>'
+                parameters: '<code>value: Date</code>'
             },
             {
                 name: '<code>change-month</code>',

@@ -26,7 +26,7 @@
 
         <Example :component="ExObjectSyntax" :code="ExObjectSyntaxCode" title="Object syntax" vertical>
             <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
+                <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.7.0</span>
             </div>
             <p>You can also use object syntax for <code>type</code> props just like Vuejs <code>class</code>.</p>
@@ -34,7 +34,7 @@
 
         <Example :component="ExCustom" :code="ExCustomCode" title="Custom Icon Pack" vertical>
             <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
+                <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.8.3</span>
             </div>
             <p>You can also add your own custom font
@@ -42,11 +42,13 @@
         </Example>
 
         <ApiView :data="api"/>
+        <VariablesView :data="variables"/>
     </div>
 </template>
 
 <script>
     import api from './api/icon'
+    import variables from './variables/icon'
 
     import ExMdi from './examples/ExMdi'
     import ExMdiCode from '!!raw-loader!./examples/ExMdi'
@@ -64,6 +66,7 @@
         data() {
             return {
                 api,
+                variables,
                 ExMdi,
                 ExFa,
                 ExObjectSyntax,

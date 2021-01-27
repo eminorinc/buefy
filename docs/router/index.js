@@ -72,11 +72,14 @@ const router = new Router({
                 route('documentation/carousel', 'components/carousel/Carousel'),
                 route('documentation/rate', 'components/rate/Rate'),
                 route('documentation/datetimepicker', 'components/datetimepicker/Datetimepicker'),
+                route('documentation/sidebar', 'components/sidebar/Sidebar'),
+                route('documentation/skeleton', 'components/skeleton/Skeleton'),
                 // Extensions
                 route('extensions', 'Extensions'),
                 route('extensions/cleavejs', 'extensions/cleavejs/Cleavejs'),
                 route('extensions/sortablejs', 'extensions/sortablejs/Sortablejs'),
                 route('extensions/veevalidate', 'extensions/veevalidate/VeeValidate'),
+                route('extensions/bulmacssvars', 'extensions/bulmacssvars/BulmaCssVars'),
                 // Expo
                 route('expo', 'Expo')
             ]

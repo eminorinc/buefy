@@ -44,7 +44,7 @@ export default [
                 description: 'Tag and input size, optional',
                 type: 'String',
                 values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
-                default: '<code>is-medium</code>'
+                default: '—'
             },
             {
                 name: '<code>rounded</code>',
@@ -96,6 +96,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>open-on-focus</code>',
+                description: 'Opens a dropdown with choices when the input field is focused',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>remove-on-keys</code>',
                 description: 'Allow removing last tag when pressing given keys, if input is empty',
                 type: 'Array',
@@ -139,7 +146,14 @@ export default [
             },
             {
                 name: '<code>check-infinite-scroll</code>',
-                description: 'Makes the autocomplete component check if list reached scroll end and emit <code>infinite-sroll</code> event.',
+                description: 'Makes the autocomplete component check if list reached scroll end and emit <code>infinite-scroll</code> event.',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>append-to-body</code>',
+                description: 'Append autocomplete content to body',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
@@ -167,6 +181,21 @@ export default [
                 name: '<code>header</code>',
                 description: 'Show a custom header as first option',
                 props: '—'
+            },
+            {
+                name: '<code>footer</code>',
+                description: 'Show a custom footer as last option',
+                props: '—'
+            },
+            {
+                name: '<code>tag</code>',
+                description: 'For customizing content in tag item.',
+                props: '<code>tag: String|Number|Object</code>'
+            },
+            {
+                name: '<code>selected</code>',
+                description: 'For customizing content of selected item.',
+                props: '<code>tags: Array</code>'
             }
         ],
         events: [

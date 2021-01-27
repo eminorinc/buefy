@@ -9,7 +9,7 @@
         <Example :component="ExValidation" :code="ExValidationCode" title="Validation" vertical>
             <p>Automatic HTML5 validation on-blur.</p>
             <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
+                <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.7.2</span>
             </div>
             <p>You can use <code>use-html5-validation</code> prop to disable the default HTML5 validation.</p>
@@ -22,11 +22,13 @@
         <Example :component="ExSizes" :code="ExSizesCode" title="Sizes" vertical/>
 
         <ApiView :data="api"/>
+        <VariablesView :data="variables"/>
     </div>
 </template>
 
 <script>
     import api from './api/input'
+    import variables from './variables/input'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
@@ -50,6 +52,7 @@
         data() {
             return {
                 api,
+                variables,
                 ExSimple,
                 ExTypesStates,
                 ExIcons,

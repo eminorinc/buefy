@@ -5,7 +5,7 @@ export default [
             {
                 name: '<code>v-model</code>',
                 description: 'Binding value, tab index',
-                type: 'Number',
+                type: 'Number, String',
                 values: '—',
                 default: '<code>0</code>'
             },
@@ -58,27 +58,41 @@ export default [
                 values: '—',
                 default: '<code>false</code>'
             },
+            {
+                name: '<code>multiline</code>',
+                description: 'Tabs will be multilined',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
         ],
         events: [
             {
                 name: '<code>input</code>',
                 description: 'Triggers when tab is clicked',
-                parameters: '<code>index: Number</code>'
+                parameters: '<code>value: String|Number</code>'
             },
             {
                 name: '<code>change</code>',
                 description: 'Triggers when active tab is changed',
-                parameters: '<code>index: Number</code>'
+                parameters: '<code>value: String|Number</code>'
             }
         ]
     },
     {
-        title: 'Tab Item',
+        title: 'Item',
         props: [
             {
                 name: '<code>label</code>',
                 description: 'Tab label',
                 type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>value</code>',
+                description: 'Tab value',
+                type: 'Number, String',
                 values: '—',
                 default: '—'
             },

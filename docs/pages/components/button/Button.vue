@@ -12,17 +12,19 @@
 
         <Example :component="ExRouter" :code="ExRouterCode" title="Router" vertical>
             <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
+                <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.7.6</span>
             </div>
         </Example>
 
         <ApiView :data="api"/>
+        <VariablesView :data="variables"/>
     </div>
 </template>
 
 <script>
     import api from './api/button'
+    import variables from './variables/button'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
@@ -46,6 +48,7 @@
         data() {
             return {
                 api,
+                variables,
                 ExSimple,
                 ExTypesStates,
                 ExIcons,

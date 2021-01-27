@@ -52,6 +52,8 @@
                 "documentation/notification",
                 "documentation/pagination",
                 "documentation/progress",
+                "documentation/skeleton",
+                "documentation/sidebar",
                 "documentation/snackbar",
                 "documentation/steps",
                 "documentation/table",
@@ -79,6 +81,12 @@
             "category": "Drag & drop",
             "pages": [
                 "extensions/sortablejs"
+            ]
+        },
+        {
+            "category": "CSS Variables",
+            "pages": [
+                "extensions/bulmacssvars"
             ]
         }
     ]

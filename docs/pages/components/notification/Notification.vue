@@ -12,7 +12,7 @@
 
         <Example :component="ExProgrammatically" :code="ExProgrammaticallyCode" title="Programmatically opening">
             <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
+                <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.7.4</span>
             </div>
         </Example>
@@ -23,11 +23,13 @@
         </Example>
 
         <ApiView :data="api"/>
+        <VariablesView :data="variables"/>
     </div>
 </template>
 
 <script>
     import api from './api/notification'
+    import variables from './variables/notification'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
@@ -48,6 +50,7 @@
         data() {
             return {
                 api,
+                variables,
                 ExSimple,
                 ExTypes,
                 ExIcons,

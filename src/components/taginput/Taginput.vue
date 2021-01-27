@@ -5,21 +5,25 @@
             :class="[statusType, size, containerClasses]"
             :disabled="disabled"
             @click="hasInput && focus($event)">
-            <b-tag
-                v-for="(tag, index) in tags"
-                :key="index"
-                :type="type"
-                :size="size"
-                :rounded="rounded"
-                :attached="attached"
-                :tabstop="false"
-                :disabled="disabled"
-                :ellipsis="ellipsis"
-                :closable="closable"
-                :title="ellipsis && getNormalizedTagText(tag)"
-                @close="removeTag(index)">
-                {{ getNormalizedTagText(tag) }}
-            </b-tag>
+            <slot name="selected" :tags="tags">
+                <b-tag
+                    v-for="(tag, index) in tags"
+                    :key="getNormalizedTagText(tag) + index"
+                    :type="type"
+                    :size="size"
+                    :rounded="rounded"
+                    :attached="attached"
+                    :tabstop="false"
+                    :disabled="disabled"
+                    :ellipsis="ellipsis"
+                    :closable="closable"
+                    :title="ellipsis && getNormalizedTagText(tag)"
+                    @close="removeTag(index, $event)">
+                    <slot name="tag" :tag="tag">
+                        {{ getNormalizedTagText(tag) }}
+                    </slot>
+                </b-tag>
+            </slot>
 
             <b-autocomplete
                 ref="autocomplete"
@@ -36,9 +40,12 @@
                 :disabled="disabled"
                 :loading="loading"
                 :autocomplete="nativeAutocomplete"
+                :open-on-focus="openOnFocus"
+                :keep-open="openOnFocus"
                 :keep-first="!allowNew"
                 :use-html5-validation="useHtml5Validation"
                 :check-infinite-scroll="checkInfiniteScroll"
+                :append-to-body="appendToBody"
                 @typing="onTyping"
                 @focus="onFocus"
                 @blur="customOnBlur"
@@ -122,6 +129,7 @@ export default {
         },
         autocomplete: Boolean,
         nativeAutocomplete: String,
+        openOnFocus: Boolean,
         disabled: Boolean,
         ellipsis: Boolean,
         closable: {
@@ -152,7 +160,8 @@ export default {
         checkInfiniteScroll: {
             type: Boolean,
             default: false
-        }
+        },
+        appendToBody: Boolean
     },
     data() {
         return {
@@ -240,7 +249,7 @@ export default {
          * When v-model is changed set internal value.
          */
         value(value) {
-            this.tags = value
+            this.tags = Array.isArray(value) ? value.slice(0) : (value || [])
         },
 
         hasInput() {
@@ -262,7 +271,14 @@ export default {
                         return
                     }
                 }
-
+                // Remove the tag input previously added (if not allowDuplicates).
+                if (!this.allowDuplicates) {
+                    const index = this.tags.indexOf(tagToAdd)
+                    if (index >= 0) {
+                        this.tags.splice(index, 1)
+                        return
+                    }
+                }
                 // Add the tag input if it is not blank
                 // or previously added (if not allowDuplicates).
                 const add = !this.allowDuplicates ? this.tags.indexOf(tagToAdd) === -1 : true
@@ -284,11 +300,11 @@ export default {
             return tag
         },
 
-        customOnBlur($event) {
+        customOnBlur(event) {
             // Add tag on-blur if not select only
             if (!this.autocomplete) this.addTag()
 
-            this.onBlur($event)
+            this.onBlur(event)
         },
 
         onSelect(option) {
@@ -300,10 +316,14 @@ export default {
             })
         },
 
-        removeTag(index) {
+        removeTag(index, event) {
             const tag = this.tags.splice(index, 1)[0]
             this.$emit('input', this.tags)
             this.$emit('remove', tag)
+            if (event) event.stopPropagation()
+            if (this.openOnFocus && this.$refs.autocomplete) {
+                this.$refs.autocomplete.focus()
+            }
             return tag
         },
 
@@ -326,8 +346,8 @@ export default {
             }
         },
 
-        onTyping($event) {
-            this.$emit('typing', $event.trim())
+        onTyping(event) {
+            this.$emit('typing', event.trim())
         },
 
         emitInfiniteScroll() {

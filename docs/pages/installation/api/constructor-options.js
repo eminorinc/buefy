@@ -330,6 +330,20 @@ export default [
                 type: 'Number',
                 values: '—',
                 default: '<code>3500</code>'
+            },
+            {
+                name: '<code>defaultTabsAnimated</code>',
+                description: 'Default tabs <code>animated</code> attribute',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>defaultLinkTags</code>',
+                description: 'Default link tags accepted as tag in some component (Button, MenuItem, PaginationButton). Can be used when using custom component or other Vue Router plugin like inertia.',
+                type: 'string',
+                values: '—',
+                default: '<code>[a, button, input, router-link, nuxt-link, n-link, RouterLink, NuxtLink, NLink]</code>'
             }
         ]
     }

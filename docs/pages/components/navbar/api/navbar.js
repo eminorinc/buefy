@@ -72,7 +72,7 @@ export default [
                 name: '<code>shadow</code>',
                 description: 'Add a shadow to navbar',
                 type: 'Boolean',
-                values: '—',
+                values: '<code>true</code>, <code>false</code>',
                 default: 'false'
             }
       ],
@@ -100,7 +100,7 @@ export default [
       ]
   },
   {
-    title: 'Navbar Item',
+    title: 'Item',
     props: [
         {
             name: '<code>tag</code>',
@@ -119,7 +119,7 @@ export default [
     ]
   },
   {
-    title: 'Navbar Dropdown',
+    title: 'Dropdown',
     props: [
         {
             name: '<code>hoverable</code>',
@@ -154,6 +154,13 @@ export default [
             description: 'Show a boxed version of the dropdown',
             type: 'Boolean',
             values: '-',
+            default: 'false'
+        },
+        {
+            name: '<code>collapsible</code>',
+            description: 'Collapsible dropdown on mobile',
+            type: 'Boolean',
+            values: '',
             default: 'false'
         }
     ],
