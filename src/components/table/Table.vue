@@ -27,7 +27,7 @@
             <div class="level-right">
                 <div v-if="paginated" class="level-item">
                     <b-pagination
-                        :icon-pack="iconPack"`
+                        :icon-pack="iconPack"
                         :total="newDataTotal"
                         :per-page="perPage"
                         :simple="paginationSimple"

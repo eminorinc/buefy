@@ -145,7 +145,7 @@ export default {
                 return column.label + '(' + (this.sortMultipleData.indexOf(sortingObject) + 1) + ')'
             }
             return column.label
-        },
+        }
     }
 }
 </script>
