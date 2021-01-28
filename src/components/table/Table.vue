@@ -288,8 +288,13 @@
                             </td>
 
                             <template v-for="(column, colindex) in visibleColumns">
-
-                                <template v-if="column.$scopedSlots && column.$scopedSlots.default">
+                                <template v-if="column.useSlot">
+                                    <slot
+                                        :row="row"
+                                        :index="index"
+                                        name="table-cell" />
+                                </template>
+                                <template v-else-if="column.$scopedSlots && column.$scopedSlots.default">
                                     <b-slot-component
                                         :key="column.newKey + ':' + index + ':' + colindex"
                                         :component="column"
@@ -307,7 +312,6 @@
                                         @click.native="$emit('cellclick',row,column,index,colindex)"
                                     />
                                 </template>
-
                             </template>
 
                             <td
