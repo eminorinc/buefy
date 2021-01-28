@@ -1,4 +1,4 @@
-/*! Buefy v0.8.9 | MIT License | github.com/buefy/buefy */
+/*! Buefy v0.8.20 | MIT License | github.com/buefy/buefy */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
@@ -225,215 +225,234 @@
         return '';
       },
 
-    function _defineProperty(obj, key, value) {
-        if (key in obj) {
-            Object.defineProperty(obj, key, {
-                value: value,
-                enumerable: true,
-                configurable: true,
-                writable: true
-            })
-        } else {
-            obj[key] = value
-        }
+    return _typeof(obj);
+  }
 
-        return obj
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
     }
 
-    function ownKeys(object, enumerableOnly) {
-        var keys = Object.keys(object)
+    return obj;
+  }
 
-        if (Object.getOwnPropertySymbols) {
-            var symbols = Object.getOwnPropertySymbols(object)
-            if (enumerableOnly) {
-                symbols = symbols.filter(function (sym) {
-                    return Object.getOwnPropertyDescriptor(object, sym).enumerable
-                })
-            }
-            keys.push.apply(keys, symbols)
-        }
+  function ownKeys(object, enumerableOnly) {
+    var keys = Object.keys(object);
 
-        return keys
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      if (enumerableOnly) symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      });
+      keys.push.apply(keys, symbols);
     }
 
-    function _objectSpread2(target) {
-        for (var i = 1; i < arguments.length; i++) {
-            var source = arguments[i] != null ? arguments[i] : {}
+    return keys;
+  }
 
-            if (i % 2) {
-                ownKeys(source, true).forEach(function (key) {
-                    _defineProperty(target, key, source[key])
-                })
-            } else if (Object.getOwnPropertyDescriptors) {
-                Object.defineProperties(target, Object.getOwnPropertyDescriptors(source))
-            } else {
-                ownKeys(source).forEach(function (key) {
-                    Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key))
-                })
-            }
-        }
+  function _objectSpread2(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i] != null ? arguments[i] : {};
 
-        return target
+      if (i % 2) {
+        ownKeys(Object(source), true).forEach(function (key) {
+          _defineProperty(target, key, source[key]);
+        });
+      } else if (Object.getOwnPropertyDescriptors) {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+      } else {
+        ownKeys(Object(source)).forEach(function (key) {
+          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
+      }
     }
 
-    var config = {
-        defaultContainerElement: null,
-        defaultIconPack: 'mdi',
-        defaultIconComponent: null,
-        defaultIconPrev: 'chevron-left',
-        defaultIconNext: 'chevron-right',
-        defaultDialogConfirmText: null,
-        defaultDialogCancelText: null,
-        defaultSnackbarDuration: 3500,
-        defaultSnackbarPosition: null,
-        defaultToastDuration: 2000,
-        defaultToastPosition: null,
-        defaultNotificationDuration: 2000,
-        defaultNotificationPosition: null,
-        defaultTooltipType: 'is-primary',
-        defaultTooltipAnimated: false,
-        defaultTooltipDelay: 0,
-        defaultInputAutocomplete: 'on',
-        defaultDateFormatter: null,
-        defaultDateParser: null,
-        defaultDateCreator: null,
-        defaultTimeCreator: null,
-        defaultDayNames: null,
-        defaultMonthNames: null,
-        defaultFirstDayOfWeek: null,
-        defaultUnselectableDaysOfWeek: null,
-        defaultTimeFormatter: null,
-        defaultTimeParser: null,
-        defaultModalCanCancel: ['escape', 'x', 'outside', 'button'],
-        defaultModalScroll: null,
-        defaultDatepickerMobileNative: true,
-        defaultTimepickerMobileNative: true,
-        defaultNoticeQueue: true,
-        defaultInputHasCounter: true,
-        defaultTaginputHasCounter: true,
-        defaultUseHtml5Validation: true,
-        defaultDropdownMobileModal: true,
-        defaultFieldLabelPosition: null,
-        defaultDatepickerYearsRange: [-100, 3],
-        defaultDatepickerNearbyMonthDays: true,
-        defaultDatepickerNearbySelectableMonthDays: false,
-        defaultDatepickerShowWeekNumber: false,
-        defaultDatepickerMobileModal: true,
-        defaultTrapFocus: false,
-        defaultButtonRounded: false,
-        defaultCarouselInterval: 3500,
-        customIconPacks: null
-    } // TODO defaultTrapFocus to true in the next breaking change
+    return target;
+  }
 
-    /**
+  function _toArray(arr) {
+    return _arrayWithHoles(arr) || _iterableToArray(arr) || _nonIterableRest();
+  }
+
+  function _arrayWithHoles(arr) {
+    if (Array.isArray(arr)) return arr;
+  }
+
+  function _iterableToArray(iter) {
+    if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+  }
+
+  function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance");
+  }
+
+  var config = {
+    defaultContainerElement: null,
+    defaultIconPack: 'mdi',
+    defaultIconComponent: null,
+    defaultIconPrev: 'chevron-left',
+    defaultIconNext: 'chevron-right',
+    defaultDialogConfirmText: null,
+    defaultDialogCancelText: null,
+    defaultSnackbarDuration: 3500,
+    defaultSnackbarPosition: null,
+    defaultToastDuration: 2000,
+    defaultToastPosition: null,
+    defaultNotificationDuration: 2000,
+    defaultNotificationPosition: null,
+    defaultTooltipType: 'is-primary',
+    defaultTooltipAnimated: false,
+    defaultTooltipDelay: 0,
+    defaultInputAutocomplete: 'on',
+    defaultDateFormatter: null,
+    defaultDateParser: null,
+    defaultDateCreator: null,
+    defaultTimeCreator: null,
+    defaultDayNames: null,
+    defaultMonthNames: null,
+    defaultFirstDayOfWeek: null,
+    defaultUnselectableDaysOfWeek: null,
+    defaultTimeFormatter: null,
+    defaultTimeParser: null,
+    defaultModalCanCancel: ['escape', 'x', 'outside', 'button'],
+    defaultModalScroll: null,
+    defaultDatepickerMobileNative: true,
+    defaultTimepickerMobileNative: true,
+    defaultNoticeQueue: true,
+    defaultInputHasCounter: true,
+    defaultTaginputHasCounter: true,
+    defaultUseHtml5Validation: true,
+    defaultDropdownMobileModal: true,
+    defaultFieldLabelPosition: null,
+    defaultDatepickerYearsRange: [-100, 3],
+    defaultDatepickerNearbyMonthDays: true,
+    defaultDatepickerNearbySelectableMonthDays: false,
+    defaultDatepickerShowWeekNumber: false,
+    defaultDatepickerMobileModal: true,
+    defaultTrapFocus: false,
+    defaultButtonRounded: false,
+    defaultCarouselInterval: 3500,
+    defaultTabsAnimated: true,
+    defaultLinkTags: ['a', 'button', 'input', 'router-link', 'nuxt-link', 'n-link', 'RouterLink', 'NuxtLink', 'NLink'],
+    customIconPacks: null
+  }; // TODO defaultTrapFocus to true in the next breaking change
+
+  /**
    * Merge function to replace Object.assign with deep merging possibility
    */
 
-    var isObject = function isObject(item) {
-        return _typeof(item) === 'object' && !Array.isArray(item)
+  var isObject = function isObject(item) {
+    return _typeof(item) === 'object' && !Array.isArray(item);
+  };
+
+  var mergeFn = function mergeFn(target, source) {
+    var deep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+    if (deep || !Object.assign) {
+      var isDeep = function isDeep(prop) {
+        return isObject(source[prop]) && target !== null && target.hasOwnProperty(prop) && isObject(target[prop]);
+      };
+
+      var replaced = Object.getOwnPropertyNames(source).map(function (prop) {
+        return _defineProperty({}, prop, isDeep(prop) ? mergeFn(target[prop], source[prop], deep) : source[prop]);
+      }).reduce(function (a, b) {
+        return _objectSpread2({}, a, {}, b);
+      }, {});
+      return _objectSpread2({}, target, {}, replaced);
+    } else {
+      return Object.assign(target, source);
+    }
+  };
+
+  var merge = mergeFn;
+
+  var mdiIcons = {
+    sizes: {
+      'default': 'mdi-24px',
+      'is-small': null,
+      'is-medium': 'mdi-36px',
+      'is-large': 'mdi-48px'
+    },
+    iconPrefix: 'mdi-'
+  };
+
+  var faIcons = function faIcons() {
+    var faIconPrefix = config && config.defaultIconComponent ? '' : 'fa-';
+    return {
+      sizes: {
+        'default': faIconPrefix + 'lg',
+        'is-small': null,
+        'is-medium': faIconPrefix + '2x',
+        'is-large': faIconPrefix + '3x'
+      },
+      iconPrefix: faIconPrefix,
+      internalIcons: {
+        'information': 'info-circle',
+        'alert': 'exclamation-triangle',
+        'alert-circle': 'exclamation-circle',
+        'chevron-right': 'angle-right',
+        'chevron-left': 'angle-left',
+        'chevron-down': 'angle-down',
+        'eye-off': 'eye-slash',
+        'menu-down': 'caret-down',
+        'menu-up': 'caret-up',
+        'close-circle': 'times-circle'
+      }
+    };
+  };
+
+  var getIcons = function getIcons() {
+    var icons = {
+      mdi: mdiIcons,
+      fa: faIcons(),
+      fas: faIcons(),
+      far: faIcons(),
+      fad: faIcons(),
+      fab: faIcons(),
+      fal: faIcons()
+    };
+
+    if (config && config.customIconPacks) {
+      icons = merge(icons, config.customIconPacks, true);
     }
 
-    var mergeFn = function mergeFn(target, source) {
-        var deep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false
+    return icons;
+  };
 
-        if (deep || !Object.assign) {
-            var isDeep = function isDeep(prop) {
-                return isObject(source[prop]) && target !== null && target.hasOwnProperty(prop) && isObject(target[prop])
-            }
+  var script = {
+    name: 'BIcon',
+    props: {
+      type: [String, Object],
+      component: String,
+      pack: String,
+      icon: String,
+      size: String,
+      customSize: String,
+      customClass: String,
+      both: Boolean // This is used internally to show both MDI and FA icon
 
-            var replaced = Object.getOwnPropertyNames(source).map(function (prop) {
-                return _defineProperty({}, prop, isDeep(prop) ? mergeFn(target[prop], source[prop], deep) : source[prop])
-            }).reduce(function (a, b) {
-                return _objectSpread2({}, a, {}, b)
-            }, {})
-            return _objectSpread2({}, target, {}, replaced)
-        } else {
-            return Object.assign(target, source)
+    },
+    computed: {
+      iconConfig: function iconConfig() {
+        var allIcons = getIcons();
+        return allIcons[this.newPack];
+      },
+      iconPrefix: function iconPrefix() {
+        if (this.iconConfig && this.iconConfig.iconPrefix) {
+          return this.iconConfig.iconPrefix;
         }
-    }
 
-    var merge = mergeFn
+        return '';
+      },
 
-    var mdiIcons = {
-        sizes: {
-            'default': 'mdi-24px',
-            'is-small': null,
-            'is-medium': 'mdi-36px',
-            'is-large': 'mdi-48px'
-        },
-        iconPrefix: 'mdi-'
-    }
-
-    var faIcons = function faIcons() {
-        var faIconPrefix = config && config.defaultIconComponent ? '' : 'fa-'
-        return {
-            sizes: {
-                'default': faIconPrefix + 'lg',
-                'is-small': null,
-                'is-medium': faIconPrefix + '2x',
-                'is-large': faIconPrefix + '3x'
-            },
-            iconPrefix: faIconPrefix,
-            internalIcons: {
-                'information': 'info-circle',
-                'alert': 'exclamation-triangle',
-                'alert-circle': 'exclamation-circle',
-                'chevron-right': 'angle-right',
-                'chevron-left': 'angle-left',
-                'chevron-down': 'angle-down',
-                'eye-off': 'eye-slash',
-                'menu-down': 'caret-down',
-                'menu-up': 'caret-up'
-            }
-        }
-    }
-
-    var getIcons = function getIcons() {
-        var icons = {
-            mdi: mdiIcons,
-            fa: faIcons(),
-            fas: faIcons(),
-            far: faIcons(),
-            fad: faIcons(),
-            fab: faIcons(),
-            fal: faIcons()
-        }
-
-        if (config && config.customIconPacks) {
-            icons = merge(icons, config.customIconPacks, true)
-        }
-
-        return icons
-    }
-
-    //
-    var script = {
-        name: 'BIcon',
-        props: {
-            type: [String, Object],
-            component: String,
-            pack: String,
-            icon: String,
-            size: String,
-            customSize: String,
-            customClass: String,
-            both: Boolean // This is used internally to show both MDI and FA icon
-
-        },
-        computed: {
-            iconConfig: function iconConfig() {
-                var allIcons = getIcons()
-                return allIcons[this.newPack]
-            },
-            iconPrefix: function iconPrefix() {
-                if (this.iconConfig && this.iconConfig.iconPrefix) {
-                    return this.iconConfig.iconPrefix
-                }
-
-                return ''
-            },
-
-            /**
+      /**
       * Internal icon name based on the pack.
       * If pack is 'fa', gets the equivalent FA icon name of the MDI,
       * internal icons are always MDI.
@@ -852,82 +871,77 @@
         this.defaultSlots = this.$slots.default;
       },
 
-            /**
+        if (this.activeStep < this.stepItems.length) {
+          var previous = this.activeStep;
+          this.stepItems.map(function (step, idx) {
+            if (step.isActive) {
+              previous = idx;
+
+              if (previous < _this.stepItems.length) {
+                _this.stepItems[previous].isActive = false;
+              }
+            }
+          });
+          this.stepItems[this.activeStep].isActive = true;
+        } else if (this.activeStep > 0) {
+          this.changeStep(this.activeStep - 1);
+        }
+      }
+    },
+    methods: {
+      refreshSlots: function refreshSlots() {
+        this.defaultSlots = this.$slots.default || [];
+      },
+
+      /**
        * Change the active step and emit change event.
        */
-            changeStep: function changeStep(newIndex) {
-                if (this.activeStep === newIndex) return
-                if (newIndex > this.stepItems.length) throw new Error('The index you trying to set is bigger than the steps length')
+      changeStep: function changeStep(newIndex) {
+        if (this.activeStep === newIndex) return;
+        if (newIndex > this.stepItems.length) throw new Error('The index you trying to set is bigger than the steps length');
 
-                if (this.activeStep < this.stepItems.length) {
-                    this.stepItems[this.activeStep].deactivate(this.activeStep, newIndex)
-                }
+        if (this.activeStep < this.stepItems.length) {
+          this.stepItems[this.activeStep].deactivate(this.activeStep, newIndex);
+        }
 
-                this.stepItems[newIndex].activate(this.activeStep, newIndex)
-                this.activeStep = newIndex
-                this.$emit('change', newIndex)
-            },
+        this.stepItems[newIndex].activate(this.activeStep, newIndex);
+        this.activeStep = newIndex;
+        this.$emit('change', this.getValueByIndex(newIndex));
+      },
 
-            /**
+      /**
        * Return if the step should be clickable or not.
        */
-            isItemClickable: function isItemClickable(stepItem, index) {
-                if (stepItem.clickable === undefined) {
-                    return this.activeStep > index
-                }
+      isItemClickable: function isItemClickable(stepItem, index) {
+        if (stepItem.clickable === undefined) {
+          return this.activeStep > index;
+        }
 
-                return stepItem.clickable
-            },
+        return stepItem.clickable;
+      },
 
-            /**
+      /**
        * Step click listener, emit input event and change active step.
        */
-            stepClick: function stepClick(value) {
-                this.$emit('input', value)
-                this.changeStep(value)
-            },
+      stepClick: function stepClick(index) {
+        this.$emit('input', this.getValueByIndex(index));
+        this.changeStep(index);
+      },
 
-            /**
+      /**
        * Previous button click listener.
        */
-            prev: function prev() {
-                var _this = this
+      prev: function prev() {
+        var _this2 = this;
 
-                if (!this.hasPrev) return
-                var prevItemIdx = this.reversedStepItems.map(function (step, idx) {
-                    return _this.stepItems.length - 1 - idx < _this.activeStep && step.visible
-                }).indexOf(true)
+        if (!this.hasPrev) return;
+        var prevItemIdx = this.reversedStepItems.map(function (step, idx) {
+          return _this2.stepItems.length - 1 - idx < _this2.activeStep && step.visible;
+        }).indexOf(true);
 
-                if (prevItemIdx >= 0) {
-                    prevItemIdx = this.stepItems.length - 1 - prevItemIdx
-                }
-
-                this.$emit('input', prevItemIdx)
-                this.changeStep(prevItemIdx)
-            },
-
-            /**
-       * Previous button click listener.
-       */
-            next: function next() {
-                var _this2 = this
-
-                if (!this.hasNext) return
-                var nextItemIdx = this.stepItems.map(function (step, idx) {
-                    return idx > _this2.activeStep && step.visible
-                }).indexOf(true)
-                this.$emit('input', nextItemIdx)
-                this.changeStep(nextItemIdx)
-            }
-        },
-        mounted: function mounted() {
-            if (this.activeStep < this.stepItems.length) {
-                this.stepItems[this.activeStep].isActive = true
-            }
-
-            this.refreshSlots()
+        if (prevItemIdx >= 0) {
+          prevItemIdx = this.stepItems.length - 1 - prevItemIdx;
         }
-    }
 
         this.$emit('input', prevItemIdx);
         this.changeStep(prevItemIdx);
@@ -1038,48 +1052,18 @@
         throw new Error('You should wrap bStepItem on a bSteps');
       }
 
-            this.$parent.refreshSlots()
-        },
-        beforeDestroy: function beforeDestroy() {
-            this.$parent.refreshSlots()
-        },
-        render: function render(createElement) {
-            var _this = this
+      this.$parent.refreshSlots();
+    },
+    beforeDestroy: function beforeDestroy() {
+      this.$parent.refreshSlots();
+    },
+    render: function render(createElement) {
+      var _this = this;
 
-            // if destroy apply v-if
-            if (this.$parent.destroyOnHide) {
-                if (!this.isActive || !this.visible) {
-                    return
-                }
-            }
-
-            var vnode = createElement('div', {
-                directives: [{
-                    name: 'show',
-                    value: this.isActive && this.visible
-                }],
-                attrs: {
-                    'class': 'step-item'
-                }
-            }, this.$slots.default) // check animated prop
-
-            if (this.$parent.animated) {
-                return createElement('transition', {
-                    props: {
-                        'name': this.transitionName
-                    },
-                    on: {
-                        'before-enter': function beforeEnter() {
-                            _this.$parent.isTransitioning = true
-                        },
-                        'after-enter': function afterEnter() {
-                            _this.$parent.isTransitioning = false
-                        }
-                    }
-                }, [vnode])
-            }
-
-            return vnode
+      // if destroy apply v-if
+      if (this.$parent.destroyOnHide) {
+        if (!this.isActive || !this.visible) {
+          return;
         }
       }
 

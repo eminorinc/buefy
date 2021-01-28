@@ -1,4 +1,4 @@
-/*! Buefy v0.8.9 | MIT License | github.com/buefy/buefy */
+/*! Buefy v0.8.20 | MIT License | github.com/buefy/buefy */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
@@ -316,37 +316,41 @@
         } else {
             return Object.assign(target, source)
         }
-    }
 
-    /**
+        return this.isValid;
+      }
+    }
+  };
+
+  /**
    * Merge function to replace Object.assign with deep merging possibility
    */
 
-    var isObject = function isObject(item) {
-        return _typeof(item) === 'object' && !Array.isArray(item)
+  var isObject = function isObject(item) {
+    return _typeof(item) === 'object' && !Array.isArray(item);
+  };
+
+  var mergeFn = function mergeFn(target, source) {
+    var deep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+    if (deep || !Object.assign) {
+      var isDeep = function isDeep(prop) {
+        return isObject(source[prop]) && target !== null && target.hasOwnProperty(prop) && isObject(target[prop]);
+      };
+
+      var replaced = Object.getOwnPropertyNames(source).map(function (prop) {
+        return _defineProperty({}, prop, isDeep(prop) ? mergeFn(target[prop], source[prop], deep) : source[prop]);
+      }).reduce(function (a, b) {
+        return _objectSpread2({}, a, {}, b);
+      }, {});
+      return _objectSpread2({}, target, {}, replaced);
+    } else {
+      return Object.assign(target, source);
     }
+  };
 
-    var mergeFn = function mergeFn(target, source) {
-        var deep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false
-
-        if (deep || !Object.assign) {
-            var isDeep = function isDeep(prop) {
-                return isObject(source[prop]) && target !== null && target.hasOwnProperty(prop) && isObject(target[prop])
-            }
-
-            var replaced = Object.getOwnPropertyNames(source).map(function (prop) {
-                return _defineProperty({}, prop, isDeep(prop) ? mergeFn(target[prop], source[prop], deep) : source[prop])
-            }).reduce(function (a, b) {
-                return _objectSpread2({}, a, {}, b)
-            }, {})
-            return _objectSpread2({}, target, {}, replaced)
-        } else {
-            return Object.assign(target, source)
-        }
-    }
-
-    var merge = mergeFn
-    /**
+  var merge = mergeFn;
+  /**
    * Mobile detection
    * https://www.abeautifulsite.net/detecting-mobile-devices-with-javascript
    */
@@ -468,99 +472,57 @@
                 el.addEventListener('keydown', onKeyDown)
             }
         }
-    }
+      },
+      closeOnClick: {
+        type: Boolean,
+        default: true
+      },
+      canClose: {
+        type: [Array, Boolean],
+        default: true
+      },
+      expanded: Boolean,
+      appendToBody: Boolean,
+      appendToBodyCopyParent: Boolean
+    },
+    data: function data() {
+      return {
+        selected: this.value,
+        style: {},
+        isActive: false,
+        isHoverable: this.hoverable,
+        _isDropdown: true,
+        // Used internally by DropdownItem
+        _bodyEl: undefined // Used to append to body
 
-    var unbind = function unbind(el) {
-        el.removeEventListener('keydown', onKeyDown)
-    }
-
-    var directive = {
-        bind: bind,
-        unbind: unbind
-    }
-
-    //
-    var DEFAULT_CLOSE_OPTIONS = ['escape', 'outside']
-    var script = {
-        name: 'BDropdown',
-        directives: {
-            trapFocus: directive
-        },
-        props: {
-            value: {
-                type: [String, Number, Boolean, Object, Array, Function],
-                default: null
-            },
-            disabled: Boolean,
-            hoverable: Boolean,
-            inline: Boolean,
-            position: {
-                type: String,
-                validator: function validator(value) {
-                    return ['is-top-right', 'is-top-left', 'is-bottom-left'].indexOf(value) > -1
-                }
-            },
-            mobileModal: {
-                type: Boolean,
-                default: function _default() {
-                    return config.defaultDropdownMobileModal
-                }
-            },
-            ariaRole: {
-                type: String,
-                default: ''
-            },
-            animation: {
-                type: String,
-                default: 'fade'
-            },
-            multiple: Boolean,
-            trapFocus: {
-                type: Boolean,
-                default: config.defaultTrapFocus
-            },
-            closeOnClick: {
-                type: Boolean,
-                default: true
-            },
-            canClose: {
-                type: [Array, Boolean],
-                default: true
-            },
-            expanded: Boolean
-        },
-        data: function data() {
-            return {
-                selected: this.value,
-                isActive: false,
-                isHoverable: this.hoverable,
-                _isDropdown: true // Used internally by DropdownItem
-
-            }
-        },
-        computed: {
-            rootClasses: function rootClasses() {
-                return [this.position, {
-                    'is-disabled': this.disabled,
-                    'is-hoverable': this.hoverable,
-                    'is-inline': this.inline,
-                    'is-active': this.isActive || this.inline,
-                    'is-mobile-modal': this.isMobileModal,
-                    'is-expanded': this.expanded
-                }]
-            },
-            isMobileModal: function isMobileModal() {
-                return this.mobileModal && !this.inline && !this.hoverable
-            },
-            cancelOptions: function cancelOptions() {
-                return typeof this.canClose === 'boolean' ? this.canClose ? DEFAULT_CLOSE_OPTIONS : [] : this.canClose
-            },
-            ariaRoleMenu: function ariaRoleMenu() {
-                return this.ariaRole === 'menu' || this.ariaRole === 'list' ? this.ariaRole : null
-            }
-        },
-        watch: {
-            /**
+      };
+    },
+    computed: {
+      rootClasses: function rootClasses() {
+        return [this.position, {
+          'is-disabled': this.disabled,
+          'is-hoverable': this.hoverable,
+          'is-inline': this.inline,
+          'is-active': this.isActive || this.inline,
+          'is-mobile-modal': this.isMobileModal,
+          'is-expanded': this.expanded
+        }];
+      },
+      isMobileModal: function isMobileModal() {
+        return this.mobileModal && !this.inline && !this.hoverable;
+      },
+      cancelOptions: function cancelOptions() {
+        return typeof this.canClose === 'boolean' ? this.canClose ? DEFAULT_CLOSE_OPTIONS : [] : this.canClose;
+      },
+      contentStyle: function contentStyle() {
+        return {
+          maxHeight: this.scrollable ? this.maxHeight === undefined ? null : isNaN(this.maxHeight) ? this.maxHeight : this.maxHeight + 'px' : null,
+          overflow: this.scrollable ? 'auto' : null
+        };
+      }
+    },
+    watch: {
+      /**
       * When v-model is changed set the new selected item.
       */
       value: function value(_value) {
@@ -586,13 +548,13 @@
           if (this.selected) {
             var index = this.selected.indexOf(value);
 
-                    this.$emit('change', this.selected)
-                } else {
-                    if (this.selected !== value) {
-                        this.selected = value
-                        this.$emit('change', this.selected)
-                    }
-                }
+          this.$emit('change', this.selected);
+        } else {
+          if (this.selected !== value) {
+            this.selected = value;
+            this.$emit('change', this.selected);
+          }
+        }
 
         this.$emit('input', this.selected);
 
@@ -605,13 +567,13 @@
         }
       },
 
-                    if (this.hoverable && this.closeOnClick) {
-                        this.isHoverable = false
-                    }
-                }
-            },
+          if (this.hoverable && this.closeOnClick) {
+            this.isHoverable = false;
+          }
+        }
+      },
 
-            /**
+      /**
       * White-listed items to not close when clicked.
       */
       isInWhiteList: function isInWhiteList(el) {
@@ -1335,9 +1297,9 @@
   /* script */
   const __vue_script__$3 = script$3;
 
-    /* template */
-    var __vue_render__$3 = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('div', {staticClass: 'control', class: _vm.rootClasses}, [(_vm.type !== 'textarea') ? _c('input', _vm._b({ref: 'input', staticClass: 'input', class: [_vm.inputClasses, _vm.customClass], attrs: {'type': _vm.newType, 'autocomplete': _vm.newAutocomplete, 'maxlength': _vm.maxlength}, domProps: {'value': _vm.computedValue}, on: {'input': _vm.onInput, 'blur': _vm.onBlur, 'focus': _vm.onFocus}}, 'input', _vm.$attrs, false)) : _c('textarea', _vm._b({ref: 'textarea', staticClass: 'textarea', class: [_vm.inputClasses, _vm.customClass], attrs: {'maxlength': _vm.maxlength}, domProps: {'value': _vm.computedValue}, on: {'input': _vm.onInput, 'blur': _vm.onBlur, 'focus': _vm.onFocus}}, 'textarea', _vm.$attrs, false)), _vm._v(' '), (_vm.icon) ? _c('b-icon', {staticClass: 'is-left', class: {'is-clickable': _vm.iconClickable}, attrs: {'icon': _vm.icon, 'pack': _vm.iconPack, 'size': _vm.iconSize}, nativeOn: {'click': function ($event) { _vm.iconClick($event) }}}) : _vm._e(), _vm._v(' '), (!_vm.loading && (_vm.passwordReveal || _vm.statusTypeIcon)) ? _c('b-icon', {staticClass: 'is-right', class: { 'is-clickable': _vm.passwordReveal }, attrs: {'icon': _vm.passwordReveal ? _vm.passwordVisibleIcon : _vm.statusTypeIcon, 'pack': _vm.iconPack, 'size': _vm.iconSize, 'type': !_vm.passwordReveal ? _vm.statusType : 'is-primary', 'both': ''}, nativeOn: {'click': function ($event) { _vm.togglePasswordVisibility($event) }}}) : _vm._e(), _vm._v(' '), (_vm.maxlength && _vm.hasCounter && _vm.type !== 'number') ? _c('small', {staticClass: 'help counter', class: { 'is-invisible': !_vm.isFocused }}, [_vm._v('\n        ' + _vm._s(_vm.valueLength) + ' / ' + _vm._s(_vm.maxlength) + '\n    ')]) : _vm._e()], 1) }
-    var __vue_staticRenderFns__$3 = []
+  /* template */
+  var __vue_render__$3 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"control",class:_vm.rootClasses},[(_vm.type !== 'textarea')?_c('input',_vm._b({ref:"input",staticClass:"input",class:[_vm.inputClasses, _vm.customClass],attrs:{"type":_vm.newType,"autocomplete":_vm.newAutocomplete,"maxlength":_vm.maxlength},domProps:{"value":_vm.computedValue},on:{"input":_vm.onInput,"blur":_vm.onBlur,"focus":_vm.onFocus}},'input',_vm.$attrs,false)):_c('textarea',_vm._b({ref:"textarea",staticClass:"textarea",class:[_vm.inputClasses, _vm.customClass],attrs:{"maxlength":_vm.maxlength},domProps:{"value":_vm.computedValue},on:{"input":_vm.onInput,"blur":_vm.onBlur,"focus":_vm.onFocus}},'textarea',_vm.$attrs,false)),_vm._v(" "),(_vm.icon)?_c('b-icon',{staticClass:"is-left",class:{'is-clickable': _vm.iconClickable},attrs:{"icon":_vm.icon,"pack":_vm.iconPack,"size":_vm.iconSize},nativeOn:{"click":function($event){_vm.iconClick('icon-click', $event);}}}):_vm._e(),_vm._v(" "),(!_vm.loading && _vm.hasIconRight)?_c('b-icon',{staticClass:"is-right",class:{ 'is-clickable': _vm.passwordReveal || _vm.iconRightClickable },attrs:{"icon":_vm.rightIcon,"pack":_vm.iconPack,"size":_vm.iconSize,"type":_vm.rightIconType,"both":""},nativeOn:{"click":function($event){return _vm.rightIconClick($event)}}}):_vm._e(),_vm._v(" "),(_vm.maxlength && _vm.hasCounter && _vm.type !== 'number')?_c('small',{staticClass:"help counter",class:{ 'is-invisible': !_vm.isFocused }},[_vm._v("\n            "+_vm._s(_vm.valueLength)+" / "+_vm._s(_vm.maxlength)+"\n        ")]):_vm._e()],1)};
+  var __vue_staticRenderFns__$3 = [];
 
     /* style */
     const __vue_inject_styles__$3 = undefined;
@@ -1394,7 +1356,28 @@
               'type': _this.type
             }
         }
+      }, this.$slots.default.map(function (element) {
+        // skip returns and comments
+        if (!element.tag) {
+          return element;
+        }
+
+        var message;
+
+        if (first) {
+          message = _this.message;
+          first = false;
+        }
+
+        return createElement('b-field', {
+          attrs: {
+            type: _this.type,
+            message: message
+          }
+        }, [element]);
+      }));
     }
+  };
 
   /* script */
   const __vue_script__$3 = script$3;
@@ -1428,37 +1411,37 @@
       undefined
     );
 
-    var script$5 = {
-        name: 'BField',
-        components: _defineProperty({}, FieldBody.name, FieldBody),
-        props: {
-            type: [String, Object],
-            label: String,
-            labelFor: String,
-            message: [String, Array, Object],
-            grouped: Boolean,
-            groupMultiline: Boolean,
-            position: String,
-            expanded: Boolean,
-            horizontal: Boolean,
-            addons: {
-                type: Boolean,
-                default: true
-            },
-            customClass: String,
-            labelPosition: {
-                type: String,
-                default: function _default() {
-                    return config.defaultFieldLabelPosition
-                }
-            }
-        },
-        data: function data() {
-            return {
-                newType: this.type,
-                newMessage: this.message,
-                fieldLabelSize: null,
-                _isField: true // Used internally by Input and Select
+  var script$5 = {
+    name: 'BField',
+    components: _defineProperty({}, FieldBody.name, FieldBody),
+    props: {
+      type: [String, Object],
+      label: String,
+      labelFor: String,
+      message: [String, Array, Object],
+      grouped: Boolean,
+      groupMultiline: Boolean,
+      position: String,
+      expanded: Boolean,
+      horizontal: Boolean,
+      addons: {
+        type: Boolean,
+        default: true
+      },
+      customClass: String,
+      labelPosition: {
+        type: String,
+        default: function _default() {
+          return config.defaultFieldLabelPosition;
+        }
+      }
+    },
+    data: function data() {
+      return {
+        newType: this.type,
+        newMessage: this.message,
+        fieldLabelSize: null,
+        _isField: true // Used internally by Input and Select
 
   /* script */
   const __vue_script__$4 = script$4;
@@ -2503,22 +2486,22 @@
           }
         }
 
-                if (multipleSelct) {
-                    this.multipleSelectedDates = this.multipleSelectedDates.filter(function (selectedDate) {
-                        return selectedDate.getTime() !== date.getTime()
-                    })
-                } else {
-                    this.multipleSelectedDates.push(date)
-                }
+        if (multipleSelect.length) {
+          this.multipleSelectedDates = this.multipleSelectedDates.filter(function (selectedDate) {
+            return selectedDate.getDate() !== date.getDate() || selectedDate.getFullYear() !== date.getFullYear() || selectedDate.getMonth() !== date.getMonth();
+          });
+        } else {
+          this.multipleSelectedDates.push(date);
+        }
 
-                this.$emit('input', this.multipleSelectedDates)
-            },
-            selectableDate: function selectableDate(day) {
-                var validity = []
+        this.$emit('input', this.multipleSelectedDates);
+      },
+      selectableDate: function selectableDate(day) {
+        var validity = [];
 
-                if (this.minDate) {
-                    validity.push(day >= this.minDate)
-                }
+        if (this.minDate) {
+          validity.push(day >= this.minDate);
+        }
 
         for (var i = 0; i < this.eventsInThisYear.length; i++) {
           if (this.eventsInThisYear[i].date.getMonth() === day.getMonth()) {
@@ -2680,8 +2663,9 @@
           }
         }
 
-        return null
-    }
+        if (this.maxDate && this.focusedDateData.year === this.maxDate.getFullYear()) {
+          maxMonth = this.maxDate.getMonth();
+        }
 
     var script$a = {
         name: 'BDatepicker',
@@ -3304,34 +3288,40 @@
         }
       },
 
-            /**
+      /**
        * Emit 'blur' event on dropdown is not active (closed)
        */
-            onActiveChange: function onActiveChange(value) {
-                if (!value) {
-                    this.onBlur()
-                }
-            }
-        },
-        created: function created() {
-            if (typeof window !== 'undefined') {
-                document.addEventListener('keyup', this.keyPress)
-            }
-        },
-        beforeDestroy: function beforeDestroy() {
-            if (typeof window !== 'undefined') {
-                document.removeEventListener('keyup', this.keyPress)
-            }
+      onActiveChange: function onActiveChange(value) {
+        if (!value) {
+          this.onBlur();
         }
+      },
+      changeFocus: function changeFocus(day) {
+        this.focusedDateData = {
+          day: day.getDate(),
+          month: day.getMonth(),
+          year: day.getFullYear()
+        };
+      }
+    },
+    created: function created() {
+      if (typeof window !== 'undefined') {
+        document.addEventListener('keyup', this.keyPress);
+      }
+    },
+    beforeDestroy: function beforeDestroy() {
+      if (typeof window !== 'undefined') {
+        document.removeEventListener('keyup', this.keyPress);
+      }
     }
   };
 
   /* script */
   const __vue_script__$a = script$a;
 
-    /* template */
-    var __vue_render__$9 = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('div', {staticClass: 'datepicker control', class: [_vm.size, {'is-expanded': _vm.expanded}]}, [(!_vm.isMobile || _vm.inline) ? _c('b-dropdown', {ref: 'dropdown', attrs: {'position': _vm.position, 'disabled': _vm.disabled, 'inline': _vm.inline, 'mobile-modal': _vm.mobileModal}, on: {'active-change': _vm.onActiveChange}}, [(!_vm.inline) ? _c('b-input', _vm._b({ref: 'input', attrs: {'slot': 'trigger', 'autocomplete': 'off', 'value': _vm.formatValue(_vm.computedValue), 'placeholder': _vm.placeholder, 'size': _vm.size, 'icon': _vm.icon, 'icon-pack': _vm.iconPack, 'rounded': _vm.rounded, 'loading': _vm.loading, 'disabled': _vm.disabled, 'readonly': !_vm.editable, 'use-html5-validation': _vm.useHtml5Validation}, on: {'focus': _vm.handleOnFocus, 'blur': _vm.onBlur}, nativeOn: {'click': function ($event) { _vm.onInputClick($event) }, 'keyup': function ($event) { if (!('button' in $event) && _vm._k($event.keyCode, 'enter', 13, $event.key)) { return null }_vm.togglePicker(true) }, 'change': function ($event) { _vm.onChange($event.target.value) }}, slot: 'trigger'}, 'b-input', _vm.$attrs, false)) : _vm._e(), _vm._v(' '), _c('b-dropdown-item', {attrs: {'disabled': _vm.disabled, 'focusable': _vm.focusable, 'custom': ''}}, [_c('header', {staticClass: 'datepicker-header'}, [(_vm.$slots.header !== undefined && _vm.$slots.header.length) ? [_vm._t('header')] : _c('div', {staticClass: 'pagination field is-centered', class: _vm.size}, [_c('a', {directives: [{name: 'show', rawName: 'v-show', value: (!_vm.showPrev && !_vm.disabled), expression: '!showPrev && !disabled'}], staticClass: 'pagination-previous', attrs: {'role': 'button', 'href': '#', 'disabled': _vm.disabled}, on: {'click': function ($event) { $event.preventDefault(); _vm.prev($event) }, 'keydown': [function ($event) { if (!('button' in $event) && _vm._k($event.keyCode, 'enter', 13, $event.key)) { return null }$event.preventDefault(); _vm.prev($event) }, function ($event) { if (!('button' in $event) && _vm._k($event.keyCode, 'space', 32, $event.key)) { return null }$event.preventDefault(); _vm.prev($event) }]}}, [_c('b-icon', {attrs: {'icon': _vm.iconPrev, 'pack': _vm.iconPack, 'both': '', 'type': 'is-primary is-clickable'}})], 1), _vm._v(' '), _c('a', {directives: [{name: 'show', rawName: 'v-show', value: (!_vm.showNext && !_vm.disabled), expression: '!showNext && !disabled'}], staticClass: 'pagination-next', attrs: {'role': 'button', 'href': '#', 'disabled': _vm.disabled}, on: {'click': function ($event) { $event.preventDefault(); _vm.next($event) }, 'keydown': [function ($event) { if (!('button' in $event) && _vm._k($event.keyCode, 'enter', 13, $event.key)) { return null }$event.preventDefault(); _vm.next($event) }, function ($event) { if (!('button' in $event) && _vm._k($event.keyCode, 'space', 32, $event.key)) { return null }$event.preventDefault(); _vm.next($event) }]}}, [_c('b-icon', {attrs: {'icon': _vm.iconNext, 'pack': _vm.iconPack, 'both': '', 'type': 'is-primary is-clickable'}})], 1), _vm._v(' '), _c('div', {staticClass: 'pagination-list'}, [_c('b-field', [(!_vm.isTypeMonth) ? _c('b-select', {attrs: {'disabled': _vm.disabled, 'size': _vm.size}, model: {value: (_vm.focusedDateData.month), callback: function ($$v) { _vm.$set(_vm.focusedDateData, 'month', $$v) }, expression: 'focusedDateData.month'}}, _vm._l((_vm.monthNames), function (month, index) { return _c('option', {key: month, domProps: {'value': index}}, [_vm._v('\n                                    ' + _vm._s(month) + '\n                                ')]) })) : _vm._e(), _vm._v(' '), _c('b-select', {attrs: {'disabled': _vm.disabled, 'size': _vm.size}, model: {value: (_vm.focusedDateData.year), callback: function ($$v) { _vm.$set(_vm.focusedDateData, 'year', $$v) }, expression: 'focusedDateData.year'}}, _vm._l((_vm.listOfYears), function (year) { return _c('option', {key: year, domProps: {'value': year}}, [_vm._v('\n                                    ' + _vm._s(year) + '\n                                ')]) }))], 1)], 1)])], 2), _vm._v(' '), (!_vm.isTypeMonth) ? _c('div', {staticClass: 'datepicker-content'}, [_c('b-datepicker-table', {attrs: {'day-names': _vm.dayNames, 'month-names': _vm.monthNames, 'first-day-of-week': _vm.firstDayOfWeek, 'rules-for-first-week': _vm.rulesForFirstWeek, 'min-date': _vm.minDate, 'max-date': _vm.maxDate, 'focused': _vm.focusedDateData, 'disabled': _vm.disabled, 'unselectable-dates': _vm.unselectableDates, 'unselectable-days-of-week': _vm.unselectableDaysOfWeek, 'selectable-dates': _vm.selectableDates, 'events': _vm.events, 'indicators': _vm.indicators, 'date-creator': _vm.dateCreator, 'type-month': _vm.isTypeMonth, 'nearby-month-days': _vm.nearbyMonthDays, 'nearby-selectable-month-days': _vm.nearbySelectableMonthDays, 'show-week-number': _vm.showWeekNumber, 'range': _vm.range, 'multiple': _vm.multiple}, on: {'range-start': function (date) { return _vm.$emit('range-start', date) }, 'range-end': function (date) { return _vm.$emit('range-end', date) }, 'close': function ($event) { _vm.togglePicker(false) }}, model: {value: (_vm.computedValue), callback: function ($$v) { _vm.computedValue = $$v }, expression: 'computedValue'}})], 1) : _c('div', [_c('b-datepicker-month', {attrs: {'month-names': _vm.monthNames, 'min-date': _vm.minDate, 'max-date': _vm.maxDate, 'focused': _vm.focusedDateData, 'disabled': _vm.disabled, 'unselectable-dates': _vm.unselectableDates, 'unselectable-days-of-week': _vm.unselectableDaysOfWeek, 'selectable-dates': _vm.selectableDates, 'events': _vm.events, 'indicators': _vm.indicators, 'date-creator': _vm.dateCreator, 'multiple': _vm.multiple}, on: {'close': function ($event) { _vm.togglePicker(false) }}, model: {value: (_vm.computedValue), callback: function ($$v) { _vm.computedValue = $$v }, expression: 'computedValue'}})], 1), _vm._v(' '), (_vm.$slots.default !== undefined && _vm.$slots.default.length) ? _c('footer', {staticClass: 'datepicker-footer'}, [_vm._t('default')], 2) : _vm._e()])], 1) : _c('b-input', _vm._b({ref: 'input', attrs: {'type': !_vm.isTypeMonth ? 'date' : 'month', 'autocomplete': 'off', 'value': _vm.formatNative(_vm.computedValue), 'placeholder': _vm.placeholder, 'size': _vm.size, 'icon': _vm.icon, 'icon-pack': _vm.iconPack, 'loading': _vm.loading, 'max': _vm.formatNative(_vm.maxDate), 'min': _vm.formatNative(_vm.minDate), 'disabled': _vm.disabled, 'readonly': false, 'use-html5-validation': _vm.useHtml5Validation}, on: {'focus': _vm.onFocus, 'blur': _vm.onBlur}, nativeOn: {'change': function ($event) { _vm.onChangeNativePicker($event) }}}, 'b-input', _vm.$attrs, false))], 1) }
-    var __vue_staticRenderFns__$9 = []
+  /* template */
+  var __vue_render__$9 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"datepicker control",class:[_vm.size, {'is-expanded': _vm.expanded}]},[(!_vm.isMobile || _vm.inline)?_c('b-dropdown',{ref:"dropdown",attrs:{"position":_vm.position,"disabled":_vm.disabled,"inline":_vm.inline,"mobile-modal":_vm.mobileModal,"trap-focus":_vm.trapFocus,"aria-role":_vm.ariaRole,"aria-modal":!_vm.inline,"append-to-body":_vm.appendToBody,"append-to-body-copy-parent":""},on:{"active-change":_vm.onActiveChange}},[(!_vm.inline)?_c('b-input',_vm._b({ref:"input",attrs:{"slot":"trigger","autocomplete":"off","value":_vm.formatValue(_vm.computedValue),"placeholder":_vm.placeholder,"size":_vm.size,"icon":_vm.icon,"icon-pack":_vm.iconPack,"rounded":_vm.rounded,"loading":_vm.loading,"disabled":_vm.disabled,"readonly":!_vm.editable || _vm.readonly,"use-html5-validation":false},on:{"focus":_vm.handleOnFocus},nativeOn:{"click":function($event){return _vm.onInputClick($event)},"keyup":function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }_vm.togglePicker(true);},"change":function($event){_vm.onChange($event.target.value);}},slot:"trigger"},'b-input',_vm.$attrs,false)):_vm._e(),_vm._v(" "),_c('b-dropdown-item',{class:{'dropdown-horizonal-timepicker': _vm.horizontalTimePicker},attrs:{"disabled":_vm.disabled,"focusable":_vm.focusable,"custom":""}},[_c('div',[_c('header',{staticClass:"datepicker-header"},[(_vm.$slots.header !== undefined && _vm.$slots.header.length)?[_vm._t("header")]:_c('div',{staticClass:"pagination field is-centered",class:_vm.size},[_c('a',{directives:[{name:"show",rawName:"v-show",value:(!_vm.showPrev && !_vm.disabled),expression:"!showPrev && !disabled"}],staticClass:"pagination-previous",attrs:{"role":"button","href":"#","disabled":_vm.disabled,"aria-label":_vm.ariaPreviousLabel},on:{"click":function($event){$event.preventDefault();return _vm.prev($event)},"keydown":[function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }$event.preventDefault();return _vm.prev($event)},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"space",32,$event.key,[" ","Spacebar"])){ return null; }$event.preventDefault();return _vm.prev($event)}]}},[_c('b-icon',{attrs:{"icon":_vm.iconPrev,"pack":_vm.iconPack,"both":"","type":"is-primary is-clickable"}})],1),_vm._v(" "),_c('a',{directives:[{name:"show",rawName:"v-show",value:(!_vm.showNext && !_vm.disabled),expression:"!showNext && !disabled"}],staticClass:"pagination-next",attrs:{"role":"button","href":"#","disabled":_vm.disabled,"aria-label":_vm.ariaNextLabel},on:{"click":function($event){$event.preventDefault();return _vm.next($event)},"keydown":[function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }$event.preventDefault();return _vm.next($event)},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"space",32,$event.key,[" ","Spacebar"])){ return null; }$event.preventDefault();return _vm.next($event)}]}},[_c('b-icon',{attrs:{"icon":_vm.iconNext,"pack":_vm.iconPack,"both":"","type":"is-primary is-clickable"}})],1),_vm._v(" "),_c('div',{staticClass:"pagination-list"},[_c('b-field',[(!_vm.isTypeMonth)?_c('b-select',{attrs:{"disabled":_vm.disabled,"size":_vm.size},model:{value:(_vm.focusedDateData.month),callback:function ($$v) {_vm.$set(_vm.focusedDateData, "month", $$v);},expression:"focusedDateData.month"}},_vm._l((_vm.listOfMonths),function(month){return _c('option',{key:month.name,attrs:{"disabled":month.disabled},domProps:{"value":month.index}},[_vm._v("\n                                            "+_vm._s(month.name)+"\n                                        ")])})):_vm._e(),_vm._v(" "),_c('b-select',{attrs:{"disabled":_vm.disabled,"size":_vm.size},model:{value:(_vm.focusedDateData.year),callback:function ($$v) {_vm.$set(_vm.focusedDateData, "year", $$v);},expression:"focusedDateData.year"}},_vm._l((_vm.listOfYears),function(year){return _c('option',{key:year,domProps:{"value":year}},[_vm._v("\n                                            "+_vm._s(year)+"\n                                        ")])}))],1)],1)])],2),_vm._v(" "),(!_vm.isTypeMonth)?_c('div',{staticClass:"datepicker-content",class:{'content-horizonal-timepicker': _vm.horizontalTimePicker}},[_c('b-datepicker-table',{attrs:{"day-names":_vm.dayNames,"month-names":_vm.monthNames,"first-day-of-week":_vm.firstDayOfWeek,"rules-for-first-week":_vm.rulesForFirstWeek,"min-date":_vm.minDate,"max-date":_vm.maxDate,"focused":_vm.focusedDateData,"disabled":_vm.disabled,"unselectable-dates":_vm.unselectableDates,"unselectable-days-of-week":_vm.unselectableDaysOfWeek,"selectable-dates":_vm.selectableDates,"events":_vm.events,"indicators":_vm.indicators,"date-creator":_vm.dateCreator,"type-month":_vm.isTypeMonth,"nearby-month-days":_vm.nearbyMonthDays,"nearby-selectable-month-days":_vm.nearbySelectableMonthDays,"show-week-number":_vm.showWeekNumber,"range":_vm.range,"multiple":_vm.multiple},on:{"update:focused":function($event){_vm.focusedDateData=$event;},"range-start":function (date) { return _vm.$emit('range-start', date); },"range-end":function (date) { return _vm.$emit('range-end', date); },"close":function($event){_vm.togglePicker(false);}},model:{value:(_vm.computedValue),callback:function ($$v) {_vm.computedValue=$$v;},expression:"computedValue"}})],1):_c('div',[_c('b-datepicker-month',{attrs:{"month-names":_vm.monthNames,"min-date":_vm.minDate,"max-date":_vm.maxDate,"focused":_vm.focusedDateData,"disabled":_vm.disabled,"unselectable-dates":_vm.unselectableDates,"unselectable-days-of-week":_vm.unselectableDaysOfWeek,"selectable-dates":_vm.selectableDates,"events":_vm.events,"indicators":_vm.indicators,"date-creator":_vm.dateCreator,"multiple":_vm.multiple},on:{"update:focused":function($event){_vm.focusedDateData=$event;},"close":function($event){_vm.togglePicker(false);},"change-focus":_vm.changeFocus},model:{value:(_vm.computedValue),callback:function ($$v) {_vm.computedValue=$$v;},expression:"computedValue"}})],1)]),_vm._v(" "),(_vm.$slots.default !== undefined && _vm.$slots.default.length)?_c('footer',{staticClass:"datepicker-footer",class:{'footer-horizontal-timepicker': _vm.horizontalTimePicker}},[_vm._t("default")],2):_vm._e()])],1):_c('b-input',_vm._b({ref:"input",attrs:{"type":!_vm.isTypeMonth ? 'date' : 'month',"autocomplete":"off","value":_vm.formatNative(_vm.computedValue),"placeholder":_vm.placeholder,"size":_vm.size,"icon":_vm.icon,"icon-pack":_vm.iconPack,"rounded":_vm.rounded,"loading":_vm.loading,"max":_vm.formatNative(_vm.maxDate),"min":_vm.formatNative(_vm.minDate),"disabled":_vm.disabled,"readonly":_vm.readonly,"use-html5-validation":false},on:{"focus":_vm.onFocus,"blur":_vm.onBlur},nativeOn:{"change":function($event){return _vm.onChangeNativePicker($event)}}},'b-input',_vm.$attrs,false))],1)};
+  var __vue_staticRenderFns__$9 = [];
 
     /* style */
     const __vue_inject_styles__$a = undefined;
@@ -3551,50 +3541,50 @@
         return vm.pad(hours) + ':' + vm.pad(minutes) + (vm.enableSeconds ? ':' + vm.pad(seconds) : '') + period
     }
 
-    var defaultTimeParser = function defaultTimeParser(timeString, vm) {
-        if (timeString) {
-            var am = false
+    return vm.pad(hours) + ':' + vm.pad(minutes) + (vm.enableSeconds ? ':' + vm.pad(seconds) : '') + period;
+  };
 
-            if (vm.hourFormat === HOUR_FORMAT_12) {
-                var dateString12 = timeString.split(' ')
-                timeString = dateString12[0]
-                am = dateString12[1] === AM
-            }
+  var defaultTimeParser = function defaultTimeParser(timeString, vm) {
+    if (timeString) {
+      var am = false;
 
-            var time = timeString.split(':')
-            var hours = parseInt(time[0], 10)
-            var minutes = parseInt(time[1], 10)
-            var seconds = vm.enableSeconds ? parseInt(time[2], 10) : 0
+      if (vm.hourFormat === HOUR_FORMAT_12) {
+        var dateString12 = timeString.split(' ');
+        timeString = dateString12[0];
+        am = dateString12[1] === AM;
+      }
 
-            if (isNaN(hours) || hours < 0 || hours > 23 || vm.hourFormat === HOUR_FORMAT_12 && (hours < 1 || hours > 12) || isNaN(minutes) || minutes < 0 || minutes > 59) {
-                return null
-            }
+      var time = timeString.split(':');
+      var hours = parseInt(time[0], 10);
+      var minutes = parseInt(time[1], 10);
+      var seconds = vm.enableSeconds ? parseInt(time[2], 10) : 0;
 
-            var d = null
+      if (isNaN(hours) || hours < 0 || hours > 23 || vm.hourFormat === HOUR_FORMAT_12 && (hours < 1 || hours > 12) || isNaN(minutes) || minutes < 0 || minutes > 59) {
+        return null;
+      }
 
-            if (vm.computedValue && !isNaN(vm.computedValue)) {
-                d = new Date(vm.computedValue)
-            } else {
-                d = vm.timeCreator()
-                d.setMilliseconds(0)
-            }
+      var d = null;
 
-            d.setSeconds(seconds)
-            d.setMinutes(minutes)
+      if (vm.computedValue && !isNaN(vm.computedValue)) {
+        d = new Date(vm.computedValue);
+      } else {
+        d = vm.timeCreator();
+        d.setMilliseconds(0);
+      }
 
-            if (vm.hourFormat === HOUR_FORMAT_12) {
-                if (am && hours === 12) {
-                    hours = 0
-                } else if (!am && hours !== 12) {
-                    hours += 12
-                }
-            }
+      d.setSeconds(seconds);
+      d.setMinutes(minutes);
 
-            d.setHours(hours)
-            return new Date(d.getTime())
+      if (vm.hourFormat === HOUR_FORMAT_12) {
+        if (am && hours === 12) {
+          hours = 0;
+        } else if (!am && hours !== 12) {
+          hours += 12;
         }
+      }
 
-        return null
+      d.setHours(hours);
+      return new Date(d.getTime());
     }
 
         for (var i = 0; i < 60; i += this.incrementSeconds) {
@@ -3604,9 +3594,11 @@
           });
         }
 
-                for (var i = 0; i < numberOfHours; i++) {
-                    var value = i
-                    var label = value
+          hours.push({
+            label: this.formatNumber(label),
+            value: value
+          });
+        }
 
       /**
        * When v-model is changed:
@@ -3658,12 +3650,12 @@
         if (hours != null && minutes != null && (!this.isHourFormat24 && meridiens !== null || this.isHourFormat24)) {
           var time = null;
 
-                    if (this.computedValue && !isNaN(this.computedValue)) {
-                        time = new Date(this.computedValue)
-                    } else {
-                        time = this.timeCreator()
-                        time.setMilliseconds(0)
-                    }
+          if (this.computedValue && !isNaN(this.computedValue)) {
+            time = new Date(this.computedValue);
+          } else {
+            time = this.timeCreator();
+            time.setMilliseconds(0);
+          }
 
           time.setHours(hours);
           time.setMinutes(minutes);
@@ -3762,6 +3754,11 @@
                 } else {
                   return time.getHours() === _this2.hoursSelected && time.getMinutes() === minute;
                 }
+              });
+              disabled = unselectable.length > 0;
+            }
+          }
+        }
 
         this.updateDateSelected(this.hoursSelected, this.minutesSelected, this.enableSeconds ? this.secondsSelected : 0, value);
       },
@@ -4062,25 +4059,24 @@
         }
       },
 
-            /**
+      /**
        * Emit 'blur' event on dropdown is not active (closed)
        */
-            onActiveChange: function onActiveChange(value) {
-                if (!value) {
-                    this.onBlur()
-                }
-            }
-        },
-        created: function created() {
-            if (typeof window !== 'undefined') {
-                document.addEventListener('keyup', this.keyPress)
-            }
-        },
-        beforeDestroy: function beforeDestroy() {
-            if (typeof window !== 'undefined') {
-                document.removeEventListener('keyup', this.keyPress)
-            }
+      onActiveChange: function onActiveChange(value) {
+        if (!value) {
+          this.onBlur();
         }
+      }
+    },
+    created: function created() {
+      if (typeof window !== 'undefined') {
+        document.addEventListener('keyup', this.keyPress);
+      }
+    },
+    beforeDestroy: function beforeDestroy() {
+      if (typeof window !== 'undefined') {
+        document.removeEventListener('keyup', this.keyPress);
+      }
     }
   };
 
@@ -4102,9 +4098,9 @@
     }
   };
 
-    /* template */
-    var __vue_render__$a = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('div', {staticClass: 'timepicker control', class: [_vm.size, {'is-expanded': _vm.expanded}]}, [(!_vm.isMobile || _vm.inline) ? _c('b-dropdown', {ref: 'dropdown', attrs: {'position': _vm.position, 'disabled': _vm.disabled, 'inline': _vm.inline}, on: {'active-change': _vm.onActiveChange}}, [(!_vm.inline) ? _c('b-input', _vm._b({ref: 'input', attrs: {'slot': 'trigger', 'autocomplete': 'off', 'value': _vm.formatValue(_vm.computedValue), 'placeholder': _vm.placeholder, 'size': _vm.size, 'icon': _vm.icon, 'icon-pack': _vm.iconPack, 'loading': _vm.loading, 'disabled': _vm.disabled, 'readonly': !_vm.editable, 'rounded': _vm.rounded, 'use-html5-validation': _vm.useHtml5Validation}, on: {'focus': _vm.handleOnFocus, 'blur': function ($event) { _vm.onBlur() && _vm.checkHtml5Validity() }}, nativeOn: {'keyup': function ($event) { if (!('button' in $event) && _vm._k($event.keyCode, 'enter', 13, $event.key)) { return null }_vm.toggle(true) }, 'change': function ($event) { _vm.onChange($event.target.value) }}, slot: 'trigger'}, 'b-input', _vm.$attrs, false)) : _vm._e(), _vm._v(' '), _c('b-dropdown-item', {attrs: {'disabled': _vm.disabled, 'focusable': _vm.focusable, 'custom': ''}}, [_c('b-field', {attrs: {'grouped': '', 'position': 'is-centered'}}, [_c('b-select', {attrs: {'disabled': _vm.disabled, 'placeholder': '00'}, nativeOn: {'change': function ($event) { _vm.onHoursChange($event.target.value) }}, model: {value: (_vm.hoursSelected), callback: function ($$v) { _vm.hoursSelected = $$v }, expression: 'hoursSelected'}}, _vm._l((_vm.hours), function (hour) { return _c('option', {key: hour.value, attrs: {'disabled': _vm.isHourDisabled(hour.value)}, domProps: {'value': hour.value}}, [_vm._v('\n                        ' + _vm._s(hour.label) + '\n                    ')]) })), _vm._v(' '), _c('span', {staticClass: 'control is-colon'}, [_vm._v(':')]), _vm._v(' '), _c('b-select', {attrs: {'disabled': _vm.disabled, 'placeholder': '00'}, nativeOn: {'change': function ($event) { _vm.onMinutesChange($event.target.value) }}, model: {value: (_vm.minutesSelected), callback: function ($$v) { _vm.minutesSelected = $$v }, expression: 'minutesSelected'}}, _vm._l((_vm.minutes), function (minute) { return _c('option', {key: minute.value, attrs: {'disabled': _vm.isMinuteDisabled(minute.value)}, domProps: {'value': minute.value}}, [_vm._v('\n                        ' + _vm._s(minute.label) + '\n                    ')]) })), _vm._v(' '), (_vm.enableSeconds) ? [_c('span', {staticClass: 'control is-colon'}, [_vm._v(':')]), _vm._v(' '), _c('b-select', {attrs: {'disabled': _vm.disabled, 'placeholder': '00'}, nativeOn: {'change': function ($event) { _vm.onSecondsChange($event.target.value) }}, model: {value: (_vm.secondsSelected), callback: function ($$v) { _vm.secondsSelected = $$v }, expression: 'secondsSelected'}}, _vm._l((_vm.seconds), function (second) { return _c('option', {key: second.value, attrs: {'disabled': _vm.isSecondDisabled(second.value)}, domProps: {'value': second.value}}, [_vm._v('\n                            ' + _vm._s(second.label) + '\n                        ')]) }))] : _vm._e(), _vm._v(' '), (!_vm.isHourFormat24) ? _c('b-select', {attrs: {'disabled': _vm.disabled}, nativeOn: {'change': function ($event) { _vm.onMeridienChange($event.target.value) }}, model: {value: (_vm.meridienSelected), callback: function ($$v) { _vm.meridienSelected = $$v }, expression: 'meridienSelected'}}, _vm._l((_vm.meridiens), function (meridien) { return _c('option', {key: meridien, domProps: {'value': meridien}}, [_vm._v('\n                        ' + _vm._s(meridien) + '\n                    ')]) })) : _vm._e()], 2), _vm._v(' '), (_vm.$slots.default !== undefined && _vm.$slots.default.length) ? _c('footer', {staticClass: 'timepicker-footer'}, [_vm._t('default')], 2) : _vm._e()], 1)], 1) : _c('b-input', _vm._b({ref: 'input', attrs: {'type': 'time', 'step': _vm.nativeStep, 'autocomplete': 'off', 'value': _vm.formatHHMMSS(_vm.computedValue), 'placeholder': _vm.placeholder, 'size': _vm.size, 'icon': _vm.icon, 'icon-pack': _vm.iconPack, 'loading': _vm.loading, 'max': _vm.formatHHMMSS(_vm.maxTime), 'min': _vm.formatHHMMSS(_vm.minTime), 'disabled': _vm.disabled, 'readonly': false, 'use-html5-validation': _vm.useHtml5Validation}, on: {'focus': _vm.handleOnFocus, 'blur': function ($event) { _vm.onBlur() && _vm.checkHtml5Validity() }}, nativeOn: {'change': function ($event) { _vm.onChange($event.target.value) }}}, 'b-input', _vm.$attrs, false))], 1) }
-    var __vue_staticRenderFns__$a = []
+  /* template */
+  var __vue_render__$a = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"timepicker control",class:[_vm.size, {'is-expanded': _vm.expanded}]},[(!_vm.isMobile || _vm.inline)?_c('b-dropdown',{ref:"dropdown",attrs:{"position":_vm.position,"disabled":_vm.disabled,"inline":_vm.inline,"append-to-body":_vm.appendToBody,"append-to-body-copy-parent":""},on:{"active-change":_vm.onActiveChange}},[(!_vm.inline)?_c('b-input',_vm._b({ref:"input",attrs:{"slot":"trigger","autocomplete":"off","value":_vm.formatValue(_vm.computedValue),"placeholder":_vm.placeholder,"size":_vm.size,"icon":_vm.icon,"icon-pack":_vm.iconPack,"loading":_vm.loading,"disabled":_vm.disabled,"readonly":!_vm.editable,"rounded":_vm.rounded,"use-html5-validation":_vm.useHtml5Validation},on:{"focus":_vm.handleOnFocus},nativeOn:{"keyup":function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }_vm.toggle(true);},"change":function($event){_vm.onChange($event.target.value);}},slot:"trigger"},'b-input',_vm.$attrs,false)):_vm._e(),_vm._v(" "),_c('b-dropdown-item',{attrs:{"disabled":_vm.disabled,"focusable":_vm.focusable,"custom":""}},[_c('b-field',{attrs:{"grouped":"","position":"is-centered"}},[_c('b-select',{attrs:{"disabled":_vm.disabled,"placeholder":"00"},nativeOn:{"change":function($event){_vm.onHoursChange($event.target.value);}},model:{value:(_vm.hoursSelected),callback:function ($$v) {_vm.hoursSelected=$$v;},expression:"hoursSelected"}},_vm._l((_vm.hours),function(hour){return _c('option',{key:hour.value,attrs:{"disabled":_vm.isHourDisabled(hour.value)},domProps:{"value":hour.value}},[_vm._v("\n                            "+_vm._s(hour.label)+"\n                        ")])})),_vm._v(" "),_c('span',{staticClass:"control is-colon"},[_vm._v(":")]),_vm._v(" "),_c('b-select',{attrs:{"disabled":_vm.disabled,"placeholder":"00"},nativeOn:{"change":function($event){_vm.onMinutesChange($event.target.value);}},model:{value:(_vm.minutesSelected),callback:function ($$v) {_vm.minutesSelected=$$v;},expression:"minutesSelected"}},_vm._l((_vm.minutes),function(minute){return _c('option',{key:minute.value,attrs:{"disabled":_vm.isMinuteDisabled(minute.value)},domProps:{"value":minute.value}},[_vm._v("\n                            "+_vm._s(minute.label)+"\n                        ")])})),_vm._v(" "),(_vm.enableSeconds)?[_c('span',{staticClass:"control is-colon"},[_vm._v(":")]),_vm._v(" "),_c('b-select',{attrs:{"disabled":_vm.disabled,"placeholder":"00"},nativeOn:{"change":function($event){_vm.onSecondsChange($event.target.value);}},model:{value:(_vm.secondsSelected),callback:function ($$v) {_vm.secondsSelected=$$v;},expression:"secondsSelected"}},_vm._l((_vm.seconds),function(second){return _c('option',{key:second.value,attrs:{"disabled":_vm.isSecondDisabled(second.value)},domProps:{"value":second.value}},[_vm._v("\n                                "+_vm._s(second.label)+"\n                            ")])}))]:_vm._e(),_vm._v(" "),(!_vm.isHourFormat24)?_c('b-select',{attrs:{"disabled":_vm.disabled},nativeOn:{"change":function($event){_vm.onMeridienChange($event.target.value);}},model:{value:(_vm.meridienSelected),callback:function ($$v) {_vm.meridienSelected=$$v;},expression:"meridienSelected"}},_vm._l((_vm.meridiens),function(meridien){return _c('option',{key:meridien,domProps:{"value":meridien}},[_vm._v("\n                            "+_vm._s(meridien)+"\n                        ")])})):_vm._e()],2),_vm._v(" "),(_vm.$slots.default !== undefined && _vm.$slots.default.length)?_c('footer',{staticClass:"timepicker-footer"},[_vm._t("default")],2):_vm._e()],1)],1):_c('b-input',_vm._b({ref:"input",attrs:{"type":"time","step":_vm.nativeStep,"autocomplete":"off","value":_vm.formatHHMMSS(_vm.computedValue),"placeholder":_vm.placeholder,"size":_vm.size,"icon":_vm.icon,"icon-pack":_vm.iconPack,"rounded":_vm.rounded,"loading":_vm.loading,"max":_vm.formatHHMMSS(_vm.maxTime),"min":_vm.formatHHMMSS(_vm.minTime),"disabled":_vm.disabled,"readonly":false,"use-html5-validation":_vm.useHtml5Validation},on:{"focus":_vm.handleOnFocus,"blur":function($event){_vm.onBlur() && _vm.checkHtml5Validity();}},nativeOn:{"change":function($event){_vm.onChange($event.target.value);}}},'b-input',_vm.$attrs,false))],1)};
+  var __vue_staticRenderFns__$a = [];
 
     /* style */
     const __vue_inject_styles__$b = undefined;
@@ -4211,9 +4207,24 @@
               val = this.maxDatetime;
             }
         },
-        data: function data() {
-            return {
-                newValue: this.value
+        set: function set(value) {
+          if (value) {
+            var val = new Date(value.getTime());
+
+            if (this.newValue) {
+              // restore time part
+              if ((value.getDate() !== this.newValue.getDate() || value.getMonth() !== this.newValue.getMonth() || value.getFullYear() !== this.newValue.getFullYear()) && value.getHours() === 0 && value.getMinutes() === 0 && value.getSeconds() === 0) {
+                val.setHours(this.newValue.getHours(), this.newValue.getMinutes(), this.newValue.getSeconds(), 0);
+              }
+            } else {
+              val = this.datetimeCreator(value);
+            } // check min and max range
+
+
+            if (this.minDatetime && val < this.adjustValue(this.minDatetime)) {
+              val = this.adjustValue(this.minDatetime);
+            } else if (this.maxDatetime && val > this.adjustValue(this.maxDatetime)) {
+              val = this.adjustValue(this.maxDatetime);
             }
 
             this.newValue = new Date(val.getTime());

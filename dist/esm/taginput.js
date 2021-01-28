@@ -168,86 +168,8 @@ var script = {
     value: function value(_value) {
       this.tags = _value;
     },
-    methods: {
-        addTag: function addTag(tag) {
-            var tagToAdd = tag || this.newTag.trim()
-
-            if (tagToAdd) {
-                if (!this.autocomplete) {
-                    var reg = this.separatorsAsRegExp
-
-                    if (reg && tagToAdd.match(reg)) {
-                        tagToAdd.split(reg).map(function (t) {
-                            return t.trim()
-                        }).filter(function (t) {
-                            return t.length !== 0
-                        }).map(this.addTag)
-                        return
-                    }
-                } // Add the tag input if it is not blank
-                // or previously added (if not allowDuplicates).
-
-                var add = !this.allowDuplicates ? this.tags.indexOf(tagToAdd) === -1 : true
-
-                if (add && this.beforeAdding(tagToAdd)) {
-                    this.tags.push(tagToAdd)
-                    this.$emit('input', this.tags)
-                    this.$emit('add', tagToAdd)
-                }
-            }
-
-            this.newTag = ''
-        },
-        getNormalizedTagText: function getNormalizedTagText(tag) {
-            if (_typeof(tag) === 'object') {
-                return getValueByPath(tag, this.field)
-            }
-
-            return tag
-        },
-        customOnBlur: function customOnBlur($event) {
-            // Add tag on-blur if not select only
-            if (!this.autocomplete) this.addTag()
-            this.onBlur($event)
-        },
-        onSelect: function onSelect(option) {
-            var _this = this
-
-            if (!option) return
-            this.addTag(option)
-            this.$nextTick(function () {
-                _this.newTag = ''
-            })
-        },
-        removeTag: function removeTag(index) {
-            var tag = this.tags.splice(index, 1)[0]
-            this.$emit('input', this.tags)
-            this.$emit('remove', tag)
-            return tag
-        },
-        removeLastTag: function removeLastTag() {
-            if (this.tagsLength > 0) {
-                this.removeTag(this.tagsLength - 1)
-            }
-        },
-        keydown: function keydown(event) {
-            if (this.removeOnKeys.indexOf(event.keyCode) !== -1 && !this.newTag.length) {
-                this.removeLastTag()
-            } // Stop if is to accept select only
-
-            if (this.autocomplete && !this.allowNew) return
-
-            if (this.confirmKeyCodes.indexOf(event.keyCode) >= 0) {
-                event.preventDefault()
-                this.addTag()
-            }
-        },
-        onTyping: function onTyping($event) {
-            this.$emit('typing', $event.trim())
-        },
-        emitInfiniteScroll: function emitInfiniteScroll() {
-            this.$emit('infinite-scroll')
-        }
+    hasInput: function hasInput() {
+      if (!this.hasInput) this.onBlur();
     }
   },
   methods: {

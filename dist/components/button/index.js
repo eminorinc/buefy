@@ -1,4 +1,4 @@
-/*! Buefy v0.8.9 | MIT License | github.com/buefy/buefy */
+/*! Buefy v0.8.20 | MIT License | github.com/buefy/buefy */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
@@ -225,215 +225,234 @@
         return '';
       },
 
-    function _defineProperty(obj, key, value) {
-        if (key in obj) {
-            Object.defineProperty(obj, key, {
-                value: value,
-                enumerable: true,
-                configurable: true,
-                writable: true
-            })
-        } else {
-            obj[key] = value
-        }
+    return _typeof(obj);
+  }
 
-        return obj
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
     }
 
-    function ownKeys(object, enumerableOnly) {
-        var keys = Object.keys(object)
+    return obj;
+  }
 
-        if (Object.getOwnPropertySymbols) {
-            var symbols = Object.getOwnPropertySymbols(object)
-            if (enumerableOnly) {
-                symbols = symbols.filter(function (sym) {
-                    return Object.getOwnPropertyDescriptor(object, sym).enumerable
-                })
-            }
-            keys.push.apply(keys, symbols)
-        }
+  function ownKeys(object, enumerableOnly) {
+    var keys = Object.keys(object);
 
-        return keys
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      if (enumerableOnly) symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      });
+      keys.push.apply(keys, symbols);
     }
 
-    function _objectSpread2(target) {
-        for (var i = 1; i < arguments.length; i++) {
-            var source = arguments[i] != null ? arguments[i] : {}
+    return keys;
+  }
 
-            if (i % 2) {
-                ownKeys(source, true).forEach(function (key) {
-                    _defineProperty(target, key, source[key])
-                })
-            } else if (Object.getOwnPropertyDescriptors) {
-                Object.defineProperties(target, Object.getOwnPropertyDescriptors(source))
-            } else {
-                ownKeys(source).forEach(function (key) {
-                    Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key))
-                })
-            }
-        }
+  function _objectSpread2(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i] != null ? arguments[i] : {};
 
-        return target
+      if (i % 2) {
+        ownKeys(Object(source), true).forEach(function (key) {
+          _defineProperty(target, key, source[key]);
+        });
+      } else if (Object.getOwnPropertyDescriptors) {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+      } else {
+        ownKeys(Object(source)).forEach(function (key) {
+          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
+      }
     }
 
-    var config = {
-        defaultContainerElement: null,
-        defaultIconPack: 'mdi',
-        defaultIconComponent: null,
-        defaultIconPrev: 'chevron-left',
-        defaultIconNext: 'chevron-right',
-        defaultDialogConfirmText: null,
-        defaultDialogCancelText: null,
-        defaultSnackbarDuration: 3500,
-        defaultSnackbarPosition: null,
-        defaultToastDuration: 2000,
-        defaultToastPosition: null,
-        defaultNotificationDuration: 2000,
-        defaultNotificationPosition: null,
-        defaultTooltipType: 'is-primary',
-        defaultTooltipAnimated: false,
-        defaultTooltipDelay: 0,
-        defaultInputAutocomplete: 'on',
-        defaultDateFormatter: null,
-        defaultDateParser: null,
-        defaultDateCreator: null,
-        defaultTimeCreator: null,
-        defaultDayNames: null,
-        defaultMonthNames: null,
-        defaultFirstDayOfWeek: null,
-        defaultUnselectableDaysOfWeek: null,
-        defaultTimeFormatter: null,
-        defaultTimeParser: null,
-        defaultModalCanCancel: ['escape', 'x', 'outside', 'button'],
-        defaultModalScroll: null,
-        defaultDatepickerMobileNative: true,
-        defaultTimepickerMobileNative: true,
-        defaultNoticeQueue: true,
-        defaultInputHasCounter: true,
-        defaultTaginputHasCounter: true,
-        defaultUseHtml5Validation: true,
-        defaultDropdownMobileModal: true,
-        defaultFieldLabelPosition: null,
-        defaultDatepickerYearsRange: [-100, 3],
-        defaultDatepickerNearbyMonthDays: true,
-        defaultDatepickerNearbySelectableMonthDays: false,
-        defaultDatepickerShowWeekNumber: false,
-        defaultDatepickerMobileModal: true,
-        defaultTrapFocus: false,
-        defaultButtonRounded: false,
-        defaultCarouselInterval: 3500,
-        customIconPacks: null
-    } // TODO defaultTrapFocus to true in the next breaking change
+    return target;
+  }
 
-    /**
+  function _toArray(arr) {
+    return _arrayWithHoles(arr) || _iterableToArray(arr) || _nonIterableRest();
+  }
+
+  function _arrayWithHoles(arr) {
+    if (Array.isArray(arr)) return arr;
+  }
+
+  function _iterableToArray(iter) {
+    if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+  }
+
+  function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance");
+  }
+
+  var config = {
+    defaultContainerElement: null,
+    defaultIconPack: 'mdi',
+    defaultIconComponent: null,
+    defaultIconPrev: 'chevron-left',
+    defaultIconNext: 'chevron-right',
+    defaultDialogConfirmText: null,
+    defaultDialogCancelText: null,
+    defaultSnackbarDuration: 3500,
+    defaultSnackbarPosition: null,
+    defaultToastDuration: 2000,
+    defaultToastPosition: null,
+    defaultNotificationDuration: 2000,
+    defaultNotificationPosition: null,
+    defaultTooltipType: 'is-primary',
+    defaultTooltipAnimated: false,
+    defaultTooltipDelay: 0,
+    defaultInputAutocomplete: 'on',
+    defaultDateFormatter: null,
+    defaultDateParser: null,
+    defaultDateCreator: null,
+    defaultTimeCreator: null,
+    defaultDayNames: null,
+    defaultMonthNames: null,
+    defaultFirstDayOfWeek: null,
+    defaultUnselectableDaysOfWeek: null,
+    defaultTimeFormatter: null,
+    defaultTimeParser: null,
+    defaultModalCanCancel: ['escape', 'x', 'outside', 'button'],
+    defaultModalScroll: null,
+    defaultDatepickerMobileNative: true,
+    defaultTimepickerMobileNative: true,
+    defaultNoticeQueue: true,
+    defaultInputHasCounter: true,
+    defaultTaginputHasCounter: true,
+    defaultUseHtml5Validation: true,
+    defaultDropdownMobileModal: true,
+    defaultFieldLabelPosition: null,
+    defaultDatepickerYearsRange: [-100, 3],
+    defaultDatepickerNearbyMonthDays: true,
+    defaultDatepickerNearbySelectableMonthDays: false,
+    defaultDatepickerShowWeekNumber: false,
+    defaultDatepickerMobileModal: true,
+    defaultTrapFocus: false,
+    defaultButtonRounded: false,
+    defaultCarouselInterval: 3500,
+    defaultTabsAnimated: true,
+    defaultLinkTags: ['a', 'button', 'input', 'router-link', 'nuxt-link', 'n-link', 'RouterLink', 'NuxtLink', 'NLink'],
+    customIconPacks: null
+  }; // TODO defaultTrapFocus to true in the next breaking change
+
+  /**
    * Merge function to replace Object.assign with deep merging possibility
    */
 
-    var isObject = function isObject(item) {
-        return _typeof(item) === 'object' && !Array.isArray(item)
+  var isObject = function isObject(item) {
+    return _typeof(item) === 'object' && !Array.isArray(item);
+  };
+
+  var mergeFn = function mergeFn(target, source) {
+    var deep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+    if (deep || !Object.assign) {
+      var isDeep = function isDeep(prop) {
+        return isObject(source[prop]) && target !== null && target.hasOwnProperty(prop) && isObject(target[prop]);
+      };
+
+      var replaced = Object.getOwnPropertyNames(source).map(function (prop) {
+        return _defineProperty({}, prop, isDeep(prop) ? mergeFn(target[prop], source[prop], deep) : source[prop]);
+      }).reduce(function (a, b) {
+        return _objectSpread2({}, a, {}, b);
+      }, {});
+      return _objectSpread2({}, target, {}, replaced);
+    } else {
+      return Object.assign(target, source);
+    }
+  };
+
+  var merge = mergeFn;
+
+  var mdiIcons = {
+    sizes: {
+      'default': 'mdi-24px',
+      'is-small': null,
+      'is-medium': 'mdi-36px',
+      'is-large': 'mdi-48px'
+    },
+    iconPrefix: 'mdi-'
+  };
+
+  var faIcons = function faIcons() {
+    var faIconPrefix = config && config.defaultIconComponent ? '' : 'fa-';
+    return {
+      sizes: {
+        'default': faIconPrefix + 'lg',
+        'is-small': null,
+        'is-medium': faIconPrefix + '2x',
+        'is-large': faIconPrefix + '3x'
+      },
+      iconPrefix: faIconPrefix,
+      internalIcons: {
+        'information': 'info-circle',
+        'alert': 'exclamation-triangle',
+        'alert-circle': 'exclamation-circle',
+        'chevron-right': 'angle-right',
+        'chevron-left': 'angle-left',
+        'chevron-down': 'angle-down',
+        'eye-off': 'eye-slash',
+        'menu-down': 'caret-down',
+        'menu-up': 'caret-up',
+        'close-circle': 'times-circle'
+      }
+    };
+  };
+
+  var getIcons = function getIcons() {
+    var icons = {
+      mdi: mdiIcons,
+      fa: faIcons(),
+      fas: faIcons(),
+      far: faIcons(),
+      fad: faIcons(),
+      fab: faIcons(),
+      fal: faIcons()
+    };
+
+    if (config && config.customIconPacks) {
+      icons = merge(icons, config.customIconPacks, true);
     }
 
-    var mergeFn = function mergeFn(target, source) {
-        var deep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false
+    return icons;
+  };
 
-        if (deep || !Object.assign) {
-            var isDeep = function isDeep(prop) {
-                return isObject(source[prop]) && target !== null && target.hasOwnProperty(prop) && isObject(target[prop])
-            }
+  var script = {
+    name: 'BIcon',
+    props: {
+      type: [String, Object],
+      component: String,
+      pack: String,
+      icon: String,
+      size: String,
+      customSize: String,
+      customClass: String,
+      both: Boolean // This is used internally to show both MDI and FA icon
 
-            var replaced = Object.getOwnPropertyNames(source).map(function (prop) {
-                return _defineProperty({}, prop, isDeep(prop) ? mergeFn(target[prop], source[prop], deep) : source[prop])
-            }).reduce(function (a, b) {
-                return _objectSpread2({}, a, {}, b)
-            }, {})
-            return _objectSpread2({}, target, {}, replaced)
-        } else {
-            return Object.assign(target, source)
+    },
+    computed: {
+      iconConfig: function iconConfig() {
+        var allIcons = getIcons();
+        return allIcons[this.newPack];
+      },
+      iconPrefix: function iconPrefix() {
+        if (this.iconConfig && this.iconConfig.iconPrefix) {
+          return this.iconConfig.iconPrefix;
         }
-    }
 
-    var merge = mergeFn
+        return '';
+      },
 
-    var mdiIcons = {
-        sizes: {
-            'default': 'mdi-24px',
-            'is-small': null,
-            'is-medium': 'mdi-36px',
-            'is-large': 'mdi-48px'
-        },
-        iconPrefix: 'mdi-'
-    }
-
-    var faIcons = function faIcons() {
-        var faIconPrefix = config && config.defaultIconComponent ? '' : 'fa-'
-        return {
-            sizes: {
-                'default': faIconPrefix + 'lg',
-                'is-small': null,
-                'is-medium': faIconPrefix + '2x',
-                'is-large': faIconPrefix + '3x'
-            },
-            iconPrefix: faIconPrefix,
-            internalIcons: {
-                'information': 'info-circle',
-                'alert': 'exclamation-triangle',
-                'alert-circle': 'exclamation-circle',
-                'chevron-right': 'angle-right',
-                'chevron-left': 'angle-left',
-                'chevron-down': 'angle-down',
-                'eye-off': 'eye-slash',
-                'menu-down': 'caret-down',
-                'menu-up': 'caret-up'
-            }
-        }
-    }
-
-    var getIcons = function getIcons() {
-        var icons = {
-            mdi: mdiIcons,
-            fa: faIcons(),
-            fas: faIcons(),
-            far: faIcons(),
-            fad: faIcons(),
-            fab: faIcons(),
-            fal: faIcons()
-        }
-
-        if (config && config.customIconPacks) {
-            icons = merge(icons, config.customIconPacks, true)
-        }
-
-        return icons
-    }
-
-    //
-    var script = {
-        name: 'BIcon',
-        props: {
-            type: [String, Object],
-            component: String,
-            pack: String,
-            icon: String,
-            size: String,
-            customSize: String,
-            customClass: String,
-            both: Boolean // This is used internally to show both MDI and FA icon
-
-        },
-        computed: {
-            iconConfig: function iconConfig() {
-                var allIcons = getIcons()
-                return allIcons[this.newPack]
-            },
-            iconPrefix: function iconPrefix() {
-                if (this.iconConfig && this.iconConfig.iconPrefix) {
-                    return this.iconConfig.iconPrefix
-                }
-
-                return ''
-            },
-
-            /**
+      /**
       * Internal icon name based on the pack.
       * If pack is 'fa', gets the equivalent FA icon name of the MDI,
       * internal icons are always MDI.
@@ -664,25 +683,17 @@
           return 'is-medium';
         }
 
-    /* script */
-    const __vue_script__$1 = script$1
+        return this.tag;
+      },
+      iconSize: function iconSize() {
+        if (!this.size || this.size === 'is-medium') {
+          return 'is-small';
+        } else if (this.size === 'is-large') {
+          return 'is-medium';
+        }
 
-    /* template */
-    var __vue_render__$1 = function () {
-        var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c(_vm.tag, _vm._g(_vm._b({tag: 'component',
-            staticClass: 'button',
-            class: [_vm.size, _vm.type, {
-                'is-rounded': _vm.rounded,
-                'is-loading': _vm.loading,
-                'is-outlined': _vm.outlined,
-                'is-fullwidth': _vm.expanded,
-                'is-inverted': _vm.inverted,
-                'is-focused': _vm.focused,
-                'is-active': _vm.active,
-                'is-hovered': _vm.hovered,
-                'is-selected': _vm.selected
-            }],
-            attrs: {'type': _vm.nativeType}}, 'component', _vm.$attrs, false), _vm.$listeners), [(_vm.iconLeft) ? _c('b-icon', {attrs: {'pack': _vm.iconPack, 'icon': _vm.iconLeft, 'size': _vm.iconSize}}) : _vm._e(), _vm._v(' '), (_vm.label) ? _c('span', [_vm._v(_vm._s(_vm.label))]) : (_vm.$slots.default) ? _c('span', [_vm._t('default')], 2) : _vm._e(), _vm._v(' '), (_vm.iconRight) ? _c('b-icon', {attrs: {'pack': _vm.iconPack, 'icon': _vm.iconRight, 'size': _vm.iconSize}}) : _vm._e()], 1)
+        return this.size;
+      }
     }
 
         return this.size;

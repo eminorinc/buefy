@@ -166,7 +166,7 @@ var __vue_staticRenderFns__ = [];
 
 var localVueInstance;
 
-var localVueInstance
+var localVueInstance;
 
 function open(propsData) {
   var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance;

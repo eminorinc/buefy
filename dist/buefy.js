@@ -9184,10 +9184,24 @@
             beforeMount: function beforeMount() {
                 var _this = this
 
-            if (!this.$parent.$data._isTable) {
-                this.$destroy()
-                throw new Error('You should wrap bTableColumn on a bTable')
-            }
+    },
+    data: function data() {
+      return {
+        newKey: this.customKey || this.label,
+        _isTableColumn: true
+      };
+    },
+    computed: {
+      rootClasses: function rootClasses() {
+        return [this.cellClass, {
+          'has-text-right': this.numeric && !this.centered,
+          'has-text-centered': this.centered,
+          'is-sticky': this.sticky
+        }];
+      }
+    },
+    beforeMount: function beforeMount() {
+      var _this = this;
 
                 if (this.internal) return
 

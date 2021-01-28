@@ -17,7 +17,6 @@
             @sort="(column, event) => sort(column, null, event)"
             @removePriority="(column) => removeSortingPriority(column)"
         />
-
         <template
             v-if="paginated && (paginationPosition === 'top' || paginationPosition === 'both')">
             <slot name="pagination">
@@ -43,7 +42,6 @@
                 </b-table-pagination>
             </slot>
         </template>
-
         <div
             class="table-wrapper"
             :class="tableWrapperClasses"

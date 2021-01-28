@@ -73,62 +73,14 @@ var script = {
         !this.isValid && this.$refs.input.checkHtml5Validity();
       }
     },
-    computed: {
-        computedValue: {
-            get: function get() {
-                return this.newValue
-            },
-            set: function set(value) {
-                var newValue = value
-
-                if (value === '') {
-                    newValue = parseFloat(this.min) || null
-                }
-
-                this.newValue = newValue
-                this.$emit('input', newValue)
-                !this.isValid && this.$refs.input.checkHtml5Validity()
-            }
-        },
-        fieldClasses: function fieldClasses() {
-            return [{
-                'has-addons': this.controlsPosition === 'compact'
-            }, {
-                'is-grouped': this.controlsPosition !== 'compact'
-            }, {
-                'is-expanded': this.expanded
-            }]
-        },
-        buttonClasses: function buttonClasses() {
-            return [this.type, this.size, {
-                'is-rounded': this.controlsRounded
-            }]
-        },
-        minNumber: function minNumber() {
-            return typeof this.min === 'string' ? parseFloat(this.min) : this.min
-        },
-        maxNumber: function maxNumber() {
-            return typeof this.max === 'string' ? parseFloat(this.max) : this.max
-        },
-        stepNumber: function stepNumber() {
-            return typeof this.newStep === 'string' ? parseFloat(this.newStep) : this.newStep
-        },
-        disabledMin: function disabledMin() {
-            return this.computedValue - this.stepNumber < this.minNumber
-        },
-        disabledMax: function disabledMax() {
-            return this.computedValue + this.stepNumber > this.maxNumber
-        },
-        stepDecimals: function stepDecimals() {
-            var step = this.stepNumber.toString()
-            var index = step.indexOf('.')
-
-            if (index >= 0) {
-                return step.substring(index + 1).length
-            }
-
-            return 0
-        }
+    fieldClasses: function fieldClasses() {
+      return [{
+        'has-addons': this.controlsPosition === 'compact'
+      }, {
+        'is-grouped': this.controlsPosition !== 'compact'
+      }, {
+        'is-expanded': this.expanded
+      }];
     },
     buttonClasses: function buttonClasses() {
       return [this.type, this.size, {

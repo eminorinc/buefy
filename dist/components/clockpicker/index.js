@@ -1,4 +1,4 @@
-/*! Buefy v0.8.9 | MIT License | github.com/buefy/buefy */
+/*! Buefy v0.8.20 | MIT License | github.com/buefy/buefy */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
@@ -316,37 +316,41 @@
         } else {
             return Object.assign(target, source)
         }
-    }
 
-    /**
+        return this.isValid;
+      }
+    }
+  };
+
+  /**
    * Merge function to replace Object.assign with deep merging possibility
    */
 
-    var isObject = function isObject(item) {
-        return _typeof(item) === 'object' && !Array.isArray(item)
+  var isObject = function isObject(item) {
+    return _typeof(item) === 'object' && !Array.isArray(item);
+  };
+
+  var mergeFn = function mergeFn(target, source) {
+    var deep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+    if (deep || !Object.assign) {
+      var isDeep = function isDeep(prop) {
+        return isObject(source[prop]) && target !== null && target.hasOwnProperty(prop) && isObject(target[prop]);
+      };
+
+      var replaced = Object.getOwnPropertyNames(source).map(function (prop) {
+        return _defineProperty({}, prop, isDeep(prop) ? mergeFn(target[prop], source[prop], deep) : source[prop]);
+      }).reduce(function (a, b) {
+        return _objectSpread2({}, a, {}, b);
+      }, {});
+      return _objectSpread2({}, target, {}, replaced);
+    } else {
+      return Object.assign(target, source);
     }
+  };
 
-    var mergeFn = function mergeFn(target, source) {
-        var deep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false
-
-        if (deep || !Object.assign) {
-            var isDeep = function isDeep(prop) {
-                return isObject(source[prop]) && target !== null && target.hasOwnProperty(prop) && isObject(target[prop])
-            }
-
-            var replaced = Object.getOwnPropertyNames(source).map(function (prop) {
-                return _defineProperty({}, prop, isDeep(prop) ? mergeFn(target[prop], source[prop], deep) : source[prop])
-            }).reduce(function (a, b) {
-                return _objectSpread2({}, a, {}, b)
-            }, {})
-            return _objectSpread2({}, target, {}, replaced)
-        } else {
-            return Object.assign(target, source)
-        }
-    }
-
-    var merge = mergeFn
-    /**
+  var merge = mergeFn;
+  /**
    * Mobile detection
    * https://www.abeautifulsite.net/detecting-mobile-devices-with-javascript
    */
@@ -418,8 +422,10 @@
             value: value
           });
         }
+      }
 
-        return vm.pad(hours) + ':' + vm.pad(minutes) + (vm.enableSeconds ? ':' + vm.pad(seconds) : '') + period
+      d.setHours(hours);
+      return new Date(d.getTime());
     }
 
     var TimepickerMixin = {
@@ -539,58 +545,7 @@
         if (!this.incrementSeconds || this.incrementSeconds < 1) throw new Error('Second increment cannot be null or less than 1.');
         var seconds = [];
 
-                    hours.push({
-                        label: this.formatNumber(label),
-                        value: value
-                    })
-                }
-
-                return hours
-            },
-            minutes: function minutes() {
-                if (!this.incrementMinutes || this.incrementMinutes < 1) throw new Error('Minute increment cannot be null or less than 1.')
-                var minutes = []
-
-                for (var i = 0; i < 60; i += this.incrementMinutes) {
-                    minutes.push({
-                        label: this.formatNumber(i, true),
-                        value: i
-                    })
-                }
-
-                return minutes
-            },
-            seconds: function seconds() {
-                if (!this.incrementSeconds || this.incrementSeconds < 1) throw new Error('Second increment cannot be null or less than 1.')
-                var seconds = []
-
-                for (var i = 0; i < 60; i += this.incrementSeconds) {
-                    seconds.push({
-                        label: this.formatNumber(i, true),
-                        value: i
-                    })
-                }
-
-                return seconds
-            },
-            meridiens: function meridiens() {
-                return [AM, PM]
-            },
-            isMobile: function isMobile$1() {
-                return this.mobileNative && isMobile.any()
-            },
-            isHourFormat24: function isHourFormat24() {
-                return this.hourFormat === HOUR_FORMAT_24
-            }
-        },
-        watch: {
-            hourFormat: function hourFormat() {
-                if (this.hoursSelected !== null) {
-                    this.meridienSelected = this.hoursSelected >= 12 ? PM : AM
-                }
-            },
-
-            /**
+      /**
        * When v-model is changed:
        *   1. Update internal value.
        *   2. If it's invalid, validate again.
@@ -640,12 +595,12 @@
         if (hours != null && minutes != null && (!this.isHourFormat24 && meridiens !== null || this.isHourFormat24)) {
           var time = null;
 
-                    if (this.computedValue && !isNaN(this.computedValue)) {
-                        time = new Date(this.computedValue)
-                    } else {
-                        time = this.timeCreator()
-                        time.setMilliseconds(0)
-                    }
+          if (this.computedValue && !isNaN(this.computedValue)) {
+            time = new Date(this.computedValue);
+          } else {
+            time = this.timeCreator();
+            time.setMilliseconds(0);
+          }
 
           time.setHours(hours);
           time.setMinutes(minutes);
@@ -744,6 +699,11 @@
                 } else {
                   return time.getHours() === _this2.hoursSelected && time.getMinutes() === minute;
                 }
+              });
+              disabled = unselectable.length > 0;
+            }
+          }
+        }
 
         this.updateDateSelected(this.hoursSelected, this.minutesSelected, this.enableSeconds ? this.secondsSelected : 0, value);
       },
@@ -1044,25 +1004,32 @@
         }
       },
 
-            /**
+      /**
        * Emit 'blur' event on dropdown is not active (closed)
        */
-            onActiveChange: function onActiveChange(value) {
-                if (!value) {
-                    this.onBlur()
-                }
-            }
-        },
-        created: function created() {
-            if (typeof window !== 'undefined') {
-                document.addEventListener('keyup', this.keyPress)
-            }
-        },
-        beforeDestroy: function beforeDestroy() {
-            if (typeof window !== 'undefined') {
-                document.removeEventListener('keyup', this.keyPress)
-            }
+      onActiveChange: function onActiveChange(value) {
+        if (!value) {
+          this.onBlur();
         }
+      }
+    },
+    created: function created() {
+      if (typeof window !== 'undefined') {
+        document.addEventListener('keyup', this.keyPress);
+      }
+    },
+    beforeDestroy: function beforeDestroy() {
+      if (typeof window !== 'undefined') {
+        document.removeEventListener('keyup', this.keyPress);
+      }
+    }
+  };
+
+  var findFocusable = function findFocusable(element) {
+    var programmatic = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+    if (!element) {
+      return null;
     }
 
     return element.querySelectorAll("a[href],\n                                     area[href],\n                                     input:not([disabled]),\n                                     select:not([disabled]),\n                                     textarea:not([disabled]),\n                                     button:not([disabled]),\n                                     iframe,\n                                     object,\n                                     embed,\n                                     *[tabindex],\n                                     *[contenteditable]");
@@ -1223,13 +1190,13 @@
           if (this.selected) {
             var index = this.selected.indexOf(value);
 
-                    this.$emit('change', this.selected)
-                } else {
-                    if (this.selected !== value) {
-                        this.selected = value
-                        this.$emit('change', this.selected)
-                    }
-                }
+          this.$emit('change', this.selected);
+        } else {
+          if (this.selected !== value) {
+            this.selected = value;
+            this.$emit('change', this.selected);
+          }
+        }
 
         this.$emit('input', this.selected);
 
@@ -1242,13 +1209,13 @@
         }
       },
 
-                    if (this.hoverable && this.closeOnClick) {
-                        this.isHoverable = false
-                    }
-                }
-            },
+          if (this.hoverable && this.closeOnClick) {
+            this.isHoverable = false;
+          }
+        }
+      },
 
-            /**
+      /**
       * White-listed items to not close when clicked.
       */
       isInWhiteList: function isInWhiteList(el) {
@@ -1972,9 +1939,9 @@
   /* script */
   const __vue_script__$3 = script$3;
 
-    /* template */
-    var __vue_render__$3 = function () { var _vm = this; var _h = _vm.$createElement; var _c = _vm._self._c || _h; return _c('div', {staticClass: 'control', class: _vm.rootClasses}, [(_vm.type !== 'textarea') ? _c('input', _vm._b({ref: 'input', staticClass: 'input', class: [_vm.inputClasses, _vm.customClass], attrs: {'type': _vm.newType, 'autocomplete': _vm.newAutocomplete, 'maxlength': _vm.maxlength}, domProps: {'value': _vm.computedValue}, on: {'input': _vm.onInput, 'blur': _vm.onBlur, 'focus': _vm.onFocus}}, 'input', _vm.$attrs, false)) : _c('textarea', _vm._b({ref: 'textarea', staticClass: 'textarea', class: [_vm.inputClasses, _vm.customClass], attrs: {'maxlength': _vm.maxlength}, domProps: {'value': _vm.computedValue}, on: {'input': _vm.onInput, 'blur': _vm.onBlur, 'focus': _vm.onFocus}}, 'textarea', _vm.$attrs, false)), _vm._v(' '), (_vm.icon) ? _c('b-icon', {staticClass: 'is-left', class: {'is-clickable': _vm.iconClickable}, attrs: {'icon': _vm.icon, 'pack': _vm.iconPack, 'size': _vm.iconSize}, nativeOn: {'click': function ($event) { _vm.iconClick($event) }}}) : _vm._e(), _vm._v(' '), (!_vm.loading && (_vm.passwordReveal || _vm.statusTypeIcon)) ? _c('b-icon', {staticClass: 'is-right', class: { 'is-clickable': _vm.passwordReveal }, attrs: {'icon': _vm.passwordReveal ? _vm.passwordVisibleIcon : _vm.statusTypeIcon, 'pack': _vm.iconPack, 'size': _vm.iconSize, 'type': !_vm.passwordReveal ? _vm.statusType : 'is-primary', 'both': ''}, nativeOn: {'click': function ($event) { _vm.togglePasswordVisibility($event) }}}) : _vm._e(), _vm._v(' '), (_vm.maxlength && _vm.hasCounter && _vm.type !== 'number') ? _c('small', {staticClass: 'help counter', class: { 'is-invisible': !_vm.isFocused }}, [_vm._v('\n        ' + _vm._s(_vm.valueLength) + ' / ' + _vm._s(_vm.maxlength) + '\n    ')]) : _vm._e()], 1) }
-    var __vue_staticRenderFns__$3 = []
+  /* template */
+  var __vue_render__$3 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"control",class:_vm.rootClasses},[(_vm.type !== 'textarea')?_c('input',_vm._b({ref:"input",staticClass:"input",class:[_vm.inputClasses, _vm.customClass],attrs:{"type":_vm.newType,"autocomplete":_vm.newAutocomplete,"maxlength":_vm.maxlength},domProps:{"value":_vm.computedValue},on:{"input":_vm.onInput,"blur":_vm.onBlur,"focus":_vm.onFocus}},'input',_vm.$attrs,false)):_c('textarea',_vm._b({ref:"textarea",staticClass:"textarea",class:[_vm.inputClasses, _vm.customClass],attrs:{"maxlength":_vm.maxlength},domProps:{"value":_vm.computedValue},on:{"input":_vm.onInput,"blur":_vm.onBlur,"focus":_vm.onFocus}},'textarea',_vm.$attrs,false)),_vm._v(" "),(_vm.icon)?_c('b-icon',{staticClass:"is-left",class:{'is-clickable': _vm.iconClickable},attrs:{"icon":_vm.icon,"pack":_vm.iconPack,"size":_vm.iconSize},nativeOn:{"click":function($event){_vm.iconClick('icon-click', $event);}}}):_vm._e(),_vm._v(" "),(!_vm.loading && _vm.hasIconRight)?_c('b-icon',{staticClass:"is-right",class:{ 'is-clickable': _vm.passwordReveal || _vm.iconRightClickable },attrs:{"icon":_vm.rightIcon,"pack":_vm.iconPack,"size":_vm.iconSize,"type":_vm.rightIconType,"both":""},nativeOn:{"click":function($event){return _vm.rightIconClick($event)}}}):_vm._e(),_vm._v(" "),(_vm.maxlength && _vm.hasCounter && _vm.type !== 'number')?_c('small',{staticClass:"help counter",class:{ 'is-invisible': !_vm.isFocused }},[_vm._v("\n            "+_vm._s(_vm.valueLength)+" / "+_vm._s(_vm.maxlength)+"\n        ")]):_vm._e()],1)};
+  var __vue_staticRenderFns__$3 = [];
 
     /* style */
     const __vue_inject_styles__$3 = undefined;
@@ -2031,7 +1998,28 @@
               'type': _this.type
             }
         }
+      }, this.$slots.default.map(function (element) {
+        // skip returns and comments
+        if (!element.tag) {
+          return element;
+        }
+
+        var message;
+
+        if (first) {
+          message = _this.message;
+          first = false;
+        }
+
+        return createElement('b-field', {
+          attrs: {
+            type: _this.type,
+            message: message
+          }
+        }, [element]);
+      }));
     }
+  };
 
   /* script */
   const __vue_script__$3 = script$3;
@@ -2065,37 +2053,37 @@
       undefined
     );
 
-    var script$5 = {
-        name: 'BField',
-        components: _defineProperty({}, FieldBody.name, FieldBody),
-        props: {
-            type: [String, Object],
-            label: String,
-            labelFor: String,
-            message: [String, Array, Object],
-            grouped: Boolean,
-            groupMultiline: Boolean,
-            position: String,
-            expanded: Boolean,
-            horizontal: Boolean,
-            addons: {
-                type: Boolean,
-                default: true
-            },
-            customClass: String,
-            labelPosition: {
-                type: String,
-                default: function _default() {
-                    return config.defaultFieldLabelPosition
-                }
-            }
-        },
-        data: function data() {
-            return {
-                newType: this.type,
-                newMessage: this.message,
-                fieldLabelSize: null,
-                _isField: true // Used internally by Input and Select
+  var script$5 = {
+    name: 'BField',
+    components: _defineProperty({}, FieldBody.name, FieldBody),
+    props: {
+      type: [String, Object],
+      label: String,
+      labelFor: String,
+      message: [String, Array, Object],
+      grouped: Boolean,
+      groupMultiline: Boolean,
+      position: String,
+      expanded: Boolean,
+      horizontal: Boolean,
+      addons: {
+        type: Boolean,
+        default: true
+      },
+      customClass: String,
+      labelPosition: {
+        type: String,
+        default: function _default() {
+          return config.defaultFieldLabelPosition;
+        }
+      }
+    },
+    data: function data() {
+      return {
+        newType: this.type,
+        newMessage: this.message,
+        fieldLabelSize: null,
+        _isField: true // Used internally by Input and Select
 
   /* script */
   const __vue_script__$4 = script$4;

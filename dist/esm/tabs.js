@@ -108,7 +108,17 @@ var script = {
 
         this.refreshSlots()
     }
-}
+  },
+  mounted: function mounted() {
+    this.activeTab = this.getIndexByValue(this.value || 0);
+
+    if (this.activeTab < this.tabItems.length) {
+      this.tabItems[this.activeTab].isActive = true;
+    }
+
+    this.refreshSlots();
+  }
+};
 
 /* script */
 const __vue_script__ = script;
@@ -263,7 +273,55 @@ var script$1 = {
 
         return vnode
     }
-}
+  },
+  created: function created() {
+    if (!this.$parent.$data._isTabs) {
+      this.$destroy();
+      throw new Error('You should wrap bTabItem on a bTabs');
+    }
+
+    this.$parent.refreshSlots();
+  },
+  beforeDestroy: function beforeDestroy() {
+    this.$parent.refreshSlots();
+  },
+  render: function render(createElement) {
+    var _this = this;
+
+    // if destroy apply v-if
+    if (this.$parent.destroyOnHide) {
+      if (!this.isActive || !this.visible) {
+        return;
+      }
+    }
+
+    var vnode = createElement('div', {
+      directives: [{
+        name: 'show',
+        value: this.isActive && this.visible
+      }],
+      class: 'tab-item'
+    }, this.$slots.default); // check animated prop
+
+    if (this.$parent.animated) {
+      return createElement('transition', {
+        props: {
+          'name': this.transitionName
+        },
+        on: {
+          'before-enter': function beforeEnter() {
+            _this.$parent.isTransitioning = true;
+          },
+          'after-enter': function afterEnter() {
+            _this.$parent.isTransitioning = false;
+          }
+        }
+      }, [vnode]);
+    }
+
+    return vnode;
+  }
+};
 
 /* script */
 const __vue_script__$1 = script$1;

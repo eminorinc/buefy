@@ -2,68 +2,70 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-require('./chunk-2777282e.js')
-var helpers = require('./helpers.js')
-var __chunk_2 = require('./chunk-8806479f.js')
-require('./chunk-f45d15e3.js')
-require('./chunk-acfb68f5.js')
-var __chunk_5 = require('./chunk-13e039f5.js')
-require('./chunk-e79d8d75.js')
-require('./chunk-dfc41c37.js')
-var autocomplete = require('./autocomplete.js')
-var button = require('./button.js')
-var carousel = require('./carousel.js')
-require('./chunk-1f7d7e31.js')
-require('./chunk-9bb707ee.js')
-var checkbox = require('./checkbox.js')
-var collapse = require('./collapse.js')
-require('./chunk-aa4b9c17.js')
-require('./chunk-c5b5b708.js')
-require('./chunk-0dbbaff2.js')
-require('./chunk-28f7fb29.js')
-var clockpicker = require('./clockpicker.js')
-require('./chunk-611c489f.js')
-require('./chunk-e2dbd9f4.js')
-var datepicker = require('./datepicker.js')
-require('./chunk-adedbd8d.js')
-var datetimepicker = require('./datetimepicker.js')
-require('./chunk-eb7730a3.js')
-var dialog = require('./dialog.js')
-var dropdown = require('./dropdown.js')
-var field = require('./field.js')
-var icon = require('./icon.js')
-var input = require('./input.js')
-require('./chunk-f1df1c63.js')
-var loading = require('./loading.js')
-var menu = require('./menu.js')
-require('./chunk-f564bebb.js')
-var message = require('./message.js')
-var modal = require('./modal.js')
-var notification = require('./notification.js')
-require('./chunk-3e4462e4.js')
-var navbar = require('./navbar.js')
-var numberinput = require('./numberinput.js')
-require('./chunk-59adcd26.js')
-var pagination = require('./pagination.js')
-var progress = require('./progress.js')
-var radio = require('./radio.js')
-var rate = require('./rate.js')
-var select = require('./select.js')
-require('./chunk-f1b9bbd3.js')
-var slider = require('./slider.js')
-var snackbar = require('./snackbar.js')
-require('./chunk-3dffe6e7.js')
-var steps = require('./steps.js')
-var _switch = require('./switch.js')
-var table = require('./table.js')
-var tabs = require('./tabs.js')
-require('./chunk-e7e96257.js')
-var tag = require('./tag.js')
-var taginput = require('./taginput.js')
-var timepicker = require('./timepicker.js')
-var toast = require('./toast.js')
-var tooltip = require('./tooltip.js')
-var upload = require('./upload.js')
+require('./chunk-14c82365.js');
+var helpers = require('./helpers.js');
+var __chunk_2 = require('./chunk-cd0dcc1d.js');
+require('./chunk-c32e7fbb.js');
+require('./chunk-60f5141f.js');
+var __chunk_5 = require('./chunk-13e039f5.js');
+require('./chunk-603a4fbb.js');
+require('./chunk-bb40e5c3.js');
+var autocomplete = require('./autocomplete.js');
+var button = require('./button.js');
+var carousel = require('./carousel.js');
+require('./chunk-1f7d7e31.js');
+require('./chunk-39fc4311.js');
+var checkbox = require('./checkbox.js');
+var collapse = require('./collapse.js');
+require('./chunk-ce1a9c7a.js');
+require('./chunk-ae7e641a.js');
+require('./chunk-b85a4136.js');
+require('./chunk-a35c9951.js');
+var clockpicker = require('./clockpicker.js');
+require('./chunk-9d73d6d0.js');
+require('./chunk-c90dac9a.js');
+var datepicker = require('./datepicker.js');
+require('./chunk-07ccb422.js');
+var datetimepicker = require('./datetimepicker.js');
+require('./chunk-8c69e10a.js');
+var dialog = require('./dialog.js');
+var dropdown = require('./dropdown.js');
+var field = require('./field.js');
+var icon = require('./icon.js');
+var input = require('./input.js');
+require('./chunk-f1df1c63.js');
+var loading = require('./loading.js');
+var menu = require('./menu.js');
+require('./chunk-be5ed730.js');
+var message = require('./message.js');
+var modal = require('./modal.js');
+var notification = require('./notification.js');
+require('./chunk-13d78c1a.js');
+var navbar = require('./navbar.js');
+var numberinput = require('./numberinput.js');
+require('./chunk-758bc4b9.js');
+var pagination = require('./pagination.js');
+var progress = require('./progress.js');
+var radio = require('./radio.js');
+var rate = require('./rate.js');
+var select = require('./select.js');
+var skeleton = require('./skeleton.js');
+var sidebar = require('./sidebar.js');
+require('./chunk-ecc5e68e.js');
+var slider = require('./slider.js');
+var snackbar = require('./snackbar.js');
+require('./chunk-3dffe6e7.js');
+var steps = require('./steps.js');
+var _switch = require('./switch.js');
+var table = require('./table.js');
+var tabs = require('./tabs.js');
+require('./chunk-dbf7ac01.js');
+var tag = require('./tag.js');
+var taginput = require('./taginput.js');
+var timepicker = require('./timepicker.js');
+var toast = require('./toast.js');
+var tooltip = require('./tooltip.js');
+var upload = require('./upload.js');
 
 
 
@@ -93,6 +95,8 @@ var components = /*#__PURE__*/Object.freeze({
     Radio: radio.default,
     Rate: rate.default,
     Select: select.default,
+    Skeleton: skeleton.default,
+    Sidebar: sidebar.default,
     Slider: slider.default,
     Snackbar: snackbar.default,
     Steps: steps.default,

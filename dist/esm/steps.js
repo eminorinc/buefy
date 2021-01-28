@@ -47,22 +47,85 @@ var script = {
 
         }
     },
-    computed: {
-        mainClasses: function mainClasses() {
-            return [this.type, this.size]
-        },
-        stepItems: function stepItems() {
-            return this.defaultSlots.filter(function (vnode) {
-                return vnode.componentInstance && vnode.componentInstance.$data && vnode.componentInstance.$data._isStepItem
-            }).map(function (vnode) {
-                return vnode.componentInstance
-            })
-        },
-        reversedStepItems: function reversedStepItems() {
-            return this.stepItems.slice().reverse()
-        },
+    iconPack: String,
+    iconPrev: {
+      type: String,
+      default: function _default() {
+        return config.defaultIconPrev;
+      }
+    },
+    iconNext: {
+      type: String,
+      default: function _default() {
+        return config.defaultIconNext;
+      }
+    },
+    hasNavigation: {
+      type: Boolean,
+      default: true
+    },
+    vertical: {
+      type: Boolean,
+      default: false
+    },
+    position: String,
+    labelPosition: {
+      type: String,
+      validator: function validator(value) {
+        return ['bottom', 'right', 'left'].indexOf(value) > -1;
+      },
+      default: 'bottom'
+    },
+    rounded: {
+      type: Boolean,
+      default: true
+    },
+    mobileMode: {
+      type: String,
+      validator: function validator(value) {
+        return ['minimalist', 'compact'].indexOf(value) > -1;
+      },
+      default: 'minimalist'
+    },
+    ariaNextLabel: String,
+    ariaPreviousLabel: String
+  },
+  data: function data() {
+    return {
+      activeStep: 0,
+      defaultSlots: [],
+      contentHeight: 0,
+      isTransitioning: false,
+      _isSteps: true // Used internally by StepItem
 
-        /**
+    };
+  },
+  computed: {
+    wrapperClasses: function wrapperClasses() {
+      return [this.size, _defineProperty({
+        'is-vertical': this.vertical
+      }, this.position, this.position && this.vertical)];
+    },
+    mainClasses: function mainClasses() {
+      return [this.type, _defineProperty({
+        'has-label-right': this.labelPosition === 'right',
+        'has-label-left': this.labelPosition === 'left',
+        'is-animated': this.animated,
+        'is-rounded': this.rounded
+      }, "mobile-".concat(this.mobileMode), this.mobileMode !== null)];
+    },
+    stepItems: function stepItems() {
+      return this.defaultSlots.filter(function (vnode) {
+        return vnode.componentInstance && vnode.componentInstance.$data && vnode.componentInstance.$data._isStepItem;
+      }).map(function (vnode) {
+        return vnode.componentInstance;
+      });
+    },
+    reversedStepItems: function reversedStepItems() {
+      return this.stepItems.slice().reverse();
+    },
+
+    /**
      * Check the first visible step index.
      */
     firstVisibleStepIndex: function firstVisibleStepIndex() {
@@ -211,82 +274,116 @@ var script = {
             this.defaultSlots = this.$slots.default
         },
 
-        /**
+      if (this.activeStep < this.stepItems.length) {
+        var previous = this.activeStep;
+        this.stepItems.map(function (step, idx) {
+          if (step.isActive) {
+            previous = idx;
+
+            if (previous < _this.stepItems.length) {
+              _this.stepItems[previous].isActive = false;
+            }
+          }
+        });
+        this.stepItems[this.activeStep].isActive = true;
+      } else if (this.activeStep > 0) {
+        this.changeStep(this.activeStep - 1);
+      }
+    }
+  },
+  methods: {
+    refreshSlots: function refreshSlots() {
+      this.defaultSlots = this.$slots.default || [];
+    },
+
+    /**
      * Change the active step and emit change event.
      */
-        changeStep: function changeStep(newIndex) {
-            if (this.activeStep === newIndex) return
-            if (newIndex > this.stepItems.length) throw new Error('The index you trying to set is bigger than the steps length')
+    changeStep: function changeStep(newIndex) {
+      if (this.activeStep === newIndex) return;
+      if (newIndex > this.stepItems.length) throw new Error('The index you trying to set is bigger than the steps length');
 
-            if (this.activeStep < this.stepItems.length) {
-                this.stepItems[this.activeStep].deactivate(this.activeStep, newIndex)
-            }
+      if (this.activeStep < this.stepItems.length) {
+        this.stepItems[this.activeStep].deactivate(this.activeStep, newIndex);
+      }
 
-            this.stepItems[newIndex].activate(this.activeStep, newIndex)
-            this.activeStep = newIndex
-            this.$emit('change', newIndex)
-        },
+      this.stepItems[newIndex].activate(this.activeStep, newIndex);
+      this.activeStep = newIndex;
+      this.$emit('change', this.getValueByIndex(newIndex));
+    },
 
-        /**
+    /**
      * Return if the step should be clickable or not.
      */
-        isItemClickable: function isItemClickable(stepItem, index) {
-            if (stepItem.clickable === undefined) {
-                return this.activeStep > index
-            }
+    isItemClickable: function isItemClickable(stepItem, index) {
+      if (stepItem.clickable === undefined) {
+        return this.activeStep > index;
+      }
 
-            return stepItem.clickable
-        },
+      return stepItem.clickable;
+    },
 
-        /**
+    /**
      * Step click listener, emit input event and change active step.
      */
-        stepClick: function stepClick(value) {
-            this.$emit('input', value)
-            this.changeStep(value)
-        },
-
-        /**
-     * Previous button click listener.
-     */
-        prev: function prev() {
-            var _this = this
-
-            if (!this.hasPrev) return
-            var prevItemIdx = this.reversedStepItems.map(function (step, idx) {
-                return _this.stepItems.length - 1 - idx < _this.activeStep && step.visible
-            }).indexOf(true)
-
-            if (prevItemIdx >= 0) {
-                prevItemIdx = this.stepItems.length - 1 - prevItemIdx
-            }
-
-            this.$emit('input', prevItemIdx)
-            this.changeStep(prevItemIdx)
-        },
-
-        /**
-     * Previous button click listener.
-     */
-        next: function next() {
-            var _this2 = this
-
-            if (!this.hasNext) return
-            var nextItemIdx = this.stepItems.map(function (step, idx) {
-                return idx > _this2.activeStep && step.visible
-            }).indexOf(true)
-            this.$emit('input', nextItemIdx)
-            this.changeStep(nextItemIdx)
-        }
+    stepClick: function stepClick(index) {
+      this.$emit('input', this.getValueByIndex(index));
+      this.changeStep(index);
     },
-    mounted: function mounted() {
-        if (this.activeStep < this.stepItems.length) {
-            this.stepItems[this.activeStep].isActive = true
-        }
 
-        this.refreshSlots()
+    /**
+     * Previous button click listener.
+     */
+    prev: function prev() {
+      var _this2 = this;
+
+      if (!this.hasPrev) return;
+      var prevItemIdx = this.reversedStepItems.map(function (step, idx) {
+        return _this2.stepItems.length - 1 - idx < _this2.activeStep && step.visible;
+      }).indexOf(true);
+
+      if (prevItemIdx >= 0) {
+        prevItemIdx = this.stepItems.length - 1 - prevItemIdx;
+      }
+
+      this.$emit('input', this.getValueByIndex(prevItemIdx));
+      this.changeStep(prevItemIdx);
+    },
+
+    /**
+     * Previous button click listener.
+     */
+    next: function next() {
+      var _this3 = this;
+
+      if (!this.hasNext) return;
+      var nextItemIdx = this.stepItems.map(function (step, idx) {
+        return idx > _this3.activeStep && step.visible;
+      }).indexOf(true);
+      this.$emit('input', this.getValueByIndex(nextItemIdx));
+      this.changeStep(nextItemIdx);
+    },
+    getIndexByValue: function getIndexByValue(value) {
+      var index = this.stepItems.map(function (t) {
+        return t.$options.propsData ? t.$options.propsData.value : undefined;
+      }).indexOf(value);
+      return index >= 0 ? index : value;
+    },
+    getValueByIndex: function getValueByIndex(index) {
+      var propsData = this.stepItems[index].$options.propsData;
+      return propsData && propsData.value ? propsData.value : index;
     }
-}
+  },
+  mounted: function mounted() {
+    this.activeStep = this.getIndexByValue(this.value || 0);
+
+    if (this.activeStep < this.stepItems.length) {
+      this.stepItems[this.activeStep].isActive = true;
+    }
+
+    this.refreshSlots();
+  }
+};
 
 /* script */
 const __vue_script__ = script;
@@ -452,7 +549,57 @@ var script$1 = {
 
         return vnode
     }
-}
+  },
+  created: function created() {
+    if (!this.$parent.$data._isSteps) {
+      this.$destroy();
+      throw new Error('You should wrap bStepItem on a bSteps');
+    }
+
+    this.$parent.refreshSlots();
+  },
+  beforeDestroy: function beforeDestroy() {
+    this.$parent.refreshSlots();
+  },
+  render: function render(createElement) {
+    var _this = this;
+
+    // if destroy apply v-if
+    if (this.$parent.destroyOnHide) {
+      if (!this.isActive || !this.visible) {
+        return;
+      }
+    }
+
+    var vnode = createElement('div', {
+      directives: [{
+        name: 'show',
+        value: this.isActive && this.visible
+      }],
+      attrs: {
+        'class': 'step-item'
+      }
+    }, this.$slots.default); // check animated prop
+
+    if (this.$parent.animated) {
+      return createElement('transition', {
+        props: {
+          'name': this.transitionName
+        },
+        on: {
+          'before-enter': function beforeEnter() {
+            _this.$parent.isTransitioning = true;
+          },
+          'after-enter': function afterEnter() {
+            _this.$parent.isTransitioning = false;
+          }
+        }
+      }, [vnode]);
+    }
+
+    return vnode;
+  }
+};
 
 /* script */
 const __vue_script__$1 = script$1;

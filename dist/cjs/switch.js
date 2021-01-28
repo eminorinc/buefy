@@ -32,6 +32,11 @@ var __chunk_5 = require('./chunk-13e039f5.js');
 //
 //
 //
+//
+//
+//
+//
+//
 var script = {
   name: 'BSwitch',
   props: {

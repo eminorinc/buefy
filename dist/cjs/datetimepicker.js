@@ -2,20 +2,20 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var __chunk_1 = require('./chunk-2777282e.js')
-var helpers = require('./helpers.js')
-var __chunk_2 = require('./chunk-8806479f.js')
-var __chunk_3 = require('./chunk-f45d15e3.js')
-require('./chunk-acfb68f5.js')
-var __chunk_5 = require('./chunk-13e039f5.js')
-require('./chunk-e79d8d75.js')
-require('./chunk-aa4b9c17.js')
-require('./chunk-c5b5b708.js')
-require('./chunk-0dbbaff2.js')
-require('./chunk-28f7fb29.js')
-require('./chunk-611c489f.js')
-var __chunk_15 = require('./chunk-e2dbd9f4.js')
-var __chunk_16 = require('./chunk-adedbd8d.js')
+var __chunk_1 = require('./chunk-14c82365.js');
+var helpers = require('./helpers.js');
+var __chunk_2 = require('./chunk-cd0dcc1d.js');
+var __chunk_3 = require('./chunk-c32e7fbb.js');
+require('./chunk-60f5141f.js');
+var __chunk_5 = require('./chunk-13e039f5.js');
+require('./chunk-603a4fbb.js');
+require('./chunk-ce1a9c7a.js');
+require('./chunk-ae7e641a.js');
+require('./chunk-b85a4136.js');
+require('./chunk-a35c9951.js');
+require('./chunk-9d73d6d0.js');
+var __chunk_15 = require('./chunk-c90dac9a.js');
+var __chunk_16 = require('./chunk-07ccb422.js');
 
 var _components;
 var script = {
@@ -140,10 +140,9 @@ var script = {
           this.newValue = value;
         }
     },
-    data: function data() {
-        return {
-            newValue: this.value
-        }
+    editable: {
+      type: Boolean,
+      default: false
     },
     methods: {
         defaultDatetimeParser: function defaultDatetimeParser(date) {

@@ -203,7 +203,72 @@ var script$2 = {
           item.$emit('update:active', item.newActive);
         }
     }
-}
+  },
+  data: function data() {
+    return {
+      newActive: this.active,
+      newExpanded: this.expanded
+    };
+  },
+  computed: {
+    ariaRoleMenu: function ariaRoleMenu() {
+      return this.ariaRole === 'menuitem' ? this.ariaRole : null;
+    }
+  },
+  watch: {
+    active: function active(value) {
+      this.newActive = value;
+    },
+    expanded: function expanded(value) {
+      this.newExpanded = value;
+    }
+  },
+  methods: {
+    onClick: function onClick(event) {
+      if (this.disabled) return;
+      var menu = this.getMenu();
+      this.reset(this.$parent, menu);
+      this.newExpanded = !this.newExpanded;
+      this.$emit('update:expanded', this.newActive);
+
+      if (menu && menu.activable) {
+        this.newActive = true;
+        this.$emit('update:active', this.newActive);
+      }
+    },
+    reset: function reset(parent, menu) {
+      var _this = this;
+
+      var items = parent.$children.filter(function (c) {
+        return c.name === _this.name;
+      });
+      items.forEach(function (item) {
+        if (item !== _this) {
+          _this.reset(item, menu);
+
+          if (!parent.$data._isMenu || parent.$data._isMenu && parent.accordion) {
+            item.newExpanded = false;
+            item.$emit('update:expanded', item.newActive);
+          }
+
+          if (menu && menu.activable) {
+            item.newActive = false;
+            item.$emit('update:active', item.newActive);
+          }
+        }
+      });
+    },
+    getMenu: function getMenu() {
+      var parent = this.$parent;
+
+      while (parent && !parent.$data._isMenu) {
+        parent = parent.$parent;
+      }
+
+      return parent;
+    }
+  }
+};
 
 /* script */
 const __vue_script__$2 = script$2;

@@ -1,4 +1,4 @@
-/*! Buefy v0.8.9 | MIT License | github.com/buefy/buefy */
+/*! Buefy v0.8.20 | MIT License | github.com/buefy/buefy */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
     typeof define === 'function' && define.amd ? define(['exports'], factory) :
@@ -407,7 +407,6 @@
       return icons;
     };
 
-    //
     var script$2 = {
       name: 'BIcon',
       props: {
@@ -481,7 +480,51 @@
                 return this.component || config.defaultIconComponent
             }
         },
-        methods: {
+        newPack: function newPack() {
+          return this.pack || config.defaultIconPack;
+        },
+        newType: function newType() {
+          if (!this.type) return;
+          var splitType = [];
+
+          if (typeof this.type === 'string') {
+            splitType = this.type.split('-');
+          } else {
+            for (var key in this.type) {
+              if (this.type[key]) {
+                splitType = key.split('-');
+                break;
+              }
+            }
+          }
+
+          if (splitType.length <= 1) return;
+
+          var _splitType = splitType,
+              _splitType2 = _toArray(_splitType),
+              type = _splitType2.slice(1);
+
+          return "has-text-".concat(type.join('-'));
+        },
+        newCustomSize: function newCustomSize() {
+          return this.customSize || this.customSizeByPack;
+        },
+        customSizeByPack: function customSizeByPack() {
+          if (this.iconConfig && this.iconConfig.sizes) {
+            if (this.size && this.iconConfig.sizes[this.size] !== undefined) {
+              return this.iconConfig.sizes[this.size];
+            } else if (this.iconConfig.sizes.default) {
+              return this.iconConfig.sizes.default;
+            }
+          }
+
+          return null;
+        },
+        useIconComponent: function useIconComponent() {
+          return this.component || config.defaultIconComponent;
+        }
+      },
+      methods: {
         /**
         * Equivalent icon name of the MDI.
         */
@@ -607,7 +650,72 @@
               item.$emit('update:active', item.newActive);
             }
         }
-    }
+      },
+      data: function data() {
+        return {
+          newActive: this.active,
+          newExpanded: this.expanded
+        };
+      },
+      computed: {
+        ariaRoleMenu: function ariaRoleMenu() {
+          return this.ariaRole === 'menuitem' ? this.ariaRole : null;
+        }
+      },
+      watch: {
+        active: function active(value) {
+          this.newActive = value;
+        },
+        expanded: function expanded(value) {
+          this.newExpanded = value;
+        }
+      },
+      methods: {
+        onClick: function onClick(event) {
+          if (this.disabled) return;
+          var menu = this.getMenu();
+          this.reset(this.$parent, menu);
+          this.newExpanded = !this.newExpanded;
+          this.$emit('update:expanded', this.newActive);
+
+          if (menu && menu.activable) {
+            this.newActive = true;
+            this.$emit('update:active', this.newActive);
+          }
+        },
+        reset: function reset(parent, menu) {
+          var _this = this;
+
+          var items = parent.$children.filter(function (c) {
+            return c.name === _this.name;
+          });
+          items.forEach(function (item) {
+            if (item !== _this) {
+              _this.reset(item, menu);
+
+              if (!parent.$data._isMenu || parent.$data._isMenu && parent.accordion) {
+                item.newExpanded = false;
+                item.$emit('update:expanded', item.newActive);
+              }
+
+              if (menu && menu.activable) {
+                item.newActive = false;
+                item.$emit('update:active', item.newActive);
+              }
+            }
+          });
+        },
+        getMenu: function getMenu() {
+          var parent = this.$parent;
+
+          while (parent && !parent.$data._isMenu) {
+            parent = parent.$parent;
+          }
+
+          return parent;
+        }
+      }
+    };
 
     /* script */
     const __vue_script__$3 = script$3;

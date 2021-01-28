@@ -518,8 +518,8 @@ var script$2 = {
     /**
     * When data prop change:
     *   1. Update internal value.
-    *   2. Reset newColumns (thead), in case it's on a v-for loop.
-    *   3. Sort again if it's not backend-sort.
+    *   2. Filter data if it's not backend-filtered.
+    *   3. Sort again if it's not backend-sorted.
     *   4. Set new total if it's not backend-paginated.
     */
     data: function data(value) {
@@ -581,14 +581,23 @@ var script$2 = {
       deep: true
     },
 
-                if (!this.backendPagination) {
-                    this.newDataTotal = this.newData.length
-                }
-            },
-            deep: true
-        },
+          if (!this.backendPagination) {
+            this.newDataTotal = this.newData.length;
+          }
 
-        /**
+          if (!this.backendSorting) {
+            if (this.sortMultiple && this.sortMultipleDataLocal && this.sortMultipleDataLocal.length > 0) {
+              this.doSortMultiColumn();
+            } else if (Object.keys(this.currentSortColumn).length > 0) {
+              this.doSortSingleColumn(this.currentSortColumn);
+            }
+          }
+        }
+      },
+      deep: true
+    },
+
+    /**
     * When the user wants to control the detailed rows via props.
     * Or wants to open the details of certain row with the router for example.
     */
@@ -632,7 +641,6 @@ var script$2 = {
 
       return sorted;
     },
-
     /**
     * Sort the column.
     * Toggle current direction on column if it's sortable
@@ -814,17 +822,17 @@ var script$2 = {
         var value = this.getValueByPath(row, key);
         if (value == null) return false;
 
-                if (Number.isInteger(value)) {
-                    if (value !== Number(this.filters[key])) return false
-                } else {
-                    var re = new RegExp(this.filters[key], 'i')
-                    if (typeof value === 'boolean') value = ''.concat(value)
-                    if (!value.match(re)) return false
-                }
-            }
+        var value = this.getValueByPath(row, key);
+        if (value == null) return false;
 
-            return true
-        },
+        if (Number.isInteger(value)) {
+          if (value !== Number(this.filters[key])) return false;
+        } else {
+          var re = new RegExp(this.filters[key], 'i');
+          if (typeof value === 'boolean') value = "".concat(value);
+          if (!value.match(re)) return false;
+        }
+      }
 
       return true;
     },
