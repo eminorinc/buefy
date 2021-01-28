@@ -282,6 +282,11 @@
                                         v-if="column.renderHtml"
                                         v-html="getValueByPath(row, column.field)"
                                     />
+                                    <slot
+                                        v-else-if="column.useSlot"
+                                        :row="row"
+                                        :index="index"
+                                        name="table-cell" />
                                     <template v-else>
                                         {{ getValueByPath(row, column.field) }}
                                     </template>
