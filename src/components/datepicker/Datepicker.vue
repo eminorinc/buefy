@@ -200,7 +200,6 @@
             :max="formatNative(maxDate)"
             :min="formatNative(minDate)"
             :disabled="disabled"
-            :readonly="readonly"
             v-bind="$attrs"
             :use-html5-validation="false"
             @change.native="onChangeNativePicker"
@@ -328,7 +327,6 @@ export default {
         focusedDate: Date,
         placeholder: String,
         editable: Boolean,
-        readonly: Boolean,
         disabled: Boolean,
         horizontalTimePicker: Boolean,
         unselectableDates: [Array, Function],
