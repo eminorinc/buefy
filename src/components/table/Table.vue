@@ -286,6 +286,7 @@
                                         v-else-if="column.useSlot"
                                         :row="row"
                                         :index="index"
+                                        :column="column.field"
                                         name="table-cell" />
                                     <template v-else>
                                         {{ getValueByPath(row, column.field) }}
