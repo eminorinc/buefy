@@ -284,7 +284,7 @@
                                     />
                                     <slot
                                         v-else-if="column.useSlot"
-                                        :row="row"
+                                        :row="Object.assign({}, row, { column: column })"
                                         :index="index"
                                         name="table-cell" />
                                     <template v-else>
