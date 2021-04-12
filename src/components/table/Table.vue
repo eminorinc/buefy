@@ -284,8 +284,9 @@
                                     />
                                     <slot
                                         v-else-if="column.useSlot"
-                                        :row="Object.assign({}, row, { column: column })"
+                                        :row="row"
                                         :index="index"
+                                        :column="column"
                                         name="table-cell" />
                                     <template v-else>
                                         {{ getValueByPath(row, column.field) }}
