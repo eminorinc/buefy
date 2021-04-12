@@ -292,6 +292,7 @@
                                     <slot
                                         :row="row"
                                         :index="index"
+                                        :column="column"
                                         name="table-cell" />
                                 </template>
                                 <template v-else-if="column.$scopedSlots && column.$scopedSlots.default">

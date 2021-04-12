@@ -92,11 +92,13 @@ var script = {
   },
   methods: {
     calculateLabel: function calculateLabel(column, index) {
-      if (column.mobileSortOptions) {
+      var mobileSortOptions = column.mobileSortOptions || column.$attrs['mobile-sort-options'];
+
+      if (mobileSortOptions) {
         if (index % 2 === 0) {
-          return "".concat(column.label, ": ").concat(column.mobileSortOptions[0]);
+          return "".concat(column.label, ": ").concat(mobileSortOptions[0]);
         } else {
-          return "".concat(column.label, ": ").concat(column.mobileSortOptions[1]);
+          return "".concat(column.label, ": ").concat(mobileSortOptions[1]);
         }
       }
 
