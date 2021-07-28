@@ -119,7 +119,7 @@ export default {
     },
     methods: {
         calculateLabel(column, index) {
-            const mobileSortOptions = column.mobileSortOptions || column.$attrs['mobile-sort-options']
+            const mobileSortOptions = column.mobileSortOptions || (column.$attrs && column.$attrs['mobile-sort-options'])
             if (mobileSortOptions) {
                 if (index % 2 === 0) {
                     return `${column.label}: ${mobileSortOptions[0]}`

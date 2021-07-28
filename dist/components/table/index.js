@@ -1505,7 +1505,7 @@
     },
     methods: {
       calculateLabel: function calculateLabel(column, index) {
-        var mobileSortOptions = column.mobileSortOptions || column.$attrs['mobile-sort-options'];
+        var mobileSortOptions = column.mobileSortOptions || column.$attrs && column.$attrs['mobile-sort-options'];
 
         if (mobileSortOptions) {
           if (index % 2 === 0) {
