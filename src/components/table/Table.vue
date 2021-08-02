@@ -61,9 +61,22 @@
                         <th v-if="showDetailRowIcon" width="40px"/>
                         <th class="checkbox-cell" v-if="checkable && checkboxPosition === 'left'">
                             <template v-if="headerCheckable">
-                                <b-checkbox
+                                <b-checkbox-button
+                                    v-if="useCheckboxButton"
                                     :value="isAllChecked"
                                     :disabled="isAllUncheckable"
+                                    :type="checkboxType"
+                                    :native-value="true"
+                                    @change.native="checkAll">
+                                    <fa-icon
+                                        class="has-text-grey-lighter"
+                                        :icon="['far', 'check']"/>
+                                </b-checkbox-button>
+                                <b-checkbox
+                                    v-else
+                                    :value="isAllChecked"
+                                    :disabled="isAllUncheckable"
+                                    :type="checkboxType"
                                     @change.native="checkAll"/>
                             </template>
                         </th>
@@ -143,9 +156,22 @@
                         </th>
                         <th class="checkbox-cell" v-if="checkable && checkboxPosition === 'right'">
                             <template v-if="headerCheckable">
-                                <b-checkbox
+                                <b-checkbox-button
+                                    v-if="useCheckboxButton"
                                     :value="isAllChecked"
                                     :disabled="isAllUncheckable"
+                                    :type="checkboxType"
+                                    :native-value="true"
+                                    @change.native="checkAll">
+                                    <fa-icon
+                                        class="has-text-grey-lighter"
+                                        :icon="['far', 'check']"/>
+                                </b-checkbox-button>
+                                <b-checkbox
+                                    v-else
+                                    :value="isAllChecked"
+                                    :disabled="isAllUncheckable"
+                                    :type="checkboxType"
                                     @change.native="checkAll"/>
                             </template>
                         </th>
@@ -260,9 +286,22 @@
                             <td
                                 class="checkbox-cell"
                                 v-if="checkable && checkboxPosition === 'left'">
-                                <b-checkbox
+                                <b-checkbox-button
+                                    v-if="useCheckboxButton"
                                     :disabled="!isRowCheckable(row)"
                                     :value="isRowChecked(row)"
+                                    :type="checkboxType"
+                                    :native-value="true"
+                                    @click.native.prevent.stop="checkRow(row, index, $event)">
+                                    <fa-icon
+                                        class="has-text-grey-lighter"
+                                        :icon="['far', 'check']"/>
+                                </b-checkbox-button>
+                                <b-checkbox
+                                    v-else
+                                    :disabled="!isRowCheckable(row)"
+                                    :value="isRowChecked(row)"
+                                    :type="checkboxType"
                                     @click.native.prevent.stop="checkRow(row, index, $event)"
                                 />
                             </td>
@@ -297,9 +336,22 @@
                             <td
                                 class="checkbox-cell"
                                 v-if="checkable && checkboxPosition === 'right'">
-                                <b-checkbox
+                                <b-checkbox-button
+                                    v-if="useCheckboxButton"
                                     :disabled="!isRowCheckable(row)"
                                     :value="isRowChecked(row)"
+                                    :type="checkboxType"
+                                    :native-value="true"
+                                    @click.native.prevent.stop="checkRow(row, index, $event)">
+                                    <fa-icon
+                                        class="has-text-grey-lighter"
+                                        :icon="['far', 'check']"/>
+                                </b-checkbox-button>
+                                <b-checkbox
+                                    v-else
+                                    :disabled="!isRowCheckable(row)"
+                                    :value="isRowChecked(row)"
+                                    :type="checkboxType"
                                     @click.native.prevent.stop="checkRow(row, index, $event)"
                                 />
                             </td>
@@ -424,6 +476,11 @@ export default {
                 ].indexOf(value) >= 0
             }
         },
+        useCheckboxButton: {
+            type: Boolean,
+            default: false
+        },
+        checkboxType: String,
         selected: Object,
         isRowSelectable: {
             type: Function,
