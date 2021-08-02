@@ -278,7 +278,19 @@
                             <td
                                 :class="['checkbox-cell', { 'is-sticky': stickyCheckbox } ]"
                                 v-if="checkable && checkboxPosition === 'left'">
+                                <b-checkbox-button
+                                    v-if="useCheckboxButton"
+                                    :disabled="!isRowCheckable(row)"
+                                    :value="isRowChecked(row)"
+                                    :type="checkboxType"
+                                    :native-value="true"
+                                    @click.native.prevent.stop="checkRow(row, index, $event)">
+                                    <fa-icon
+                                        class="has-text-grey-lighter"
+                                        :icon="['far', 'check']"/>
+                                </b-checkbox-button>
                                 <b-checkbox
+                                    v-else
                                     autocomplete="off"
                                     :value="isRowChecked(row)"
                                     :type="checkboxType"
@@ -318,7 +330,19 @@
                             <td
                                 :class="['checkbox-cell', { 'is-sticky': stickyCheckbox } ]"
                                 v-if="checkable && checkboxPosition === 'right'">
+                                <b-checkbox-button
+                                    v-if="useCheckboxButton"
+                                    :disabled="!isRowCheckable(row)"
+                                    :value="isRowChecked(row)"
+                                    :type="checkboxType"
+                                    :native-value="true"
+                                    @click.native.prevent.stop="checkRow(row, index, $event)">
+                                    <fa-icon
+                                        class="has-text-grey-lighter"
+                                        :icon="['far', 'check']"/>
+                                </b-checkbox-button>
                                 <b-checkbox
+                                    v-else
                                     autocomplete="off"
                                     :value="isRowChecked(row)"
                                     :type="checkboxType"
@@ -487,6 +511,10 @@ export default {
             }
         },
         stickyCheckbox: {
+            type: Boolean,
+            default: false
+        },
+        useCheckboxButton: {
             type: Boolean,
             default: false
         },

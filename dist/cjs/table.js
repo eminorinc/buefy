@@ -284,6 +284,11 @@ var script$2 = {
         return ['left', 'right'].indexOf(value) >= 0;
       }
     },
+    useCheckboxButton: {
+      type: Boolean,
+      default: false
+    },
+    checkboxType: String,
     selected: Object,
     focusable: Boolean,
     customIsChecked: Function,
