@@ -5,19 +5,27 @@
   (global = global || self, factory(global.Field = {}));
 }(this, function (exports) { 'use strict';
 
-  function _defineProperty(obj, key, value) {
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
+  function _defineProperty(e, r, t) {
+    return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
+      value: t,
+      enumerable: !0,
+      configurable: !0,
+      writable: !0
+    }) : e[r] = t, e;
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
     }
-
-    return obj;
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : i + "";
   }
 
   var config = {
@@ -83,7 +91,6 @@
     },
     render: function render(createElement) {
       var _this = this;
-
       var first = true;
       return createElement('div', {
         attrs: {
@@ -94,14 +101,11 @@
         if (!element.tag) {
           return element;
         }
-
         var message;
-
         if (first) {
           message = _this.message;
           first = false;
         }
-
         return createElement('b-field', {
           attrs: {
             type: _this.type,
@@ -214,22 +218,26 @@
     
     /* style inject SSR */
     
+    /* style inject shadow dom */
+    
 
     
-    var FieldBody = normalizeComponent_1(
+    const __vue_component__ = /*#__PURE__*/normalizeComponent_1(
       {},
       __vue_inject_styles__,
       __vue_script__,
       __vue_scope_id__,
       __vue_is_functional_template__,
       __vue_module_identifier__,
+      false,
+      undefined,
       undefined,
       undefined
     );
 
   var script$1 = {
     name: 'BField',
-    components: _defineProperty({}, FieldBody.name, FieldBody),
+    components: _defineProperty({}, __vue_component__.name, __vue_component__),
     props: {
       type: [String, Object],
       label: String,
@@ -258,7 +266,6 @@
         newMessage: this.message,
         fieldLabelSize: null,
         _isField: true // Used internally by Input and Select
-
       };
     },
     computed: {
@@ -271,7 +278,6 @@
           'is-floating-label': this.hasLabel && !this.horizontal && this.labelPosition === 'on-border'
         }, this.numberInputClasses];
       },
-
       /**
       * Correct Bulma class for the side of the addon or group.
       *
@@ -286,7 +292,6 @@
         var prefix = this.grouped ? 'is-grouped-' : 'has-addons-';
         if (this.position) return prefix + position[1];
       },
-
       /**
       * Formatted message in case it's an array
       * (each element is separated by <br> tag)
@@ -295,9 +300,7 @@
         if (typeof this.newMessage === 'string') {
           return [this.newMessage];
         }
-
         var messages = [];
-
         if (Array.isArray(this.newMessage)) {
           this.newMessage.forEach(function (message) {
             if (typeof message === 'string') {
@@ -317,7 +320,6 @@
             }
           }
         }
-
         return messages.filter(function (m) {
           if (m) return m;
         });
@@ -333,24 +335,19 @@
           var numberinput = this.$slots.default.filter(function (node) {
             return node.tag && node.tag.toLowerCase().indexOf('numberinput') >= 0;
           })[0];
-
           if (numberinput) {
             var classes = ['has-numberinput'];
             var controlsPosition = numberinput.componentOptions.propsData.controlsPosition;
             var size = numberinput.componentOptions.propsData.size;
-
             if (controlsPosition) {
               classes.push("has-numberinput-".concat(controlsPosition));
             }
-
             if (size) {
               classes.push("has-numberinput-".concat(size));
             }
-
             return classes;
           }
         }
-
         return null;
       }
     },
@@ -361,7 +358,6 @@
       type: function type(value) {
         this.newType = value;
       },
-
       /**
       * Set internal message when prop change.
       */
@@ -379,13 +375,11 @@
       fieldType: function fieldType() {
         if (this.grouped) return 'is-grouped';
         var renderedNode = 0;
-
         if (this.$slots.default) {
           renderedNode = this.$slots.default.reduce(function (i, node) {
             return node.tag ? i + 1 : i;
           }, 0);
         }
-
         if (renderedNode > 1 && this.addons && !this.horizontal) {
           return 'has-addons';
         }
@@ -395,7 +389,6 @@
       if (this.horizontal) {
         // Bulma docs: .is-normal for any .input or .button
         var elements = this.$el.querySelectorAll('.input, .select, .button, .textarea, .b-slider');
-
         if (elements.length > 0) {
           this.fieldLabelSize = 'is-normal';
         }
@@ -422,15 +415,19 @@
     
     /* style inject SSR */
     
+    /* style inject shadow dom */
+    
 
     
-    var Field = normalizeComponent_1(
+    const __vue_component__$1 = /*#__PURE__*/normalizeComponent_1(
       { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
       __vue_inject_styles__$1,
       __vue_script__$1,
       __vue_scope_id__$1,
       __vue_is_functional_template__$1,
       __vue_module_identifier__$1,
+      false,
+      undefined,
       undefined,
       undefined
     );
@@ -446,12 +443,12 @@
 
   var Plugin = {
     install: function install(Vue) {
-      registerComponent(Vue, Field);
+      registerComponent(Vue, __vue_component__$1);
     }
   };
   use(Plugin);
 
-  exports.BField = Field;
+  exports.BField = __vue_component__$1;
   exports.default = Plugin;
 
   Object.defineProperty(exports, '__esModule', { value: true });

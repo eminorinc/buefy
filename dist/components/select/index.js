@@ -5,85 +5,81 @@
   (global = global || self, factory(global.Select = {}));
 }(this, function (exports) { 'use strict';
 
-  function _typeof(obj) {
+  function _arrayLikeToArray(r, a) {
+    (null == a || a > r.length) && (a = r.length);
+    for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
+    return n;
+  }
+  function _arrayWithHoles(r) {
+    if (Array.isArray(r)) return r;
+  }
+  function _defineProperty(e, r, t) {
+    return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
+      value: t,
+      enumerable: !0,
+      configurable: !0,
+      writable: !0
+    }) : e[r] = t, e;
+  }
+  function _iterableToArray(r) {
+    if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r);
+  }
+  function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+  function ownKeys(e, r) {
+    var t = Object.keys(e);
+    if (Object.getOwnPropertySymbols) {
+      var o = Object.getOwnPropertySymbols(e);
+      r && (o = o.filter(function (r) {
+        return Object.getOwnPropertyDescriptor(e, r).enumerable;
+      })), t.push.apply(t, o);
+    }
+    return t;
+  }
+  function _objectSpread2(e) {
+    for (var r = 1; r < arguments.length; r++) {
+      var t = null != arguments[r] ? arguments[r] : {};
+      r % 2 ? ownKeys(Object(t), !0).forEach(function (r) {
+        _defineProperty(e, r, t[r]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) {
+        Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+      });
+    }
+    return e;
+  }
+  function _toArray(r) {
+    return _arrayWithHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableRest();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : i + "";
+  }
+  function _typeof(o) {
     "@babel/helpers - typeof";
 
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof = function (obj) {
-        return typeof obj;
-      };
-    } else {
-      _typeof = function (obj) {
-        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-      };
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+      return typeof o;
+    } : function (o) {
+      return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+    }, _typeof(o);
+  }
+  function _unsupportedIterableToArray(r, a) {
+    if (r) {
+      if ("string" == typeof r) return _arrayLikeToArray(r, a);
+      var t = {}.toString.call(r).slice(8, -1);
+      return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0;
     }
-
-    return _typeof(obj);
-  }
-
-  function _defineProperty(obj, key, value) {
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
-    }
-
-    return obj;
-  }
-
-  function ownKeys(object, enumerableOnly) {
-    var keys = Object.keys(object);
-
-    if (Object.getOwnPropertySymbols) {
-      var symbols = Object.getOwnPropertySymbols(object);
-      if (enumerableOnly) symbols = symbols.filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-      });
-      keys.push.apply(keys, symbols);
-    }
-
-    return keys;
-  }
-
-  function _objectSpread2(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i] != null ? arguments[i] : {};
-
-      if (i % 2) {
-        ownKeys(Object(source), true).forEach(function (key) {
-          _defineProperty(target, key, source[key]);
-        });
-      } else if (Object.getOwnPropertyDescriptors) {
-        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-      } else {
-        ownKeys(Object(source)).forEach(function (key) {
-          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-        });
-      }
-    }
-
-    return target;
-  }
-
-  function _toArray(arr) {
-    return _arrayWithHoles(arr) || _iterableToArray(arr) || _nonIterableRest();
-  }
-
-  function _arrayWithHoles(arr) {
-    if (Array.isArray(arr)) return arr;
-  }
-
-  function _iterableToArray(iter) {
-    if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
-  }
-
-  function _nonIterableRest() {
-    throw new TypeError("Invalid attempt to destructure non-iterable instance");
   }
 
   var config = {
@@ -140,31 +136,26 @@
   /**
    * Merge function to replace Object.assign with deep merging possibility
    */
-
   var isObject = function isObject(item) {
     return _typeof(item) === 'object' && !Array.isArray(item);
   };
-
-  var mergeFn = function mergeFn(target, source) {
+  var _mergeFn = function mergeFn(target, source) {
     var deep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
     if (deep || !Object.assign) {
       var isDeep = function isDeep(prop) {
         return isObject(source[prop]) && target !== null && target.hasOwnProperty(prop) && isObject(target[prop]);
       };
-
       var replaced = Object.getOwnPropertyNames(source).map(function (prop) {
-        return _defineProperty({}, prop, isDeep(prop) ? mergeFn(target[prop], source[prop], deep) : source[prop]);
+        return _defineProperty({}, prop, isDeep(prop) ? _mergeFn(target[prop], source[prop], deep) : source[prop]);
       }).reduce(function (a, b) {
-        return _objectSpread2({}, a, {}, b);
+        return _objectSpread2(_objectSpread2({}, a), b);
       }, {});
-      return _objectSpread2({}, target, {}, replaced);
+      return _objectSpread2(_objectSpread2({}, target), replaced);
     } else {
       return Object.assign(target, source);
     }
   };
-
-  var merge = mergeFn;
+  var merge = _mergeFn;
 
   var mdiIcons = {
     sizes: {
@@ -175,7 +166,6 @@
     },
     iconPrefix: 'mdi-'
   };
-
   var faIcons = function faIcons() {
     var faIconPrefix = config && config.defaultIconComponent ? '' : 'fa-';
     return {
@@ -200,7 +190,6 @@
       }
     };
   };
-
   var getIcons = function getIcons() {
     var icons = {
       mdi: mdiIcons,
@@ -211,11 +200,9 @@
       fab: faIcons(),
       fal: faIcons()
     };
-
     if (config && config.customIconPacks) {
       icons = merge(icons, config.customIconPacks, true);
     }
-
     return icons;
   };
 
@@ -230,7 +217,6 @@
       customSize: String,
       customClass: String,
       both: Boolean // This is used internally to show both MDI and FA icon
-
     },
     computed: {
       iconConfig: function iconConfig() {
@@ -241,10 +227,8 @@
         if (this.iconConfig && this.iconConfig.iconPrefix) {
           return this.iconConfig.iconPrefix;
         }
-
         return '';
       },
-
       /**
       * Internal icon name based on the pack.
       * If pack is 'fa', gets the equivalent FA icon name of the MDI,
@@ -259,7 +243,6 @@
       newType: function newType() {
         if (!this.type) return;
         var splitType = [];
-
         if (typeof this.type === 'string') {
           splitType = this.type.split('-');
         } else {
@@ -270,13 +253,10 @@
             }
           }
         }
-
         if (splitType.length <= 1) return;
-
         var _splitType = splitType,
-            _splitType2 = _toArray(_splitType),
-            type = _splitType2.slice(1);
-
+          _splitType2 = _toArray(_splitType),
+          type = _splitType2.slice(1);
         return "has-text-".concat(type.join('-'));
       },
       newCustomSize: function newCustomSize() {
@@ -290,7 +270,6 @@
             return this.iconConfig.sizes.default;
           }
         }
-
         return null;
       },
       useIconComponent: function useIconComponent() {
@@ -306,11 +285,9 @@
         if (!this.both) {
           return value;
         }
-
         if (this.iconConfig && this.iconConfig.internalIcons && this.iconConfig.internalIcons[value]) {
           return this.iconConfig.internalIcons[value];
         }
-
         return value;
       }
     }
@@ -420,15 +397,19 @@
     
     /* style inject SSR */
     
+    /* style inject shadow dom */
+    
 
     
-    var Icon = normalizeComponent_1(
+    const __vue_component__ = /*#__PURE__*/normalizeComponent_1(
       { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
       __vue_inject_styles__,
       __vue_script__,
       __vue_scope_id__,
       __vue_is_functional_template__,
       __vue_module_identifier__,
+      false,
+      undefined,
       undefined,
       undefined
     );
@@ -465,23 +446,19 @@
        */
       parentField: function parentField() {
         var parent = this.$parent;
-
         for (var i = 0; i < 3; i++) {
           if (parent && !parent.$data._isField) {
             parent = parent.$parent;
           }
         }
-
         return parent;
       },
-
       /**
        * Get the type prop from parent if it's a Field.
        */
       statusType: function statusType() {
         if (!this.parentField) return;
         if (!this.parentField.newType) return;
-
         if (typeof this.parentField.newType === 'string') {
           return this.parentField.newType;
         } else {
@@ -492,7 +469,6 @@
           }
         }
       },
-
       /**
        * Get the message prop from parent if it's a Field.
        */
@@ -500,7 +476,6 @@
         if (!this.parentField) return;
         return this.parentField.newMessage || this.parentField.$slots.message;
       },
-
       /**
        * Fix icon size for inputs, large was too big
        */
@@ -508,10 +483,8 @@
         switch (this.size) {
           case 'is-small':
             return this.size;
-
           case 'is-medium':
             return;
-
           case 'is-large':
             return this.newIconPack === 'mdi' ? 'is-medium' : '';
         }
@@ -523,11 +496,9 @@
        */
       focus: function focus() {
         var _this = this;
-
         if (this.$data._elementRef === undefined) return;
         this.$nextTick(function () {
           var el = _this.$el.querySelector(_this.$data._elementRef);
-
           if (el) el.focus();
         });
       },
@@ -550,22 +521,19 @@
       },
       setValidity: function setValidity(type, message) {
         var _this2 = this;
-
         this.$nextTick(function () {
           if (_this2.parentField) {
             // Set type only if not defined
             if (!_this2.parentField.type) {
               _this2.parentField.newType = type;
-            } // Set message only if not defined
-
-
+            }
+            // Set message only if not defined
             if (!_this2.parentField.message) {
               _this2.parentField.newMessage = message;
             }
           }
         });
       },
-
       /**
        * Check HTML5 validation, set isValid property.
        * If validation fail, send 'is-danger' type,
@@ -575,7 +543,6 @@
         if (!this.useHtml5Validation) return;
         if (this.$refs[this.$data._elementRef] === undefined) return;
         if (this.getElement() === null) return;
-
         if (!this.getElement().checkValidity()) {
           this.setInvalid();
           this.isValid = false;
@@ -583,7 +550,6 @@
           this.setValidity(null, null);
           this.isValid = true;
         }
-
         return this.isValid;
       }
     }
@@ -591,7 +557,7 @@
 
   var script$1 = {
     name: 'BSelect',
-    components: _defineProperty({}, Icon.name, Icon),
+    components: _defineProperty({}, __vue_component__.name, __vue_component__),
     mixins: [FormElementMixin],
     inheritAttrs: false,
     props: {
@@ -601,8 +567,7 @@
       },
       placeholder: String,
       multiple: Boolean,
-      nativeSize: [String, Number],
-      customStyle: String
+      nativeSize: [String, Number]
     },
     data: function data() {
       return {
@@ -648,7 +613,7 @@
   const __vue_script__$1 = script$1;
 
   /* template */
-  var __vue_render__$1 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"control",class:{ 'is-expanded': _vm.expanded, 'has-icons-left': _vm.icon },style:(_vm.customStyle)},[_c('span',{staticClass:"select",class:_vm.spanClasses},[_c('select',_vm._b({directives:[{name:"model",rawName:"v-model",value:(_vm.computedValue),expression:"computedValue"}],ref:"select",attrs:{"multiple":_vm.multiple,"size":_vm.nativeSize},on:{"blur":function($event){_vm.$emit('blur', $event) && _vm.checkHtml5Validity();},"focus":function($event){_vm.$emit('focus', $event);},"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.computedValue=$event.target.multiple ? $$selectedVal : $$selectedVal[0];}}},'select',_vm.$attrs,false),[(_vm.placeholder)?[(_vm.computedValue == null)?_c('option',{attrs:{"disabled":"","hidden":""},domProps:{"value":null}},[_vm._v("\n                        "+_vm._s(_vm.placeholder)+"\n                    ")]):_vm._e()]:_vm._e(),_vm._v(" "),_vm._t("default")],2)]),_vm._v(" "),(_vm.icon)?_c('b-icon',{staticClass:"is-left",attrs:{"icon":_vm.icon,"pack":_vm.iconPack,"size":_vm.iconSize}}):_vm._e()],1)};
+  var __vue_render__$1 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"control",class:{ 'is-expanded': _vm.expanded, 'has-icons-left': _vm.icon }},[_c('span',{staticClass:"select",class:_vm.spanClasses},[_c('select',_vm._b({directives:[{name:"model",rawName:"v-model",value:(_vm.computedValue),expression:"computedValue"}],ref:"select",attrs:{"multiple":_vm.multiple,"size":_vm.nativeSize},on:{"blur":function($event){_vm.$emit('blur', $event) && _vm.checkHtml5Validity();},"focus":function($event){_vm.$emit('focus', $event);},"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.computedValue=$event.target.multiple ? $$selectedVal : $$selectedVal[0];}}},'select',_vm.$attrs,false),[(_vm.placeholder)?[(_vm.computedValue == null)?_c('option',{attrs:{"disabled":"","hidden":""},domProps:{"value":null}},[_vm._v("\n                        "+_vm._s(_vm.placeholder)+"\n                    ")]):_vm._e()]:_vm._e(),_vm._v(" "),_vm._t("default")],2)]),_vm._v(" "),(_vm.icon)?_c('b-icon',{staticClass:"is-left",attrs:{"icon":_vm.icon,"pack":_vm.iconPack,"size":_vm.iconSize}}):_vm._e()],1)};
   var __vue_staticRenderFns__$1 = [];
 
     /* style */
@@ -663,15 +628,19 @@
     
     /* style inject SSR */
     
+    /* style inject shadow dom */
+    
 
     
-    var Select = normalizeComponent_1(
+    const __vue_component__$1 = /*#__PURE__*/normalizeComponent_1(
       { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
       __vue_inject_styles__$1,
       __vue_script__$1,
       __vue_scope_id__$1,
       __vue_is_functional_template__$1,
       __vue_module_identifier__$1,
+      false,
+      undefined,
       undefined,
       undefined
     );
@@ -687,12 +656,12 @@
 
   var Plugin = {
     install: function install(Vue) {
-      registerComponent(Vue, Select);
+      registerComponent(Vue, __vue_component__$1);
     }
   };
   use(Plugin);
 
-  exports.BSelect = Select;
+  exports.BSelect = __vue_component__$1;
   exports.default = Plugin;
 
   Object.defineProperty(exports, '__esModule', { value: true });

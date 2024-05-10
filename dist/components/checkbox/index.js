@@ -168,15 +168,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var Checkbox = normalizeComponent_1(
+      const __vue_component__ = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
         __vue_inject_styles__,
         __vue_script__,
         __vue_scope_id__,
         __vue_is_functional_template__,
         __vue_module_identifier__,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -202,7 +206,6 @@
           if (Array.isArray(this.newValue)) {
             return this.newValue.indexOf(this.nativeValue) >= 0;
           }
-
           return this.newValue === this.nativeValue;
         }
       }
@@ -230,15 +233,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var CheckboxButton = normalizeComponent_1(
+      const __vue_component__$1 = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
         __vue_inject_styles__$1,
         __vue_script__$1,
         __vue_scope_id__$1,
         __vue_is_functional_template__$1,
         __vue_module_identifier__$1,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -254,14 +261,14 @@
 
     var Plugin = {
       install: function install(Vue) {
-        registerComponent(Vue, Checkbox);
-        registerComponent(Vue, CheckboxButton);
+        registerComponent(Vue, __vue_component__);
+        registerComponent(Vue, __vue_component__$1);
       }
     };
     use(Plugin);
 
-    exports.BCheckbox = Checkbox;
-    exports.BCheckboxButton = CheckboxButton;
+    exports.BCheckbox = __vue_component__;
+    exports.BCheckboxButton = __vue_component__$1;
     exports.default = Plugin;
 
     Object.defineProperty(exports, '__esModule', { value: true });

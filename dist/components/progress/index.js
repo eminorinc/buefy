@@ -18,6 +18,7 @@
     //
     //
     //
+
     var script = {
       name: 'BProgress',
       props: {
@@ -65,13 +66,10 @@
           if (this.value === undefined || this.value === null || isNaN(this.value)) {
             return undefined;
           }
-
           if (this.format === 'percent') {
             var _val = this.toFixed(this.value * 100 / this.max);
-
             return "".concat(_val, "%");
           }
-
           var val = this.toFixed(this.value);
           return val;
         }
@@ -96,11 +94,9 @@
         // Custom function that imitate the javascript toFixed method with improved rounding
         toFixed: function toFixed(num) {
           var fixed = (+"".concat(Math.round(+"".concat(num, "e").concat(this.precision)), "e").concat(-this.precision)).toFixed(this.precision);
-
           if (!this.keepTrailingZeroes) {
             fixed = fixed.replace(/\.?0+$/, '');
           }
-
           return fixed;
         }
       },
@@ -213,15 +209,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var Progress = normalizeComponent_1(
+      const __vue_component__ = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
         __vue_inject_styles__,
         __vue_script__,
         __vue_scope_id__,
         __vue_is_functional_template__,
         __vue_module_identifier__,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -237,12 +237,12 @@
 
     var Plugin = {
       install: function install(Vue) {
-        registerComponent(Vue, Progress);
+        registerComponent(Vue, __vue_component__);
       }
     };
     use(Plugin);
 
-    exports.BProgress = Progress;
+    exports.BProgress = __vue_component__;
     exports.default = Plugin;
 
     Object.defineProperty(exports, '__esModule', { value: true });

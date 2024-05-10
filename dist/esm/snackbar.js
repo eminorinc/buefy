@@ -1,8 +1,8 @@
-import './chunk-1fafdf15.js';
+import './chunk-94a101ab.js';
 import { merge } from './helpers.js';
 import { c as config, V as VueInstance } from './chunk-6985c8ce.js';
 import { _ as __vue_normalize__, a as registerComponentProgrammatic, u as use } from './chunk-cca88db8.js';
-import { N as NoticeMixin } from './chunk-9ef3c066.js';
+import { N as NoticeMixin } from './chunk-bd8d2417.js';
 
 //
 var script = {
@@ -116,16 +116,20 @@ var __vue_staticRenderFns__ = [];
   const __vue_is_functional_template__ = false;
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Snackbar = __vue_normalize__(
+  const __vue_component__ = /*#__PURE__*/__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
     __vue_scope_id__,
     __vue_is_functional_template__,
     __vue_module_identifier__,
+    false,
     browser,
+    undefined,
     undefined
   );
 
@@ -133,26 +137,22 @@ var localVueInstance;
 var SnackbarProgrammatic = {
   open: function open(params) {
     var parent;
-
     if (typeof params === 'string') {
       params = {
         message: params
       };
     }
-
     var defaultParam = {
       type: 'is-success',
       position: config.defaultSnackbarPosition || 'is-bottom-right'
     };
-
     if (params.parent) {
       parent = params.parent;
       delete params.parent;
     }
-
     var propsData = merge(defaultParam, params);
     var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance;
-    var SnackbarComponent = vm.extend(Snackbar);
+    var SnackbarComponent = vm.extend(__vue_component__);
     return new SnackbarComponent({
       parent: parent,
       el: document.createElement('div'),
@@ -169,4 +169,4 @@ var Plugin = {
 use(Plugin);
 
 export default Plugin;
-export { Snackbar as BSnackbar, SnackbarProgrammatic };
+export { __vue_component__ as BSnackbar, SnackbarProgrammatic };

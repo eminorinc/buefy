@@ -1,7 +1,7 @@
-import { _ as _defineProperty } from './chunk-1fafdf15.js';
+import { _ as _defineProperty } from './chunk-94a101ab.js';
 import { merge, sign } from './helpers.js';
 import { c as config } from './chunk-6985c8ce.js';
-import { I as Icon } from './chunk-a376283d.js';
+import { I as Icon } from './chunk-665715e0.js';
 import { _ as __vue_normalize__, r as registerComponent, u as use } from './chunk-cca88db8.js';
 
 var script = {
@@ -135,7 +135,6 @@ var script = {
         this.changeItem(_value, false);
       }
     },
-
     /**
      * When carousel-items are updated, set active one.
      */
@@ -144,7 +143,6 @@ var script = {
         this.carouselItems[this.activeItem].isActive = true;
       }
     },
-
     /**
      *  When autoplay is change, set by status
      */
@@ -155,7 +153,6 @@ var script = {
   methods: {
     startTimer: function startTimer() {
       var _this = this;
-
       if (!this.autoplay || this.timer) return;
       this.isPause = false;
       this.timer = setInterval(function () {
@@ -168,7 +165,6 @@ var script = {
     },
     pauseTimer: function pauseTimer() {
       this.isPause = true;
-
       if (this.timer) {
         clearInterval(this.timer);
         this.timer = null;
@@ -179,7 +175,6 @@ var script = {
         return this.pauseTimer();
       }
     },
-
     /**
      * Change the active item and emit change event.
      * action only for animated slide, there true = next, false = prev
@@ -187,11 +182,9 @@ var script = {
     changeItem: function changeItem(newIndex) {
       var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
       if (this.activeItem === newIndex) return;
-
       if (this.activeItem < this.carouselItems.length) {
         this.carouselItems[this.activeItem].status(false, action);
       }
-
       this.carouselItems[newIndex].status(true, action);
       this.activeItem = newIndex;
       this.$emit('change', newIndex);
@@ -226,7 +219,6 @@ var script = {
     dragStart: function dragStart(event) {
       if (!this.hasDrag) return;
       this.dragx = event.touches ? event.changedTouches[0].pageX : event.pageX;
-
       if (event.touches) {
         this.pauseTimer();
       } else {
@@ -237,7 +229,6 @@ var script = {
       if (!this.hasDrag) return;
       var detected = event.touches ? event.changedTouches[0].pageX : event.pageX;
       var diffX = detected - this.dragx;
-
       if (Math.abs(diffX) > 50) {
         if (diffX < 0) {
           this.next();
@@ -245,7 +236,6 @@ var script = {
           this.prev();
         }
       }
-
       if (event.touches) {
         this.startTimer();
       }
@@ -255,7 +245,6 @@ var script = {
     if (this.activeItem < this.carouselItems.length) {
       this.carouselItems[this.activeItem].isActive = true;
     }
-
     this.startTimer();
   },
   beforeDestroy: function beforeDestroy() {
@@ -282,15 +271,19 @@ var __vue_staticRenderFns__ = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Carousel = __vue_normalize__(
+  const __vue_component__ = /*#__PURE__*/__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
     __vue_scope_id__,
     __vue_is_functional_template__,
     __vue_module_identifier__,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -303,6 +296,7 @@ var __vue_staticRenderFns__ = [];
 //
 //
 //
+
 var script$1 = {
   name: 'BCarouselItem',
   data: function data() {
@@ -334,12 +328,10 @@ var script$1 = {
       this.$destroy();
       throw new Error('You should wrap bCarouselItem on a bCarousel');
     }
-
     this.$parent.carouselItems.push(this);
   },
   beforeDestroy: function beforeDestroy() {
     var index = this.$parent.carouselItems.indexOf(this);
-
     if (index >= 0) {
       this.$parent.carouselItems.splice(index, 1);
     }
@@ -365,15 +357,19 @@ var __vue_staticRenderFns__$1 = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var CarouselItem = __vue_normalize__(
+  const __vue_component__$1 = /*#__PURE__*/__vue_normalize__(
     { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
     __vue_inject_styles__$1,
     __vue_script__$1,
     __vue_scope_id__$1,
     __vue_is_functional_template__$1,
     __vue_module_identifier__$1,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -476,7 +472,6 @@ var script$2 = {
     value: function value(_value) {
       this.switchTo(_value);
     },
-
     /**
      * Only for overlay and as indicator.
      * when call overlay with click.
@@ -507,25 +502,21 @@ var script$2 = {
       if (this.breakpoints) {
         this.updateConfig();
       }
-
       this.getWidth();
     },
     updateConfig: function updateConfig() {
       var _this = this;
-
       var breakpoints = Object.keys(this.breakpoints).sort(function (a, b) {
         return b - a;
       });
       var checking;
       breakpoints.some(function (breakpoint) {
         checking = window.matchMedia("(min-width: ".concat(breakpoint, "px)")).matches;
-
         if (checking) {
           _this.settings = _this.config.breakpoints[breakpoint];
           return true;
         }
       });
-
       if (!checking) {
         this.settings = this.config;
       }
@@ -547,8 +538,8 @@ var script$2 = {
     },
     checkAsIndicator: function checkAsIndicator(value, e) {
       if (!this.asIndicator) return;
-      var timeCheck = new Date().getTime(); // al solution: holding, 100 - 400 not 100% but 200 is better!
-
+      var timeCheck = new Date().getTime();
+      // al solution: holding, 100 - 400 not 100% but 200 is better!
       if (!e.touches && timeCheck - this.hold > 200) return;
       this.switchTo(value);
     },
@@ -565,7 +556,6 @@ var script$2 = {
       this.dragEndX = event.touches ? event.touches[0].clientX : event.clientX;
       var deltaX = this.dragEndX - this.dragStartX;
       this.delta = deltaX < 0 ? Math.abs(deltaX) : -Math.abs(deltaX);
-
       if (!event.touches) {
         event.preventDefault();
       }
@@ -573,7 +563,6 @@ var script$2 = {
     dragEnd: function dragEnd(event) {
       var signCheck = 1 * sign(this.delta);
       var results = Math.round(Math.abs(this.delta / this.itemWidth) + 0.15); // Hack
-
       this.switchTo(this.activeItem + signCheck * results);
       this.dragging = false;
       this.delta = 0;
@@ -583,14 +572,12 @@ var script$2 = {
   },
   created: function created() {
     this.initConfig();
-
     if (typeof window !== 'undefined') {
       window.addEventListener('resize', this.update);
     }
   },
   mounted: function mounted() {
     var _this2 = this;
-
     this.$nextTick(function () {
       _this2.update();
     });
@@ -621,27 +608,31 @@ var __vue_staticRenderFns__$2 = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var CarouselList = __vue_normalize__(
+  const __vue_component__$2 = /*#__PURE__*/__vue_normalize__(
     { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
     __vue_inject_styles__$2,
     __vue_script__$2,
     __vue_scope_id__$2,
     __vue_is_functional_template__$2,
     __vue_module_identifier__$2,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin = {
   install: function install(Vue) {
-    registerComponent(Vue, Carousel);
-    registerComponent(Vue, CarouselItem);
-    registerComponent(Vue, CarouselList);
+    registerComponent(Vue, __vue_component__);
+    registerComponent(Vue, __vue_component__$1);
+    registerComponent(Vue, __vue_component__$2);
   }
 };
 use(Plugin);
 
 export default Plugin;
-export { Carousel as BCarousel, CarouselItem as BCarouselItem, CarouselList as BCarouselList };
+export { __vue_component__ as BCarousel, __vue_component__$1 as BCarouselItem, __vue_component__$2 as BCarouselList };

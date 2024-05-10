@@ -2,17 +2,16 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var __chunk_1 = require('./chunk-14c82365.js');
+var __chunk_1 = require('./chunk-f22477ff.js');
 require('./helpers.js');
 var __chunk_2 = require('./chunk-cd0dcc1d.js');
-var __chunk_4 = require('./chunk-60f5141f.js');
+var __chunk_4 = require('./chunk-ff4db405.js');
 var __chunk_5 = require('./chunk-13e039f5.js');
 var __chunk_23 = require('./chunk-3dffe6e7.js');
 
-var _components;
 var script = {
   name: 'BSteps',
-  components: (_components = {}, __chunk_1._defineProperty(_components, __chunk_4.Icon.name, __chunk_4.Icon), __chunk_1._defineProperty(_components, __chunk_23.SlotComponent.name, __chunk_23.SlotComponent), _components),
+  components: __chunk_1._defineProperty(__chunk_1._defineProperty({}, __chunk_4.Icon.name, __chunk_4.Icon), __chunk_23.SlotComponent.name, __chunk_23.SlotComponent),
   props: {
     value: [Number, String],
     type: [String, Object],
@@ -75,7 +74,6 @@ var script = {
       contentHeight: 0,
       isTransitioning: false,
       _isSteps: true // Used internally by StepItem
-
     };
   },
   computed: {
@@ -102,7 +100,6 @@ var script = {
     reversedStepItems: function reversedStepItems() {
       return this.stepItems.slice().reverse();
     },
-
     /**
      * Check the first visible step index.
      */
@@ -111,14 +108,12 @@ var script = {
         return step.visible;
       }).indexOf(true);
     },
-
     /**
      * Check if previous button is available.
      */
     hasPrev: function hasPrev() {
       return this.firstVisibleStepIndex >= 0 && this.activeStep > this.firstVisibleStepIndex;
     },
-
     /**
      * Check the last visible step index.
      */
@@ -126,14 +121,11 @@ var script = {
       var idx = this.reversedStepItems.map(function (step, idx) {
         return step.visible;
       }).indexOf(true);
-
       if (idx >= 0) {
         return this.stepItems.length - 1 - idx;
       }
-
       return idx;
     },
-
     /**
      * Check if next button is available.
      */
@@ -161,19 +153,16 @@ var script = {
       var index = this.getIndexByValue(_value);
       this.changeStep(index);
     },
-
     /**
     * When step-items are updated, set active one.
     */
     stepItems: function stepItems() {
       var _this = this;
-
       if (this.activeStep < this.stepItems.length) {
         var previous = this.activeStep;
         this.stepItems.map(function (step, idx) {
           if (step.isActive) {
             previous = idx;
-
             if (previous < _this.stepItems.length) {
               _this.stepItems[previous].isActive = false;
             }
@@ -189,23 +178,19 @@ var script = {
     refreshSlots: function refreshSlots() {
       this.defaultSlots = this.$slots.default || [];
     },
-
     /**
      * Change the active step and emit change event.
      */
     changeStep: function changeStep(newIndex) {
       if (this.activeStep === newIndex) return;
       if (newIndex > this.stepItems.length) throw new Error('The index you trying to set is bigger than the steps length');
-
       if (this.activeStep < this.stepItems.length) {
         this.stepItems[this.activeStep].deactivate(this.activeStep, newIndex);
       }
-
       this.stepItems[newIndex].activate(this.activeStep, newIndex);
       this.activeStep = newIndex;
       this.$emit('change', this.getValueByIndex(newIndex));
     },
-
     /**
      * Return if the step should be clickable or not.
      */
@@ -213,10 +198,8 @@ var script = {
       if (stepItem.clickable === undefined) {
         return this.activeStep > index;
       }
-
       return stepItem.clickable;
     },
-
     /**
      * Step click listener, emit input event and change active step.
      */
@@ -224,32 +207,26 @@ var script = {
       this.$emit('input', this.getValueByIndex(index));
       this.changeStep(index);
     },
-
     /**
      * Previous button click listener.
      */
     prev: function prev() {
       var _this2 = this;
-
       if (!this.hasPrev) return;
       var prevItemIdx = this.reversedStepItems.map(function (step, idx) {
         return _this2.stepItems.length - 1 - idx < _this2.activeStep && step.visible;
       }).indexOf(true);
-
       if (prevItemIdx >= 0) {
         prevItemIdx = this.stepItems.length - 1 - prevItemIdx;
       }
-
       this.$emit('input', this.getValueByIndex(prevItemIdx));
       this.changeStep(prevItemIdx);
     },
-
     /**
      * Previous button click listener.
      */
     next: function next() {
       var _this3 = this;
-
       if (!this.hasNext) return;
       var nextItemIdx = this.stepItems.map(function (step, idx) {
         return idx > _this3.activeStep && step.visible;
@@ -270,11 +247,9 @@ var script = {
   },
   mounted: function mounted() {
     this.activeStep = this.getIndexByValue(this.value || 0);
-
     if (this.activeStep < this.stepItems.length) {
       this.stepItems[this.activeStep].isActive = true;
     }
-
     this.refreshSlots();
   }
 };
@@ -301,15 +276,19 @@ var __vue_staticRenderFns__ = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Steps = __chunk_5.__vue_normalize__(
+  const __vue_component__ = /*#__PURE__*/__chunk_5.__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
     __vue_scope_id__,
     __vue_is_functional_template__,
     __vue_module_identifier__,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -337,7 +316,6 @@ var script$1 = {
       isActive: false,
       transitionName: null,
       _isStepItem: true // Used internally by Step
-
     };
   },
   methods: {
@@ -348,7 +326,6 @@ var script$1 = {
       this.transitionName = index < oldIndex ? this.$parent.vertical ? 'slide-down' : 'slide-next' : this.$parent.vertical ? 'slide-up' : 'slide-prev';
       this.isActive = true;
     },
-
     /**
     * Deactivate step, alter animation name based on the index.
     */
@@ -362,7 +339,6 @@ var script$1 = {
       this.$destroy();
       throw new Error('You should wrap bStepItem on a bSteps');
     }
-
     this.$parent.refreshSlots();
   },
   beforeDestroy: function beforeDestroy() {
@@ -370,14 +346,12 @@ var script$1 = {
   },
   render: function render(createElement) {
     var _this = this;
-
     // if destroy apply v-if
     if (this.$parent.destroyOnHide) {
       if (!this.isActive || !this.visible) {
         return;
       }
     }
-
     var vnode = createElement('div', {
       directives: [{
         name: 'show',
@@ -386,8 +360,8 @@ var script$1 = {
       attrs: {
         'class': 'step-item'
       }
-    }, this.$slots.default); // check animated prop
-
+    }, this.$slots.default);
+    // check animated prop
     if (this.$parent.animated) {
       return createElement('transition', {
         props: {
@@ -403,7 +377,6 @@ var script$1 = {
         }
       }, [vnode]);
     }
-
     return vnode;
   }
 };
@@ -425,27 +398,31 @@ const __vue_script__$1 = script$1;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var StepItem = __chunk_5.__vue_normalize__(
+  const __vue_component__$1 = /*#__PURE__*/__chunk_5.__vue_normalize__(
     {},
     __vue_inject_styles__$1,
     __vue_script__$1,
     __vue_scope_id__$1,
     __vue_is_functional_template__$1,
     __vue_module_identifier__$1,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin = {
   install: function install(Vue) {
-    __chunk_5.registerComponent(Vue, Steps);
-    __chunk_5.registerComponent(Vue, StepItem);
+    __chunk_5.registerComponent(Vue, __vue_component__);
+    __chunk_5.registerComponent(Vue, __vue_component__$1);
   }
 };
 __chunk_5.use(Plugin);
 
-exports.BStepItem = StepItem;
-exports.BSteps = Steps;
+exports.BStepItem = __vue_component__$1;
+exports.BSteps = __vue_component__;
 exports.default = Plugin;

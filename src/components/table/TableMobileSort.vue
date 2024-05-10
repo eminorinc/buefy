@@ -1,54 +1,87 @@
 <template>
-    <div
-        :style="customStyle"
-        class="table-mobile-sort"
-        style="z-index:0;width:1px;height:1px;right:83px;position:absolute;
-        background:transparent;top:0;-moz-appearance:none;-webkit-appearance: none;"
-    >
-        <b-select
-            v-model="sortMultipleSelect"
-            expanded
-            v-if="sortMultiple">
-            <option
-                v-for="(column, index) in columns"
-                v-if="column.sortable"
-                :key="index"
-                :value="column">
-                {{ getLabel(column) }}
-                <template v-if="getSortingObjectOfColumn(column)">
-                    <template v-if="columnIsDesc(column)">
-                        &#8595;
-                    </template>
-                    <template v-else>
-                        &#8593;
-                    </template>
-                </template>
-            </option>
-        </b-select>
-        <b-select
-            :custom-style="customSelectStyle"
-            v-model="mobileSort"
-            class="mobile-sort"
-            v-else
-        >
-            <template v-if="placeholder">
+    <div class="field table-mobile-sort">
+        <div class="field has-addons">
+            <b-select
+                v-model="sortMultipleSelect"
+                expanded
+                v-if="sortMultiple">
                 <option
-                    v-show="showPlaceholder"
-                    :value="{}"
-                    selected
-                    disabled
-                    hidden>
-                    {{ placeholder }}
+                    v-for="(column, index) in columns"
+                    v-if="column.sortable"
+                    :key="index"
+                    :value="column">
+                    {{ getLabel(column) }}
+                    <template v-if="getSortingObjectOfColumn(column)">
+                        <template v-if="columnIsDesc(column)">
+                            &#8595;
+                        </template>
+                        <template v-else>
+                            &#8593;
+                        </template>
+                    </template>
                 </option>
-            </template>
-            <option
-                v-for="(column, index) in calculateParsedColumns"
-                v-if="column.sortable"
-                :key="index"
-                :value="{column, index}">
-                {{ calculateLabel(column, index) }}
-            </option>
-        </b-select>
+            </b-select>
+            <b-select
+                v-model="mobileSort"
+                expanded
+                v-else>
+                <template v-if="placeholder">
+                    <option
+                        v-show="showPlaceholder"
+                        :value="{}"
+                        selected
+                        disabled
+                        hidden>
+                        {{ placeholder }}
+                    </option>
+                </template>
+                <option
+                    v-for="(column, index) in columns"
+                    v-if="column.sortable"
+                    :key="index"
+                    :value="column">
+                    {{ column.label }}
+                </option>
+            </b-select>
+            <div class="control">
+                <template
+                    v-if="sortMultiple && sortMultipleData.length > 0" >
+                    <button
+                        class="button is-primary"
+                        @click="sort">
+                        <b-icon
+                            :class="{ 'is-desc': columnIsDesc(sortMultipleSelect) }"
+                            :icon="sortIcon"
+                            :pack="iconPack"
+                            :size="sortIconSize"
+                            both
+                        />
+                    </button>
+                    <button
+                        class="button is-primary"
+                        @click="removePriority">
+                        <b-icon
+                            icon="delete"
+                            :size="sortIconSize"
+                            both
+                        />
+                    </button>
+                </template>
+                <button
+                    v-else-if="!sortMultiple"
+                    class="button is-primary"
+                    @click="sort">
+                    <b-icon
+                        v-show="currentSortColumn === mobileSort"
+                        :class="{ 'is-desc': !isAsc }"
+                        :icon="sortIcon"
+                        :pack="iconPack"
+                        :size="sortIconSize"
+                        both
+                    />
+                </button>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -68,8 +101,15 @@ export default {
         isAsc: Boolean,
         columns: Array,
         placeholder: String,
-        customStyle: String,
-        customSelectStyle: String,
+        iconPack: String,
+        sortIcon: {
+            type: String,
+            default: 'arrow-up'
+        },
+        sortIconSize: {
+            type: String,
+            default: 'is-small'
+        },
         sortMultiple: {
             type: Boolean,
             default: false
@@ -78,7 +118,7 @@ export default {
     data() {
         return {
             sortMultipleSelect: '',
-            mobileSort: { column: this.currentSortColumn, index: null },
+            mobileSort: this.currentSortColumn,
             defaultEvent: {
                 shiftKey: true,
                 altKey: true,
@@ -88,12 +128,6 @@ export default {
         }
     },
     computed: {
-        calculateParsedColumns() {
-            if (this.columns) {
-                return this.columns.reduce((res, current) => [...res, current, current], [])
-            }
-            return []
-        },
         showPlaceholder() {
             return !this.columns || !this.columns.some((column) => column === this.mobileSort)
         }
@@ -106,28 +140,28 @@ export default {
                 this.$emit('sort', column, this.defaultEvent)
             }
         },
-        mobileSort(newVal, oldVal) {
-            if (newVal.column !== oldVal.column || newVal.index !== oldVal.index) {
-                if (this.currentSortColumn === newVal.column &&
-                    newVal.index === oldVal.index) return
-                this.$emit('sort', newVal.column, newVal.index % 2 === 0 ? 'asc' : 'desc')
-            }
+        mobileSort(column) {
+            if (this.currentSortColumn === column) return
+
+            this.$emit('sort', column, this.defaultEvent)
         },
         currentSortColumn(column) {
-            this.mobileSort.column = column
+            this.mobileSort = column
         }
     },
     methods: {
-        calculateLabel(column, index) {
-            const mobileSortOptions = column.mobileSortOptions || (column.$attrs && column.$attrs['mobile-sort-options'])
-            if (mobileSortOptions) {
-                if (index % 2 === 0) {
-                    return `${column.label}: ${mobileSortOptions[0]}`
-                } else {
-                    return `${column.label}: ${mobileSortOptions[1]}`
-                }
-            }
-            return column.label
+        removePriority() {
+            this.$emit('removePriority', this.sortMultipleSelect)
+            // ignore the watcher to sort when we just change whats displayed in the select
+            // otherwise the direction will be flipped
+            // The sort event is already triggered by the emit
+            this.ignoreSort = true
+            // Select one of the other options when we reset one
+            let remainingFields = this.sortMultipleData.filter((data) =>
+                data.field !== this.sortMultipleSelect.field)
+                .map((data) => data.field)
+            this.sortMultipleSelect = this.columns.filter((column) =>
+                remainingFields.includes(column.field))[0]
         },
         getSortingObjectOfColumn(column) {
             return this.sortMultipleData.filter((i) =>
@@ -146,6 +180,9 @@ export default {
                 return column.label + '(' + (this.sortMultipleData.indexOf(sortingObject) + 1) + ')'
             }
             return column.label
+        },
+        sort() {
+            this.$emit('sort', (this.sortMultiple ? this.sortMultipleSelect : this.mobileSort), this.defaultEvent)
         }
     }
 }

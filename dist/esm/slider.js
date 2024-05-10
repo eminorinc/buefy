@@ -1,7 +1,7 @@
-import { _ as _defineProperty, d as _toConsumableArray } from './chunk-1fafdf15.js';
+import { _ as _defineProperty, e as _toConsumableArray } from './chunk-94a101ab.js';
 import './chunk-6985c8ce.js';
 import { _ as __vue_normalize__, r as registerComponent, u as use } from './chunk-cca88db8.js';
-import { T as Tooltip } from './chunk-523d345f.js';
+import { T as Tooltip } from './chunk-b71f44ef.js';
 
 var script = {
   name: 'BSliderThumb',
@@ -71,7 +71,6 @@ var script = {
       if (this.disabled) return;
       event.preventDefault();
       this.onDragStart(event);
-
       if (typeof window !== 'undefined') {
         document.addEventListener('mousemove', this.onDragging);
         document.addEventListener('touchmove', this.onDragging);
@@ -107,11 +106,9 @@ var script = {
     onDragStart: function onDragStart(event) {
       this.dragging = true;
       this.$emit('dragstart');
-
       if (event.type === 'touchstart') {
         event.clientX = event.touches[0].clientX;
       }
-
       this.startX = event.clientX;
       this.startPosition = parseFloat(this.currentPosition);
       this.newPosition = this.startPosition;
@@ -121,7 +118,6 @@ var script = {
         if (event.type === 'touchmove') {
           event.clientX = event.touches[0].clientX;
         }
-
         var diff = (event.clientX - this.startX) / this.$parent.sliderSize() * 100;
         this.newPosition = this.startPosition + diff;
         this.setPosition(this.newPosition);
@@ -130,13 +126,10 @@ var script = {
     onDragEnd: function onDragEnd() {
       this.dragging = false;
       this.$emit('dragend');
-
       if (this.value !== this.oldValue) {
         this.$parent.emitValue('change');
       }
-
       this.setPosition(this.newPosition);
-
       if (typeof window !== 'undefined') {
         document.removeEventListener('mousemove', this.onDragging);
         document.removeEventListener('touchmove', this.onDragging);
@@ -147,19 +140,16 @@ var script = {
     },
     setPosition: function setPosition(percent) {
       if (percent === null || isNaN(percent)) return;
-
       if (percent < 0) {
         percent = 0;
       } else if (percent > 100) {
         percent = 100;
       }
-
       var stepLength = 100 / ((this.max - this.min) / this.step);
       var steps = Math.round(percent / stepLength);
       var value = steps * stepLength / 100 * (this.max - this.min) + this.min;
       value = parseFloat(value.toFixed(this.precision));
       this.$emit('input', value);
-
       if (!this.dragging && value !== this.oldValue) {
         this.oldValue = value;
       }
@@ -186,15 +176,19 @@ var __vue_staticRenderFns__ = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var SliderThumb = __vue_normalize__(
+  const __vue_component__ = /*#__PURE__*/__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
     __vue_scope_id__,
     __vue_is_functional_template__,
     __vue_module_identifier__,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -210,6 +204,7 @@ var __vue_staticRenderFns__ = [];
 //
 //
 //
+
 var script$1 = {
   name: 'BSliderTick',
   props: {
@@ -261,23 +256,26 @@ var __vue_staticRenderFns__$1 = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var SliderTick = __vue_normalize__(
+  const __vue_component__$1 = /*#__PURE__*/__vue_normalize__(
     { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
     __vue_inject_styles__$1,
     __vue_script__$1,
     __vue_scope_id__$1,
     __vue_is_functional_template__$1,
     __vue_module_identifier__$1,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
-var _components;
 var script$2 = {
   name: 'BSlider',
-  components: (_components = {}, _defineProperty(_components, SliderThumb.name, SliderThumb), _defineProperty(_components, SliderTick.name, SliderTick), _components),
+  components: _defineProperty(_defineProperty({}, __vue_component__.name, __vue_component__), __vue_component__$1.name, __vue_component__$1),
   props: {
     value: {
       type: [Number, Array],
@@ -335,7 +333,6 @@ var script$2 = {
       dragging: false,
       isRange: false,
       _isSlider: true // Used by Thumb and Tick
-
     };
   },
   computed: {
@@ -345,11 +342,9 @@ var script$2 = {
     tickValues: function tickValues() {
       if (!this.ticks || this.min > this.max || this.step === 0) return [];
       var result = [];
-
       for (var i = this.min + this.step; i < this.max; i = i + this.step) {
         result.push(i);
       }
-
       return result;
     },
     minValue: function minValue() {
@@ -411,7 +406,6 @@ var script$2 = {
       if (this.min > this.max) {
         return;
       }
-
       if (Array.isArray(newValue)) {
         this.isRange = true;
         var smallValue = typeof newValue[0] !== 'number' || isNaN(newValue[0]) ? this.min : Math.min(Math.max(this.min, newValue[0]), this.max);
@@ -428,11 +422,9 @@ var script$2 = {
       if (this.isRange) {
         this.isThumbReversed = this.value1 > this.value2;
       }
-
       if (!this.lazy || !this.dragging) {
         this.emitValue('input');
       }
-
       if (this.dragging) {
         this.emitValue('dragging');
       }
@@ -446,13 +438,11 @@ var script$2 = {
       var percent = (event.clientX - sliderOffsetLeft) / this.sliderSize() * 100;
       var targetValue = this.min + percent * (this.max - this.min) / 100;
       var diffFirst = Math.abs(targetValue - this.value1);
-
       if (!this.isRange) {
         if (diffFirst < this.step / 2) return;
         this.$refs.button1.setPosition(percent);
       } else {
         var diffSecond = Math.abs(targetValue - this.value2);
-
         if (diffFirst <= diffSecond) {
           if (diffFirst < this.step / 2) return;
           this.$refs['button1'].setPosition(percent);
@@ -461,7 +451,6 @@ var script$2 = {
           this.$refs['button2'].setPosition(percent);
         }
       }
-
       this.emitValue('change');
     },
     onDragStart: function onDragStart() {
@@ -470,7 +459,6 @@ var script$2 = {
     },
     onDragEnd: function onDragEnd() {
       var _this = this;
-
       this.isTrackClickDisabled = true;
       setTimeout(function () {
         // avoid triggering onSliderClick after dragend
@@ -478,7 +466,6 @@ var script$2 = {
       }, 0);
       this.dragging = false;
       this.$emit('dragend');
-
       if (this.lazy) {
         this.emitValue('input');
       }
@@ -513,26 +500,30 @@ var __vue_staticRenderFns__$2 = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Slider = __vue_normalize__(
+  const __vue_component__$2 = /*#__PURE__*/__vue_normalize__(
     { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
     __vue_inject_styles__$2,
     __vue_script__$2,
     __vue_scope_id__$2,
     __vue_is_functional_template__$2,
     __vue_module_identifier__$2,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin = {
   install: function install(Vue) {
-    registerComponent(Vue, Slider);
-    registerComponent(Vue, SliderTick);
+    registerComponent(Vue, __vue_component__$2);
+    registerComponent(Vue, __vue_component__$1);
   }
 };
 use(Plugin);
 
 export default Plugin;
-export { Slider as BSlider, SliderTick as BSliderTick };
+export { __vue_component__$2 as BSlider, __vue_component__$1 as BSliderTick };

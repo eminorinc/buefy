@@ -1,7 +1,7 @@
 import { _ as __vue_normalize__, r as registerComponent, u as use } from './chunk-cca88db8.js';
 import { C as CheckRadioMixin } from './chunk-a1a77ea5.js';
-import { C as Checkbox } from './chunk-c2cb52bb.js';
-export { C as BCheckbox } from './chunk-c2cb52bb.js';
+import { C as Checkbox } from './chunk-78b3e262.js';
+export { C as BCheckbox } from './chunk-78b3e262.js';
 
 //
 var script = {
@@ -24,7 +24,6 @@ var script = {
       if (Array.isArray(this.newValue)) {
         return this.newValue.indexOf(this.nativeValue) >= 0;
       }
-
       return this.newValue === this.nativeValue;
     }
   }
@@ -52,15 +51,19 @@ var __vue_staticRenderFns__ = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var CheckboxButton = __vue_normalize__(
+  const __vue_component__ = /*#__PURE__*/__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
     __vue_scope_id__,
     __vue_is_functional_template__,
     __vue_module_identifier__,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -68,10 +71,10 @@ var __vue_staticRenderFns__ = [];
 var Plugin = {
   install: function install(Vue) {
     registerComponent(Vue, Checkbox);
-    registerComponent(Vue, CheckboxButton);
+    registerComponent(Vue, __vue_component__);
   }
 };
 use(Plugin);
 
 export default Plugin;
-export { CheckboxButton as BCheckboxButton };
+export { __vue_component__ as BCheckboxButton };
