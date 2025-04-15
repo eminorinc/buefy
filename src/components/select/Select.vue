@@ -2,7 +2,6 @@
     <div
         class="control"
         :class="{ 'is-expanded': expanded, 'has-icons-left': icon }"
-        :style="customStyle"
     >
         <span class="select" :class="spanClasses">
 

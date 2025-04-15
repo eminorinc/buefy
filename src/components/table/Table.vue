@@ -14,7 +14,7 @@
             :icon-pack="iconPack"
             :sort-icon="sortIcon"
             :sort-icon-size="sortIconSize"
-            @sort="(column, event) => sort(column, null, event)"
+            @sort="(column) => sort(column)"
             @removePriority="(column) => removeSortingPriority(column)"
         />
         <template
