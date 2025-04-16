@@ -1,2 +1,501 @@
-/*! Buefy v0.6.7 | MIT License | github.com/buefy/buefy */
-!(function(t,e){if("object"==typeof exports&&"object"==typeof module)module.exports=e(require("vue"));else if("function"==typeof define&&define.amd)define(["vue"],e);else{var n=e("object"==typeof exports?require("vue"):t.Vue);for(var r in n)("object"==typeof exports?exports:t)[r]=n[r]}})("undefined"!=typeof self?self:this,(function(t){return (function(t){function e(r){if(n[r])return n[r].exports;var o=n[r]={i:r,l:!1,exports:{}};return t[r].call(o.exports,o,o.exports,e),o.l=!0,o.exports}var n={};return e.m=t,e.c=n,e.d=function(t,n,r){e.o(t,n)||Object.defineProperty(t,n,{configurable:!1,enumerable:!0,get:r})},e.n=function(t){var n=t&&t.__esModule?function(){return t.default}:function(){return t};return e.d(n,"a",n),n},e.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},e.p="/",e(e.s=260)})({0:function(t,e,n){t.exports=!n(7)((function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a}))},1:function(t,e){t.exports=function(t,e,n,r,o){var i,u=t=t||{},a=typeof t.default;"object"!==a&&"function"!==a||(i=t,u=t.default);var c="function"==typeof u?u.options:u;e&&(c.render=e.render,c.staticRenderFns=e.staticRenderFns),r&&(c._scopeId=r);var s;if(o?(s=function(t){t=t||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext,t||"undefined"==typeof __VUE_SSR_CONTEXT__||(t=__VUE_SSR_CONTEXT__),n&&n.call(this,t),t&&t._registeredComponents&&t._registeredComponents.add(o)},c._ssrRegister=s):n&&(s=n),s){var f=c.functional,l=f?c.render:c.beforeCreate;f?c.render=function(t,e){return s.call(e),l(t,e)}:c.beforeCreate=l?[].concat(l,s):[s]}return{esModule:i,exports:u,options:c}}},10:function(t,e,n){var r=n(37),o=n(26);t.exports=function(t){return r(o(t))}},110:function(t,e,n){"use strict";var r=n(14),o=n(46);e.a={props:{type:{type:String,default:"is-dark"},message:String,duration:Number,queue:{type:Boolean,default:void 0},position:{type:String,default:"is-top",validator:function(t){return["is-top-right","is-top","is-top-left","is-bottom-right","is-bottom","is-bottom-left"].indexOf(t)>-1}},container:String},data:function(){return{isActive:!1,parentTop:null,parentBottom:null,newContainer:this.container||r.a.defaultContainerElement}},computed:{correctParent:function(){switch(this.position){case"is-top-right":case"is-top":case"is-top-left":return this.parentTop;case"is-bottom-right":case"is-bottom":case"is-bottom-left":return this.parentBottom}},transition:function(){switch(this.position){case"is-top-right":case"is-top":case"is-top-left":return{enter:"fadeInDown",leave:"fadeOut"};case"is-bottom-right":case"is-bottom":case"is-bottom-left":return{enter:"fadeInUp",leave:"fadeOut"}}}},methods:{shouldQueue:function(){return!!(void 0!==this.queue?this.queue:r.a.defaultNoticeQueue)&&(this.parentTop.childElementCount>0||this.parentBottom.childElementCount>0)},close:function(){var t=this;clearTimeout(this.timer),this.isActive=!1,setTimeout((function(){t.$destroy(),Object(o.e)(t.$el)}),150)},showNotice:function(){var t=this;if(this.shouldQueue())return void setTimeout((function(){return t.showNotice()}),250);this.correctParent.insertAdjacentElement("afterbegin",this.$el),this.isActive=!0,this.indefinite||(this.timer=setTimeout((function(){return t.close()}),this.newDuration))},setupContainer:function(){if(this.parentTop=document.querySelector(".notices.is-top"),this.parentBottom=document.querySelector(".notices.is-bottom"),!this.parentTop||!this.parentBottom){this.parentTop||(this.parentTop=document.createElement("div"),this.parentTop.className="notices is-top"),this.parentBottom||(this.parentBottom=document.createElement("div"),this.parentBottom.className="notices is-bottom");var t=document.querySelector(this.newContainer)||document.body;t.appendChild(this.parentTop),t.appendChild(this.parentBottom),this.newContainer&&(this.parentTop.classList.add("has-custom-container"),this.parentBottom.classList.add("has-custom-container"))}}},beforeMount:function(){this.setupContainer()},mounted:function(){this.showNotice()}}},12:function(t,e,n){"use strict";n.d(e,"c",(function(){return r})),n.d(e,"a",(function(){return o})),n.d(e,"b",(function(){return i}));var r=function(t){"undefined"!=typeof window&&window.Vue&&window.Vue.use(t)},o=function(t,e){t.component(e.name,e)},i=function(t,e,n){t.prototype[e]=n}},13:function(t,e){t.exports=function(t,e){return{enumerable:!(1&t),configurable:!(2&t),writable:!(4&t),value:e}}},14:function(t,e,n){"use strict";var r={defaultContainerElement:null,defaultIconPack:"mdi",defaultDialogConfirmText:null,defaultDialogCancelText:null,defaultSnackbarDuration:3500,defaultToastDuration:2e3,defaultTooltipType:"is-primary",defaultTooltipAnimated:!1,defaultInputAutocomplete:"on",defaultDateFormatter:null,defaultDateParser:null,defaultDayNames:null,defaultMonthNames:null,defaultFirstDayOfWeek:null,defaultUnselectableDaysOfWeek:null,defaultTimeFormatter:null,defaultTimeParser:null,defaultModalScroll:null,defaultDatepickerMobileNative:!0,defaultTimepickerMobileNative:!0,defaultNoticeQueue:!0,defaultInputHasCounter:!0};e.a=r},15:function(t,e,n){var r=n(4);t.exports=function(t,e){if(!r(t))return t;var n,o;if(e&&"function"==typeof(n=t.toString)&&!r(o=n.call(t)))return o;if("function"==typeof(n=t.valueOf)&&!r(o=n.call(t)))return o;if(!e&&"function"==typeof(n=t.toString)&&!r(o=n.call(t)))return o;throw TypeError("Can't convert object to primitive value")}},16:function(t,e){var n=0,r=Math.random();t.exports=function(t){return"Symbol(".concat(void 0===t?"":t,")_",(++n+r).toString(36))}},17:function(t,e,n){var r=n(2),o=n(6),i=n(29),u=n(8),a=n(5),c=function(t,e,n){var s,f,l,p=t&c.F,d=t&c.G,v=t&c.S,h=t&c.P,m=t&c.B,y=t&c.W,w=d?o:o[e]||(o[e]={}),b=w.prototype,x=d?r:v?r[e]:(r[e]||{}).prototype;d&&(n=e);for(s in n)(f=!p&&x&&void 0!==x[s])&&a(w,s)||(l=f?x[s]:n[s],w[s]=d&&"function"!=typeof x[s]?n[s]:m&&f?i(l,r):y&&x[s]==l?(function(t){var e=function(e,n,r){if(this instanceof t){switch(arguments.length){case 0:return new t;case 1:return new t(e);case 2:return new t(e,n)}return new t(e,n,r)}return t.apply(this,arguments)};return e.prototype=t.prototype,e})(l):h&&"function"==typeof l?i(Function.call,l):l,h&&((w.virtual||(w.virtual={}))[s]=l,t&c.R&&b&&!b[s]&&u(b,s,l)))};c.F=1,c.G=2,c.S=4,c.P=8,c.B=16,c.W=32,c.U=64,c.R=128,t.exports=c},18:function(t,e,n){t.exports=!n(0)&&!n(7)((function(){return 7!=Object.defineProperty(n(19)("div"),"a",{get:function(){return 7}}).a}))},19:function(t,e,n){var r=n(4),o=n(2).document,i=r(o)&&r(o.createElement);t.exports=function(t){return i?o.createElement(t):{}}},2:function(t,e){var n=t.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=n)},21:function(t,e){var n=Math.ceil,r=Math.floor;t.exports=function(t){return isNaN(t=+t)?0:(t>0?r:n)(t)}},22:function(t,e,n){var r=n(34),o=n(25);t.exports=Object.keys||function(t){return r(t,o)}},222:function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var r=n(70),o=n.n(r),i=n(71),u=n.n(i),a=n(223),c=n.n(a),s=n(12),f={open:function(t){var e=void 0;"string"==typeof t&&(e=t);var n={message:e},r=o()(n,t);return new(("undefined"!=typeof window&&window.Vue?window.Vue:u.a).extend(c.a))({el:document.createElement("div"),propsData:r})}},l={install:function(t){Object(s.b)(t,"$toast",f)}};Object(s.c)(l),e.default=l},223:function(t,e,n){var r=n(1)(n(224),n(225),null,null,null);t.exports=r.exports},224:function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var r=n(14),o=n(110);e.default={name:"BToast",mixins:[o.a],data:function(){return{newDuration:this.duration||r.a.defaultToastDuration}}}},225:function(t,e){t.exports={render:function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("transition",{attrs:{"enter-active-class":t.transition.enter,"leave-active-class":t.transition.leave}},[n("div",{directives:[{name:"show",rawName:"v-show",value:t.isActive,expression:"isActive"}],staticClass:"toast",class:[t.type,t.position]},[n("div",{domProps:{innerHTML:t._s(t.message)}})])])},staticRenderFns:[]}},23:function(t,e){e.f={}.propertyIsEnumerable},24:function(t,e,n){var r=n(2),o=r["__core-js_shared__"]||(r["__core-js_shared__"]={});t.exports=function(t){return o[t]||(o[t]={})}},25:function(t,e){t.exports="constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf".split(",")},26:function(t,e){t.exports=function(t){if(void 0==t)throw TypeError("Can't call method on  "+t);return t}},260:function(t,e,n){t.exports=n(222)},27:function(t,e){var n={}.toString;t.exports=function(t){return n.call(t).slice(8,-1)}},28:function(t,e,n){var r=n(24)("keys"),o=n(16);t.exports=function(t){return r[t]||(r[t]=o(t))}},29:function(t,e,n){var r=n(31);t.exports=function(t,e,n){if(r(t),void 0===e)return t;switch(n){case 1:return function(n){return t.call(e,n)};case 2:return function(n,r){return t.call(e,n,r)};case 3:return function(n,r,o){return t.call(e,n,r,o)}}return function(){return t.apply(e,arguments)}}},3:function(t,e,n){var r=n(9),o=n(18),i=n(15),u=Object.defineProperty;e.f=n(0)?Object.defineProperty:function(t,e,n){if(r(t),e=i(e,!0),r(n),o)try{return u(t,e,n)}catch(t){}if("get"in n||"set"in n)throw TypeError("Accessors not supported!");return"value"in n&&(t[e]=n.value),t}},31:function(t,e){t.exports=function(t){if("function"!=typeof t)throw TypeError(t+" is not a function!");return t}},33:function(t,e){e.f=Object.getOwnPropertySymbols},34:function(t,e,n){var r=n(5),o=n(10),i=n(44)(!1),u=n(28)("IE_PROTO");t.exports=function(t,e){var n,a=o(t),c=0,s=[];for(n in a)n!=u&&r(a,n)&&s.push(n);for(;e.length>c;)r(a,n=e[c++])&&(~i(s,n)||s.push(n));return s}},37:function(t,e,n){var r=n(27);t.exports=Object("z").propertyIsEnumerable(0)?Object:function(t){return"String"==r(t)?t.split(""):Object(t)}},4:function(t,e){t.exports=function(t){return"object"==typeof t?null!==t:"function"==typeof t}},42:function(t,e,n){var r=n(21),o=Math.min;t.exports=function(t){return t>0?o(r(t),9007199254740991):0}},44:function(t,e,n){var r=n(10),o=n(42),i=n(45);t.exports=function(t){return function(e,n,u){var a,c=r(e),s=o(c.length),f=i(u,s);if(t&&n!=n){for(;s>f;)if((a=c[f++])!=a)return!0}else for(;s>f;f++)if((t||f in c)&&c[f]===n)return t||f||0;return!t&&-1}}},45:function(t,e,n){var r=n(21),o=Math.max,i=Math.min;t.exports=function(t,e){return t=r(t),t<0?o(t+e,0):i(t,e)}},46:function(t,e,n){"use strict";function r(t,e){return e.split(".").reduce((function(t,e){return t[e]}),t)}function o(t,e,n){if(!t)return-1;if(!n||"function"!=typeof n)return t.indexOf(e);for(var r=0;r<t.length;r++)if(n(t[r],e))return r;return-1}function i(t){void 0!==t.remove?t.remove():t.parentNode.removeChild(t)}function u(t){return t?t.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g,"\\$&"):t}e.b=r,e.c=o,n.d(e,"d",(function(){return a})),e.e=i,e.a=u;var a={Android:function(){return"undefined"!=typeof window&&window.navigator.userAgent.match(/Android/i)},BlackBerry:function(){return"undefined"!=typeof window&&window.navigator.userAgent.match(/BlackBerry/i)},iOS:function(){return"undefined"!=typeof window&&window.navigator.userAgent.match(/iPhone|iPad|iPod/i)},Opera:function(){return"undefined"!=typeof window&&window.navigator.userAgent.match(/Opera Mini/i)},Windows:function(){return"undefined"!=typeof window&&window.navigator.userAgent.match(/IEMobile/i)},any:function(){return a.Android()||a.BlackBerry()||a.iOS()||a.Opera()||a.Windows()}}},5:function(t,e){var n={}.hasOwnProperty;t.exports=function(t,e){return n.call(t,e)}},55:function(t,e,n){var r=n(26);t.exports=function(t){return Object(r(t))}},6:function(t,e){var n=t.exports={version:"2.5.5"};"number"==typeof __e&&(__e=n)},7:function(t,e){t.exports=function(t){try{return!!t()}catch(t){return!0}}},70:function(t,e,n){t.exports={default:n(88),__esModule:!0}},71:function(e,n){e.exports=t},8:function(t,e,n){var r=n(3),o=n(13);t.exports=n(0)?function(t,e,n){return r.f(t,e,o(1,n))}:function(t,e,n){return t[e]=n,t}},88:function(t,e,n){n(89),t.exports=n(6).Object.assign},89:function(t,e,n){var r=n(17);r(r.S+r.F,"Object",{assign:n(90)})},9:function(t,e,n){var r=n(4);t.exports=function(t){if(!r(t))throw TypeError(t+" is not an object!");return t}},90:function(t,e,n){"use strict";var r=n(22),o=n(33),i=n(23),u=n(55),a=n(37),c=Object.assign;t.exports=!c||n(7)((function(){var t={},e={},n=Symbol(),r="abcdefghijklmnopqrst";return t[n]=7,r.split("").forEach((function(t){e[t]=t})),7!=c({},t)[n]||Object.keys(c({},e)).join("")!=r}))?function(t,e){for(var n=u(t),c=arguments.length,s=1,f=o.f,l=i.f;c>s;)for(var p,d=a(arguments[s++]),v=f?r(d).concat(f(d)):r(d),h=v.length,m=0;h>m;)l.call(d,p=v[m++])&&(n[p]=d[p]);return n}:c}})}));
+/*! Buefy v0.9.29 | MIT License | github.com/buefy/buefy */
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+    typeof define === 'function' && define.amd ? define(['exports'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.Toast = {}));
+})(this, (function (exports) { 'use strict';
+
+    var config = {
+      defaultContainerElement: null,
+      defaultIconPack: 'mdi',
+      defaultIconComponent: null,
+      defaultIconPrev: 'chevron-left',
+      defaultIconNext: 'chevron-right',
+      defaultLocale: undefined,
+      defaultDialogConfirmText: null,
+      defaultDialogCancelText: null,
+      defaultSnackbarDuration: 3500,
+      defaultSnackbarPosition: null,
+      defaultToastDuration: 2000,
+      defaultToastPosition: null,
+      defaultNotificationDuration: 2000,
+      defaultNotificationPosition: null,
+      defaultTooltipType: 'is-primary',
+      defaultTooltipDelay: null,
+      defaultTooltipCloseDelay: null,
+      defaultSidebarDelay: null,
+      defaultInputAutocomplete: 'on',
+      defaultDateFormatter: null,
+      defaultDateParser: null,
+      defaultDateCreator: null,
+      defaultTimeCreator: null,
+      defaultDayNames: null,
+      defaultMonthNames: null,
+      defaultFirstDayOfWeek: null,
+      defaultUnselectableDaysOfWeek: null,
+      defaultTimeFormatter: null,
+      defaultTimeParser: null,
+      defaultModalCanCancel: ['escape', 'x', 'outside', 'button'],
+      defaultModalScroll: null,
+      defaultDatepickerMobileNative: true,
+      defaultTimepickerMobileNative: true,
+      defaultTimepickerMobileModal: true,
+      defaultNoticeQueue: true,
+      defaultInputHasCounter: true,
+      defaultTaginputHasCounter: true,
+      defaultUseHtml5Validation: true,
+      defaultDropdownMobileModal: true,
+      defaultFieldLabelPosition: null,
+      defaultDatepickerYearsRange: [-100, 10],
+      defaultDatepickerNearbyMonthDays: true,
+      defaultDatepickerNearbySelectableMonthDays: false,
+      defaultDatepickerShowWeekNumber: false,
+      defaultDatepickerWeekNumberClickable: false,
+      defaultDatepickerMobileModal: true,
+      defaultTrapFocus: true,
+      defaultAutoFocus: true,
+      defaultButtonRounded: false,
+      defaultSwitchRounded: true,
+      defaultCarouselInterval: 3500,
+      defaultTabsExpanded: false,
+      defaultTabsAnimated: true,
+      defaultTabsType: null,
+      defaultStatusIcon: true,
+      defaultProgrammaticPromise: false,
+      defaultLinkTags: ['a', 'button', 'input', 'router-link', 'nuxt-link', 'n-link', 'RouterLink', 'NuxtLink', 'NLink'],
+      defaultImageWebpFallback: null,
+      defaultImageLazy: true,
+      defaultImageResponsive: true,
+      defaultImageRatio: null,
+      defaultImageSrcsetFormatter: null,
+      defaultBreadcrumbTag: 'a',
+      defaultBreadcrumbAlign: 'is-left',
+      defaultBreadcrumbSeparator: '',
+      defaultBreadcrumbSize: 'is-medium',
+      customIconPacks: null
+    };
+    var VueInstance;
+
+    function ownKeys(e, r) {
+      var t = Object.keys(e);
+      if (Object.getOwnPropertySymbols) {
+        var o = Object.getOwnPropertySymbols(e);
+        r && (o = o.filter(function (r) {
+          return Object.getOwnPropertyDescriptor(e, r).enumerable;
+        })), t.push.apply(t, o);
+      }
+      return t;
+    }
+    function _objectSpread2(e) {
+      for (var r = 1; r < arguments.length; r++) {
+        var t = null != arguments[r] ? arguments[r] : {};
+        r % 2 ? ownKeys(Object(t), !0).forEach(function (r) {
+          _defineProperty(e, r, t[r]);
+        }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) {
+          Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+        });
+      }
+      return e;
+    }
+    function _toPrimitive(t, r) {
+      if ("object" != typeof t || !t) return t;
+      var e = t[Symbol.toPrimitive];
+      if (void 0 !== e) {
+        var i = e.call(t, r || "default");
+        if ("object" != typeof i) return i;
+        throw new TypeError("@@toPrimitive must return a primitive value.");
+      }
+      return ("string" === r ? String : Number)(t);
+    }
+    function _toPropertyKey(t) {
+      var i = _toPrimitive(t, "string");
+      return "symbol" == typeof i ? i : String(i);
+    }
+    function _typeof(o) {
+      "@babel/helpers - typeof";
+
+      return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+        return typeof o;
+      } : function (o) {
+        return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+      }, _typeof(o);
+    }
+    function _defineProperty(obj, key, value) {
+      key = _toPropertyKey(key);
+      if (key in obj) {
+        Object.defineProperty(obj, key, {
+          value: value,
+          enumerable: true,
+          configurable: true,
+          writable: true
+        });
+      } else {
+        obj[key] = value;
+      }
+      return obj;
+    }
+
+    /**
+     * Merge function to replace Object.assign with deep merging possibility
+     */
+    var isObject = function isObject(item) {
+      return _typeof(item) === 'object' && !Array.isArray(item);
+    };
+    var mergeFn = function mergeFn(target, source) {
+      var deep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+      if (deep || !Object.assign) {
+        var isDeep = function isDeep(prop) {
+          return isObject(source[prop]) && target !== null && target.hasOwnProperty(prop) && isObject(target[prop]);
+        };
+        var replaced = Object.getOwnPropertyNames(source).map(function (prop) {
+          return _defineProperty({}, prop, isDeep(prop) ? mergeFn(target[prop], source[prop], deep) : source[prop]);
+        }).reduce(function (a, b) {
+          return _objectSpread2(_objectSpread2({}, a), b);
+        }, {});
+        return _objectSpread2(_objectSpread2({}, target), replaced);
+      } else {
+        return Object.assign(target, source);
+      }
+    };
+    var merge = mergeFn;
+    function removeElement(el) {
+      if (typeof el.remove !== 'undefined') {
+        el.remove();
+      } else if (typeof el.parentNode !== 'undefined' && el.parentNode !== null) {
+        el.parentNode.removeChild(el);
+      }
+    }
+
+    var NoticeMixin = {
+      props: {
+        type: {
+          type: String,
+          default: 'is-dark'
+        },
+        message: [String, Array],
+        duration: Number,
+        queue: {
+          type: Boolean,
+          default: undefined
+        },
+        indefinite: {
+          type: Boolean,
+          default: false
+        },
+        pauseOnHover: {
+          type: Boolean,
+          default: false
+        },
+        position: {
+          type: String,
+          default: 'is-top',
+          validator: function validator(value) {
+            return ['is-top-right', 'is-top', 'is-top-left', 'is-bottom-right', 'is-bottom', 'is-bottom-left'].indexOf(value) > -1;
+          }
+        },
+        container: String
+      },
+      data: function data() {
+        return {
+          isActive: false,
+          isPaused: false,
+          parentTop: null,
+          parentBottom: null,
+          newContainer: this.container || config.defaultContainerElement
+        };
+      },
+      computed: {
+        correctParent: function correctParent() {
+          switch (this.position) {
+            case 'is-top-right':
+            case 'is-top':
+            case 'is-top-left':
+              return this.parentTop;
+            case 'is-bottom-right':
+            case 'is-bottom':
+            case 'is-bottom-left':
+              return this.parentBottom;
+          }
+        },
+        transition: function transition() {
+          switch (this.position) {
+            case 'is-top-right':
+            case 'is-top':
+            case 'is-top-left':
+              return {
+                enter: 'fadeInDown',
+                leave: 'fadeOut'
+              };
+            case 'is-bottom-right':
+            case 'is-bottom':
+            case 'is-bottom-left':
+              return {
+                enter: 'fadeInUp',
+                leave: 'fadeOut'
+              };
+          }
+        }
+      },
+      methods: {
+        pause: function pause() {
+          if (this.pauseOnHover && !this.indefinite) {
+            this.isPaused = true;
+            clearInterval(this.$buefy.globalNoticeInterval);
+          }
+        },
+        removePause: function removePause() {
+          if (this.pauseOnHover && !this.indefinite) {
+            this.isPaused = false;
+            this.close();
+          }
+        },
+        shouldQueue: function shouldQueue() {
+          var queue = this.queue !== undefined ? this.queue : config.defaultNoticeQueue;
+          if (!queue) return false;
+          return this.parentTop.childElementCount > 0 || this.parentBottom.childElementCount > 0;
+        },
+        click: function click() {
+          this.$emit('click');
+        },
+        close: function close() {
+          var _this = this;
+          if (!this.isPaused) {
+            clearTimeout(this.timer);
+            this.isActive = false;
+            this.$emit('close');
+
+            // Timeout for the animation complete before destroying
+            setTimeout(function () {
+              _this.$destroy();
+              removeElement(_this.$el);
+            }, 150);
+          }
+        },
+        timeoutCallback: function timeoutCallback() {
+          return this.close();
+        },
+        showNotice: function showNotice() {
+          var _this2 = this;
+          if (this.shouldQueue()) this.correctParent.innerHTML = '';
+          this.correctParent.insertAdjacentElement('afterbegin', this.$el);
+          this.isActive = true;
+          if (!this.indefinite) {
+            this.timer = setTimeout(function () {
+              return _this2.timeoutCallback();
+            }, this.newDuration);
+          }
+        },
+        setupContainer: function setupContainer() {
+          this.parentTop = document.querySelector((this.newContainer ? this.newContainer : 'body') + '>.notices.is-top');
+          this.parentBottom = document.querySelector((this.newContainer ? this.newContainer : 'body') + '>.notices.is-bottom');
+          if (this.parentTop && this.parentBottom) return;
+          if (!this.parentTop) {
+            this.parentTop = document.createElement('div');
+            this.parentTop.className = 'notices is-top';
+          }
+          if (!this.parentBottom) {
+            this.parentBottom = document.createElement('div');
+            this.parentBottom.className = 'notices is-bottom';
+          }
+          var container = document.querySelector(this.newContainer) || document.body;
+          container.appendChild(this.parentTop);
+          container.appendChild(this.parentBottom);
+          if (this.newContainer) {
+            this.parentTop.classList.add('has-custom-container');
+            this.parentBottom.classList.add('has-custom-container');
+          }
+        }
+      },
+      beforeMount: function beforeMount() {
+        this.setupContainer();
+      },
+      mounted: function mounted() {
+        this.showNotice();
+      }
+    };
+
+    //
+    var script = {
+      name: 'BToast',
+      mixins: [NoticeMixin],
+      data: function data() {
+        return {
+          newDuration: this.duration || config.defaultToastDuration
+        };
+      }
+    };
+
+    function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier /* server only */, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
+        if (typeof shadowMode !== 'boolean') {
+            createInjectorSSR = createInjector;
+            createInjector = shadowMode;
+            shadowMode = false;
+        }
+        // Vue.extend constructor export interop.
+        const options = typeof script === 'function' ? script.options : script;
+        // render functions
+        if (template && template.render) {
+            options.render = template.render;
+            options.staticRenderFns = template.staticRenderFns;
+            options._compiled = true;
+            // functional template
+            if (isFunctionalTemplate) {
+                options.functional = true;
+            }
+        }
+        // scopedId
+        if (scopeId) {
+            options._scopeId = scopeId;
+        }
+        let hook;
+        if (moduleIdentifier) {
+            // server build
+            hook = function (context) {
+                // 2.3 injection
+                context =
+                    context || // cached call
+                        (this.$vnode && this.$vnode.ssrContext) || // stateful
+                        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext); // functional
+                // 2.2 with runInNewContext: true
+                if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+                    context = __VUE_SSR_CONTEXT__;
+                }
+                // inject component styles
+                if (style) {
+                    style.call(this, createInjectorSSR(context));
+                }
+                // register component module identifier for async chunk inference
+                if (context && context._registeredComponents) {
+                    context._registeredComponents.add(moduleIdentifier);
+                }
+            };
+            // used by ssr in case component is cached and beforeCreate
+            // never gets called
+            options._ssrRegister = hook;
+        }
+        else if (style) {
+            hook = shadowMode
+                ? function (context) {
+                    style.call(this, createInjectorShadow(context, this.$root.$options.shadowRoot));
+                }
+                : function (context) {
+                    style.call(this, createInjector(context));
+                };
+        }
+        if (hook) {
+            if (options.functional) {
+                // register for functional component in vue file
+                const originalRender = options.render;
+                options.render = function renderWithStyleInjection(h, context) {
+                    hook.call(context);
+                    return originalRender(h, context);
+                };
+            }
+            else {
+                // inject component registration as beforeCreate hook
+                const existing = options.beforeCreate;
+                options.beforeCreate = existing ? [].concat(existing, hook) : [hook];
+            }
+        }
+        return script;
+    }
+
+    /* script */
+    const __vue_script__ = script;
+
+    /* template */
+    var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('transition',{attrs:{"enter-active-class":_vm.transition.enter,"leave-active-class":_vm.transition.leave}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isActive),expression:"isActive"}],staticClass:"toast",class:[_vm.type, _vm.position],attrs:{"aria-hidden":!_vm.isActive,"role":"alert"},on:{"mouseenter":_vm.pause,"mouseleave":_vm.removePause}},[(_vm.$slots.default)?[_vm._t("default")]:[_c('div',{domProps:{"innerHTML":_vm._s(_vm.message)}})]],2)])};
+    var __vue_staticRenderFns__ = [];
+
+      /* style */
+      const __vue_inject_styles__ = undefined;
+      /* scoped */
+      const __vue_scope_id__ = undefined;
+      /* module identifier */
+      const __vue_module_identifier__ = undefined;
+      /* functional template */
+      const __vue_is_functional_template__ = false;
+      /* style inject */
+      
+      /* style inject SSR */
+      
+      /* style inject shadow dom */
+      
+
+      
+      const __vue_component__ = /*#__PURE__*/normalizeComponent(
+        { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+        __vue_inject_styles__,
+        __vue_script__,
+        __vue_scope_id__,
+        __vue_is_functional_template__,
+        __vue_module_identifier__,
+        false,
+        undefined,
+        undefined,
+        undefined
+      );
+
+      var Toast = __vue_component__;
+
+    var use = function use(plugin) {
+      if (typeof window !== 'undefined' && window.Vue) {
+        window.Vue.use(plugin);
+      }
+    };
+    var registerComponentProgrammatic = function registerComponentProgrammatic(Vue, property, component) {
+      if (!Vue.prototype.$buefy) Vue.prototype.$buefy = {};
+      Vue.prototype.$buefy[property] = component;
+    };
+
+    var localVueInstance;
+    var ToastProgrammatic = {
+      open: function open(params) {
+        var parent;
+        if (typeof params === 'string') {
+          params = {
+            message: params
+          };
+        }
+        var defaultParam = {
+          position: config.defaultToastPosition || 'is-top'
+        };
+        if (params.parent) {
+          parent = params.parent;
+          delete params.parent;
+        }
+        var slot;
+        if (Array.isArray(params.message)) {
+          slot = params.message;
+          delete params.message;
+        }
+        var propsData = merge(defaultParam, params);
+        var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance;
+        var ToastComponent = vm.extend(Toast);
+        var component = new ToastComponent({
+          parent: parent,
+          el: document.createElement('div'),
+          propsData: propsData
+        });
+        if (slot) {
+          component.$slots.default = slot;
+          component.$forceUpdate();
+        }
+        return component;
+      }
+    };
+    var Plugin = {
+      install: function install(Vue) {
+        localVueInstance = Vue;
+        registerComponentProgrammatic(Vue, 'toast', ToastProgrammatic);
+      }
+    };
+    use(Plugin);
+
+    exports.BToast = Toast;
+    exports.ToastProgrammatic = ToastProgrammatic;
+    exports["default"] = Plugin;
+
+    Object.defineProperty(exports, '__esModule', { value: true });
+
+}));

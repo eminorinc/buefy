@@ -1,2 +1,862 @@
-/*! Buefy v0.6.7 | MIT License | github.com/buefy/buefy */
-!(function(e,t){if("object"==typeof exports&&"object"==typeof module)module.exports=t();else if("function"==typeof define&&define.amd)define([],t);else{var n=t();for(var i in n)("object"==typeof exports?exports:e)[i]=n[i]}})("undefined"!=typeof self?self:this,(function(){return (function(e){function t(i){if(n[i])return n[i].exports;var r=n[i]={i:i,l:!1,exports:{}};return e[i].call(r.exports,r,r.exports,t),r.l=!0,r.exports}var n={};return t.m=e,t.c=n,t.d=function(e,n,i){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:i})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="/",t(t.s=244)})({0:function(e,t,n){e.exports=!n(7)((function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a}))},1:function(e,t){e.exports=function(e,t,n,i,r){var s,o=e=e||{},a=typeof e.default;"object"!==a&&"function"!==a||(s=e,o=e.default);var u="function"==typeof o?o.options:o;t&&(u.render=t.render,u.staticRenderFns=t.staticRenderFns),i&&(u._scopeId=i);var c;if(r?(c=function(e){e=e||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext,e||"undefined"==typeof __VUE_SSR_CONTEXT__||(e=__VUE_SSR_CONTEXT__),n&&n.call(this,e),e&&e._registeredComponents&&e._registeredComponents.add(r)},u._ssrRegister=c):n&&(c=n),c){var l=u.functional,f=l?u.render:u.beforeCreate;l?u.render=function(e,t){return c.call(t),f(e,t)}:u.beforeCreate=f?[].concat(f,c):[c]}return{esModule:s,exports:o,options:u}}},12:function(e,t,n){"use strict";n.d(t,"c",(function(){return i})),n.d(t,"a",(function(){return r})),n.d(t,"b",(function(){return s}));var i=function(e){"undefined"!=typeof window&&window.Vue&&window.Vue.use(e)},r=function(e,t){e.component(t.name,t)},s=function(e,t,n){e.prototype[t]=n}},13:function(e,t){e.exports=function(e,t){return{enumerable:!(1&e),configurable:!(2&e),writable:!(4&e),value:t}}},14:function(e,t,n){"use strict";var i={defaultContainerElement:null,defaultIconPack:"mdi",defaultDialogConfirmText:null,defaultDialogCancelText:null,defaultSnackbarDuration:3500,defaultToastDuration:2e3,defaultTooltipType:"is-primary",defaultTooltipAnimated:!1,defaultInputAutocomplete:"on",defaultDateFormatter:null,defaultDateParser:null,defaultDayNames:null,defaultMonthNames:null,defaultFirstDayOfWeek:null,defaultUnselectableDaysOfWeek:null,defaultTimeFormatter:null,defaultTimeParser:null,defaultModalScroll:null,defaultDatepickerMobileNative:!0,defaultTimepickerMobileNative:!0,defaultNoticeQueue:!0,defaultInputHasCounter:!0};t.a=i},15:function(e,t,n){var i=n(4);e.exports=function(e,t){if(!i(e))return e;var n,r;if(t&&"function"==typeof(n=e.toString)&&!i(r=n.call(e)))return r;if("function"==typeof(n=e.valueOf)&&!i(r=n.call(e)))return r;if(!t&&"function"==typeof(n=e.toString)&&!i(r=n.call(e)))return r;throw TypeError("Can't convert object to primitive value")}},152:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var i=n(74),r=n.n(i),s=n(12),o={install:function(e){Object(s.a)(e,r.a)}};Object(s.c)(o),t.default=o},17:function(e,t,n){var i=n(2),r=n(6),s=n(29),o=n(8),a=n(5),u=function(e,t,n){var c,l,f,p=e&u.F,d=e&u.G,h=e&u.S,m=e&u.P,y=e&u.B,v=e&u.W,w=d?r:r[t]||(r[t]={}),g=w.prototype,x=d?i:h?i[t]:(i[t]||{}).prototype;d&&(n=t);for(c in n)(l=!p&&x&&void 0!==x[c])&&a(w,c)||(f=l?x[c]:n[c],w[c]=d&&"function"!=typeof x[c]?n[c]:y&&l?s(f,i):v&&x[c]==f?(function(e){var t=function(t,n,i){if(this instanceof e){switch(arguments.length){case 0:return new e;case 1:return new e(t);case 2:return new e(t,n)}return new e(t,n,i)}return e.apply(this,arguments)};return t.prototype=e.prototype,t})(f):m&&"function"==typeof f?s(Function.call,f):f,m&&((w.virtual||(w.virtual={}))[c]=f,e&u.R&&g&&!g[c]&&o(g,c,f)))};u.F=1,u.G=2,u.S=4,u.P=8,u.B=16,u.W=32,u.U=64,u.R=128,e.exports=u},18:function(e,t,n){e.exports=!n(0)&&!n(7)((function(){return 7!=Object.defineProperty(n(19)("div"),"a",{get:function(){return 7}}).a}))},19:function(e,t,n){var i=n(4),r=n(2).document,s=i(r)&&i(r.createElement);e.exports=function(e){return s?r.createElement(e):{}}},2:function(e,t){var n=e.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=n)},20:function(e,t,n){"use strict";t.__esModule=!0;var i=n(48),r=(function(e){return e&&e.__esModule?e:{default:e}})(i);t.default=function(e,t,n){return t in e?(0,r.default)(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}},244:function(e,t,n){e.exports=n(152)},29:function(e,t,n){var i=n(31);e.exports=function(e,t,n){if(i(e),void 0===t)return e;switch(n){case 1:return function(n){return e.call(t,n)};case 2:return function(n,i){return e.call(t,n,i)};case 3:return function(n,i,r){return e.call(t,n,i,r)}}return function(){return e.apply(t,arguments)}}},3:function(e,t,n){var i=n(9),r=n(18),s=n(15),o=Object.defineProperty;t.f=n(0)?Object.defineProperty:function(e,t,n){if(i(e),t=s(t,!0),i(n),r)try{return o(e,t,n)}catch(e){}if("get"in n||"set"in n)throw TypeError("Accessors not supported!");return"value"in n&&(e[t]=n.value),e}},30:function(e,t,n){var i=n(1)(n(51),n(52),null,null,null);e.exports=i.exports},31:function(e,t){e.exports=function(e){if("function"!=typeof e)throw TypeError(e+" is not a function!");return e}},38:function(e,t,n){"use strict";var i=n(14);t.a={props:{iconPack:String},data:function(){return{newIconPack:this.iconPack||i.a.defaultIconPack}}}},4:function(e,t){e.exports=function(e){return"object"==typeof e?null!==e:"function"==typeof e}},47:function(e,t,n){"use strict";var i=n(38);t.a={mixins:[i.a],props:{size:String,expanded:Boolean,loading:Boolean,rounded:Boolean,icon:String,autocomplete:String,maxlength:[Number,String]},data:function(){return{isValid:!0,isFocused:!1}},computed:{parentField:function(){for(var e=this.$parent,t=0;t<3;t++)e&&!e.$data._isField&&(e=e.$parent);return e},statusType:function(){if(this.parentField)return this.parentField.newType},statusMessage:function(){if(this.parentField)return this.parentField.newMessage},iconSize:function(){switch(this.size){case"is-small":return this.size;case"is-medium":return;case"is-large":return"mdi"===this.newIconPack?"is-medium":""}}},methods:{focus:function(){var e=this;void 0!==this.$data._elementRef&&this.$nextTick((function(){return e.$el.querySelector(e.$data._elementRef).focus()}))},onBlur:function(e){this.isFocused=!1,this.$emit("blur",e),this.checkHtml5Validity()},onFocus:function(e){this.isFocused=!0,this.$emit("focus",e)},checkHtml5Validity:function(){if(void 0!==this.$refs[this.$data._elementRef]){var e=this.$el.querySelector(this.$data._elementRef),t=null,n=null,i=!0;return e.checkValidity()||(t="is-danger",n=e.validationMessage,i=!1),this.isValid=i,this.parentField&&(this.parentField.type||(this.parentField.newType=t),this.parentField.message||(this.parentField.newMessage=n)),this.isValid}}}}},48:function(e,t,n){e.exports={default:n(49),__esModule:!0}},49:function(e,t,n){n(50);var i=n(6).Object;e.exports=function(e,t,n){return i.defineProperty(e,t,n)}},5:function(e,t){var n={}.hasOwnProperty;e.exports=function(e,t){return n.call(e,t)}},50:function(e,t,n){var i=n(17);i(i.S+i.F*!n(0),"Object",{defineProperty:n(3).f})},51:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var i=n(14);t.default={name:"BIcon",props:{type:String,pack:String,icon:String,size:String,customSize:String,customClass:String,both:Boolean},computed:{newIcon:function(){return this.both?"mdi"===this.newPack?this.newPack+"-"+this.icon:"fa-"+this.getEquivalentIconOf(this.icon):"mdi"===this.newPack?this.newPack+"-"+this.icon:"fa-"+this.icon},newPack:function(){return this.pack||i.a.defaultIconPack},newType:function(){if(this.type){var e=this.type.split("-");if(e.length)return"has-text-"+e[1]}},newCustomSize:function(){return this.customSize||this.customSizeByPack},customSizeByPack:function(){var e="mdi"===this.newPack?"mdi-24px":"fa-lg",t="mdi"===this.newPack?"mdi-36px":"fa-2x",n="mdi"===this.newPack?"mdi-48px":"fa-3x";switch(this.size){case"is-small":return;case"is-medium":return t;case"is-large":return n;default:return e}}},methods:{getEquivalentIconOf:function(e){switch(e){case"check":return"check";case"information":return"info-circle";case"check-circle":return"check-circle";case"alert":return"exclamation-triangle";case"alert-circle":return"exclamation-circle";case"arrow-up":return"arrow-up";case"chevron-right":return"angle-right";case"chevron-left":return"angle-left";case"chevron-down":return"angle-down";case"eye":return"eye";case"eye-off":return"eye-slash";case"menu-down":return"caret-down";case"menu-up":return"caret-up";default:return e}}}}},52:function(e,t){e.exports={render:function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("span",{staticClass:"icon",class:[e.newType,e.size]},[n("i",{class:[e.newPack,e.newIcon,e.newCustomSize,e.customClass]})])},staticRenderFns:[]}},6:function(e,t){var n=e.exports={version:"2.5.5"};"number"==typeof __e&&(__e=n)},7:function(e,t){e.exports=function(e){try{return!!e()}catch(e){return!0}}},74:function(e,t,n){var i=n(1)(n(86),n(87),null,null,null);e.exports=i.exports},8:function(e,t,n){var i=n(3),r=n(13);e.exports=n(0)?function(e,t,n){return i.f(e,t,r(1,n))}:function(e,t,n){return e[t]=n,e}},86:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var i=n(20),r=n.n(i),s=n(30),o=n.n(s),a=n(14),u=n(47);t.default={name:"BInput",components:r()({},o.a.name,o.a),mixins:[u.a],inheritAttrs:!1,props:{value:[Number,String],type:{type:String,default:"text"},passwordReveal:Boolean,hasCounter:{type:Boolean,default:function(){return a.a.defaultInputHasCounter}}},data:function(){return{newValue:this.value,newType:this.type,newAutocomplete:this.autocomplete||a.a.defaultInputAutocomplete,isPasswordVisible:!1,_elementRef:"textarea"===this.type?"textarea":"input"}},computed:{rootClasses:function(){return[this.iconPosition,this.size,{"is-expanded":this.expanded,"is-loading":this.loading,"is-clearfix":!this.hasMessage}]},inputClasses:function(){return[this.statusType,this.size,{"is-rounded":this.rounded}]},hasIconRight:function(){return this.passwordReveal||this.loading||this.statusType},iconPosition:function(){return this.icon&&this.hasIconRight?"has-icons-left has-icons-right":!this.icon&&this.hasIconRight?"has-icons-right":this.icon?"has-icons-left":void 0},statusTypeIcon:function(){switch(this.statusType){case"is-success":return"check";case"is-danger":return"alert-circle";case"is-info":return"information";case"is-warning":return"alert"}},hasMessage:function(){return!!this.statusMessage},passwordVisibleIcon:function(){return this.isPasswordVisible?"eye-off":"eye"},valueLength:function(){return"string"==typeof this.newValue?this.newValue.length:"number"==typeof this.newValue?this.newValue.toString().length:0}},watch:{value:function(e){this.newValue=e},newValue:function(e){this.$emit("input",e),!this.isValid&&this.checkHtml5Validity()}},methods:{togglePasswordVisibility:function(){var e=this;this.isPasswordVisible=!this.isPasswordVisible,this.newType=this.isPasswordVisible?"text":"password",this.$nextTick((function(){e.$refs.input.focus()}))},onInput:function(e){var t=this;this.$nextTick((function(){t.newValue=e.target.value}))}}}},87:function(e,t){e.exports={render:function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("div",{staticClass:"control",class:e.rootClasses},["textarea"!==e.type?n("input",e._b({ref:"input",staticClass:"input",class:e.inputClasses,attrs:{type:e.newType,autocomplete:e.newAutocomplete,maxlength:e.maxlength},domProps:{value:e.newValue},on:{input:e.onInput,blur:e.onBlur,focus:e.onFocus}},"input",e.$attrs,!1)):n("textarea",e._b({ref:"textarea",staticClass:"textarea",class:e.inputClasses,attrs:{maxlength:e.maxlength},domProps:{value:e.newValue},on:{input:e.onInput,blur:e.onBlur,focus:e.onFocus}},"textarea",e.$attrs,!1)),e._v(" "),e.icon?n("b-icon",{staticClass:"is-left",attrs:{icon:e.icon,pack:e.iconPack,size:e.iconSize}}):e._e(),e._v(" "),e.loading||!e.passwordReveal&&!e.statusType?e._e():n("b-icon",{staticClass:"is-right",class:{"is-clickable":e.passwordReveal},attrs:{icon:e.passwordReveal?e.passwordVisibleIcon:e.statusTypeIcon,pack:e.iconPack,size:e.iconSize,type:e.passwordReveal?"is-primary":e.statusType,both:""},nativeOn:{click:function(t){e.togglePasswordVisibility(t)}}}),e._v(" "),e.maxlength&&e.hasCounter&&"number"!==e.type?n("small",{staticClass:"help counter",class:{"is-invisible":!e.isFocused}},[e._v("\n        "+e._s(e.valueLength)+" / "+e._s(e.maxlength)+"\n    ")]):e._e()],1)},staticRenderFns:[]}},9:function(e,t,n){var i=n(4);e.exports=function(e){if(!i(e))throw TypeError(e+" is not an object!");return e}}})}));
+/*! Buefy v0.9.29 | MIT License | github.com/buefy/buefy */
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+  typeof define === 'function' && define.amd ? define(['exports'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.Input = {}));
+})(this, (function (exports) { 'use strict';
+
+  function ownKeys(e, r) {
+    var t = Object.keys(e);
+    if (Object.getOwnPropertySymbols) {
+      var o = Object.getOwnPropertySymbols(e);
+      r && (o = o.filter(function (r) {
+        return Object.getOwnPropertyDescriptor(e, r).enumerable;
+      })), t.push.apply(t, o);
+    }
+    return t;
+  }
+  function _objectSpread2(e) {
+    for (var r = 1; r < arguments.length; r++) {
+      var t = null != arguments[r] ? arguments[r] : {};
+      r % 2 ? ownKeys(Object(t), !0).forEach(function (r) {
+        _defineProperty(e, r, t[r]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) {
+        Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+      });
+    }
+    return e;
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
+  function _typeof(o) {
+    "@babel/helpers - typeof";
+
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+      return typeof o;
+    } : function (o) {
+      return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+    }, _typeof(o);
+  }
+  function _defineProperty(obj, key, value) {
+    key = _toPropertyKey(key);
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+    return obj;
+  }
+  function _toArray(arr) {
+    return _arrayWithHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableRest();
+  }
+  function _arrayWithHoles(arr) {
+    if (Array.isArray(arr)) return arr;
+  }
+  function _iterableToArray(iter) {
+    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
+  }
+  function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+  }
+  function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+    for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+    return arr2;
+  }
+  function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+
+  var config = {
+    defaultContainerElement: null,
+    defaultIconPack: 'mdi',
+    defaultIconComponent: null,
+    defaultIconPrev: 'chevron-left',
+    defaultIconNext: 'chevron-right',
+    defaultLocale: undefined,
+    defaultDialogConfirmText: null,
+    defaultDialogCancelText: null,
+    defaultSnackbarDuration: 3500,
+    defaultSnackbarPosition: null,
+    defaultToastDuration: 2000,
+    defaultToastPosition: null,
+    defaultNotificationDuration: 2000,
+    defaultNotificationPosition: null,
+    defaultTooltipType: 'is-primary',
+    defaultTooltipDelay: null,
+    defaultTooltipCloseDelay: null,
+    defaultSidebarDelay: null,
+    defaultInputAutocomplete: 'on',
+    defaultDateFormatter: null,
+    defaultDateParser: null,
+    defaultDateCreator: null,
+    defaultTimeCreator: null,
+    defaultDayNames: null,
+    defaultMonthNames: null,
+    defaultFirstDayOfWeek: null,
+    defaultUnselectableDaysOfWeek: null,
+    defaultTimeFormatter: null,
+    defaultTimeParser: null,
+    defaultModalCanCancel: ['escape', 'x', 'outside', 'button'],
+    defaultModalScroll: null,
+    defaultDatepickerMobileNative: true,
+    defaultTimepickerMobileNative: true,
+    defaultTimepickerMobileModal: true,
+    defaultNoticeQueue: true,
+    defaultInputHasCounter: true,
+    defaultTaginputHasCounter: true,
+    defaultUseHtml5Validation: true,
+    defaultDropdownMobileModal: true,
+    defaultFieldLabelPosition: null,
+    defaultDatepickerYearsRange: [-100, 10],
+    defaultDatepickerNearbyMonthDays: true,
+    defaultDatepickerNearbySelectableMonthDays: false,
+    defaultDatepickerShowWeekNumber: false,
+    defaultDatepickerWeekNumberClickable: false,
+    defaultDatepickerMobileModal: true,
+    defaultTrapFocus: true,
+    defaultAutoFocus: true,
+    defaultButtonRounded: false,
+    defaultSwitchRounded: true,
+    defaultCarouselInterval: 3500,
+    defaultTabsExpanded: false,
+    defaultTabsAnimated: true,
+    defaultTabsType: null,
+    defaultStatusIcon: true,
+    defaultProgrammaticPromise: false,
+    defaultLinkTags: ['a', 'button', 'input', 'router-link', 'nuxt-link', 'n-link', 'RouterLink', 'NuxtLink', 'NLink'],
+    defaultImageWebpFallback: null,
+    defaultImageLazy: true,
+    defaultImageResponsive: true,
+    defaultImageRatio: null,
+    defaultImageSrcsetFormatter: null,
+    defaultBreadcrumbTag: 'a',
+    defaultBreadcrumbAlign: 'is-left',
+    defaultBreadcrumbSeparator: '',
+    defaultBreadcrumbSize: 'is-medium',
+    customIconPacks: null
+  };
+
+  /**
+   * Merge function to replace Object.assign with deep merging possibility
+   */
+  var isObject = function isObject(item) {
+    return _typeof(item) === 'object' && !Array.isArray(item);
+  };
+  var mergeFn = function mergeFn(target, source) {
+    var deep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+    if (deep || !Object.assign) {
+      var isDeep = function isDeep(prop) {
+        return isObject(source[prop]) && target !== null && target.hasOwnProperty(prop) && isObject(target[prop]);
+      };
+      var replaced = Object.getOwnPropertyNames(source).map(function (prop) {
+        return _defineProperty({}, prop, isDeep(prop) ? mergeFn(target[prop], source[prop], deep) : source[prop]);
+      }).reduce(function (a, b) {
+        return _objectSpread2(_objectSpread2({}, a), b);
+      }, {});
+      return _objectSpread2(_objectSpread2({}, target), replaced);
+    } else {
+      return Object.assign(target, source);
+    }
+  };
+  var merge = mergeFn;
+  function isVueComponent(c) {
+    return c && c._isVue;
+  }
+
+  var mdiIcons = {
+    sizes: {
+      'default': 'mdi-24px',
+      'is-small': null,
+      'is-medium': 'mdi-36px',
+      'is-large': 'mdi-48px'
+    },
+    iconPrefix: 'mdi-'
+  };
+  var faIcons = function faIcons() {
+    var faIconPrefix = config && config.defaultIconComponent ? '' : 'fa-';
+    return {
+      sizes: {
+        'default': null,
+        'is-small': null,
+        'is-medium': faIconPrefix + 'lg',
+        'is-large': faIconPrefix + '2x'
+      },
+      iconPrefix: faIconPrefix,
+      internalIcons: {
+        'information': 'info-circle',
+        'alert': 'exclamation-triangle',
+        'alert-circle': 'exclamation-circle',
+        'chevron-right': 'angle-right',
+        'chevron-left': 'angle-left',
+        'chevron-down': 'angle-down',
+        'eye-off': 'eye-slash',
+        'menu-down': 'caret-down',
+        'menu-up': 'caret-up',
+        'close-circle': 'times-circle'
+      }
+    };
+  };
+  var getIcons = function getIcons() {
+    var icons = {
+      mdi: mdiIcons,
+      fa: faIcons(),
+      fas: faIcons(),
+      far: faIcons(),
+      fad: faIcons(),
+      fab: faIcons(),
+      fal: faIcons(),
+      'fa-solid': faIcons(),
+      'fa-regular': faIcons(),
+      'fa-light': faIcons(),
+      'fa-thin': faIcons(),
+      'fa-duotone': faIcons(),
+      'fa-brands': faIcons()
+    };
+    if (config && config.customIconPacks) {
+      icons = merge(icons, config.customIconPacks, true);
+    }
+    return icons;
+  };
+  var getIcons$1 = getIcons;
+
+  var script$1 = {
+    name: 'BIcon',
+    props: {
+      type: [String, Object],
+      component: String,
+      pack: String,
+      icon: String,
+      size: String,
+      customSize: String,
+      customClass: String,
+      both: Boolean // This is used internally to show both MDI and FA icon
+    },
+    computed: {
+      iconConfig: function iconConfig() {
+        var allIcons = getIcons$1();
+        return allIcons[this.newPack];
+      },
+      iconPrefix: function iconPrefix() {
+        if (this.iconConfig && this.iconConfig.iconPrefix) {
+          return this.iconConfig.iconPrefix;
+        }
+        return '';
+      },
+      /**
+      * Internal icon name based on the pack.
+      * If pack is 'fa', gets the equivalent FA icon name of the MDI,
+      * internal icons are always MDI.
+      */
+      newIcon: function newIcon() {
+        return "".concat(this.iconPrefix).concat(this.getEquivalentIconOf(this.icon));
+      },
+      newPack: function newPack() {
+        return this.pack || config.defaultIconPack;
+      },
+      newType: function newType() {
+        if (!this.type) return;
+        var splitType = [];
+        if (typeof this.type === 'string') {
+          splitType = this.type.split('-');
+        } else {
+          for (var key in this.type) {
+            if (this.type[key]) {
+              splitType = key.split('-');
+              break;
+            }
+          }
+        }
+        if (splitType.length <= 1) return;
+        var _splitType = splitType,
+          _splitType2 = _toArray(_splitType),
+          type = _splitType2.slice(1);
+        return "has-text-".concat(type.join('-'));
+      },
+      newCustomSize: function newCustomSize() {
+        return this.customSize || this.customSizeByPack;
+      },
+      customSizeByPack: function customSizeByPack() {
+        if (this.iconConfig && this.iconConfig.sizes) {
+          if (this.size && this.iconConfig.sizes[this.size] !== undefined) {
+            return this.iconConfig.sizes[this.size];
+          } else if (this.iconConfig.sizes.default) {
+            return this.iconConfig.sizes.default;
+          }
+        }
+        return null;
+      },
+      useIconComponent: function useIconComponent() {
+        return this.component || config.defaultIconComponent;
+      }
+    },
+    methods: {
+      /**
+      * Equivalent icon name of the MDI.
+      */
+      getEquivalentIconOf: function getEquivalentIconOf(value) {
+        // Only transform the class if the both prop is set to true
+        if (!this.both) {
+          return value;
+        }
+        if (this.iconConfig && this.iconConfig.internalIcons && this.iconConfig.internalIcons[value]) {
+          return this.iconConfig.internalIcons[value];
+        }
+        return value;
+      }
+    }
+  };
+
+  function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier /* server only */, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
+      if (typeof shadowMode !== 'boolean') {
+          createInjectorSSR = createInjector;
+          createInjector = shadowMode;
+          shadowMode = false;
+      }
+      // Vue.extend constructor export interop.
+      const options = typeof script === 'function' ? script.options : script;
+      // render functions
+      if (template && template.render) {
+          options.render = template.render;
+          options.staticRenderFns = template.staticRenderFns;
+          options._compiled = true;
+          // functional template
+          if (isFunctionalTemplate) {
+              options.functional = true;
+          }
+      }
+      // scopedId
+      if (scopeId) {
+          options._scopeId = scopeId;
+      }
+      let hook;
+      if (moduleIdentifier) {
+          // server build
+          hook = function (context) {
+              // 2.3 injection
+              context =
+                  context || // cached call
+                      (this.$vnode && this.$vnode.ssrContext) || // stateful
+                      (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext); // functional
+              // 2.2 with runInNewContext: true
+              if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+                  context = __VUE_SSR_CONTEXT__;
+              }
+              // inject component styles
+              if (style) {
+                  style.call(this, createInjectorSSR(context));
+              }
+              // register component module identifier for async chunk inference
+              if (context && context._registeredComponents) {
+                  context._registeredComponents.add(moduleIdentifier);
+              }
+          };
+          // used by ssr in case component is cached and beforeCreate
+          // never gets called
+          options._ssrRegister = hook;
+      }
+      else if (style) {
+          hook = shadowMode
+              ? function (context) {
+                  style.call(this, createInjectorShadow(context, this.$root.$options.shadowRoot));
+              }
+              : function (context) {
+                  style.call(this, createInjector(context));
+              };
+      }
+      if (hook) {
+          if (options.functional) {
+              // register for functional component in vue file
+              const originalRender = options.render;
+              options.render = function renderWithStyleInjection(h, context) {
+                  hook.call(context);
+                  return originalRender(h, context);
+              };
+          }
+          else {
+              // inject component registration as beforeCreate hook
+              const existing = options.beforeCreate;
+              options.beforeCreate = existing ? [].concat(existing, hook) : [hook];
+          }
+      }
+      return script;
+  }
+
+  /* script */
+  const __vue_script__$1 = script$1;
+
+  /* template */
+  var __vue_render__$1 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"icon",class:[_vm.newType, _vm.size]},[(!_vm.useIconComponent)?_c('i',{class:[_vm.newPack, _vm.newIcon, _vm.newCustomSize, _vm.customClass]}):_c(_vm.useIconComponent,{tag:"component",class:[_vm.customClass],attrs:{"icon":[_vm.newPack, _vm.newIcon],"size":_vm.newCustomSize}})],1)};
+  var __vue_staticRenderFns__$1 = [];
+
+    /* style */
+    const __vue_inject_styles__$1 = undefined;
+    /* scoped */
+    const __vue_scope_id__$1 = undefined;
+    /* module identifier */
+    const __vue_module_identifier__$1 = undefined;
+    /* functional template */
+    const __vue_is_functional_template__$1 = false;
+    /* style inject */
+    
+    /* style inject SSR */
+    
+    /* style inject shadow dom */
+    
+
+    
+    const __vue_component__$1 = /*#__PURE__*/normalizeComponent(
+      { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
+      __vue_inject_styles__$1,
+      __vue_script__$1,
+      __vue_scope_id__$1,
+      __vue_is_functional_template__$1,
+      __vue_module_identifier__$1,
+      false,
+      undefined,
+      undefined,
+      undefined
+    );
+
+    var Icon = __vue_component__$1;
+
+  var FormElementMixin = {
+    props: {
+      size: String,
+      expanded: Boolean,
+      loading: Boolean,
+      rounded: Boolean,
+      icon: String,
+      iconPack: String,
+      // Native options to use in HTML5 validation
+      autocomplete: String,
+      maxlength: [Number, String],
+      useHtml5Validation: {
+        type: Boolean,
+        default: function _default() {
+          return config.defaultUseHtml5Validation;
+        }
+      },
+      validationMessage: String,
+      locale: {
+        type: [String, Array],
+        default: function _default() {
+          return config.defaultLocale;
+        }
+      },
+      statusIcon: {
+        type: Boolean,
+        default: function _default() {
+          return config.defaultStatusIcon;
+        }
+      }
+    },
+    data: function data() {
+      return {
+        isValid: true,
+        isFocused: false,
+        newIconPack: this.iconPack || config.defaultIconPack
+      };
+    },
+    computed: {
+      /**
+       * Find parent Field, max 3 levels deep.
+       */
+      parentField: function parentField() {
+        var parent = this.$parent;
+        for (var i = 0; i < 3; i++) {
+          if (parent && !parent.$data._isField) {
+            parent = parent.$parent;
+          }
+        }
+        return parent;
+      },
+      /**
+       * Get the type prop from parent if it's a Field.
+       */
+      statusType: function statusType() {
+        var _ref = this.parentField || {},
+          newType = _ref.newType;
+        if (!newType) return;
+        if (typeof newType === 'string') {
+          return newType;
+        } else {
+          for (var key in newType) {
+            if (newType[key]) {
+              return key;
+            }
+          }
+        }
+      },
+      /**
+       * Get the message prop from parent if it's a Field.
+       */
+      statusMessage: function statusMessage() {
+        if (!this.parentField) return;
+        return this.parentField.newMessage || this.parentField.$slots.message;
+      },
+      /**
+       * Fix icon size for inputs, large was too big
+       */
+      iconSize: function iconSize() {
+        switch (this.size) {
+          case 'is-small':
+            return this.size;
+          case 'is-medium':
+            return;
+          case 'is-large':
+            return this.newIconPack === 'mdi' ? 'is-medium' : '';
+        }
+      }
+    },
+    methods: {
+      /**
+       * Focus method that work dynamically depending on the component.
+       */
+      focus: function focus() {
+        var el = this.getElement();
+        if (el === undefined) return;
+        this.$nextTick(function () {
+          if (el) el.focus();
+        });
+      },
+      onBlur: function onBlur($event) {
+        this.isFocused = false;
+        this.$emit('blur', $event);
+        this.checkHtml5Validity();
+      },
+      onFocus: function onFocus($event) {
+        this.isFocused = true;
+        this.$emit('focus', $event);
+      },
+      getElement: function getElement() {
+        var el = this.$refs[this.$data._elementRef];
+        while (isVueComponent(el)) {
+          el = el.$refs[el.$data._elementRef];
+        }
+        return el;
+      },
+      setInvalid: function setInvalid() {
+        var type = 'is-danger';
+        var message = this.validationMessage || this.getElement().validationMessage;
+        this.setValidity(type, message);
+      },
+      setValidity: function setValidity(type, message) {
+        var _this = this;
+        this.$nextTick(function () {
+          if (_this.parentField) {
+            // Set type only if not defined
+            if (!_this.parentField.type) {
+              _this.parentField.newType = type;
+            }
+            // Set message only if not defined
+            if (!_this.parentField.message) {
+              _this.parentField.newMessage = message;
+            }
+          }
+        });
+      },
+      /**
+       * Check HTML5 validation, set isValid property.
+       * If validation fail, send 'is-danger' type,
+       * and error message to parent if it's a Field.
+       */
+      checkHtml5Validity: function checkHtml5Validity() {
+        if (!this.useHtml5Validation) return;
+        var el = this.getElement();
+        if (el === undefined) return;
+        if (!el.checkValidity()) {
+          this.setInvalid();
+          this.isValid = false;
+        } else {
+          this.setValidity(null, null);
+          this.isValid = true;
+        }
+        return this.isValid;
+      }
+    }
+  };
+
+  var script = {
+    name: 'BInput',
+    components: _defineProperty({}, Icon.name, Icon),
+    mixins: [FormElementMixin],
+    inheritAttrs: false,
+    props: {
+      value: [Number, String],
+      type: {
+        type: String,
+        default: 'text'
+      },
+      lazy: {
+        type: Boolean,
+        default: false
+      },
+      passwordReveal: Boolean,
+      iconClickable: Boolean,
+      hasCounter: {
+        type: Boolean,
+        default: function _default() {
+          return config.defaultInputHasCounter;
+        }
+      },
+      customClass: {
+        type: String,
+        default: ''
+      },
+      iconRight: String,
+      iconRightClickable: Boolean,
+      iconRightType: String
+    },
+    data: function data() {
+      return {
+        newValue: this.value,
+        newType: this.type,
+        newAutocomplete: this.autocomplete || config.defaultInputAutocomplete,
+        isPasswordVisible: false,
+        _elementRef: this.type === 'textarea' ? 'textarea' : 'input'
+      };
+    },
+    computed: {
+      computedValue: {
+        get: function get() {
+          return this.newValue;
+        },
+        set: function set(value) {
+          this.newValue = value;
+          this.$emit('input', value);
+        }
+      },
+      rootClasses: function rootClasses() {
+        return [this.iconPosition, this.size, {
+          'is-expanded': this.expanded,
+          'is-loading': this.loading,
+          'is-clearfix': !this.hasMessage
+        }];
+      },
+      inputClasses: function inputClasses() {
+        return [this.statusType, this.size, {
+          'is-rounded': this.rounded
+        }];
+      },
+      hasIconRight: function hasIconRight() {
+        return this.passwordReveal || this.loading || this.statusIcon && this.statusTypeIcon || this.iconRight;
+      },
+      rightIcon: function rightIcon() {
+        if (this.passwordReveal) {
+          return this.passwordVisibleIcon;
+        } else if (this.iconRight) {
+          return this.iconRight;
+        }
+        return this.statusTypeIcon;
+      },
+      rightIconType: function rightIconType() {
+        if (this.passwordReveal) {
+          return 'is-primary';
+        } else if (this.iconRight) {
+          return this.iconRightType || null;
+        }
+        return this.statusType;
+      },
+      /**
+      * Position of the icon or if it's both sides.
+      */
+      iconPosition: function iconPosition() {
+        var iconClasses = '';
+        if (this.icon) {
+          iconClasses += 'has-icons-left ';
+        }
+        if (this.hasIconRight) {
+          iconClasses += 'has-icons-right';
+        }
+        return iconClasses;
+      },
+      /**
+      * Icon name (MDI) based on the type.
+      */
+      statusTypeIcon: function statusTypeIcon() {
+        switch (this.statusType) {
+          case 'is-success':
+            return 'check';
+          case 'is-danger':
+            return 'alert-circle';
+          case 'is-info':
+            return 'information';
+          case 'is-warning':
+            return 'alert';
+        }
+      },
+      /**
+      * Check if have any message prop from parent if it's a Field.
+      */
+      hasMessage: function hasMessage() {
+        return !!this.statusMessage;
+      },
+      /**
+      * Current password-reveal icon name.
+      */
+      passwordVisibleIcon: function passwordVisibleIcon() {
+        return !this.isPasswordVisible ? 'eye' : 'eye-off';
+      },
+      /**
+      * Get value length
+      */
+      valueLength: function valueLength() {
+        if (typeof this.computedValue === 'string') {
+          return Array.from(this.computedValue).length;
+        } else if (typeof this.computedValue === 'number') {
+          return this.computedValue.toString().length;
+        }
+        return 0;
+      }
+    },
+    watch: {
+      /**
+      * When v-model is changed:
+      *   1. Set internal value.
+      *   2. Validate it if the value came from outside;
+      *      i.e., not equal to computedValue
+      */
+      value: function value(_value) {
+        var _this = this;
+        var fromOutside = this.computedValue != _value; // eslint-disable-line eqeqeq
+        this.newValue = _value;
+        if (fromOutside) {
+          // validation must wait for DOM updated
+          this.$nextTick(function () {
+            !_this.isValid && _this.checkHtml5Validity();
+          });
+        }
+      },
+      type: function type(_type) {
+        this.newType = _type;
+      }
+    },
+    methods: {
+      /**
+      * Toggle the visibility of a password-reveal input
+      * by changing the type and focus the input right away.
+      */
+      togglePasswordVisibility: function togglePasswordVisibility() {
+        var _this2 = this;
+        this.isPasswordVisible = !this.isPasswordVisible;
+        this.newType = this.isPasswordVisible ? 'text' : 'password';
+        this.$nextTick(function () {
+          _this2.focus();
+        });
+      },
+      iconClick: function iconClick(emit, event) {
+        var _this3 = this;
+        this.$emit(emit, event);
+        this.$nextTick(function () {
+          _this3.focus();
+        });
+      },
+      rightIconClick: function rightIconClick(event) {
+        if (this.passwordReveal) {
+          this.togglePasswordVisibility();
+        } else if (this.iconRightClickable) {
+          this.iconClick('icon-right-click', event);
+        }
+      },
+      onInput: function onInput(event) {
+        if (!this.lazy) {
+          var value = event.target.value;
+          this.updateValue(value);
+        }
+      },
+      onChange: function onChange(event) {
+        if (this.lazy) {
+          var value = event.target.value;
+          this.updateValue(value);
+        }
+      },
+      updateValue: function updateValue(value) {
+        this.computedValue = value;
+        !this.isValid && this.checkHtml5Validity();
+      }
+    }
+  };
+
+  /* script */
+  const __vue_script__ = script;
+
+  /* template */
+  var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"control",class:_vm.rootClasses},[(_vm.type !== 'textarea')?_c('input',_vm._b({ref:"input",staticClass:"input",class:[_vm.inputClasses, _vm.customClass],attrs:{"type":_vm.newType,"autocomplete":_vm.newAutocomplete,"maxlength":_vm.maxlength},domProps:{"value":_vm.computedValue},on:{"input":_vm.onInput,"change":_vm.onChange,"blur":_vm.onBlur,"focus":_vm.onFocus}},'input',_vm.$attrs,false)):_c('textarea',_vm._b({ref:"textarea",staticClass:"textarea",class:[_vm.inputClasses, _vm.customClass],attrs:{"maxlength":_vm.maxlength},domProps:{"value":_vm.computedValue},on:{"input":_vm.onInput,"change":_vm.onChange,"blur":_vm.onBlur,"focus":_vm.onFocus}},'textarea',_vm.$attrs,false)),(_vm.icon)?_c('b-icon',{staticClass:"is-left",class:{'is-clickable': _vm.iconClickable},attrs:{"icon":_vm.icon,"pack":_vm.iconPack,"size":_vm.iconSize},nativeOn:{"click":function($event){return _vm.iconClick('icon-click', $event)}}}):_vm._e(),(!_vm.loading && _vm.hasIconRight)?_c('b-icon',{staticClass:"is-right",class:{ 'is-clickable': _vm.passwordReveal || _vm.iconRightClickable },attrs:{"icon":_vm.rightIcon,"pack":_vm.iconPack,"size":_vm.iconSize,"type":_vm.rightIconType,"both":""},nativeOn:{"click":function($event){return _vm.rightIconClick($event)}}}):_vm._e(),(_vm.maxlength && _vm.hasCounter && _vm.type !== 'number')?_c('small',{staticClass:"help counter",class:{ 'is-invisible': !_vm.isFocused }},[_vm._v(" "+_vm._s(_vm.valueLength)+" / "+_vm._s(_vm.maxlength)+" ")]):_vm._e()],1)};
+  var __vue_staticRenderFns__ = [];
+
+    /* style */
+    const __vue_inject_styles__ = undefined;
+    /* scoped */
+    const __vue_scope_id__ = undefined;
+    /* module identifier */
+    const __vue_module_identifier__ = undefined;
+    /* functional template */
+    const __vue_is_functional_template__ = false;
+    /* style inject */
+    
+    /* style inject SSR */
+    
+    /* style inject shadow dom */
+    
+
+    
+    const __vue_component__ = /*#__PURE__*/normalizeComponent(
+      { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+      __vue_inject_styles__,
+      __vue_script__,
+      __vue_scope_id__,
+      __vue_is_functional_template__,
+      __vue_module_identifier__,
+      false,
+      undefined,
+      undefined,
+      undefined
+    );
+
+    var Input = __vue_component__;
+
+  var use = function use(plugin) {
+    if (typeof window !== 'undefined' && window.Vue) {
+      window.Vue.use(plugin);
+    }
+  };
+  var registerComponent = function registerComponent(Vue, component) {
+    Vue.component(component.name, component);
+  };
+
+  var Plugin = {
+    install: function install(Vue) {
+      registerComponent(Vue, Input);
+    }
+  };
+  use(Plugin);
+
+  exports.BInput = Input;
+  exports["default"] = Plugin;
+
+  Object.defineProperty(exports, '__esModule', { value: true });
+
+}));

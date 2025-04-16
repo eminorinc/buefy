@@ -2,18 +2,18 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-require('./chunk-2777282e.js');
+var Icon = require('./Icon-78961800.js');
+var plugins = require('./plugins-7f41b028.js');
+require('./_rollupPluginBabelHelpers-8b2e54ad.js');
+require('./config-8cfb5a4a.js');
 require('./helpers.js');
-require('./chunk-8806479f.js');
-var __chunk_4 = require('./chunk-acfb68f5.js');
-var __chunk_5 = require('./chunk-13e039f5.js');
 
 var Plugin = {
   install: function install(Vue) {
-    __chunk_5.registerComponent(Vue, __chunk_4.Icon);
+    plugins.registerComponent(Vue, Icon.Icon);
   }
 };
-__chunk_5.use(Plugin);
+plugins.use(Plugin);
 
-exports.BIcon = __chunk_4.Icon;
-exports.default = Plugin;
+exports.BIcon = Icon.Icon;
+exports["default"] = Plugin;

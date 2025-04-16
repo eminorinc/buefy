@@ -2,16 +2,18 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-require('./chunk-8806479f.js');
-var __chunk_5 = require('./chunk-13e039f5.js');
-var __chunk_22 = require('./chunk-f1b9bbd3.js');
+var Tooltip = require('./Tooltip-54c708e5.js');
+var plugins = require('./plugins-7f41b028.js');
+require('./_rollupPluginBabelHelpers-8b2e54ad.js');
+require('./config-8cfb5a4a.js');
+require('./helpers.js');
 
 var Plugin = {
   install: function install(Vue) {
-    __chunk_5.registerComponent(Vue, __chunk_22.Tooltip);
+    plugins.registerComponent(Vue, Tooltip.Tooltip);
   }
 };
-__chunk_5.use(Plugin);
+plugins.use(Plugin);
 
-exports.BTooltip = __chunk_22.Tooltip;
-exports.default = Plugin;
+exports.BTooltip = Tooltip.Tooltip;
+exports["default"] = Plugin;

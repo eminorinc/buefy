@@ -1,22 +1,24 @@
-import { _ as _defineProperty } from './chunk-1fafdf15.js';
-import { isMobile } from './helpers.js';
-import { c as config } from './chunk-6985c8ce.js';
-import { F as FormElementMixin } from './chunk-7ef8bebf.js';
-import './chunk-a376283d.js';
-import { _ as __vue_normalize__, r as registerComponent, u as use } from './chunk-cca88db8.js';
-import './chunk-df5f75f1.js';
-import './chunk-f8d9dda7.js';
-import './chunk-42f463e6.js';
-import './chunk-d1259ca0.js';
-import './chunk-f6fe77d8.js';
-import './chunk-06c11900.js';
-import { D as Datepicker } from './chunk-5893b645.js';
-import { T as Timepicker } from './chunk-f127d576.js';
+import { _ as _defineProperty } from './_rollupPluginBabelHelpers-df313029.js';
+import { F as FormElementMixin } from './FormElementMixin-b223d3c7.js';
+import { isMobile, matchWithGroups } from './helpers.js';
+import { c as config } from './config-e7d4b9c2.js';
+import { D as Datepicker } from './Datepicker-153e1b03.js';
+import { T as Timepicker } from './Timepicker-c1e2bbf4.js';
+import { n as normalizeComponent, u as use, a as registerComponent } from './plugins-218aea86.js';
+import './DropdownItem-55682322.js';
+import './trapFocus-f0736873.js';
+import './InjectedChildMixin-b4220787.js';
+import './Input-20612b63.js';
+import './Icon-60d47b31.js';
+import './Field-3cb24eff.js';
+import './Select-97781d4e.js';
+import './TimepickerMixin-d736b0a9.js';
 
-var _components;
+var AM = 'AM';
+var PM = 'PM';
 var script = {
   name: 'BDatetimepicker',
-  components: (_components = {}, _defineProperty(_components, Datepicker.name, Datepicker), _defineProperty(_components, Timepicker.name, Timepicker), _components),
+  components: _defineProperty(_defineProperty({}, Datepicker.name, Datepicker), Timepicker.name, Timepicker),
   mixins: [FormElementMixin],
   inheritAttrs: false,
   props: {
@@ -28,8 +30,27 @@ var script = {
       default: false
     },
     placeholder: String,
+    horizontalTimePicker: Boolean,
     disabled: Boolean,
+    firstDayOfWeek: {
+      type: Number,
+      default: function _default() {
+        if (typeof config.defaultFirstDayOfWeek === 'number') {
+          return config.defaultFirstDayOfWeek;
+        } else {
+          return 0;
+        }
+      }
+    },
+    rulesForFirstWeek: {
+      type: Number,
+      default: function _default() {
+        return 4;
+      }
+    },
     icon: String,
+    iconRight: String,
+    iconRightClickable: Boolean,
     iconPack: String,
     inline: Boolean,
     openOnFocus: Boolean,
@@ -40,6 +61,10 @@ var script = {
     },
     minDatetime: Date,
     maxDatetime: Date,
+    nearbyMonthDays: {
+      type: Boolean,
+      default: config.defaultDatepickerNearbyMonthDays
+    },
     datetimeFormatter: {
       type: Function
     },
@@ -58,14 +83,19 @@ var script = {
     },
     datepicker: Object,
     timepicker: Object,
+    tzOffset: {
+      type: Number,
+      default: 0
+    },
     focusable: {
       type: Boolean,
       default: true
-    }
+    },
+    appendToBody: Boolean
   },
   data: function data() {
     return {
-      newValue: this.value
+      newValue: this.adjustValue(this.value)
     };
   },
   computed: {
@@ -76,121 +106,6 @@ var script = {
       set: function set(value) {
         if (value) {
           var val = new Date(value.getTime());
-
-                    if (this.newValue) {
-                        // restore time part
-                        if ((value.getDate() !== this.newValue.getDate() || value.getMonth() !== this.newValue.getMonth() || value.getFullYear() !== this.newValue.getFullYear()) && value.getHours() === 0 && value.getMinutes() === 0 && value.getSeconds() === 0) {
-                            val.setHours(this.newValue.getHours(), this.newValue.getMinutes(), this.newValue.getSeconds(), 0)
-                        }
-                    } else {
-                        val = this.datetimeCreator(value)
-                    } // check min and max range
-
-                    if (this.minDatetime && val < this.minDatetime) {
-                        val = this.minDatetime
-                    } else if (this.maxDatetime && val > this.maxDatetime) {
-                        val = this.maxDatetime
-                    }
-
-                    this.newValue = new Date(val.getTime())
-                } else {
-                    this.newValue = value
-                }
-
-                this.$emit('input', this.newValue)
-            }
-        },
-        isMobile: function isMobile$1() {
-            return this.mobileNative && isMobile.any()
-        },
-        minDate: function minDate() {
-            if (!this.minDatetime) return this.datepicker ? this.datepicker.minDate : null
-            return new Date(this.minDatetime.getFullYear(), this.minDatetime.getMonth(), this.minDatetime.getDate(), 0, 0, 0, 0)
-        },
-        maxDate: function maxDate() {
-            if (!this.maxDatetime) return this.datepicker ? this.datepicker.maxDate : null
-            return new Date(this.maxDatetime.getFullYear(), this.maxDatetime.getMonth(), this.maxDatetime.getDate(), 0, 0, 0, 0)
-        },
-        minTime: function minTime() {
-            if (!this.minDatetime || this.newValue === null || typeof this.newValue === 'undefined') {
-                return this.timepicker ? this.timepicker.minTime : null
-            }
-
-            if (this.minDatetime.getFullYear() === this.newValue.getFullYear() && this.minDatetime.getMonth() === this.newValue.getMonth() && this.minDatetime.getDate() === this.newValue.getDate()) {
-                return this.minDatetime
-            }
-        },
-        maxTime: function maxTime() {
-            if (!this.maxDatetime || this.newValue === null || typeof this.newValue === 'undefined') {
-                return this.timepicker ? this.timepicker.maxTime : null
-            }
-
-          if (this.minDatetime && val < this.minDatetime) {
-            val = this.minDatetime;
-          } else if (this.maxDatetime && val > this.maxDatetime) {
-            val = this.maxDatetime;
-          }
-
-          this.newValue = new Date(val.getTime());
-        } else {
-          this.newValue = value;
-        }
-    },
-    data: function data() {
-        return {
-            newValue: this.value
-        }
-    },
-    placeholder: String,
-    disabled: Boolean,
-    icon: String,
-    iconPack: String,
-    inline: Boolean,
-    openOnFocus: Boolean,
-    position: String,
-    mobileNative: {
-      type: Boolean,
-      default: true
-    },
-    minDatetime: Date,
-    maxDatetime: Date,
-    datetimeFormatter: {
-      type: Function
-    },
-    datetimeParser: {
-      type: Function
-    },
-    datetimeCreator: {
-      type: Function,
-      default: function _default(date) {
-        if (typeof config.defaultDatetimeCreator === 'function') {
-          return config.defaultDatetimeCreator(date);
-        } else {
-          return date;
-        }
-      }
-    },
-    datepicker: Object,
-    timepicker: Object,
-    focusable: {
-      type: Boolean,
-      default: true
-    }
-  },
-  data: function data() {
-    return {
-      newValue: this.value
-    };
-  },
-  computed: {
-    computedValue: {
-      get: function get() {
-        return this.newValue;
-      },
-      set: function set(value) {
-        if (value) {
-          var val = new Date(value.getTime());
-
           if (this.newValue) {
             // restore time part
             if ((value.getDate() !== this.newValue.getDate() || value.getMonth() !== this.newValue.getMonth() || value.getFullYear() !== this.newValue.getFullYear()) && value.getHours() === 0 && value.getMinutes() === 0 && value.getSeconds() === 0) {
@@ -198,50 +113,78 @@ var script = {
             }
           } else {
             val = this.datetimeCreator(value);
-          } // check min and max range
-
-
-          if (this.minDatetime && val < this.minDatetime) {
-            val = this.minDatetime;
-          } else if (this.maxDatetime && val > this.maxDatetime) {
-            val = this.maxDatetime;
           }
-
+          // check min and max range
+          if (this.minDatetime && val < this.adjustValue(this.minDatetime)) {
+            val = this.adjustValue(this.minDatetime);
+          } else if (this.maxDatetime && val > this.adjustValue(this.maxDatetime)) {
+            val = this.adjustValue(this.maxDatetime);
+          }
           this.newValue = new Date(val.getTime());
         } else {
-          this.newValue = value;
+          this.newValue = this.adjustValue(value);
         }
-
-        this.$emit('input', this.newValue);
+        var adjustedValue = this.adjustValue(this.newValue, true); // reverse adjust
+        this.$emit('input', adjustedValue);
       }
     },
+    localeOptions: function localeOptions() {
+      return new Intl.DateTimeFormat(this.locale, {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: this.enableSeconds() ? 'numeric' : undefined
+      }).resolvedOptions();
+    },
+    dtf: function dtf() {
+      return new Intl.DateTimeFormat(this.locale, {
+        year: this.localeOptions.year || 'numeric',
+        month: this.localeOptions.month || 'numeric',
+        day: this.localeOptions.day || 'numeric',
+        hour: this.localeOptions.hour || 'numeric',
+        minute: this.localeOptions.minute || 'numeric',
+        second: this.enableSeconds() ? this.localeOptions.second || 'numeric' : undefined,
+        hourCycle: !this.isHourFormat24() ? 'h12' : 'h23'
+      });
+    },
+    isMobileNative: function isMobileNative() {
+      return this.mobileNative && this.tzOffset === 0;
+    },
     isMobile: function isMobile$1() {
-      return this.mobileNative && isMobile.any();
+      return this.isMobileNative && isMobile.any();
     },
     minDate: function minDate() {
-      if (!this.minDatetime) return this.datepicker ? this.datepicker.minDate : null;
-      return new Date(this.minDatetime.getFullYear(), this.minDatetime.getMonth(), this.minDatetime.getDate(), 0, 0, 0, 0);
+      if (!this.minDatetime) {
+        return this.datepicker ? this.adjustValue(this.datepicker.minDate) : null;
+      }
+      var adjMinDatetime = this.adjustValue(this.minDatetime);
+      return new Date(adjMinDatetime.getFullYear(), adjMinDatetime.getMonth(), adjMinDatetime.getDate(), 0, 0, 0, 0);
     },
     maxDate: function maxDate() {
-      if (!this.maxDatetime) return this.datepicker ? this.datepicker.maxDate : null;
-      return new Date(this.maxDatetime.getFullYear(), this.maxDatetime.getMonth(), this.maxDatetime.getDate(), 0, 0, 0, 0);
+      if (!this.maxDatetime) {
+        return this.datepicker ? this.adjustValue(this.datepicker.maxDate) : null;
+      }
+      var adjMaxDatetime = this.adjustValue(this.maxDatetime);
+      return new Date(adjMaxDatetime.getFullYear(), adjMaxDatetime.getMonth(), adjMaxDatetime.getDate(), 0, 0, 0, 0);
     },
     minTime: function minTime() {
       if (!this.minDatetime || this.newValue === null || typeof this.newValue === 'undefined') {
-        return this.timepicker ? this.timepicker.minTime : null;
+        return this.timepicker ? this.adjustValue(this.timepicker.minTime) : null;
       }
-
-      if (this.minDatetime.getFullYear() === this.newValue.getFullYear() && this.minDatetime.getMonth() === this.newValue.getMonth() && this.minDatetime.getDate() === this.newValue.getDate()) {
-        return this.minDatetime;
+      var adjMinDatetime = this.adjustValue(this.minDatetime);
+      if (adjMinDatetime.getFullYear() === this.newValue.getFullYear() && adjMinDatetime.getMonth() === this.newValue.getMonth() && adjMinDatetime.getDate() === this.newValue.getDate()) {
+        return adjMinDatetime;
       }
     },
     maxTime: function maxTime() {
       if (!this.maxDatetime || this.newValue === null || typeof this.newValue === 'undefined') {
-        return this.timepicker ? this.timepicker.maxTime : null;
+        return this.timepicker ? this.adjustValue(this.timepicker.maxTime) : null;
       }
-
-      if (this.maxDatetime.getFullYear() === this.newValue.getFullYear() && this.maxDatetime.getMonth() === this.newValue.getMonth() && this.maxDatetime.getDate() === this.newValue.getDate()) {
-        return this.maxDatetime;
+      var adjMaxDatetime = this.adjustValue(this.maxDatetime);
+      if (adjMaxDatetime.getFullYear() === this.newValue.getFullYear() && adjMaxDatetime.getMonth() === this.newValue.getMonth() && adjMaxDatetime.getDate() === this.newValue.getDate()) {
+        return adjMaxDatetime;
       }
     },
     datepickerSize: function datepickerSize() {
@@ -255,46 +198,107 @@ var script = {
     }
   },
   watch: {
-    value: function value(_value) {
-      this.newValue = _value;
+    value: function value() {
+      this.newValue = this.adjustValue(this.value);
+    },
+    tzOffset: function tzOffset() {
+      this.newValue = this.adjustValue(this.value);
     }
   },
   methods: {
+    enableSeconds: function enableSeconds() {
+      if (this.$refs.timepicker) {
+        return this.$refs.timepicker.enableSeconds;
+      }
+      return false;
+    },
+    isHourFormat24: function isHourFormat24() {
+      if (this.$refs.timepicker) {
+        return this.$refs.timepicker.isHourFormat24;
+      }
+      return !this.localeOptions.hour12;
+    },
+    adjustValue: function adjustValue(value) {
+      var reverse = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      if (!value) return value;
+      if (reverse) {
+        return new Date(value.getTime() - this.tzOffset * 60000);
+      } else {
+        return new Date(value.getTime() + this.tzOffset * 60000);
+      }
+    },
     defaultDatetimeParser: function defaultDatetimeParser(date) {
       if (typeof this.datetimeParser === 'function') {
         return this.datetimeParser(date);
       } else if (typeof config.defaultDatetimeParser === 'function') {
         return config.defaultDatetimeParser(date);
       } else {
+        if (this.dtf.formatToParts && typeof this.dtf.formatToParts === 'function') {
+          var dayPeriods = [AM, PM, AM.toLowerCase(), PM.toLowerCase()];
+          if (this.$refs.timepicker) {
+            dayPeriods.push(this.$refs.timepicker.amString);
+            dayPeriods.push(this.$refs.timepicker.pmString);
+          }
+          var parts = this.dtf.formatToParts(new Date());
+          var formatRegex = parts.map(function (part, idx) {
+            if (part.type === 'literal') {
+              if (idx + 1 < parts.length && parts[idx + 1].type === 'hour') {
+                return "[^\\d]+";
+              }
+              return part.value.replace(/ /g, '\\s?');
+            } else if (part.type === 'dayPeriod') {
+              return "((?!=<".concat(part.type, ">)(").concat(dayPeriods.join('|'), ")?)");
+            }
+            return "((?!=<".concat(part.type, ">)\\d+)");
+          }).join('');
+          var datetimeGroups = matchWithGroups(formatRegex, date);
+
+          // We do a simple validation for the group.
+          // If it is not valid, it will fallback to Date.parse below
+          if (datetimeGroups.year && datetimeGroups.year.length === 4 && datetimeGroups.month && datetimeGroups.month <= 12 && datetimeGroups.day && datetimeGroups.day <= 31 && datetimeGroups.hour && datetimeGroups.hour >= 0 && datetimeGroups.hour < 24 && datetimeGroups.minute && datetimeGroups.minute >= 0 && datetimeGroups.minute <= 59) {
+            var d = new Date(datetimeGroups.year, datetimeGroups.month - 1, datetimeGroups.day, datetimeGroups.hour, datetimeGroups.minute, datetimeGroups.second || 0);
+            return d;
+          }
+        }
         return new Date(Date.parse(date));
       }
     },
     defaultDatetimeFormatter: function defaultDatetimeFormatter(date) {
       if (typeof this.datetimeFormatter === 'function') {
         return this.datetimeFormatter(date);
-      } else if (typeof config.defaultDatetimeParser === 'function') {
-        return config.defaultDatetimeParser(date);
+      } else if (typeof config.defaultDatetimeFormatter === 'function') {
+        return config.defaultDatetimeFormatter(date);
       } else {
-        if (this.$refs.timepicker) {
-          var yyyyMMdd = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
-          var d = new Date(yyyyMMdd);
-          return d.toLocaleDateString() + ' ' + this.$refs.timepicker.timeFormatter(date, this.$refs.timepicker);
-        }
-
-        return null;
+        return this.dtf.format(date);
       }
     },
-
     /*
     * Parse date from string
     */
     onChangeNativePicker: function onChangeNativePicker(event) {
       var date = event.target.value;
-      this.computedValue = date ? new Date(date) : null;
+      var s = date ? date.split(/\D/) : [];
+      if (s.length >= 5) {
+        var year = parseInt(s[0], 10);
+        var month = parseInt(s[1], 10) - 1;
+        var day = parseInt(s[2], 10);
+        var hours = parseInt(s[3], 10);
+        var minutes = parseInt(s[4], 10);
+        // Seconds are omitted intentionally; they are unsupported by input
+        // type=datetime-local and cause the control to fail native validation
+        this.computedValue = new Date(year, month, day, hours, minutes);
+      } else {
+        this.computedValue = null;
+      }
+    },
+    /*
+     * Emit 'active-change' on datepicker active state change
+     */
+    onActiveChange: function onActiveChange(value) {
+      this.$emit('active-change', value);
     },
     formatNative: function formatNative(value) {
       var date = new Date(value);
-
       if (value && !isNaN(date)) {
         var year = date.getFullYear();
         var month = date.getMonth() + 1;
@@ -304,7 +308,6 @@ var script = {
         var seconds = date.getSeconds();
         return year + '-' + ((month < 10 ? '0' : '') + month) + '-' + ((day < 10 ? '0' : '') + day) + 'T' + ((hours < 10 ? '0' : '') + hours) + ':' + ((minutes < 10 ? '0' : '') + minutes) + ':' + ((seconds < 10 ? '0' : '') + seconds);
       }
-
       return '';
     },
     toggle: function toggle() {
@@ -312,9 +315,11 @@ var script = {
     }
   },
   mounted: function mounted() {
-    // $refs attached, it's time to refresh datepicker (input)
-    if (this.newValue) {
-      this.$refs.datepicker.$forceUpdate();
+    if (!this.isMobile || this.inline) {
+      // $refs attached, it's time to refresh datepicker (input)
+      if (this.newValue) {
+        this.$refs.datepicker.$forceUpdate();
+      }
     }
   }
 };
@@ -323,7 +328,7 @@ var script = {
 const __vue_script__ = script;
 
 /* template */
-var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (!_vm.isMobile || _vm.inline)?_c('b-datepicker',_vm._b({ref:"datepicker",attrs:{"open-on-focus":_vm.openOnFocus,"position":_vm.position,"loading":_vm.loading,"inline":_vm.inline,"editable":_vm.editable,"expanded":_vm.expanded,"close-on-click":false,"date-formatter":_vm.defaultDatetimeFormatter,"date-parser":_vm.defaultDatetimeParser,"min-date":_vm.minDate,"max-date":_vm.maxDate,"icon":_vm.icon,"icon-pack":_vm.iconPack,"size":_vm.datepickerSize,"placeholder":_vm.placeholder,"range":false,"disabled":_vm.disabled,"mobile-native":_vm.mobileNative,"focusable":_vm.focusable},on:{"change-month":function($event){_vm.$emit('change-month', $event);},"change-year":function($event){_vm.$emit('change-year', $event);}},model:{value:(_vm.computedValue),callback:function ($$v) {_vm.computedValue=$$v;},expression:"computedValue"}},'b-datepicker',_vm.datepicker,false),[_c('nav',{staticClass:"level is-mobile"},[(_vm.$slots.left !== undefined)?_c('div',{staticClass:"level-item has-text-centered"},[_vm._t("left")],2):_vm._e(),_vm._v(" "),_c('div',{staticClass:"level-item has-text-centered"},[_c('b-timepicker',_vm._b({ref:"timepicker",attrs:{"inline":"","editable":_vm.editable,"min-time":_vm.minTime,"max-time":_vm.maxTime,"size":_vm.timepickerSize,"disabled":_vm.timepickerDisabled,"focusable":_vm.focusable},model:{value:(_vm.computedValue),callback:function ($$v) {_vm.computedValue=$$v;},expression:"computedValue"}},'b-timepicker',_vm.timepicker,false))],1),_vm._v(" "),(_vm.$slots.right !== undefined)?_c('div',{staticClass:"level-item has-text-centered"},[_vm._t("right")],2):_vm._e()])]):_c('b-input',_vm._b({ref:"input",attrs:{"type":"datetime-local","autocomplete":"off","value":_vm.formatNative(_vm.computedValue),"placeholder":_vm.placeholder,"size":_vm.size,"icon":_vm.icon,"icon-pack":_vm.iconPack,"loading":_vm.loading,"max":_vm.formatNative(_vm.maxDate),"min":_vm.formatNative(_vm.minDate),"disabled":_vm.disabled,"readonly":false,"use-html5-validation":_vm.useHtml5Validation},on:{"focus":_vm.onFocus,"blur":_vm.onBlur},nativeOn:{"change":function($event){_vm.onChangeNativePicker($event);}}},'b-input',_vm.$attrs,false))};
+var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (!_vm.isMobile || _vm.inline)?_c('b-datepicker',_vm._b({ref:"datepicker",attrs:{"rounded":_vm.rounded,"open-on-focus":_vm.openOnFocus,"position":_vm.position,"loading":_vm.loading,"inline":_vm.inline,"editable":_vm.editable,"expanded":_vm.expanded,"close-on-click":false,"first-day-of-week":_vm.firstDayOfWeek,"rules-for-first-week":_vm.rulesForFirstWeek,"date-formatter":_vm.defaultDatetimeFormatter,"date-parser":_vm.defaultDatetimeParser,"min-date":_vm.minDate,"max-date":_vm.maxDate,"nearby-month-days":_vm.nearbyMonthDays,"icon":_vm.icon,"icon-right":_vm.iconRight,"icon-right-clickable":_vm.iconRightClickable,"icon-pack":_vm.iconPack,"size":_vm.datepickerSize,"placeholder":_vm.placeholder,"horizontal-time-picker":_vm.horizontalTimePicker,"range":false,"disabled":_vm.disabled,"mobile-native":_vm.isMobileNative,"locale":_vm.locale,"focusable":_vm.focusable,"append-to-body":_vm.appendToBody},on:{"focus":_vm.onFocus,"blur":_vm.onBlur,"active-change":_vm.onActiveChange,"icon-right-click":function($event){return _vm.$emit('icon-right-click')},"change-month":function($event){return _vm.$emit('change-month', $event)},"change-year":function($event){return _vm.$emit('change-year', $event)}},model:{value:(_vm.computedValue),callback:function ($$v) {_vm.computedValue=$$v;},expression:"computedValue"}},'b-datepicker',_vm.datepicker,false),[_c('nav',{staticClass:"level is-mobile"},[(_vm.$slots.left !== undefined)?_c('div',{staticClass:"level-item has-text-centered"},[_vm._t("left")],2):_vm._e(),_c('div',{staticClass:"level-item has-text-centered"},[_c('b-timepicker',_vm._b({ref:"timepicker",attrs:{"inline":"","editable":_vm.editable,"min-time":_vm.minTime,"max-time":_vm.maxTime,"size":_vm.timepickerSize,"disabled":_vm.timepickerDisabled,"focusable":_vm.focusable,"mobile-native":_vm.isMobileNative,"locale":_vm.locale},model:{value:(_vm.computedValue),callback:function ($$v) {_vm.computedValue=$$v;},expression:"computedValue"}},'b-timepicker',_vm.timepicker,false))],1),(_vm.$slots.right !== undefined)?_c('div',{staticClass:"level-item has-text-centered"},[_vm._t("right")],2):_vm._e()])]):_c('b-input',_vm._b({ref:"input",attrs:{"type":"datetime-local","autocomplete":"off","value":_vm.formatNative(_vm.computedValue),"placeholder":_vm.placeholder,"size":_vm.size,"icon":_vm.icon,"icon-pack":_vm.iconPack,"rounded":_vm.rounded,"loading":_vm.loading,"max":_vm.formatNative(_vm.maxDate),"min":_vm.formatNative(_vm.minDate),"disabled":_vm.disabled,"readonly":false,"use-html5-validation":_vm.useHtml5Validation},on:{"focus":_vm.onFocus,"blur":_vm.onBlur},nativeOn:{"change":function($event){return _vm.onChangeNativePicker($event)}}},'b-input',_vm.$attrs,false))};
 var __vue_staticRenderFns__ = [];
 
   /* style */
@@ -338,18 +343,24 @@ var __vue_staticRenderFns__ = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Datetimepicker = __vue_normalize__(
+  const __vue_component__ = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
     __vue_scope_id__,
     __vue_is_functional_template__,
     __vue_module_identifier__,
+    false,
+    undefined,
     undefined,
     undefined
   );
+
+  var Datetimepicker = __vue_component__;
 
 var Plugin = {
   install: function install(Vue) {
@@ -358,5 +369,4 @@ var Plugin = {
 };
 use(Plugin);
 
-export default Plugin;
-export { Datetimepicker as BDatetimepicker };
+export { Datetimepicker as BDatetimepicker, Plugin as default };

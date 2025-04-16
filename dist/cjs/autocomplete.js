@@ -2,21 +2,21 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-require('./chunk-2777282e.js');
+var Autocomplete = require('./Autocomplete-7a39c5ce.js');
+var plugins = require('./plugins-7f41b028.js');
+require('./_rollupPluginBabelHelpers-8b2e54ad.js');
 require('./helpers.js');
-require('./chunk-8806479f.js');
-require('./chunk-f45d15e3.js');
-require('./chunk-acfb68f5.js');
-var __chunk_5 = require('./chunk-13e039f5.js');
-require('./chunk-e79d8d75.js');
-var __chunk_7 = require('./chunk-dfc41c37.js');
+require('./FormElementMixin-193a88b8.js');
+require('./config-8cfb5a4a.js');
+require('./Input-e5a72d97.js');
+require('./Icon-78961800.js');
 
 var Plugin = {
   install: function install(Vue) {
-    __chunk_5.registerComponent(Vue, __chunk_7.Autocomplete);
+    plugins.registerComponent(Vue, Autocomplete.Autocomplete);
   }
 };
-__chunk_5.use(Plugin);
+plugins.use(Plugin);
 
-exports.BAutocomplete = __chunk_7.Autocomplete;
-exports.default = Plugin;
+exports.BAutocomplete = Autocomplete.Autocomplete;
+exports["default"] = Plugin;

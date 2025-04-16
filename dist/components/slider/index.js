@@ -1,11 +1,35 @@
-/*! Buefy v0.8.20 | MIT License | github.com/buefy/buefy */
+/*! Buefy v0.9.29 | MIT License | github.com/buefy/buefy */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (global = global || self, factory(global.Slider = {}));
-}(this, function (exports) { 'use strict';
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.Slider = {}));
+})(this, (function (exports) { 'use strict';
 
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
+  function _typeof(o) {
+    "@babel/helpers - typeof";
+
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+      return typeof o;
+    } : function (o) {
+      return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+    }, _typeof(o);
+  }
   function _defineProperty(obj, key, value) {
+    key = _toPropertyKey(key);
     if (key in obj) {
       Object.defineProperty(obj, key, {
         value: value,
@@ -16,28 +40,83 @@
     } else {
       obj[key] = value;
     }
-
     return obj;
   }
-
   function _toConsumableArray(arr) {
-    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
   }
-
   function _arrayWithoutHoles(arr) {
-    if (Array.isArray(arr)) {
-      for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
-
-      return arr2;
-    }
+    if (Array.isArray(arr)) return _arrayLikeToArray(arr);
   }
-
   function _iterableToArray(iter) {
-    if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
   }
-
+  function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+  }
+  function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+    for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+    return arr2;
+  }
   function _nonIterableSpread() {
-    throw new TypeError("Invalid attempt to spread non-iterable instance");
+    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+  function _createForOfIteratorHelper(o, allowArrayLike) {
+    var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
+    if (!it) {
+      if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
+        if (it) o = it;
+        var i = 0;
+        var F = function () {};
+        return {
+          s: F,
+          n: function () {
+            if (i >= o.length) return {
+              done: true
+            };
+            return {
+              done: false,
+              value: o[i++]
+            };
+          },
+          e: function (e) {
+            throw e;
+          },
+          f: F
+        };
+      }
+      throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+    }
+    var normalCompletion = true,
+      didErr = false,
+      err;
+    return {
+      s: function () {
+        it = it.call(o);
+      },
+      n: function () {
+        var step = it.next();
+        normalCompletion = step.done;
+        return step;
+      },
+      e: function (e) {
+        didErr = true;
+        err = e;
+      },
+      f: function () {
+        try {
+          if (!normalCompletion && it.return != null) it.return();
+        } finally {
+          if (didErr) throw err;
+        }
+      }
+    };
   }
 
   var config = {
@@ -46,6 +125,7 @@
     defaultIconComponent: null,
     defaultIconPrev: 'chevron-left',
     defaultIconNext: 'chevron-right',
+    defaultLocale: undefined,
     defaultDialogConfirmText: null,
     defaultDialogCancelText: null,
     defaultSnackbarDuration: 3500,
@@ -55,8 +135,9 @@
     defaultNotificationDuration: 2000,
     defaultNotificationPosition: null,
     defaultTooltipType: 'is-primary',
-    defaultTooltipAnimated: false,
-    defaultTooltipDelay: 0,
+    defaultTooltipDelay: null,
+    defaultTooltipCloseDelay: null,
+    defaultSidebarDelay: null,
     defaultInputAutocomplete: 'on',
     defaultDateFormatter: null,
     defaultDateParser: null,
@@ -72,33 +153,98 @@
     defaultModalScroll: null,
     defaultDatepickerMobileNative: true,
     defaultTimepickerMobileNative: true,
+    defaultTimepickerMobileModal: true,
     defaultNoticeQueue: true,
     defaultInputHasCounter: true,
     defaultTaginputHasCounter: true,
     defaultUseHtml5Validation: true,
     defaultDropdownMobileModal: true,
     defaultFieldLabelPosition: null,
-    defaultDatepickerYearsRange: [-100, 3],
+    defaultDatepickerYearsRange: [-100, 10],
     defaultDatepickerNearbyMonthDays: true,
     defaultDatepickerNearbySelectableMonthDays: false,
     defaultDatepickerShowWeekNumber: false,
+    defaultDatepickerWeekNumberClickable: false,
     defaultDatepickerMobileModal: true,
-    defaultTrapFocus: false,
+    defaultTrapFocus: true,
+    defaultAutoFocus: true,
     defaultButtonRounded: false,
+    defaultSwitchRounded: true,
     defaultCarouselInterval: 3500,
+    defaultTabsExpanded: false,
+    defaultTabsAnimated: true,
+    defaultTabsType: null,
+    defaultStatusIcon: true,
+    defaultProgrammaticPromise: false,
+    defaultLinkTags: ['a', 'button', 'input', 'router-link', 'nuxt-link', 'n-link', 'RouterLink', 'NuxtLink', 'NLink'],
+    defaultImageWebpFallback: null,
+    defaultImageLazy: true,
+    defaultImageResponsive: true,
+    defaultImageRatio: null,
+    defaultImageSrcsetFormatter: null,
+    defaultBreadcrumbTag: 'a',
+    defaultBreadcrumbAlign: 'is-left',
+    defaultBreadcrumbSeparator: '',
+    defaultBreadcrumbSize: 'is-medium',
     customIconPacks: null
-  }; // TODO defaultTrapFocus to true in the next breaking change
+  };
 
-  //
-  var script = {
+  /**
+   * Asserts a value is beetween min and max
+   * @param val
+   * @param min
+   * @param max
+   * @returns {number}
+   */
+  function bound(val, min, max) {
+    return Math.max(min, Math.min(max, val));
+  }
+  function removeElement(el) {
+    if (typeof el.remove !== 'undefined') {
+      el.remove();
+    } else if (typeof el.parentNode !== 'undefined' && el.parentNode !== null) {
+      el.parentNode.removeChild(el);
+    }
+  }
+  function createAbsoluteElement(el) {
+    var root = document.createElement('div');
+    root.style.position = 'absolute';
+    root.style.left = '0px';
+    root.style.top = '0px';
+    root.style.width = '100%';
+    var wrapper = document.createElement('div');
+    root.appendChild(wrapper);
+    wrapper.appendChild(el);
+    document.body.appendChild(root);
+    return root;
+  }
+
+  var script$3 = {
     name: 'BTooltip',
     props: {
       active: {
         type: Boolean,
         default: true
       },
-      type: String,
+      type: {
+        type: String,
+        default: function _default() {
+          return config.defaultTooltipType;
+        }
+      },
       label: String,
+      delay: {
+        type: Number,
+        default: function _default() {
+          return config.defaultTooltipDelay;
+        }
+      },
+      closeDelay: {
+        type: Number,
+        default: function _default() {
+          return config.defaultTooltipCloseDelay;
+        }
+      },
       position: {
         type: String,
         default: 'is-top',
@@ -106,8 +252,13 @@
           return ['is-top', 'is-bottom', 'is-left', 'is-right'].indexOf(value) > -1;
         }
       },
+      triggers: {
+        type: Array,
+        default: function _default() {
+          return ['hover'];
+        }
+      },
       always: Boolean,
-      animated: Boolean,
       square: Boolean,
       dashed: Boolean,
       multilined: Boolean,
@@ -115,146 +266,399 @@
         type: String,
         default: 'is-medium'
       },
-      delay: Number
+      appendToBody: Boolean,
+      animated: {
+        type: Boolean,
+        default: true
+      },
+      animation: {
+        type: String,
+        default: 'fade'
+      },
+      contentClass: String,
+      autoClose: {
+        type: [Array, Boolean],
+        default: true
+      }
+    },
+    data: function data() {
+      return {
+        isActive: false,
+        triggerStyle: {},
+        timer: null,
+        _bodyEl: undefined,
+        // Used to append to body
+        resizeObserver: undefined,
+        resizeListener: undefined,
+        timeOutID: null
+      };
     },
     computed: {
-      newType: function newType() {
-        return this.type || config.defaultTooltipType;
+      rootClasses: function rootClasses() {
+        return ['b-tooltip', this.type, this.position, this.size, {
+          'is-square': this.square,
+          'is-always': this.always,
+          'is-multiline': this.multilined,
+          'is-dashed': this.dashed
+        }];
       },
-      newAnimated: function newAnimated() {
-        return this.animated || config.defaultTooltipAnimated;
-      },
-      newDelay: function newDelay() {
-        return this.delay || config.defaultTooltipDelay;
+      newAnimation: function newAnimation() {
+        return this.animated ? this.animation : undefined;
       }
+    },
+    watch: {
+      isActive: function isActive() {
+        this.$emit(this.isActive ? 'open' : 'close');
+        if (this.appendToBody) {
+          this.updateAppendToBody();
+        }
+      }
+    },
+    methods: {
+      updateAppendToBody: function updateAppendToBody() {
+        var tooltip = this.$refs.tooltip;
+        var trigger = this.$refs.trigger;
+        if (tooltip && trigger) {
+          // update wrapper tooltip
+          var tooltipEl = this.$data._bodyEl.children[0];
+          tooltipEl.classList.forEach(function (item) {
+            return tooltipEl.classList.remove(item);
+          });
+          if (this.$vnode && this.$vnode.data && this.$vnode.data.staticClass) {
+            tooltipEl.classList.add(this.$vnode.data.staticClass);
+          }
+          this.rootClasses.forEach(function (item) {
+            if (_typeof(item) === 'object') {
+              for (var key in item) {
+                if (item[key]) {
+                  tooltipEl.classList.add(key);
+                }
+              }
+            } else {
+              tooltipEl.classList.add(item);
+            }
+          });
+          var rect = trigger.getBoundingClientRect();
+          var top = rect.top + window.scrollY;
+          var left = rect.left + window.scrollX;
+
+          // `tooltipEl` will be placed relative to `wrapper`
+          // because `wrapper` should create a stacking context
+          // as its z-index is non-auto
+          tooltipEl.style.position = 'absolute';
+          switch (this.position) {
+            case 'is-top':
+              tooltipEl.style.width = "".concat(trigger.clientWidth, "px");
+              tooltipEl.style.height = '0px';
+              tooltipEl.style.top = '0px';
+              tooltipEl.style.left = '0px';
+              break;
+            case 'is-bottom':
+              tooltipEl.style.width = "".concat(trigger.clientWidth, "px");
+              tooltipEl.style.height = '0px';
+              tooltipEl.style.top = "".concat(trigger.clientHeight, "px");
+              tooltipEl.style.left = '0px';
+              break;
+            case 'is-left':
+              tooltipEl.style.width = '0px';
+              tooltipEl.style.height = "".concat(trigger.clientHeight, "px");
+              tooltipEl.style.top = '0px';
+              tooltipEl.style.left = '0px';
+              break;
+            case 'is-right':
+              tooltipEl.style.width = '0px';
+              tooltipEl.style.height = "".concat(trigger.clientHeight, "px");
+              tooltipEl.style.top = '0px';
+              tooltipEl.style.left = "".concat(trigger.clientWidth, "px");
+              break;
+          }
+          var wrapper = this.$data._bodyEl;
+          wrapper.style.position = 'absolute';
+          wrapper.style.top = "".concat(top, "px");
+          wrapper.style.left = "".concat(left, "px");
+          wrapper.style.width = '0px';
+          wrapper.style.zIndex = this.isActive || this.always ? '99' : '-1';
+          this.triggerStyle = {
+            zIndex: this.isActive || this.always ? '100' : undefined
+          };
+        }
+      },
+      onClick: function onClick() {
+        var _this = this;
+        if (this.triggers.indexOf('click') < 0) return;
+        // if not active, toggle after clickOutside event
+        // this fixes toggling programmatic
+        this.$nextTick(function () {
+          _this.timeOutID = setTimeout(function () {
+            return _this.open();
+          });
+        });
+      },
+      onHover: function onHover() {
+        if (this.triggers.indexOf('hover') < 0) return;
+        this.open();
+      },
+      onContextMenu: function onContextMenu(e) {
+        if (this.triggers.indexOf('contextmenu') < 0) return;
+        e.preventDefault();
+        this.open();
+      },
+      onFocus: function onFocus() {
+        if (this.triggers.indexOf('focus') < 0) return;
+        this.open();
+      },
+      open: function open() {
+        var _this2 = this;
+        if (this.delay) {
+          this.timer = setTimeout(function () {
+            _this2.isActive = true;
+            _this2.timer = null;
+          }, this.delay);
+        } else {
+          this.isActive = true;
+        }
+      },
+      close: function close() {
+        var _this3 = this;
+        if (typeof this.autoClose === 'boolean') {
+          if (this.autoClose && this.timer) clearTimeout(this.timer);
+          if (this.closeDelay) {
+            this.timer = setTimeout(function () {
+              _this3.isActive = !_this3.autoClose;
+              _this3.timer = null;
+            }, this.closeDelay);
+          } else {
+            this.isActive = !this.autoClose;
+          }
+        }
+      },
+      /**
+      * Close tooltip if clicked outside.
+      */
+      clickedOutside: function clickedOutside(event) {
+        if (this.isActive) {
+          if (Array.isArray(this.autoClose)) {
+            if (this.autoClose.includes('outside')) {
+              if (!this.isInWhiteList(event.target)) {
+                this.isActive = false;
+                return;
+              }
+            }
+            if (this.autoClose.includes('inside')) {
+              if (this.isInWhiteList(event.target)) this.isActive = false;
+            }
+          }
+        }
+      },
+      /**
+       * Keypress event that is bound to the document
+       */
+      keyPress: function keyPress(_ref) {
+        var key = _ref.key;
+        if (this.isActive && (key === 'Escape' || key === 'Esc')) {
+          if (Array.isArray(this.autoClose)) {
+            if (this.autoClose.indexOf('escape') >= 0) this.isActive = false;
+          }
+        }
+      },
+      /**
+      * White-listed items to not close when clicked.
+      */
+      isInWhiteList: function isInWhiteList(el) {
+        if (el === this.$refs.content) return true;
+        // All chidren from content
+        if (this.$refs.content !== undefined) {
+          var children = this.$refs.content.querySelectorAll('*');
+          var _iterator = _createForOfIteratorHelper(children),
+            _step;
+          try {
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
+              var child = _step.value;
+              if (el === child) {
+                return true;
+              }
+            }
+          } catch (err) {
+            _iterator.e(err);
+          } finally {
+            _iterator.f();
+          }
+        }
+        return false;
+      }
+    },
+    mounted: function mounted() {
+      var _this4 = this;
+      if (this.appendToBody && typeof window !== 'undefined') {
+        this.controller = new window.AbortController();
+        this.$data._bodyEl = createAbsoluteElement(this.$refs.content);
+        this.updateAppendToBody();
+        // updates the tooltip position if the tooltip is inside
+        // `.animation-content`
+        var animation = this.$el.closest('.animation-content');
+        if (animation != null) {
+          var listener = function listener() {
+            _this4.updateAppendToBody();
+            animation.removeEventListener('transitionend', listener);
+          };
+          animation.addEventListener('transitionend', listener, {
+            signal: this.controller.signal
+          });
+        }
+        // observes changes in the window size
+        this.resizeListener = function () {
+          return _this4.updateAppendToBody();
+        };
+        window.addEventListener('resize', this.resizeListener);
+        // observes changes in the size of the immediate parent
+        this.resizeObserver = new ResizeObserver(this.resizeListener);
+        if (this.$el.parentNode != null && this.$el.parentNode.nodeType === Node.ELEMENT_NODE) {
+          this.resizeObserver.observe(this.$el.parentNode);
+        }
+      }
+    },
+    created: function created() {
+      if (typeof window !== 'undefined') {
+        document.addEventListener('click', this.clickedOutside);
+        document.addEventListener('keyup', this.keyPress);
+      }
+    },
+    beforeDestroy: function beforeDestroy() {
+      if (typeof window !== 'undefined') {
+        document.removeEventListener('click', this.clickedOutside);
+        document.removeEventListener('keyup', this.keyPress);
+      }
+      if (this.resizeListener != null) {
+        window.removeEventListener('resize', this.resizeListener);
+      }
+      if (this.resizeObserver != null) {
+        this.resizeObserver.disconnect();
+      }
+      if (this.appendToBody) {
+        removeElement(this.$data._bodyEl);
+      }
+      if (this.controller != null) {
+        this.controller.abort();
+      }
+      clearTimeout(this.timer);
+      clearTimeout(this.timeOutID);
     }
   };
 
-  function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier
-  /* server only */
-  , shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
-    if (typeof shadowMode !== 'boolean') {
-      createInjectorSSR = createInjector;
-      createInjector = shadowMode;
-      shadowMode = false;
-    } // Vue.extend constructor export interop.
-
-
-    var options = typeof script === 'function' ? script.options : script; // render functions
-
-    if (template && template.render) {
-      options.render = template.render;
-      options.staticRenderFns = template.staticRenderFns;
-      options._compiled = true; // functional template
-
-      if (isFunctionalTemplate) {
-        options.functional = true;
+  function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier /* server only */, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
+      if (typeof shadowMode !== 'boolean') {
+          createInjectorSSR = createInjector;
+          createInjector = shadowMode;
+          shadowMode = false;
       }
-    } // scopedId
-
-
-    if (scopeId) {
-      options._scopeId = scopeId;
-    }
-
-    var hook;
-
-    if (moduleIdentifier) {
-      // server build
-      hook = function hook(context) {
-        // 2.3 injection
-        context = context || // cached call
-        this.$vnode && this.$vnode.ssrContext || // stateful
-        this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext; // functional
-        // 2.2 with runInNewContext: true
-
-        if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-          context = __VUE_SSR_CONTEXT__;
-        } // inject component styles
-
-
-        if (style) {
-          style.call(this, createInjectorSSR(context));
-        } // register component module identifier for async chunk inference
-
-
-        if (context && context._registeredComponents) {
-          context._registeredComponents.add(moduleIdentifier);
-        }
-      }; // used by ssr in case component is cached and beforeCreate
-      // never gets called
-
-
-      options._ssrRegister = hook;
-    } else if (style) {
-      hook = shadowMode ? function () {
-        style.call(this, createInjectorShadow(this.$root.$options.shadowRoot));
-      } : function (context) {
-        style.call(this, createInjector(context));
-      };
-    }
-
-    if (hook) {
-      if (options.functional) {
-        // register for functional component in vue file
-        var originalRender = options.render;
-
-        options.render = function renderWithStyleInjection(h, context) {
-          hook.call(context);
-          return originalRender(h, context);
-        };
-      } else {
-        // inject component registration as beforeCreate hook
-        var existing = options.beforeCreate;
-        options.beforeCreate = existing ? [].concat(existing, hook) : [hook];
+      // Vue.extend constructor export interop.
+      const options = typeof script === 'function' ? script.options : script;
+      // render functions
+      if (template && template.render) {
+          options.render = template.render;
+          options.staticRenderFns = template.staticRenderFns;
+          options._compiled = true;
+          // functional template
+          if (isFunctionalTemplate) {
+              options.functional = true;
+          }
       }
-    }
-
-    return script;
+      // scopedId
+      if (scopeId) {
+          options._scopeId = scopeId;
+      }
+      let hook;
+      if (moduleIdentifier) {
+          // server build
+          hook = function (context) {
+              // 2.3 injection
+              context =
+                  context || // cached call
+                      (this.$vnode && this.$vnode.ssrContext) || // stateful
+                      (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext); // functional
+              // 2.2 with runInNewContext: true
+              if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+                  context = __VUE_SSR_CONTEXT__;
+              }
+              // inject component styles
+              if (style) {
+                  style.call(this, createInjectorSSR(context));
+              }
+              // register component module identifier for async chunk inference
+              if (context && context._registeredComponents) {
+                  context._registeredComponents.add(moduleIdentifier);
+              }
+          };
+          // used by ssr in case component is cached and beforeCreate
+          // never gets called
+          options._ssrRegister = hook;
+      }
+      else if (style) {
+          hook = shadowMode
+              ? function (context) {
+                  style.call(this, createInjectorShadow(context, this.$root.$options.shadowRoot));
+              }
+              : function (context) {
+                  style.call(this, createInjector(context));
+              };
+      }
+      if (hook) {
+          if (options.functional) {
+              // register for functional component in vue file
+              const originalRender = options.render;
+              options.render = function renderWithStyleInjection(h, context) {
+                  hook.call(context);
+                  return originalRender(h, context);
+              };
+          }
+          else {
+              // inject component registration as beforeCreate hook
+              const existing = options.beforeCreate;
+              options.beforeCreate = existing ? [].concat(existing, hook) : [hook];
+          }
+      }
+      return script;
   }
 
-  var normalizeComponent_1 = normalizeComponent;
-
   /* script */
-  const __vue_script__ = script;
+  const __vue_script__$3 = script$3;
 
   /* template */
-  var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{class:[_vm.newType, _vm.position, _vm.size, {
-          'b-tooltip': _vm.active,
-          'is-square': _vm.square,
-          'is-animated': _vm.newAnimated,
-          'is-always': _vm.always,
-          'is-multiline': _vm.multilined,
-          'is-dashed': _vm.dashed
-      }],style:({'transition-delay': (_vm.newDelay + "ms")}),attrs:{"data-label":_vm.label}},[_vm._t("default")],2)};
-  var __vue_staticRenderFns__ = [];
+  var __vue_render__$3 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"tooltip",class:_vm.rootClasses},[_c('transition',{attrs:{"name":_vm.newAnimation}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.active && (_vm.isActive || _vm.always)),expression:"active && (isActive || always)"}],ref:"content",class:['tooltip-content', _vm.contentClass]},[(_vm.label)?[_vm._v(_vm._s(_vm.label))]:(_vm.$slots.content)?[_vm._t("content")]:_vm._e()],2)]),_c('div',{ref:"trigger",staticClass:"tooltip-trigger",style:(_vm.triggerStyle),on:{"click":_vm.onClick,"contextmenu":_vm.onContextMenu,"mouseenter":_vm.onHover,"!focus":function($event){return _vm.onFocus($event)},"!blur":function($event){return _vm.close($event)},"mouseleave":_vm.close}},[_vm._t("default")],2)],1)};
+  var __vue_staticRenderFns__$3 = [];
 
     /* style */
-    const __vue_inject_styles__ = undefined;
+    const __vue_inject_styles__$3 = undefined;
     /* scoped */
-    const __vue_scope_id__ = undefined;
+    const __vue_scope_id__$3 = undefined;
     /* module identifier */
-    const __vue_module_identifier__ = undefined;
+    const __vue_module_identifier__$3 = undefined;
     /* functional template */
-    const __vue_is_functional_template__ = false;
+    const __vue_is_functional_template__$3 = false;
     /* style inject */
     
     /* style inject SSR */
     
+    /* style inject shadow dom */
+    
 
     
-    var Tooltip = normalizeComponent_1(
-      { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
-      __vue_inject_styles__,
-      __vue_script__,
-      __vue_scope_id__,
-      __vue_is_functional_template__,
-      __vue_module_identifier__,
+    const __vue_component__$3 = /*#__PURE__*/normalizeComponent(
+      { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
+      __vue_inject_styles__$3,
+      __vue_script__$3,
+      __vue_scope_id__$3,
+      __vue_is_functional_template__$3,
+      __vue_module_identifier__$3,
+      false,
+      undefined,
       undefined,
       undefined
     );
 
-  var script$1 = {
+    var Tooltip = __vue_component__$3;
+
+  var script$2 = {
     name: 'BSliderThumb',
     components: _defineProperty({}, Tooltip.name, Tooltip),
     inheritAttrs: false,
@@ -271,7 +675,28 @@
         type: Boolean,
         default: true
       },
-      customFormatter: Function
+      indicator: {
+        type: Boolean,
+        default: false
+      },
+      customFormatter: Function,
+      format: {
+        type: String,
+        default: 'raw',
+        validator: function validator(value) {
+          return ['raw', 'percent'].indexOf(value) >= 0;
+        }
+      },
+      locale: {
+        type: [String, Array],
+        default: function _default() {
+          return config.defaultLocale;
+        }
+      },
+      tooltipAlways: {
+        type: Boolean,
+        default: false
+      }
     },
     data: function data() {
       return {
@@ -307,8 +732,16 @@
           left: this.currentPosition
         };
       },
-      tooltipLabel: function tooltipLabel() {
-        return typeof this.customFormatter !== 'undefined' ? this.customFormatter(this.value) : this.value.toString();
+      formattedValue: function formattedValue() {
+        if (typeof this.customFormatter !== 'undefined') {
+          return this.customFormatter(this.value);
+        }
+        if (this.format === 'percent') {
+          return new Intl.NumberFormat(this.locale, {
+            style: 'percent'
+          }).format((this.value - this.min) / (this.max - this.min));
+        }
+        return new Intl.NumberFormat(this.locale).format(this.value);
       }
     },
     methods: {
@@ -322,7 +755,6 @@
         if (this.disabled) return;
         event.preventDefault();
         this.onDragStart(event);
-
         if (typeof window !== 'undefined') {
           document.addEventListener('mousemove', this.onDragging);
           document.addEventListener('touchmove', this.onDragging);
@@ -358,11 +790,9 @@
       onDragStart: function onDragStart(event) {
         this.dragging = true;
         this.$emit('dragstart');
-
         if (event.type === 'touchstart') {
           event.clientX = event.touches[0].clientX;
         }
-
         this.startX = event.clientX;
         this.startPosition = parseFloat(this.currentPosition);
         this.newPosition = this.startPosition;
@@ -372,8 +802,7 @@
           if (event.type === 'touchmove') {
             event.clientX = event.touches[0].clientX;
           }
-
-          var diff = (event.clientX - this.startX) / this.$parent.sliderSize * 100;
+          var diff = (event.clientX - this.startX) / this.$parent.sliderSize() * 100;
           this.newPosition = this.startPosition + diff;
           this.setPosition(this.newPosition);
         }
@@ -381,13 +810,10 @@
       onDragEnd: function onDragEnd() {
         this.dragging = false;
         this.$emit('dragend');
-
         if (this.value !== this.oldValue) {
           this.$parent.emitValue('change');
         }
-
         this.setPosition(this.newPosition);
-
         if (typeof window !== 'undefined') {
           document.removeEventListener('mousemove', this.onDragging);
           document.removeEventListener('touchmove', this.onDragging);
@@ -398,58 +824,68 @@
       },
       setPosition: function setPosition(percent) {
         if (percent === null || isNaN(percent)) return;
-
         if (percent < 0) {
           percent = 0;
         } else if (percent > 100) {
           percent = 100;
         }
-
         var stepLength = 100 / ((this.max - this.min) / this.step);
         var steps = Math.round(percent / stepLength);
         var value = steps * stepLength / 100 * (this.max - this.min) + this.min;
         value = parseFloat(value.toFixed(this.precision));
         this.$emit('input', value);
-
         if (!this.dragging && value !== this.oldValue) {
           this.oldValue = value;
         }
       }
+    },
+    beforeDestroy: function beforeDestroy() {
+      document.removeEventListener('mousemove', this.onDragging);
+      document.removeEventListener('touchmove', this.onDragging);
+      document.removeEventListener('mouseup', this.onDragEnd);
+      document.removeEventListener('touchend', this.onDragEnd);
+      document.removeEventListener('contextmenu', this.onDragEnd);
     }
   };
 
   /* script */
-  const __vue_script__$1 = script$1;
+  const __vue_script__$2 = script$2;
 
   /* template */
-  var __vue_render__$1 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"b-slider-thumb-wrapper",class:{ 'is-dragging': _vm.dragging },style:(_vm.wrapperStyle)},[_c('b-tooltip',{attrs:{"label":_vm.tooltipLabel,"type":_vm.type,"always":_vm.dragging || _vm.isFocused,"active":!_vm.disabled && _vm.tooltip}},[_c('div',_vm._b({staticClass:"b-slider-thumb",attrs:{"tabindex":_vm.disabled ? false : 0},on:{"mousedown":_vm.onButtonDown,"touchstart":_vm.onButtonDown,"focus":_vm.onFocus,"blur":_vm.onBlur,"keydown":[function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"left",37,$event.key)){ return null; }if('button' in $event && $event.button !== 0){ return null; }$event.preventDefault();_vm.onLeftKeyDown($event);},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"right",39,$event.key)){ return null; }if('button' in $event && $event.button !== 2){ return null; }$event.preventDefault();_vm.onRightKeyDown($event);},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"down",40,$event.key)){ return null; }$event.preventDefault();_vm.onLeftKeyDown($event);},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"up",38,$event.key)){ return null; }$event.preventDefault();_vm.onRightKeyDown($event);},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"home",undefined,$event.key)){ return null; }$event.preventDefault();_vm.onHomeKeyDown($event);},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"end",undefined,$event.key)){ return null; }$event.preventDefault();_vm.onEndKeyDown($event);}]}},'div',_vm.$attrs,false))])],1)};
-  var __vue_staticRenderFns__$1 = [];
+  var __vue_render__$2 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"b-slider-thumb-wrapper",class:{ 'is-dragging': _vm.dragging, 'has-indicator': _vm.indicator},style:(_vm.wrapperStyle)},[_c('b-tooltip',{attrs:{"label":_vm.formattedValue,"type":_vm.type,"always":_vm.dragging || _vm.isFocused || _vm.tooltipAlways,"active":!_vm.disabled && _vm.tooltip}},[_c('div',_vm._b({staticClass:"b-slider-thumb",attrs:{"tabindex":_vm.disabled ? false : 0},on:{"mousedown":_vm.onButtonDown,"touchstart":_vm.onButtonDown,"focus":_vm.onFocus,"blur":_vm.onBlur,"keydown":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"left",37,$event.key,["Left","ArrowLeft"])){ return null; }if('button' in $event && $event.button !== 0){ return null; }$event.preventDefault();return _vm.onLeftKeyDown($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"right",39,$event.key,["Right","ArrowRight"])){ return null; }if('button' in $event && $event.button !== 2){ return null; }$event.preventDefault();return _vm.onRightKeyDown($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"down",40,$event.key,["Down","ArrowDown"])){ return null; }$event.preventDefault();return _vm.onLeftKeyDown($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"up",38,$event.key,["Up","ArrowUp"])){ return null; }$event.preventDefault();return _vm.onRightKeyDown($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"home",undefined,$event.key,undefined)){ return null; }$event.preventDefault();return _vm.onHomeKeyDown($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"end",undefined,$event.key,undefined)){ return null; }$event.preventDefault();return _vm.onEndKeyDown($event)}]}},'div',_vm.$attrs,false),[(_vm.indicator)?_c('span',[_vm._v(_vm._s(_vm.formattedValue))]):_vm._e()])])],1)};
+  var __vue_staticRenderFns__$2 = [];
 
     /* style */
-    const __vue_inject_styles__$1 = undefined;
+    const __vue_inject_styles__$2 = undefined;
     /* scoped */
-    const __vue_scope_id__$1 = undefined;
+    const __vue_scope_id__$2 = undefined;
     /* module identifier */
-    const __vue_module_identifier__$1 = undefined;
+    const __vue_module_identifier__$2 = undefined;
     /* functional template */
-    const __vue_is_functional_template__$1 = false;
+    const __vue_is_functional_template__$2 = false;
     /* style inject */
     
     /* style inject SSR */
     
+    /* style inject shadow dom */
+    
 
     
-    var SliderThumb = normalizeComponent_1(
-      { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
-      __vue_inject_styles__$1,
-      __vue_script__$1,
-      __vue_scope_id__$1,
-      __vue_is_functional_template__$1,
-      __vue_module_identifier__$1,
+    const __vue_component__$2 = /*#__PURE__*/normalizeComponent(
+      { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
+      __vue_inject_styles__$2,
+      __vue_script__$2,
+      __vue_scope_id__$2,
+      __vue_is_functional_template__$2,
+      __vue_module_identifier__$2,
+      false,
+      undefined,
       undefined,
       undefined
     );
 
+    var SliderThumb = __vue_component__$2;
+
   //
   //
   //
@@ -461,7 +897,8 @@
   //
   //
   //
-  var script$2 = {
+
+  var script$1 = {
     name: 'BSliderTick',
     props: {
       value: {
@@ -494,41 +931,46 @@
   };
 
   /* script */
-  const __vue_script__$2 = script$2;
+  const __vue_script__$1 = script$1;
 
   /* template */
-  var __vue_render__$2 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"b-slider-tick",class:{ 'is-tick-hidden': _vm.hidden },style:(_vm.getTickStyle(_vm.position))},[(_vm.$slots.default)?_c('span',{staticClass:"b-slider-tick-label"},[_vm._t("default")],2):_vm._e()])};
-  var __vue_staticRenderFns__$2 = [];
+  var __vue_render__$1 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"b-slider-tick",class:{ 'is-tick-hidden': _vm.hidden },style:(_vm.getTickStyle(_vm.position))},[(_vm.$slots.default)?_c('span',{staticClass:"b-slider-tick-label"},[_vm._t("default")],2):_vm._e()])};
+  var __vue_staticRenderFns__$1 = [];
 
     /* style */
-    const __vue_inject_styles__$2 = undefined;
+    const __vue_inject_styles__$1 = undefined;
     /* scoped */
-    const __vue_scope_id__$2 = undefined;
+    const __vue_scope_id__$1 = undefined;
     /* module identifier */
-    const __vue_module_identifier__$2 = undefined;
+    const __vue_module_identifier__$1 = undefined;
     /* functional template */
-    const __vue_is_functional_template__$2 = false;
+    const __vue_is_functional_template__$1 = false;
     /* style inject */
     
     /* style inject SSR */
     
+    /* style inject shadow dom */
+    
 
     
-    var SliderTick = normalizeComponent_1(
-      { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
-      __vue_inject_styles__$2,
-      __vue_script__$2,
-      __vue_scope_id__$2,
-      __vue_is_functional_template__$2,
-      __vue_module_identifier__$2,
+    const __vue_component__$1 = /*#__PURE__*/normalizeComponent(
+      { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
+      __vue_inject_styles__$1,
+      __vue_script__$1,
+      __vue_scope_id__$1,
+      __vue_is_functional_template__$1,
+      __vue_module_identifier__$1,
+      false,
+      undefined,
       undefined,
       undefined
     );
 
-  var _components;
-  var script$3 = {
+    var SliderTick = __vue_component__$1;
+
+  var script = {
     name: 'BSlider',
-    components: (_components = {}, _defineProperty(_components, SliderThumb.name, SliderThumb), _defineProperty(_components, SliderTick.name, SliderTick), _components),
+    components: _defineProperty(_defineProperty({}, SliderThumb.name, SliderThumb), SliderTick.name, SliderTick),
     props: {
       value: {
         type: [Number, Array],
@@ -573,7 +1015,32 @@
         default: false
       },
       customFormatter: Function,
-      ariaLabel: [String, Array]
+      ariaLabel: [String, Array],
+      biggerSliderFocus: {
+        type: Boolean,
+        default: false
+      },
+      indicator: {
+        type: Boolean,
+        default: false
+      },
+      format: {
+        type: String,
+        default: 'raw',
+        validator: function validator(value) {
+          return ['raw', 'percent'].indexOf(value) >= 0;
+        }
+      },
+      locale: {
+        type: [String, Array],
+        default: function _default() {
+          return config.defaultLocale;
+        }
+      },
+      tooltipAlways: {
+        type: Boolean,
+        default: false
+      }
     },
     data: function data() {
       return {
@@ -581,8 +1048,9 @@
         value2: null,
         dragging: false,
         isRange: false,
-        _isSlider: true // Used by Thumb and Tick
-
+        _isSlider: true,
+        // Used by Thumb and Tick
+        timeOutID: null
       };
     },
     computed: {
@@ -592,11 +1060,9 @@
       tickValues: function tickValues() {
         if (!this.ticks || this.min > this.max || this.step === 0) return [];
         var result = [];
-
         for (var i = this.min + this.step; i < this.max; i = i + this.step) {
           result.push(i);
         }
-
         return result;
       },
       minValue: function minValue() {
@@ -624,14 +1090,12 @@
           left: this.barStart
         };
       },
-      sliderSize: function sliderSize() {
-        return this.$refs.slider['clientWidth'];
-      },
       rootClasses: function rootClasses() {
         return {
           'is-rounded': this.rounded,
           'is-dragging': this.dragging,
-          'is-disabled': this.disabled
+          'is-disabled': this.disabled,
+          'slider-focus': this.biggerSliderFocus
         };
       }
     },
@@ -660,16 +1124,15 @@
         if (this.min > this.max) {
           return;
         }
-
         if (Array.isArray(newValue)) {
           this.isRange = true;
-          var smallValue = typeof newValue[0] !== 'number' || isNaN(newValue[0]) ? this.min : Math.min(Math.max(this.min, newValue[0]), this.max);
-          var largeValue = typeof newValue[1] !== 'number' || isNaN(newValue[1]) ? this.max : Math.max(Math.min(this.max, newValue[1]), this.min);
+          var smallValue = typeof newValue[0] !== 'number' || isNaN(newValue[0]) ? this.min : bound(newValue[0], this.min, this.max);
+          var largeValue = typeof newValue[1] !== 'number' || isNaN(newValue[1]) ? this.max : bound(newValue[1], this.min, this.max);
           this.value1 = this.isThumbReversed ? largeValue : smallValue;
           this.value2 = this.isThumbReversed ? smallValue : largeValue;
         } else {
           this.isRange = false;
-          this.value1 = isNaN(newValue) ? this.min : Math.min(this.max, Math.max(this.min, newValue));
+          this.value1 = isNaN(newValue) ? this.min : bound(newValue, this.min, this.max);
           this.value2 = null;
         }
       },
@@ -677,28 +1140,27 @@
         if (this.isRange) {
           this.isThumbReversed = this.value1 > this.value2;
         }
-
         if (!this.lazy || !this.dragging) {
           this.emitValue('input');
         }
-
         if (this.dragging) {
           this.emitValue('dragging');
         }
       },
+      sliderSize: function sliderSize() {
+        return this.$refs.slider.getBoundingClientRect().width;
+      },
       onSliderClick: function onSliderClick(event) {
         if (this.disabled || this.isTrackClickDisabled) return;
         var sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left;
-        var percent = (event.clientX - sliderOffsetLeft) / this.sliderSize * 100;
+        var percent = (event.clientX - sliderOffsetLeft) / this.sliderSize() * 100;
         var targetValue = this.min + percent * (this.max - this.min) / 100;
         var diffFirst = Math.abs(targetValue - this.value1);
-
         if (!this.isRange) {
           if (diffFirst < this.step / 2) return;
           this.$refs.button1.setPosition(percent);
         } else {
           var diffSecond = Math.abs(targetValue - this.value2);
-
           if (diffFirst <= diffSecond) {
             if (diffFirst < this.step / 2) return;
             this.$refs['button1'].setPosition(percent);
@@ -707,7 +1169,6 @@
             this.$refs['button2'].setPosition(percent);
           }
         }
-
         this.emitValue('change');
       },
       onDragStart: function onDragStart() {
@@ -716,15 +1177,13 @@
       },
       onDragEnd: function onDragEnd() {
         var _this = this;
-
         this.isTrackClickDisabled = true;
-        setTimeout(function () {
+        this.timeOutID = setTimeout(function () {
           // avoid triggering onSliderClick after dragend
           _this.isTrackClickDisabled = false;
         }, 0);
         this.dragging = false;
         this.$emit('dragend');
-
         if (this.lazy) {
           this.emitValue('input');
         }
@@ -737,40 +1196,49 @@
       this.isThumbReversed = false;
       this.isTrackClickDisabled = false;
       this.setValues(this.value);
+    },
+    beforeDestroy: function beforeDestroy() {
+      clearTimeout(this.timeOutID);
     }
   };
 
   /* script */
-  const __vue_script__$3 = script$3;
+  const __vue_script__ = script;
 
   /* template */
-  var __vue_render__$3 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"b-slider",class:[_vm.size, _vm.type, _vm.rootClasses]},[_c('div',{ref:"slider",staticClass:"b-slider-track",on:{"click":_vm.onSliderClick}},[_c('div',{staticClass:"b-slider-fill",style:(_vm.barStyle)}),_vm._v(" "),(_vm.ticks)?_vm._l((_vm.tickValues),function(val,key){return _c('b-slider-tick',{key:key,attrs:{"value":val}})}):_vm._e(),_vm._v(" "),_vm._t("default"),_vm._v(" "),_c('b-slider-thumb',{ref:"button1",attrs:{"type":_vm.newTooltipType,"tooltip":_vm.tooltip,"custom-formatter":_vm.customFormatter,"role":"slider","aria-valuenow":_vm.value1,"aria-valuemin":_vm.min,"aria-valuemax":_vm.max,"aria-orientation":"horizontal","aria-label":Array.isArray(_vm.ariaLabel) ? _vm.ariaLabel[0] : _vm.ariaLabel,"aria-disabled":_vm.disabled},on:{"dragstart":_vm.onDragStart,"dragend":_vm.onDragEnd},model:{value:(_vm.value1),callback:function ($$v) {_vm.value1=$$v;},expression:"value1"}}),_vm._v(" "),(_vm.isRange)?_c('b-slider-thumb',{ref:"button2",attrs:{"type":_vm.newTooltipType,"tooltip":_vm.tooltip,"custom-formatter":_vm.customFormatter,"role":"slider","aria-valuenow":_vm.value2,"aria-valuemin":_vm.min,"aria-valuemax":_vm.max,"aria-orientation":"horizontal","aria-label":Array.isArray(_vm.ariaLabel) ? _vm.ariaLabel[1] : '',"aria-disabled":_vm.disabled},on:{"dragstart":_vm.onDragStart,"dragend":_vm.onDragEnd},model:{value:(_vm.value2),callback:function ($$v) {_vm.value2=$$v;},expression:"value2"}}):_vm._e()],2)])};
-  var __vue_staticRenderFns__$3 = [];
+  var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"b-slider",class:[_vm.size, _vm.type, _vm.rootClasses ],on:{"click":_vm.onSliderClick}},[_c('div',{ref:"slider",staticClass:"b-slider-track"},[_c('div',{staticClass:"b-slider-fill",style:(_vm.barStyle)}),(_vm.ticks)?_vm._l((_vm.tickValues),function(val,key){return _c('b-slider-tick',{key:key,attrs:{"value":val}})}):_vm._e(),_vm._t("default"),_c('b-slider-thumb',{ref:"button1",attrs:{"tooltip-always":_vm.tooltipAlways,"type":_vm.newTooltipType,"tooltip":_vm.tooltip,"custom-formatter":_vm.customFormatter,"indicator":_vm.indicator,"format":_vm.format,"locale":_vm.locale,"role":"slider","aria-valuenow":_vm.value1,"aria-valuemin":_vm.min,"aria-valuemax":_vm.max,"aria-orientation":"horizontal","aria-label":Array.isArray(_vm.ariaLabel) ? _vm.ariaLabel[0] : _vm.ariaLabel,"aria-disabled":_vm.disabled},on:{"dragstart":_vm.onDragStart,"dragend":_vm.onDragEnd},model:{value:(_vm.value1),callback:function ($$v) {_vm.value1=$$v;},expression:"value1"}}),(_vm.isRange)?_c('b-slider-thumb',{ref:"button2",attrs:{"tooltip-always":_vm.tooltipAlways,"type":_vm.newTooltipType,"tooltip":_vm.tooltip,"custom-formatter":_vm.customFormatter,"indicator":_vm.indicator,"format":_vm.format,"locale":_vm.locale,"role":"slider","aria-valuenow":_vm.value2,"aria-valuemin":_vm.min,"aria-valuemax":_vm.max,"aria-orientation":"horizontal","aria-label":Array.isArray(_vm.ariaLabel) ? _vm.ariaLabel[1] : '',"aria-disabled":_vm.disabled},on:{"dragstart":_vm.onDragStart,"dragend":_vm.onDragEnd},model:{value:(_vm.value2),callback:function ($$v) {_vm.value2=$$v;},expression:"value2"}}):_vm._e()],2)])};
+  var __vue_staticRenderFns__ = [];
 
     /* style */
-    const __vue_inject_styles__$3 = undefined;
+    const __vue_inject_styles__ = undefined;
     /* scoped */
-    const __vue_scope_id__$3 = undefined;
+    const __vue_scope_id__ = undefined;
     /* module identifier */
-    const __vue_module_identifier__$3 = undefined;
+    const __vue_module_identifier__ = undefined;
     /* functional template */
-    const __vue_is_functional_template__$3 = false;
+    const __vue_is_functional_template__ = false;
     /* style inject */
     
     /* style inject SSR */
     
+    /* style inject shadow dom */
+    
 
     
-    var Slider = normalizeComponent_1(
-      { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
-      __vue_inject_styles__$3,
-      __vue_script__$3,
-      __vue_scope_id__$3,
-      __vue_is_functional_template__$3,
-      __vue_module_identifier__$3,
+    const __vue_component__ = /*#__PURE__*/normalizeComponent(
+      { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+      __vue_inject_styles__,
+      __vue_script__,
+      __vue_scope_id__,
+      __vue_is_functional_template__,
+      __vue_module_identifier__,
+      false,
+      undefined,
       undefined,
       undefined
     );
+
+    var Slider = __vue_component__;
 
   var use = function use(plugin) {
     if (typeof window !== 'undefined' && window.Vue) {
@@ -791,7 +1259,7 @@
 
   exports.BSlider = Slider;
   exports.BSliderTick = SliderTick;
-  exports.default = Plugin;
+  exports["default"] = Plugin;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 

@@ -2,26 +2,27 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-require('./chunk-2777282e.js');
+var Timepicker = require('./Timepicker-99784633.js');
+var plugins = require('./plugins-7f41b028.js');
+require('./_rollupPluginBabelHelpers-8b2e54ad.js');
+require('./TimepickerMixin-6c1a4ab4.js');
+require('./FormElementMixin-193a88b8.js');
+require('./config-8cfb5a4a.js');
 require('./helpers.js');
-require('./chunk-8806479f.js');
-require('./chunk-f45d15e3.js');
-require('./chunk-acfb68f5.js');
-var __chunk_5 = require('./chunk-13e039f5.js');
-require('./chunk-e79d8d75.js');
-require('./chunk-aa4b9c17.js');
-require('./chunk-c5b5b708.js');
-require('./chunk-0dbbaff2.js');
-require('./chunk-28f7fb29.js');
-require('./chunk-611c489f.js');
-var __chunk_16 = require('./chunk-adedbd8d.js');
+require('./DropdownItem-422f8c34.js');
+require('./trapFocus-261420b0.js');
+require('./InjectedChildMixin-d6bf7f91.js');
+require('./Input-e5a72d97.js');
+require('./Icon-78961800.js');
+require('./Field-ed10a252.js');
+require('./Select-2b3879bc.js');
 
 var Plugin = {
   install: function install(Vue) {
-    __chunk_5.registerComponent(Vue, __chunk_16.Timepicker);
+    plugins.registerComponent(Vue, Timepicker.Timepicker);
   }
 };
-__chunk_5.use(Plugin);
+plugins.use(Plugin);
 
-exports.BTimepicker = __chunk_16.Timepicker;
-exports.default = Plugin;
+exports.BTimepicker = Timepicker.Timepicker;
+exports["default"] = Plugin;

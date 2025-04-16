@@ -1,7 +1,12 @@
-import { _ as __vue_normalize__, r as registerComponent, u as use } from './chunk-cca88db8.js';
+import { n as normalizeComponent, u as use, a as registerComponent } from './plugins-218aea86.js';
 
 var script = {
   name: 'BCollapse',
+  // deprecated, to replace with default 'value' in the next breaking change
+  model: {
+    prop: 'open',
+    event: 'update:open'
+  },
   props: {
     open: {
       type: Boolean,
@@ -59,8 +64,7 @@ var script = {
     }, [createElement('div', {
       staticClass: 'collapse-content',
       attrs: {
-        'id': this.ariaId,
-        'aria-expanded': this.isOpen
+        'id': this.ariaId
       },
       directives: [{
         name: 'show',
@@ -90,18 +94,24 @@ const __vue_script__ = script;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Collapse = __vue_normalize__(
+  const __vue_component__ = /*#__PURE__*/normalizeComponent(
     {},
     __vue_inject_styles__,
     __vue_script__,
     __vue_scope_id__,
     __vue_is_functional_template__,
     __vue_module_identifier__,
+    false,
+    undefined,
     undefined,
     undefined
   );
+
+  var Collapse = __vue_component__;
 
 var Plugin = {
   install: function install(Vue) {
@@ -110,5 +120,4 @@ var Plugin = {
 };
 use(Plugin);
 
-export default Plugin;
-export { Collapse as BCollapse };
+export { Collapse as BCollapse, Plugin as default };

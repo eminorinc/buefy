@@ -1,325 +1,110 @@
-import { _ as _defineProperty } from './chunk-f2006744.js';
+import { _ as _defineProperty } from './_rollupPluginBabelHelpers-df313029.js';
+import { c as config } from './config-e7d4b9c2.js';
+import { T as TabbedMixin, a as TabbedChildMixin } from './TabbedChildMixin-bcb13767.js';
+import { n as normalizeComponent, u as use, a as registerComponent } from './plugins-218aea86.js';
+import './Icon-60d47b31.js';
 import './helpers.js';
-import './chunk-b76a6c1d.js';
-import { I as Icon } from './chunk-c8434a6f.js';
-import { _ as __vue_normalize__, r as registerComponent, u as use } from './chunk-cca88db8.js';
-import { S as SlotComponent } from './chunk-0e3f4fb5.js';
+import './SlotComponent-8871a20f.js';
+import './InjectedChildMixin-b4220787.js';
 
-var _components;
-var script = {
+var script$1 = {
   name: 'BTabs',
-  components: (_components = {}, _defineProperty(_components, Icon.name, Icon), _defineProperty(_components, SlotComponent.name, SlotComponent), _components),
+  mixins: [TabbedMixin('tab')],
   props: {
-    value: Number,
-    expanded: Boolean,
-    type: String,
-    size: String,
-    position: String,
+    expanded: {
+      type: Boolean,
+      default: function _default() {
+        return config.defaultTabsExpanded;
+      }
+    },
+    type: {
+      type: [String, Object],
+      default: function _default() {
+        return config.defaultTabsType;
+      }
+    },
     animated: {
       type: Boolean,
-      default: true
+      default: function _default() {
+        return config.defaultTabsAnimated;
+      }
     },
-    destroyOnHide: {
-      type: Boolean,
-      default: false
-    },
-    vertical: Boolean
+    multiline: Boolean
   },
   data: function data() {
     return {
-      activeTab: this.value || 0,
-      defaultSlots: [],
-      contentHeight: 0,
-      isTransitioning: false,
-      _isTabs: true // Used internally by TabItem
-
+      currentFocus: this.value
     };
   },
   computed: {
     mainClasses: function mainClasses() {
       return _defineProperty({
         'is-fullwidth': this.expanded,
-        'is-vertical': this.vertical
+        'is-vertical': this.vertical,
+        'is-multiline': this.multiline
       }, this.position, this.position && this.vertical);
     },
     navClasses: function navClasses() {
-      var _ref2;
-
-      return [this.type, this.size, (_ref2 = {}, _defineProperty(_ref2, this.position, this.position && !this.vertical), _defineProperty(_ref2, 'is-fullwidth', this.expanded), _defineProperty(_ref2, 'is-toggle-rounded is-toggle', this.type === 'is-toggle-rounded'), _ref2)];
-    },
-    tabItems: function tabItems() {
-      return this.defaultSlots.filter(function (vnode) {
-        return vnode.componentInstance && vnode.componentInstance.$data && vnode.componentInstance.$data._isTabItem;
-      }).map(function (vnode) {
-        return vnode.componentInstance;
-      });
-    }
-  },
-  watch: {
-    /**
-    * When v-model is changed set the new active tab.
-    */
-    value: function value(_value) {
-      this.changeTab(_value);
-    },
-
-    /**
-    * When tab-items are updated, set active one.
-    */
-    tabItems: function tabItems() {
-      if (this.activeTab < this.tabItems.length) {
-        this.tabItems[this.activeTab].isActive = true;
-      }
+      return [this.type, this.size, _defineProperty(_defineProperty(_defineProperty({}, this.position, this.position && !this.vertical), 'is-fullwidth', this.expanded), 'is-toggle', this.type === 'is-toggle-rounded')];
     }
   },
   methods: {
-    refreshSlots: function refreshSlots() {
-      this.defaultSlots = this.$slots.default;
-    },
-
-    /**
-    * Change the active tab and emit change event.
-    */
-    changeTab: function changeTab(newIndex) {
-      if (this.activeTab === newIndex || this.tabItems[newIndex] === undefined) return;
-
-      if (this.activeTab < this.tabItems.length) {
-        this.tabItems[this.activeTab].deactivate(this.activeTab, newIndex);
+    giveFocusToTab: function giveFocusToTab(tab) {
+      if (tab.$el && tab.$el.focus) {
+        tab.$el.focus();
+      } else if (tab.focus) {
+        tab.focus();
       }
-
-      this.tabItems[newIndex].activate(this.activeTab, newIndex);
-      this.activeTab = newIndex;
-      this.$emit('change', newIndex);
     },
-
-    /**
-    * Tab click listener, emit input event and change active tab.
-    */
-    tabClick: function tabClick(value) {
-      if (this.activeTab === value) return;
-      this.$emit('input', value);
-      this.changeTab(value);
-    }
-  },
-  mounted: function mounted() {
-    if (this.activeTab < this.tabItems.length) {
-      this.tabItems[this.activeTab].isActive = true;
-    }
-
-        this.refreshSlots()
-    }
-  },
-  mounted: function mounted() {
-    this.activeTab = this.getIndexByValue(this.value || 0);
-
-    if (this.activeTab < this.tabItems.length) {
-      this.tabItems[this.activeTab].isActive = true;
-    }
-
-    this.refreshSlots();
-  }
-};
-
-/* script */
-const __vue_script__ = script;
-
-/* template */
-var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"b-tabs",class:_vm.mainClasses},[_c('nav',{staticClass:"tabs",class:_vm.navClasses},[_c('ul',_vm._l((_vm.tabItems),function(tabItem,index){return _c('li',{directives:[{name:"show",rawName:"v-show",value:(tabItem.visible),expression:"tabItem.visible"}],key:index,class:{ 'is-active': _vm.activeTab === index, 'is-disabled': tabItem.disabled }},[_c('a',{on:{"click":function($event){_vm.tabClick(index);}}},[(tabItem.$slots.header)?[_c('b-slot-component',{attrs:{"component":tabItem,"name":"header","tag":"span"}})]:[(tabItem.icon)?_c('b-icon',{attrs:{"icon":tabItem.icon,"pack":tabItem.iconPack,"size":_vm.size}}):_vm._e(),_vm._v(" "),_c('span',[_vm._v(_vm._s(tabItem.label))])]],2)])}))]),_vm._v(" "),_c('section',{staticClass:"tab-content",class:{'is-transitioning': _vm.isTransitioning}},[_vm._t("default")],2)])};
-var __vue_staticRenderFns__ = [];
-
-  /* style */
-  const __vue_inject_styles__ = undefined;
-  /* scoped */
-  const __vue_scope_id__ = undefined;
-  /* module identifier */
-  const __vue_module_identifier__ = undefined;
-  /* functional template */
-  const __vue_is_functional_template__ = false;
-  /* style inject */
-  
-  /* style inject SSR */
-  
-
-  
-  var Tabs = __vue_normalize__(
-    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
-    __vue_inject_styles__,
-    __vue_script__,
-    __vue_scope_id__,
-    __vue_is_functional_template__,
-    __vue_module_identifier__,
-    undefined,
-    undefined
-  );
-
-var script$1 = {
-  name: 'BTabItem',
-  props: {
-    label: String,
-    icon: String,
-    iconPack: String,
-    disabled: Boolean,
-    visible: {
-      type: Boolean,
-      default: true
-    }
-  },
-  data: function data() {
-    return {
-      isActive: false,
-      transitionName: null,
-      _isTabItem: true // Used internally by Tab
-
-    };
-  },
-  methods: {
-    /**
-    * Activate tab, alter animation name based on the index.
-    */
-    activate: function activate(oldIndex, index) {
-      this.transitionName = index < oldIndex ? 'slide-next' : 'slide-prev';
-      this.isActive = true;
-    },
-
-    /**
-    * Deactivate tab, alter animation name based on the index.
-    */
-    deactivate: function deactivate(oldIndex, index) {
-      this.transitionName = index < oldIndex ? 'slide-next' : 'slide-prev';
-      this.isActive = false;
-    }
-  },
-  created: function created() {
-    if (!this.$parent.$data._isTabs) {
-      this.$destroy();
-      throw new Error('You should wrap bTabItem on a bTabs');
-    }
-
-    this.$parent.refreshSlots();
-  },
-  beforeDestroy: function beforeDestroy() {
-    this.$parent.refreshSlots();
-  },
-  render: function render(createElement) {
-    var _this = this;
-
-    // if destroy apply v-if
-    if (this.$parent.destroyOnHide) {
-      if (!this.isActive || !this.visible) {
-        return;
-      }
-    }
-
-    var vnode = createElement('div', {
-      directives: [{
-        name: 'show',
-        value: this.isActive && this.visible
-      }],
-      class: 'tab-item'
-    }, this.$slots.default); // check animated prop
-
-    if (this.$parent.animated) {
-      return createElement('transition', {
-        props: {
-          'name': this.transitionName
-        },
-        on: {
-          'before-enter': function beforeEnter() {
-            _this.$parent.isTransitioning = true;
-          },
-          'after-enter': function afterEnter() {
-            _this.$parent.isTransitioning = false;
-          }
-        }
-
-        this.$parent.refreshSlots()
-    },
-    beforeDestroy: function beforeDestroy() {
-        this.$parent.refreshSlots()
-    },
-    render: function render(createElement) {
-        var _this = this
-
-        // if destroy apply v-if
-        if (this.$parent.destroyOnHide) {
-            if (!this.isActive || !this.visible) {
-                return
+    manageTablistKeydown: function manageTablistKeydown(event) {
+      // https://developer.mozilla.org/fr/docs/Web/API/KeyboardEvent/key/Key_Values#Navigation_keys
+      var key = event.key;
+      switch (key) {
+        case this.vertical ? 'ArrowUp' : 'ArrowLeft':
+        case this.vertical ? 'Up' : 'Left':
+          {
+            var prevIdx = this.getPrevItemIdx(this.currentFocus, true);
+            if (prevIdx === null) {
+              // We try to give focus back to the last visible element
+              prevIdx = this.getPrevItemIdx(this.items.length, true);
             }
-        }
-
-        var vnode = createElement('div', {
-            directives: [{
-                name: 'show',
-                value: this.isActive && this.visible
-            }],
-            class: 'tab-item'
-        }, this.$slots.default) // check animated prop
-
-        if (this.$parent.animated) {
-            return createElement('transition', {
-                props: {
-                    'name': this.transitionName
-                },
-                on: {
-                    'before-enter': function beforeEnter() {
-                        _this.$parent.isTransitioning = true
-                    },
-                    'after-enter': function afterEnter() {
-                        _this.$parent.isTransitioning = false
-                    }
-                }
-            }, [vnode])
-        }
-
-        return vnode
-    }
-  },
-  created: function created() {
-    if (!this.$parent.$data._isTabs) {
-      this.$destroy();
-      throw new Error('You should wrap bTabItem on a bTabs');
-    }
-
-    this.$parent.refreshSlots();
-  },
-  beforeDestroy: function beforeDestroy() {
-    this.$parent.refreshSlots();
-  },
-  render: function render(createElement) {
-    var _this = this;
-
-    // if destroy apply v-if
-    if (this.$parent.destroyOnHide) {
-      if (!this.isActive || !this.visible) {
-        return;
+            if (prevIdx !== null && this.$refs.tabLink && prevIdx < this.$refs.tabLink.length && !this.items[prevIdx].disabled) {
+              this.giveFocusToTab(this.$refs.tabLink[prevIdx]);
+            }
+            event.preventDefault();
+            break;
+          }
+        case this.vertical ? 'ArrowDown' : 'ArrowRight':
+        case this.vertical ? 'Down' : 'Right':
+          {
+            var nextIdx = this.getNextItemIdx(this.currentFocus, true);
+            if (nextIdx === null) {
+              // We try to give focus back to the first visible element
+              nextIdx = this.getNextItemIdx(-1, true);
+            }
+            if (nextIdx !== null && this.$refs.tabLink && nextIdx < this.$refs.tabLink.length && !this.items[nextIdx].disabled) {
+              this.giveFocusToTab(this.$refs.tabLink[nextIdx]);
+            }
+            event.preventDefault();
+            break;
+          }
+      }
+    },
+    manageTabKeydown: function manageTabKeydown(event, childItem) {
+      // https://developer.mozilla.org/fr/docs/Web/API/KeyboardEvent/key/Key_Values#Navigation_keys
+      var key = event.key;
+      switch (key) {
+        case ' ':
+        case 'Space':
+        case 'Spacebar':
+        case 'Enter':
+          {
+            this.childClick(childItem);
+            event.preventDefault();
+            break;
+          }
       }
     }
-
-    var vnode = createElement('div', {
-      directives: [{
-        name: 'show',
-        value: this.isActive && this.visible
-      }],
-      class: 'tab-item'
-    }, this.$slots.default); // check animated prop
-
-    if (this.$parent.animated) {
-      return createElement('transition', {
-        props: {
-          'name': this.transitionName
-        },
-        on: {
-          'before-enter': function beforeEnter() {
-            _this.$parent.isTransitioning = true;
-          },
-          'after-enter': function afterEnter() {
-            _this.$parent.isTransitioning = false;
-          }
-        }
-      }, [vnode]);
-    }
-
-    return vnode;
   }
 };
 
@@ -327,6 +112,9 @@ var script$1 = {
 const __vue_script__$1 = script$1;
 
 /* template */
+var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"b-tabs",class:_vm.mainClasses},[_c('nav',{staticClass:"tabs",class:_vm.navClasses,on:{"keydown":_vm.manageTablistKeydown}},[_vm._t("start"),_c('ul',{attrs:{"aria-orientation":_vm.vertical ? 'vertical' : 'horizontal',"role":"tablist"}},_vm._l((_vm.items),function(childItem,childIdx){return _c('li',{directives:[{name:"show",rawName:"v-show",value:(childItem.visible),expression:"childItem.visible"}],key:childItem.value,class:[ childItem.headerClass, { 'is-active': childItem.isActive,
+                                                   'is-disabled': childItem.disabled }],attrs:{"role":"tab","aria-controls":((childItem.value) + "-content"),"aria-selected":("" + (childItem.isActive))}},[(childItem.$scopedSlots.header)?_c('b-slot-component',{ref:"tabLink",refInFor:true,attrs:{"component":childItem,"name":"header","tag":"a","id":((childItem.value) + "-label"),"tabindex":childItem.isActive ? 0 : -1},on:{"keydown":function($event){return _vm.manageTabKeydown($event, childItem)}},nativeOn:{"focus":function($event){_vm.currentFocus = childIdx;},"click":function($event){return _vm.childClick(childItem)}}}):_c('a',{ref:"tabLink",refInFor:true,attrs:{"id":((childItem.value) + "-label"),"tabindex":childItem.isActive ? 0 : -1},on:{"focus":function($event){_vm.currentFocus = childIdx;},"click":function($event){return _vm.childClick(childItem)},"keydown":function($event){return _vm.manageTabKeydown($event, childItem)}}},[(childItem.icon)?_c('b-icon',{attrs:{"icon":childItem.icon,"pack":childItem.iconPack,"size":_vm.size}}):_vm._e(),_c('span',[_vm._v(_vm._s(childItem.label))])],1)],1)}),0),_vm._t("end")],2),_c('section',{staticClass:"tab-content",class:{'is-transitioning': _vm.isTransitioning}},[_vm._t("default")],2)])};
+var __vue_staticRenderFns__ = [];
 
   /* style */
   const __vue_inject_styles__$1 = undefined;
@@ -335,23 +123,79 @@ const __vue_script__$1 = script$1;
   /* module identifier */
   const __vue_module_identifier__$1 = undefined;
   /* functional template */
-  const __vue_is_functional_template__$1 = undefined;
+  const __vue_is_functional_template__$1 = false;
   /* style inject */
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var TabItem = __vue_normalize__(
-    {},
+  const __vue_component__$1 = /*#__PURE__*/normalizeComponent(
+    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__$1,
     __vue_script__$1,
     __vue_scope_id__$1,
     __vue_is_functional_template__$1,
     __vue_module_identifier__$1,
+    false,
+    undefined,
     undefined,
     undefined
   );
+
+  var Tabs = __vue_component__$1;
+
+var script = {
+  name: 'BTabItem',
+  mixins: [TabbedChildMixin('tab')],
+  props: {
+    disabled: Boolean
+  },
+  data: function data() {
+    return {
+      elementClass: 'tab-item',
+      elementRole: 'tabpanel'
+    };
+  }
+};
+
+/* script */
+const __vue_script__ = script;
+
+/* template */
+
+  /* style */
+  const __vue_inject_styles__ = undefined;
+  /* scoped */
+  const __vue_scope_id__ = undefined;
+  /* module identifier */
+  const __vue_module_identifier__ = undefined;
+  /* functional template */
+  const __vue_is_functional_template__ = undefined;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+  /* style inject shadow dom */
+  
+
+  
+  const __vue_component__ = /*#__PURE__*/normalizeComponent(
+    {},
+    __vue_inject_styles__,
+    __vue_script__,
+    __vue_scope_id__,
+    __vue_is_functional_template__,
+    __vue_module_identifier__,
+    false,
+    undefined,
+    undefined,
+    undefined
+  );
+
+  var TabItem = __vue_component__;
 
 var Plugin = {
   install: function install(Vue) {
@@ -361,5 +205,4 @@ var Plugin = {
 };
 use(Plugin);
 
-export default Plugin;
-export { TabItem as BTabItem, Tabs as BTabs };
+export { TabItem as BTabItem, Tabs as BTabs, Plugin as default };

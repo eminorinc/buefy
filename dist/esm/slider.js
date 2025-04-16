@@ -1,9 +1,10 @@
-import { _ as _defineProperty, c as _toConsumableArray } from './chunk-f2006744.js';
-import './chunk-b76a6c1d.js';
-import { _ as __vue_normalize__, r as registerComponent, u as use } from './chunk-cca88db8.js';
-import { T as Tooltip } from './chunk-e430e8e7.js';
+import { _ as _defineProperty, e as _toConsumableArray } from './_rollupPluginBabelHelpers-df313029.js';
+import { T as Tooltip } from './Tooltip-c67e7511.js';
+import { c as config } from './config-e7d4b9c2.js';
+import { n as normalizeComponent, u as use, a as registerComponent } from './plugins-218aea86.js';
+import { bound } from './helpers.js';
 
-var script = {
+var script$2 = {
   name: 'BSliderThumb',
   components: _defineProperty({}, Tooltip.name, Tooltip),
   inheritAttrs: false,
@@ -20,7 +21,28 @@ var script = {
       type: Boolean,
       default: true
     },
-    customFormatter: Function
+    indicator: {
+      type: Boolean,
+      default: false
+    },
+    customFormatter: Function,
+    format: {
+      type: String,
+      default: 'raw',
+      validator: function validator(value) {
+        return ['raw', 'percent'].indexOf(value) >= 0;
+      }
+    },
+    locale: {
+      type: [String, Array],
+      default: function _default() {
+        return config.defaultLocale;
+      }
+    },
+    tooltipAlways: {
+      type: Boolean,
+      default: false
+    }
   },
   data: function data() {
     return {
@@ -56,8 +78,16 @@ var script = {
         left: this.currentPosition
       };
     },
-    tooltipLabel: function tooltipLabel() {
-      return typeof this.customFormatter !== 'undefined' ? this.customFormatter(this.value) : this.value.toString();
+    formattedValue: function formattedValue() {
+      if (typeof this.customFormatter !== 'undefined') {
+        return this.customFormatter(this.value);
+      }
+      if (this.format === 'percent') {
+        return new Intl.NumberFormat(this.locale, {
+          style: 'percent'
+        }).format((this.value - this.min) / (this.max - this.min));
+      }
+      return new Intl.NumberFormat(this.locale).format(this.value);
     }
   },
   methods: {
@@ -71,7 +101,6 @@ var script = {
       if (this.disabled) return;
       event.preventDefault();
       this.onDragStart(event);
-
       if (typeof window !== 'undefined') {
         document.addEventListener('mousemove', this.onDragging);
         document.addEventListener('touchmove', this.onDragging);
@@ -107,11 +136,9 @@ var script = {
     onDragStart: function onDragStart(event) {
       this.dragging = true;
       this.$emit('dragstart');
-
       if (event.type === 'touchstart') {
         event.clientX = event.touches[0].clientX;
       }
-
       this.startX = event.clientX;
       this.startPosition = parseFloat(this.currentPosition);
       this.newPosition = this.startPosition;
@@ -121,8 +148,7 @@ var script = {
         if (event.type === 'touchmove') {
           event.clientX = event.touches[0].clientX;
         }
-
-        var diff = (event.clientX - this.startX) / this.$parent.sliderSize * 100;
+        var diff = (event.clientX - this.startX) / this.$parent.sliderSize() * 100;
         this.newPosition = this.startPosition + diff;
         this.setPosition(this.newPosition);
       }
@@ -130,13 +156,10 @@ var script = {
     onDragEnd: function onDragEnd() {
       this.dragging = false;
       this.$emit('dragend');
-
       if (this.value !== this.oldValue) {
         this.$parent.emitValue('change');
       }
-
       this.setPosition(this.newPosition);
-
       if (typeof window !== 'undefined') {
         document.removeEventListener('mousemove', this.onDragging);
         document.removeEventListener('touchmove', this.onDragging);
@@ -147,58 +170,68 @@ var script = {
     },
     setPosition: function setPosition(percent) {
       if (percent === null || isNaN(percent)) return;
-
       if (percent < 0) {
         percent = 0;
       } else if (percent > 100) {
         percent = 100;
       }
-
       var stepLength = 100 / ((this.max - this.min) / this.step);
       var steps = Math.round(percent / stepLength);
       var value = steps * stepLength / 100 * (this.max - this.min) + this.min;
       value = parseFloat(value.toFixed(this.precision));
       this.$emit('input', value);
-
       if (!this.dragging && value !== this.oldValue) {
         this.oldValue = value;
       }
     }
+  },
+  beforeDestroy: function beforeDestroy() {
+    document.removeEventListener('mousemove', this.onDragging);
+    document.removeEventListener('touchmove', this.onDragging);
+    document.removeEventListener('mouseup', this.onDragEnd);
+    document.removeEventListener('touchend', this.onDragEnd);
+    document.removeEventListener('contextmenu', this.onDragEnd);
   }
 };
 
 /* script */
-const __vue_script__ = script;
+const __vue_script__$2 = script$2;
 
 /* template */
-var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"b-slider-thumb-wrapper",class:{ 'is-dragging': _vm.dragging },style:(_vm.wrapperStyle)},[_c('b-tooltip',{attrs:{"label":_vm.tooltipLabel,"type":_vm.type,"always":_vm.dragging || _vm.isFocused,"active":!_vm.disabled && _vm.tooltip}},[_c('div',_vm._b({staticClass:"b-slider-thumb",attrs:{"tabindex":_vm.disabled ? false : 0},on:{"mousedown":_vm.onButtonDown,"touchstart":_vm.onButtonDown,"focus":_vm.onFocus,"blur":_vm.onBlur,"keydown":[function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"left",37,$event.key)){ return null; }if('button' in $event && $event.button !== 0){ return null; }$event.preventDefault();_vm.onLeftKeyDown($event);},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"right",39,$event.key)){ return null; }if('button' in $event && $event.button !== 2){ return null; }$event.preventDefault();_vm.onRightKeyDown($event);},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"down",40,$event.key)){ return null; }$event.preventDefault();_vm.onLeftKeyDown($event);},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"up",38,$event.key)){ return null; }$event.preventDefault();_vm.onRightKeyDown($event);},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"home",undefined,$event.key)){ return null; }$event.preventDefault();_vm.onHomeKeyDown($event);},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"end",undefined,$event.key)){ return null; }$event.preventDefault();_vm.onEndKeyDown($event);}]}},'div',_vm.$attrs,false))])],1)};
-var __vue_staticRenderFns__ = [];
+var __vue_render__$2 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"b-slider-thumb-wrapper",class:{ 'is-dragging': _vm.dragging, 'has-indicator': _vm.indicator},style:(_vm.wrapperStyle)},[_c('b-tooltip',{attrs:{"label":_vm.formattedValue,"type":_vm.type,"always":_vm.dragging || _vm.isFocused || _vm.tooltipAlways,"active":!_vm.disabled && _vm.tooltip}},[_c('div',_vm._b({staticClass:"b-slider-thumb",attrs:{"tabindex":_vm.disabled ? false : 0},on:{"mousedown":_vm.onButtonDown,"touchstart":_vm.onButtonDown,"focus":_vm.onFocus,"blur":_vm.onBlur,"keydown":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"left",37,$event.key,["Left","ArrowLeft"])){ return null; }if('button' in $event && $event.button !== 0){ return null; }$event.preventDefault();return _vm.onLeftKeyDown($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"right",39,$event.key,["Right","ArrowRight"])){ return null; }if('button' in $event && $event.button !== 2){ return null; }$event.preventDefault();return _vm.onRightKeyDown($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"down",40,$event.key,["Down","ArrowDown"])){ return null; }$event.preventDefault();return _vm.onLeftKeyDown($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"up",38,$event.key,["Up","ArrowUp"])){ return null; }$event.preventDefault();return _vm.onRightKeyDown($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"home",undefined,$event.key,undefined)){ return null; }$event.preventDefault();return _vm.onHomeKeyDown($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"end",undefined,$event.key,undefined)){ return null; }$event.preventDefault();return _vm.onEndKeyDown($event)}]}},'div',_vm.$attrs,false),[(_vm.indicator)?_c('span',[_vm._v(_vm._s(_vm.formattedValue))]):_vm._e()])])],1)};
+var __vue_staticRenderFns__$2 = [];
 
   /* style */
-  const __vue_inject_styles__ = undefined;
+  const __vue_inject_styles__$2 = undefined;
   /* scoped */
-  const __vue_scope_id__ = undefined;
+  const __vue_scope_id__$2 = undefined;
   /* module identifier */
-  const __vue_module_identifier__ = undefined;
+  const __vue_module_identifier__$2 = undefined;
   /* functional template */
-  const __vue_is_functional_template__ = false;
+  const __vue_is_functional_template__$2 = false;
   /* style inject */
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var SliderThumb = __vue_normalize__(
-    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
-    __vue_inject_styles__,
-    __vue_script__,
-    __vue_scope_id__,
-    __vue_is_functional_template__,
-    __vue_module_identifier__,
+  const __vue_component__$2 = /*#__PURE__*/normalizeComponent(
+    { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
+    __vue_inject_styles__$2,
+    __vue_script__$2,
+    __vue_scope_id__$2,
+    __vue_is_functional_template__$2,
+    __vue_module_identifier__$2,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
+  var SliderThumb = __vue_component__$2;
+
 //
 //
 //
@@ -210,6 +243,7 @@ var __vue_staticRenderFns__ = [];
 //
 //
 //
+
 var script$1 = {
   name: 'BSliderTick',
   props: {
@@ -261,23 +295,28 @@ var __vue_staticRenderFns__$1 = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var SliderTick = __vue_normalize__(
+  const __vue_component__$1 = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
     __vue_inject_styles__$1,
     __vue_script__$1,
     __vue_scope_id__$1,
     __vue_is_functional_template__$1,
     __vue_module_identifier__$1,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
-var _components;
-var script$2 = {
+  var SliderTick = __vue_component__$1;
+
+var script = {
   name: 'BSlider',
-  components: (_components = {}, _defineProperty(_components, SliderThumb.name, SliderThumb), _defineProperty(_components, SliderTick.name, SliderTick), _components),
+  components: _defineProperty(_defineProperty({}, SliderThumb.name, SliderThumb), SliderTick.name, SliderTick),
   props: {
     value: {
       type: [Number, Array],
@@ -322,7 +361,32 @@ var script$2 = {
       default: false
     },
     customFormatter: Function,
-    ariaLabel: [String, Array]
+    ariaLabel: [String, Array],
+    biggerSliderFocus: {
+      type: Boolean,
+      default: false
+    },
+    indicator: {
+      type: Boolean,
+      default: false
+    },
+    format: {
+      type: String,
+      default: 'raw',
+      validator: function validator(value) {
+        return ['raw', 'percent'].indexOf(value) >= 0;
+      }
+    },
+    locale: {
+      type: [String, Array],
+      default: function _default() {
+        return config.defaultLocale;
+      }
+    },
+    tooltipAlways: {
+      type: Boolean,
+      default: false
+    }
   },
   data: function data() {
     return {
@@ -330,8 +394,9 @@ var script$2 = {
       value2: null,
       dragging: false,
       isRange: false,
-      _isSlider: true // Used by Thumb and Tick
-
+      _isSlider: true,
+      // Used by Thumb and Tick
+      timeOutID: null
     };
   },
   computed: {
@@ -341,11 +406,9 @@ var script$2 = {
     tickValues: function tickValues() {
       if (!this.ticks || this.min > this.max || this.step === 0) return [];
       var result = [];
-
       for (var i = this.min + this.step; i < this.max; i = i + this.step) {
         result.push(i);
       }
-
       return result;
     },
     minValue: function minValue() {
@@ -373,14 +436,12 @@ var script$2 = {
         left: this.barStart
       };
     },
-    sliderSize: function sliderSize() {
-      return this.$refs.slider['clientWidth'];
-    },
     rootClasses: function rootClasses() {
       return {
         'is-rounded': this.rounded,
         'is-dragging': this.dragging,
-        'is-disabled': this.disabled
+        'is-disabled': this.disabled,
+        'slider-focus': this.biggerSliderFocus
       };
     }
   },
@@ -409,16 +470,15 @@ var script$2 = {
       if (this.min > this.max) {
         return;
       }
-
       if (Array.isArray(newValue)) {
         this.isRange = true;
-        var smallValue = typeof newValue[0] !== 'number' || isNaN(newValue[0]) ? this.min : Math.min(Math.max(this.min, newValue[0]), this.max);
-        var largeValue = typeof newValue[1] !== 'number' || isNaN(newValue[1]) ? this.max : Math.max(Math.min(this.max, newValue[1]), this.min);
+        var smallValue = typeof newValue[0] !== 'number' || isNaN(newValue[0]) ? this.min : bound(newValue[0], this.min, this.max);
+        var largeValue = typeof newValue[1] !== 'number' || isNaN(newValue[1]) ? this.max : bound(newValue[1], this.min, this.max);
         this.value1 = this.isThumbReversed ? largeValue : smallValue;
         this.value2 = this.isThumbReversed ? smallValue : largeValue;
       } else {
         this.isRange = false;
-        this.value1 = isNaN(newValue) ? this.min : Math.min(this.max, Math.max(this.min, newValue));
+        this.value1 = isNaN(newValue) ? this.min : bound(newValue, this.min, this.max);
         this.value2 = null;
       }
     },
@@ -426,28 +486,27 @@ var script$2 = {
       if (this.isRange) {
         this.isThumbReversed = this.value1 > this.value2;
       }
-
       if (!this.lazy || !this.dragging) {
         this.emitValue('input');
       }
-
       if (this.dragging) {
         this.emitValue('dragging');
       }
     },
+    sliderSize: function sliderSize() {
+      return this.$refs.slider.getBoundingClientRect().width;
+    },
     onSliderClick: function onSliderClick(event) {
       if (this.disabled || this.isTrackClickDisabled) return;
       var sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left;
-      var percent = (event.clientX - sliderOffsetLeft) / this.sliderSize * 100;
+      var percent = (event.clientX - sliderOffsetLeft) / this.sliderSize() * 100;
       var targetValue = this.min + percent * (this.max - this.min) / 100;
       var diffFirst = Math.abs(targetValue - this.value1);
-
       if (!this.isRange) {
         if (diffFirst < this.step / 2) return;
         this.$refs.button1.setPosition(percent);
       } else {
         var diffSecond = Math.abs(targetValue - this.value2);
-
         if (diffFirst <= diffSecond) {
           if (diffFirst < this.step / 2) return;
           this.$refs['button1'].setPosition(percent);
@@ -456,7 +515,6 @@ var script$2 = {
           this.$refs['button2'].setPosition(percent);
         }
       }
-
       this.emitValue('change');
     },
     onDragStart: function onDragStart() {
@@ -465,15 +523,13 @@ var script$2 = {
     },
     onDragEnd: function onDragEnd() {
       var _this = this;
-
       this.isTrackClickDisabled = true;
-      setTimeout(function () {
+      this.timeOutID = setTimeout(function () {
         // avoid triggering onSliderClick after dragend
         _this.isTrackClickDisabled = false;
       }, 0);
       this.dragging = false;
       this.$emit('dragend');
-
       if (this.lazy) {
         this.emitValue('input');
       }
@@ -486,40 +542,49 @@ var script$2 = {
     this.isThumbReversed = false;
     this.isTrackClickDisabled = false;
     this.setValues(this.value);
+  },
+  beforeDestroy: function beforeDestroy() {
+    clearTimeout(this.timeOutID);
   }
 };
 
 /* script */
-const __vue_script__$2 = script$2;
+const __vue_script__ = script;
 
 /* template */
-var __vue_render__$2 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"b-slider",class:[_vm.size, _vm.type, _vm.rootClasses]},[_c('div',{ref:"slider",staticClass:"b-slider-track",on:{"click":_vm.onSliderClick}},[_c('div',{staticClass:"b-slider-fill",style:(_vm.barStyle)}),_vm._v(" "),(_vm.ticks)?_vm._l((_vm.tickValues),function(val,key){return _c('b-slider-tick',{key:key,attrs:{"value":val}})}):_vm._e(),_vm._v(" "),_vm._t("default"),_vm._v(" "),_c('b-slider-thumb',{ref:"button1",attrs:{"type":_vm.newTooltipType,"tooltip":_vm.tooltip,"custom-formatter":_vm.customFormatter,"role":"slider","aria-valuenow":_vm.value1,"aria-valuemin":_vm.min,"aria-valuemax":_vm.max,"aria-orientation":"horizontal","aria-label":Array.isArray(_vm.ariaLabel) ? _vm.ariaLabel[0] : _vm.ariaLabel,"aria-disabled":_vm.disabled},on:{"dragstart":_vm.onDragStart,"dragend":_vm.onDragEnd},model:{value:(_vm.value1),callback:function ($$v) {_vm.value1=$$v;},expression:"value1"}}),_vm._v(" "),(_vm.isRange)?_c('b-slider-thumb',{ref:"button2",attrs:{"type":_vm.newTooltipType,"tooltip":_vm.tooltip,"custom-formatter":_vm.customFormatter,"role":"slider","aria-valuenow":_vm.value2,"aria-valuemin":_vm.min,"aria-valuemax":_vm.max,"aria-orientation":"horizontal","aria-label":Array.isArray(_vm.ariaLabel) ? _vm.ariaLabel[1] : '',"aria-disabled":_vm.disabled},on:{"dragstart":_vm.onDragStart,"dragend":_vm.onDragEnd},model:{value:(_vm.value2),callback:function ($$v) {_vm.value2=$$v;},expression:"value2"}}):_vm._e()],2)])};
-var __vue_staticRenderFns__$2 = [];
+var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"b-slider",class:[_vm.size, _vm.type, _vm.rootClasses ],on:{"click":_vm.onSliderClick}},[_c('div',{ref:"slider",staticClass:"b-slider-track"},[_c('div',{staticClass:"b-slider-fill",style:(_vm.barStyle)}),(_vm.ticks)?_vm._l((_vm.tickValues),function(val,key){return _c('b-slider-tick',{key:key,attrs:{"value":val}})}):_vm._e(),_vm._t("default"),_c('b-slider-thumb',{ref:"button1",attrs:{"tooltip-always":_vm.tooltipAlways,"type":_vm.newTooltipType,"tooltip":_vm.tooltip,"custom-formatter":_vm.customFormatter,"indicator":_vm.indicator,"format":_vm.format,"locale":_vm.locale,"role":"slider","aria-valuenow":_vm.value1,"aria-valuemin":_vm.min,"aria-valuemax":_vm.max,"aria-orientation":"horizontal","aria-label":Array.isArray(_vm.ariaLabel) ? _vm.ariaLabel[0] : _vm.ariaLabel,"aria-disabled":_vm.disabled},on:{"dragstart":_vm.onDragStart,"dragend":_vm.onDragEnd},model:{value:(_vm.value1),callback:function ($$v) {_vm.value1=$$v;},expression:"value1"}}),(_vm.isRange)?_c('b-slider-thumb',{ref:"button2",attrs:{"tooltip-always":_vm.tooltipAlways,"type":_vm.newTooltipType,"tooltip":_vm.tooltip,"custom-formatter":_vm.customFormatter,"indicator":_vm.indicator,"format":_vm.format,"locale":_vm.locale,"role":"slider","aria-valuenow":_vm.value2,"aria-valuemin":_vm.min,"aria-valuemax":_vm.max,"aria-orientation":"horizontal","aria-label":Array.isArray(_vm.ariaLabel) ? _vm.ariaLabel[1] : '',"aria-disabled":_vm.disabled},on:{"dragstart":_vm.onDragStart,"dragend":_vm.onDragEnd},model:{value:(_vm.value2),callback:function ($$v) {_vm.value2=$$v;},expression:"value2"}}):_vm._e()],2)])};
+var __vue_staticRenderFns__ = [];
 
   /* style */
-  const __vue_inject_styles__$2 = undefined;
+  const __vue_inject_styles__ = undefined;
   /* scoped */
-  const __vue_scope_id__$2 = undefined;
+  const __vue_scope_id__ = undefined;
   /* module identifier */
-  const __vue_module_identifier__$2 = undefined;
+  const __vue_module_identifier__ = undefined;
   /* functional template */
-  const __vue_is_functional_template__$2 = false;
+  const __vue_is_functional_template__ = false;
   /* style inject */
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Slider = __vue_normalize__(
-    { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
-    __vue_inject_styles__$2,
-    __vue_script__$2,
-    __vue_scope_id__$2,
-    __vue_is_functional_template__$2,
-    __vue_module_identifier__$2,
+  const __vue_component__ = /*#__PURE__*/normalizeComponent(
+    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+    __vue_inject_styles__,
+    __vue_script__,
+    __vue_scope_id__,
+    __vue_is_functional_template__,
+    __vue_module_identifier__,
+    false,
+    undefined,
     undefined,
     undefined
   );
+
+  var Slider = __vue_component__;
 
 var Plugin = {
   install: function install(Vue) {
@@ -529,5 +594,4 @@ var Plugin = {
 };
 use(Plugin);
 
-export default Plugin;
-export { Slider as BSlider, SliderTick as BSliderTick };
+export { Slider as BSlider, SliderTick as BSliderTick, Plugin as default };

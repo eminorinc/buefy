@@ -15,6 +15,14 @@
     "description": "Function to format an option to a string for display in the input as alternative to field prop)",
     "type": "function"
   },
+  "b-autocomplete/group-field": {
+    "description": "Property of the object (if data is array of objects) to use as display text of group",
+    "type": "string"
+  },
+  "b-autocomplete/group-options": {
+    "description": "Property of the object (if data is array of objects) to use as key to get items array of each group, optional",
+    "type": "string"
+  },
   "b-autocomplete/clear-on-select": {
     "description": "Clear input text on select",
     "type": "boolean"
@@ -47,6 +55,10 @@
     "description": "Icon pack to use",
     "type": "string"
   },
+  "b-autocomplete/confirm-keys": {
+    "description": "Array of keys (https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values) which will select an option when typing (default tab and enter)",
+    "type": "array"
+  },
   "b-autocomplete/clearable": {
     "description": "Add a button to clear the inputed text",
     "type": "boolean"
@@ -72,12 +84,44 @@
     "type": "string"
   },
   "b-autocomplete/append-to-body": {
-    "description": "Append autocomplete content to body",
+    "description": "Append autocomplete content to body (prevents event bubbling)",
+    "type": "boolean"
+  },
+  "b-autocomplete/select-on-click-outside": {
+    "description": "Trigger the @select event for the first pre-selected option when clicking outside and keep-first is enabled",
+    "type": "boolean"
+  },
+  "b-autocomplete/selectable-header": {
+    "description": "Allows the header in the autocomplete to be selectable",
+    "type": "boolean"
+  },
+  "b-autocomplete/selectable-footer": {
+    "description": "Allows the footer in the autocomplete to be selectable",
     "type": "boolean"
   },
   "b-autocomplete/Any native attribute": {
     "description": "—",
     "type": "—"
+  },
+  "b-breadcrumb/align": {
+    "description": "Breadcrumb alignment.",
+    "type": "string"
+  },
+  "b-breadcrumb/separator": {
+    "description": "Symbol that separates the breadcrumb items.",
+    "type": "string"
+  },
+  "b-breadcrumb/size": {
+    "description": "The breadcrumb size",
+    "type": "string"
+  },
+  "b-breadcrumb-breadcrumb item/tag": {
+    "description": "a, router-link and it's html attributes like href, to, etc...",
+    "type": "string"
+  },
+  "b-breadcrumb-breadcrumb item/active": {
+    "description": "is the current breadcrumb is actually the current page.",
+    "type": "boolean"
   },
   "b-button/type": {
     "description": "Type (color) of the control, optional",
@@ -101,6 +145,26 @@
   },
   "b-button/outlined": {
     "description": "Outlined style",
+    "type": "boolean"
+  },
+  "b-button/focused": {
+    "description": "Focused style",
+    "type": "boolean"
+  },
+  "b-button/inverted": {
+    "description": "Inverted style",
+    "type": "boolean"
+  },
+  "b-button/hovered": {
+    "description": "Hovered style",
+    "type": "boolean"
+  },
+  "b-button/active": {
+    "description": "Active style",
+    "type": "boolean"
+  },
+  "b-button/selected": {
+    "description": "Selected style",
     "type": "boolean"
   },
   "b-button/expanded": {
@@ -144,11 +208,11 @@
     "type": "number"
   },
   "b-carousel/has-drag": {
-    "description": "Toggle touch dragging, when touch not detected. auto switch mouse dragging",
+    "description": "Toggle touch dragging, when touch not detected. Auto switch mouse dragging",
     "type": "boolean"
   },
   "b-carousel/autoplay": {
-    "description": "Whether automatically loop the slides",
+    "description": "Whether to automatically loop the slides",
     "type": "boolean"
   },
   "b-carousel/pause-hover": {
@@ -156,7 +220,7 @@
     "type": "boolean"
   },
   "b-carousel/pause-info": {
-    "description": "Show infomation pause when autoplay and pause-hover",
+    "description": "Show information about pause when autoplay and pause-hover",
     "type": "boolean"
   },
   "b-carousel/pause-info-type": {
@@ -171,16 +235,12 @@
     "description": "\tDisplay the \"next\" and \"prev\" action",
     "type": "boolean"
   },
-  "b-carousel/arrow-both": {
-    "description": "Display the \"next\" and \"prev\" action when first or last item",
-    "type": "boolean"
-  },
   "b-carousel/arrow-hover": {
     "description": "Display the \"next\" and \"prev\" action when hover, but hidden on mobile",
     "type": "boolean"
   },
   "b-carousel/repeat": {
-    "description": "Controls whether the carousel loops around at the start and end.",
+    "description": "Controls whether the carousel loops around at the start and end",
     "type": "boolean"
   },
   "b-carousel/icon-pack": {
@@ -204,19 +264,19 @@
     "type": "boolean"
   },
   "b-carousel/indicator-background": {
-    "description": "Added background for indicator",
+    "description": "Adds background to indicator",
     "type": "boolean"
   },
   "b-carousel/indicator-custom": {
-    "description": "use when the image is more than 6 so that the indicator is not too small",
+    "description": "Use when there are more than 6 images so that the indicator is not too small",
     "type": "boolean"
   },
   "b-carousel/indicator-custom-size": {
-    "description": "image size on the indicator when the indicator-custom is used",
+    "description": "Image size of the indicator when the indicator-custom is used",
     "type": "string"
   },
   "b-carousel/indicator-inside": {
-    "description": "Display the indicator inside on carousel",
+    "description": "Display the indicator inside the carousel",
     "type": "boolean"
   },
   "b-carousel/indicator-mode": {
@@ -244,7 +304,7 @@
     "type": "string"
   },
   "b-carousel/with-carousel-list": {
-    "description": "use this when indicator custom with b-carousel-list",
+    "description": "Use when indicator custom with b-carousel-list",
     "type": "boolean"
   },
   "b-carousel-list/value": {
@@ -252,35 +312,31 @@
     "type": "number"
   },
   "b-carousel-list/data": {
-    "description": "Carousel-list data",
+    "description": "Carousel-list data (any b-image prop can be used)",
     "type": "array"
   },
-  "b-carousel-list/config": {
-    "description": "An object to pass all configs",
-    "type": "object"
-  },
   "b-carousel-list/has-drag": {
-    "description": "Toggle touch dragging, when touch not detected. auto switch mouse dragging",
+    "description": "Toggle touch dragging, when touch not detected. Auto switch mouse dragging",
     "type": "boolean"
   },
   "b-carousel-list/has-grayscale": {
-    "description": "Give a effect grayscale on img",
+    "description": "Give a grayscale effect to img",
     "type": "boolean"
   },
   "b-carousel-list/has-opacity": {
-    "description": "Give a effect opacity on img",
+    "description": "Give an opacity effect to img",
     "type": "boolean"
   },
   "b-carousel-list/repeat": {
-    "description": "Back to value 0 when item active same with total data",
+    "description": "Returns carousel to start when active item matches length of data",
     "type": "boolean"
   },
   "b-carousel-list/items-to-show": {
-    "description": "count of items to showed per view (support a decimal).",
+    "description": "Count of items to be showed per view (supports a decimal).",
     "type": "number"
   },
   "b-carousel-list/items-to-list": {
-    "description": "count of items to list when use navigation buttons",
+    "description": "Count of items to list when using navigation buttons",
     "type": "number"
   },
   "b-carousel-list/as-indicator": {
@@ -288,7 +344,7 @@
     "type": "boolean"
   },
   "b-carousel-list/refresh": {
-    "description": "Refresh for overlay carousel",
+    "description": "Refresh for carousel overlay",
     "type": "boolean"
   },
   "b-carousel-list/arrow": {
@@ -296,7 +352,7 @@
     "type": "boolean"
   },
   "b-carousel-list/arrow-hover": {
-    "description": "Display Arrow action when hover, but hidden on mobile",
+    "description": "Display arrow action when hovered. Hidden on mobile",
     "type": "boolean"
   },
   "b-carousel-list/icon-pack": {
@@ -355,6 +411,14 @@
     "description": "Type (color) of the control, optional",
     "type": "string"
   },
+  "b-checkbox/aria-labelledby": {
+    "description": "Accessibility label to establish relationship between the checkbox and control label",
+    "type": "string"
+  },
+  "b-checkbox/input-id": {
+    "description": "String to set the inner input id",
+    "type": "string"
+  },
   "b-checkbox-button/value": {
     "description": "Binding value",
     "type": "any"
@@ -394,6 +458,10 @@
   "b-clockpicker/hour-format": {
     "description": "Hour format for input and display",
     "type": "string"
+  },
+  "b-clockpicker/increment-minutes": {
+    "description": "Unit for increment minutes ",
+    "type": "number"
   },
   "b-clockpicker/time-formatter": {
     "description": "Function to format time (Date type) to a string for display in the input",
@@ -447,6 +515,10 @@
     "description": "Enable native timepicker on mobile",
     "type": "boolean"
   },
+  "b-clockpicker/mobile-modal": {
+    "description": "Clockpicker is shown into a modal on mobile",
+    "type": "boolean"
+  },
   "b-clockpicker/position": {
     "description": "Optional, position of the timepicker relative to the input",
     "type": "string"
@@ -468,8 +540,12 @@
     "type": "string"
   },
   "b-clockpicker/append-to-body": {
-    "description": "Append clockpicker calendar to body",
+    "description": "Append clockpicker calendar to body (prevents event bubbling)",
     "type": "boolean"
+  },
+  "b-clockpicker/locale": {
+    "description": "Accept a string with a BCP 47 language tag, or an array of such strings.\n                See <a href=\"https://www.unicode.org/reports/tr35/tr35.html#BCP_47_Conformance\" target=\"_blank\">Unicode BCP 47 locale identifier</a>",
+    "type": "string|array of string"
   },
   "b-clockpicker/Any native attribute": {
     "description": "—",
@@ -490,6 +566,62 @@
   "b-collapse/position": {
     "description": "Trigger position",
     "type": "string"
+  },
+  "b-colorpicker/value": {
+    "description": "Binding value",
+    "type": "object(color)"
+  },
+  "b-colorpicker/representation": {
+    "description": "Representation of Saturation & Lightness values",
+    "type": "string"
+  },
+  "b-colorpicker/alpha": {
+    "description": "Allow color with transparency",
+    "type": "boolean"
+  },
+  "b-colorpicker/color-formatter": {
+    "description": "Function to format color to a string for display in the button",
+    "type": "function"
+  },
+  "b-colorpicker/color-parser": {
+    "description": "Function to parse value to a color",
+    "type": "function"
+  },
+  "b-colorpicker/size": {
+    "description": "Vertical size of input and picker, optional",
+    "type": "string"
+  },
+  "b-colorpicker/inline": {
+    "description": "Colorpicker is shown inline, button is removed",
+    "type": "boolean"
+  },
+  "b-colorpicker/position": {
+    "description": "Optional, position of the colorpicker relative to the button",
+    "type": "string"
+  },
+  "b-colorpicker/open-on-focus": {
+    "description": "Open colorpicker on button focus",
+    "type": "boolean"
+  },
+  "b-colorpicker/focusable": {
+    "description": "Colorpicker container can be focused",
+    "type": "boolean"
+  },
+  "b-colorpicker/trap-focus": {
+    "description": "Trap focus inside the colorpicker.",
+    "type": "boolean"
+  },
+  "b-colorpicker/close-on-click": {
+    "description": "Choose whether the Colorpicker should close after selecting a color",
+    "type": "boolean"
+  },
+  "b-colorpicker/append-to-body": {
+    "description": "Append colorpicker dropdown to body (prevents event bubbling)",
+    "type": "boolean"
+  },
+  "b-colorpicker/Any native attribute": {
+    "description": "—",
+    "type": "—"
   },
   "b-datepicker/value": {
     "description": "Binding value",
@@ -547,6 +679,14 @@
     "description": "Icon name to be added",
     "type": "string"
   },
+  "b-datepicker/icon-right": {
+    "description": "Icon name to be added on the right side",
+    "type": "string"
+  },
+  "b-datepicker/icon-right-clickable": {
+    "description": "Make the right icon clickable",
+    "type": "boolean"
+  },
   "b-datepicker/icon-pack": {
     "description": "Icon pack to use",
     "type": "string"
@@ -560,16 +700,20 @@
     "type": "string"
   },
   "b-datepicker/unselectable-dates": {
-    "description": "Array of unselectable dates",
-    "type": "array"
+    "description": "Array of unselectable dates, or a function to identify unselectable dates",
+    "type": "array|function"
   },
   "b-datepicker/unselectable-days-of-week": {
     "description": "Array of unselectable days of week",
     "type": "array"
   },
   "b-datepicker/selectable-dates": {
-    "description": "Array of selectable dates",
-    "type": "array"
+    "description": "Array of selectable dates, or a function to identify selectable dates",
+    "type": "array|function"
+  },
+  "b-datepicker/locale": {
+    "description": "Accept a string with a BCP 47 language tag, or an array of such strings.\n                See <a href=\"https://www.unicode.org/reports/tr35/tr35.html#BCP_47_Conformance\" target=\"_blank\">Unicode BCP 47 locale identifier</a>",
+    "type": "string|array of string"
   },
   "b-datepicker/month-names": {
     "description": "Names of months to display in table header",
@@ -585,6 +729,10 @@
   },
   "b-datepicker/mobile-native": {
     "description": "Enable native datepicker on mobile",
+    "type": "boolean"
+  },
+  "b-datepicker/mobile-modal": {
+    "description": "Datepicker is shown into a modal on mobile",
     "type": "boolean"
   },
   "b-datepicker/position": {
@@ -615,6 +763,10 @@
     "description": "Display week number",
     "type": "boolean"
   },
+  "b-datepicker/week-number-clickable": {
+    "description": "Enable click on week number",
+    "type": "boolean"
+  },
   "b-datepicker/rules-for-first-week": {
     "description": "Choose the rule to determinate the first week of Year, 4 for ISO or 1 for other",
     "type": "number"
@@ -635,8 +787,12 @@
     "description": "Trap focus inside the datepicker.",
     "type": "boolean"
   },
+  "b-datepicker/close-on-click": {
+    "description": "Choose whether the Datepicker should close after selecting a date",
+    "type": "boolean"
+  },
   "b-datepicker/append-to-body": {
-    "description": "Append datepicker calendar to body",
+    "description": "Append datepicker calendar to body (prevents event bubbling)",
     "type": "boolean"
   },
   "b-datepicker/aria-next-label": {
@@ -656,11 +812,11 @@
     "type": "date"
   },
   "b-datetimepicker/datetime-formatter": {
-    "description": "Function to format datetime (Date type) to a string for display in the input",
+    "description": "Function to format datetime (Date type) to a string for displaying in the input",
     "type": "function"
   },
   "b-datetimepicker/datetime-parser": {
-    "description": "Function to parse string to a datetime (Date type) for set a datetime from the input to the component",
+    "description": "Function to parse string to a datetime (Date type) for setting the component's datetime from the input",
     "type": "function"
   },
   "b-datetimepicker/min-datetime": {
@@ -670,6 +826,14 @@
   "b-datetimepicker/max-datetime": {
     "description": "Latest datetime available for selection",
     "type": "date"
+  },
+  "b-datetimepicker/first-day-of-week": {
+    "description": "First day of week to display in table header",
+    "type": "number"
+  },
+  "b-datetimepicker/nearby-month-days": {
+    "description": "Show/Hide nearby month days (prev and next month)",
+    "type": "boolean"
   },
   "b-datetimepicker/size": {
     "description": "Vertical size of input and picker, optional",
@@ -690,6 +854,14 @@
   "b-datetimepicker/icon": {
     "description": "Icon name to be added",
     "type": "string"
+  },
+  "b-datetimepicker/icon-right": {
+    "description": "Icon name to be added on the right side",
+    "type": "string"
+  },
+  "b-datetimepicker/icon-right-clickable": {
+    "description": "Make the right icon clickable",
+    "type": "boolean"
   },
   "b-datetimepicker/icon-pack": {
     "description": "Icon pack to use",
@@ -724,8 +896,12 @@
     "type": "boolean"
   },
   "b-datetimepicker/append-to-body": {
-    "description": "Append datetimepicker calendar to body",
+    "description": "Append datetimepicker calendar to body (prevents event bubbling)",
     "type": "boolean"
+  },
+  "b-datetimepicker/locale": {
+    "description": "Accept a string with a BCP 47 language tag, or an array of such strings.\n                See <a href=\"https://www.unicode.org/reports/tr35/tr35.html#BCP_47_Conformance\" target=\"_blank\">Unicode BCP 47 locale identifier</a>",
+    "type": "string|array of string"
   },
   "b-datetimepicker/Any native attribute": {
     "description": "—",
@@ -741,7 +917,7 @@
   },
   "b-dialog/message": {
     "description": "Message text (can contain HTML). <div class=\"notification is-danger\">Dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to <a href=\"https://en.wikipedia.org/wiki/Cross-site_scripting\" target=\"_blank\" rel=\"noopener\">XSS vulnerabilities</a>. Only use HTML interpolation on trusted content and never on user-provided content.</div>",
-    "type": "string"
+    "type": "string|array<vnode>"
   },
   "b-dialog/hasIcon": {
     "description": "Adds an icon on the left side depending on the type or icon",
@@ -819,9 +995,9 @@
     "description": "Binding value",
     "type": "any"
   },
-  "b-dropdown/hoverable": {
-    "description": "Dropdown will be triggered by hover instead of click",
-    "type": "boolean"
+  "b-dropdown/triggers": {
+    "description": "Dropdown will be triggered by any events",
+    "type": "array"
   },
   "b-dropdown/position": {
     "description": "Optional, position of the dropdown relative to the trigger",
@@ -868,7 +1044,7 @@
     "type": "boolean"
   },
   "b-dropdown/append-to-body": {
-    "description": "Append dropdown content to body",
+    "description": "Append dropdown content to body (prevents event bubbling)",
     "type": "boolean"
   },
   "b-dropdown/scrollable": {
@@ -878,6 +1054,10 @@
   "b-dropdown/max-height": {
     "description": "Max height of dropdown content",
     "type": "string|number"
+  },
+  "b-dropdown/trigger-tabindex": {
+    "description": "Set the tabindex attribute on the dropdown trigger div (-1 to prevent selection via tab key)",
+    "type": "number"
   },
   "b-dropdown-item/value": {
     "description": "The value that will be returned on events and v-model",
@@ -932,7 +1112,7 @@
     "type": "string|object, array<string>, array<object>"
   },
   "b-field/grouped": {
-    "description": "Direct child components/elements of Field will be grouped horizontally (see which ones at the top of the page)",
+    "description": "Direct child components/elements of Field will be grouped horizontally (see which ones at the top of the page). Do not mix with horizontal because there is an issue that the validation error cannot be reset once it is set if combined with horizontal.",
     "type": "boolean"
   },
   "b-field/group-multiline": {
@@ -948,7 +1128,7 @@
     "type": "boolean"
   },
   "b-field/horizontal": {
-    "description": "Group label and control on the same line for horizontal forms",
+    "description": "Group label and control on the same line for horizontal forms. Do not mix with grouped because there is an issue that the validation error cannot be reset once it is set if combined with grouped.",
     "type": "boolean"
   },
   "b-field/label-position": {
@@ -979,9 +1159,65 @@
     "description": "Add class to icon font (&lt;i&gt; tag), optional.\n                    See <a href=\"https://materialdesignicons.com/getting-started\" target=\"_blank\">here for MDI</a>,\n                    <a href=\"http://fontawesome.io/examples/\" target=\"_blank\">here for FontAwesome 4</a> and\n                    <a href=\"https://fontawesome.com/how-to-use/on-the-web/using-with/vuejs\" target=\"_blank\">here for FontAwesome 5</a> custom classes",
     "type": "string"
   },
+  "b-image/src": {
+    "description": "The image url you want to display. You can use webp extension here. Do not forget to specify a fallback for browsers that do not support this format yet.",
+    "type": "string"
+  },
+  "b-image/alt": {
+    "description": "The image alternate text, if it cannot be displayed.",
+    "type": "string"
+  },
+  "b-image/src-fallback": {
+    "description": "The image url you want to display if the image specified using src fails to load.",
+    "type": "string"
+  },
+  "b-image/webp-fallback": {
+    "description": "Fallback when using webp format. You can specify an extension only (.jpg, .jpeg, .png, .gif) if the filename is the same. You can use a full url if not.",
+    "type": "string"
+  },
+  "b-image/lazy": {
+    "description": "Use IntersectionObserver to display the image only when in viewport.",
+    "type": "boolean"
+  },
+  "b-image/responsive": {
+    "description": "The image will take 100% of the parent width. Use this with ratio to prevent page jump when images are loading.",
+    "type": "boolean"
+  },
+  "b-image/ratio": {
+    "description": "The space will be reserved. Prevent page jump when images are loading when using responsive.",
+    "type": "string"
+  },
+  "b-image/placeholder": {
+    "description": "The image that will be displayed before the src load. Useful if you want to use lqip technique. Will use webp-fallback if only an extension is given.",
+    "type": "string"
+  },
+  "b-image/srcset": {
+    "description": "You can enter a valid srcset value (ex. \"image1.webp 400w,image2.webp 800w\"). Will use webp-fallback if only an extension is given.",
+    "type": "string"
+  },
+  "b-image/srcset-sizes": {
+    "description": "It will generate a srcset string using those sizes.",
+    "type": "array<number>"
+  },
+  "b-image/srcset-formatter": {
+    "description": "Function to format src according to a given size.",
+    "type": "function"
+  },
+  "b-image/rounded": {
+    "description": "Rounded image.",
+    "type": "boolean"
+  },
+  "b-image/custom-class": {
+    "description": "Add custom css class to the img tag.",
+    "type": "string"
+  },
   "b-input/value": {
     "description": "Binding value",
     "type": "string|number"
+  },
+  "b-input/lazy": {
+    "description": "Makes the binding lazy. Note: v-model.lazy won't work",
+    "type": "boolean"
   },
   "b-input/type": {
     "description": "Input type, like native",
@@ -1044,7 +1280,7 @@
     "type": "—"
   },
   "b-loading/active": {
-    "description": "Whether modal is active or not, use the .sync modifier to make it two-way binding",
+    "description": "Whether loading is active or not, use the .sync modifier to make it two-way binding",
     "type": "boolean"
   },
   "b-loading/animation": {
@@ -1147,6 +1383,10 @@
     "description": "Visibility duration in miliseconds",
     "type": "number"
   },
+  "b-message/progress-bar": {
+    "description": "remaining seconds before the alert will close (in seconds)",
+    "type": "boolean"
+  },
   "b-message/icon-pack": {
     "description": "Icon pack to use",
     "type": "string"
@@ -1197,7 +1437,7 @@
   },
   "b-modal/content": {
     "description": "HTML content <div class=\"notification is-danger\">Dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to <a href=\"https://en.wikipedia.org/wiki/Cross-site_scripting\" target=\"_blank\" rel=\"noopener\">XSS vulnerabilities</a>. Only use HTML interpolation on trusted content and never on user-provided content.</div>",
-    "type": "string"
+    "type": "string|array<vnode>"
   },
   "b-modal/width": {
     "description": "Width of the Modal",
@@ -1231,6 +1471,10 @@
     "description": "Trap focus inside the modal.",
     "type": "boolean"
   },
+  "b-modal/auto-focus": {
+    "description": "Automatically focus modal when active.",
+    "type": "boolean"
+  },
   "b-modal/custom-class": {
     "description": "CSS classes to be applied on modal",
     "type": "string"
@@ -1243,8 +1487,20 @@
     "description": "Role attribute to be passed to modal container for better accessibility.",
     "type": "string"
   },
+  "b-modal/aria-label": {
+    "description": "Aria label attribute to be passed to modal container for better accessibility.",
+    "type": "string"
+  },
   "b-modal/aria-modal": {
     "description": "Improve accessiblity when enabled.",
+    "type": "boolean"
+  },
+  "b-modal/close-button-aria-label": {
+    "description": "Aria label attribute to be passed to the close button for better accessibility.",
+    "type": "string"
+  },
+  "b-modal/render-on-mounted": {
+    "description": "Create DOM for the modal content whether modal is active or not",
     "type": "boolean"
   },
   "b-navbar/transparent": {
@@ -1259,8 +1515,12 @@
     "description": "Fixes the navbar to the bottom of the page",
     "type": "boolean"
   },
-  "b-navbar/is-active": {
+  "b-navbar/active": {
     "description": "To control the behaviour of the mobile menu programmatically, use the .sync modifier to make it two-way binding",
+    "type": "boolean"
+  },
+  "b-navbar/centered": {
+    "description": "To center the navbar-start slot",
     "type": "boolean"
   },
   "b-navbar/type": {
@@ -1295,6 +1555,10 @@
     "description": "Item is active",
     "type": "boolean"
   },
+  "b-navbar-dropdown/tag": {
+    "description": "Sets the type of the component that have to render as navbar-item",
+    "type": "string"
+  },
   "b-navbar-dropdown/hoverable": {
     "description": "Dropdown will be triggered by hover instead of click",
     "type": "boolean"
@@ -1319,6 +1583,10 @@
     "description": "Collapsible dropdown on mobile",
     "type": "boolean"
   },
+  "b-notification/value": {
+    "description": "Active state - set on `true` to reopen after close",
+    "type": "boolean"
+  },
   "b-notification/type": {
     "description": "Type (color) of the notification, optional",
     "type": "string"
@@ -1332,12 +1600,16 @@
     "type": "boolean"
   },
   "b-notification/auto-close": {
-    "description": "Hide notification after duration only not programmatic",
+    "description": "Hide notification after duration",
     "type": "boolean"
   },
   "b-notification/duration": {
     "description": "Visibility duration in miliseconds",
     "type": "number"
+  },
+  "b-notification/progress-bar": {
+    "description": "remaining seconds before the alert will close (in seconds)",
+    "type": "boolean"
   },
   "b-notification/animation": {
     "description": "Custom animation (transition name)",
@@ -1355,16 +1627,20 @@
     "description": "Icon name to use with has-icon",
     "type": "boolean"
   },
+  "b-notification/icon-size": {
+    "description": "Size of the icon, optional",
+    "type": "string"
+  },
   "b-notification/aria-close-label": {
     "description": "Label for the close button, to be read by accessibility screenreaders.",
     "type": "string"
   },
   "b-notification/message": {
     "description": "Message text (can contain HTML). <div class=\"notification is-danger\">Dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to <a href=\"https://en.wikipedia.org/wiki/Cross-site_scripting\" target=\"_blank\" rel=\"noopener\">XSS vulnerabilities</a>. Only use HTML interpolation on trusted content and never on user-provided content.</div>",
-    "type": "string"
+    "type": "string|array<vnode>"
   },
   "b-notification/position": {
-    "description": "Which position the notification will appear when programmatically",
+    "description": "Which position the notification will appear when opened programmatically",
     "type": "string"
   },
   "b-notification/queue": {
@@ -1372,7 +1648,11 @@
     "type": "boolean"
   },
   "b-notification/indefinite": {
-    "description": "Show the Notification indefinitely until it is dismissed when programmatically",
+    "description": "Show the Notification indefinitely until it is dismissed when opened programmatically",
+    "type": "boolean"
+  },
+  "b-notification/pause-on-hover": {
+    "description": "Pause and show on hover until hover off when opened programmatically, if indefinite is false.",
     "type": "boolean"
   },
   "b-notification/container": {
@@ -1419,17 +1699,41 @@
     "description": "Incremental number step",
     "type": "number|string"
   },
-  "b-numberinput/controls-rounded": {
-    "description": "Show rounded controls",
-    "type": "boolean"
+  "b-numberinput/min-step": {
+    "description": "Minimum step-size allowed. Input value is validated to be integer multiple of min-step",
+    "type": "number|string"
+  },
+  "b-numberinput/exponential": {
+    "description": "The factor of incrementation on long press",
+    "type": "boolean|number"
   },
   "b-numberinput/controls": {
-    "description": "Showing controls(+/-)",
+    "description": "Show controls (+/-)",
+    "type": "boolean"
+  },
+  "b-numberinput/controls-rounded": {
+    "description": "Show rounded controls",
     "type": "boolean"
   },
   "b-numberinput/controls-position": {
     "description": "Position of controls",
     "type": "string"
+  },
+  "b-numberinput/controls-alignment": {
+    "description": "Alignment of controls",
+    "type": "string"
+  },
+  "b-numberinput/aria-minus-label": {
+    "description": "Accessibility label for the minus button.",
+    "type": "string"
+  },
+  "b-numberinput/aria-plus-label": {
+    "description": "Accessibility label for the plus button.",
+    "type": "string"
+  },
+  "b-numberinput/long-press": {
+    "description": "Long press on the plus or minus button will increment/decrement the input value.",
+    "type": "boolean"
   },
   "b-numberinput/Any native attribute": {
     "description": "—",
@@ -1499,6 +1803,18 @@
     "description": "Accessibility label for the current page link. If passed, this text will be prepended to the current page.",
     "type": "string"
   },
+  "b-pagination/page-input": {
+    "description": "Include page number input.",
+    "type": "boolean"
+  },
+  "b-pagination/page-input-position": {
+    "description": "Page input position.",
+    "type": "string"
+  },
+  "b-pagination/debounce-page-input": {
+    "description": "Sets the page input debounce time (in milliseconds)",
+    "type": "number"
+  },
   "b-pagination-button/page": {
     "description": "The prop page need to be passed upon the component (:page=\"props.page\").",
     "type": "object"
@@ -1514,6 +1830,10 @@
   "b-progress/size": {
     "description": "Size of the progress bar, optional",
     "type": "string"
+  },
+  "b-progress/rounded": {
+    "description": "rounded style of the progress bar, optional",
+    "type": "boolean"
   },
   "b-progress/value": {
     "description": "The progress value, progress will be indeterminate if undefined.",
@@ -1537,6 +1857,22 @@
   },
   "b-progress/keep-trailing-zeroes": {
     "description": "Truncate or not the trailing zeroes",
+    "type": "boolean"
+  },
+  "b-progress/locale": {
+    "description": "Accept a string with a BCP 47 language tag, or an array of such strings.\n                See <a href=\"https://www.unicode.org/reports/tr35/tr35.html#BCP_47_Conformance\" target=\"_blank\">Unicode BCP 47 locale identifier</a>",
+    "type": "string|array of string"
+  },
+  "b-progress-bar/type": {
+    "description": "Type (color) of the progress bar, optional",
+    "type": "string"
+  },
+  "b-progress-bar/value": {
+    "description": "The progress value.",
+    "type": "number"
+  },
+  "b-progress-bar/show-value": {
+    "description": "If the value should be displayed inside the progress bar.",
     "type": "boolean"
   },
   "b-radio/value": {
@@ -1643,6 +1979,10 @@
     "description": "Texts template only for show-text, like on e-commerce",
     "type": "array"
   },
+  "b-rate/locale": {
+    "description": "Accept a string with a BCP 47 language tag, or an array of such strings.\n              See <a href=\"https://www.unicode.org/reports/tr35/tr35.html#BCP_47_Conformance\" target=\"_blank\">Unicode BCP 47 locale identifier</a>",
+    "type": "string|array of string"
+  },
   "b-select/value": {
     "description": "Binding value",
     "type": "any"
@@ -1692,7 +2032,7 @@
     "type": "string|"
   },
   "b-sidebar/can-cancel": {
-    "description": "Can close Sidebar by clicking 'X', pressing escape or clicking outside",
+    "description": "Can close Sidebar pressing escape or clicking outside",
     "type": "boolean|array"
   },
   "b-sidebar/on-cancel": {
@@ -1700,7 +2040,7 @@
     "type": "function"
   },
   "b-sidebar/fullwidth": {
-    "description": "Show sidebar in fullwidth.",
+    "description": "Show sidebar in fullwidth. A close button will be present for a fullwidth sidebar.",
     "type": "boolean"
   },
   "b-sidebar/fullheight": {
@@ -1730,6 +2070,14 @@
   "b-sidebar/reduce": {
     "description": "Show a small sidebar",
     "type": "boolean"
+  },
+  "b-sidebar/scroll": {
+    "description": "clip to remove the &lt;body&gt; scrollbar, keep to have a non scrollable scrollbar\n                    to avoid shifting background, but will set &lt;body&gt; to position fixed, might break some layouts",
+    "type": "string"
+  },
+  "b-sidebar/delay": {
+    "description": "Sidebar delay before it open (number in ms)",
+    "type": "number"
   },
   "b-skeleton/active": {
     "description": "Show or hide loader",
@@ -1763,6 +2111,10 @@
     "description": "Number of shapes to display",
     "type": "number"
   },
+  "b-skeleton/position": {
+    "description": "Position of the skeleton, optional",
+    "type": "string"
+  },
   "b-slider/value": {
     "description": "Binding value",
     "type": "number|array"
@@ -1795,6 +2147,10 @@
     "description": "Show tooltip when thumb is being dragged",
     "type": "boolean"
   },
+  "b-slider/indicator": {
+    "description": "Show v-model value inside thumb",
+    "type": "boolean"
+  },
   "b-slider/tooltip-type": {
     "description": "The type (color) of the tooltip. Defaults to type",
     "type": "string"
@@ -1811,12 +2167,24 @@
     "description": "Function to format the tooltip label for display",
     "type": "function"
   },
+  "b-slider/format": {
+    "description": "Which format should be used to display the value.\n                              The value will be displayed as-is if using raw. The percent using value,\n                              min and max will be calculated and displayed if using percent",
+    "type": "string"
+  },
+  "b-slider/locale": {
+    "description": "Accept a string with a BCP 47 language tag, or an array of such strings.\n                See <a href=\"https://www.unicode.org/reports/tr35/tr35.html#BCP_47_Conformance\" target=\"_blank\">Unicode BCP 47 locale identifier</a>",
+    "type": "string|array of string"
+  },
   "b-slider/aria-label": {
     "description": "Accessibility label for the thumbs",
     "type": "string|array"
   },
   "b-slider/bigger-slider-focus": {
     "description": "Increase the clickable area",
+    "type": "boolean"
+  },
+  "b-slider/tooltip-always": {
+    "description": "Tooltip displays always",
     "type": "boolean"
   },
   "b-slider-slidertick/value": {
@@ -1829,7 +2197,7 @@
   },
   "b-snackbar/message": {
     "description": "Message text (can contain HTML). <div class=\"notification is-danger\">Dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to <a href=\"https://en.wikipedia.org/wiki/Cross-site_scripting\" target=\"_blank\" rel=\"noopener\">XSS vulnerabilities</a>. Only use HTML interpolation on trusted content and never on user-provided content.</div>",
-    "type": "string"
+    "type": "string|array<vnode>"
   },
   "b-snackbar/position": {
     "description": "Which position the snackbar will appear",
@@ -1847,6 +2215,10 @@
     "description": "Show the Snackbar indefinitely until it is dismissed",
     "type": "boolean"
   },
+  "b-snackbar/pause-on-hover": {
+    "description": "Pause and show on hover until hover off (it works when indefinite is false)",
+    "type": "boolean"
+  },
   "b-snackbar/container": {
     "description": "DOM element the toast will be created on. Note that this also changes the position of the toast from fixed to absolute. Meaning that the container should be fixed. Also note that this will override the defaultContainerElement if you specified it in your Buefy Constructor Options. See Constructor options for more details.",
     "type": "string"
@@ -1859,13 +2231,25 @@
     "description": "Callback function when the button is clicked",
     "type": "function"
   },
+  "b-snackbar/cancelText": {
+    "description": "Snackbar's cancel button text. Default is no cancel button",
+    "type": "string"
+  },
   "b-steps/value": {
-    "description": "Binding value, step index",
-    "type": "number"
+    "description": "Binding value, step index. Passing undefined will show the first step",
+    "type": "number|string"
   },
   "b-steps/animated": {
     "description": "Steps have slide animation",
     "type": "boolean"
+  },
+  "b-steps/animateInitially": {
+    "description": "Apply animation on the initial render",
+    "type": "boolean"
+  },
+  "b-steps/animation": {
+    "description": "Custom animation (transition name)",
+    "type": "string"
   },
   "b-steps/type": {
     "description": "Default Type/Style for the steps, optional",
@@ -1932,11 +2316,11 @@
     "type": "string"
   },
   "b-steps-item/value": {
-    "description": "Step value",
-    "type": "number|string"
+    "description": "Step identifier",
+    "type": "string"
   },
   "b-steps-item/type": {
-    "description": "Default Type/Style for the step, optional\n                    This will override parent type. Could be used to set a completed step to\n                    is-success for example",
+    "description": "Default Type/Style for the step, optional.\n                    This will override parent type. Could be used to set a completed step to\n                    is-success for example",
     "type": "string"
   },
   "b-steps-item/icon": {
@@ -1954,6 +2338,10 @@
   "b-steps-item/visible": {
     "description": "Item is visible",
     "type": "boolean"
+  },
+  "b-steps-item/headerClass": {
+    "description": "The classes to add to the step label container",
+    "type": "string|array, object"
   },
   "b-switch/type": {
     "description": "Type (color) of the switch, optional",
@@ -1999,12 +2387,16 @@
     "description": "Outlined style",
     "type": "boolean"
   },
+  "b-switch/aria-labelledby": {
+    "description": "Accessibility label to establish relationship between the switch and control label",
+    "type": "string"
+  },
   "b-table/data": {
     "description": "Table data",
     "type": "array<object>"
   },
   "b-table/columns": {
-    "description": "Table columns, you can also add renderHtml: true on each column object",
+    "description": "Table columns",
     "type": "array<object>(same as tablecolumns props)"
   },
   "b-table/default-sort": {
@@ -2055,6 +2447,10 @@
     "description": "Position of the checkbox (if checkable is true)",
     "type": "string"
   },
+  "b-table/sticky-checkbox": {
+    "description": "Make the checkbox column sticky when checkable",
+    "type": "boolean"
+  },
   "b-table/checked-rows": {
     "description": "Set which rows are checked, use the .sync modifier to make it two-way binding",
     "type": "array<object>"
@@ -2062,6 +2458,10 @@
   "b-table/header-checkable": {
     "description": "Show check/uncheck all checkbox in table header when checkable",
     "type": "boolean"
+  },
+  "b-table/checkbox-type": {
+    "description": "Type (color) of the checkbox when checkable, optional",
+    "type": "string"
   },
   "b-table/mobile-cards": {
     "description": "Rows appears as cards on mobile (collapse rows)",
@@ -2080,7 +2480,7 @@
     "type": "number"
   },
   "b-table/current-page": {
-    "description": "Current page of table data (if paginated), use the .sync modifier to make it two-way binding",
+    "description": "Current page of table data (if paginated)",
     "type": "number"
   },
   "b-table/loading": {
@@ -2095,6 +2495,14 @@
     "description": "Simple pagination (if paginated)",
     "type": "boolean"
   },
+  "b-table/pagination-rounded": {
+    "description": "Rounded pagination (if paginated)",
+    "type": "boolean"
+  },
+  "b-table/pagination-order": {
+    "description": "Buttons order, optional",
+    "type": "string"
+  },
   "b-table/pagination-size": {
     "description": "Pagination size (if paginated)",
     "type": "string"
@@ -2107,6 +2515,18 @@
     "description": "How many rows per page (if paginated)",
     "type": "number"
   },
+  "b-table/page-input": {
+    "description": "Include page number input.",
+    "type": "boolean"
+  },
+  "b-table/page-input-position": {
+    "description": "Page input position.",
+    "type": "string"
+  },
+  "b-table/debounce-page-input": {
+    "description": "Sets the page input debounce time (in milliseconds)",
+    "type": "number"
+  },
   "b-table/sort-multiple": {
     "description": "Adds multiple column sorting",
     "type": "boolean"
@@ -2116,7 +2536,7 @@
     "type": "object"
   },
   "b-table/sort-multiple-key": {
-    "description": "Adds a key which will be required for multi column sorting to work. Will always be enabled if null is selected (default). Requres sort-multiple",
+    "description": "Adds a key which will be required for multi column sorting to work. Will always be enabled if null is selected (default). Requires sort-multiple",
     "type": "string"
   },
   "b-table/row-class": {
@@ -2135,6 +2555,10 @@
     "description": "Allow chevron icon and column to be visible",
     "type": "boolean"
   },
+  "b-table/detail-icon": {
+    "description": "Icon name",
+    "type": "string"
+  },
   "b-table/opened-detailed": {
     "description": "Allow pre-defined opened details. Ideal to open details via vue-router. (A unique key is required; check detail-key prop)",
     "type": "array"
@@ -2145,6 +2569,10 @@
   },
   "b-table/detail-key": {
     "description": "Use a unique key of your data Object when use detailed or opened detailed. (id recommended)",
+    "type": "string"
+  },
+  "b-table/detail-transition": {
+    "description": "Transition name to use when toggling row details.",
     "type": "string"
   },
   "b-table/custom-is-checked": {
@@ -2175,6 +2603,10 @@
     "description": "Allows rows to be draggable",
     "type": "boolean"
   },
+  "b-table/draggable-column": {
+    "description": "Allows columns to be draggable",
+    "type": "boolean"
+  },
   "b-table/backend-filtering": {
     "description": "Columns won't be filtered with Javascript, use with searchable prop to the columns to filter in your backend",
     "type": "boolean"
@@ -2199,6 +2631,10 @@
     "description": "Rows appears as cards (collapse rows)",
     "type": "boolean"
   },
+  "b-table/show-header": {
+    "description": "Show table column header",
+    "type": "boolean"
+  },
   "b-table/aria-next-label": {
     "description": "Accessibility label for the next page link (if paginated)",
     "type": "string"
@@ -2214,6 +2650,10 @@
   "b-table/aria-current-label": {
     "description": "Accessibility label for the current page link. If passed, this text will be prepended to the current page (if paginated)",
     "type": "string"
+  },
+  "b-table/debounce-search": {
+    "description": "Sets the filtering debounce time (in milliseconds)",
+    "type": "number"
   },
   "b-table-column/label": {
     "description": "Column header text, also used to identify column if custom-key prop is missing",
@@ -2252,12 +2692,16 @@
     "type": "boolean"
   },
   "b-table-column/custom-sort": {
-    "description": "Custom sort method, works when is sortable",
+    "description": "Custom sort method, works when column is sortable",
     "type": "function(a: object| b: object, isasc: boolean)"
   },
   "b-table-column/searchable": {
     "description": "Add a input below the header to filter data",
     "type": "boolean"
+  },
+  "b-table-column/custom-search": {
+    "description": "Custom search method, works when column is searchable",
+    "type": "function(a: object| input: string)"
   },
   "b-table-column/subheading": {
     "description": "Column subheading text",
@@ -2268,7 +2712,7 @@
     "type": "boolean"
   },
   "b-table-column/header-selectable": {
-    "description": "Prevent text selection of header when setting this to false.",
+    "description": "Whether the header text is selectable, works when column is sortable.",
     "type": "boolean"
   },
   "b-table-column/header-class": {
@@ -2279,9 +2723,17 @@
     "description": "CSS classes to be applied on cell",
     "type": "string"
   },
+  "b-table-column/th-attrs": {
+    "description": "Adds native attributes to th :th-attrs=\"(column)\" => ({})\"",
+    "type": "function"
+  },
+  "b-table-column/td-attrs": {
+    "description": "Adds native attributes to td :td-attrs=\"(row, column)\" => ({})\"",
+    "type": "function"
+  },
   "b-tabs/value": {
-    "description": "Binding value, tab index",
-    "type": "number|string"
+    "description": "Binding value, tab index. Passing undefined will show the first tab, null will show no tab",
+    "type": "string|number, null"
   },
   "b-tabs/expanded": {
     "description": "Make tab full width",
@@ -2290,6 +2742,14 @@
   "b-tabs/animated": {
     "description": "Tabs have slide animation",
     "type": "boolean"
+  },
+  "b-tabs/animateInitially": {
+    "description": "Apply animation on the initial render",
+    "type": "boolean"
+  },
+  "b-tabs/animation": {
+    "description": "Custom animation (transition name)",
+    "type": "string"
   },
   "b-tabs/type": {
     "description": "Type/Style of the tab, optional",
@@ -2320,8 +2780,8 @@
     "type": "string"
   },
   "b-tabs-item/value": {
-    "description": "Tab value",
-    "type": "number|string"
+    "description": "Tab identifier",
+    "type": "string"
   },
   "b-tabs-item/icon": {
     "description": "Icon name",
@@ -2339,6 +2799,10 @@
     "description": "Item is visible",
     "type": "boolean"
   },
+  "b-tabs-item/headerClass": {
+    "description": "The classes to add to the tab header",
+    "type": "string|array, object"
+  },
   "b-tag/type": {
     "description": "Type (color) of the tag, optional",
     "type": "string"
@@ -2348,7 +2812,7 @@
     "type": "string"
   },
   "b-tag/size": {
-    "description": "Size of the tab, optional",
+    "description": "Size of the tag, optional",
     "type": "string"
   },
   "b-tag/rounded": {
@@ -2379,8 +2843,32 @@
     "description": "Accessibility label for the close button",
     "type": "string"
   },
+  "b-tag/icon": {
+    "description": "Adds an icon to the left of the tag.",
+    "type": "string"
+  },
+  "b-tag/icon-pack": {
+    "description": "Icon pack to use",
+    "type": "string"
+  },
+  "b-tag/icon-type": {
+    "description": "Type (color) of the icon on the left side of tag, optional",
+    "type": "string"
+  },
+  "b-tag/close-icon": {
+    "description": "Replace times in close button with a customized icon. closable and attached props should be needed.",
+    "type": "string"
+  },
+  "b-tag/close-icon-pack": {
+    "description": "Icon pack to use",
+    "type": "string"
+  },
+  "b-tag/close-icon-type": {
+    "description": "Type (color) of the close icon of tag, optional",
+    "type": "string"
+  },
   "b-tag-taglist/attached": {
-    "description": "Tabs inside are attached together",
+    "description": "Tags inside are attached together",
     "type": "boolean"
   },
   "b-taginput/value": {
@@ -2403,6 +2891,10 @@
     "description": "Type (color) of the tags, optional",
     "type": "string"
   },
+  "b-taginput/closeType": {
+    "description": "Type (color) of the close icon, optional",
+    "type": "string"
+  },
   "b-taginput/size": {
     "description": "Tag and input size, optional",
     "type": "string"
@@ -2423,6 +2915,10 @@
     "description": "Add close/delete button to the tag",
     "type": "boolean"
   },
+  "b-taginput/aria-close-label": {
+    "description": "Accessibility label for the close button",
+    "type": "string"
+  },
   "b-taginput/field": {
     "description": "Property of the object (if data is array of objects) to use as display text",
     "type": "string"
@@ -2430,6 +2926,14 @@
   "b-taginput/autocomplete": {
     "description": "Add autocomplete feature (if true, any Autocomplete props may be used too)",
     "type": "boolean"
+  },
+  "b-taginput/group-field": {
+    "description": "Property of the object (if data is array of objects) to use as display text of group",
+    "type": "string"
+  },
+  "b-taginput/group-options": {
+    "description": "Property of the object (if data is array of objects) to use as key to get items array of each group, optional",
+    "type": "string"
   },
   "b-taginput/allow-new": {
     "description": "When autocomplete, it allow to add new tags",
@@ -2443,8 +2947,8 @@
     "description": "Allow removing last tag when pressing given keys, if input is empty",
     "type": "array"
   },
-  "b-taginput/confirm-key-codes": {
-    "description": "Array of key codes which will add a tag when typing (default comma, enter and tab)",
+  "b-taginput/confirm-keys": {
+    "description": "Array of keys (https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values) which will add a tag when typing (default comma, tab and enter)",
     "type": "array"
   },
   "b-taginput/on-paste-separators": {
@@ -2459,6 +2963,10 @@
     "description": "Allows adding the same tag multiple times",
     "type": "boolean"
   },
+  "b-taginput/create-tag": {
+    "description": "Function to create tag item to push into v-model (tags)",
+    "type": "function"
+  },
   "b-taginput/readonly": {
     "description": "Disable input/typing",
     "type": "boolean"
@@ -2468,7 +2976,7 @@
     "type": "boolean"
   },
   "b-taginput/append-to-body": {
-    "description": "Append autocomplete content to body",
+    "description": "Append autocomplete content to body (prevents event bubbling)",
     "type": "boolean"
   },
   "b-taginput/Any other native attribute": {
@@ -2482,6 +2990,10 @@
   "b-timepicker/hour-format": {
     "description": "Hour format for input and display",
     "type": "string"
+  },
+  "b-timepicker/increment-hours": {
+    "description": "Step hours for select component",
+    "type": "number"
   },
   "b-timepicker/increment-minutes": {
     "description": "Step minutes for select component",
@@ -2535,6 +3047,10 @@
     "description": "Enable native timepicker on mobile",
     "type": "boolean"
   },
+  "b-timepicker/mobile-modal": {
+    "description": "Timepicker is shown into a modal on mobile",
+    "type": "boolean"
+  },
   "b-timepicker/position": {
     "description": "Optional, position of the timepicker relative to the input",
     "type": "string"
@@ -2564,7 +3080,15 @@
     "type": "boolean"
   },
   "b-timepicker/append-to-body": {
-    "description": "Append timepicker calendar to body",
+    "description": "Append timepicker calendar to body (prevents event bubbling)",
+    "type": "boolean"
+  },
+  "b-timepicker/locale": {
+    "description": "Accept a string with a BCP 47 language tag, or an array of such strings.\n                See <a href=\"https://www.unicode.org/reports/tr35/tr35.html#BCP_47_Conformance\" target=\"_blank\">Unicode BCP 47 locale identifier</a>",
+    "type": "string|array of string"
+  },
+  "b-timepicker/reset-on-meridian-change": {
+    "description": "Reset timepicker values on meridian change",
     "type": "boolean"
   },
   "b-timepicker/Any native attribute": {
@@ -2577,7 +3101,7 @@
   },
   "b-toast/message": {
     "description": "Message text (can contain HTML). <div class=\"notification is-danger\">Dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to <a href=\"https://en.wikipedia.org/wiki/Cross-site_scripting\" target=\"_blank\" rel=\"noopener\">XSS vulnerabilities</a>. Only use HTML interpolation on trusted content and never on user-provided content.</div>",
-    "type": "string"
+    "type": "string|array<vnode>"
   },
   "b-toast/position": {
     "description": "Which position the toast will appear",
@@ -2589,6 +3113,14 @@
   },
   "b-toast/queue": {
     "description": "If should queue with others notices (snackbar/toast/notification)",
+    "type": "boolean"
+  },
+  "b-toast/indefinite": {
+    "description": "Show indefinitely until it is dismissed programmatically",
+    "type": "boolean"
+  },
+  "b-toast/pause-on-hover": {
+    "description": "Pause and show on hover until hover off (it works when indefinite is false)",
     "type": "boolean"
   },
   "b-toast/container": {
@@ -2603,9 +3135,17 @@
     "description": "Whether tooltip is active or not",
     "type": "boolean"
   },
+  "b-tooltip/auto-close": {
+    "description": "The event(s) that should trigger the tooltip to close",
+    "type": "boolean|array"
+  },
   "b-tooltip/label": {
     "description": "Tooltip text",
     "type": "string"
+  },
+  "b-tooltip/triggers": {
+    "description": "Tooltip will be triggered by any events",
+    "type": "array"
   },
   "b-tooltip/position": {
     "description": "Tooltip position in relation to the element",
@@ -2639,6 +3179,14 @@
     "description": "Tooltip delay before it appears (number in ms)",
     "type": "number"
   },
+  "b-tooltip/close-delay": {
+    "description": "Tooltip delay before it disappears (number in ms)",
+    "type": "number"
+  },
+  "b-tooltip/append-to-body": {
+    "description": "Append tooltip content to body (prevents event bubbling)",
+    "type": "boolean"
+  },
   "b-upload/value": {
     "description": "Binding value",
     "type": "file|array<file>"
@@ -2668,7 +3216,7 @@
     "type": "string"
   },
   "b-upload/loading": {
-    "description": "Add the loading state",
+    "description": "Add the loading state to the drag & drop area",
     "type": "boolean"
   },
   "b-upload/multiple": {
@@ -2681,6 +3229,10 @@
   },
   "b-upload/expanded": {
     "description": "Upload will be expanded (full-width)",
+    "type": "boolean"
+  },
+  "b-upload/rounded": {
+    "description": "Upload will be rounded",
     "type": "boolean"
   }
 }

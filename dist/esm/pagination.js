@@ -1,10 +1,10 @@
-import './chunk-f2006744.js';
+import { P as Pagination, a as PaginationButton } from './Pagination-68f12c1e.js';
+export { P as BPagination, a as BPaginationButton } from './Pagination-68f12c1e.js';
+import { u as use, a as registerComponent } from './plugins-218aea86.js';
+import './_rollupPluginBabelHelpers-df313029.js';
+import './config-e7d4b9c2.js';
+import './Icon-60d47b31.js';
 import './helpers.js';
-import './chunk-b76a6c1d.js';
-import './chunk-c8434a6f.js';
-import { r as registerComponent, u as use } from './chunk-cca88db8.js';
-import { P as Pagination, a as PaginationButton } from './chunk-4dc010ac.js';
-export { P as BPagination, a as BPaginationButton } from './chunk-4dc010ac.js';
 
 var Plugin = {
   install: function install(Vue) {
@@ -14,4 +14,4 @@ var Plugin = {
 };
 use(Plugin);
 
-export default Plugin;
+export { Plugin as default };

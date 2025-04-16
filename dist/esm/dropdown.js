@@ -1,8 +1,11 @@
-import './chunk-b76a6c1d.js';
-import { r as registerComponent, u as use } from './chunk-cca88db8.js';
-import './chunk-b3471279.js';
-import { D as Dropdown, a as DropdownItem } from './chunk-b98d635b.js';
-export { D as BDropdown, a as BDropdownItem } from './chunk-b98d635b.js';
+import { a as Dropdown, D as DropdownItem } from './DropdownItem-55682322.js';
+export { a as BDropdown, D as BDropdownItem } from './DropdownItem-55682322.js';
+import { u as use, a as registerComponent } from './plugins-218aea86.js';
+import './_rollupPluginBabelHelpers-df313029.js';
+import './trapFocus-f0736873.js';
+import './config-e7d4b9c2.js';
+import './helpers.js';
+import './InjectedChildMixin-b4220787.js';
 
 var Plugin = {
   install: function install(Vue) {
@@ -12,4 +15,4 @@ var Plugin = {
 };
 use(Plugin);
 
-export default Plugin;
+export { Plugin as default };

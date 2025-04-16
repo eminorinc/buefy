@@ -307,7 +307,9 @@
                                         :column="column"
                                         name="table-cell" />
                                 </template>
-                                <template v-else-if="column.$scopedSlots && column.$scopedSlots.default">
+                                <template
+                                    v-else-if="column.$scopedSlots &&
+                                    column.$scopedSlots.default">
                                     <b-slot-component
                                         :key="column.newKey + ':' + index + ':' + colindex"
                                         :component="column"

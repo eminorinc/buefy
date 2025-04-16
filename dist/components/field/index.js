@@ -1,2 +1,518 @@
-/*! Buefy v0.6.7 | MIT License | github.com/buefy/buefy */
-!(function(e,t){if("object"==typeof exports&&"object"==typeof module)module.exports=t();else if("function"==typeof define&&define.amd)define([],t);else{var n=t();for(var r in n)("object"==typeof exports?exports:e)[r]=n[r]}})("undefined"!=typeof self?self:this,(function(){return (function(e){function t(r){if(n[r])return n[r].exports;var o=n[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,t),o.l=!0,o.exports}var n={};return t.m=e,t.c=n,t.d=function(e,n,r){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:r})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="/",t(t.s=242)})({0:function(e,t,n){e.exports=!n(7)((function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a}))},1:function(e,t){e.exports=function(e,t,n,r,o){var i,s=e=e||{},u=typeof e.default;"object"!==u&&"function"!==u||(i=e,s=e.default);var a="function"==typeof s?s.options:s;t&&(a.render=t.render,a.staticRenderFns=t.staticRenderFns),r&&(a._scopeId=r);var f;if(o?(f=function(e){e=e||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext,e||"undefined"==typeof __VUE_SSR_CONTEXT__||(e=__VUE_SSR_CONTEXT__),n&&n.call(this,e),e&&e._registeredComponents&&e._registeredComponents.add(o)},a._ssrRegister=f):n&&(f=n),f){var l=a.functional,c=l?a.render:a.beforeCreate;l?a.render=function(e,t){return f.call(t),c(e,t)}:a.beforeCreate=c?[].concat(c,f):[f]}return{esModule:i,exports:s,options:a}}},101:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=n(20),o=n.n(r),i=n(102),s=n.n(i);t.default={name:"BField",components:o()({},s.a.name,s.a),props:{type:String,label:String,labelFor:String,message:[String,Array],grouped:Boolean,groupMultiline:Boolean,position:String,expanded:Boolean,horizontal:Boolean,addons:{type:Boolean,default:!0},customClass:String},data:function(){return{newType:this.type,newMessage:this.message,fieldLabelSize:null,_isField:!0}},computed:{rootClasses:function(){return[this.newPosition,{"is-expanded":this.expanded,"is-grouped-multiline":this.groupMultiline,"is-horizontal":this.horizontal}]},newPosition:function(){if(void 0!==this.position){var e=this.position.split("-");if(!(e.length<1)){var t=this.grouped?"is-grouped-":"has-addons-";return this.position?t+e[1]:void 0}}},formattedMessage:function(){return this.newMessage&&Array.isArray(this.newMessage)?this.newMessage.filter((function(e){if(e)return e})).join(" <br> "):this.newMessage}},watch:{type:function(e){this.newType=e},message:function(e){this.newMessage=e}},methods:{fieldType:function(){if(this.grouped)return"is-grouped";var e=0;return this.$slots.default&&(e=this.$slots.default.reduce((function(e,t){return t.tag?e+1:e}),0)),e>1&&this.addons&&!this.horizontal?"has-addons":void 0}},mounted:function(){if(this.horizontal){this.$el.querySelectorAll(".input, .select, .button, .textarea").length>0&&(this.fieldLabelSize="is-normal")}}}},102:function(e,t,n){var r=n(1)(n(103),null,null,null,null);e.exports=r.exports},103:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default={name:"BFieldBody",props:{message:{type:[String]},type:{type:[String]}},render:function(e){var t=this;return e("div",{attrs:{class:"field-body"}},this.$slots.default.map((function(n){return n.tag?t.message?e("b-field",{attrs:{message:t.message,type:t.type}},[n]):e("b-field",{attrs:{type:t.type}},[n]):n})))}}},104:function(e,t){e.exports={render:function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("div",{staticClass:"field",class:[e.rootClasses,e.fieldType()]},[e.horizontal?n("div",{staticClass:"field-label",class:[e.customClass,e.fieldLabelSize]},[e.label?n("label",{staticClass:"label",attrs:{for:e.labelFor}},[e._v("\n            "+e._s(e.label)+"\n        ")]):e._e()]):[e.label?n("label",{staticClass:"label",class:e.customClass,attrs:{for:e.labelFor}},[e._v("\n            "+e._s(e.label)+"\n        ")]):e._e()],e._v(" "),e.horizontal?n("b-field-body",{attrs:{message:e.newMessage?e.formattedMessage:"",type:e.newType}},[e._t("default")],2):[e._t("default")],e._v(" "),e.newMessage&&!e.horizontal?n("p",{staticClass:"help",class:e.newType,domProps:{innerHTML:e._s(e.formattedMessage)}}):e._e()],2)},staticRenderFns:[]}},12:function(e,t,n){"use strict";n.d(t,"c",(function(){return r})),n.d(t,"a",(function(){return o})),n.d(t,"b",(function(){return i}));var r=function(e){"undefined"!=typeof window&&window.Vue&&window.Vue.use(e)},o=function(e,t){e.component(t.name,t)},i=function(e,t,n){e.prototype[t]=n}},13:function(e,t){e.exports=function(e,t){return{enumerable:!(1&e),configurable:!(2&e),writable:!(4&e),value:t}}},15:function(e,t,n){var r=n(4);e.exports=function(e,t){if(!r(e))return e;var n,o;if(t&&"function"==typeof(n=e.toString)&&!r(o=n.call(e)))return o;if("function"==typeof(n=e.valueOf)&&!r(o=n.call(e)))return o;if(!t&&"function"==typeof(n=e.toString)&&!r(o=n.call(e)))return o;throw TypeError("Can't convert object to primitive value")}},150:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=n(93),o=n.n(r),i=n(12),s={install:function(e){Object(i.a)(e,o.a)}};Object(i.c)(s),t.default=s},17:function(e,t,n){var r=n(2),o=n(6),i=n(29),s=n(8),u=n(5),a=function(e,t,n){var f,l,c,p=e&a.F,d=e&a.G,y=e&a.S,h=e&a.P,v=e&a.B,b=e&a.W,g=d?o:o[t]||(o[t]={}),_=g.prototype,m=d?r:y?r[t]:(r[t]||{}).prototype;d&&(n=t);for(f in n)(l=!p&&m&&void 0!==m[f])&&u(g,f)||(c=l?m[f]:n[f],g[f]=d&&"function"!=typeof m[f]?n[f]:v&&l?i(c,r):b&&m[f]==c?(function(e){var t=function(t,n,r){if(this instanceof e){switch(arguments.length){case 0:return new e;case 1:return new e(t);case 2:return new e(t,n)}return new e(t,n,r)}return e.apply(this,arguments)};return t.prototype=e.prototype,t})(c):h&&"function"==typeof c?i(Function.call,c):c,h&&((g.virtual||(g.virtual={}))[f]=c,e&a.R&&_&&!_[f]&&s(_,f,c)))};a.F=1,a.G=2,a.S=4,a.P=8,a.B=16,a.W=32,a.U=64,a.R=128,e.exports=a},18:function(e,t,n){e.exports=!n(0)&&!n(7)((function(){return 7!=Object.defineProperty(n(19)("div"),"a",{get:function(){return 7}}).a}))},19:function(e,t,n){var r=n(4),o=n(2).document,i=r(o)&&r(o.createElement);e.exports=function(e){return i?o.createElement(e):{}}},2:function(e,t){var n=e.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=n)},20:function(e,t,n){"use strict";t.__esModule=!0;var r=n(48),o=(function(e){return e&&e.__esModule?e:{default:e}})(r);t.default=function(e,t,n){return t in e?(0,o.default)(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}},242:function(e,t,n){e.exports=n(150)},29:function(e,t,n){var r=n(31);e.exports=function(e,t,n){if(r(e),void 0===t)return e;switch(n){case 1:return function(n){return e.call(t,n)};case 2:return function(n,r){return e.call(t,n,r)};case 3:return function(n,r,o){return e.call(t,n,r,o)}}return function(){return e.apply(t,arguments)}}},3:function(e,t,n){var r=n(9),o=n(18),i=n(15),s=Object.defineProperty;t.f=n(0)?Object.defineProperty:function(e,t,n){if(r(e),t=i(t,!0),r(n),o)try{return s(e,t,n)}catch(e){}if("get"in n||"set"in n)throw TypeError("Accessors not supported!");return"value"in n&&(e[t]=n.value),e}},31:function(e,t){e.exports=function(e){if("function"!=typeof e)throw TypeError(e+" is not a function!");return e}},4:function(e,t){e.exports=function(e){return"object"==typeof e?null!==e:"function"==typeof e}},48:function(e,t,n){e.exports={default:n(49),__esModule:!0}},49:function(e,t,n){n(50);var r=n(6).Object;e.exports=function(e,t,n){return r.defineProperty(e,t,n)}},5:function(e,t){var n={}.hasOwnProperty;e.exports=function(e,t){return n.call(e,t)}},50:function(e,t,n){var r=n(17);r(r.S+r.F*!n(0),"Object",{defineProperty:n(3).f})},6:function(e,t){var n=e.exports={version:"2.5.5"};"number"==typeof __e&&(__e=n)},7:function(e,t){e.exports=function(e){try{return!!e()}catch(e){return!0}}},8:function(e,t,n){var r=n(3),o=n(13);e.exports=n(0)?function(e,t,n){return r.f(e,t,o(1,n))}:function(e,t,n){return e[t]=n,e}},9:function(e,t,n){var r=n(4);e.exports=function(e){if(!r(e))throw TypeError(e+" is not an object!");return e}},93:function(e,t,n){var r=n(1)(n(101),n(104),null,null,null);e.exports=r.exports}})}));
+/*! Buefy v0.9.29 | MIT License | github.com/buefy/buefy */
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+  typeof define === 'function' && define.amd ? define(['exports'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.Field = {}));
+})(this, (function (exports) { 'use strict';
+
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
+  function _defineProperty(obj, key, value) {
+    key = _toPropertyKey(key);
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+    return obj;
+  }
+
+  var config = {
+    defaultContainerElement: null,
+    defaultIconPack: 'mdi',
+    defaultIconComponent: null,
+    defaultIconPrev: 'chevron-left',
+    defaultIconNext: 'chevron-right',
+    defaultLocale: undefined,
+    defaultDialogConfirmText: null,
+    defaultDialogCancelText: null,
+    defaultSnackbarDuration: 3500,
+    defaultSnackbarPosition: null,
+    defaultToastDuration: 2000,
+    defaultToastPosition: null,
+    defaultNotificationDuration: 2000,
+    defaultNotificationPosition: null,
+    defaultTooltipType: 'is-primary',
+    defaultTooltipDelay: null,
+    defaultTooltipCloseDelay: null,
+    defaultSidebarDelay: null,
+    defaultInputAutocomplete: 'on',
+    defaultDateFormatter: null,
+    defaultDateParser: null,
+    defaultDateCreator: null,
+    defaultTimeCreator: null,
+    defaultDayNames: null,
+    defaultMonthNames: null,
+    defaultFirstDayOfWeek: null,
+    defaultUnselectableDaysOfWeek: null,
+    defaultTimeFormatter: null,
+    defaultTimeParser: null,
+    defaultModalCanCancel: ['escape', 'x', 'outside', 'button'],
+    defaultModalScroll: null,
+    defaultDatepickerMobileNative: true,
+    defaultTimepickerMobileNative: true,
+    defaultTimepickerMobileModal: true,
+    defaultNoticeQueue: true,
+    defaultInputHasCounter: true,
+    defaultTaginputHasCounter: true,
+    defaultUseHtml5Validation: true,
+    defaultDropdownMobileModal: true,
+    defaultFieldLabelPosition: null,
+    defaultDatepickerYearsRange: [-100, 10],
+    defaultDatepickerNearbyMonthDays: true,
+    defaultDatepickerNearbySelectableMonthDays: false,
+    defaultDatepickerShowWeekNumber: false,
+    defaultDatepickerWeekNumberClickable: false,
+    defaultDatepickerMobileModal: true,
+    defaultTrapFocus: true,
+    defaultAutoFocus: true,
+    defaultButtonRounded: false,
+    defaultSwitchRounded: true,
+    defaultCarouselInterval: 3500,
+    defaultTabsExpanded: false,
+    defaultTabsAnimated: true,
+    defaultTabsType: null,
+    defaultStatusIcon: true,
+    defaultProgrammaticPromise: false,
+    defaultLinkTags: ['a', 'button', 'input', 'router-link', 'nuxt-link', 'n-link', 'RouterLink', 'NuxtLink', 'NLink'],
+    defaultImageWebpFallback: null,
+    defaultImageLazy: true,
+    defaultImageResponsive: true,
+    defaultImageRatio: null,
+    defaultImageSrcsetFormatter: null,
+    defaultBreadcrumbTag: 'a',
+    defaultBreadcrumbAlign: 'is-left',
+    defaultBreadcrumbSeparator: '',
+    defaultBreadcrumbSize: 'is-medium',
+    customIconPacks: null
+  };
+
+  var script$1 = {
+    name: 'BFieldBody',
+    props: {
+      message: {
+        type: [String, Array]
+      },
+      type: {
+        type: [String, Object]
+      }
+    },
+    render: function render(createElement) {
+      var _this = this;
+      var first = true;
+      return createElement('div', {
+        attrs: {
+          'class': 'field-body'
+        }
+      }, this.$slots.default.map(function (element) {
+        // skip returns and comments
+        if (!element.tag) {
+          return element;
+        }
+        var message;
+        if (first) {
+          message = _this.message;
+          first = false;
+        }
+        return createElement('b-field', {
+          attrs: {
+            type: _this.type,
+            message: message
+          }
+        }, [element]);
+      }));
+    }
+  };
+
+  function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier /* server only */, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
+      if (typeof shadowMode !== 'boolean') {
+          createInjectorSSR = createInjector;
+          createInjector = shadowMode;
+          shadowMode = false;
+      }
+      // Vue.extend constructor export interop.
+      const options = typeof script === 'function' ? script.options : script;
+      // render functions
+      if (template && template.render) {
+          options.render = template.render;
+          options.staticRenderFns = template.staticRenderFns;
+          options._compiled = true;
+          // functional template
+          if (isFunctionalTemplate) {
+              options.functional = true;
+          }
+      }
+      // scopedId
+      if (scopeId) {
+          options._scopeId = scopeId;
+      }
+      let hook;
+      if (moduleIdentifier) {
+          // server build
+          hook = function (context) {
+              // 2.3 injection
+              context =
+                  context || // cached call
+                      (this.$vnode && this.$vnode.ssrContext) || // stateful
+                      (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext); // functional
+              // 2.2 with runInNewContext: true
+              if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+                  context = __VUE_SSR_CONTEXT__;
+              }
+              // inject component styles
+              if (style) {
+                  style.call(this, createInjectorSSR(context));
+              }
+              // register component module identifier for async chunk inference
+              if (context && context._registeredComponents) {
+                  context._registeredComponents.add(moduleIdentifier);
+              }
+          };
+          // used by ssr in case component is cached and beforeCreate
+          // never gets called
+          options._ssrRegister = hook;
+      }
+      else if (style) {
+          hook = shadowMode
+              ? function (context) {
+                  style.call(this, createInjectorShadow(context, this.$root.$options.shadowRoot));
+              }
+              : function (context) {
+                  style.call(this, createInjector(context));
+              };
+      }
+      if (hook) {
+          if (options.functional) {
+              // register for functional component in vue file
+              const originalRender = options.render;
+              options.render = function renderWithStyleInjection(h, context) {
+                  hook.call(context);
+                  return originalRender(h, context);
+              };
+          }
+          else {
+              // inject component registration as beforeCreate hook
+              const existing = options.beforeCreate;
+              options.beforeCreate = existing ? [].concat(existing, hook) : [hook];
+          }
+      }
+      return script;
+  }
+
+  /* script */
+  const __vue_script__$1 = script$1;
+
+  /* template */
+
+    /* style */
+    const __vue_inject_styles__$1 = undefined;
+    /* scoped */
+    const __vue_scope_id__$1 = undefined;
+    /* module identifier */
+    const __vue_module_identifier__$1 = undefined;
+    /* functional template */
+    const __vue_is_functional_template__$1 = undefined;
+    /* style inject */
+    
+    /* style inject SSR */
+    
+    /* style inject shadow dom */
+    
+
+    
+    const __vue_component__$1 = /*#__PURE__*/normalizeComponent(
+      {},
+      __vue_inject_styles__$1,
+      __vue_script__$1,
+      __vue_scope_id__$1,
+      __vue_is_functional_template__$1,
+      __vue_module_identifier__$1,
+      false,
+      undefined,
+      undefined,
+      undefined
+    );
+
+    var FieldBody = __vue_component__$1;
+
+  var script = {
+    name: 'BField',
+    components: _defineProperty({}, FieldBody.name, FieldBody),
+    provide: function provide() {
+      return {
+        'BField': this
+      };
+    },
+    inject: {
+      parent: {
+        from: 'BField',
+        default: false
+      }
+    },
+    // Used internally only when using Field in Field
+    props: {
+      type: [String, Object],
+      label: String,
+      labelFor: String,
+      message: [String, Array, Object],
+      grouped: Boolean,
+      groupMultiline: Boolean,
+      position: String,
+      expanded: Boolean,
+      horizontal: Boolean,
+      addons: {
+        type: Boolean,
+        default: true
+      },
+      customClass: String,
+      labelPosition: {
+        type: String,
+        default: function _default() {
+          return config.defaultFieldLabelPosition;
+        }
+      }
+    },
+    data: function data() {
+      return {
+        newType: this.type,
+        newMessage: this.message,
+        fieldLabelSize: null,
+        _isField: true // Used internally by Input and Select
+      };
+    },
+    computed: {
+      rootClasses: function rootClasses() {
+        return [{
+          'is-expanded': this.expanded,
+          'is-horizontal': this.horizontal,
+          'is-floating-in-label': this.hasLabel && !this.horizontal && this.labelPosition === 'inside',
+          'is-floating-label': this.hasLabel && !this.horizontal && this.labelPosition === 'on-border'
+        }, this.numberInputClasses];
+      },
+      innerFieldClasses: function innerFieldClasses() {
+        return [this.fieldType(), this.newPosition, {
+          'is-grouped-multiline': this.groupMultiline
+        }];
+      },
+      hasInnerField: function hasInnerField() {
+        return this.grouped || this.groupMultiline || this.hasAddons();
+      },
+      /**
+      * Correct Bulma class for the side of the addon or group.
+      *
+      * This is not kept like the others (is-small, etc.),
+      * because since 'has-addons' is set automatically it
+      * doesn't make sense to teach users what addons are exactly.
+      */
+      newPosition: function newPosition() {
+        if (this.position === undefined) return;
+        var position = this.position.split('-');
+        if (position.length < 1) return;
+        var prefix = this.grouped ? 'is-grouped-' : 'has-addons-';
+        if (this.position) return prefix + position[1];
+      },
+      /**
+      * Formatted message in case it's an array
+      * (each element is separated by <br> tag)
+      */
+      formattedMessage: function formattedMessage() {
+        if (this.parent && this.parent.hasInnerField) {
+          return ''; // Message will be displayed in parent field
+        }
+        if (typeof this.newMessage === 'string') {
+          return [this.newMessage];
+        }
+        var messages = [];
+        if (Array.isArray(this.newMessage)) {
+          this.newMessage.forEach(function (message) {
+            if (typeof message === 'string') {
+              messages.push(message);
+            } else {
+              for (var key in message) {
+                if (message[key]) {
+                  messages.push(key);
+                }
+              }
+            }
+          });
+        } else {
+          for (var key in this.newMessage) {
+            if (this.newMessage[key]) {
+              messages.push(key);
+            }
+          }
+        }
+        return messages.filter(function (m) {
+          if (m) return m;
+        });
+      },
+      hasLabel: function hasLabel() {
+        return this.label || this.$slots.label;
+      },
+      hasMessage: function hasMessage() {
+        return (!this.parent || !this.parent.hasInnerField) && this.newMessage || this.$slots.message;
+      },
+      numberInputClasses: function numberInputClasses() {
+        if (this.$slots.default) {
+          var numberinput = this.$slots.default.filter(function (node) {
+            return node.tag && node.tag.toLowerCase().indexOf('numberinput') >= 0;
+          })[0];
+          if (numberinput) {
+            var classes = ['has-numberinput'];
+            var controlsPosition = numberinput.componentOptions.propsData.controlsPosition;
+            var size = numberinput.componentOptions.propsData.size;
+            if (controlsPosition) {
+              classes.push("has-numberinput-".concat(controlsPosition));
+            }
+            if (size) {
+              classes.push("has-numberinput-".concat(size));
+            }
+            return classes;
+          }
+        }
+        return null;
+      }
+    },
+    watch: {
+      /**
+      * Set internal type when prop change.
+      */
+      type: function type(value) {
+        this.newType = value;
+      },
+      /**
+      * Set internal message when prop change.
+      */
+      message: function message(value) {
+        // we deep comparison here becase an innner Field of another Field
+        // receives the message as a brand new array every time, so simple
+        // identity check won't work and will end up with infinite
+        // recursions
+        // https://github.com/buefy/buefy/issues/4018#issuecomment-1985026234
+        if (JSON.stringify(value) !== JSON.stringify(this.newMessage)) {
+          this.newMessage = value;
+        }
+      },
+      /**
+      * Set parent message if we use Field in Field.
+      */
+      newMessage: function newMessage(value) {
+        if (this.parent && this.parent.hasInnerField) {
+          if (!this.parent.type) {
+            this.parent.newType = this.newType;
+          }
+          if (!this.parent.message) {
+            this.parent.newMessage = value;
+          }
+        }
+      }
+    },
+    methods: {
+      /**
+      * Field has addons if there are more than one slot
+      * (element / component) in the Field.
+      * Or is grouped when prop is set.
+      * Is a method to be called when component re-render.
+      */
+      fieldType: function fieldType() {
+        if (this.grouped) return 'is-grouped';
+        if (this.hasAddons()) return 'has-addons';
+      },
+      hasAddons: function hasAddons() {
+        var renderedNode = 0;
+        if (this.$slots.default) {
+          renderedNode = this.$slots.default.reduce(function (i, node) {
+            return node.tag ? i + 1 : i;
+          }, 0);
+        }
+        return renderedNode > 1 && this.addons && !this.horizontal;
+      }
+    },
+    mounted: function mounted() {
+      if (this.horizontal) {
+        // Bulma docs: .is-normal for any .input or .button
+        var elements = this.$el.querySelectorAll('.input, .select, .button, .textarea, .b-slider');
+        if (elements.length > 0) {
+          this.fieldLabelSize = 'is-normal';
+        }
+      }
+    }
+  };
+
+  /* script */
+  const __vue_script__ = script;
+
+  /* template */
+  var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"field",class:_vm.rootClasses},[(_vm.horizontal)?_c('div',{staticClass:"field-label",class:[_vm.customClass, _vm.fieldLabelSize]},[(_vm.hasLabel)?_c('label',{staticClass:"label",class:_vm.customClass,attrs:{"for":_vm.labelFor}},[(_vm.$slots.label)?_vm._t("label"):[_vm._v(_vm._s(_vm.label))]],2):_vm._e()]):[(_vm.hasLabel)?_c('label',{staticClass:"label",class:_vm.customClass,attrs:{"for":_vm.labelFor}},[(_vm.$slots.label)?_vm._t("label"):[_vm._v(_vm._s(_vm.label))]],2):_vm._e()],(_vm.horizontal)?_c('b-field-body',{attrs:{"message":_vm.newMessage ? _vm.formattedMessage : '',"type":_vm.newType}},[_vm._t("default")],2):(_vm.hasInnerField)?_c('div',{staticClass:"field-body"},[_c('b-field',{class:_vm.innerFieldClasses,attrs:{"addons":false,"type":_vm.type}},[_vm._t("default")],2)],1):[_vm._t("default")],(_vm.hasMessage && !_vm.horizontal)?_c('p',{staticClass:"help",class:_vm.newType},[(_vm.$slots.message)?_vm._t("message",null,{"messages":_vm.formattedMessage}):[_vm._l((_vm.formattedMessage),function(mess,i){return [_vm._v(" "+_vm._s(mess)+" "),((i + 1) < _vm.formattedMessage.length)?_c('br',{key:i}):_vm._e()]})]],2):_vm._e()],2)};
+  var __vue_staticRenderFns__ = [];
+
+    /* style */
+    const __vue_inject_styles__ = undefined;
+    /* scoped */
+    const __vue_scope_id__ = undefined;
+    /* module identifier */
+    const __vue_module_identifier__ = undefined;
+    /* functional template */
+    const __vue_is_functional_template__ = false;
+    /* style inject */
+    
+    /* style inject SSR */
+    
+    /* style inject shadow dom */
+    
+
+    
+    const __vue_component__ = /*#__PURE__*/normalizeComponent(
+      { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+      __vue_inject_styles__,
+      __vue_script__,
+      __vue_scope_id__,
+      __vue_is_functional_template__,
+      __vue_module_identifier__,
+      false,
+      undefined,
+      undefined,
+      undefined
+    );
+
+    var Field = __vue_component__;
+
+  var use = function use(plugin) {
+    if (typeof window !== 'undefined' && window.Vue) {
+      window.Vue.use(plugin);
+    }
+  };
+  var registerComponent = function registerComponent(Vue, component) {
+    Vue.component(component.name, component);
+  };
+
+  var Plugin = {
+    install: function install(Vue) {
+      registerComponent(Vue, Field);
+    }
+  };
+  use(Plugin);
+
+  exports.BField = Field;
+  exports["default"] = Plugin;
+
+  Object.defineProperty(exports, '__esModule', { value: true });
+
+}));

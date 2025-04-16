@@ -5,6 +5,8 @@
       "data",
       "field",
       "custom-formatter",
+      "group-field",
+      "group-options",
       "clear-on-select",
       "open-on-focus",
       "keep-first",
@@ -13,15 +15,38 @@
       "loading",
       "icon",
       "icon-pack",
+      "confirm-keys",
       "clearable",
       "icon-right",
       "maxlength",
       "check-infinite-scroll",
       "max-height",
       "dropdown-position",
-      "append-to-body"
+      "append-to-body",
+      "select-on-click-outside",
+      "selectable-header",
+      "selectable-footer"
     ],
     "description": "Buefy component <b-autocomplete>",
+    "subtags": []
+  },
+  "b-breadcrumb": {
+    "attributes": [
+      "align",
+      "separator",
+      "size"
+    ],
+    "description": "Buefy component <b-breadcrumb>",
+    "subtags": [
+      "b-breadcrumb-breadcrumb item"
+    ]
+  },
+  "b-breadcrumb-breadcrumb item": {
+    "attributes": [
+      "tag",
+      "active"
+    ],
+    "description": "Buefy component <b-breadcrumb-breadcrumb item>",
     "subtags": []
   },
   "b-button": {
@@ -32,6 +57,11 @@
       "loading",
       "rounded",
       "outlined",
+      "focused",
+      "inverted",
+      "hovered",
+      "active",
+      "selected",
       "expanded",
       "icon-left",
       "icon-right",
@@ -54,7 +84,6 @@
       "pause-info-type",
       "pause-text",
       "arrow",
-      "arrow-both",
       "arrow-hover",
       "repeat",
       "icon-pack",
@@ -76,14 +105,19 @@
     ],
     "description": "Buefy component <b-carousel>",
     "subtags": [
+      "b-carousel-item",
       "b-carousel-list"
     ]
+  },
+  "b-carousel-item": {
+    "attributes": [],
+    "description": "Buefy component <b-carousel-item>",
+    "subtags": []
   },
   "b-carousel-list": {
     "attributes": [
       "value",
       "data",
-      "config",
       "has-drag",
       "has-grayscale",
       "has-opacity",
@@ -113,7 +147,9 @@
       "required",
       "name",
       "size",
-      "type"
+      "type",
+      "aria-labelledby",
+      "input-id"
     ],
     "description": "Buefy component <b-checkbox>",
     "subtags": [
@@ -138,6 +174,7 @@
       "value",
       "type",
       "hour-format",
+      "increment-minutes",
       "time-formatter",
       "time-parser",
       "min-time",
@@ -151,12 +188,14 @@
       "icon-pack",
       "unselectable-times",
       "mobile-native",
+      "mobile-modal",
       "position",
       "auto-switch",
       "open-on-focus",
       "hours-label",
       "minutes-label",
-      "append-to-body"
+      "append-to-body",
+      "locale"
     ],
     "description": "Buefy component <b-clockpicker>",
     "subtags": []
@@ -169,6 +208,25 @@
       "position"
     ],
     "description": "Buefy component <b-collapse>",
+    "subtags": []
+  },
+  "b-colorpicker": {
+    "attributes": [
+      "value",
+      "representation",
+      "alpha",
+      "color-formatter",
+      "color-parser",
+      "size",
+      "inline",
+      "position",
+      "open-on-focus",
+      "focusable",
+      "trap-focus",
+      "close-on-click",
+      "append-to-body"
+    ],
+    "description": "Buefy component <b-colorpicker>",
     "subtags": []
   },
   "b-datepicker": {
@@ -187,16 +245,20 @@
       "editable",
       "loading",
       "icon",
+      "icon-right",
+      "icon-right-clickable",
       "icon-pack",
       "icon-prev",
       "icon-next",
       "unselectable-dates",
       "unselectable-days-of-week",
       "selectable-dates",
+      "locale",
       "month-names",
       "day-names",
       "first-day-of-week",
       "mobile-native",
+      "mobile-modal",
       "position",
       "open-on-focus",
       "type",
@@ -204,11 +266,13 @@
       "nearby-month-days",
       "nearby-selectable-month-days",
       "show-week-number",
+      "week-number-clickable",
       "rules-for-first-week",
       "range",
       "multiple",
       "focusable",
       "trap-focus",
+      "close-on-click",
       "append-to-body",
       "aria-next-label",
       "aria-previous-label"
@@ -223,11 +287,15 @@
       "datetime-parser",
       "min-datetime",
       "max-datetime",
+      "first-day-of-week",
+      "nearby-month-days",
       "size",
       "inline",
       "editable",
       "loading",
       "icon",
+      "icon-right",
+      "icon-right-clickable",
       "icon-pack",
       "mobile-native",
       "position",
@@ -236,7 +304,8 @@
       "timepicker",
       "focusable",
       "horizontal-time-picker",
-      "append-to-body"
+      "append-to-body",
+      "locale"
     ],
     "description": "Buefy component <b-datetimepicker>",
     "subtags": []
@@ -271,7 +340,7 @@
   "b-dropdown": {
     "attributes": [
       "value",
-      "hoverable",
+      "triggers",
       "position",
       "disabled",
       "animation",
@@ -285,7 +354,8 @@
       "close-on-click",
       "append-to-body",
       "scrollable",
-      "max-height"
+      "max-height",
+      "trigger-tabindex"
     ],
     "description": "Buefy component <b-dropdown>",
     "subtags": [
@@ -335,9 +405,29 @@
     "description": "Buefy component <b-icon>",
     "subtags": []
   },
+  "b-image": {
+    "attributes": [
+      "src",
+      "alt",
+      "src-fallback",
+      "webp-fallback",
+      "lazy",
+      "responsive",
+      "ratio",
+      "placeholder",
+      "srcset",
+      "srcset-sizes",
+      "srcset-formatter",
+      "rounded",
+      "custom-class"
+    ],
+    "description": "Buefy component <b-image>",
+    "subtags": []
+  },
   "b-input": {
     "attributes": [
       "value",
+      "lazy",
       "type",
       "size",
       "expanded",
@@ -410,6 +500,7 @@
       "closable",
       "auto-close",
       "duration",
+      "progress-bar",
       "icon-pack",
       "has-icon",
       "icon",
@@ -437,10 +528,14 @@
       "on-cancel",
       "scroll",
       "trap-focus",
+      "auto-focus",
       "custom-class",
       "destroy-on-hide",
       "aria-role",
-      "aria-modal"
+      "aria-label",
+      "aria-modal",
+      "close-button-aria-label",
+      "render-on-mounted"
     ],
     "description": "Buefy component <b-modal>",
     "subtags": []
@@ -450,7 +545,8 @@
       "transparent",
       "fixed-top",
       "fixed-bottom",
-      "is-active",
+      "active",
+      "centered",
       "type",
       "wrapper-class",
       "close-on-click",
@@ -474,6 +570,7 @@
   },
   "b-navbar-dropdown": {
     "attributes": [
+      "tag",
       "hoverable",
       "active",
       "right",
@@ -486,20 +583,24 @@
   },
   "b-notification": {
     "attributes": [
+      "value",
       "type",
       "active",
       "closable",
       "auto-close",
       "duration",
+      "progress-bar",
       "animation",
       "icon-pack",
       "has-icon",
       "icon",
+      "icon-size",
       "aria-close-label",
       "message",
       "position",
       "queue",
       "indefinite",
+      "pause-on-hover",
       "container"
     ],
     "description": "Buefy component <b-notification>",
@@ -517,9 +618,15 @@
       "min",
       "max",
       "step",
-      "controls-rounded",
+      "min-step",
+      "exponential",
       "controls",
-      "controls-position"
+      "controls-rounded",
+      "controls-position",
+      "controls-alignment",
+      "aria-minus-label",
+      "aria-plus-label",
+      "long-press"
     ],
     "description": "Buefy component <b-numberinput>",
     "subtags": []
@@ -541,7 +648,10 @@
       "aria-next-label",
       "aria-previous-label",
       "aria-page-label",
-      "aria-current-label"
+      "aria-current-label",
+      "page-input",
+      "page-input-position",
+      "debounce-page-input"
     ],
     "description": "Buefy component <b-pagination>",
     "subtags": [
@@ -560,14 +670,27 @@
     "attributes": [
       "type",
       "size",
+      "rounded",
       "value",
       "max",
       "show-value",
       "format",
       "precision",
-      "keep-trailing-zeroes"
+      "keep-trailing-zeroes",
+      "locale"
     ],
     "description": "Buefy component <b-progress>",
+    "subtags": [
+      "b-progress-bar"
+    ]
+  },
+  "b-progress-bar": {
+    "attributes": [
+      "type",
+      "value",
+      "show-value"
+    ],
+    "description": "Buefy component <b-progress-bar>",
     "subtags": []
   },
   "b-radio": {
@@ -611,7 +734,8 @@
       "show-score",
       "show-text",
       "custom-text",
-      "texts"
+      "texts",
+      "locale"
     ],
     "description": "Buefy component <b-rate>",
     "subtags": []
@@ -644,7 +768,9 @@
       "overlay",
       "expand-on-hover",
       "expand-on-hover-fixed",
-      "reduce"
+      "reduce",
+      "scroll",
+      "delay"
     ],
     "description": "Buefy component <b-sidebar>",
     "subtags": []
@@ -658,7 +784,8 @@
       "width",
       "height",
       "circle",
-      "count"
+      "count",
+      "position"
     ],
     "description": "Buefy component <b-skeleton>",
     "subtags": []
@@ -673,12 +800,16 @@
       "size",
       "ticks",
       "tooltip",
+      "indicator",
       "tooltip-type",
       "rounded",
       "disabled",
       "custom-formatter",
+      "format",
+      "locale",
       "aria-label",
-      "bigger-slider-focus"
+      "bigger-slider-focus",
+      "tooltip-always"
     ],
     "description": "Buefy component <b-slider>",
     "subtags": [
@@ -700,9 +831,11 @@
       "duration",
       "queue",
       "indefinite",
+      "pause-on-hover",
       "container",
       "actionText",
-      "onAction"
+      "onAction",
+      "cancelText"
     ],
     "description": "Buefy component <b-snackbar>",
     "subtags": []
@@ -711,6 +844,8 @@
     "attributes": [
       "value",
       "animated",
+      "animateInitially",
+      "animation",
       "type",
       "size",
       "destroy-on-hide",
@@ -740,7 +875,8 @@
       "icon",
       "icon-pack",
       "clickable",
-      "visible"
+      "visible",
+      "headerClass"
     ],
     "description": "Buefy component <b-steps-item>",
     "subtags": []
@@ -757,7 +893,8 @@
       "name",
       "size",
       "rounded",
-      "outlined"
+      "outlined",
+      "aria-labelledby"
     ],
     "description": "Buefy component <b-switch>",
     "subtags": []
@@ -778,8 +915,10 @@
       "hoverable",
       "checkable",
       "checkbox-position",
+      "sticky-checkbox",
       "checked-rows",
       "header-checkable",
+      "checkbox-type",
       "mobile-cards",
       "backend-sorting",
       "backend-pagination",
@@ -788,9 +927,14 @@
       "loading",
       "paginated",
       "pagination-simple",
+      "pagination-rounded",
+      "pagination-order",
       "pagination-size",
       "pagination-position",
       "per-page",
+      "page-input",
+      "page-input-position",
+      "debounce-page-input",
       "sort-multiple",
       "sort-multiple-data",
       "sort-multiple-key",
@@ -798,9 +942,11 @@
       "detailed",
       "custom-detail-row",
       "show-detail-icon",
+      "detail-icon",
       "opened-detailed",
       "has-detailed-visible",
       "detail-key",
+      "detail-transition",
       "custom-is-checked",
       "is-row-checkable",
       "is-row-selectable",
@@ -808,16 +954,19 @@
       "mobile-sort-placeholder",
       "custom-row-key",
       "draggable",
+      "draggable-column",
       "backend-filtering",
       "sticky-header",
       "scrollable",
       "height",
       "filters-event",
       "card-layout",
+      "show-header",
       "aria-next-label",
       "aria-previous-label",
       "aria-page-label",
-      "aria-current-label"
+      "aria-current-label",
+      "debounce-search"
     ],
     "description": "Buefy component <b-table>",
     "subtags": [
@@ -837,11 +986,14 @@
       "visible",
       "custom-sort",
       "searchable",
+      "custom-search",
       "subheading",
       "sticky",
       "header-selectable",
       "header-class",
-      "cell-class"
+      "cell-class",
+      "th-attrs",
+      "td-attrs"
     ],
     "description": "Buefy component <b-table-column>",
     "subtags": []
@@ -851,6 +1003,8 @@
       "value",
       "expanded",
       "animated",
+      "animateInitially",
+      "animation",
       "type",
       "size",
       "position",
@@ -870,7 +1024,8 @@
       "icon",
       "icon-pack",
       "disabled",
-      "visible"
+      "visible",
+      "headerClass"
     ],
     "description": "Buefy component <b-tabs-item>",
     "subtags": []
@@ -886,7 +1041,13 @@
       "ellipsis",
       "tabstop",
       "disabled",
-      "aria-close-label"
+      "aria-close-label",
+      "icon",
+      "icon-pack",
+      "icon-type",
+      "close-icon",
+      "close-icon-pack",
+      "close-icon-type"
     ],
     "description": "Buefy component <b-tag>",
     "subtags": [
@@ -907,20 +1068,25 @@
       "maxtags",
       "has-counter",
       "type",
+      "closeType",
       "size",
       "rounded",
       "attached",
       "ellipsis",
       "closable",
+      "aria-close-label",
       "field",
       "autocomplete",
+      "group-field",
+      "group-options",
       "allow-new",
       "open-on-focus",
       "remove-on-keys",
-      "confirm-key-codes",
+      "confirm-keys",
       "on-paste-separators",
       "before-adding",
       "allow-duplicates",
+      "create-tag",
       "readonly",
       "check-infinite-scroll",
       "append-to-body"
@@ -932,6 +1098,7 @@
     "attributes": [
       "value",
       "hour-format",
+      "increment-hours",
       "increment-minutes",
       "time-formatter",
       "time-parser",
@@ -945,6 +1112,7 @@
       "icon-pack",
       "unselectable-times",
       "mobile-native",
+      "mobile-modal",
       "position",
       "open-on-focus",
       "enable-seconds",
@@ -952,7 +1120,9 @@
       "default-seconds",
       "time-creator",
       "focusable",
-      "append-to-body"
+      "append-to-body",
+      "locale",
+      "reset-on-meridian-change"
     ],
     "description": "Buefy component <b-timepicker>",
     "subtags": []
@@ -964,6 +1134,8 @@
       "position",
       "duration",
       "queue",
+      "indefinite",
+      "pause-on-hover",
       "container"
     ],
     "description": "Buefy component <b-toast>",
@@ -973,7 +1145,9 @@
     "attributes": [
       "type",
       "active",
+      "auto-close",
       "label",
+      "triggers",
       "position",
       "always",
       "animated",
@@ -981,7 +1155,9 @@
       "dashed",
       "multilined",
       "size",
-      "delay"
+      "delay",
+      "close-delay",
+      "append-to-body"
     ],
     "description": "Buefy component <b-tooltip>",
     "subtags": []
@@ -998,7 +1174,8 @@
       "loading",
       "multiple",
       "native",
-      "expanded"
+      "expanded",
+      "rounded"
     ],
     "description": "Buefy component <b-upload>",
     "subtags": []

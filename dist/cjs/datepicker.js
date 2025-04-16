@@ -2,25 +2,26 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-require('./chunk-14c82365.js');
+var Datepicker = require('./Datepicker-abdb3610.js');
+var plugins = require('./plugins-7f41b028.js');
+require('./_rollupPluginBabelHelpers-8b2e54ad.js');
+require('./FormElementMixin-193a88b8.js');
+require('./config-8cfb5a4a.js');
 require('./helpers.js');
-require('./chunk-cd0dcc1d.js');
-require('./chunk-c32e7fbb.js');
-require('./chunk-60f5141f.js');
-var __chunk_5 = require('./chunk-13e039f5.js');
-require('./chunk-603a4fbb.js');
-require('./chunk-ae7e641a.js');
-require('./chunk-b85a4136.js');
-require('./chunk-a35c9951.js');
-require('./chunk-9d73d6d0.js');
-var __chunk_15 = require('./chunk-c90dac9a.js');
+require('./DropdownItem-422f8c34.js');
+require('./trapFocus-261420b0.js');
+require('./InjectedChildMixin-d6bf7f91.js');
+require('./Input-e5a72d97.js');
+require('./Icon-78961800.js');
+require('./Field-ed10a252.js');
+require('./Select-2b3879bc.js');
 
 var Plugin = {
   install: function install(Vue) {
-    __chunk_5.registerComponent(Vue, __chunk_15.Datepicker);
+    plugins.registerComponent(Vue, Datepicker.Datepicker);
   }
 };
-__chunk_5.use(Plugin);
+plugins.use(Plugin);
 
-exports.BDatepicker = __chunk_15.Datepicker;
-exports.default = Plugin;
+exports.BDatepicker = Datepicker.Datepicker;
+exports["default"] = Plugin;

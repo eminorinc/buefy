@@ -2,21 +2,21 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-require('./chunk-2777282e.js');
+var Pagination = require('./Pagination-d6b3fb85.js');
+var plugins = require('./plugins-7f41b028.js');
+require('./_rollupPluginBabelHelpers-8b2e54ad.js');
+require('./config-8cfb5a4a.js');
+require('./Icon-78961800.js');
 require('./helpers.js');
-require('./chunk-8806479f.js');
-require('./chunk-acfb68f5.js');
-var __chunk_5 = require('./chunk-13e039f5.js');
-var __chunk_21 = require('./chunk-59adcd26.js');
 
 var Plugin = {
   install: function install(Vue) {
-    __chunk_5.registerComponent(Vue, __chunk_21.Pagination);
-    __chunk_5.registerComponent(Vue, __chunk_21.PaginationButton);
+    plugins.registerComponent(Vue, Pagination.Pagination);
+    plugins.registerComponent(Vue, Pagination.PaginationButton);
   }
 };
-__chunk_5.use(Plugin);
+plugins.use(Plugin);
 
-exports.BPagination = __chunk_21.Pagination;
-exports.BPaginationButton = __chunk_21.PaginationButton;
-exports.default = Plugin;
+exports.BPagination = Pagination.Pagination;
+exports.BPaginationButton = Pagination.PaginationButton;
+exports["default"] = Plugin;

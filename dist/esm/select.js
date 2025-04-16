@@ -1,11 +1,11 @@
-import './chunk-f2006744.js';
+import { S as Select } from './Select-97781d4e.js';
+export { S as BSelect } from './Select-97781d4e.js';
+import { u as use, a as registerComponent } from './plugins-218aea86.js';
+import './_rollupPluginBabelHelpers-df313029.js';
+import './Icon-60d47b31.js';
+import './config-e7d4b9c2.js';
 import './helpers.js';
-import './chunk-b76a6c1d.js';
-import './chunk-03b1476b.js';
-import './chunk-c8434a6f.js';
-import { r as registerComponent, u as use } from './chunk-cca88db8.js';
-import { S as Select } from './chunk-9c209565.js';
-export { S as BSelect } from './chunk-9c209565.js';
+import './FormElementMixin-b223d3c7.js';
 
 var Plugin = {
   install: function install(Vue) {
@@ -14,4 +14,4 @@ var Plugin = {
 };
 use(Plugin);
 
-export default Plugin;
+export { Plugin as default };

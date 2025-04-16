@@ -2,13 +2,18 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-require('./chunk-14c82365.js');
+var config = require('./config-8cfb5a4a.js');
 var helpers = require('./helpers.js');
-var __chunk_5 = require('./chunk-13e039f5.js');
+var plugins = require('./plugins-7f41b028.js');
+require('./_rollupPluginBabelHelpers-8b2e54ad.js');
 
 //
 var script = {
   name: 'BSidebar',
+  model: {
+    prop: 'open',
+    event: 'update:open'
+  },
   props: {
     open: Boolean,
     type: [String, Object],
@@ -29,6 +34,12 @@ var script = {
     reduce: Boolean,
     expandOnHover: Boolean,
     expandOnHoverFixed: Boolean,
+    delay: {
+      type: Number,
+      default: function _default() {
+        return config.config.defaultSidebarDelay;
+      }
+    },
     canCancel: {
       type: [Array, Boolean],
       default: function _default() {
@@ -38,13 +49,25 @@ var script = {
     onCancel: {
       type: Function,
       default: function _default() {}
+    },
+    scroll: {
+      type: String,
+      default: function _default() {
+        return config.config.defaultModalScroll ? config.config.defaultModalScroll : 'clip';
+      },
+      validator: function validator(value) {
+        return ['clip', 'keep'].indexOf(value) >= 0;
+      }
     }
   },
   data: function data() {
     return {
       isOpen: this.open,
+      isDelayOver: false,
       transitionName: null,
-      animating: true
+      animating: true,
+      savedScrollTop: null,
+      hasLeaved: false
     };
   },
   computed: {
@@ -56,9 +79,10 @@ var script = {
         'is-fullheight': this.fullheight,
         'is-fullwidth': this.fullwidth,
         'is-right': this.right,
-        'is-mini': this.reduce,
-        'is-mini-expand': this.expandOnHover,
-        'is-mini-expand-fixed': this.expandOnHover && this.expandOnHoverFixed,
+        'is-mini': this.reduce && !this.isDelayOver,
+        'is-mini-expand': this.expandOnHover || this.isDelayOver,
+        'is-mini-expand-fixed': this.expandOnHover && this.expandOnHoverFixed || this.isDelayOver,
+        'is-mini-delayed': this.delay !== null,
         'is-mini-mobile': this.mobile === 'reduce',
         'is-hidden-mobile': this.mobile === 'hide',
         'is-fullwidth-mobile': this.mobile === 'fullwidth'
@@ -75,50 +99,15 @@ var script = {
     },
     isAbsolute: function isAbsolute() {
       return this.position === 'absolute';
-    },
-
-    /**
-     * White-listed items to not close when clicked.
-     * Add sidebar content and all children.
-     */
-    whiteList: function whiteList() {
-      var whiteList = [];
-      whiteList.push(this.$refs.sidebarContent); // Add all chidren from dropdown
-
-      if (this.$refs.sidebarContent !== undefined) {
-        var children = this.$refs.sidebarContent.querySelectorAll('*');
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-          for (var _iterator = children[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var child = _step.value;
-            whiteList.push(child);
-          }
-        } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-              _iterator.return();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
-          }
-        }
-      }
-
-      return whiteList;
     }
   },
   watch: {
     open: {
       handler: function handler(value) {
         this.isOpen = value;
+        if (this.overlay) {
+          this.handleScroll();
+        }
         var open = this.right ? !value : value;
         this.transitionName = !open ? 'slide-prev' : 'slide-next';
       },
@@ -129,13 +118,12 @@ var script = {
     /**
     * Keypress event that is bound to the document.
     */
-    keyPress: function keyPress(event) {
-      // Esc key
+    keyPress: function keyPress(_ref) {
+      var key = _ref.key;
       if (this.isFixed) {
-        if (this.isOpen && event.keyCode === 27) this.cancel('escape');
+        if (this.isOpen && (key === 'Escape' || key === 'Esc')) this.cancel('escape');
       }
     },
-
     /**
     * Close the Sidebar if canCancel and call the onCancel prop (function).
     */
@@ -145,7 +133,6 @@ var script = {
       this.onCancel.apply(null, arguments);
       this.close();
     },
-
     /**
     * Call the onCancel prop (function) and emit events
     */
@@ -154,32 +141,81 @@ var script = {
       this.$emit('close');
       this.$emit('update:open', false);
     },
-
     /**
      * Close fixed sidebar if clicked outside.
      */
     clickedOutside: function clickedOutside(event) {
-      if (this.isFixed) {
-        if (this.isOpen && !this.animating) {
-          if (this.whiteList.indexOf(event.target) < 0) {
-            this.cancel('outside');
-          }
-        }
+      if (!this.isFixed || !this.isOpen || this.animating) {
+        return;
+      }
+      if (!event.composedPath().includes(this.$refs.sidebarContent)) {
+        this.cancel('outside');
       }
     },
-
     /**
     * Transition before-enter hook
     */
     beforeEnter: function beforeEnter() {
       this.animating = true;
     },
-
     /**
     * Transition after-leave hook
     */
     afterEnter: function afterEnter() {
       this.animating = false;
+    },
+    handleScroll: function handleScroll() {
+      if (typeof window === 'undefined') return;
+      if (this.scroll === 'clip') {
+        if (this.open) {
+          document.documentElement.classList.add('is-clipped');
+        } else {
+          document.documentElement.classList.remove('is-clipped');
+        }
+        return;
+      }
+      this.savedScrollTop = !this.savedScrollTop ? document.documentElement.scrollTop : this.savedScrollTop;
+      if (this.open) {
+        document.body.classList.add('is-noscroll');
+      } else {
+        document.body.classList.remove('is-noscroll');
+      }
+      if (this.open) {
+        document.body.style.top = "-".concat(this.savedScrollTop, "px");
+        return;
+      }
+      document.documentElement.scrollTop = this.savedScrollTop;
+      document.body.style.top = null;
+      this.savedScrollTop = null;
+    },
+    onHover: function onHover() {
+      var _this = this;
+      if (this.delay) {
+        this.hasLeaved = false;
+        this.timer = setTimeout(function () {
+          if (!_this.hasLeaved) {
+            _this.isDelayOver = true;
+          }
+          _this.timer = null;
+        }, this.delay);
+      } else {
+        this.isDelayOver = false;
+      }
+    },
+    onHoverLeave: function onHoverLeave() {
+      this.hasLeaved = true;
+      this.timer = null;
+      this.isDelayOver = false;
+    },
+    /**
+     * Close sidebar if close button is clicked.
+     */
+    clickedCloseButton: function clickedCloseButton() {
+      if (this.isFixed) {
+        if (this.isOpen && this.fullwidth) {
+          this.cancel('outside');
+        }
+      }
     }
   },
   created: function created() {
@@ -194,16 +230,27 @@ var script = {
         document.body.appendChild(this.$el);
       }
     }
+    if (this.overlay && this.open) {
+      this.handleScroll();
+    }
   },
   beforeDestroy: function beforeDestroy() {
     if (typeof window !== 'undefined') {
       document.removeEventListener('keyup', this.keyPress);
       document.removeEventListener('click', this.clickedOutside);
+      if (this.overlay) {
+        // reset scroll
+        document.documentElement.classList.remove('is-clipped');
+        var savedScrollTop = !this.savedScrollTop ? document.documentElement.scrollTop : this.savedScrollTop;
+        document.body.classList.remove('is-noscroll');
+        document.documentElement.scrollTop = savedScrollTop;
+        document.body.style.top = null;
+      }
     }
-
     if (this.isFixed) {
       helpers.removeElement(this.$el);
     }
+    clearTimeout(this.timer);
   }
 };
 
@@ -211,7 +258,7 @@ var script = {
 const __vue_script__ = script;
 
 /* template */
-var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"b-sidebar"},[(_vm.overlay && _vm.isOpen)?_c('div',{staticClass:"sidebar-background"}):_vm._e(),_vm._v(" "),_c('transition',{attrs:{"name":_vm.transitionName},on:{"before-enter":_vm.beforeEnter,"after-enter":_vm.afterEnter}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isOpen),expression:"isOpen"}],ref:"sidebarContent",staticClass:"sidebar-content",class:_vm.rootClasses},[_vm._t("default")],2)])],1)};
+var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"b-sidebar"},[(_vm.overlay && _vm.isOpen)?_c('div',{staticClass:"sidebar-background"}):_vm._e(),_c('transition',{attrs:{"name":_vm.transitionName},on:{"before-enter":_vm.beforeEnter,"after-enter":_vm.afterEnter}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isOpen),expression:"isOpen"}],ref:"sidebarContent",staticClass:"sidebar-content",class:_vm.rootClasses,on:{"mouseenter":_vm.onHover,"mouseleave":_vm.onHoverLeave}},[(_vm.fullwidth)?_c('button',{staticClass:"modal-close is-large sidebar-close",attrs:{"type":"button","aria-label":"Close"},on:{"click":_vm.clickedCloseButton}}):_vm._e(),_vm._t("default")],2)])],1)};
 var __vue_staticRenderFns__ = [];
 
   /* style */
@@ -226,25 +273,31 @@ var __vue_staticRenderFns__ = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Sidebar = __chunk_5.__vue_normalize__(
+  const __vue_component__ = /*#__PURE__*/plugins.normalizeComponent(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
     __vue_scope_id__,
     __vue_is_functional_template__,
     __vue_module_identifier__,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
+  var Sidebar = __vue_component__;
+
 var Plugin = {
   install: function install(Vue) {
-    __chunk_5.registerComponent(Vue, Sidebar);
+    plugins.registerComponent(Vue, Sidebar);
   }
 };
-__chunk_5.use(Plugin);
+plugins.use(Plugin);
 
 exports.BSidebar = Sidebar;
-exports.default = Plugin;
+exports["default"] = Plugin;

@@ -2,20 +2,20 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-require('./chunk-2777282e.js');
+var Input = require('./Input-e5a72d97.js');
+var plugins = require('./plugins-7f41b028.js');
+require('./_rollupPluginBabelHelpers-8b2e54ad.js');
+require('./Icon-78961800.js');
+require('./config-8cfb5a4a.js');
 require('./helpers.js');
-require('./chunk-8806479f.js');
-require('./chunk-f45d15e3.js');
-require('./chunk-acfb68f5.js');
-var __chunk_5 = require('./chunk-13e039f5.js');
-var __chunk_6 = require('./chunk-e79d8d75.js');
+require('./FormElementMixin-193a88b8.js');
 
 var Plugin = {
   install: function install(Vue) {
-    __chunk_5.registerComponent(Vue, __chunk_6.Input);
+    plugins.registerComponent(Vue, Input.Input);
   }
 };
-__chunk_5.use(Plugin);
+plugins.use(Plugin);
 
-exports.BInput = __chunk_6.Input;
-exports.default = Plugin;
+exports.BInput = Input.Input;
+exports["default"] = Plugin;

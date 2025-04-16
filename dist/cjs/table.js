@@ -2,154 +2,169 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var __chunk_1 = require('./chunk-2777282e.js');
+var _rollupPluginBabelHelpers = require('./_rollupPluginBabelHelpers-8b2e54ad.js');
 var helpers = require('./helpers.js');
-require('./chunk-8806479f.js');
-require('./chunk-f45d15e3.js');
-var __chunk_4 = require('./chunk-acfb68f5.js');
-var __chunk_5 = require('./chunk-13e039f5.js');
-var __chunk_6 = require('./chunk-e79d8d75.js');
-require('./chunk-1f7d7e31.js');
-var __chunk_9 = require('./chunk-9bb707ee.js');
-var __chunk_14 = require('./chunk-611c489f.js');
-var __chunk_21 = require('./chunk-59adcd26.js');
-var __chunk_23 = require('./chunk-3dffe6e7.js');
+var Pagination = require('./Pagination-d6b3fb85.js');
+var config = require('./config-8cfb5a4a.js');
+var Checkbox = require('./Checkbox-43f54cc7.js');
+var Icon = require('./Icon-78961800.js');
+var Input = require('./Input-e5a72d97.js');
+var Loading = require('./Loading-6f2c7075.js');
+var SlotComponent = require('./SlotComponent-4fb48389.js');
+var Select = require('./Select-2b3879bc.js');
+var plugins = require('./plugins-7f41b028.js');
+require('./CheckRadioMixin-c910f2ed.js');
+require('./FormElementMixin-193a88b8.js');
+require('./ssr-20dba236.js');
 
-var _components;
-var script = {
+var script$3 = {
   name: 'BTableMobileSort',
-  components: (_components = {}, __chunk_1._defineProperty(_components, __chunk_14.Select.name, __chunk_14.Select), __chunk_1._defineProperty(_components, __chunk_4.Icon.name, __chunk_4.Icon), _components),
+  components: _rollupPluginBabelHelpers._defineProperty(_rollupPluginBabelHelpers._defineProperty({}, Select.Select.name, Select.Select), Icon.Icon.name, Icon.Icon),
   props: {
     currentSortColumn: Object,
+    sortMultipleData: Array,
     isAsc: Boolean,
     columns: Array,
     placeholder: String,
-    customStyle: String,
-    customSelectStyle: String
+    iconPack: String,
+    sortIcon: {
+      type: String,
+      default: 'arrow-up'
+    },
+    sortIconSize: {
+      type: String,
+      default: 'is-small'
+    },
+    sortMultiple: {
+      type: Boolean,
+      default: false
+    }
   },
   data: function data() {
     return {
-      mobileSort: {
-        column: this.currentSortColumn,
-        index: null
-      }
+      sortMultipleSelect: '',
+      mobileSort: this.currentSortColumn,
+      defaultEvent: {
+        shiftKey: true,
+        altKey: true,
+        ctrlKey: true
+      },
+      ignoreSort: false
     };
   },
   computed: {
-    calculateParsedColumns: function calculateParsedColumns() {
-      if (this.columns) {
-        return this.columns.reduce(function (res, current) {
-          return [].concat(__chunk_1._toConsumableArray(res), [current, current]);
-        }, []);
-      }
-
-      return [];
-    },
-    data: function data() {
-        return {
-            mobileSort: {
-                column: this.currentSortColumn,
-                index: null
-            }
-        }
-    },
-    computed: {
-        calculateParsedColumns: function calculateParsedColumns() {
-            if (this.columns) {
-                return this.columns.reduce(function (res, current) {
-                    return [].concat(__chunk_1._toConsumableArray(res), [current, current])
-                }, [])
-            }
-
-            return []
-        },
-        showPlaceholder: function showPlaceholder() {
-            var _this = this
-
-            return !this.columns || !this.columns.some(function (column) {
-                return column === _this.mobileSort
-            })
-        }
-    },
     showPlaceholder: function showPlaceholder() {
       var _this = this;
-
       return !this.columns || !this.columns.some(function (column) {
         return column === _this.mobileSort;
       });
     }
   },
   watch: {
-    mobileSort: function mobileSort(newVal, oldVal) {
-      if (newVal.column !== oldVal.column || newVal.index !== oldVal.index) {
-        if (this.currentSortColumn === newVal.column && newVal.index === oldVal.index) return;
-        this.$emit('sort', newVal.column, newVal.index % 2 === 0 ? 'asc' : 'desc');
+    sortMultipleSelect: function sortMultipleSelect(column) {
+      if (this.ignoreSort) {
+        this.ignoreSort = false;
+      } else {
+        this.$emit('sort', column, this.defaultEvent);
       }
     },
+    mobileSort: function mobileSort(column) {
+      if (this.currentSortColumn === column) return;
+      this.$emit('sort', column, this.defaultEvent);
+    },
     currentSortColumn: function currentSortColumn(column) {
-      this.mobileSort.column = column;
+      this.mobileSort = column;
     }
   },
   methods: {
-    calculateLabel: function calculateLabel(column, index) {
-      var mobileSortOptions = column.mobileSortOptions || column.$attrs && column.$attrs['mobile-sort-options'];
-
-      if (mobileSortOptions) {
-        if (index % 2 === 0) {
-          return "".concat(column.label, ": ").concat(mobileSortOptions[0]);
-        } else {
-          return "".concat(column.label, ": ").concat(mobileSortOptions[1]);
-        }
+    removePriority: function removePriority() {
+      var _this2 = this;
+      this.$emit('removePriority', this.sortMultipleSelect);
+      // ignore the watcher to sort when we just change whats displayed in the select
+      // otherwise the direction will be flipped
+      // The sort event is already triggered by the emit
+      this.ignoreSort = true;
+      // Select one of the other options when we reset one
+      var remainingFields = this.sortMultipleData.filter(function (data) {
+        return data.field !== _this2.sortMultipleSelect.field;
+      }).map(function (data) {
+        return data.field;
+      });
+      this.sortMultipleSelect = this.columns.filter(function (column) {
+        return remainingFields.includes(column.field);
+      })[0];
+    },
+    getSortingObjectOfColumn: function getSortingObjectOfColumn(column) {
+      return this.sortMultipleData.filter(function (i) {
+        return i.field === column.field;
+      })[0];
+    },
+    columnIsDesc: function columnIsDesc(column) {
+      var sortingObject = this.getSortingObjectOfColumn(column);
+      if (sortingObject) {
+        return !!(sortingObject.order && sortingObject.order === 'desc');
       }
-
+      return true;
+    },
+    getLabel: function getLabel(column) {
+      var sortingObject = this.getSortingObjectOfColumn(column);
+      if (sortingObject) {
+        return column.label + '(' + (this.sortMultipleData.indexOf(sortingObject) + 1) + ')';
+      }
       return column.label;
+    },
+    sort: function sort() {
+      this.$emit('sort', this.sortMultiple ? this.sortMultipleSelect : this.mobileSort, this.defaultEvent);
     }
   }
 };
 
 /* script */
-const __vue_script__ = script;
+const __vue_script__$3 = script$3;
 
 /* template */
-var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"table-mobile-sort",staticStyle:{"z-index":"0","width":"1px","height":"1px","right":"83px","position":"absolute","background":"transparent","top":"0","-moz-appearance":"none","-webkit-appearance":"none"},style:(_vm.customStyle)},[_c('b-select',{staticClass:"mobile-sort",attrs:{"custom-style":_vm.customSelectStyle},model:{value:(_vm.mobileSort),callback:function ($$v) {_vm.mobileSort=$$v;},expression:"mobileSort"}},[(_vm.placeholder)?[_c('option',{directives:[{name:"show",rawName:"v-show",value:(_vm.showPlaceholder),expression:"showPlaceholder"}],attrs:{"selected":"","disabled":"","hidden":""},domProps:{"value":{}}},[_vm._v("\n                "+_vm._s(_vm.placeholder)+"\n            ")])]:_vm._e(),_vm._v(" "),_vm._l((_vm.calculateParsedColumns),function(column,index){return (column.sortable)?_c('option',{key:index,domProps:{"value":{column: column, index: index}}},[_vm._v("\n            "+_vm._s(_vm.calculateLabel(column, index))+"\n        ")]):_vm._e()})],2)],1)};
-var __vue_staticRenderFns__ = [];
+var __vue_render__$2 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"field table-mobile-sort"},[_c('div',{staticClass:"field has-addons"},[(_vm.sortMultiple)?_c('b-select',{attrs:{"expanded":""},model:{value:(_vm.sortMultipleSelect),callback:function ($$v) {_vm.sortMultipleSelect=$$v;},expression:"sortMultipleSelect"}},_vm._l((_vm.columns),function(column,index){return (column.sortable)?_c('option',{key:index,domProps:{"value":column}},[_vm._v(" "+_vm._s(_vm.getLabel(column))+" "),(_vm.getSortingObjectOfColumn(column))?[(_vm.columnIsDesc(column))?[_vm._v(" ↓ ")]:[_vm._v(" ↑ ")]]:_vm._e()],2):_vm._e()}),0):_c('b-select',{attrs:{"expanded":""},model:{value:(_vm.mobileSort),callback:function ($$v) {_vm.mobileSort=$$v;},expression:"mobileSort"}},[(_vm.placeholder)?[_c('option',{directives:[{name:"show",rawName:"v-show",value:(_vm.showPlaceholder),expression:"showPlaceholder"}],attrs:{"selected":"","disabled":"","hidden":""},domProps:{"value":{}}},[_vm._v(" "+_vm._s(_vm.placeholder)+" ")])]:_vm._e(),_vm._l((_vm.columns),function(column,index){return (column.sortable)?_c('option',{key:index,domProps:{"value":column}},[_vm._v(" "+_vm._s(column.label)+" ")]):_vm._e()})],2),_c('div',{staticClass:"control"},[(_vm.sortMultiple && _vm.sortMultipleData.length > 0)?[_c('button',{staticClass:"button is-primary",on:{"click":_vm.sort}},[_c('b-icon',{class:{ 'is-desc': _vm.columnIsDesc(_vm.sortMultipleSelect) },attrs:{"icon":_vm.sortIcon,"pack":_vm.iconPack,"size":_vm.sortIconSize,"both":""}})],1),_c('button',{staticClass:"button is-primary",on:{"click":_vm.removePriority}},[_c('b-icon',{attrs:{"icon":"delete","size":_vm.sortIconSize,"both":""}})],1)]:(!_vm.sortMultiple)?_c('button',{staticClass:"button is-primary",on:{"click":_vm.sort}},[_c('b-icon',{directives:[{name:"show",rawName:"v-show",value:(_vm.currentSortColumn === _vm.mobileSort),expression:"currentSortColumn === mobileSort"}],class:{ 'is-desc': !_vm.isAsc },attrs:{"icon":_vm.sortIcon,"pack":_vm.iconPack,"size":_vm.sortIconSize,"both":""}})],1):_vm._e()],2)],1)])};
+var __vue_staticRenderFns__$2 = [];
 
   /* style */
-  const __vue_inject_styles__ = undefined;
+  const __vue_inject_styles__$3 = undefined;
   /* scoped */
-  const __vue_scope_id__ = undefined;
+  const __vue_scope_id__$3 = undefined;
   /* module identifier */
-  const __vue_module_identifier__ = undefined;
+  const __vue_module_identifier__$3 = undefined;
   /* functional template */
-  const __vue_is_functional_template__ = false;
+  const __vue_is_functional_template__$3 = false;
   /* style inject */
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var TableMobileSort = __chunk_5.__vue_normalize__(
-    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
-    __vue_inject_styles__,
-    __vue_script__,
-    __vue_scope_id__,
-    __vue_is_functional_template__,
-    __vue_module_identifier__,
+  const __vue_component__$3 = /*#__PURE__*/plugins.normalizeComponent(
+    { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
+    __vue_inject_styles__$3,
+    __vue_script__$3,
+    __vue_scope_id__$3,
+    __vue_is_functional_template__$3,
+    __vue_module_identifier__$3,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var script$1 = {
+  var TableMobileSort = __vue_component__$3;
+
+var script$2 = {
   name: 'BTableColumn',
+  inject: {
+    $table: {
+      name: '$table',
+      default: false
+    }
+  },
   props: {
     label: String,
     customKey: [String, Number],
@@ -166,9 +181,23 @@ var script$1 = {
     },
     subheading: [String, Number],
     customSort: Function,
-    internal: Boolean,
-    // Used internally by Table
-    mobileSortOptions: Array
+    customSearch: Function,
+    sticky: Boolean,
+    headerSelectable: Boolean,
+    headerClass: String,
+    cellClass: String,
+    thAttrs: {
+      type: Function,
+      default: function _default() {
+        return {};
+      }
+    },
+    tdAttrs: {
+      type: Function,
+      default: function _default() {
+        return {};
+      }
+    }
   },
   data: function data() {
     return {
@@ -177,42 +206,169 @@ var script$1 = {
     };
   },
   computed: {
+    thClasses: function thClasses() {
+      var attrs = this.thAttrs(this);
+      var classes = [this.headerClass, {
+        'is-sortable': this.sortable,
+        'is-sticky': this.sticky,
+        'is-unselectable': this.isHeaderUnSelectable
+      }];
+      if (attrs && attrs.class) {
+        classes.push(attrs.class);
+      }
+      return classes;
+    },
+    thStyle: function thStyle() {
+      var attrs = this.thAttrs(this);
+      var style = [this.style];
+      if (attrs && attrs.style) {
+        style.push(attrs.style);
+      }
+      return style;
+    },
+    thWrapStyle: function thWrapStyle() {
+      var width = helpers.toCssWidth(this.width);
+      // interestingly, percentage width on the th element has effect
+      // so we won't apply it to .th-wrap
+      if (width != null && !width.trim().endsWith('%')) {
+        return {
+          width: width
+        };
+      } else {
+        return {};
+      }
+    },
     rootClasses: function rootClasses() {
-      return {
+      return [this.cellClass, {
         'has-text-right': this.numeric && !this.centered,
-        'has-text-centered': this.centered
+        'has-text-centered': this.centered,
+        'is-sticky': this.sticky
+      }];
+    },
+    style: function style() {
+      return {
+        width: helpers.toCssWidth(this.width)
       };
+    },
+    hasDefaultSlot: function hasDefaultSlot() {
+      return !!this.$scopedSlots.default;
+    },
+    /**
+     * Return if column header is un-selectable
+     */
+    isHeaderUnSelectable: function isHeaderUnSelectable() {
+      return !this.headerSelectable && this.sortable;
     }
   },
-  beforeMount: function beforeMount() {
-    var _this = this;
-
-    if (!this.$parent.$data._isTable) {
+  methods: {
+    getRootClasses: function getRootClasses(row) {
+      var attrs = this.tdAttrs(row, this);
+      var classes = [this.rootClasses];
+      if (attrs && attrs.class) {
+        classes.push(attrs.class);
+      }
+      return classes;
+    },
+    getRootStyle: function getRootStyle(row) {
+      var attrs = this.tdAttrs(row, this);
+      var style = [];
+      if (attrs && attrs.style) {
+        style.push(attrs.style);
+      }
+      return style;
+    }
+  },
+  created: function created() {
+    if (!this.$table) {
       this.$destroy();
       throw new Error('You should wrap bTableColumn on a bTable');
     }
-
-    if (this.internal) return; // Since we're using scoped prop the columns gonna be multiplied,
-    // this finds when to stop based on the newKey property.
-
-    var repeated = this.$parent.newColumns.some(function (column) {
-      return column.newKey === _this.newKey;
-    });
-    !repeated && this.$parent.newColumns.push(this);
+    this.$table.refreshSlots();
   },
   beforeDestroy: function beforeDestroy() {
-    var _this2 = this;
+    this.$table.refreshSlots();
+  },
+  render: function render(createElement) {
+    // renderless
+    return null;
+  }
+};
 
-    if (!this.$parent.visibleData.length) return;
-    if (this.$parent.$children.filter(function (vm) {
-      return vm.$data._isTableColumn && vm.$data.newKey === _this2.newKey;
-    }).length !== 1) return;
-    var index = this.$parent.newColumns.map(function (column) {
-      return column.newKey;
-    }).indexOf(this.newKey);
+/* script */
+const __vue_script__$2 = script$2;
 
-    if (index >= 0) {
-      this.$parent.newColumns.splice(index, 1);
+/* template */
+
+  /* style */
+  const __vue_inject_styles__$2 = undefined;
+  /* scoped */
+  const __vue_scope_id__$2 = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$2 = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$2 = undefined;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+  /* style inject shadow dom */
+  
+
+  
+  const __vue_component__$2 = /*#__PURE__*/plugins.normalizeComponent(
+    {},
+    __vue_inject_styles__$2,
+    __vue_script__$2,
+    __vue_scope_id__$2,
+    __vue_is_functional_template__$2,
+    __vue_module_identifier__$2,
+    false,
+    undefined,
+    undefined,
+    undefined
+  );
+
+  var TableColumn = __vue_component__$2;
+
+var script$1 = {
+  name: 'BTablePagination',
+  components: _rollupPluginBabelHelpers._defineProperty({}, Pagination.Pagination.name, Pagination.Pagination),
+  props: {
+    paginated: Boolean,
+    total: [Number, String],
+    perPage: [Number, String],
+    currentPage: [Number, String],
+    paginationSimple: Boolean,
+    paginationSize: String,
+    rounded: Boolean,
+    iconPack: String,
+    ariaNextLabel: String,
+    ariaPreviousLabel: String,
+    ariaPageLabel: String,
+    ariaCurrentLabel: String,
+    pageInput: Boolean,
+    paginationOrder: String,
+    pageInputPosition: String,
+    debouncePageInput: [Number, String]
+  },
+  data: function data() {
+    return {
+      newCurrentPage: this.currentPage
+    };
+  },
+  watch: {
+    currentPage: function currentPage(newVal) {
+      this.newCurrentPage = newVal;
+    }
+  },
+  methods: {
+    /**
+    * Paginator change listener.
+    */
+    pageChanged: function pageChanged(page) {
+      this.newCurrentPage = page > 0 ? page : 1;
+      this.$emit('update:currentPage', this.newCurrentPage);
+      this.$emit('page-change', this.newCurrentPage);
     }
   }
 };
@@ -221,7 +377,7 @@ var script$1 = {
 const __vue_script__$1 = script$1;
 
 /* template */
-var __vue_render__$1 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.visible)?_c('td',{class:_vm.rootClasses,attrs:{"data-label":_vm.label}},[_vm._t("default")],2):_vm._e()};
+var __vue_render__$1 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"top level"},[_c('div',{staticClass:"level-left"},[_vm._t("default")],2),_c('div',{staticClass:"level-right"},[(_vm.paginated)?_c('div',{staticClass:"level-item"},[_c('b-pagination',{attrs:{"icon-pack":_vm.iconPack,"total":_vm.total,"per-page":_vm.perPage,"simple":_vm.paginationSimple,"size":_vm.paginationSize,"current":_vm.newCurrentPage,"rounded":_vm.rounded,"aria-next-label":_vm.ariaNextLabel,"aria-previous-label":_vm.ariaPreviousLabel,"aria-page-label":_vm.ariaPageLabel,"aria-current-label":_vm.ariaCurrentLabel,"page-input":_vm.pageInput,"order":_vm.paginationOrder,"page-input-position":_vm.pageInputPosition,"debounce-page-input":_vm.debouncePageInput},on:{"change":_vm.pageChanged}})],1):_vm._e()])])};
 var __vue_staticRenderFns__$1 = [];
 
   /* style */
@@ -236,23 +392,34 @@ var __vue_staticRenderFns__$1 = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var TableColumn = __chunk_5.__vue_normalize__(
+  const __vue_component__$1 = /*#__PURE__*/plugins.normalizeComponent(
     { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
     __vue_inject_styles__$1,
     __vue_script__$1,
     __vue_scope_id__$1,
     __vue_is_functional_template__$1,
     __vue_module_identifier__$1,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
-var _components$1;
-var script$2 = {
+  var TablePagination = __vue_component__$1;
+
+var script = {
   name: 'BTable',
-  components: (_components$1 = {}, __chunk_1._defineProperty(_components$1, __chunk_9.Checkbox.name, __chunk_9.Checkbox), __chunk_1._defineProperty(_components$1, __chunk_4.Icon.name, __chunk_4.Icon), __chunk_1._defineProperty(_components$1, __chunk_6.Input.name, __chunk_6.Input), __chunk_1._defineProperty(_components$1, __chunk_21.Pagination.name, __chunk_21.Pagination), __chunk_1._defineProperty(_components$1, __chunk_23.SlotComponent.name, __chunk_23.SlotComponent), __chunk_1._defineProperty(_components$1, TableMobileSort.name, TableMobileSort), __chunk_1._defineProperty(_components$1, TableColumn.name, TableColumn), _components$1),
+  components: _rollupPluginBabelHelpers._defineProperty(_rollupPluginBabelHelpers._defineProperty(_rollupPluginBabelHelpers._defineProperty(_rollupPluginBabelHelpers._defineProperty(_rollupPluginBabelHelpers._defineProperty(_rollupPluginBabelHelpers._defineProperty(_rollupPluginBabelHelpers._defineProperty(_rollupPluginBabelHelpers._defineProperty({}, Checkbox.Checkbox.name, Checkbox.Checkbox), Icon.Icon.name, Icon.Icon), Input.Input.name, Input.Input), Loading.Loading.name, Loading.Loading), SlotComponent.SlotComponent.name, SlotComponent.SlotComponent), TableMobileSort.name, TableMobileSort), TableColumn.name, TableColumn), TablePagination.name, TablePagination),
+  inheritAttrs: false,
+  provide: function provide() {
+    return {
+      $table: this
+    };
+  },
   props: {
     data: {
       type: Array,
@@ -277,6 +444,10 @@ var script$2 = {
       type: Boolean,
       default: true
     },
+    checkboxType: {
+      type: String,
+      default: 'is-primary'
+    },
     checkboxPosition: {
       type: String,
       default: 'left',
@@ -284,12 +455,21 @@ var script$2 = {
         return ['left', 'right'].indexOf(value) >= 0;
       }
     },
+    stickyCheckbox: {
+      type: Boolean,
+      default: false
+    },
     useCheckboxButton: {
       type: Boolean,
       default: false
     },
-    checkboxType: String,
     selected: Object,
+    isRowSelectable: {
+      type: Function,
+      default: function _default() {
+        return true;
+      }
+    },
     focusable: Boolean,
     customIsChecked: Function,
     isRowCheckable: {
@@ -321,6 +501,20 @@ var script$2 = {
       type: String,
       default: 'is-small'
     },
+    sortMultiple: {
+      type: Boolean,
+      default: false
+    },
+    sortMultipleData: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    sortMultipleKey: {
+      type: String,
+      default: null
+    },
     paginated: Boolean,
     currentPage: {
       type: Number,
@@ -334,8 +528,10 @@ var script$2 = {
       type: Boolean,
       default: true
     },
-    paginationSimple: Boolean,
-    paginationSize: String,
+    detailIcon: {
+      type: String,
+      default: 'chevron-right'
+    },
     paginationPosition: {
       type: String,
       default: 'bottom',
@@ -343,7 +539,9 @@ var script$2 = {
         return ['bottom', 'top', 'both', 'none'].indexOf(value) >= 0;
       }
     },
+    paginationRounded: Boolean,
     backendSorting: Boolean,
+    backendFiltering: Boolean,
     rowClass: {
       type: Function,
       default: function _default() {
@@ -366,6 +564,10 @@ var script$2 = {
       type: String,
       default: ''
     },
+    detailTransition: {
+      type: String,
+      default: ''
+    },
     customDetailRow: {
       type: Boolean,
       default: false
@@ -375,14 +577,6 @@ var script$2 = {
       type: [Number, String],
       default: 0
     },
-    customStyle: {
-      type: String,
-      default: ''
-    },
-    customSelectStyle: {
-      type: String,
-      default: ''
-    },
     iconPack: String,
     mobileSortPlaceholder: String,
     customRowKey: String,
@@ -390,48 +584,98 @@ var script$2 = {
       type: Boolean,
       default: false
     },
+    draggableColumn: {
+      type: Boolean,
+      default: false
+    },
+    scrollable: Boolean,
     ariaNextLabel: String,
     ariaPreviousLabel: String,
     ariaPageLabel: String,
-    ariaCurrentLabel: String
+    ariaCurrentLabel: String,
+    stickyHeader: Boolean,
+    height: [Number, String],
+    filtersEvent: {
+      type: String,
+      default: ''
+    },
+    cardLayout: Boolean,
+    showHeader: {
+      type: Boolean,
+      default: true
+    },
+    debounceSearch: Number,
+    caption: String,
+    showCaption: {
+      type: Boolean,
+      default: true
+    },
+    pageInput: {
+      type: Boolean,
+      default: false
+    },
+    paginationOrder: String,
+    pageInputPosition: String,
+    debouncePageInput: [Number, String]
   },
   data: function data() {
     return {
+      sortMultipleDataLocal: [],
       getValueByPath: helpers.getValueByPath,
-      newColumns: __chunk_1._toConsumableArray(this.columns),
       visibleDetailRows: this.openedDetailed,
       newData: this.data,
       newDataTotal: this.backendPagination ? this.total : this.data.length,
-      newCheckedRows: __chunk_1._toConsumableArray(this.checkedRows),
+      newCheckedRows: _rollupPluginBabelHelpers._toConsumableArray(this.checkedRows),
       lastCheckedRowIndex: null,
       newCurrentPage: this.currentPage,
       currentSortColumn: {},
       isAsc: true,
       filters: {},
+      defaultSlots: [],
       firstTimeSort: true,
       // Used by first time initSort
-      _isTable: true // Used by TableColumn
-
+      _isTable: true,
+      // Used by TableColumn
+      isDraggingRow: false,
+      isDraggingColumn: false,
+      // for touch-enabled devices
+      _selectedRow: null,
+      mayBeTouchDragging: false,
+      touchDragoverTarget: null,
+      _draggedCellEl: undefined,
+      draggedCellContent: ''
     };
   },
   computed: {
-    /**
-    * return if detailed row tabled
-    * will be with chevron column & icon or not
-    */
-    showDetailRowIcon: function showDetailRowIcon() {
-      return this.detailed && this.showDetailIcon;
+    sortMultipleDataComputed: function sortMultipleDataComputed() {
+      return this.backendSorting ? this.sortMultipleData : this.sortMultipleDataLocal;
     },
     tableClasses: function tableClasses() {
       return {
         'is-bordered': this.bordered,
         'is-striped': this.striped,
         'is-narrow': this.narrowed,
-        'has-mobile-cards': this.mobileCards,
         'is-hoverable': (this.hoverable || this.focusable) && this.visibleData.length
       };
     },
-
+    tableWrapperClasses: function tableWrapperClasses() {
+      return {
+        'has-mobile-cards': this.mobileCards,
+        'has-sticky-header': this.stickyHeader,
+        'is-card-list': this.cardLayout,
+        'table-container': this.isScrollable
+      };
+    },
+    tableStyle: function tableStyle() {
+      return {
+        height: helpers.toCssWidth(this.height)
+      };
+    },
+    touchDraggedCellClasses: function touchDraggedCellClasses() {
+      return {
+        'has-mobile-cards': this.mobileCards
+      };
+    },
     /**
     * Splitted data based on the pagination.
     */
@@ -439,7 +683,6 @@ var script$2 = {
       if (!this.paginated) return this.newData;
       var currentPage = this.newCurrentPage;
       var perPage = this.perPage;
-
       if (this.newData.length <= perPage) {
         return this.newData;
       } else {
@@ -454,13 +697,11 @@ var script$2 = {
         return column.visible || column.visible === undefined;
       });
     },
-
     /**
     * Check if all rows in the page are checked.
     */
     isAllChecked: function isAllChecked() {
       var _this = this;
-
       var validVisibleData = this.visibleData.filter(function (row) {
         return _this.isRowCheckable(row);
       });
@@ -470,19 +711,16 @@ var script$2 = {
       });
       return !isAllChecked;
     },
-
     /**
     * Check if all rows in the page are checkable.
     */
     isAllUncheckable: function isAllUncheckable() {
       var _this2 = this;
-
       var validVisibleData = this.visibleData.filter(function (row) {
         return _this2.isRowCheckable(row);
       });
       return validVisibleData.length === 0;
     },
-
     /**
     * Check if has any sortable column.
     */
@@ -491,7 +729,6 @@ var script$2 = {
         return column.sortable;
       });
     },
-
     /**
     * Check if has any searchable column.
     */
@@ -500,7 +737,6 @@ var script$2 = {
         return column.searchable;
       });
     },
-
     /**
     * Check if has any column using subheading.
     */
@@ -510,15 +746,65 @@ var script$2 = {
         return column.subheading || column.$scopedSlots && column.$scopedSlots.subheading;
       });
     },
-
     /**
     * Return total column count based if it's checkable or expanded
     */
     columnCount: function columnCount() {
-      var count = this.newColumns.length;
+      var count = this.visibleColumns.length;
       count += this.checkable ? 1 : 0;
-      count += this.detailed ? 1 : 0;
+      count += this.detailed && this.showDetailIcon ? 1 : 0;
       return count;
+    },
+    /**
+    * return if detailed row tabled
+    * will be with chevron column & icon or not
+    */
+    showDetailRowIcon: function showDetailRowIcon() {
+      return this.detailed && this.showDetailIcon;
+    },
+    /**
+    * return if scrollable table
+    */
+    isScrollable: function isScrollable() {
+      if (this.scrollable) return true;
+      if (!this.newColumns) return false;
+      return this.newColumns.some(function (column) {
+        return column.sticky;
+      });
+    },
+    newColumns: function newColumns() {
+      var _this3 = this;
+      if (this.columns && this.columns.length) {
+        return this.columns.map(function (column) {
+          var TableColumnComponent = config.VueInstance.extend(TableColumn);
+          var component = new TableColumnComponent({
+            parent: _this3,
+            propsData: column
+          });
+          component.$scopedSlots = {
+            default: function _default(props) {
+              var vnode = component.$createElement('span', {
+                domProps: {
+                  innerHTML: helpers.getValueByPath(props.row, column.field)
+                }
+              });
+              return [vnode];
+            }
+          };
+          return component;
+        });
+      }
+      return this.defaultSlots.filter(function (vnode) {
+        return vnode.componentInstance && vnode.componentInstance.$data && vnode.componentInstance.$data._isTableColumn;
+      }).map(function (vnode) {
+        return vnode.componentInstance;
+      });
+    },
+    canDragRow: function canDragRow() {
+      return this.draggable && !this.isDraggingColumn;
+    },
+    canDragColumn: function canDragColumn() {
+      return this.draggableColumn && !this.isDraggingRow;
     }
   },
   watch: {
@@ -530,27 +816,20 @@ var script$2 = {
     *   4. Set new total if it's not backend-paginated.
     */
     data: function data(value) {
-      var _this3 = this;
-
-      // Save newColumns before resetting
-      var newColumns = this.newColumns;
-      this.newColumns = [];
-      this.newData = value; // Prevent table from being headless, data could change and created hook
-      // on column might not trigger
-
-      this.$nextTick(function () {
-        if (!_this3.newColumns.length) _this3.newColumns = newColumns;
-      });
-
+      var _this4 = this;
+      this.newData = value;
+      if (!this.backendFiltering) {
+        this.newData = value.filter(function (row) {
+          return _this4.isRowFiltered(row);
+        });
+      }
       if (!this.backendSorting) {
         this.sort(this.currentSortColumn, true);
       }
-
       if (!this.backendPagination) {
-        this.newDataTotal = value.length;
+        this.newDataTotal = this.newData.length;
       }
     },
-
     /**
     * When Pagination total change, update internal total
     * only if it's backend-paginated.
@@ -559,94 +838,155 @@ var script$2 = {
       if (!this.backendPagination) return;
       this.newDataTotal = newTotal;
     },
-
+    currentPage: function currentPage(newVal) {
+      this.newCurrentPage = newVal;
+    },
+    newCurrentPage: function newCurrentPage(newVal) {
+      this.$emit('update:currentPage', newVal);
+    },
     /**
     * When checkedRows prop change, update internal value without
     * mutating original data.
     */
     checkedRows: function checkedRows(rows) {
-      this.newCheckedRows = __chunk_1._toConsumableArray(rows);
+      this.newCheckedRows = _rollupPluginBabelHelpers._toConsumableArray(rows);
     },
-    columns: function columns(value) {
-      this.newColumns = __chunk_1._toConsumableArray(value);
+    /*
+    newColumns(value) {
+        this.checkSort()
     },
-    newColumns: function newColumns(value) {
-      this.checkSort();
+    */
+
+    debounceSearch: {
+      handler: function handler(value) {
+        this.debouncedHandleFiltersChange = Pagination.debounce(this.handleFiltersChange, value);
+      },
+      immediate: true
     },
     filters: {
       handler: function handler(value) {
-        var _this4 = this;
-
-        this.newData = this.data.filter(function (row) {
-          return _this4.isRowFiltered(row);
-        });
-
-        if (!this.backendPagination) {
-          this.newDataTotal = this.newData.length;
+        if (this.debounceSearch) {
+          this.debouncedHandleFiltersChange(value);
+        } else {
+          this.handleFiltersChange(value);
         }
       },
       deep: true
     },
-
-          if (!this.backendPagination) {
-            this.newDataTotal = this.newData.length;
-          }
-
-          if (!this.backendSorting) {
-            if (this.sortMultiple && this.sortMultipleDataLocal && this.sortMultipleDataLocal.length > 0) {
-              this.doSortMultiColumn();
-            } else if (Object.keys(this.currentSortColumn).length > 0) {
-              this.doSortSingleColumn(this.currentSortColumn);
-            }
-          }
-        }
-      },
-      deep: true
-    },
-
     /**
     * When the user wants to control the detailed rows via props.
     * Or wants to open the details of certain row with the router for example.
     */
     openedDetailed: function openedDetailed(expandedRows) {
       this.visibleDetailRows = expandedRows;
-    },
-    currentPage: function currentPage(newVal) {
-      this.newCurrentPage = newVal;
     }
   },
   methods: {
+    onFiltersEvent: function onFiltersEvent(event) {
+      this.$emit("filters-event-".concat(this.filtersEvent), {
+        event: event,
+        filters: this.filters
+      });
+    },
+    handleFiltersChange: function handleFiltersChange(value) {
+      var _this5 = this;
+      if (this.backendFiltering) {
+        this.$emit('filters-change', value);
+      } else {
+        this.newData = this.data.filter(function (row) {
+          return _this5.isRowFiltered(row);
+        });
+        if (!this.backendPagination) {
+          this.newDataTotal = this.newData.length;
+        }
+        if (!this.backendSorting) {
+          if (this.sortMultiple && this.sortMultipleDataLocal && this.sortMultipleDataLocal.length > 0) {
+            this.doSortMultiColumn();
+          } else if (Object.keys(this.currentSortColumn).length > 0) {
+            this.doSortSingleColumn(this.currentSortColumn);
+          }
+        }
+      }
+    },
+    findIndexOfSortData: function findIndexOfSortData(column) {
+      var sortObj = this.sortMultipleDataComputed.filter(function (i) {
+        return i.field === column.field;
+      })[0];
+      return this.sortMultipleDataComputed.indexOf(sortObj) + 1;
+    },
+    removeSortingPriority: function removeSortingPriority(column) {
+      if (this.backendSorting) {
+        this.$emit('sorting-priority-removed', column.field);
+      } else {
+        this.sortMultipleDataLocal = this.sortMultipleDataLocal.filter(function (priority) {
+          return priority.field !== column.field;
+        });
+        if (this.sortMultipleDataLocal.length === 0) {
+          this.resetMultiSorting();
+        } else {
+          this.newData = helpers.multiColumnSort(this.newData, this.sortMultipleDataLocal);
+        }
+      }
+    },
+    resetMultiSorting: function resetMultiSorting() {
+      this.sortMultipleDataLocal = [];
+      this.currentSortColumn = {};
+      this.newData = this.data;
+    },
     /**
     * Sort an array by key without mutating original data.
     * Call the user sort function if it was passed.
     */
     sortBy: function sortBy(array, key, fn, isAsc) {
-      var sorted = []; // Sorting without mutating original data
-
+      var sorted = [];
+      // Sorting without mutating original data
       if (fn && typeof fn === 'function') {
-        sorted = __chunk_1._toConsumableArray(array).sort(function (a, b) {
+        sorted = _rollupPluginBabelHelpers._toConsumableArray(array).sort(function (a, b) {
           return fn(a, b, isAsc);
         });
       } else {
-        sorted = __chunk_1._toConsumableArray(array).sort(function (a, b) {
+        sorted = _rollupPluginBabelHelpers._toConsumableArray(array).sort(function (a, b) {
           // Get nested values from objects
           var newA = helpers.getValueByPath(a, key);
-          var newB = helpers.getValueByPath(b, key); // sort boolean type
+          var newB = helpers.getValueByPath(b, key);
 
+          // sort boolean type
           if (typeof newA === 'boolean' && typeof newB === 'boolean') {
             return isAsc ? newA - newB : newB - newA;
           }
 
-          if (!newA && newA !== 0) return 1;
-          if (!newB && newB !== 0) return -1;
+          // sort null values to the bottom when in asc order
+          // and to the top when in desc order
+          if (!helpers.isNil(newB) && helpers.isNil(newA)) return isAsc ? 1 : -1;
+          if (!helpers.isNil(newA) && helpers.isNil(newB)) return isAsc ? -1 : 1;
           if (newA === newB) return 0;
           newA = typeof newA === 'string' ? newA.toUpperCase() : newA;
           newB = typeof newB === 'string' ? newB.toUpperCase() : newB;
           return isAsc ? newA > newB ? 1 : -1 : newA > newB ? -1 : 1;
         });
       }
-
       return sorted;
+    },
+    sortMultiColumn: function sortMultiColumn(column) {
+      this.currentSortColumn = {};
+      if (!this.backendSorting) {
+        var existingPriority = this.sortMultipleDataLocal.filter(function (i) {
+          return i.field === column.field;
+        })[0];
+        if (existingPriority) {
+          existingPriority.order = existingPriority.order === 'desc' ? 'asc' : 'desc';
+        } else {
+          this.sortMultipleDataLocal.push({
+            field: column.field,
+            order: column.isAsc,
+            customSort: column.customSort
+          });
+        }
+        this.doSortMultiColumn();
+      }
+    },
+    doSortMultiColumn: function doSortMultiColumn() {
+      this.newData = helpers.multiColumnSort(this.newData, this.sortMultipleDataLocal);
     },
     /**
     * Sort the column.
@@ -655,70 +995,84 @@ var script$2 = {
     */
     sort: function sort(column) {
       var updatingData = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-      var direction = arguments.length > 2 ? arguments[2] : undefined;
+      var event = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
       if (!column || !column.sortable) return;
-
-      if (!updatingData) {
-        this.isAsc = column === this.currentSortColumn ? !this.isAsc : this.defaultSortDirection.toLowerCase() !== 'desc';
-      } // from mobile sort
-
-
-      if (direction) {
-        this.isAsc = direction === 'asc';
+      if (
+      // if backend sorting is enabled, just emit the sort press like usual
+      // if the correct key combination isnt pressed, sort like usual
+      !this.backendSorting && this.sortMultiple && (this.sortMultipleKey && event[this.sortMultipleKey] || !this.sortMultipleKey)) {
+        if (updatingData) {
+          this.doSortMultiColumn();
+        } else {
+          this.sortMultiColumn(column);
+        }
+      } else {
+        // sort multiple is enabled but the correct key combination isnt pressed so reset
+        if (this.sortMultiple) {
+          this.sortMultipleDataLocal = [];
+        }
+        if (!updatingData) {
+          this.isAsc = column === this.currentSortColumn ? !this.isAsc : this.defaultSortDirection.toLowerCase() !== 'desc';
+        }
+        if (!this.firstTimeSort) {
+          this.$emit('sort', column.field, this.isAsc ? 'asc' : 'desc', event);
+        }
+        if (!this.backendSorting) {
+          this.doSortSingleColumn(column);
+        }
+        this.currentSortColumn = column;
       }
-
-      if (!this.firstTimeSort) {
-        this.$emit('sort', column.field, this.isAsc ? 'asc' : 'desc');
-      }
-
-      if (!this.backendSorting) {
-        this.newData = this.sortBy(this.newData, column.field, column.customSort, this.isAsc);
-      }
-
-      this.currentSortColumn = column;
     },
-
+    doSortSingleColumn: function doSortSingleColumn(column) {
+      this.newData = this.sortBy(this.newData, column.field, column.customSort, this.isAsc);
+    },
+    isRowSelected: function isRowSelected(row, selected) {
+      if (!selected) {
+        return false;
+      }
+      if (this.customRowKey) {
+        return row[this.customRowKey] === selected[this.customRowKey];
+      }
+      return row === selected;
+    },
     /**
     * Check if the row is checked (is added to the array).
     */
     isRowChecked: function isRowChecked(row) {
       return helpers.indexOf(this.newCheckedRows, row, this.customIsChecked) >= 0;
     },
-
     /**
     * Remove a checked row from the array.
     */
     removeCheckedRow: function removeCheckedRow(row) {
       var index = helpers.indexOf(this.newCheckedRows, row, this.customIsChecked);
-
       if (index >= 0) {
         this.newCheckedRows.splice(index, 1);
       }
     },
-
     /**
     * Header checkbox click listener.
     * Add or remove all rows in current page.
     */
     checkAll: function checkAll() {
-      var _this5 = this;
-
+      var _this6 = this;
       var isAllChecked = this.isAllChecked;
       this.visibleData.forEach(function (currentRow) {
-        _this5.removeCheckedRow(currentRow);
-
+        if (_this6.isRowCheckable(currentRow)) {
+          _this6.removeCheckedRow(currentRow);
+        }
         if (!isAllChecked) {
-          if (_this5.isRowCheckable(currentRow)) {
-            _this5.newCheckedRows.push(currentRow);
+          if (_this6.isRowCheckable(currentRow)) {
+            _this6.newCheckedRows.push(currentRow);
           }
         }
       });
       this.$emit('check', this.newCheckedRows);
-      this.$emit('check-all', this.newCheckedRows); // Emit checked rows to update user variable
+      this.$emit('check-all', this.newCheckedRows);
 
+      // Emit checked rows to update user variable
       this.$emit('update:checkedRows', this.newCheckedRows);
     },
-
     /**
     * Row checkbox click listener.
     */
@@ -726,7 +1080,6 @@ var script$2 = {
       if (!this.isRowCheckable(row)) return;
       var lastIndex = this.lastCheckedRowIndex;
       this.lastCheckedRowIndex = index;
-
       if (event.shiftKey && lastIndex !== null && index !== lastIndex) {
         this.shiftCheckRow(row, index, lastIndex);
       } else if (!this.isRowChecked(row)) {
@@ -734,68 +1087,58 @@ var script$2 = {
       } else {
         this.removeCheckedRow(row);
       }
+      this.$emit('check', this.newCheckedRows, row);
 
-      this.$emit('check', this.newCheckedRows, row); // Emit checked rows to update user variable
-
+      // Emit checked rows to update user variable
       this.$emit('update:checkedRows', this.newCheckedRows);
     },
-
     /**
      * Check row when shift is pressed.
      */
     shiftCheckRow: function shiftCheckRow(row, index, lastCheckedRowIndex) {
-      var _this6 = this;
-
+      var _this7 = this;
       // Get the subset of the list between the two indicies
-      var subset = this.visibleData.slice(Math.min(index, lastCheckedRowIndex), Math.max(index, lastCheckedRowIndex) + 1); // Determine the operation based on the state of the clicked checkbox
+      var subset = this.visibleData.slice(Math.min(index, lastCheckedRowIndex), Math.max(index, lastCheckedRowIndex) + 1);
 
+      // Determine the operation based on the state of the clicked checkbox
       var shouldCheck = !this.isRowChecked(row);
       subset.forEach(function (item) {
-        _this6.removeCheckedRow(item);
-
-        if (shouldCheck && _this6.isRowCheckable(item)) {
-          _this6.newCheckedRows.push(item);
+        _this7.removeCheckedRow(item);
+        if (shouldCheck && _this7.isRowCheckable(item)) {
+          _this7.newCheckedRows.push(item);
         }
       });
     },
-
     /**
     * Row click listener.
     * Emit all necessary events.
     */
     selectRow: function selectRow(row, index) {
       this.$emit('click', row);
-      if (this.selected === row) return; // Emit new and old row
+      this._selectedRow = row; // row must be clicked before dragging by touch
+      if (this.selected === row) return;
+      if (!this.isRowSelectable(row)) return;
 
-      this.$emit('select', row, this.selected); // Emit new row to update user variable
+      // Emit new and old row
+      this.$emit('select', row, this.selected);
 
+      // Emit new row to update user variable
       this.$emit('update:selected', row);
     },
-
-    /**
-    * Paginator change listener.
-    */
-    pageChanged: function pageChanged(page) {
-      this.newCurrentPage = page > 0 ? page : 1;
-      this.$emit('page-change', this.newCurrentPage);
-      this.$emit('update:currentPage', this.newCurrentPage);
-    },
-
     /**
     * Toggle to show/hide details slot
     */
     toggleDetails: function toggleDetails(obj) {
       var found = this.isVisibleDetailRow(obj);
-
       if (found) {
         this.closeDetailRow(obj);
         this.$emit('details-close', obj);
       } else {
         this.openDetailRow(obj);
         this.$emit('details-open', obj);
-      } // Syncs the detailed rows with the parent component
+      }
 
-
+      // Syncs the detailed rows with the parent component
       this.$emit('update:openedDetailed', this.visibleDetailRows);
     },
     openDetailRow: function openDetailRow(obj) {
@@ -805,12 +1148,13 @@ var script$2 = {
     closeDetailRow: function closeDetailRow(obj) {
       var index = this.handleDetailKey(obj);
       var i = this.visibleDetailRows.indexOf(index);
-      this.visibleDetailRows.splice(i, 1);
+      if (i >= 0) {
+        this.visibleDetailRows.splice(i, 1);
+      }
     },
     isVisibleDetailRow: function isVisibleDetailRow(obj) {
       var index = this.handleDetailKey(obj);
-      var result = this.visibleDetailRows.indexOf(index) >= 0;
-      return result;
+      return this.visibleDetailRows.indexOf(index) >= 0;
     },
     isActiveDetailRow: function isActiveDetailRow(row) {
       return this.detailed && !this.customDetailRow && this.isVisibleDetailRow(row);
@@ -819,47 +1163,67 @@ var script$2 = {
       return this.detailed && this.customDetailRow && this.isVisibleDetailRow(row);
     },
     isRowFiltered: function isRowFiltered(row) {
+      var _this8 = this;
+      var _loop = function _loop(key) {
+          if (!_this8.filters[key]) return 0; // continue
+          var input = _this8.filters[key];
+          var column = _this8.newColumns.filter(function (c) {
+            return c.field === key;
+          })[0];
+          if (column && column.customSearch && typeof column.customSearch === 'function') {
+            if (!column.customSearch(row, input)) return {
+              v: false
+            };
+          } else {
+            var value = _this8.getValueByPath(row, key);
+            if (value == null) return {
+              v: false
+            };
+            if (Number.isInteger(value)) {
+              if (value !== Number(input)) return {
+                v: false
+              };
+            } else {
+              var re = new RegExp(helpers.escapeRegExpChars(input), 'i');
+              if (Array.isArray(value)) {
+                var valid = value.some(function (val) {
+                  return re.test(helpers.removeDiacriticsFromString(val)) || re.test(val);
+                });
+                if (!valid) return {
+                  v: false
+                };
+              } else {
+                if (!re.test(helpers.removeDiacriticsFromString(value)) && !re.test(value)) {
+                  return {
+                    v: false
+                  };
+                }
+              }
+            }
+          }
+        },
+        _ret;
       for (var key in this.filters) {
-        // remove key if empty
-        if (!this.filters[key]) {
-          delete this.filters[key];
-          return true;
-        }
-
-        var value = this.getValueByPath(row, key);
-        if (value == null) return false;
-
-        var value = this.getValueByPath(row, key);
-        if (value == null) return false;
-
-        if (Number.isInteger(value)) {
-          if (value !== Number(this.filters[key])) return false;
-        } else {
-          var re = new RegExp(this.filters[key], 'i');
-          if (typeof value === 'boolean') value = "".concat(value);
-          if (!value.match(re)) return false;
-        }
+        _ret = _loop(key);
+        if (_ret === 0) continue;
+        if (_ret) return _ret.v;
       }
-
       return true;
     },
-
     /**
-        * When the detailKey is defined we use the object[detailKey] as index.
-        * If not, use the object reference by default.
-        */
+    * When the detailKey is defined we use the object[detailKey] as index.
+    * If not, use the object reference by default.
+    */
     handleDetailKey: function handleDetailKey(index) {
       var key = this.detailKey;
       return !key.length || !index ? index : index[key];
     },
     checkPredefinedDetailedRows: function checkPredefinedDetailedRows() {
       var defaultExpandedRowsDefined = this.openedDetailed.length > 0;
-
       if (defaultExpandedRowsDefined && !this.detailKey.length) {
         throw new Error('If you set a predefined opened-detailed, you must provide a unique key using the prop "detail-key"');
       }
     },
-
     /**
     * Call initSort only first time (For example async data).
     */
@@ -868,7 +1232,7 @@ var script$2 = {
         this.initSort();
         this.firstTimeSort = false;
       } else if (this.newColumns.length) {
-        if (this.currentSortColumn.field) {
+        if (Object.keys(this.currentSortColumn).length > 0) {
           for (var i = 0; i < this.newColumns.length; i++) {
             if (this.newColumns[i].field === this.currentSortColumn.field) {
               this.currentSortColumn = this.newColumns[i];
@@ -878,7 +1242,6 @@ var script$2 = {
         }
       }
     },
-
     /**
     * Check if footer slot has custom content.
     */
@@ -888,25 +1251,40 @@ var script$2 = {
       if (tag !== 'th' && tag !== 'td') return false;
       return true;
     },
-
     /**
     * Check if bottom-left slot exists.
     */
     hasBottomLeftSlot: function hasBottomLeftSlot() {
       return typeof this.$slots['bottom-left'] !== 'undefined';
     },
-
     /**
     * Table arrow keys listener, change selection.
     */
     pressedArrow: function pressedArrow(pos) {
       if (!this.visibleData.length) return;
-      var index = this.visibleData.indexOf(this.selected) + pos; // Prevent from going up from first and down from last
+      var index = this.visibleData.indexOf(this.selected) + pos;
 
+      // Prevent from going up from first and down from last
       index = index < 0 ? 0 : index > this.visibleData.length - 1 ? this.visibleData.length - 1 : index;
-      this.selectRow(this.visibleData[index]);
+      var row = this.visibleData[index];
+      if (!this.isRowSelectable(row)) {
+        var newIndex = null;
+        if (pos > 0) {
+          for (var i = index; i < this.visibleData.length && newIndex === null; i++) {
+            if (this.isRowSelectable(this.visibleData[i])) newIndex = i;
+          }
+        } else {
+          for (var _i = index; _i >= 0 && newIndex === null; _i--) {
+            if (this.isRowSelectable(this.visibleData[_i])) newIndex = _i;
+          }
+        }
+        if (newIndex >= 0) {
+          this.selectRow(this.visibleData[newIndex]);
+        }
+      } else {
+        this.selectRow(row);
+      }
     },
-
     /**
     * Focus table element if has selected prop.
     */
@@ -914,157 +1292,409 @@ var script$2 = {
       if (!this.focusable) return;
       this.$el.querySelector('table').focus();
     },
-
     /**
     * Initial sorted column based on the default-sort prop.
     */
     initSort: function initSort() {
-      var _this7 = this;
-
-      if (!this.defaultSort) return;
-      var sortField = '';
-      var sortDirection = this.defaultSortDirection;
-
-      if (Array.isArray(this.defaultSort)) {
-        sortField = this.defaultSort[0];
-
-        if (this.defaultSort[1]) {
-          sortDirection = this.defaultSort[1];
-        }
+      var _this9 = this;
+      if (this.sortMultiple && this.sortMultipleData) {
+        this.sortMultipleData.forEach(function (column) {
+          _this9.sortMultiColumn(column);
+        });
       } else {
-        sortField = this.defaultSort;
-      }
-
-      this.newColumns.forEach(function (column) {
-        if (column.field === sortField) {
-          _this7.isAsc = sortDirection.toLowerCase() !== 'desc';
-
-          _this7.sort(column, true);
+        if (!this.defaultSort) return;
+        var sortField = '';
+        var sortDirection = this.defaultSortDirection;
+        if (Array.isArray(this.defaultSort)) {
+          sortField = this.defaultSort[0];
+          if (this.defaultSort[1]) {
+            sortDirection = this.defaultSort[1];
+          }
+        } else {
+          sortField = this.defaultSort;
         }
-      });
+        var sortColumn = this.newColumns.filter(function (column) {
+          return column.field === sortField;
+        })[0];
+        if (sortColumn) {
+          this.isAsc = sortDirection.toLowerCase() !== 'desc';
+          this.sort(sortColumn, true);
+        }
+      }
     },
-
     /**
-    * Emits drag start event
+    * Emits drag start event (row)
     */
     handleDragStart: function handleDragStart(event, row, index) {
+      if (!this.canDragRow) return;
+      this.isDraggingRow = true;
       this.$emit('dragstart', {
         event: event,
         row: row,
         index: index
       });
     },
-
     /**
-    * Emits drag leave event
+    * Emits drag leave event (row)
     */
     handleDragEnd: function handleDragEnd(event, row, index) {
+      if (!this.canDragRow) return;
+      this.isDraggingRow = false;
       this.$emit('dragend', {
         event: event,
         row: row,
         index: index
       });
     },
-
     /**
-    * Emits drop event
+    * Emits drop event (row)
     */
     handleDrop: function handleDrop(event, row, index) {
+      if (!this.canDragRow) return;
       this.$emit('drop', {
         event: event,
         row: row,
         index: index
       });
     },
-
     /**
-    * Emits drag over event
+    * Emits drag over event (row)
     */
     handleDragOver: function handleDragOver(event, row, index) {
+      if (!this.canDragRow) return;
       this.$emit('dragover', {
         event: event,
         row: row,
         index: index
       });
     },
-
     /**
-    * Emits drag leave event
+    * Emits drag leave event (row)
     */
     handleDragLeave: function handleDragLeave(event, row, index) {
+      if (!this.canDragRow) return;
       this.$emit('dragleave', {
         event: event,
         row: row,
         index: index
       });
+    },
+    emitEventForRow: function emitEventForRow(eventName, event, row) {
+      return this.$listeners[eventName] ? this.$emit(eventName, row, event) : null;
+    },
+    /**
+    * Emits drag start event (column)
+    */
+    handleColumnDragStart: function handleColumnDragStart(event, column, index) {
+      if (!this.canDragColumn) return;
+      this.isDraggingColumn = true;
+      this.$emit('columndragstart', {
+        event: event,
+        column: column,
+        index: index
+      });
+    },
+    /**
+    * Emits drag leave event (column)
+    */
+    handleColumnDragEnd: function handleColumnDragEnd(event, column, index) {
+      if (!this.canDragColumn) return;
+      this.isDraggingColumn = false;
+      this.$emit('columndragend', {
+        event: event,
+        column: column,
+        index: index
+      });
+    },
+    /**
+    * Emits drop event (column)
+    */
+    handleColumnDrop: function handleColumnDrop(event, column, index) {
+      if (!this.canDragColumn) return;
+      this.$emit('columndrop', {
+        event: event,
+        column: column,
+        index: index
+      });
+    },
+    /**
+    * Emits drag over event (column)
+    */
+    handleColumnDragOver: function handleColumnDragOver(event, column, index) {
+      if (!this.canDragColumn) return;
+      this.$emit('columndragover', {
+        event: event,
+        column: column,
+        index: index
+      });
+    },
+    /**
+    * Emits drag leave event (column)
+    */
+    handleColumnDragLeave: function handleColumnDragLeave(event, column, index) {
+      if (!this.canDragColumn) return;
+      this.$emit('columndragleave', {
+        event: event,
+        column: column,
+        index: index
+      });
+    },
+    /**
+    * Starts monitoring drag-by-touch events (row on touch-enabled devices)
+    */
+    handleTouchStart: function handleTouchStart(event, row, index) {
+      if (!this.canDragRow) return;
+      if (this.isDraggingColumn) return;
+      // drag won't start unless the row has been clicked (tapped)
+      // I think trapping touch-scrolling is annoying
+      if (this._selectedRow !== row) return;
+      event.preventDefault();
+      this.mayBeTouchDragging = true;
+    },
+    /**
+    * Emits dragover and dragleave events (row on touch-enabled devices)
+    *
+    * Emits also dragstart if this is the first touchmove after touchstart.
+    */
+    handleTouchMove: function handleTouchMove(event, row, index) {
+      if (!this.canDragRow) return;
+      if (!this.mayBeTouchDragging) return;
+      if (!this.isDraggingRow) {
+        var tr = event.target.closest('tr');
+        this.draggedCellContent = tr ? "<table class=\"table\"><tr>".concat(tr.innerHTML, "</tr></table>") : event.target.innerHTML;
+        this.$refs.draggedCell.style.width = tr ? "".concat(tr.offsetWidth, "px") : "".concat(event.target.offsetWidth, "px");
+        event.target.dispatchEvent(helpers.translateTouchAsDragEvent(event, {
+          type: 'dragstart'
+        }));
+      }
+      var touch = event.touches[0];
+      var target = document.elementFromPoint(touch.clientX, touch.clientY);
+      if (target != null) {
+        if (target !== this.touchDragoverTarget) {
+          if (this.touchDragoverTarget != null) {
+            this.touchDragoverTarget.dispatchEvent(helpers.translateTouchAsDragEvent(event, {
+              type: 'dragleave',
+              target: this.touchDragoverTarget
+            }));
+          }
+          this.touchDragoverTarget = target;
+          target.dispatchEvent(helpers.translateTouchAsDragEvent(event, {
+            type: 'dragover',
+            target: target
+          }));
+        }
+      } else if (this.touchDragoverTarget != null) {
+        this.touchDragoverTarget.dispatchEvent(helpers.translateTouchAsDragEvent(event, {
+          type: 'dragleave',
+          target: this.touchDragoverTarget
+        }));
+        this.touchDragoverTarget = null;
+      }
+      this.updateDraggedCell(touch);
+    },
+    /**
+    * Emits drop and dragend events (row on touch-enabled devices)
+    */
+    handleTouchEnd: function handleTouchEnd(event, row, index) {
+      if (!this.canDragRow) return;
+      if (this.isDraggingRow) {
+        var touch = event.changedTouches[0];
+        var target = document.elementFromPoint(touch.clientX, touch.clientY);
+        if (target != null) {
+          target.dispatchEvent(helpers.translateTouchAsDragEvent(event, {
+            type: 'drop',
+            target: target
+          }));
+        }
+        event.target.dispatchEvent(helpers.translateTouchAsDragEvent(event, {
+          type: 'dragend'
+        }));
+        this._selectedRow = null;
+      }
+      this.mayBeTouchDragging = false;
+    },
+    /**
+    * Starts monitoring drag-by-touch events (column on touch-enabled devices)
+    */
+    handleColumnTouchStart: function handleColumnTouchStart(event, column, index) {
+      if (!this.canDragColumn) return;
+      if (this.isDraggingRow) return;
+      event.preventDefault(); // otherwise triggers touch-scrolling
+      this.mayBeTouchDragging = true;
+    },
+    /**
+    * Emits dragover and dragleave events (column on touch-enabled devices)
+    *
+    * Also emits dragstart if this is the first touchmove after touchstart.
+    */
+    handleColumnTouchMove: function handleColumnTouchMove(event, column, index) {
+      if (!this.canDragColumn) return;
+      if (!this.mayBeTouchDragging) return;
+      if (!this.isDraggingColumn) {
+        this.draggedCellContent = event.target.innerHTML;
+        this.$refs.draggedCell.style.width = "".concat(event.target.offsetWidth, "px");
+        event.target.dispatchEvent(helpers.translateTouchAsDragEvent(event, {
+          type: 'dragstart'
+        }));
+      }
+      var touch = event.touches[0];
+      var target = document.elementFromPoint(touch.clientX, touch.clientY);
+      if (target != null) {
+        if (target !== this.touchDragoverTarget) {
+          if (this.touchDragoverTarget != null) {
+            this.touchDragoverTarget.dispatchEvent(helpers.translateTouchAsDragEvent(event, {
+              type: 'dragleave',
+              target: this.touchDragoverTarget
+            }));
+          }
+          this.touchDragoverTarget = target;
+          target.dispatchEvent(helpers.translateTouchAsDragEvent(event, {
+            type: 'dragover',
+            target: target
+          }));
+        }
+      } else if (this.touchDragoverTarget != null) {
+        this.touchDragoverTarget.dispatchEvent(helpers.translateTouchAsDragEvent(event, {
+          type: 'dragleave',
+          target: this.touchDragoverTarget
+        }));
+        this.touchDragoverTarget = null;
+      }
+      this.updateDraggedCell(touch);
+    },
+    /**
+    * Emits drop and dragend events (column on touch-enabled devices)
+    */
+    handleColumnTouchEnd: function handleColumnTouchEnd(event, column, index) {
+      if (!this.canDragColumn) return;
+      if (this.isDraggingColumn) {
+        var touch = event.changedTouches[0];
+        var target = document.elementFromPoint(touch.clientX, touch.clientY);
+        if (target != null) {
+          target.dispatchEvent(helpers.translateTouchAsDragEvent(event, {
+            type: 'drop',
+            target: target
+          }));
+        }
+        event.target.dispatchEvent(helpers.translateTouchAsDragEvent(event, {
+          type: 'dragend'
+        }));
+      }
+      this.mayBeTouchDragging = false;
+    },
+    updateDraggedCell: function updateDraggedCell(_ref) {
+      var clientX = _ref.clientX,
+        clientY = _ref.clientY;
+      var cellRect = this.$refs.draggedCell.getBoundingClientRect();
+      var top = clientY + window.scrollY - cellRect.height / 2;
+      var left = clientX + window.scrollX - cellRect.width / 2;
+      this.$refs.draggedCell.style.top = "calc(".concat(top, "px)");
+      this.$refs.draggedCell.style.left = "calc(".concat(left, "px)");
+    },
+    refreshSlots: function refreshSlots() {
+      this.defaultSlots = this.$slots.default || [];
     }
   },
   mounted: function mounted() {
+    this.refreshSlots();
     this.checkPredefinedDetailedRows();
     this.checkSort();
+    // appends `draggedCell` to the body whenever `draggable` or
+    // `draggableColumn` becomes true
+    // starts watching here to make sure the DOM is ready
+    function prepareDraggedCell(isDraggable) {
+      if (isDraggable && this.$data._draggedCellEl == null) {
+        this.$data._draggedCellEl = helpers.createAbsoluteElement(this.$refs.draggedCell);
+      }
+    }
+    this.$watch('draggable', prepareDraggedCell, {
+      immediate: true
+    });
+    this.$watch('draggableColumn', prepareDraggedCell, {
+      immediate: true
+    });
+  },
+  beforeDestroy: function beforeDestroy() {
+    if (this.$data._draggedCellEl) {
+      helpers.removeElement(this.$data._draggedCellEl);
+    }
   }
 };
 
 /* script */
-const __vue_script__$2 = script$2;
+const __vue_script__ = script;
 
 /* template */
-var __vue_render__$2 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"b-table",class:{ 'is-loading': _vm.loading }},[(_vm.mobileCards && _vm.hasSortablenewColumns)?_c('b-table-mobile-sort',{attrs:{"current-sort-column":_vm.currentSortColumn,"is-asc":_vm.isAsc,"columns":_vm.newColumns,"custom-style":_vm.customStyle,"custom-select-style":_vm.customSelectStyle,"placeholder":_vm.mobileSortPlaceholder,"icon-pack":_vm.iconPack,"sort-icon":_vm.sortIcon,"sort-icon-size":_vm.sortIconSize},on:{"sort":function (column, direction) { return _vm.sort(column, null, direction); }}}):_vm._e(),_vm._v(" "),(_vm.paginated && (_vm.paginationPosition === 'top' || _vm.paginationPosition === 'both'))?_c('div',{staticClass:"top level"},[_c('div',{staticClass:"level-left"},[_vm._t("top-left")],2),_vm._v(" "),_c('div',{staticClass:"level-right"},[(_vm.paginated)?_c('div',{staticClass:"level-item"},[_c('b-pagination',{attrs:{"icon-pack":_vm.iconPack,"total":_vm.newDataTotal,"per-page":_vm.perPage,"simple":_vm.paginationSimple,"size":_vm.paginationSize,"current":_vm.newCurrentPage,"aria-next-label":_vm.ariaNextLabel,"aria-previous-label":_vm.ariaPreviousLabel,"aria-page-label":_vm.ariaPageLabel,"aria-current-label":_vm.ariaCurrentLabel},on:{"change":_vm.pageChanged}})],1):_vm._e()])]):_vm._e(),_vm._v(" "),_c('div',{staticClass:"table-wrapper"},[_c('table',{staticClass:"table",class:_vm.tableClasses,attrs:{"tabindex":!_vm.focusable ? false : 0},on:{"keydown":[function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"up",38,$event.key)){ return null; }if($event.target !== $event.currentTarget){ return null; }$event.preventDefault();_vm.pressedArrow(-1);},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"down",40,$event.key)){ return null; }if($event.target !== $event.currentTarget){ return null; }$event.preventDefault();_vm.pressedArrow(1);}]}},[(_vm.newColumns.length)?_c('thead',[_c('tr',[(_vm.showDetailRowIcon)?_c('th',{attrs:{"width":"40px"}}):_vm._e(),_vm._v(" "),(_vm.checkable && _vm.checkboxPosition === 'left')?_c('th',{staticClass:"checkbox-cell"},[(_vm.headerCheckable)?[_c('b-checkbox',{attrs:{"value":_vm.isAllChecked,"disabled":_vm.isAllUncheckable},nativeOn:{"change":function($event){_vm.checkAll($event);}}})]:_vm._e()],2):_vm._e(),_vm._v(" "),_vm._l((_vm.visibleColumns),function(column,index){return _c('th',{key:index,class:{
-                            'is-current-sort': _vm.currentSortColumn === column,
-                            'is-sortable': column.sortable
-                        },style:({
-                            width: column.width === undefined ? null :
-                            (isNaN(column.width) ? column.width : column.width + 'px')
-                        }),on:{"click":function($event){$event.stopPropagation();_vm.sort(column);}}},[_c('div',{staticClass:"th-wrap",class:{
+var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"b-table"},[_vm._t("default"),(_vm.mobileCards && _vm.hasSortablenewColumns)?_c('b-table-mobile-sort',{attrs:{"current-sort-column":_vm.currentSortColumn,"sort-multiple":_vm.sortMultiple,"sort-multiple-data":_vm.sortMultipleDataComputed,"is-asc":_vm.isAsc,"columns":_vm.newColumns,"placeholder":_vm.mobileSortPlaceholder,"icon-pack":_vm.iconPack,"sort-icon":_vm.sortIcon,"sort-icon-size":_vm.sortIconSize},on:{"sort":function (column) { return _vm.sort(column); },"removePriority":function (column) { return _vm.removeSortingPriority(column); }}}):_vm._e(),(_vm.paginated && (_vm.paginationPosition === 'top' || _vm.paginationPosition === 'both'))?[_vm._t("pagination",[_c('b-table-pagination',_vm._b({attrs:{"per-page":_vm.perPage,"paginated":_vm.paginated,"rounded":_vm.paginationRounded,"icon-pack":_vm.iconPack,"total":_vm.newDataTotal,"current-page":_vm.newCurrentPage,"aria-next-label":_vm.ariaNextLabel,"aria-previous-label":_vm.ariaPreviousLabel,"aria-page-label":_vm.ariaPageLabel,"aria-current-label":_vm.ariaCurrentLabel,"page-input":_vm.pageInput,"pagination-order":_vm.paginationOrder,"page-input-position":_vm.pageInputPosition,"debounce-page-input":_vm.debouncePageInput},on:{"update:currentPage":function($event){_vm.newCurrentPage=$event;},"update:current-page":function($event){_vm.newCurrentPage=$event;},"page-change":function (event) { return _vm.$emit('page-change', event); }}},'b-table-pagination',_vm.$attrs,false),[_vm._t("top-left")],2)])]:_vm._e(),_c('div',{staticClass:"table-wrapper",class:_vm.tableWrapperClasses,style:(_vm.tableStyle)},[_c('table',{staticClass:"table",class:_vm.tableClasses,attrs:{"tabindex":!_vm.focusable ? false : 0},on:{"keydown":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"up",38,$event.key,["Up","ArrowUp"])){ return null; }if($event.target !== $event.currentTarget){ return null; }$event.preventDefault();return _vm.pressedArrow(-1)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"down",40,$event.key,["Down","ArrowDown"])){ return null; }if($event.target !== $event.currentTarget){ return null; }$event.preventDefault();return _vm.pressedArrow(1)}]}},[(_vm.caption)?_c('caption',{directives:[{name:"show",rawName:"v-show",value:(_vm.showCaption),expression:"showCaption"}]},[_vm._v(_vm._s(_vm.caption))]):_vm._e(),(_vm.newColumns.length && _vm.showHeader)?_c('thead',[_c('tr',[(_vm.showDetailRowIcon)?_c('th',{attrs:{"width":"40px"}}):_vm._e(),(_vm.checkable && _vm.checkboxPosition === 'left')?_c('th',{class:['checkbox-cell', { 'is-sticky': _vm.stickyCheckbox } ]},[(_vm.headerCheckable)?[_vm._t("check-all",[_c('b-checkbox',{attrs:{"autocomplete":"off","value":_vm.isAllChecked,"type":_vm.checkboxType,"disabled":_vm.isAllUncheckable},nativeOn:{"change":function($event){return _vm.checkAll($event)}}})],{"isAllChecked":_vm.isAllChecked,"isAllUncheckable":_vm.isAllUncheckable,"checkAll":_vm.checkAll})]:_vm._e()],2):_vm._e(),_vm._l((_vm.visibleColumns),function(column,index){return _c('th',_vm._b({key:column.newKey + ':' + index + 'header',class:[column.thClasses, {
+                            'is-current-sort': !_vm.sortMultiple && _vm.currentSortColumn === column,
+                        }],style:(column.thStyle),attrs:{"draggable":_vm.canDragColumn},on:{"click":function($event){$event.stopPropagation();return _vm.sort(column, null, $event)},"dragstart":function($event){return _vm.handleColumnDragStart($event, column, index)},"dragend":function($event){return _vm.handleColumnDragEnd($event, column, index)},"drop":function($event){return _vm.handleColumnDrop($event, column, index)},"dragover":function($event){return _vm.handleColumnDragOver($event, column, index)},"dragleave":function($event){return _vm.handleColumnDragLeave($event, column, index)},"touchstart":function($event){return _vm.handleColumnTouchStart($event, column, index)},"touchmove":function($event){return _vm.handleColumnTouchMove($event, column, index)},"touchend":function($event){return _vm.handleColumnTouchEnd($event, column, index)}}},'th',column.thAttrs(column),false),[_c('div',{staticClass:"th-wrap is-relative",class:{
                                 'is-numeric': column.numeric,
                                 'is-centered': column.centered
-                        }},[(column.$scopedSlots && column.$scopedSlots.header)?[_c('b-slot-component',{attrs:{"component":column,"scoped":true,"name":"header","tag":"span","props":{ column: column, index: index }}})]:(_vm.$scopedSlots.header)?[_vm._t("header",null,{column:column,index:index})]:[_vm._v(_vm._s(column.label))],_vm._v(" "),_c('b-icon',{directives:[{name:"show",rawName:"v-show",value:(_vm.currentSortColumn === column),expression:"currentSortColumn === column"}],class:{ 'is-desc': !_vm.isAsc },attrs:{"icon":_vm.sortIcon,"pack":_vm.iconPack,"both":"","size":_vm.sortIconSize}})],2)])}),_vm._v(" "),(_vm.checkable && _vm.checkboxPosition === 'right')?_c('th',{staticClass:"checkbox-cell"},[(_vm.headerCheckable)?[_c('b-checkbox',{attrs:{"value":_vm.isAllChecked,"disabled":_vm.isAllUncheckable},nativeOn:{"change":function($event){_vm.checkAll($event);}}})]:_vm._e()],2):_vm._e()],2),_vm._v(" "),(_vm.hasCustomSubheadings)?_c('tr',{staticClass:"is-subheading"},[(_vm.showDetailRowIcon)?_c('th',{attrs:{"width":"40px"}}):_vm._e(),_vm._v(" "),(_vm.checkable && _vm.checkboxPosition === 'left')?_c('th'):_vm._e(),_vm._v(" "),_vm._l((_vm.visibleColumns),function(column,index){return _c('th',{key:index,style:({
-                            width: column.width === undefined ? null
-                        : (isNaN(column.width) ? column.width : column.width + 'px') })},[_c('div',{staticClass:"th-wrap",class:{
+                            },style:(column.thWrapStyle)},[(column.$scopedSlots && column.$scopedSlots.header)?[_c('b-slot-component',{attrs:{"component":column,"scoped":"","name":"header","tag":"span","props":{ column: column, index: index }}})]:[_vm._v(" "+_vm._s(column.label)+" "),(_vm.sortMultiple &&
+                                        _vm.sortMultipleDataComputed &&
+                                        _vm.sortMultipleDataComputed.length > 0 &&
+                                        _vm.sortMultipleDataComputed.filter(function (i) { return i.field === column.field; }).length > 0)?[_c('span',{staticClass:"multi-sort-icons"},[_c('b-icon',{class:{
+                                                'is-desc': _vm.sortMultipleDataComputed.filter(function (i) { return i.field === column.field; })[0].order === 'desc'},attrs:{"icon":_vm.sortIcon,"pack":_vm.iconPack,"both":"","size":_vm.sortIconSize}}),_vm._v(" "+_vm._s(_vm.findIndexOfSortData(column))+" "),_c('button',{staticClass:"delete is-small multi-sort-cancel-icon",attrs:{"type":"button"},on:{"click":function($event){$event.stopPropagation();return _vm.removeSortingPriority(column)}}})],1)]:_c('b-icon',{staticClass:"sort-icon",class:{
+                                        'is-desc': !_vm.isAsc,
+                                        'is-invisible': _vm.currentSortColumn !== column
+                                    },attrs:{"icon":_vm.sortIcon,"pack":_vm.iconPack,"both":"","size":_vm.sortIconSize}})]],2)])}),(_vm.checkable && _vm.checkboxPosition === 'right')?_c('th',{class:['checkbox-cell', { 'is-sticky': _vm.stickyCheckbox } ]},[(_vm.headerCheckable)?[_vm._t("check-all",[_c('b-checkbox',{attrs:{"autocomplete":"off","value":_vm.isAllChecked,"type":_vm.checkboxType,"disabled":_vm.isAllUncheckable},nativeOn:{"change":function($event){return _vm.checkAll($event)}}})],{"isAllChecked":_vm.isAllChecked,"isAllUncheckable":_vm.isAllUncheckable,"checkAll":_vm.checkAll})]:_vm._e()],2):_vm._e()],2),(_vm.hasCustomSubheadings)?_c('tr',{staticClass:"is-subheading"},[(_vm.showDetailRowIcon)?_c('th',{attrs:{"width":"40px"}}):_vm._e(),(_vm.checkable && _vm.checkboxPosition === 'left')?_c('th'):_vm._e(),_vm._l((_vm.visibleColumns),function(column,index){return _c('th',{key:column.newKey + ':' + index + 'subheading',style:(column.style)},[_c('div',{staticClass:"th-wrap",class:{
                                 'is-numeric': column.numeric,
                                 'is-centered': column.centered
-                        }},[(column.$scopedSlots && column.$scopedSlots.subheading)?[_c('b-slot-component',{attrs:{"component":column,"scoped":true,"name":"subheading","tag":"span","props":{ column: column, index: index }}})]:(_vm.$scopedSlots.subheading)?[_vm._t("subheading",null,{column:column,index:index})]:[_vm._v(_vm._s(column.subheading))]],2)])}),_vm._v(" "),(_vm.checkable && _vm.checkboxPosition === 'right')?_c('th'):_vm._e()],2):_vm._e(),_vm._v(" "),(_vm.hasSearchablenewColumns)?_c('tr',[(_vm.showDetailRowIcon)?_c('th',{attrs:{"width":"40px"}}):_vm._e(),_vm._v(" "),(_vm.checkable && _vm.checkboxPosition === 'left')?_c('th'):_vm._e(),_vm._v(" "),_vm._l((_vm.visibleColumns),function(column,index){return _c('th',{key:index,style:({
-                            width: column.width === undefined ? null
-                        : (isNaN(column.width) ? column.width : column.width + 'px') })},[_c('div',{staticClass:"th-wrap"},[(column.searchable)?[_c('b-input',{attrs:{"type":column.numeric ? 'number' : 'text'},model:{value:(_vm.filters[column.field]),callback:function ($$v) {_vm.$set(_vm.filters, column.field, $$v);},expression:"filters[column.field]"}})]:_vm._e()],2)])}),_vm._v(" "),(_vm.checkable && _vm.checkboxPosition === 'right')?_c('th'):_vm._e()],2):_vm._e()]):_vm._e(),_vm._v(" "),(_vm.visibleData.length)?_c('tbody',[_vm._l((_vm.visibleData),function(row,index){return [_c('tr',{key:_vm.customRowKey ? row[_vm.customRowKey] : index,class:[_vm.rowClass(row, index), {
-                            'is-selected': row === _vm.selected,
+                            },style:(column.thWrapStyle)},[(column.$scopedSlots && column.$scopedSlots.subheading)?[_c('b-slot-component',{attrs:{"component":column,"scoped":"","name":"subheading","tag":"span","props":{ column: column, index: index }}})]:[_vm._v(_vm._s(column.subheading))]],2)])}),(_vm.checkable && _vm.checkboxPosition === 'right')?_c('th'):_vm._e()],2):_vm._e(),(_vm.hasSearchablenewColumns)?_c('tr',[(_vm.showDetailRowIcon)?_c('th',{attrs:{"width":"40px"}}):_vm._e(),(_vm.checkable && _vm.checkboxPosition === 'left')?_c('th'):_vm._e(),_vm._l((_vm.visibleColumns),function(column,index){return _c('th',_vm._b({key:column.newKey + ':' + index + 'searchable',class:{'is-sticky': column.sticky},style:(column.thStyle)},'th',column.thAttrs(column),false),[_c('div',{staticClass:"th-wrap",style:(column.thWrapStyle)},[(column.searchable)?[(column.$scopedSlots
+                                    && column.$scopedSlots.searchable)?[_c('b-slot-component',{attrs:{"component":column,"scoped":true,"name":"searchable","tag":"span","props":{ column: column, filters: _vm.filters }}})]:_c('b-input',{attrs:{"type":column.numeric ? 'number' : 'text'},nativeOn:_vm._d({},[_vm.filtersEvent,function($event){return _vm.onFiltersEvent($event)}]),model:{value:(_vm.filters[column.field]),callback:function ($$v) {_vm.$set(_vm.filters, column.field, $$v);},expression:"filters[column.field]"}})]:_vm._e()],2)])}),(_vm.checkable && _vm.checkboxPosition === 'right')?_c('th'):_vm._e()],2):_vm._e()]):_vm._e(),_c('tbody',[_vm._l((_vm.visibleData),function(row,index){return [_c('tr',{key:_vm.customRowKey ? row[_vm.customRowKey] : index,class:[_vm.rowClass(row, index), {
+                            'is-selected': _vm.isRowSelected(row, _vm.selected),
                             'is-checked': _vm.isRowChecked(row),
-                        }],attrs:{"draggable":_vm.draggable},on:{"click":function($event){_vm.selectRow(row);},"dblclick":function($event){_vm.$emit('dblclick', row);},"mouseenter":function($event){_vm.$emit('mouseenter', row);},"mouseleave":function($event){_vm.$emit('mouseleave', row);},"contextmenu":function($event){_vm.$emit('contextmenu', row, $event);},"dragstart":function($event){_vm.handleDragStart($event, row, index);},"dragend":function($event){_vm.handleDragEnd($event, row, index);},"drop":function($event){_vm.handleDrop($event, row, index);},"dragover":function($event){_vm.handleDragOver($event, row, index);},"dragleave":function($event){_vm.handleDragLeave($event, row, index);}}},[(_vm.showDetailRowIcon)?_c('td',{staticClass:"chevron-cell"},[(_vm.hasDetailedVisible(row))?_c('a',{attrs:{"role":"button"},on:{"click":function($event){$event.stopPropagation();_vm.toggleDetails(row);}}},[_c('b-icon',{class:{'is-expanded': _vm.isVisibleDetailRow(row)},attrs:{"icon":"chevron-right","pack":_vm.iconPack,"both":""}})],1):_vm._e()]):_vm._e(),_vm._v(" "),(_vm.checkable && _vm.checkboxPosition === 'left')?_c('td',{staticClass:"checkbox-cell"},[_c('b-checkbox',{attrs:{"disabled":!_vm.isRowCheckable(row),"value":_vm.isRowChecked(row)},nativeOn:{"click":function($event){$event.preventDefault();$event.stopPropagation();_vm.checkRow(row, index, $event);}}})],1):_vm._e(),_vm._v(" "),(_vm.$scopedSlots.default)?_vm._t("default",null,{row:row,index:index}):_vm._l((_vm.newColumns),function(column){return _c('BTableColumn',_vm._b({key:column.field,attrs:{"internal":""}},'BTableColumn',column,false),[(column.renderHtml)?_c('span',{domProps:{"innerHTML":_vm._s(_vm.getValueByPath(row, column.field))}}):[_vm._v("\n                                    "+_vm._s(_vm.getValueByPath(row, column.field))+"\n                                ")]],2)}),_vm._v(" "),(_vm.checkable && _vm.checkboxPosition === 'right')?_c('td',{staticClass:"checkbox-cell"},[_c('b-checkbox',{attrs:{"disabled":!_vm.isRowCheckable(row),"value":_vm.isRowChecked(row)},nativeOn:{"click":function($event){$event.preventDefault();$event.stopPropagation();_vm.checkRow(row, index, $event);}}})],1):_vm._e()],2),_vm._v(" "),(_vm.isActiveDetailRow(row))?_c('tr',{staticClass:"detail"},[_c('td',{attrs:{"colspan":_vm.columnCount}},[_c('div',{staticClass:"detail-container"},[_vm._t("detail",null,{row:row,index:index})],2)])]):_vm._e(),_vm._v(" "),(_vm.isActiveCustomDetailRow(row))?_vm._t("detail",null,{row:row,index:index}):_vm._e()]})],2):_c('tbody',[_c('tr',{staticClass:"is-empty"},[_c('td',{attrs:{"colspan":_vm.columnCount}},[_vm._t("empty")],2)])]),_vm._v(" "),(_vm.$slots.footer !== undefined)?_c('tfoot',[_c('tr',{staticClass:"table-footer"},[(_vm.hasCustomFooterSlot())?_vm._t("footer"):_c('th',{attrs:{"colspan":_vm.columnCount}},[_vm._t("footer")],2)],2)]):_vm._e()])]),_vm._v(" "),((_vm.checkable && _vm.hasBottomLeftSlot()) ||
-        (_vm.paginated && (_vm.paginationPosition === 'bottom' || _vm.paginationPosition === 'both')))?_c('div',{staticClass:"level is-mobile"},[_c('div',{staticClass:"level-left"},[_vm._t("bottom-left")],2),_vm._v(" "),_c('div',{staticClass:"level-right"},[(_vm.paginated)?_c('div',{staticClass:"level-item"},[_c('b-pagination',{attrs:{"icon-pack":_vm.iconPack,"total":_vm.newDataTotal,"per-page":_vm.perPage,"simple":_vm.paginationSimple,"size":_vm.paginationSize,"current":_vm.newCurrentPage,"aria-next-label":_vm.ariaNextLabel,"aria-previous-label":_vm.ariaPreviousLabel,"aria-page-label":_vm.ariaPageLabel,"aria-current-label":_vm.ariaCurrentLabel},on:{"change":_vm.pageChanged}})],1):_vm._e()])]):_vm._e()],1)};
-var __vue_staticRenderFns__$2 = [];
+                        }],attrs:{"draggable":_vm.canDragRow},on:{"click":function($event){return _vm.selectRow(row)},"dblclick":function($event){return _vm.$emit('dblclick', row)},"mouseenter":function($event){return _vm.emitEventForRow('mouseenter', $event, row)},"mouseleave":function($event){return _vm.emitEventForRow('mouseleave', $event, row)},"contextmenu":function($event){return _vm.$emit('contextmenu', row, $event)},"dragstart":function($event){return _vm.handleDragStart($event, row, index)},"dragend":function($event){return _vm.handleDragEnd($event, row, index)},"drop":function($event){return _vm.handleDrop($event, row, index)},"dragover":function($event){return _vm.handleDragOver($event, row, index)},"dragleave":function($event){return _vm.handleDragLeave($event, row, index)},"touchstart":function($event){return _vm.handleTouchStart($event, row, index)},"touchmove":function($event){return _vm.handleTouchMove($event, row, index)},"touchend":function($event){return _vm.handleTouchEnd($event, row, index)}}},[(_vm.showDetailRowIcon)?_c('td',{staticClass:"chevron-cell"},[(_vm.hasDetailedVisible(row))?_c('a',{attrs:{"role":"button"},on:{"click":function($event){$event.stopPropagation();return _vm.toggleDetails(row)}}},[_c('b-icon',{class:{'is-expanded': _vm.isVisibleDetailRow(row)},attrs:{"icon":_vm.detailIcon,"pack":_vm.iconPack,"both":""}})],1):_vm._e()]):_vm._e(),(_vm.checkable && _vm.checkboxPosition === 'left')?_c('td',{class:['checkbox-cell', { 'is-sticky': _vm.stickyCheckbox } ]},[(_vm.useCheckboxButton)?_c('b-checkbox-button',{attrs:{"disabled":!_vm.isRowCheckable(row),"value":_vm.isRowChecked(row),"type":_vm.checkboxType,"native-value":true},nativeOn:{"click":function($event){$event.preventDefault();$event.stopPropagation();return _vm.checkRow(row, index, $event)}}},[_c('fa-icon',{staticClass:"has-text-grey-lighter",attrs:{"icon":['far', 'check']}})],1):_c('b-checkbox',{attrs:{"autocomplete":"off","value":_vm.isRowChecked(row),"type":_vm.checkboxType,"disabled":!_vm.isRowCheckable(row)},nativeOn:{"click":function($event){$event.preventDefault();$event.stopPropagation();return _vm.checkRow(row, index, $event)}}})],1):_vm._e(),_vm._l((_vm.visibleColumns),function(column,colindex){return [(column.useSlot)?[_vm._t("table-cell",null,{"row":row,"index":index,"column":column})]:(column.$scopedSlots &&
+                                column.$scopedSlots.default)?[_c('b-slot-component',_vm._b({key:column.newKey + ':' + index + ':' + colindex,class:column.getRootClasses(row),style:(column.getRootStyle(row)),attrs:{"component":column,"scoped":"","name":"default","tag":"td","data-label":column.label,"props":{
+                                        row: row, column: column, index: index, colindex: colindex,
+                                        toggleDetails: _vm.toggleDetails, isActiveDetailRow: _vm.isActiveDetailRow
+                                    }},nativeOn:{"click":function($event){return _vm.$emit('cellclick',row,column,index,colindex)}}},'b-slot-component',column.tdAttrs(row, column),false))]:_vm._e()]}),(_vm.checkable && _vm.checkboxPosition === 'right')?_c('td',{class:['checkbox-cell', { 'is-sticky': _vm.stickyCheckbox } ]},[(_vm.useCheckboxButton)?_c('b-checkbox-button',{attrs:{"disabled":!_vm.isRowCheckable(row),"value":_vm.isRowChecked(row),"type":_vm.checkboxType,"native-value":true},nativeOn:{"click":function($event){$event.preventDefault();$event.stopPropagation();return _vm.checkRow(row, index, $event)}}},[_c('fa-icon',{staticClass:"has-text-grey-lighter",attrs:{"icon":['far', 'check']}})],1):_c('b-checkbox',{attrs:{"autocomplete":"off","value":_vm.isRowChecked(row),"type":_vm.checkboxType,"disabled":!_vm.isRowCheckable(row)},nativeOn:{"click":function($event){$event.preventDefault();$event.stopPropagation();return _vm.checkRow(row, index, $event)}}})],1):_vm._e()],2),_c('transition',{key:(_vm.customRowKey ? row[_vm.customRowKey] : index) + 'detail',attrs:{"name":_vm.detailTransition}},[(_vm.isActiveDetailRow(row))?_c('tr',{staticClass:"detail"},[_c('td',{attrs:{"colspan":_vm.columnCount}},[_c('div',{staticClass:"detail-container"},[_vm._t("detail",null,{"row":row,"index":index})],2)])]):_vm._e()]),(_vm.isActiveCustomDetailRow(row))?_vm._t("detail",null,{"row":row,"index":index}):_vm._e()]}),(!_vm.visibleData.length)?_c('tr',{staticClass:"is-empty"},[_c('td',{attrs:{"colspan":_vm.columnCount}},[_vm._t("empty")],2)]):_vm._e()],2),(_vm.$slots.footer !== undefined)?_c('tfoot',[_c('tr',{staticClass:"table-footer"},[(_vm.hasCustomFooterSlot())?_vm._t("footer"):_c('th',{attrs:{"colspan":_vm.columnCount}},[_vm._t("footer")],2)],2)]):_vm._e()]),(_vm.loading)?[_vm._t("loading",[_c('b-loading',{attrs:{"is-full-page":false,"active":_vm.loading},on:{"update:active":function($event){_vm.loading=$event;}}})])]:_vm._e()],2),((_vm.checkable && _vm.hasBottomLeftSlot()) ||
+        (_vm.paginated && (_vm.paginationPosition === 'bottom' || _vm.paginationPosition === 'both')))?[_vm._t("pagination",[_c('b-table-pagination',_vm._b({attrs:{"per-page":_vm.perPage,"paginated":_vm.paginated,"rounded":_vm.paginationRounded,"icon-pack":_vm.iconPack,"total":_vm.newDataTotal,"current-page":_vm.newCurrentPage,"aria-next-label":_vm.ariaNextLabel,"aria-previous-label":_vm.ariaPreviousLabel,"aria-page-label":_vm.ariaPageLabel,"aria-current-label":_vm.ariaCurrentLabel,"page-input":_vm.pageInput,"pagination-order":_vm.paginationOrder,"page-input-position":_vm.pageInputPosition,"debounce-page-input":_vm.debouncePageInput},on:{"update:currentPage":function($event){_vm.newCurrentPage=$event;},"update:current-page":function($event){_vm.newCurrentPage=$event;},"page-change":function (event) { return _vm.$emit('page-change', event); }}},'b-table-pagination',_vm.$attrs,false),[_vm._t("bottom-left")],2)])]:_vm._e(),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.mayBeTouchDragging && (_vm.isDraggingRow || _vm.isDraggingColumn)),expression:"mayBeTouchDragging && (isDraggingRow || isDraggingColumn)"}],ref:"draggedCell",staticClass:"touch-dragged-cell",class:_vm.touchDraggedCellClasses,domProps:{"innerHTML":_vm._s(_vm.draggedCellContent)}})],2)};
+var __vue_staticRenderFns__ = [];
 
   /* style */
-  const __vue_inject_styles__$2 = undefined;
+  const __vue_inject_styles__ = undefined;
   /* scoped */
-  const __vue_scope_id__$2 = undefined;
+  const __vue_scope_id__ = undefined;
   /* module identifier */
-  const __vue_module_identifier__$2 = undefined;
+  const __vue_module_identifier__ = undefined;
   /* functional template */
-  const __vue_is_functional_template__$2 = false;
+  const __vue_is_functional_template__ = false;
   /* style inject */
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Table = __chunk_5.__vue_normalize__(
-    { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
-    __vue_inject_styles__$2,
-    __vue_script__$2,
-    __vue_scope_id__$2,
-    __vue_is_functional_template__$2,
-    __vue_module_identifier__$2,
+  const __vue_component__ = /*#__PURE__*/plugins.normalizeComponent(
+    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+    __vue_inject_styles__,
+    __vue_script__,
+    __vue_scope_id__,
+    __vue_is_functional_template__,
+    __vue_module_identifier__,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
+  var Table = __vue_component__;
+
 var Plugin = {
   install: function install(Vue) {
-    __chunk_5.registerComponent(Vue, Table);
-    __chunk_5.registerComponent(Vue, TableColumn);
+    // individual import + extend method into Table.vue
+    if (typeof config.VueInstance === 'undefined') {
+      config.setVueInstance(Vue);
+    }
+    plugins.registerComponent(Vue, Table);
+    plugins.registerComponent(Vue, TableColumn);
   }
 };
-__chunk_5.use(Plugin);
+plugins.use(Plugin);
 
 exports.BTable = Table;
 exports.BTableColumn = TableColumn;
-exports.default = Plugin;
+exports["default"] = Plugin;

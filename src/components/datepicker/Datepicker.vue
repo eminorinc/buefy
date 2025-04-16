@@ -200,6 +200,7 @@
             :max="formatNative(maxDate)"
             :min="formatNative(minDate)"
             :disabled="disabled"
+            :readonly="false"
             v-bind="$attrs"
             :use-html5-validation="false"
             @change.native="onChangeNativePicker"

@@ -1,8 +1,8 @@
-import './chunk-f2006744.js';
-import './chunk-b76a6c1d.js';
-import { r as registerComponent, u as use } from './chunk-cca88db8.js';
-import { F as Field } from './chunk-169e5faa.js';
-export { F as BField } from './chunk-169e5faa.js';
+import { F as Field } from './Field-3cb24eff.js';
+export { F as BField } from './Field-3cb24eff.js';
+import { u as use, a as registerComponent } from './plugins-218aea86.js';
+import './_rollupPluginBabelHelpers-df313029.js';
+import './config-e7d4b9c2.js';
 
 var Plugin = {
   install: function install(Vue) {
@@ -11,4 +11,4 @@ var Plugin = {
 };
 use(Plugin);
 
-export default Plugin;
+export { Plugin as default };

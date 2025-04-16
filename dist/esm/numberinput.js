@@ -1,22 +1,25 @@
-import { _ as _defineProperty } from './chunk-f2006744.js';
+import { _ as _defineProperty } from './_rollupPluginBabelHelpers-df313029.js';
+import { I as Icon } from './Icon-60d47b31.js';
+import { I as Input } from './Input-20612b63.js';
+import { F as FormElementMixin } from './FormElementMixin-b223d3c7.js';
+import { n as normalizeComponent, u as use, a as registerComponent } from './plugins-218aea86.js';
+import './config-e7d4b9c2.js';
 import './helpers.js';
-import './chunk-b76a6c1d.js';
-import { F as FormElementMixin } from './chunk-03b1476b.js';
-import { I as Icon } from './chunk-c8434a6f.js';
-import { _ as __vue_normalize__, r as registerComponent, u as use } from './chunk-cca88db8.js';
-import { I as Input } from './chunk-70383fcd.js';
 
-var _components;
 var script = {
   name: 'BNumberinput',
-  components: (_components = {}, _defineProperty(_components, Icon.name, Icon), _defineProperty(_components, Input.name, Input), _components),
+  components: _defineProperty(_defineProperty({}, Icon.name, Icon), Input.name, Input),
   mixins: [FormElementMixin],
   inheritAttrs: false,
   props: {
     value: Number,
-    min: [Number, String],
+    min: {
+      type: [Number, String]
+    },
     max: [Number, String],
     step: [Number, String],
+    minStep: [Number, String],
+    exponential: [Boolean, Number],
     disabled: Boolean,
     type: {
       type: String,
@@ -30,16 +33,32 @@ var script = {
       type: Boolean,
       default: true
     },
+    controlsAlignment: {
+      type: String,
+      default: 'center',
+      validator: function validator(value) {
+        return ['left', 'right', 'center'].indexOf(value) >= 0;
+      }
+    },
     controlsRounded: {
       type: Boolean,
       default: false
     },
-    controlsPosition: String
+    controlsPosition: String,
+    placeholder: [Number, String],
+    ariaMinusLabel: String,
+    ariaPlusLabel: String,
+    longPress: {
+      type: Boolean,
+      default: true
+    }
   },
   data: function data() {
     return {
-      newValue: !isNaN(this.value) ? this.value : parseFloat(this.min) || 0,
+      newValue: this.value,
       newStep: this.step || 1,
+      newMinStep: this.minStep,
+      timesPressed: 1,
       _elementRef: 'input'
     };
   },
@@ -49,29 +68,36 @@ var script = {
         return this.newValue;
       },
       set: function set(value) {
-        var newValue = value;
-
-        if (value === '') {
-          newValue = parseFloat(this.min) || null;
+        var _this = this;
+        // Parses the number, so that "0" => 0, and "invalid" => null
+        var newValue = Number(value) === 0 ? 0 : Number(value) || null;
+        if (value === '' || value === undefined || value === null) {
+          newValue = null;
         }
-
         this.newValue = newValue;
-        this.$emit('input', newValue);
-        !this.isValid && this.$refs.input.checkHtml5Validity();
+        if (newValue === null) {
+          this.$emit('input', newValue);
+        } else if (!isNaN(newValue) && newValue !== '-0') {
+          this.$emit('input', Number(newValue));
+        }
+        this.$nextTick(function () {
+          if (_this.$refs.input) {
+            _this.$refs.input.checkHtml5Validity();
+          }
+        });
       }
     },
-    computed: {
-        computedValue: {
-            get: function get() {
-                return this.newValue
-            },
-            set: function set(value) {
-                var newValue = value
-
-        this.newValue = newValue;
-        this.$emit('input', newValue);
-        !this.isValid && this.$refs.input.checkHtml5Validity();
+    controlsLeft: function controlsLeft() {
+      if (this.controls && this.controlsAlignment !== 'right') {
+        return this.controlsAlignment === 'left' ? ['minus', 'plus'] : ['minus'];
       }
+      return [];
+    },
+    controlsRight: function controlsRight() {
+      if (this.controls && this.controlsAlignment !== 'left') {
+        return this.controlsAlignment === 'right' ? ['minus', 'plus'] : ['plus'];
+      }
+      return [];
     },
     fieldClasses: function fieldClasses() {
       return [{
@@ -94,7 +120,17 @@ var script = {
       return typeof this.max === 'string' ? parseFloat(this.max) : this.max;
     },
     stepNumber: function stepNumber() {
+      if (this.newStep === 'any') {
+        return 1;
+      }
       return typeof this.newStep === 'string' ? parseFloat(this.newStep) : this.newStep;
+    },
+    minStepNumber: function minStepNumber() {
+      if (this.newStep === 'any' && typeof this.newMinStep === 'undefined') {
+        return 'any';
+      }
+      var step = typeof this.newMinStep !== 'undefined' ? this.newMinStep : this.newStep;
+      return typeof step === 'string' ? parseFloat(step) : step;
     },
     disabledMin: function disabledMin() {
       return this.computedValue - this.stepNumber < this.minNumber;
@@ -103,71 +139,57 @@ var script = {
       return this.computedValue + this.stepNumber > this.maxNumber;
     },
     stepDecimals: function stepDecimals() {
-      var step = this.stepNumber.toString();
+      var step = this.minStepNumber.toString();
       var index = step.indexOf('.');
-
-                this.newValue = newValue
-                this.$emit('input', newValue)
-                !this.isValid && this.$refs.input.checkHtml5Validity()
-            }
-        },
-        fieldClasses: function fieldClasses() {
-            return [{
-                'has-addons': this.controlsPosition === 'compact'
-            }, {
-                'is-grouped': this.controlsPosition !== 'compact'
-            }, {
-                'is-expanded': this.expanded
-            }]
-        },
-        buttonClasses: function buttonClasses() {
-            return [this.type, this.size, {
-                'is-rounded': this.controlsRounded
-            }]
-        },
-        minNumber: function minNumber() {
-            return typeof this.min === 'string' ? parseFloat(this.min) : this.min
-        },
-        maxNumber: function maxNumber() {
-            return typeof this.max === 'string' ? parseFloat(this.max) : this.max
-        },
-        stepNumber: function stepNumber() {
-            return typeof this.newStep === 'string' ? parseFloat(this.newStep) : this.newStep
-        },
-        disabledMin: function disabledMin() {
-            return this.computedValue - this.stepNumber < this.minNumber
-        },
-        disabledMax: function disabledMax() {
-            return this.computedValue + this.stepNumber > this.maxNumber
-        },
-        stepDecimals: function stepDecimals() {
-            var step = this.stepNumber.toString()
-            var index = step.indexOf('.')
-
-            if (index >= 0) {
-                return step.substring(index + 1).length
-            }
-
-            return 0
-        }
-    },
-    watch: {
+      if (index >= 0) {
+        return step.substring(index + 1).length;
+      }
+      return 0;
+    }
+  },
+  watch: {
     /**
-    * When v-model is changed:
-    *   1. Set internal value.
-    */
-    value: function value(_value) {
-      this.newValue = _value;
+     * When v-model is changed:
+     *   1. Set internal value.
+     */
+    value: {
+      immediate: true,
+      handler: function handler(value) {
+        this.newValue = value;
+      }
+    },
+    step: function step(value) {
+      this.newStep = value;
+    },
+    minStep: function minStep(value) {
+      this.newMinStep = value;
     }
   },
   methods: {
+    isDisabled: function isDisabled(control) {
+      return this.disabled || (control === 'plus' ? this.disabledMax : this.disabledMin);
+    },
     decrement: function decrement() {
+      if (this.computedValue === null || typeof this.computedValue === 'undefined') {
+        if (this.maxNumber !== null && typeof this.maxNumber !== 'undefined') {
+          this.computedValue = this.maxNumber;
+          return;
+        }
+        this.computedValue = 0;
+      }
       if (typeof this.minNumber === 'undefined' || this.computedValue - this.stepNumber >= this.minNumber) {
         var value = this.computedValue - this.stepNumber;
         this.computedValue = parseFloat(value.toFixed(this.stepDecimals));
       }
     },
     increment: function increment() {
+      if (this.computedValue === null || typeof this.computedValue === 'undefined' || this.computedValue < this.minNumber) {
+        if (this.minNumber !== null && typeof this.minNumber !== 'undefined') {
+          this.computedValue = this.minNumber;
+          return;
+        }
+        this.computedValue = 0;
+      }
       if (typeof this.maxNumber === 'undefined' || this.computedValue + this.stepNumber <= this.maxNumber) {
         var value = this.computedValue + this.stepNumber;
         this.computedValue = parseFloat(value.toFixed(this.stepDecimals));
@@ -175,30 +197,31 @@ var script = {
     },
     onControlClick: function onControlClick(event, inc) {
       // IE 11 -> filter click event
-      if (event.detail !== 0 || event.type === 'click') return;
+      if (event.detail !== 0 || event.type !== 'click') return;
       if (inc) this.increment();else this.decrement();
     },
-    onStartLongPress: function onStartLongPress(event, inc) {
-      var _this = this;
-
-      if (event.button !== 0 && event.type !== 'touchstart') return;
-      this._$intervalTime = new Date();
-      clearInterval(this._$intervalRef);
-      this._$intervalRef = setInterval(function () {
-        if (inc) _this.increment();else _this.decrement();
-      }, 250);
+    longPressTick: function longPressTick(inc) {
+      var _this2 = this;
+      if (inc) this.increment();else this.decrement();
+      if (!this.longPress) return;
+      this._$intervalRef = setTimeout(function () {
+        _this2.longPressTick(inc);
+      }, this.exponential ? 250 / (this.exponential * this.timesPressed++) : 250);
     },
-    onStopLongPress: function onStopLongPress(inc) {
+    onStartLongPress: function onStartLongPress(event, inc) {
+      if (event.button !== 0 && event.type !== 'touchstart') return;
+      clearTimeout(this._$intervalRef);
+      this.longPressTick(inc);
+    },
+    onStopLongPress: function onStopLongPress() {
       if (!this._$intervalRef) return;
-      var d = new Date();
-
-      if (d - this._$intervalTime < 250) {
-        if (inc) this.increment();else this.decrement();
-      }
-
-      clearInterval(this._$intervalRef);
+      this.timesPressed = 1;
+      clearTimeout(this._$intervalRef);
       this._$intervalRef = null;
     }
+  },
+  beforeDestroy: function beforeDestroy() {
+    clearTimeout(this._$intervalRef);
   }
 };
 
@@ -206,7 +229,7 @@ var script = {
 const __vue_script__ = script;
 
 /* template */
-var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"b-numberinput field",class:_vm.fieldClasses},[(_vm.controls)?_c('p',{staticClass:"control",on:{"mouseup":function($event){_vm.onStopLongPress(false);},"mouseleave":function($event){_vm.onStopLongPress(false);},"touchend":function($event){_vm.onStopLongPress(false);},"touchcancel":function($event){_vm.onStopLongPress(false);}}},[_c('button',{staticClass:"button",class:_vm.buttonClasses,attrs:{"type":"button","disabled":_vm.disabled || _vm.disabledMin},on:{"mousedown":function($event){_vm.onStartLongPress($event, false);},"touchstart":function($event){$event.preventDefault();_vm.onStartLongPress($event, false);},"click":function($event){_vm.onControlClick($event, false);}}},[_c('b-icon',{attrs:{"icon":"minus","pack":_vm.iconPack,"size":_vm.iconSize}})],1)]):_vm._e(),_vm._v(" "),_c('b-input',_vm._b({ref:"input",attrs:{"type":"number","step":_vm.newStep,"max":_vm.max,"min":_vm.min,"size":_vm.size,"disabled":_vm.disabled,"readonly":!_vm.editable,"loading":_vm.loading,"rounded":_vm.rounded,"icon":_vm.icon,"icon-pack":_vm.iconPack,"autocomplete":_vm.autocomplete,"expanded":_vm.expanded,"use-html5-validation":_vm.useHtml5Validation},on:{"focus":function($event){_vm.$emit('focus', $event);},"blur":function($event){_vm.$emit('blur', $event);}},model:{value:(_vm.computedValue),callback:function ($$v) {_vm.computedValue=_vm._n($$v);},expression:"computedValue"}},'b-input',_vm.$attrs,false)),_vm._v(" "),(_vm.controls)?_c('p',{staticClass:"control",on:{"mouseup":function($event){_vm.onStopLongPress(true);},"mouseleave":function($event){_vm.onStopLongPress(true);},"touchend":function($event){_vm.onStopLongPress(true);},"touchcancel":function($event){_vm.onStopLongPress(true);}}},[_c('button',{staticClass:"button",class:_vm.buttonClasses,attrs:{"type":"button","disabled":_vm.disabled || _vm.disabledMax},on:{"mousedown":function($event){_vm.onStartLongPress($event, true);},"touchstart":function($event){$event.preventDefault();_vm.onStartLongPress($event, true);},"click":function($event){_vm.onControlClick($event, true);}}},[_c('b-icon',{attrs:{"icon":"plus","pack":_vm.iconPack,"size":_vm.iconSize}})],1)]):_vm._e()],1)};
+var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"b-numberinput field",class:_vm.fieldClasses},[_vm._l((_vm.controlsLeft),function(control){return _c('p',{key:control,class:['control', control],on:{"mouseup":_vm.onStopLongPress,"mouseleave":_vm.onStopLongPress,"touchend":_vm.onStopLongPress,"touchcancel":_vm.onStopLongPress}},[_c('button',{staticClass:"button",class:_vm.buttonClasses,attrs:{"type":"button","disabled":_vm.isDisabled(control),"aria-label":control === 'plus' ? _vm.ariaPlusLabel : _vm.ariaMinusLabel},on:{"mousedown":function($event){!_vm.isDisabled(control) && _vm.onStartLongPress($event, control === 'plus');},"touchstart":function($event){$event.preventDefault();!_vm.isDisabled(control) && _vm.onStartLongPress($event, control === 'plus');},"click":function($event){!_vm.isDisabled(control) && _vm.onControlClick($event, control === 'plus');}}},[_c('b-icon',{attrs:{"both":"","icon":control,"pack":_vm.iconPack,"size":_vm.iconSize}})],1)])}),_c('b-input',_vm._b({ref:"input",attrs:{"type":"number","step":_vm.minStepNumber,"max":_vm.max,"min":_vm.min,"size":_vm.size,"disabled":_vm.disabled,"readonly":!_vm.editable,"loading":_vm.loading,"rounded":_vm.rounded,"icon":_vm.icon,"icon-pack":_vm.iconPack,"autocomplete":_vm.autocomplete,"expanded":_vm.expanded,"placeholder":_vm.placeholder,"use-html5-validation":_vm.useHtml5Validation},on:{"focus":function($event){return _vm.$emit('focus', $event)},"blur":function($event){return _vm.$emit('blur', $event)}},model:{value:(_vm.computedValue),callback:function ($$v) {_vm.computedValue=$$v;},expression:"computedValue"}},'b-input',_vm.$attrs,false)),_vm._l((_vm.controlsRight),function(control){return _c('p',{key:control,class:['control', control],on:{"mouseup":_vm.onStopLongPress,"mouseleave":_vm.onStopLongPress,"touchend":_vm.onStopLongPress,"touchcancel":_vm.onStopLongPress}},[_c('button',{staticClass:"button",class:_vm.buttonClasses,attrs:{"type":"button","disabled":_vm.isDisabled(control),"aria-label":control === 'plus' ? _vm.ariaPlusLabel : _vm.ariaMinusLabel},on:{"mousedown":function($event){!_vm.isDisabled(control) && _vm.onStartLongPress($event, control === 'plus');},"touchstart":function($event){$event.preventDefault();!_vm.isDisabled(control) && _vm.onStartLongPress($event, control === 'plus');},"click":function($event){!_vm.isDisabled(control) && _vm.onControlClick($event, control === 'plus');}}},[_c('b-icon',{attrs:{"both":"","icon":control,"pack":_vm.iconPack,"size":_vm.iconSize}})],1)])})],2)};
 var __vue_staticRenderFns__ = [];
 
   /* style */
@@ -221,18 +244,24 @@ var __vue_staticRenderFns__ = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Numberinput = __vue_normalize__(
+  const __vue_component__ = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
     __vue_scope_id__,
     __vue_is_functional_template__,
     __vue_module_identifier__,
+    false,
+    undefined,
     undefined,
     undefined
   );
+
+  var Numberinput = __vue_component__;
 
 var Plugin = {
   install: function install(Vue) {
@@ -241,5 +270,4 @@ var Plugin = {
 };
 use(Plugin);
 
-export default Plugin;
-export { Numberinput as BNumberinput };
+export { Numberinput as BNumberinput, Plugin as default };
