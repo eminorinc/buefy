@@ -5,46 +5,93 @@
   (global = global || self, factory(global.Dropdown = {}));
 }(this, function (exports) { 'use strict';
 
-  function _typeof(obj) {
+  function _arrayLikeToArray(r, a) {
+    (null == a || a > r.length) && (a = r.length);
+    for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
+    return n;
+  }
+  function _createForOfIteratorHelper(r, e) {
+    var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+    if (!t) {
+      if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) {
+        t && (r = t);
+        var n = 0,
+          F = function () {};
+        return {
+          s: F,
+          n: function () {
+            return n >= r.length ? {
+              done: !0
+            } : {
+              done: !1,
+              value: r[n++]
+            };
+          },
+          e: function (r) {
+            throw r;
+          },
+          f: F
+        };
+      }
+      throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+    }
+    var o,
+      a = !0,
+      u = !1;
+    return {
+      s: function () {
+        t = t.call(r);
+      },
+      n: function () {
+        var r = t.next();
+        return a = r.done, r;
+      },
+      e: function (r) {
+        u = !0, o = r;
+      },
+      f: function () {
+        try {
+          a || null == t.return || t.return();
+        } finally {
+          if (u) throw o;
+        }
+      }
+    };
+  }
+  function _typeof(o) {
     "@babel/helpers - typeof";
 
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof = function (obj) {
-        return typeof obj;
-      };
-    } else {
-      _typeof = function (obj) {
-        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-      };
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+      return typeof o;
+    } : function (o) {
+      return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+    }, _typeof(o);
+  }
+  function _unsupportedIterableToArray(r, a) {
+    if (r) {
+      if ("string" == typeof r) return _arrayLikeToArray(r, a);
+      var t = {}.toString.call(r).slice(8, -1);
+      return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0;
     }
-
-    return _typeof(obj);
   }
 
   var findFocusable = function findFocusable(element) {
     var programmatic = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
     if (!element) {
       return null;
     }
-
     if (programmatic) {
       return element.querySelectorAll("*[tabindex=\"-1\"]");
     }
-
     return element.querySelectorAll("a[href]:not([tabindex=\"-1\"]),\n                                     area[href],\n                                     input:not([disabled]),\n                                     select:not([disabled]),\n                                     textarea:not([disabled]),\n                                     button:not([disabled]),\n                                     iframe,\n                                     object,\n                                     embed,\n                                     *[tabindex]:not([tabindex=\"-1\"]),\n                                     *[contenteditable]");
   };
-
   var onKeyDown;
-
   var bind = function bind(el, _ref) {
     var _ref$value = _ref.value,
-        value = _ref$value === void 0 ? true : _ref$value;
-
+      value = _ref$value === void 0 ? true : _ref$value;
     if (value) {
       var focusable = findFocusable(el);
       var focusableProg = findFocusable(el, true);
-
       if (focusable && focusable.length > 0) {
         onKeyDown = function onKeyDown(event) {
           // Need to get focusable each time since it can change between key events
@@ -53,7 +100,6 @@
           focusableProg = findFocusable(el, true);
           var firstFocusable = focusable[0];
           var lastFocusable = focusable[focusable.length - 1];
-
           if (event.target === firstFocusable && event.shiftKey && event.key === 'Tab') {
             event.preventDefault();
             lastFocusable.focus();
@@ -62,16 +108,13 @@
             firstFocusable.focus();
           }
         };
-
         el.addEventListener('keydown', onKeyDown);
       }
     }
   };
-
   var unbind = function unbind(el) {
     el.removeEventListener('keydown', onKeyDown);
   };
-
   var directive = {
     bind: bind,
     unbind: unbind
@@ -217,7 +260,6 @@
         _isDropdown: true,
         // Used internally by DropdownItem
         _bodyEl: undefined // Used to append to body
-
       };
     },
     computed: {
@@ -251,15 +293,12 @@
       value: function value(_value) {
         this.selected = _value;
       },
-
       /**
       * Emit event when isActive value is changed.
       */
       isActive: function isActive(value) {
         var _this = this;
-
         this.$emit('active-change', value);
-
         if (this.appendToBody) {
           this.$nextTick(function () {
             _this.updateAppendToBody();
@@ -278,7 +317,6 @@
         if (this.multiple) {
           if (this.selected) {
             var index = this.selected.indexOf(value);
-
             if (index === -1) {
               this.selected.push(value);
             } else {
@@ -287,7 +325,6 @@
           } else {
             this.selected = [value];
           }
-
           this.$emit('change', this.selected);
         } else {
           if (this.selected !== value) {
@@ -295,90 +332,58 @@
             this.$emit('change', this.selected);
           }
         }
-
         this.$emit('input', this.selected);
-
         if (!this.multiple) {
           this.isActive = !this.closeOnClick;
-
           if (this.hoverable && this.closeOnClick) {
             this.isHoverable = false;
           }
         }
       },
-
       /**
       * White-listed items to not close when clicked.
       */
       isInWhiteList: function isInWhiteList(el) {
         if (el === this.$refs.dropdownMenu) return true;
-        if (el === this.$refs.trigger) return true; // All chidren from dropdown
-
+        if (el === this.$refs.trigger) return true;
+        // All chidren from dropdown
         if (this.$refs.dropdownMenu !== undefined) {
           var children = this.$refs.dropdownMenu.querySelectorAll('*');
-          var _iteratorNormalCompletion = true;
-          var _didIteratorError = false;
-          var _iteratorError = undefined;
-
+          var _iterator = _createForOfIteratorHelper(children),
+            _step;
           try {
-            for (var _iterator = children[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
               var child = _step.value;
-
               if (el === child) {
                 return true;
               }
             }
           } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
+            _iterator.e(err);
           } finally {
-            try {
-              if (!_iteratorNormalCompletion && _iterator.return != null) {
-                _iterator.return();
-              }
-            } finally {
-              if (_didIteratorError) {
-                throw _iteratorError;
-              }
-            }
+            _iterator.f();
           }
-        } // All children from trigger
-
-
+        }
+        // All children from trigger
         if (this.$refs.trigger !== undefined) {
           var _children = this.$refs.trigger.querySelectorAll('*');
-
-          var _iteratorNormalCompletion2 = true;
-          var _didIteratorError2 = false;
-          var _iteratorError2 = undefined;
-
+          var _iterator2 = _createForOfIteratorHelper(_children),
+            _step2;
           try {
-            for (var _iterator2 = _children[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
               var _child = _step2.value;
-
               if (el === _child) {
                 return true;
               }
             }
           } catch (err) {
-            _didIteratorError2 = true;
-            _iteratorError2 = err;
+            _iterator2.e(err);
           } finally {
-            try {
-              if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-                _iterator2.return();
-              }
-            } finally {
-              if (_didIteratorError2) {
-                throw _iteratorError2;
-              }
-            }
+            _iterator2.f();
           }
         }
-
         return false;
       },
-
       /**
       * Close dropdown if clicked outside.
       */
@@ -387,7 +392,6 @@
         if (this.inline) return;
         if (!this.isInWhiteList(event.target)) this.isActive = false;
       },
-
       /**
        * Keypress event that is bound to the document
        */
@@ -398,22 +402,19 @@
           this.isActive = false;
         }
       },
-
       /**
       * Toggle dropdown if it's not disabled.
       */
       toggle: function toggle() {
         var _this2 = this;
-
         if (this.disabled) return;
-
         if (!this.isActive) {
           // if not active, toggle after clickOutside event
           // this fixes toggling programmatic
           this.$nextTick(function () {
             var value = !_this2.isActive;
-            _this2.isActive = value; // Vue 2.6.x ???
-
+            _this2.isActive = value;
+            // Vue 2.6.x ???
             setTimeout(function () {
               return _this2.isActive = value;
             });
@@ -430,7 +431,6 @@
       updateAppendToBody: function updateAppendToBody() {
         var dropdownMenu = this.$refs.dropdownMenu;
         var trigger = this.$refs.trigger;
-
         if (dropdownMenu && trigger) {
           // update wrapper dropdown
           var dropdown = this.$data._bodyEl.children[0];
@@ -439,11 +439,9 @@
           });
           dropdown.classList.add('dropdown');
           dropdown.classList.add('dropdown-menu-animation');
-
           if (this.$vnode && this.$vnode.data && this.$vnode.data.staticClass) {
             dropdown.classList.add(this.$vnode.data.staticClass);
           }
-
           this.rootClasses.forEach(function (item) {
             // skip position prop
             if (item && _typeof(item) === 'object') {
@@ -454,7 +452,6 @@
               }
             }
           });
-
           if (this.appendToBodyCopyParent) {
             var parentNode = this.$refs.dropdown.parentNode;
             var parent = this.$data._bodyEl;
@@ -465,21 +462,17 @@
               parent.classList.add(item);
             });
           }
-
           var rect = trigger.getBoundingClientRect();
           var top = rect.top + window.scrollY;
           var left = rect.left + window.scrollX;
-
           if (!this.position || this.position.indexOf('bottom') >= 0) {
             top += trigger.clientHeight;
           } else {
             top -= dropdownMenu.clientHeight;
           }
-
           if (this.position && this.position.indexOf('left') >= 0) {
             left -= dropdownMenu.clientWidth - trigger.clientWidth;
           }
-
           this.style = {
             position: 'absolute',
             top: "".concat(top, "px"),
@@ -506,7 +499,6 @@
         document.removeEventListener('click', this.clickedOutside);
         document.removeEventListener('keyup', this.keyPress);
       }
-
       if (this.appendToBody) {
         removeElement(this.$data._bodyEl);
       }
@@ -617,15 +609,19 @@
     
     /* style inject SSR */
     
+    /* style inject shadow dom */
+    
 
     
-    var Dropdown = normalizeComponent_1(
+    const __vue_component__ = /*#__PURE__*/normalizeComponent_1(
       { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
       __vue_inject_styles__,
       __vue_script__,
       __vue_scope_id__,
       __vue_is_functional_template__,
       __vue_module_identifier__,
+      false,
+      undefined,
       undefined,
       undefined
     );
@@ -651,6 +647,7 @@
   //
   //
   //
+
   var script$1 = {
     name: 'BDropdownItem',
     props: {
@@ -741,15 +738,19 @@
     
     /* style inject SSR */
     
+    /* style inject shadow dom */
+    
 
     
-    var DropdownItem = normalizeComponent_1(
+    const __vue_component__$1 = /*#__PURE__*/normalizeComponent_1(
       { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
       __vue_inject_styles__$1,
       __vue_script__$1,
       __vue_scope_id__$1,
       __vue_is_functional_template__$1,
       __vue_module_identifier__$1,
+      false,
+      undefined,
       undefined,
       undefined
     );
@@ -765,14 +766,14 @@
 
   var Plugin = {
     install: function install(Vue) {
-      registerComponent(Vue, Dropdown);
-      registerComponent(Vue, DropdownItem);
+      registerComponent(Vue, __vue_component__);
+      registerComponent(Vue, __vue_component__$1);
     }
   };
   use(Plugin);
 
-  exports.BDropdown = Dropdown;
-  exports.BDropdownItem = DropdownItem;
+  exports.BDropdown = __vue_component__;
+  exports.BDropdownItem = __vue_component__$1;
   exports.default = Plugin;
 
   Object.defineProperty(exports, '__esModule', { value: true });

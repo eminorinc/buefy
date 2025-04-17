@@ -1,15 +1,14 @@
-import { _ as _defineProperty } from './chunk-1fafdf15.js';
+import { _ as _defineProperty } from './chunk-94a101ab.js';
 import './helpers.js';
 import './chunk-6985c8ce.js';
-import { F as FormElementMixin } from './chunk-7ef8bebf.js';
-import { I as Icon } from './chunk-a376283d.js';
+import { F as FormElementMixin } from './chunk-32d5bd27.js';
+import { I as Icon } from './chunk-665715e0.js';
 import { _ as __vue_normalize__, r as registerComponent, u as use } from './chunk-cca88db8.js';
-import { I as Input } from './chunk-df5f75f1.js';
+import { I as Input } from './chunk-30008156.js';
 
-var _components;
 var script = {
   name: 'BNumberinput',
-  components: (_components = {}, _defineProperty(_components, Icon.name, Icon), _defineProperty(_components, Input.name, Input), _components),
+  components: _defineProperty(_defineProperty({}, Icon.name, Icon), Input.name, Input),
   mixins: [FormElementMixin],
   inheritAttrs: false,
   props: {
@@ -50,11 +49,9 @@ var script = {
       },
       set: function set(value) {
         var newValue = value;
-
         if (value === '') {
           newValue = parseFloat(this.min) || null;
         }
-
         this.newValue = newValue;
         this.$emit('input', newValue);
         !this.isValid && this.$refs.input.checkHtml5Validity();
@@ -92,11 +89,9 @@ var script = {
     stepDecimals: function stepDecimals() {
       var step = this.stepNumber.toString();
       var index = step.indexOf('.');
-
       if (index >= 0) {
         return step.substring(index + 1).length;
       }
-
       return 0;
     }
   },
@@ -129,7 +124,6 @@ var script = {
     },
     onStartLongPress: function onStartLongPress(event, inc) {
       var _this = this;
-
       if (event.button !== 0 && event.type !== 'touchstart') return;
       this._$intervalTime = new Date();
       clearInterval(this._$intervalRef);
@@ -140,11 +134,9 @@ var script = {
     onStopLongPress: function onStopLongPress(inc) {
       if (!this._$intervalRef) return;
       var d = new Date();
-
       if (d - this._$intervalTime < 250) {
         if (inc) this.increment();else this.decrement();
       }
-
       clearInterval(this._$intervalRef);
       this._$intervalRef = null;
     }
@@ -170,25 +162,29 @@ var __vue_staticRenderFns__ = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Numberinput = __vue_normalize__(
+  const __vue_component__ = /*#__PURE__*/__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
     __vue_scope_id__,
     __vue_is_functional_template__,
     __vue_module_identifier__,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin = {
   install: function install(Vue) {
-    registerComponent(Vue, Numberinput);
+    registerComponent(Vue, __vue_component__);
   }
 };
 use(Plugin);
 
 export default Plugin;
-export { Numberinput as BNumberinput };
+export { __vue_component__ as BNumberinput };

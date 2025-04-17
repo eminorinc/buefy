@@ -1,22 +1,21 @@
-import { _ as _defineProperty } from './chunk-1fafdf15.js';
+import { _ as _defineProperty } from './chunk-94a101ab.js';
 import { isMobile } from './helpers.js';
 import { c as config } from './chunk-6985c8ce.js';
-import { F as FormElementMixin } from './chunk-7ef8bebf.js';
-import './chunk-a376283d.js';
+import { F as FormElementMixin } from './chunk-32d5bd27.js';
+import './chunk-665715e0.js';
 import { _ as __vue_normalize__, r as registerComponent, u as use } from './chunk-cca88db8.js';
-import './chunk-df5f75f1.js';
-import './chunk-f8d9dda7.js';
-import './chunk-42f463e6.js';
-import './chunk-d1259ca0.js';
-import './chunk-f6fe77d8.js';
-import './chunk-06c11900.js';
-import { D as Datepicker } from './chunk-5893b645.js';
-import { T as Timepicker } from './chunk-f127d576.js';
+import './chunk-30008156.js';
+import './chunk-bc2d2806.js';
+import './chunk-28fd8807.js';
+import './chunk-33b054ae.js';
+import './chunk-0c66fa55.js';
+import './chunk-4615c329.js';
+import { D as Datepicker } from './chunk-6861e046.js';
+import { T as Timepicker } from './chunk-b4b1975f.js';
 
-var _components;
 var script = {
   name: 'BDatetimepicker',
-  components: (_components = {}, _defineProperty(_components, Datepicker.name, Datepicker), _defineProperty(_components, Timepicker.name, Timepicker), _components),
+  components: _defineProperty(_defineProperty({}, Datepicker.name, Datepicker), Timepicker.name, Timepicker),
   mixins: [FormElementMixin],
   inheritAttrs: false,
   props: {
@@ -82,7 +81,6 @@ var script = {
       set: function set(value) {
         if (value) {
           var val = new Date(value.getTime());
-
           if (this.newValue) {
             // restore time part
             if ((value.getDate() !== this.newValue.getDate() || value.getMonth() !== this.newValue.getMonth() || value.getFullYear() !== this.newValue.getFullYear()) && value.getHours() === 0 && value.getMinutes() === 0 && value.getSeconds() === 0) {
@@ -90,22 +88,18 @@ var script = {
             }
           } else {
             val = this.datetimeCreator(value);
-          } // check min and max range
-
-
+          }
+          // check min and max range
           if (this.minDatetime && val < this.adjustValue(this.minDatetime)) {
             val = this.adjustValue(this.minDatetime);
           } else if (this.maxDatetime && val > this.adjustValue(this.maxDatetime)) {
             val = this.adjustValue(this.maxDatetime);
           }
-
           this.newValue = new Date(val.getTime());
         } else {
           this.newValue = this.adjustValue(this.value);
         }
-
         var adjustedValue = this.adjustValue(this.newValue, true); // reverse adjust
-
         this.$emit('input', adjustedValue);
       }
     },
@@ -119,7 +113,6 @@ var script = {
       if (!this.minDatetime) {
         return this.datepicker ? this.adjustValue(this.datepicker.minDate) : null;
       }
-
       var adjMinDatetime = this.adjustValue(this.minDatetime);
       return new Date(adjMinDatetime.getFullYear(), adjMinDatetime.getMonth(), adjMinDatetime.getDate(), 0, 0, 0, 0);
     },
@@ -127,7 +120,6 @@ var script = {
       if (!this.maxDatetime) {
         return this.datepicker ? this.adjustValue(this.datepicker.maxDate) : null;
       }
-
       var adjMaxDatetime = this.adjustValue(this.maxDatetime);
       return new Date(adjMaxDatetime.getFullYear(), adjMaxDatetime.getMonth(), adjMaxDatetime.getDate(), 0, 0, 0, 0);
     },
@@ -135,9 +127,7 @@ var script = {
       if (!this.minDatetime || this.newValue === null || typeof this.newValue === 'undefined') {
         return this.timepicker ? this.adjustValue(this.timepicker.minTime) : null;
       }
-
       var adjMinDatetime = this.adjustValue(this.minDatetime);
-
       if (adjMinDatetime.getFullYear() === this.newValue.getFullYear() && adjMinDatetime.getMonth() === this.newValue.getMonth() && adjMinDatetime.getDate() === this.newValue.getDate()) {
         return adjMinDatetime;
       }
@@ -146,9 +136,7 @@ var script = {
       if (!this.maxDatetime || this.newValue === null || typeof this.newValue === 'undefined') {
         return this.timepicker ? this.adjustValue(this.timepicker.maxTime) : null;
       }
-
       var adjMaxDatetime = this.adjustValue(this.maxDatetime);
-
       if (adjMaxDatetime.getFullYear() === this.newValue.getFullYear() && adjMaxDatetime.getMonth() === this.newValue.getMonth() && adjMaxDatetime.getDate() === this.newValue.getDate()) {
         return adjMaxDatetime;
       }
@@ -175,7 +163,6 @@ var script = {
     adjustValue: function adjustValue(value) {
       var reverse = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       if (!value) return value;
-
       if (reverse) {
         return new Date(value.getTime() - this.tzOffset * 60000);
       } else {
@@ -201,26 +188,23 @@ var script = {
           var d = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12);
           return d.toLocaleDateString() + ' ' + this.$refs.timepicker.timeFormatter(date, this.$refs.timepicker);
         }
-
         return null;
       }
     },
-
     /*
     * Parse date from string
     */
     onChangeNativePicker: function onChangeNativePicker(event) {
       var date = event.target.value;
       var s = date ? date.split(/\D/) : [];
-
       if (s.length >= 5) {
         var year = parseInt(s[0], 10);
         var month = parseInt(s[1], 10) - 1;
         var day = parseInt(s[2], 10);
         var hours = parseInt(s[3], 10);
-        var minutes = parseInt(s[4], 10); // Seconds are omitted intentionally; they are unsupported by input
+        var minutes = parseInt(s[4], 10);
+        // Seconds are omitted intentionally; they are unsupported by input
         // type=datetime-local and cause the control to fail native validation
-
         this.computedValue = new Date(year, month, day, hours, minutes);
       } else {
         this.computedValue = null;
@@ -228,7 +212,6 @@ var script = {
     },
     formatNative: function formatNative(value) {
       var date = new Date(value);
-
       if (value && !isNaN(date)) {
         var year = date.getFullYear();
         var month = date.getMonth() + 1;
@@ -238,7 +221,6 @@ var script = {
         var seconds = date.getSeconds();
         return year + '-' + ((month < 10 ? '0' : '') + month) + '-' + ((day < 10 ? '0' : '') + day) + 'T' + ((hours < 10 ? '0' : '') + hours) + ':' + ((minutes < 10 ? '0' : '') + minutes) + ':' + ((seconds < 10 ? '0' : '') + seconds);
       }
-
       return '';
     },
     toggle: function toggle() {
@@ -274,25 +256,29 @@ var __vue_staticRenderFns__ = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Datetimepicker = __vue_normalize__(
+  const __vue_component__ = /*#__PURE__*/__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
     __vue_scope_id__,
     __vue_is_functional_template__,
     __vue_module_identifier__,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin = {
   install: function install(Vue) {
-    registerComponent(Vue, Datetimepicker);
+    registerComponent(Vue, __vue_component__);
   }
 };
 use(Plugin);
 
 export default Plugin;
-export { Datetimepicker as BDatetimepicker };
+export { __vue_component__ as BDatetimepicker };

@@ -7,8 +7,6 @@
             :sort-multiple-data="sortMultipleDataComputed"
             :is-asc="isAsc"
             :columns="newColumns"
-            :custom-style="customStyle"
-            :custom-select-style="customSelectStyle"
             :placeholder="mobileSortPlaceholder"
             :icon-pack="iconPack"
             :sort-icon="sortIcon"
@@ -61,19 +59,7 @@
                         <th v-if="showDetailRowIcon" width="40px"/>
                         <th class="checkbox-cell" v-if="checkable && checkboxPosition === 'left'">
                             <template v-if="headerCheckable">
-                                <b-checkbox-button
-                                    v-if="useCheckboxButton"
-                                    :value="isAllChecked"
-                                    :disabled="isAllUncheckable"
-                                    :type="checkboxType"
-                                    :native-value="true"
-                                    @change.native="checkAll">
-                                    <fa-icon
-                                        class="has-text-grey-lighter"
-                                        :icon="['far', 'check']"/>
-                                </b-checkbox-button>
                                 <b-checkbox
-                                    v-else
                                     :value="isAllChecked"
                                     :disabled="isAllUncheckable"
                                     :type="checkboxType"
@@ -156,19 +142,7 @@
                         </th>
                         <th class="checkbox-cell" v-if="checkable && checkboxPosition === 'right'">
                             <template v-if="headerCheckable">
-                                <b-checkbox-button
-                                    v-if="useCheckboxButton"
-                                    :value="isAllChecked"
-                                    :disabled="isAllUncheckable"
-                                    :type="checkboxType"
-                                    :native-value="true"
-                                    @change.native="checkAll">
-                                    <fa-icon
-                                        class="has-text-grey-lighter"
-                                        :icon="['far', 'check']"/>
-                                </b-checkbox-button>
                                 <b-checkbox
-                                    v-else
                                     :value="isAllChecked"
                                     :disabled="isAllUncheckable"
                                     :type="checkboxType"
@@ -286,19 +260,7 @@
                             <td
                                 class="checkbox-cell"
                                 v-if="checkable && checkboxPosition === 'left'">
-                                <b-checkbox-button
-                                    v-if="useCheckboxButton"
-                                    :disabled="!isRowCheckable(row)"
-                                    :value="isRowChecked(row)"
-                                    :type="checkboxType"
-                                    :native-value="true"
-                                    @click.native.prevent.stop="checkRow(row, index, $event)">
-                                    <fa-icon
-                                        class="has-text-grey-lighter"
-                                        :icon="['far', 'check']"/>
-                                </b-checkbox-button>
                                 <b-checkbox
-                                    v-else
                                     :disabled="!isRowCheckable(row)"
                                     :value="isRowChecked(row)"
                                     :type="checkboxType"
@@ -336,19 +298,7 @@
                             <td
                                 class="checkbox-cell"
                                 v-if="checkable && checkboxPosition === 'right'">
-                                <b-checkbox-button
-                                    v-if="useCheckboxButton"
-                                    :disabled="!isRowCheckable(row)"
-                                    :value="isRowChecked(row)"
-                                    :type="checkboxType"
-                                    :native-value="true"
-                                    @click.native.prevent.stop="checkRow(row, index, $event)">
-                                    <fa-icon
-                                        class="has-text-grey-lighter"
-                                        :icon="['far', 'check']"/>
-                                </b-checkbox-button>
                                 <b-checkbox
-                                    v-else
                                     :disabled="!isRowCheckable(row)"
                                     :value="isRowChecked(row)"
                                     :type="checkboxType"
@@ -476,10 +426,6 @@ export default {
                 ].indexOf(value) >= 0
             }
         },
-        useCheckboxButton: {
-            type: Boolean,
-            default: false
-        },
         checkboxType: String,
         selected: Object,
         isRowSelectable: {
@@ -578,14 +524,6 @@ export default {
         total: {
             type: [Number, String],
             default: 0
-        },
-        customStyle: {
-            type: String,
-            default: ''
-        },
-        customSelectStyle: {
-            type: String,
-            default: ''
         },
         iconPack: String,
         mobileSortPlaceholder: String,

@@ -2,11 +2,10 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-require('./chunk-14c82365.js');
+var __chunk_1 = require('./chunk-f22477ff.js');
 var helpers = require('./helpers.js');
 var __chunk_5 = require('./chunk-13e039f5.js');
 
-//
 var script = {
   name: 'BSidebar',
   props: {
@@ -76,42 +75,29 @@ var script = {
     isAbsolute: function isAbsolute() {
       return this.position === 'absolute';
     },
-
     /**
      * White-listed items to not close when clicked.
      * Add sidebar content and all children.
      */
     whiteList: function whiteList() {
       var whiteList = [];
-      whiteList.push(this.$refs.sidebarContent); // Add all chidren from dropdown
-
+      whiteList.push(this.$refs.sidebarContent);
+      // Add all chidren from dropdown
       if (this.$refs.sidebarContent !== undefined) {
         var children = this.$refs.sidebarContent.querySelectorAll('*');
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
+        var _iterator = __chunk_1._createForOfIteratorHelper(children),
+          _step;
         try {
-          for (var _iterator = children[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
             var child = _step.value;
             whiteList.push(child);
           }
         } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
+          _iterator.e(err);
         } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-              _iterator.return();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
-          }
+          _iterator.f();
         }
       }
-
       return whiteList;
     }
   },
@@ -135,7 +121,6 @@ var script = {
         if (this.isOpen && event.keyCode === 27) this.cancel('escape');
       }
     },
-
     /**
     * Close the Sidebar if canCancel and call the onCancel prop (function).
     */
@@ -145,7 +130,6 @@ var script = {
       this.onCancel.apply(null, arguments);
       this.close();
     },
-
     /**
     * Call the onCancel prop (function) and emit events
     */
@@ -154,7 +138,6 @@ var script = {
       this.$emit('close');
       this.$emit('update:open', false);
     },
-
     /**
      * Close fixed sidebar if clicked outside.
      */
@@ -167,14 +150,12 @@ var script = {
         }
       }
     },
-
     /**
     * Transition before-enter hook
     */
     beforeEnter: function beforeEnter() {
       this.animating = true;
     },
-
     /**
     * Transition after-leave hook
     */
@@ -200,7 +181,6 @@ var script = {
       document.removeEventListener('keyup', this.keyPress);
       document.removeEventListener('click', this.clickedOutside);
     }
-
     if (this.isFixed) {
       helpers.removeElement(this.$el);
     }
@@ -226,25 +206,29 @@ var __vue_staticRenderFns__ = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Sidebar = __chunk_5.__vue_normalize__(
+  const __vue_component__ = /*#__PURE__*/__chunk_5.__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
     __vue_scope_id__,
     __vue_is_functional_template__,
     __vue_module_identifier__,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin = {
   install: function install(Vue) {
-    __chunk_5.registerComponent(Vue, Sidebar);
+    __chunk_5.registerComponent(Vue, __vue_component__);
   }
 };
 __chunk_5.use(Plugin);
 
-exports.BSidebar = Sidebar;
+exports.BSidebar = __vue_component__;
 exports.default = Plugin;

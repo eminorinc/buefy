@@ -2,48 +2,48 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-require('./chunk-14c82365.js');
+require('./chunk-f22477ff.js');
 var helpers = require('./helpers.js');
 var __chunk_2 = require('./chunk-cd0dcc1d.js');
-require('./chunk-c32e7fbb.js');
-require('./chunk-60f5141f.js');
+require('./chunk-ee30b6ca.js');
+require('./chunk-ff4db405.js');
 var __chunk_5 = require('./chunk-13e039f5.js');
-require('./chunk-603a4fbb.js');
-require('./chunk-bb40e5c3.js');
+require('./chunk-32feedee.js');
+require('./chunk-39ae042c.js');
 var autocomplete = require('./autocomplete.js');
 var button = require('./button.js');
 var carousel = require('./carousel.js');
 require('./chunk-1f7d7e31.js');
-require('./chunk-39fc4311.js');
+require('./chunk-5cb77942.js');
 var checkbox = require('./checkbox.js');
 var collapse = require('./collapse.js');
-require('./chunk-ce1a9c7a.js');
-require('./chunk-ae7e641a.js');
-require('./chunk-b85a4136.js');
-require('./chunk-a35c9951.js');
+require('./chunk-ec523aac.js');
+require('./chunk-81a092b8.js');
+require('./chunk-85326d0e.js');
+require('./chunk-857cce79.js');
 var clockpicker = require('./clockpicker.js');
-require('./chunk-9d73d6d0.js');
-require('./chunk-c90dac9a.js');
+require('./chunk-86128bdb.js');
+require('./chunk-1d27f7f6.js');
 var datepicker = require('./datepicker.js');
-require('./chunk-07ccb422.js');
+require('./chunk-746bf797.js');
 var datetimepicker = require('./datetimepicker.js');
-require('./chunk-8c69e10a.js');
+require('./chunk-f01eeb01.js');
 var dialog = require('./dialog.js');
 var dropdown = require('./dropdown.js');
 var field = require('./field.js');
 var icon = require('./icon.js');
 var input = require('./input.js');
-require('./chunk-f1df1c63.js');
+require('./chunk-e8b1ba4d.js');
 var loading = require('./loading.js');
 var menu = require('./menu.js');
-require('./chunk-be5ed730.js');
+require('./chunk-554e0df6.js');
 var message = require('./message.js');
 var modal = require('./modal.js');
 var notification = require('./notification.js');
-require('./chunk-13d78c1a.js');
+require('./chunk-6c0a3883.js');
 var navbar = require('./navbar.js');
 var numberinput = require('./numberinput.js');
-require('./chunk-758bc4b9.js');
+require('./chunk-ed89e5f7.js');
 var pagination = require('./pagination.js');
 var progress = require('./progress.js');
 var radio = require('./radio.js');
@@ -51,7 +51,7 @@ var rate = require('./rate.js');
 var select = require('./select.js');
 var skeleton = require('./skeleton.js');
 var sidebar = require('./sidebar.js');
-require('./chunk-ecc5e68e.js');
+require('./chunk-38530975.js');
 var slider = require('./slider.js');
 var snackbar = require('./snackbar.js');
 require('./chunk-3dffe6e7.js');
@@ -59,7 +59,7 @@ var steps = require('./steps.js');
 var _switch = require('./switch.js');
 var table = require('./table.js');
 var tabs = require('./tabs.js');
-require('./chunk-dbf7ac01.js');
+require('./chunk-5fc827e4.js');
 var tag = require('./tag.js');
 var taginput = require('./taginput.js');
 var timepicker = require('./timepicker.js');
@@ -123,15 +123,14 @@ var ConfigComponent = {
 var Buefy = {
   install: function install(Vue) {
     var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-    __chunk_2.setVueInstance(Vue); // Options
-
-    __chunk_2.setOptions(helpers.merge(__chunk_2.config, options, true)); // Components
-
+    __chunk_2.setVueInstance(Vue);
+    // Options
+    __chunk_2.setOptions(helpers.merge(__chunk_2.config, options, true));
+    // Components
     for (var componentKey in components) {
       Vue.use(components[componentKey]);
-    } // Config component
-
-
+    }
+    // Config component
     __chunk_5.registerComponentProgrammatic(Vue, 'config', ConfigComponent);
   }
 };

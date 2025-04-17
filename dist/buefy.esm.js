@@ -1,99 +1,136 @@
 /*! Buefy v0.8.20 | MIT License | github.com/buefy/buefy */
-function _typeof(obj) {
+function _arrayLikeToArray(r, a) {
+  (null == a || a > r.length) && (a = r.length);
+  for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
+  return n;
+}
+function _arrayWithHoles(r) {
+  if (Array.isArray(r)) return r;
+}
+function _arrayWithoutHoles(r) {
+  if (Array.isArray(r)) return _arrayLikeToArray(r);
+}
+function _createForOfIteratorHelper(r, e) {
+  var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+  if (!t) {
+    if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) {
+      t && (r = t);
+      var n = 0,
+        F = function () {};
+      return {
+        s: F,
+        n: function () {
+          return n >= r.length ? {
+            done: !0
+          } : {
+            done: !1,
+            value: r[n++]
+          };
+        },
+        e: function (r) {
+          throw r;
+        },
+        f: F
+      };
+    }
+    throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+  var o,
+    a = !0,
+    u = !1;
+  return {
+    s: function () {
+      t = t.call(r);
+    },
+    n: function () {
+      var r = t.next();
+      return a = r.done, r;
+    },
+    e: function (r) {
+      u = !0, o = r;
+    },
+    f: function () {
+      try {
+        a || null == t.return || t.return();
+      } finally {
+        if (u) throw o;
+      }
+    }
+  };
+}
+function _defineProperty(e, r, t) {
+  return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
+    value: t,
+    enumerable: !0,
+    configurable: !0,
+    writable: !0
+  }) : e[r] = t, e;
+}
+function _iterableToArray(r) {
+  if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r);
+}
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function ownKeys(e, r) {
+  var t = Object.keys(e);
+  if (Object.getOwnPropertySymbols) {
+    var o = Object.getOwnPropertySymbols(e);
+    r && (o = o.filter(function (r) {
+      return Object.getOwnPropertyDescriptor(e, r).enumerable;
+    })), t.push.apply(t, o);
+  }
+  return t;
+}
+function _objectSpread2(e) {
+  for (var r = 1; r < arguments.length; r++) {
+    var t = null != arguments[r] ? arguments[r] : {};
+    r % 2 ? ownKeys(Object(t), !0).forEach(function (r) {
+      _defineProperty(e, r, t[r]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) {
+      Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+    });
+  }
+  return e;
+}
+function _toArray(r) {
+  return _arrayWithHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableRest();
+}
+function _toConsumableArray(r) {
+  return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread();
+}
+function _toPrimitive(t, r) {
+  if ("object" != typeof t || !t) return t;
+  var e = t[Symbol.toPrimitive];
+  if (void 0 !== e) {
+    var i = e.call(t, r || "default");
+    if ("object" != typeof i) return i;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return ("string" === r ? String : Number)(t);
+}
+function _toPropertyKey(t) {
+  var i = _toPrimitive(t, "string");
+  return "symbol" == typeof i ? i : i + "";
+}
+function _typeof(o) {
   "@babel/helpers - typeof";
 
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof = function (obj) {
-      return typeof obj;
-    };
-  } else {
-    _typeof = function (obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
+  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+    return typeof o;
+  } : function (o) {
+    return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+  }, _typeof(o);
+}
+function _unsupportedIterableToArray(r, a) {
+  if (r) {
+    if ("string" == typeof r) return _arrayLikeToArray(r, a);
+    var t = {}.toString.call(r).slice(8, -1);
+    return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0;
   }
-
-  return _typeof(obj);
-}
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-
-function ownKeys(object, enumerableOnly) {
-  var keys = Object.keys(object);
-
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-    if (enumerableOnly) symbols = symbols.filter(function (sym) {
-      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-    });
-    keys.push.apply(keys, symbols);
-  }
-
-  return keys;
-}
-
-function _objectSpread2(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-
-    if (i % 2) {
-      ownKeys(Object(source), true).forEach(function (key) {
-        _defineProperty(target, key, source[key]);
-      });
-    } else if (Object.getOwnPropertyDescriptors) {
-      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-    } else {
-      ownKeys(Object(source)).forEach(function (key) {
-        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-      });
-    }
-  }
-
-  return target;
-}
-
-function _toArray(arr) {
-  return _arrayWithHoles(arr) || _iterableToArray(arr) || _nonIterableRest();
-}
-
-function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
-}
-
-function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) {
-    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
-
-    return arr2;
-  }
-}
-
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
-}
-
-function _iterableToArray(iter) {
-  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
-}
-
-function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance");
-}
-
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance");
 }
 
 /**
@@ -103,67 +140,60 @@ function signPoly(value) {
   if (value < 0) return -1;
   return value > 0 ? 1 : 0;
 }
-
 var sign = Math.sign || signPoly;
+
 /**
  * Get value of an object property/path even if it's nested
  */
-
 function getValueByPath(obj, path) {
   var value = path.split('.').reduce(function (o, i) {
     return o ? o[i] : null;
   }, obj);
   return value;
 }
+
 /**
  * Extension of indexOf method by equality function if specified
  */
-
 function indexOf(array, obj, fn) {
   if (!array) return -1;
   if (!fn || typeof fn !== 'function') return array.indexOf(obj);
-
   for (var i = 0; i < array.length; i++) {
     if (fn(array[i], obj)) {
       return i;
     }
   }
-
   return -1;
 }
+
 /**
  * Merge function to replace Object.assign with deep merging possibility
  */
-
 var isObject = function isObject(item) {
   return _typeof(item) === 'object' && !Array.isArray(item);
 };
-
-var mergeFn = function mergeFn(target, source) {
+var _mergeFn = function mergeFn(target, source) {
   var deep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
   if (deep || !Object.assign) {
     var isDeep = function isDeep(prop) {
       return isObject(source[prop]) && target !== null && target.hasOwnProperty(prop) && isObject(target[prop]);
     };
-
     var replaced = Object.getOwnPropertyNames(source).map(function (prop) {
-      return _defineProperty({}, prop, isDeep(prop) ? mergeFn(target[prop], source[prop], deep) : source[prop]);
+      return _defineProperty({}, prop, isDeep(prop) ? _mergeFn(target[prop], source[prop], deep) : source[prop]);
     }).reduce(function (a, b) {
-      return _objectSpread2({}, a, {}, b);
+      return _objectSpread2(_objectSpread2({}, a), b);
     }, {});
-    return _objectSpread2({}, target, {}, replaced);
+    return _objectSpread2(_objectSpread2({}, target), replaced);
   } else {
     return Object.assign(target, source);
   }
 };
+var merge = _mergeFn;
 
-var merge = mergeFn;
 /**
  * Mobile detection
  * https://www.abeautifulsite.net/detecting-mobile-devices-with-javascript
  */
-
 var isMobile = {
   Android: function Android() {
     return typeof window !== 'undefined' && window.navigator.userAgent.match(/Android/i);
@@ -202,49 +232,44 @@ function createAbsoluteElement(el) {
   document.body.appendChild(root);
   return root;
 }
+
 /**
  * Escape regex characters
  * http://stackoverflow.com/a/6969486
  */
-
 function escapeRegExpChars(value) {
-  if (!value) return value; // eslint-disable-next-line
+  if (!value) return value;
 
+  // eslint-disable-next-line
   return value.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
 }
 function multiColumnSort(inputArray, sortingPriority) {
   // clone it to prevent the any watchers from triggering every sorting iteration
   var array = JSON.parse(JSON.stringify(inputArray));
-
   var fieldSorter = function fieldSorter(fields) {
     return function (a, b) {
       return fields.map(function (o) {
         var dir = 1;
-
         if (o[0] === '-') {
           dir = -1;
           o = o.substring(1);
         }
-
         return a[o] > b[o] ? dir : a[o] < b[o] ? -dir : 0;
       }).reduce(function (p, n) {
         return p || n;
       }, 0);
     };
   };
-
   return array.sort(fieldSorter(sortingPriority));
 }
 function createNewEvent(eventName) {
   var event;
-
   if (typeof Event === 'function') {
     event = new Event(eventName);
   } else {
     event = document.createEvent('Event');
     event.initEvent(eventName, true, true);
   }
-
   return event;
 }
 
@@ -338,23 +363,19 @@ var FormElementMixin = {
      */
     parentField: function parentField() {
       var parent = this.$parent;
-
       for (var i = 0; i < 3; i++) {
         if (parent && !parent.$data._isField) {
           parent = parent.$parent;
         }
       }
-
       return parent;
     },
-
     /**
      * Get the type prop from parent if it's a Field.
      */
     statusType: function statusType() {
       if (!this.parentField) return;
       if (!this.parentField.newType) return;
-
       if (typeof this.parentField.newType === 'string') {
         return this.parentField.newType;
       } else {
@@ -365,7 +386,6 @@ var FormElementMixin = {
         }
       }
     },
-
     /**
      * Get the message prop from parent if it's a Field.
      */
@@ -373,7 +393,6 @@ var FormElementMixin = {
       if (!this.parentField) return;
       return this.parentField.newMessage || this.parentField.$slots.message;
     },
-
     /**
      * Fix icon size for inputs, large was too big
      */
@@ -381,10 +400,8 @@ var FormElementMixin = {
       switch (this.size) {
         case 'is-small':
           return this.size;
-
         case 'is-medium':
           return;
-
         case 'is-large':
           return this.newIconPack === 'mdi' ? 'is-medium' : '';
       }
@@ -396,11 +413,9 @@ var FormElementMixin = {
      */
     focus: function focus() {
       var _this = this;
-
       if (this.$data._elementRef === undefined) return;
       this.$nextTick(function () {
         var el = _this.$el.querySelector(_this.$data._elementRef);
-
         if (el) el.focus();
       });
     },
@@ -423,22 +438,19 @@ var FormElementMixin = {
     },
     setValidity: function setValidity(type, message) {
       var _this2 = this;
-
       this.$nextTick(function () {
         if (_this2.parentField) {
           // Set type only if not defined
           if (!_this2.parentField.type) {
             _this2.parentField.newType = type;
-          } // Set message only if not defined
-
-
+          }
+          // Set message only if not defined
           if (!_this2.parentField.message) {
             _this2.parentField.newMessage = message;
           }
         }
       });
     },
-
     /**
      * Check HTML5 validation, set isValid property.
      * If validation fail, send 'is-danger' type,
@@ -448,7 +460,6 @@ var FormElementMixin = {
       if (!this.useHtml5Validation) return;
       if (this.$refs[this.$data._elementRef] === undefined) return;
       if (this.getElement() === null) return;
-
       if (!this.getElement().checkValidity()) {
         this.setInvalid();
         this.isValid = false;
@@ -456,7 +467,6 @@ var FormElementMixin = {
         this.setValidity(null, null);
         this.isValid = true;
       }
-
       return this.isValid;
     }
   }
@@ -471,7 +481,6 @@ var mdiIcons = {
   },
   iconPrefix: 'mdi-'
 };
-
 var faIcons = function faIcons() {
   var faIconPrefix = config && config.defaultIconComponent ? '' : 'fa-';
   return {
@@ -496,7 +505,6 @@ var faIcons = function faIcons() {
     }
   };
 };
-
 var getIcons = function getIcons() {
   var icons = {
     mdi: mdiIcons,
@@ -507,11 +515,9 @@ var getIcons = function getIcons() {
     fab: faIcons(),
     fal: faIcons()
   };
-
   if (config && config.customIconPacks) {
     icons = merge(icons, config.customIconPacks, true);
   }
-
   return icons;
 };
 
@@ -526,7 +532,6 @@ var script = {
     customSize: String,
     customClass: String,
     both: Boolean // This is used internally to show both MDI and FA icon
-
   },
   computed: {
     iconConfig: function iconConfig() {
@@ -537,10 +542,8 @@ var script = {
       if (this.iconConfig && this.iconConfig.iconPrefix) {
         return this.iconConfig.iconPrefix;
       }
-
       return '';
     },
-
     /**
     * Internal icon name based on the pack.
     * If pack is 'fa', gets the equivalent FA icon name of the MDI,
@@ -555,7 +558,6 @@ var script = {
     newType: function newType() {
       if (!this.type) return;
       var splitType = [];
-
       if (typeof this.type === 'string') {
         splitType = this.type.split('-');
       } else {
@@ -566,13 +568,10 @@ var script = {
           }
         }
       }
-
       if (splitType.length <= 1) return;
-
       var _splitType = splitType,
-          _splitType2 = _toArray(_splitType),
-          type = _splitType2.slice(1);
-
+        _splitType2 = _toArray(_splitType),
+        type = _splitType2.slice(1);
       return "has-text-".concat(type.join('-'));
     },
     newCustomSize: function newCustomSize() {
@@ -586,7 +585,6 @@ var script = {
           return this.iconConfig.sizes.default;
         }
       }
-
       return null;
     },
     useIconComponent: function useIconComponent() {
@@ -602,11 +600,9 @@ var script = {
       if (!this.both) {
         return value;
       }
-
       if (this.iconConfig && this.iconConfig.internalIcons && this.iconConfig.internalIcons[value]) {
         return this.iconConfig.internalIcons[value];
       }
-
       return value;
     }
   }
@@ -716,22 +712,26 @@ var __vue_staticRenderFns__ = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Icon = normalizeComponent_1(
+  const __vue_component__ = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
     __vue_scope_id__,
     __vue_is_functional_template__,
     __vue_module_identifier__,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var script$1 = {
   name: 'BInput',
-  components: _defineProperty({}, Icon.name, Icon),
+  components: _defineProperty({}, __vue_component__.name, __vue_component__),
   mixins: [FormElementMixin],
   inheritAttrs: false,
   props: {
@@ -796,7 +796,6 @@ var script$1 = {
       } else if (this.iconRight) {
         return this.iconRight;
       }
-
       return this.statusTypeIcon;
     },
     rightIconType: function rightIconType() {
@@ -805,10 +804,8 @@ var script$1 = {
       } else if (this.iconRight) {
         return null;
       }
-
       return this.statusType;
     },
-
     /**
     * Position of the icon or if it's both sides.
     */
@@ -821,7 +818,6 @@ var script$1 = {
         return 'has-icons-left';
       }
     },
-
     /**
     * Icon name (MDI) based on the type.
     */
@@ -829,32 +825,26 @@ var script$1 = {
       switch (this.statusType) {
         case 'is-success':
           return 'check';
-
         case 'is-danger':
           return 'alert-circle';
-
         case 'is-info':
           return 'information';
-
         case 'is-warning':
           return 'alert';
       }
     },
-
     /**
     * Check if have any message prop from parent if it's a Field.
     */
     hasMessage: function hasMessage() {
       return !!this.statusMessage;
     },
-
     /**
     * Current password-reveal icon name.
     */
     passwordVisibleIcon: function passwordVisibleIcon() {
       return !this.isPasswordVisible ? 'eye' : 'eye-off';
     },
-
     /**
     * Get value length
     */
@@ -864,7 +854,6 @@ var script$1 = {
       } else if (typeof this.computedValue === 'number') {
         return this.computedValue.toString().length;
       }
-
       return 0;
     }
   },
@@ -884,21 +873,18 @@ var script$1 = {
     */
     togglePasswordVisibility: function togglePasswordVisibility() {
       var _this = this;
-
       this.isPasswordVisible = !this.isPasswordVisible;
       this.newType = this.isPasswordVisible ? 'text' : 'password';
       this.$nextTick(function () {
         _this.$refs[_this.$data._elementRef].focus();
       });
     },
-
     /**
     * Input's 'input' event listener, 'nextTick' is used to prevent event firing
     * before ui update, helps when using masks (Cleavejs and potentially others).
     */
     onInput: function onInput(event) {
       var _this2 = this;
-
       this.$nextTick(function () {
         if (event.target) {
           _this2.computedValue = event.target.value;
@@ -907,7 +893,6 @@ var script$1 = {
     },
     iconClick: function iconClick(emit, event) {
       var _this3 = this;
-
       this.$emit(emit, event);
       this.$nextTick(function () {
         _this3.$refs[_this3.$data._elementRef].focus();
@@ -942,22 +927,26 @@ var __vue_staticRenderFns__$1 = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Input = normalizeComponent_1(
+  const __vue_component__$1 = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
     __vue_inject_styles__$1,
     __vue_script__$1,
     __vue_scope_id__$1,
     __vue_is_functional_template__$1,
     __vue_module_identifier__$1,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var script$2 = {
   name: 'BAutocomplete',
-  components: _defineProperty({}, Input.name, Input),
+  components: _defineProperty({}, __vue_component__$1.name, __vue_component__$1),
   mixins: [FormElementMixin],
   inheritAttrs: false,
   props: {
@@ -1001,7 +990,6 @@ var script$2 = {
       _isAutocomplete: true,
       _elementRef: 'input',
       _bodyEl: undefined // Used to append to body
-
     };
   },
   computed: {
@@ -1012,96 +1000,67 @@ var script$2 = {
     whiteList: function whiteList() {
       var whiteList = [];
       whiteList.push(this.$refs.input.$el.querySelector('input'));
-      whiteList.push(this.$refs.dropdown); // Add all chidren from dropdown
-
+      whiteList.push(this.$refs.dropdown);
+      // Add all chidren from dropdown
       if (this.$refs.dropdown !== undefined) {
         var children = this.$refs.dropdown.querySelectorAll('*');
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
+        var _iterator = _createForOfIteratorHelper(children),
+          _step;
         try {
-          for (var _iterator = children[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
             var child = _step.value;
             whiteList.push(child);
           }
         } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
+          _iterator.e(err);
         } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-              _iterator.return();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
-          }
+          _iterator.f();
         }
       }
-
       if (this.$parent.$data._isTaginput) {
         // Add taginput container
-        whiteList.push(this.$parent.$el); // Add .tag and .delete
-
+        whiteList.push(this.$parent.$el);
+        // Add .tag and .delete
         var tagInputChildren = this.$parent.$el.querySelectorAll('*');
-        var _iteratorNormalCompletion2 = true;
-        var _didIteratorError2 = false;
-        var _iteratorError2 = undefined;
-
+        var _iterator2 = _createForOfIteratorHelper(tagInputChildren),
+          _step2;
         try {
-          for (var _iterator2 = tagInputChildren[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
             var tagInputChild = _step2.value;
             whiteList.push(tagInputChild);
           }
         } catch (err) {
-          _didIteratorError2 = true;
-          _iteratorError2 = err;
+          _iterator2.e(err);
         } finally {
-          try {
-            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-              _iterator2.return();
-            }
-          } finally {
-            if (_didIteratorError2) {
-              throw _iteratorError2;
-            }
-          }
+          _iterator2.f();
         }
       }
-
       return whiteList;
     },
-
     /**
      * Check if exists default slot
      */
     hasDefaultSlot: function hasDefaultSlot() {
       return !!this.$scopedSlots.default;
     },
-
     /**
      * Check if exists "empty" slot
      */
     hasEmptySlot: function hasEmptySlot() {
       return !!this.$slots.empty;
     },
-
     /**
      * Check if exists "header" slot
      */
     hasHeaderSlot: function hasHeaderSlot() {
       return !!this.$slots.header;
     },
-
     /**
      * Check if exists "footer" slot
      */
     hasFooterSlot: function hasFooterSlot() {
       return !!this.$slots.footer;
     },
-
     /**
      * Apply dropdownPosition property
      */
@@ -1112,14 +1071,12 @@ var script$2 = {
       if (this.clearable && this.newValue) {
         return 'close-circle';
       }
-
       return this.iconRight;
     },
     newIconRightClickable: function newIconRightClickable() {
       if (this.clearable) {
         return true;
       }
-
       return this.iconRightClickable;
     },
     contentStyle: function contentStyle() {
@@ -1135,7 +1092,6 @@ var script$2 = {
      */
     isActive: function isActive(active) {
       var _this = this;
-
       if (this.dropdownPosition === 'auto') {
         if (active) {
           this.calcDropdownInViewportVertical();
@@ -1146,12 +1102,10 @@ var script$2 = {
           }, 100);
         }
       }
-
       if (active) this.$nextTick(function () {
         return _this.setHovered(null);
       });
     },
-
     /**
      * When updating input's value
      *   1. Emit changes
@@ -1159,20 +1113,17 @@ var script$2 = {
      *   3. Close dropdown if value is clear or else open it
      */
     newValue: function newValue(value) {
-      this.$emit('input', value); // Check if selected is invalid
-
+      this.$emit('input', value);
+      // Check if selected is invalid
       var currentValue = this.getValue(this.selected);
-
       if (currentValue && currentValue !== value) {
         this.setSelected(null, false);
-      } // Close dropdown if input is clear or else open it
-
-
+      }
+      // Close dropdown if input is clear or else open it
       if (this.hasFocus && (!this.openOnFocus || value)) {
         this.isActive = !!value;
       }
     },
-
     /**
      * When v-model is changed:
      *   1. Update internal value.
@@ -1181,7 +1132,6 @@ var script$2 = {
     value: function value(_value) {
       this.newValue = _value;
     },
-
     /**
      * Select first option if "keep-first
      */
@@ -1200,37 +1150,31 @@ var script$2 = {
       if (option === undefined) return;
       this.hovered = option;
     },
-
     /**
      * Set which option is currently selected, update v-model,
      * update input value and close dropdown.
      */
     setSelected: function setSelected(option) {
       var _this2 = this;
-
       var closeDropdown = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
       var event = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
       if (option === undefined) return;
       this.selected = option;
       this.$emit('select', this.selected, event);
-
       if (this.selected !== null) {
         this.newValue = this.clearOnSelect ? '' : this.getValue(this.selected);
         this.setHovered(null);
       }
-
       closeDropdown && this.$nextTick(function () {
         _this2.isActive = false;
       });
       this.checkValidity();
     },
-
     /**
      * Select first option
      */
     selectFirstOption: function selectFirstOption(options) {
       var _this3 = this;
-
       this.$nextTick(function () {
         if (options.length) {
           // If has visible data or open on focus, keep updating the hovered
@@ -1242,7 +1186,6 @@ var script$2 = {
         }
       });
     },
-
     /**
      * Enter key listener.
      * Select the hovered option.
@@ -1251,7 +1194,6 @@ var script$2 = {
       if (this.hovered === null) return;
       this.setSelected(this.hovered, !this.keepOpen, event);
     },
-
     /**
      * Tab key listener.
      * Select hovered option if it exists, close dropdown, then allow
@@ -1262,31 +1204,25 @@ var script$2 = {
         this.isActive = false;
         return;
       }
-
       this.setSelected(this.hovered, !this.keepOpen, event);
     },
-
     /**
      * Close dropdown if clicked outside.
      */
     clickedOutside: function clickedOutside(event) {
       if (this.whiteList.indexOf(event.target) < 0) this.isActive = false;
     },
-
     /**
      * Return display text for the input.
      * If object, get value from path, or else just the value.
      */
     getValue: function getValue(option) {
       if (option === null) return;
-
       if (typeof this.customFormatter !== 'undefined') {
         return this.customFormatter(option);
       }
-
       return _typeof(option) === 'object' ? getValueByPath(option, this.field) : option;
     },
-
     /**
      * Check if the scroll list inside the dropdown
      * reached it's end.
@@ -1296,38 +1232,31 @@ var script$2 = {
         this.$emit('infinite-scroll');
       }
     },
-
     /**
      * Calculate if the dropdown is vertically visible when activated,
      * otherwise it is openened upwards.
      */
     calcDropdownInViewportVertical: function calcDropdownInViewportVertical() {
       var _this4 = this;
-
       this.$nextTick(function () {
         /**
         * this.$refs.dropdown may be undefined
         * when Autocomplete is conditional rendered
         */
         if (_this4.$refs.dropdown === undefined) return;
-
         var rect = _this4.$refs.dropdown.getBoundingClientRect();
-
         _this4.isListInViewportVertically = rect.top >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight);
-
         if (_this4.appendToBody) {
           _this4.updateAppendToBody();
         }
       });
     },
-
     /**
      * Arrows keys listener.
      * If dropdown is active, set hovered option, or else just open.
      */
     keyArrows: function keyArrows(direction) {
       var sum = direction === 'down' ? 1 : -1;
-
       if (this.isActive) {
         var index = this.data.indexOf(this.hovered) + sum;
         index = index > this.data.length - 1 ? this.data.length : index;
@@ -1338,7 +1267,6 @@ var script$2 = {
         if (!element) return;
         var visMin = list.scrollTop;
         var visMax = list.scrollTop + list.clientHeight - element.clientHeight;
-
         if (element.offsetTop < visMin) {
           list.scrollTop = element.offsetTop;
         } else if (element.offsetTop >= visMax) {
@@ -1348,7 +1276,6 @@ var script$2 = {
         this.isActive = true;
       }
     },
-
     /**
      * Focus listener.
      * If value is the same as selected, select all text.
@@ -1357,19 +1284,15 @@ var script$2 = {
       if (this.getValue(this.selected) === this.newValue) {
         this.$el.querySelector('input').select();
       }
-
       if (this.openOnFocus) {
         this.isActive = true;
-
         if (this.keepFirst) {
           this.selectFirstOption(this.data);
         }
       }
-
       this.hasFocus = true;
       this.$emit('focus', event);
     },
-
     /**
     * Blur listener.
     */
@@ -1386,7 +1309,6 @@ var script$2 = {
     rightIconClick: function rightIconClick(event) {
       if (this.clearable) {
         this.newValue = '';
-
         if (this.openOnFocus) {
           this.$el.focus();
         }
@@ -1396,7 +1318,6 @@ var script$2 = {
     },
     checkValidity: function checkValidity() {
       var _this5 = this;
-
       if (this.useHtml5Validation) {
         this.$nextTick(function () {
           _this5.checkHtml5Validity();
@@ -1406,7 +1327,6 @@ var script$2 = {
     updateAppendToBody: function updateAppendToBody() {
       var dropdownMenu = this.$refs.dropdown;
       var trigger = this.$refs.input.$el;
-
       if (dropdownMenu && trigger) {
         // update wrapper dropdown
         var root = this.$data._bodyEl;
@@ -1415,21 +1335,17 @@ var script$2 = {
         });
         root.classList.add('autocomplete');
         root.classList.add('control');
-
         if (this.expandend) {
           root.classList.add('is-expandend');
         }
-
         var rect = trigger.getBoundingClientRect();
         var top = rect.top + window.scrollY;
         var left = rect.left + window.scrollX;
-
         if (!this.isOpenedTop) {
           top += trigger.clientHeight;
         } else {
           top -= dropdownMenu.clientHeight;
         }
-
         this.style = {
           position: 'absolute',
           top: "".concat(top, "px"),
@@ -1449,14 +1365,12 @@ var script$2 = {
   },
   mounted: function mounted() {
     var _this6 = this;
-
     if (this.checkInfiniteScroll && this.$refs.dropdown && this.$refs.dropdown.querySelector('.dropdown-content')) {
       var list = this.$refs.dropdown.querySelector('.dropdown-content');
       list.addEventListener('scroll', function () {
         return _this6.checkIfReachedTheEndOfScroll(list);
       });
     }
-
     if (this.appendToBody) {
       this.$data._bodyEl = createAbsoluteElement(this.$refs.dropdown);
       this.updateAppendToBody();
@@ -1467,12 +1381,10 @@ var script$2 = {
       document.removeEventListener('click', this.clickedOutside);
       if (this.dropdownPosition === 'auto') window.removeEventListener('resize', this.calcDropdownInViewportVertical);
     }
-
     if (this.checkInfiniteScroll && this.$refs.dropdown && this.$refs.dropdown.querySelector('.dropdown-content')) {
       var list = this.$refs.dropdown.querySelector('.dropdown-content');
       list.removeEventListener('scroll', this.checkIfReachedTheEndOfScroll);
     }
-
     if (this.appendToBody) {
       removeElement(this.$data._bodyEl);
     }
@@ -1498,15 +1410,19 @@ var __vue_staticRenderFns__$2 = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Autocomplete = normalizeComponent_1(
+  const __vue_component__$2 = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
     __vue_inject_styles__$2,
     __vue_script__$2,
     __vue_scope_id__$2,
     __vue_is_functional_template__$2,
     __vue_module_identifier__$2,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -1526,14 +1442,14 @@ var registerComponentProgrammatic = function registerComponentProgrammatic(Vue, 
 
 var Plugin = {
   install: function install(Vue) {
-    registerComponent(Vue, Autocomplete);
+    registerComponent(Vue, __vue_component__$2);
   }
 };
 use(Plugin);
 
 var script$3 = {
   name: 'BButton',
-  components: _defineProperty({}, Icon.name, Icon),
+  components: _defineProperty({}, __vue_component__.name, __vue_component__),
   inheritAttrs: false,
   props: {
     type: [String, Object],
@@ -1576,7 +1492,6 @@ var script$3 = {
       if (this.$attrs.disabled !== undefined && this.$attrs.disabled !== false) {
         return 'button';
       }
-
       return this.tag;
     },
     iconSize: function iconSize() {
@@ -1585,7 +1500,6 @@ var script$3 = {
       } else if (this.size === 'is-large') {
         return 'is-medium';
       }
-
       return this.size;
     }
   }
@@ -1620,29 +1534,33 @@ var __vue_staticRenderFns__$3 = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Button = normalizeComponent_1(
+  const __vue_component__$3 = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
     __vue_inject_styles__$3,
     __vue_script__$3,
     __vue_scope_id__$3,
     __vue_is_functional_template__$3,
     __vue_module_identifier__$3,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin$1 = {
   install: function install(Vue) {
-    registerComponent(Vue, Button);
+    registerComponent(Vue, __vue_component__$3);
   }
 };
 use(Plugin$1);
 
 var script$4 = {
   name: 'BCarousel',
-  components: _defineProperty({}, Icon.name, Icon),
+  components: _defineProperty({}, __vue_component__.name, __vue_component__),
   props: {
     value: {
       type: Number,
@@ -1771,7 +1689,6 @@ var script$4 = {
         this.changeItem(_value, false);
       }
     },
-
     /**
      * When carousel-items are updated, set active one.
      */
@@ -1780,7 +1697,6 @@ var script$4 = {
         this.carouselItems[this.activeItem].isActive = true;
       }
     },
-
     /**
      *  When autoplay is change, set by status
      */
@@ -1791,7 +1707,6 @@ var script$4 = {
   methods: {
     startTimer: function startTimer() {
       var _this = this;
-
       if (!this.autoplay || this.timer) return;
       this.isPause = false;
       this.timer = setInterval(function () {
@@ -1804,7 +1719,6 @@ var script$4 = {
     },
     pauseTimer: function pauseTimer() {
       this.isPause = true;
-
       if (this.timer) {
         clearInterval(this.timer);
         this.timer = null;
@@ -1815,7 +1729,6 @@ var script$4 = {
         return this.pauseTimer();
       }
     },
-
     /**
      * Change the active item and emit change event.
      * action only for animated slide, there true = next, false = prev
@@ -1823,11 +1736,9 @@ var script$4 = {
     changeItem: function changeItem(newIndex) {
       var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
       if (this.activeItem === newIndex) return;
-
       if (this.activeItem < this.carouselItems.length) {
         this.carouselItems[this.activeItem].status(false, action);
       }
-
       this.carouselItems[newIndex].status(true, action);
       this.activeItem = newIndex;
       this.$emit('change', newIndex);
@@ -1862,7 +1773,6 @@ var script$4 = {
     dragStart: function dragStart(event) {
       if (!this.hasDrag) return;
       this.dragx = event.touches ? event.changedTouches[0].pageX : event.pageX;
-
       if (event.touches) {
         this.pauseTimer();
       } else {
@@ -1873,7 +1783,6 @@ var script$4 = {
       if (!this.hasDrag) return;
       var detected = event.touches ? event.changedTouches[0].pageX : event.pageX;
       var diffX = detected - this.dragx;
-
       if (Math.abs(diffX) > 50) {
         if (diffX < 0) {
           this.next();
@@ -1881,7 +1790,6 @@ var script$4 = {
           this.prev();
         }
       }
-
       if (event.touches) {
         this.startTimer();
       }
@@ -1891,7 +1799,6 @@ var script$4 = {
     if (this.activeItem < this.carouselItems.length) {
       this.carouselItems[this.activeItem].isActive = true;
     }
-
     this.startTimer();
   },
   beforeDestroy: function beforeDestroy() {
@@ -1918,15 +1825,19 @@ var __vue_staticRenderFns__$4 = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Carousel = normalizeComponent_1(
+  const __vue_component__$4 = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$4, staticRenderFns: __vue_staticRenderFns__$4 },
     __vue_inject_styles__$4,
     __vue_script__$4,
     __vue_scope_id__$4,
     __vue_is_functional_template__$4,
     __vue_module_identifier__$4,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -1939,6 +1850,7 @@ var __vue_staticRenderFns__$4 = [];
 //
 //
 //
+
 var script$5 = {
   name: 'BCarouselItem',
   data: function data() {
@@ -1970,12 +1882,10 @@ var script$5 = {
       this.$destroy();
       throw new Error('You should wrap bCarouselItem on a bCarousel');
     }
-
     this.$parent.carouselItems.push(this);
   },
   beforeDestroy: function beforeDestroy() {
     var index = this.$parent.carouselItems.indexOf(this);
-
     if (index >= 0) {
       this.$parent.carouselItems.splice(index, 1);
     }
@@ -2001,22 +1911,26 @@ var __vue_staticRenderFns__$5 = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var CarouselItem = normalizeComponent_1(
+  const __vue_component__$5 = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$5, staticRenderFns: __vue_staticRenderFns__$5 },
     __vue_inject_styles__$5,
     __vue_script__$5,
     __vue_scope_id__$5,
     __vue_is_functional_template__$5,
     __vue_module_identifier__$5,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var script$6 = {
   name: 'BCarouselList',
-  components: _defineProperty({}, Icon.name, Icon),
+  components: _defineProperty({}, __vue_component__.name, __vue_component__),
   props: {
     config: {
       type: Object,
@@ -2112,7 +2026,6 @@ var script$6 = {
     value: function value(_value) {
       this.switchTo(_value);
     },
-
     /**
      * Only for overlay and as indicator.
      * when call overlay with click.
@@ -2143,25 +2056,21 @@ var script$6 = {
       if (this.breakpoints) {
         this.updateConfig();
       }
-
       this.getWidth();
     },
     updateConfig: function updateConfig() {
       var _this = this;
-
       var breakpoints = Object.keys(this.breakpoints).sort(function (a, b) {
         return b - a;
       });
       var checking;
       breakpoints.some(function (breakpoint) {
         checking = window.matchMedia("(min-width: ".concat(breakpoint, "px)")).matches;
-
         if (checking) {
           _this.settings = _this.config.breakpoints[breakpoint];
           return true;
         }
       });
-
       if (!checking) {
         this.settings = this.config;
       }
@@ -2183,8 +2092,8 @@ var script$6 = {
     },
     checkAsIndicator: function checkAsIndicator(value, e) {
       if (!this.asIndicator) return;
-      var timeCheck = new Date().getTime(); // al solution: holding, 100 - 400 not 100% but 200 is better!
-
+      var timeCheck = new Date().getTime();
+      // al solution: holding, 100 - 400 not 100% but 200 is better!
       if (!e.touches && timeCheck - this.hold > 200) return;
       this.switchTo(value);
     },
@@ -2201,7 +2110,6 @@ var script$6 = {
       this.dragEndX = event.touches ? event.touches[0].clientX : event.clientX;
       var deltaX = this.dragEndX - this.dragStartX;
       this.delta = deltaX < 0 ? Math.abs(deltaX) : -Math.abs(deltaX);
-
       if (!event.touches) {
         event.preventDefault();
       }
@@ -2209,7 +2117,6 @@ var script$6 = {
     dragEnd: function dragEnd(event) {
       var signCheck = 1 * sign(this.delta);
       var results = Math.round(Math.abs(this.delta / this.itemWidth) + 0.15); // Hack
-
       this.switchTo(this.activeItem + signCheck * results);
       this.dragging = false;
       this.delta = 0;
@@ -2219,14 +2126,12 @@ var script$6 = {
   },
   created: function created() {
     this.initConfig();
-
     if (typeof window !== 'undefined') {
       window.addEventListener('resize', this.update);
     }
   },
   mounted: function mounted() {
     var _this2 = this;
-
     this.$nextTick(function () {
       _this2.update();
     });
@@ -2257,24 +2162,28 @@ var __vue_staticRenderFns__$6 = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var CarouselList = normalizeComponent_1(
+  const __vue_component__$6 = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$6, staticRenderFns: __vue_staticRenderFns__$6 },
     __vue_inject_styles__$6,
     __vue_script__$6,
     __vue_scope_id__$6,
     __vue_is_functional_template__$6,
     __vue_module_identifier__$6,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin$2 = {
   install: function install(Vue) {
-    registerComponent(Vue, Carousel);
-    registerComponent(Vue, CarouselItem);
-    registerComponent(Vue, CarouselList);
+    registerComponent(Vue, __vue_component__$4);
+    registerComponent(Vue, __vue_component__$5);
+    registerComponent(Vue, __vue_component__$6);
   }
 };
 use(Plugin$2);
@@ -2357,15 +2266,19 @@ var __vue_staticRenderFns__$7 = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Checkbox = normalizeComponent_1(
+  const __vue_component__$7 = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$7, staticRenderFns: __vue_staticRenderFns__$7 },
     __vue_inject_styles__$7,
     __vue_script__$7,
     __vue_scope_id__$7,
     __vue_is_functional_template__$7,
     __vue_module_identifier__$7,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -2391,7 +2304,6 @@ var script$8 = {
       if (Array.isArray(this.newValue)) {
         return this.newValue.indexOf(this.nativeValue) >= 0;
       }
-
       return this.newValue === this.nativeValue;
     }
   }
@@ -2419,23 +2331,27 @@ var __vue_staticRenderFns__$8 = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var CheckboxButton = normalizeComponent_1(
+  const __vue_component__$8 = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$8, staticRenderFns: __vue_staticRenderFns__$8 },
     __vue_inject_styles__$8,
     __vue_script__$8,
     __vue_scope_id__$8,
     __vue_is_functional_template__$8,
     __vue_module_identifier__$8,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin$3 = {
   install: function install(Vue) {
-    registerComponent(Vue, Checkbox);
-    registerComponent(Vue, CheckboxButton);
+    registerComponent(Vue, __vue_component__$7);
+    registerComponent(Vue, __vue_component__$8);
   }
 };
 use(Plugin$3);
@@ -2530,22 +2446,26 @@ const __vue_script__$9 = script$9;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Collapse = normalizeComponent_1(
+  const __vue_component__$9 = /*#__PURE__*/normalizeComponent_1(
     {},
     __vue_inject_styles__$9,
     __vue_script__$9,
     __vue_scope_id__$9,
     __vue_is_functional_template__$9,
     __vue_module_identifier__$9,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin$4 = {
   install: function install(Vue) {
-    registerComponent(Vue, Collapse);
+    registerComponent(Vue, __vue_component__$9);
   }
 };
 use(Plugin$4);
@@ -2554,57 +2474,45 @@ var AM = 'AM';
 var PM = 'PM';
 var HOUR_FORMAT_24 = '24';
 var HOUR_FORMAT_12 = '12';
-
 var defaultTimeFormatter = function defaultTimeFormatter(date, vm) {
   var hours = date.getHours();
   var minutes = date.getMinutes();
   var seconds = date.getSeconds();
   var period = '';
-
   if (vm.hourFormat === HOUR_FORMAT_12) {
     period = ' ' + (hours < 12 ? AM : PM);
-
     if (hours > 12) {
       hours -= 12;
     } else if (hours === 0) {
       hours = 12;
     }
   }
-
   return vm.pad(hours) + ':' + vm.pad(minutes) + (vm.enableSeconds ? ':' + vm.pad(seconds) : '') + period;
 };
-
 var defaultTimeParser = function defaultTimeParser(timeString, vm) {
   if (timeString) {
     var am = false;
-
     if (vm.hourFormat === HOUR_FORMAT_12) {
       var dateString12 = timeString.split(' ');
       timeString = dateString12[0];
       am = dateString12[1] === AM;
     }
-
     var time = timeString.split(':');
     var hours = parseInt(time[0], 10);
     var minutes = parseInt(time[1], 10);
     var seconds = vm.enableSeconds ? parseInt(time[2], 10) : 0;
-
     if (isNaN(hours) || hours < 0 || hours > 23 || vm.hourFormat === HOUR_FORMAT_12 && (hours < 1 || hours > 12) || isNaN(minutes) || minutes < 0 || minutes > 59) {
       return null;
     }
-
     var d = null;
-
     if (vm.computedValue && !isNaN(vm.computedValue)) {
       d = new Date(vm.computedValue);
     } else {
       d = vm.timeCreator();
       d.setMilliseconds(0);
     }
-
     d.setSeconds(seconds);
     d.setMinutes(minutes);
-
     if (vm.hourFormat === HOUR_FORMAT_12) {
       if (am && hours === 12) {
         hours = 0;
@@ -2612,14 +2520,11 @@ var defaultTimeParser = function defaultTimeParser(timeString, vm) {
         hours += 12;
       }
     }
-
     d.setHours(hours);
     return new Date(d.getTime());
   }
-
   return null;
 };
-
 var TimepickerMixin = {
   mixins: [FormElementMixin],
   inheritAttrs: false,
@@ -2730,15 +2635,12 @@ var TimepickerMixin = {
       if (!this.incrementHours || this.incrementHours < 1) throw new Error('Hour increment cannot be null or less than 1.');
       var hours = [];
       var numberOfHours = this.isHourFormat24 ? 24 : 12;
-
       for (var i = 0; i < numberOfHours; i += this.incrementHours) {
         var value = i;
         var label = value;
-
         if (!this.isHourFormat24) {
           value = i + 1;
           label = value;
-
           if (this.meridienSelected === this.AM) {
             if (value === 12) {
               value = 0;
@@ -2749,39 +2651,33 @@ var TimepickerMixin = {
             }
           }
         }
-
         hours.push({
           label: this.formatNumber(label),
           value: value
         });
       }
-
       return hours;
     },
     minutes: function minutes() {
       if (!this.incrementMinutes || this.incrementMinutes < 1) throw new Error('Minute increment cannot be null or less than 1.');
       var minutes = [];
-
       for (var i = 0; i < 60; i += this.incrementMinutes) {
         minutes.push({
           label: this.formatNumber(i, true),
           value: i
         });
       }
-
       return minutes;
     },
     seconds: function seconds() {
       if (!this.incrementSeconds || this.incrementSeconds < 1) throw new Error('Second increment cannot be null or less than 1.');
       var seconds = [];
-
       for (var i = 0; i < 60; i += this.incrementSeconds) {
         seconds.push({
           label: this.formatNumber(i, true),
           value: i
         });
       }
-
       return seconds;
     },
     meridiens: function meridiens() {
@@ -2800,7 +2696,6 @@ var TimepickerMixin = {
         this.meridienSelected = this.hoursSelected >= 12 ? PM : AM;
       }
     },
-
     /**
      * When v-model is changed:
      *   1. Update internal value.
@@ -2823,25 +2718,21 @@ var TimepickerMixin = {
           this.hoursSelected -= 12;
         }
       }
-
       this.updateDateSelected(this.hoursSelected, this.minutesSelected, this.enableSeconds ? this.secondsSelected : 0, value);
     },
     onHoursChange: function onHoursChange(value) {
       if (!this.minutesSelected && typeof this.defaultMinutes !== 'undefined') {
         this.minutesSelected = this.defaultMinutes;
       }
-
       if (!this.secondsSelected && typeof this.defaultSeconds !== 'undefined') {
         this.secondsSelected = this.defaultSeconds;
       }
-
       this.updateDateSelected(parseInt(value, 10), this.minutesSelected, this.enableSeconds ? this.secondsSelected : 0, this.meridienSelected);
     },
     onMinutesChange: function onMinutesChange(value) {
       if (!this.secondsSelected && this.defaultSeconds) {
         this.secondsSelected = this.defaultSeconds;
       }
-
       this.updateDateSelected(this.hoursSelected, parseInt(value, 10), this.enableSeconds ? this.secondsSelected : 0, this.meridienSelected);
     },
     onSecondsChange: function onSecondsChange(value) {
@@ -2850,14 +2741,12 @@ var TimepickerMixin = {
     updateDateSelected: function updateDateSelected(hours, minutes, seconds, meridiens) {
       if (hours != null && minutes != null && (!this.isHourFormat24 && meridiens !== null || this.isHourFormat24)) {
         var time = null;
-
         if (this.computedValue && !isNaN(this.computedValue)) {
           time = new Date(this.computedValue);
         } else {
           time = this.timeCreator();
           time.setMilliseconds(0);
         }
-
         time.setHours(hours);
         time.setMinutes(minutes);
         time.setSeconds(seconds);
@@ -2876,14 +2765,11 @@ var TimepickerMixin = {
         this.secondsSelected = null;
         this.meridienSelected = AM;
       }
-
       this.dateSelected = value;
     },
     isHourDisabled: function isHourDisabled(hour) {
       var _this = this;
-
       var disabled = false;
-
       if (this.minTime) {
         var minHours = this.minTime.getHours();
         var noMinutesAvailable = this.minutes.every(function (minute) {
@@ -2891,14 +2777,12 @@ var TimepickerMixin = {
         });
         disabled = hour < minHours || noMinutesAvailable;
       }
-
       if (this.maxTime) {
         if (!disabled) {
           var maxHours = this.maxTime.getHours();
           disabled = hour > maxHours;
         }
       }
-
       if (this.unselectableTimes) {
         if (!disabled) {
           var unselectable = this.unselectableTimes.filter(function (time) {
@@ -2913,18 +2797,15 @@ var TimepickerMixin = {
           disabled = unselectable.length > 0;
         }
       }
-
       return disabled;
     },
     isMinuteDisabledForHour: function isMinuteDisabledForHour(hour, minute) {
       var disabled = false;
-
       if (this.minTime) {
         var minHours = this.minTime.getHours();
         var minMinutes = this.minTime.getMinutes();
         disabled = hour === minHours && minute < minMinutes;
       }
-
       if (this.maxTime) {
         if (!disabled) {
           var maxHours = this.maxTime.getHours();
@@ -2932,21 +2813,17 @@ var TimepickerMixin = {
           disabled = hour === maxHours && minute > maxMinutes;
         }
       }
-
       return disabled;
     },
     isMinuteDisabled: function isMinuteDisabled(minute) {
       var _this2 = this;
-
       var disabled = false;
-
       if (this.hoursSelected !== null) {
         if (this.isHourDisabled(this.hoursSelected)) {
           disabled = true;
         } else {
           disabled = this.isMinuteDisabledForHour(this.hoursSelected, minute);
         }
-
         if (this.unselectableTimes) {
           if (!disabled) {
             var unselectable = this.unselectableTimes.filter(function (time) {
@@ -2960,14 +2837,11 @@ var TimepickerMixin = {
           }
         }
       }
-
       return disabled;
     },
     isSecondDisabled: function isSecondDisabled(second) {
       var _this3 = this;
-
       var disabled = false;
-
       if (this.minutesSelected !== null) {
         if (this.isMinuteDisabled(this.minutesSelected)) {
           disabled = true;
@@ -2978,7 +2852,6 @@ var TimepickerMixin = {
             var minSeconds = this.minTime.getSeconds();
             disabled = this.hoursSelected === minHours && this.minutesSelected === minMinutes && second < minSeconds;
           }
-
           if (this.maxTime) {
             if (!disabled) {
               var maxHours = this.maxTime.getHours();
@@ -2988,7 +2861,6 @@ var TimepickerMixin = {
             }
           }
         }
-
         if (this.unselectableTimes) {
           if (!disabled) {
             var unselectable = this.unselectableTimes.filter(function (time) {
@@ -2998,17 +2870,14 @@ var TimepickerMixin = {
           }
         }
       }
-
       return disabled;
     },
-
     /*
     * Parse string into date
     */
     onChange: function onChange(value) {
       var date = this.timeParser(value, this);
       this.updateInternalState(date);
-
       if (date && !isNaN(date)) {
         this.computedValue = date;
       } else {
@@ -3017,7 +2886,6 @@ var TimepickerMixin = {
         this.$refs.input.newValue = this.computedValue;
       }
     },
-
     /*
     * Toggle timepicker
     */
@@ -3026,57 +2894,47 @@ var TimepickerMixin = {
         this.$refs.dropdown.isActive = typeof active === 'boolean' ? active : !this.$refs.dropdown.isActive;
       }
     },
-
     /*
     * Close timepicker
     */
     close: function close() {
       this.toggle(false);
     },
-
     /*
     * Call default onFocus method and show timepicker
     */
     handleOnFocus: function handleOnFocus() {
       this.onFocus();
-
       if (this.openOnFocus) {
         this.toggle(true);
       }
     },
-
     /*
     * Format date into string 'HH-MM-SS'
     */
     formatHHMMSS: function formatHHMMSS(value) {
       var date = new Date(value);
-
       if (value && !isNaN(date)) {
         var hours = date.getHours();
         var minutes = date.getMinutes();
         var seconds = date.getSeconds();
         return this.formatNumber(hours, true) + ':' + this.formatNumber(minutes, true) + ':' + this.formatNumber(seconds, true);
       }
-
       return '';
     },
-
     /*
     * Parse time from string
     */
     onChangeNativePicker: function onChangeNativePicker(event) {
       var date = event.target.value;
-
       if (date) {
         var time = null;
-
         if (this.computedValue && !isNaN(this.computedValue)) {
           time = new Date(this.computedValue);
         } else {
           time = new Date();
           time.setMilliseconds(0);
         }
-
         var t = date.split(':');
         time.setHours(parseInt(t[0], 10));
         time.setMinutes(parseInt(t[1], 10));
@@ -3092,7 +2950,6 @@ var TimepickerMixin = {
     pad: function pad(value) {
       return (value < 10 ? '0' : '') + value;
     },
-
     /*
     * Format date into string
     */
@@ -3103,7 +2960,6 @@ var TimepickerMixin = {
         return null;
       }
     },
-
     /**
      * Keypress event that is bound to the document.
      */
@@ -3113,7 +2969,6 @@ var TimepickerMixin = {
         this.toggle(false);
       }
     },
-
     /**
      * Emit 'blur' event on dropdown is not active (closed)
      */
@@ -3137,28 +2992,21 @@ var TimepickerMixin = {
 
 var findFocusable = function findFocusable(element) {
   var programmatic = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
   if (!element) {
     return null;
   }
-
   if (programmatic) {
     return element.querySelectorAll("*[tabindex=\"-1\"]");
   }
-
   return element.querySelectorAll("a[href]:not([tabindex=\"-1\"]),\n                                     area[href],\n                                     input:not([disabled]),\n                                     select:not([disabled]),\n                                     textarea:not([disabled]),\n                                     button:not([disabled]),\n                                     iframe,\n                                     object,\n                                     embed,\n                                     *[tabindex]:not([tabindex=\"-1\"]),\n                                     *[contenteditable]");
 };
-
 var onKeyDown;
-
 var bind = function bind(el, _ref) {
   var _ref$value = _ref.value,
-      value = _ref$value === void 0 ? true : _ref$value;
-
+    value = _ref$value === void 0 ? true : _ref$value;
   if (value) {
     var focusable = findFocusable(el);
     var focusableProg = findFocusable(el, true);
-
     if (focusable && focusable.length > 0) {
       onKeyDown = function onKeyDown(event) {
         // Need to get focusable each time since it can change between key events
@@ -3167,7 +3015,6 @@ var bind = function bind(el, _ref) {
         focusableProg = findFocusable(el, true);
         var firstFocusable = focusable[0];
         var lastFocusable = focusable[focusable.length - 1];
-
         if (event.target === firstFocusable && event.shiftKey && event.key === 'Tab') {
           event.preventDefault();
           lastFocusable.focus();
@@ -3176,16 +3023,13 @@ var bind = function bind(el, _ref) {
           firstFocusable.focus();
         }
       };
-
       el.addEventListener('keydown', onKeyDown);
     }
   }
 };
-
 var unbind = function unbind(el) {
   el.removeEventListener('keydown', onKeyDown);
 };
-
 var directive = {
   bind: bind,
   unbind: unbind
@@ -3261,7 +3105,6 @@ var script$a = {
       _isDropdown: true,
       // Used internally by DropdownItem
       _bodyEl: undefined // Used to append to body
-
     };
   },
   computed: {
@@ -3295,15 +3138,12 @@ var script$a = {
     value: function value(_value) {
       this.selected = _value;
     },
-
     /**
     * Emit event when isActive value is changed.
     */
     isActive: function isActive(value) {
       var _this = this;
-
       this.$emit('active-change', value);
-
       if (this.appendToBody) {
         this.$nextTick(function () {
           _this.updateAppendToBody();
@@ -3322,7 +3162,6 @@ var script$a = {
       if (this.multiple) {
         if (this.selected) {
           var index = this.selected.indexOf(value);
-
           if (index === -1) {
             this.selected.push(value);
           } else {
@@ -3331,7 +3170,6 @@ var script$a = {
         } else {
           this.selected = [value];
         }
-
         this.$emit('change', this.selected);
       } else {
         if (this.selected !== value) {
@@ -3339,90 +3177,58 @@ var script$a = {
           this.$emit('change', this.selected);
         }
       }
-
       this.$emit('input', this.selected);
-
       if (!this.multiple) {
         this.isActive = !this.closeOnClick;
-
         if (this.hoverable && this.closeOnClick) {
           this.isHoverable = false;
         }
       }
     },
-
     /**
     * White-listed items to not close when clicked.
     */
     isInWhiteList: function isInWhiteList(el) {
       if (el === this.$refs.dropdownMenu) return true;
-      if (el === this.$refs.trigger) return true; // All chidren from dropdown
-
+      if (el === this.$refs.trigger) return true;
+      // All chidren from dropdown
       if (this.$refs.dropdownMenu !== undefined) {
         var children = this.$refs.dropdownMenu.querySelectorAll('*');
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
+        var _iterator = _createForOfIteratorHelper(children),
+          _step;
         try {
-          for (var _iterator = children[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
             var child = _step.value;
-
             if (el === child) {
               return true;
             }
           }
         } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
+          _iterator.e(err);
         } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-              _iterator.return();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
-          }
+          _iterator.f();
         }
-      } // All children from trigger
-
-
+      }
+      // All children from trigger
       if (this.$refs.trigger !== undefined) {
         var _children = this.$refs.trigger.querySelectorAll('*');
-
-        var _iteratorNormalCompletion2 = true;
-        var _didIteratorError2 = false;
-        var _iteratorError2 = undefined;
-
+        var _iterator2 = _createForOfIteratorHelper(_children),
+          _step2;
         try {
-          for (var _iterator2 = _children[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
             var _child = _step2.value;
-
             if (el === _child) {
               return true;
             }
           }
         } catch (err) {
-          _didIteratorError2 = true;
-          _iteratorError2 = err;
+          _iterator2.e(err);
         } finally {
-          try {
-            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-              _iterator2.return();
-            }
-          } finally {
-            if (_didIteratorError2) {
-              throw _iteratorError2;
-            }
-          }
+          _iterator2.f();
         }
       }
-
       return false;
     },
-
     /**
     * Close dropdown if clicked outside.
     */
@@ -3431,7 +3237,6 @@ var script$a = {
       if (this.inline) return;
       if (!this.isInWhiteList(event.target)) this.isActive = false;
     },
-
     /**
      * Keypress event that is bound to the document
      */
@@ -3442,22 +3247,19 @@ var script$a = {
         this.isActive = false;
       }
     },
-
     /**
     * Toggle dropdown if it's not disabled.
     */
     toggle: function toggle() {
       var _this2 = this;
-
       if (this.disabled) return;
-
       if (!this.isActive) {
         // if not active, toggle after clickOutside event
         // this fixes toggling programmatic
         this.$nextTick(function () {
           var value = !_this2.isActive;
-          _this2.isActive = value; // Vue 2.6.x ???
-
+          _this2.isActive = value;
+          // Vue 2.6.x ???
           setTimeout(function () {
             return _this2.isActive = value;
           });
@@ -3474,7 +3276,6 @@ var script$a = {
     updateAppendToBody: function updateAppendToBody() {
       var dropdownMenu = this.$refs.dropdownMenu;
       var trigger = this.$refs.trigger;
-
       if (dropdownMenu && trigger) {
         // update wrapper dropdown
         var dropdown = this.$data._bodyEl.children[0];
@@ -3483,11 +3284,9 @@ var script$a = {
         });
         dropdown.classList.add('dropdown');
         dropdown.classList.add('dropdown-menu-animation');
-
         if (this.$vnode && this.$vnode.data && this.$vnode.data.staticClass) {
           dropdown.classList.add(this.$vnode.data.staticClass);
         }
-
         this.rootClasses.forEach(function (item) {
           // skip position prop
           if (item && _typeof(item) === 'object') {
@@ -3498,7 +3297,6 @@ var script$a = {
             }
           }
         });
-
         if (this.appendToBodyCopyParent) {
           var parentNode = this.$refs.dropdown.parentNode;
           var parent = this.$data._bodyEl;
@@ -3509,21 +3307,17 @@ var script$a = {
             parent.classList.add(item);
           });
         }
-
         var rect = trigger.getBoundingClientRect();
         var top = rect.top + window.scrollY;
         var left = rect.left + window.scrollX;
-
         if (!this.position || this.position.indexOf('bottom') >= 0) {
           top += trigger.clientHeight;
         } else {
           top -= dropdownMenu.clientHeight;
         }
-
         if (this.position && this.position.indexOf('left') >= 0) {
           left -= dropdownMenu.clientWidth - trigger.clientWidth;
         }
-
         this.style = {
           position: 'absolute',
           top: "".concat(top, "px"),
@@ -3550,7 +3344,6 @@ var script$a = {
       document.removeEventListener('click', this.clickedOutside);
       document.removeEventListener('keyup', this.keyPress);
     }
-
     if (this.appendToBody) {
       removeElement(this.$data._bodyEl);
     }
@@ -3576,15 +3369,19 @@ var __vue_staticRenderFns__$9 = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Dropdown = normalizeComponent_1(
+  const __vue_component__$a = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$9, staticRenderFns: __vue_staticRenderFns__$9 },
     __vue_inject_styles__$a,
     __vue_script__$a,
     __vue_scope_id__$a,
     __vue_is_functional_template__$a,
     __vue_module_identifier__$a,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -3610,6 +3407,7 @@ var __vue_staticRenderFns__$9 = [];
 //
 //
 //
+
 var script$b = {
   name: 'BDropdownItem',
   props: {
@@ -3700,15 +3498,19 @@ var __vue_staticRenderFns__$a = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var DropdownItem = normalizeComponent_1(
+  const __vue_component__$b = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$a, staticRenderFns: __vue_staticRenderFns__$a },
     __vue_inject_styles__$b,
     __vue_script__$b,
     __vue_scope_id__$b,
     __vue_is_functional_template__$b,
     __vue_module_identifier__$b,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -3725,7 +3527,6 @@ var script$c = {
   },
   render: function render(createElement) {
     var _this = this;
-
     var first = true;
     return createElement('div', {
       attrs: {
@@ -3736,14 +3537,11 @@ var script$c = {
       if (!element.tag) {
         return element;
       }
-
       var message;
-
       if (first) {
         message = _this.message;
         first = false;
       }
-
       return createElement('b-field', {
         attrs: {
           type: _this.type,
@@ -3771,22 +3569,26 @@ const __vue_script__$c = script$c;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var FieldBody = normalizeComponent_1(
+  const __vue_component__$c = /*#__PURE__*/normalizeComponent_1(
     {},
     __vue_inject_styles__$c,
     __vue_script__$c,
     __vue_scope_id__$c,
     __vue_is_functional_template__$c,
     __vue_module_identifier__$c,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var script$d = {
   name: 'BField',
-  components: _defineProperty({}, FieldBody.name, FieldBody),
+  components: _defineProperty({}, __vue_component__$c.name, __vue_component__$c),
   props: {
     type: [String, Object],
     label: String,
@@ -3815,7 +3617,6 @@ var script$d = {
       newMessage: this.message,
       fieldLabelSize: null,
       _isField: true // Used internally by Input and Select
-
     };
   },
   computed: {
@@ -3828,7 +3629,6 @@ var script$d = {
         'is-floating-label': this.hasLabel && !this.horizontal && this.labelPosition === 'on-border'
       }, this.numberInputClasses];
     },
-
     /**
     * Correct Bulma class for the side of the addon or group.
     *
@@ -3843,7 +3643,6 @@ var script$d = {
       var prefix = this.grouped ? 'is-grouped-' : 'has-addons-';
       if (this.position) return prefix + position[1];
     },
-
     /**
     * Formatted message in case it's an array
     * (each element is separated by <br> tag)
@@ -3852,9 +3651,7 @@ var script$d = {
       if (typeof this.newMessage === 'string') {
         return [this.newMessage];
       }
-
       var messages = [];
-
       if (Array.isArray(this.newMessage)) {
         this.newMessage.forEach(function (message) {
           if (typeof message === 'string') {
@@ -3874,7 +3671,6 @@ var script$d = {
           }
         }
       }
-
       return messages.filter(function (m) {
         if (m) return m;
       });
@@ -3890,24 +3686,19 @@ var script$d = {
         var numberinput = this.$slots.default.filter(function (node) {
           return node.tag && node.tag.toLowerCase().indexOf('numberinput') >= 0;
         })[0];
-
         if (numberinput) {
           var classes = ['has-numberinput'];
           var controlsPosition = numberinput.componentOptions.propsData.controlsPosition;
           var size = numberinput.componentOptions.propsData.size;
-
           if (controlsPosition) {
             classes.push("has-numberinput-".concat(controlsPosition));
           }
-
           if (size) {
             classes.push("has-numberinput-".concat(size));
           }
-
           return classes;
         }
       }
-
       return null;
     }
   },
@@ -3918,7 +3709,6 @@ var script$d = {
     type: function type(value) {
       this.newType = value;
     },
-
     /**
     * Set internal message when prop change.
     */
@@ -3936,13 +3726,11 @@ var script$d = {
     fieldType: function fieldType() {
       if (this.grouped) return 'is-grouped';
       var renderedNode = 0;
-
       if (this.$slots.default) {
         renderedNode = this.$slots.default.reduce(function (i, node) {
           return node.tag ? i + 1 : i;
         }, 0);
       }
-
       if (renderedNode > 1 && this.addons && !this.horizontal) {
         return 'has-addons';
       }
@@ -3952,7 +3740,6 @@ var script$d = {
     if (this.horizontal) {
       // Bulma docs: .is-normal for any .input or .button
       var elements = this.$el.querySelectorAll('.input, .select, .button, .textarea, .b-slider');
-
       if (elements.length > 0) {
         this.fieldLabelSize = 'is-normal';
       }
@@ -3979,15 +3766,19 @@ var __vue_staticRenderFns__$b = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Field = normalizeComponent_1(
+  const __vue_component__$d = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$b, staticRenderFns: __vue_staticRenderFns__$b },
     __vue_inject_styles__$d,
     __vue_script__$d,
     __vue_scope_id__$d,
     __vue_is_functional_template__$d,
     __vue_module_identifier__$d,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -4019,6 +3810,7 @@ var __vue_staticRenderFns__$b = [];
 //
 //
 //
+
 // These should match the variables in clockpicker.scss
 var indicatorSize = 40;
 var paddingInner = 5;
@@ -4047,35 +3839,31 @@ var script$e = {
     count: function count() {
       return this.max - this.min + 1;
     },
-
     /**
     * How many number indicators are shown per ring on the face
     */
     countPerRing: function countPerRing() {
       return this.double ? this.count / 2 : this.count;
     },
-
     /**
     * Radius of the clock face
     */
     radius: function radius() {
       return this.pickerSize / 2;
     },
-
     /**
     * Radius of the outer ring of number indicators
     */
     outerRadius: function outerRadius() {
       return this.radius - paddingInner - indicatorSize / 2;
     },
-
     /**
     * Radius of the inner ring of number indicators
     */
     innerRadius: function innerRadius() {
-      return Math.max(this.outerRadius * 0.6, this.outerRadius - paddingInner - indicatorSize); // 48px gives enough room for the outer ring of numbers
+      return Math.max(this.outerRadius * 0.6, this.outerRadius - paddingInner - indicatorSize);
+      // 48px gives enough room for the outer ring of numbers
     },
-
     /**
     * The angle for each selectable value
     * For hours this ends up being 30 degrees, for minutes 6 degrees
@@ -4083,31 +3871,24 @@ var script$e = {
     degreesPerUnit: function degreesPerUnit() {
       return 360 / this.countPerRing;
     },
-
     /**
     * Used for calculating x/y grid location based on degrees
     */
     degrees: function degrees() {
       return this.degreesPerUnit * Math.PI / 180;
     },
-
     /**
     * Calculates the angle the clock hand should be rotated for the
     * selected value
     */
     handRotateAngle: function handRotateAngle() {
       var currentAngle = this.prevAngle;
-
-      while (currentAngle < 0) {
-        currentAngle += 360;
-      }
-
+      while (currentAngle < 0) currentAngle += 360;
       var targetAngle = this.calcHandAngle(this.displayedValue);
       var degreesDiff = this.shortestDistanceDegrees(currentAngle, targetAngle);
       var angle = this.prevAngle + degreesDiff;
       return angle;
     },
-
     /**
     * Determines how long the selector hand is based on if the
     * selected value is located along the outer or inner ring
@@ -4121,7 +3902,6 @@ var script$e = {
         transition: '.3s cubic-bezier(.25,.8,.50,1)'
       };
     },
-
     /**
     * The value the hand should be pointing at
     */
@@ -4134,7 +3914,6 @@ var script$e = {
       if (_value !== this.inputValue) {
         this.prevAngle = this.handRotateAngle;
       }
-
       this.inputValue = _value;
     }
   },
@@ -4142,7 +3921,6 @@ var script$e = {
     isDisabled: function isDisabled(value) {
       return this.disabledValues && this.disabledValues(value);
     },
-
     /**
     * Calculates the distance between two points
     */
@@ -4156,7 +3934,6 @@ var script$e = {
       var shortestDistance = 180 - Math.abs(Math.abs(modDiff) - 180);
       return (modDiff + 360) % 360 < 180 ? shortestDistance * 1 : shortestDistance * -1;
     },
-
     /**
     * Calculates the angle of the line from the center point
     * to the given point.
@@ -4165,7 +3942,6 @@ var script$e = {
       var value = 2 * Math.atan2(p1.y - center.y - this.euclidean(center, p1), p1.x - center.x);
       return Math.abs(value * 180 / Math.PI);
     },
-
     /**
     * Generates the inline style translate() property for a
     * number indicator, which determines it's location on the
@@ -4173,12 +3949,10 @@ var script$e = {
     */
     getNumberTranslate: function getNumberTranslate(value) {
       var _this$getNumberCoords = this.getNumberCoords(value),
-          x = _this$getNumberCoords.x,
-          y = _this$getNumberCoords.y;
-
+        x = _this$getNumberCoords.x,
+        y = _this$getNumberCoords.y;
       return "translate(".concat(x, "px, ").concat(y, "px)");
     },
-
     /***
     * Calculates the coordinates on the clock face for a number
     * indicator value
@@ -4196,7 +3970,6 @@ var script$e = {
         'disabled': this.isDisabled(num.value)
       };
     },
-
     /**
     * Determines if a value resides on the inner ring
     */
@@ -4218,7 +3991,6 @@ var script$e = {
     },
     onMouseUp: function onMouseUp() {
       this.isDragging = false;
-
       if (!this.isDisabled(this.inputValue)) {
         this.$emit('change', this.inputValue);
       }
@@ -4226,16 +3998,13 @@ var script$e = {
     onDragMove: function onDragMove(e) {
       e.preventDefault();
       if (!this.isDragging && e.type !== 'click') return;
-
       var _this$$refs$clock$get = this.$refs.clock.getBoundingClientRect(),
-          width = _this$$refs$clock$get.width,
-          top = _this$$refs$clock$get.top,
-          left = _this$$refs$clock$get.left;
-
+        width = _this$$refs$clock$get.width,
+        top = _this$$refs$clock$get.top,
+        left = _this$$refs$clock$get.left;
       var _ref = 'touches' in e ? e.touches[0] : e,
-          clientX = _ref.clientX,
-          clientY = _ref.clientY;
-
+        clientX = _ref.clientX,
+        clientY = _ref.clientY;
       var center = {
         x: width / 2,
         y: -width / 2
@@ -4246,12 +4015,12 @@ var script$e = {
       };
       var handAngle = Math.round(this.coordToAngle(center, coords) + 360) % 360;
       var insideClick = this.double && this.euclidean(center, coords) < (this.outerRadius + this.innerRadius) / 2 - 16;
-      var value = Math.round(handAngle / this.degreesPerUnit) + this.min + (insideClick ? this.countPerRing : 0); // Necessary to fix edge case when selecting left part of max value
+      var value = Math.round(handAngle / this.degreesPerUnit) + this.min + (insideClick ? this.countPerRing : 0);
 
+      // Necessary to fix edge case when selecting left part of max value
       if (handAngle >= 360 - this.degreesPerUnit / 2) {
         value = insideClick ? this.max : this.min;
       }
-
       this.update(value);
     },
     update: function update(value) {
@@ -4283,24 +4052,27 @@ var __vue_staticRenderFns__$c = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var ClockpickerFace = normalizeComponent_1(
+  const __vue_component__$e = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$c, staticRenderFns: __vue_staticRenderFns__$c },
     __vue_inject_styles__$e,
     __vue_script__$e,
     __vue_scope_id__$e,
     __vue_is_functional_template__$e,
     __vue_module_identifier__$e,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
-var _components;
 var outerPadding = 12;
 var script$f = {
   name: 'BClockpicker',
-  components: (_components = {}, _defineProperty(_components, ClockpickerFace.name, ClockpickerFace), _defineProperty(_components, Input.name, Input), _defineProperty(_components, Field.name, Field), _defineProperty(_components, Icon.name, Icon), _defineProperty(_components, Dropdown.name, Dropdown), _defineProperty(_components, DropdownItem.name, DropdownItem), _components),
+  components: _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty({}, __vue_component__$e.name, __vue_component__$e), __vue_component__$1.name, __vue_component__$1), __vue_component__$d.name, __vue_component__$d), __vue_component__.name, __vue_component__), __vue_component__$a.name, __vue_component__$a), __vue_component__$b.name, __vue_component__$b),
   mixins: [TimepickerMixin],
   props: {
     pickerSize: {
@@ -4414,29 +4186,33 @@ var __vue_staticRenderFns__$d = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Clockpicker = normalizeComponent_1(
+  const __vue_component__$f = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$d, staticRenderFns: __vue_staticRenderFns__$d },
     __vue_inject_styles__$f,
     __vue_script__$f,
     __vue_scope_id__$f,
     __vue_is_functional_template__$f,
     __vue_module_identifier__$f,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin$5 = {
   install: function install(Vue) {
-    registerComponent(Vue, Clockpicker);
+    registerComponent(Vue, __vue_component__$f);
   }
 };
 use(Plugin$5);
 
 var script$g = {
   name: 'BSelect',
-  components: _defineProperty({}, Icon.name, Icon),
+  components: _defineProperty({}, __vue_component__.name, __vue_component__),
   mixins: [FormElementMixin],
   inheritAttrs: false,
   props: {
@@ -4446,8 +4222,7 @@ var script$g = {
     },
     placeholder: String,
     multiple: Boolean,
-    nativeSize: [String, Number],
-    customStyle: String
+    nativeSize: [String, Number]
   },
   data: function data() {
     return {
@@ -4493,7 +4268,7 @@ var script$g = {
 const __vue_script__$g = script$g;
 
 /* template */
-var __vue_render__$e = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"control",class:{ 'is-expanded': _vm.expanded, 'has-icons-left': _vm.icon },style:(_vm.customStyle)},[_c('span',{staticClass:"select",class:_vm.spanClasses},[_c('select',_vm._b({directives:[{name:"model",rawName:"v-model",value:(_vm.computedValue),expression:"computedValue"}],ref:"select",attrs:{"multiple":_vm.multiple,"size":_vm.nativeSize},on:{"blur":function($event){_vm.$emit('blur', $event) && _vm.checkHtml5Validity();},"focus":function($event){_vm.$emit('focus', $event);},"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.computedValue=$event.target.multiple ? $$selectedVal : $$selectedVal[0];}}},'select',_vm.$attrs,false),[(_vm.placeholder)?[(_vm.computedValue == null)?_c('option',{attrs:{"disabled":"","hidden":""},domProps:{"value":null}},[_vm._v("\n                        "+_vm._s(_vm.placeholder)+"\n                    ")]):_vm._e()]:_vm._e(),_vm._v(" "),_vm._t("default")],2)]),_vm._v(" "),(_vm.icon)?_c('b-icon',{staticClass:"is-left",attrs:{"icon":_vm.icon,"pack":_vm.iconPack,"size":_vm.iconSize}}):_vm._e()],1)};
+var __vue_render__$e = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"control",class:{ 'is-expanded': _vm.expanded, 'has-icons-left': _vm.icon }},[_c('span',{staticClass:"select",class:_vm.spanClasses},[_c('select',_vm._b({directives:[{name:"model",rawName:"v-model",value:(_vm.computedValue),expression:"computedValue"}],ref:"select",attrs:{"multiple":_vm.multiple,"size":_vm.nativeSize},on:{"blur":function($event){_vm.$emit('blur', $event) && _vm.checkHtml5Validity();},"focus":function($event){_vm.$emit('focus', $event);},"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.computedValue=$event.target.multiple ? $$selectedVal : $$selectedVal[0];}}},'select',_vm.$attrs,false),[(_vm.placeholder)?[(_vm.computedValue == null)?_c('option',{attrs:{"disabled":"","hidden":""},domProps:{"value":null}},[_vm._v("\n                        "+_vm._s(_vm.placeholder)+"\n                    ")]):_vm._e()]:_vm._e(),_vm._v(" "),_vm._t("default")],2)]),_vm._v(" "),(_vm.icon)?_c('b-icon',{staticClass:"is-left",attrs:{"icon":_vm.icon,"pack":_vm.iconPack,"size":_vm.iconSize}}):_vm._e()],1)};
 var __vue_staticRenderFns__$e = [];
 
   /* style */
@@ -4508,15 +4283,19 @@ var __vue_staticRenderFns__$e = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Select = normalizeComponent_1(
+  const __vue_component__$g = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$e, staticRenderFns: __vue_staticRenderFns__$e },
     __vue_inject_styles__$g,
     __vue_script__$g,
     __vue_scope_id__$g,
     __vue_is_functional_template__$g,
     __vue_module_identifier__$g,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -4565,6 +4344,7 @@ var __vue_staticRenderFns__$e = [];
 //
 //
 //
+
 var script$h = {
   name: 'BDatepickerTableRow',
   props: {
@@ -4614,9 +4394,7 @@ var script$h = {
     day: {
       handler: function handler(day) {
         var _this = this;
-
         var refName = "day-".concat(day);
-
         if (this.$refs[refName] && this.$refs[refName].length > 0) {
           this.$nextTick(function () {
             if (_this.$refs[refName][0]) {
@@ -4631,8 +4409,8 @@ var script$h = {
   methods: {
     firstWeekOffset: function firstWeekOffset(year, dow, doy) {
       // first-week day -- which january is always in the first week (4 for iso, 1 for other)
-      var fwd = 7 + dow - doy; // first-week day local weekday -- which local weekday is fwd
-
+      var fwd = 7 + dow - doy;
+      // first-week day local weekday -- which local weekday is fwd
       var firstJanuary = new Date(year, 0, fwd);
       var fwdlw = (7 + firstJanuary.getDay() - dow) % 7;
       return -fwdlw + fwd - 1;
@@ -4654,13 +4432,11 @@ var script$h = {
     getWeekNumber: function getWeekNumber(mom) {
       var dow = this.firstDayOfWeek; // first day of week
       // Rules for the first week : 1 for the 1st January, 4 for the 4th January
-
       var doy = this.rulesForFirstWeek;
       var weekOffset = this.firstWeekOffset(mom.getFullYear(), dow, doy);
       var week = Math.floor((this.getSetDayOfYear(mom) - weekOffset - 1) / 7) + 1;
       var resWeek;
       var resYear;
-
       if (week < 1) {
         resYear = mom.getFullYear() - 1;
         resWeek = week + this.weeksInYear(resYear, dow, doy);
@@ -4671,33 +4447,26 @@ var script$h = {
         resYear = mom.getFullYear();
         resWeek = week;
       }
-
       return resWeek;
     },
-
     /*
      * Check that selected day is within earliest/latest params and
      * is within this month
      */
     selectableDate: function selectableDate(day) {
       var validity = [];
-
       if (this.minDate) {
         validity.push(day >= this.minDate);
       }
-
       if (this.maxDate) {
         validity.push(day <= this.maxDate);
       }
-
       if (this.nearbyMonthDays && !this.nearbySelectableMonthDays) {
         validity.push(day.getMonth() === this.month);
       }
-
       if (this.selectableDates) {
         for (var i = 0; i < this.selectableDates.length; i++) {
           var enabledDate = this.selectableDates[i];
-
           if (day.getDate() === enabledDate.getDate() && day.getFullYear() === enabledDate.getFullYear() && day.getMonth() === enabledDate.getMonth()) {
             return true;
           } else {
@@ -4705,30 +4474,25 @@ var script$h = {
           }
         }
       }
-
       if (this.unselectableDates) {
         for (var _i = 0; _i < this.unselectableDates.length; _i++) {
           var disabledDate = this.unselectableDates[_i];
           validity.push(day.getDate() !== disabledDate.getDate() || day.getFullYear() !== disabledDate.getFullYear() || day.getMonth() !== disabledDate.getMonth());
         }
       }
-
       if (this.unselectableDaysOfWeek) {
         for (var _i2 = 0; _i2 < this.unselectableDaysOfWeek.length; _i2++) {
           var dayOfWeek = this.unselectableDaysOfWeek[_i2];
           validity.push(day.getDay() !== dayOfWeek);
         }
       }
-
       return validity.indexOf(false) < 0;
     },
-
     /*
     * Emit select event with chosen date as payload
     */
     emitChosenDate: function emitChosenDate(day) {
       if (this.disabled) return;
-
       if (this.selectableDate(day)) {
         this.$emit('select', day);
       }
@@ -4736,20 +4500,16 @@ var script$h = {
     eventsDateMatch: function eventsDateMatch(day) {
       if (!this.events || !this.events.length) return false;
       var dayEvents = [];
-
       for (var i = 0; i < this.events.length; i++) {
         if (this.events[i].date.getDay() === day.getDay()) {
           dayEvents.push(this.events[i]);
         }
       }
-
       if (!dayEvents.length) {
         return false;
       }
-
       return dayEvents;
     },
-
     /*
     * Build classObject for cell using validations
     */
@@ -4760,24 +4520,19 @@ var script$h = {
         if (!dateOne || !dateTwo || multiple) {
           return false;
         }
-
         if (Array.isArray(dateTwo)) {
           return dateTwo.some(function (date) {
             return dateOne.getDate() === date.getDate() && dateOne.getFullYear() === date.getFullYear() && dateOne.getMonth() === date.getMonth();
           });
         }
-
         return dateOne.getDate() === dateTwo.getDate() && dateOne.getFullYear() === dateTwo.getFullYear() && dateOne.getMonth() === dateTwo.getMonth();
       }
-
       function dateWithin(dateOne, dates, multiple) {
         if (!Array.isArray(dates) || multiple) {
           return false;
         }
-
         return dateOne > dates[0] && dateOne < dates[1];
       }
-
       return {
         'is-selected': dateMatch(day, this.selectedDate) || dateWithin(day, this.selectedDate, this.multiple),
         'is-first-selected': dateMatch(day, Array.isArray(this.selectedDate) && this.selectedDate[0], this.multiple),
@@ -4826,15 +4581,19 @@ var __vue_staticRenderFns__$f = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var DatepickerTableRow = normalizeComponent_1(
+  const __vue_component__$h = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$f, staticRenderFns: __vue_staticRenderFns__$f },
     __vue_inject_styles__$h,
     __vue_script__$h,
     __vue_scope_id__$h,
     __vue_is_functional_template__$h,
     __vue_module_identifier__$h,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -4842,10 +4601,9 @@ var __vue_staticRenderFns__$f = [];
 var isDefined = function isDefined(d) {
   return d !== undefined;
 };
-
 var script$i = {
   name: 'BDatepickerTable',
-  components: _defineProperty({}, DatepickerTableRow.name, DatepickerTableRow),
+  components: _defineProperty({}, __vue_component__$h.name, __vue_component__$h),
   props: {
     value: {
       type: [Date, Array]
@@ -4892,48 +4650,39 @@ var script$i = {
     visibleDayNames: function visibleDayNames() {
       var visibleDayNames = [];
       var index = this.firstDayOfWeek;
-
       while (visibleDayNames.length < this.dayNames.length) {
         var currentDayName = this.dayNames[index % this.dayNames.length];
         visibleDayNames.push(currentDayName);
         index++;
       }
-
       if (this.showWeekNumber) visibleDayNames.unshift('');
       return visibleDayNames;
     },
     hasEvents: function hasEvents() {
       return this.events && this.events.length;
     },
-
     /*
     * Return array of all events in the specified month
     */
     eventsInThisMonth: function eventsInThisMonth() {
       if (!this.events) return [];
       var monthEvents = [];
-
       for (var i = 0; i < this.events.length; i++) {
         var event = this.events[i];
-
         if (!event.hasOwnProperty('date')) {
           event = {
             date: event
           };
         }
-
         if (!event.hasOwnProperty('type')) {
           event.type = 'is-primary';
         }
-
         if (event.date.getMonth() === this.focused.month && event.date.getFullYear() === this.focused.year) {
           monthEvents.push(event);
         }
       }
-
       return monthEvents;
     },
-
     /*
     * Return array of all weeks in the specified month
     */
@@ -4943,28 +4692,23 @@ var script$i = {
       var year = this.focused.year;
       var weeksInThisMonth = [];
       var startingDay = 1;
-
       while (weeksInThisMonth.length < 6) {
         var newWeek = this.weekBuilder(startingDay, month, year);
         weeksInThisMonth.push(newWeek);
         startingDay += 7;
       }
-
       return weeksInThisMonth;
     },
     hoveredDateRange: function hoveredDateRange() {
       if (!this.range) {
         return [];
       }
-
       if (!isNaN(this.selectedEndDate)) {
         return [];
       }
-
       if (this.hoveredEndDate < this.selectedBeginDate) {
         return [this.hoveredEndDate, this.selectedBeginDate].filter(isDefined);
       }
-
       return [this.selectedBeginDate, this.hoveredEndDate].filter(isDefined);
     }
   },
@@ -4981,7 +4725,6 @@ var script$i = {
         this.handleSelectMultipleDates(date);
       }
     },
-
     /*
     * If both begin and end dates are set, reset the end date and set the begin date.
     * If only begin date is selected, emit an array of the begin date and the new date.
@@ -4999,7 +4742,6 @@ var script$i = {
         } else {
           this.selectedEndDate = date;
         }
-
         this.$emit('range-end', date);
         this.$emit('input', [this.selectedBeginDate, this.selectedEndDate]);
       } else {
@@ -5007,7 +4749,6 @@ var script$i = {
         this.$emit('range-start', date);
       }
     },
-
     /*
     * If selected date already exists list of selected dates, remove it from the list
     * Otherwise, add date to list of selected dates
@@ -5016,7 +4757,6 @@ var script$i = {
       var multipleSelect = this.multipleSelectedDates.filter(function (selectedDate) {
         return selectedDate.getDate() === date.getDate() && selectedDate.getFullYear() === date.getFullYear() && selectedDate.getMonth() === date.getMonth();
       });
-
       if (multipleSelect.length) {
         this.multipleSelectedDates = this.multipleSelectedDates.filter(function (selectedDate) {
           return selectedDate.getDate() !== date.getDate() || selectedDate.getFullYear() !== date.getFullYear() || selectedDate.getMonth() !== date.getMonth();
@@ -5024,10 +4764,8 @@ var script$i = {
       } else {
         this.multipleSelectedDates.push(date);
       }
-
       this.$emit('input', this.multipleSelectedDates);
     },
-
     /*
      * Return array of all days in the week that the startingDate is within
      */
@@ -5037,33 +4775,27 @@ var script$i = {
       var dayOfWeek = new Date(year, month, startingDate).getDay();
       var end = dayOfWeek >= this.firstDayOfWeek ? dayOfWeek - this.firstDayOfWeek : 7 - this.firstDayOfWeek + dayOfWeek;
       var daysAgo = 1;
-
       for (var i = 0; i < end; i++) {
         thisWeek.unshift(new Date(thisMonth.getFullYear(), thisMonth.getMonth(), startingDate - daysAgo));
         daysAgo++;
       }
-
       thisWeek.push(new Date(year, month, startingDate));
       var daysForward = 1;
-
       while (thisWeek.length < 7) {
         thisWeek.push(new Date(year, month, startingDate + daysForward));
         daysForward++;
       }
-
       return thisWeek;
     },
     validateFocusedDay: function validateFocusedDay() {
       var focusedDate = new Date(this.focused.year, this.focused.month, this.focused.day);
       if (this.selectableDate(focusedDate)) return;
-      var day = 0; // Number of days in the current month
-
+      var day = 0;
+      // Number of days in the current month
       var monthDays = new Date(this.focused.year, this.focused.month + 1, 0).getDate();
       var firstFocusable = null;
-
       while (!firstFocusable && ++day < monthDays) {
         var date = new Date(this.focused.year, this.focused.month, day);
-
         if (this.selectableDate(date)) {
           firstFocusable = focusedDate;
           var focused = {
@@ -5075,30 +4807,24 @@ var script$i = {
         }
       }
     },
-
     /*
      * Check that selected day is within earliest/latest params and
      * is within this month
      */
     selectableDate: function selectableDate(day) {
       var validity = [];
-
       if (this.minDate) {
         validity.push(day >= this.minDate);
       }
-
       if (this.maxDate) {
         validity.push(day <= this.maxDate);
       }
-
       if (this.nearbyMonthDays && !this.nearbySelectableMonthDays) {
         validity.push(day.getMonth() === this.focused.month);
       }
-
       if (this.selectableDates) {
         for (var i = 0; i < this.selectableDates.length; i++) {
           var enabledDate = this.selectableDates[i];
-
           if (day.getDate() === enabledDate.getDate() && day.getFullYear() === enabledDate.getFullYear() && day.getMonth() === enabledDate.getMonth()) {
             return true;
           } else {
@@ -5106,21 +4832,18 @@ var script$i = {
           }
         }
       }
-
       if (this.unselectableDates) {
         for (var _i = 0; _i < this.unselectableDates.length; _i++) {
           var disabledDate = this.unselectableDates[_i];
           validity.push(day.getDate() !== disabledDate.getDate() || day.getFullYear() !== disabledDate.getFullYear() || day.getMonth() !== disabledDate.getMonth());
         }
       }
-
       if (this.unselectableDaysOfWeek) {
         for (var _i2 = 0; _i2 < this.unselectableDaysOfWeek.length; _i2++) {
           var dayOfWeek = this.unselectableDaysOfWeek[_i2];
           validity.push(day.getDay() !== dayOfWeek);
         }
       }
-
       return validity.indexOf(false) < 0;
     },
     eventsInThisWeek: function eventsInThisWeek(week) {
@@ -5166,15 +4889,19 @@ var __vue_staticRenderFns__$g = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var DatepickerTable = normalizeComponent_1(
+  const __vue_component__$i = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$g, staticRenderFns: __vue_staticRenderFns__$g },
     __vue_inject_styles__$i,
     __vue_script__$i,
     __vue_scope_id__$i,
     __vue_is_functional_template__$i,
     __vue_module_identifier__$i,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -5227,6 +4954,7 @@ var __vue_staticRenderFns__$g = [];
 //
 //
 //
+
 var script$j = {
   name: 'BDatepickerMonth',
   props: {
@@ -5255,44 +4983,36 @@ var script$j = {
     hasEvents: function hasEvents() {
       return this.events && this.events.length;
     },
-
     /*
     * Return array of all events in the specified month
     */
     eventsInThisYear: function eventsInThisYear() {
       if (!this.events) return [];
       var yearEvents = [];
-
       for (var i = 0; i < this.events.length; i++) {
         var event = this.events[i];
-
         if (!event.hasOwnProperty('date')) {
           event = {
             date: event
           };
         }
-
         if (!event.hasOwnProperty('type')) {
           event.type = 'is-primary';
         }
-
         if (event.date.getFullYear() === this.focused.year) {
           yearEvents.push(event);
         }
       }
-
       return yearEvents;
     },
     monthDates: function monthDates() {
       var year = this.focused.year;
       var months = [];
-
       for (var i = 0; i < 12; i++) {
         var d = new Date(year, i, 1);
         d.setHours(0, 0, 0, 0);
         months.push(d);
       }
-
       return months;
     },
     focusedMonth: function focusedMonth() {
@@ -5303,9 +5023,7 @@ var script$j = {
     focusedMonth: {
       handler: function handler(month) {
         var _this = this;
-
         var refName = "month-".concat(month);
-
         if (this.$refs[refName] && this.$refs[refName].length > 0) {
           this.$nextTick(function () {
             if (_this.$refs[refName][0]) {
@@ -5323,7 +5041,6 @@ var script$j = {
       var multipleSelect = this.multipleSelectedDates.filter(function (selectedDate) {
         return selectedDate.getDate() === date.getDate() && selectedDate.getFullYear() === date.getFullYear() && selectedDate.getMonth() === date.getMonth();
       });
-
       if (multipleSelect.length) {
         this.multipleSelectedDates = this.multipleSelectedDates.filter(function (selectedDate) {
           return selectedDate.getDate() !== date.getDate() || selectedDate.getFullYear() !== date.getFullYear() || selectedDate.getMonth() !== date.getMonth();
@@ -5331,26 +5048,20 @@ var script$j = {
       } else {
         this.multipleSelectedDates.push(date);
       }
-
       this.$emit('input', this.multipleSelectedDates);
     },
     selectableDate: function selectableDate(day) {
       var validity = [];
-
       if (this.minDate) {
         validity.push(day >= this.minDate);
       }
-
       if (this.maxDate) {
         validity.push(day <= this.maxDate);
       }
-
       validity.push(day.getFullYear() === this.focused.year);
-
       if (this.selectableDates) {
         for (var i = 0; i < this.selectableDates.length; i++) {
           var enabledDate = this.selectableDates[i];
-
           if (day.getFullYear() === enabledDate.getFullYear() && day.getMonth() === enabledDate.getMonth()) {
             return true;
           } else {
@@ -5358,40 +5069,33 @@ var script$j = {
           }
         }
       }
-
       if (this.unselectableDates) {
         for (var _i = 0; _i < this.unselectableDates.length; _i++) {
           var disabledDate = this.unselectableDates[_i];
           validity.push(day.getFullYear() !== disabledDate.getFullYear() || day.getMonth() !== disabledDate.getMonth());
         }
       }
-
       if (this.unselectableDaysOfWeek) {
         for (var _i2 = 0; _i2 < this.unselectableDaysOfWeek.length; _i2++) {
           var dayOfWeek = this.unselectableDaysOfWeek[_i2];
           validity.push(day.getDay() !== dayOfWeek);
         }
       }
-
       return validity.indexOf(false) < 0;
     },
     eventsDateMatch: function eventsDateMatch(day) {
       if (!this.eventsInThisYear.length) return false;
       var monthEvents = [];
-
       for (var i = 0; i < this.eventsInThisYear.length; i++) {
         if (this.eventsInThisYear[i].date.getMonth() === day.getMonth()) {
           monthEvents.push(this.events[i]);
         }
       }
-
       if (!monthEvents.length) {
         return false;
       }
-
       return monthEvents;
     },
-
     /*
     * Build classObject for cell using validations
     */
@@ -5401,20 +5105,16 @@ var script$j = {
         if (!dateOne || !dateTwo || multiple) {
           return false;
         }
-
         return dateOne.getFullYear() === dateTwo.getFullYear() && dateOne.getMonth() === dateTwo.getMonth();
       }
-
       function dateMultipleSelected(dateOne, dates, multiple) {
         if (!Array.isArray(dates) || !multiple) {
           return false;
         }
-
         return dates.some(function (date) {
           return dateOne.getDate() === date.getDate() && dateOne.getFullYear() === date.getFullYear() && dateOne.getMonth() === date.getMonth();
         });
       }
-
       return {
         'is-selected': dateMatch(day, this.value, this.multiple) || dateMultipleSelected(day, this.multipleSelectedDates, this.multiple),
         'is-today': dateMatch(day, this.dateCreator()),
@@ -5422,13 +5122,11 @@ var script$j = {
         'is-unselectable': !this.selectableDate(day) || this.disabled
       };
     },
-
     /*
      * Emit select event with chosen date as payload
      */
     emitChosenDate: function emitChosenDate(day) {
       if (this.disabled) return;
-
       if (!this.multiple) {
         if (this.selectableDate(day)) {
           this.$emit('input', day);
@@ -5468,20 +5166,22 @@ var __vue_staticRenderFns__$h = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var DatepickerMonth = normalizeComponent_1(
+  const __vue_component__$j = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$h, staticRenderFns: __vue_staticRenderFns__$h },
     __vue_inject_styles__$j,
     __vue_script__$j,
     __vue_scope_id__$j,
     __vue_is_functional_template__$j,
     __vue_module_identifier__$j,
+    false,
+    undefined,
     undefined,
     undefined
   );
-
-var _components$1;
 
 var defaultDateFormatter = function defaultDateFormatter(date, vm) {
   var targetDates = Array.isArray(date) ? date : [date];
@@ -5494,26 +5194,21 @@ var defaultDateFormatter = function defaultDateFormatter(date, vm) {
   });
   return !vm.multiple ? dates.join(' - ') : dates.join(', ');
 };
-
 var defaultDateParser = function defaultDateParser(date, vm) {
   if (!vm.isTypeMonth) return new Date(Date.parse(date));
-
   if (date) {
     var s = date.split('/');
     var year = s[0].length === 4 ? s[0] : s[1];
     var month = s[0].length === 2 ? s[0] : s[1];
-
     if (year && month) {
       return new Date(parseInt(year, 10), parseInt(month - 1, 10), 1, 0, 0, 0, 0);
     }
   }
-
   return null;
 };
-
 var script$k = {
   name: 'BDatepicker',
-  components: (_components$1 = {}, _defineProperty(_components$1, DatepickerTable.name, DatepickerTable), _defineProperty(_components$1, DatepickerMonth.name, DatepickerMonth), _defineProperty(_components$1, Input.name, Input), _defineProperty(_components$1, Field.name, Field), _defineProperty(_components$1, Select.name, Select), _defineProperty(_components$1, Icon.name, Icon), _defineProperty(_components$1, Dropdown.name, Dropdown), _defineProperty(_components$1, DropdownItem.name, DropdownItem), _components$1),
+  components: _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty({}, __vue_component__$i.name, __vue_component__$i), __vue_component__$j.name, __vue_component__$j), __vue_component__$1.name, __vue_component__$1), __vue_component__$d.name, __vue_component__$d), __vue_component__$g.name, __vue_component__$g), __vue_component__.name, __vue_component__), __vue_component__$a.name, __vue_component__$a), __vue_component__$b.name, __vue_component__$b),
   mixins: [FormElementMixin],
   inheritAttrs: false,
   props: {
@@ -5556,7 +5251,6 @@ var script$k = {
     focusedDate: Date,
     placeholder: String,
     editable: Boolean,
-    readonly: Boolean,
     disabled: Boolean,
     horizontalTimePicker: Boolean,
     unselectableDates: Array,
@@ -5710,11 +5404,9 @@ var script$k = {
       },
       set: function set(value) {
         var _this = this;
-
         this.updateInternalState(value);
         if (!this.multiple) this.togglePicker(false);
         this.$emit('input', value);
-
         if (this.useHtml5Validation) {
           this.$nextTick(function () {
             _this.checkHtml5Validity();
@@ -5725,15 +5417,12 @@ var script$k = {
     listOfMonths: function listOfMonths() {
       var minMonth = 0;
       var maxMonth = 12;
-
       if (this.minDate && this.focusedDateData.year === this.minDate.getFullYear()) {
         minMonth = this.minDate.getMonth();
       }
-
       if (this.maxDate && this.focusedDateData.year === this.maxDate.getFullYear()) {
         maxMonth = this.maxDate.getMonth();
       }
-
       return this.monthNames.map(function (name, index) {
         return {
           name: name,
@@ -5742,50 +5431,39 @@ var script$k = {
         };
       });
     },
-
     /*
      * Returns an array of years for the year dropdown. If earliest/latest
      * dates are set by props, range of years will fall within those dates.
     */
     listOfYears: function listOfYears() {
       var latestYear = this.focusedDateData.year + this.yearsRange[1];
-
       if (this.maxDate && this.maxDate.getFullYear() < latestYear) {
         latestYear = Math.max(this.maxDate.getFullYear(), this.focusedDateData.year);
       }
-
       var earliestYear = this.focusedDateData.year + this.yearsRange[0];
-
       if (this.minDate && this.minDate.getFullYear() > earliestYear) {
         earliestYear = Math.min(this.minDate.getFullYear(), this.focusedDateData.year);
       }
-
       var arrayOfYears = [];
-
       for (var i = earliestYear; i <= latestYear; i++) {
         arrayOfYears.push(i);
       }
-
       return arrayOfYears.reverse();
     },
     showPrev: function showPrev() {
       if (!this.minDate) return false;
-
       if (this.isTypeMonth) {
         return this.focusedDateData.year <= this.minDate.getFullYear();
       }
-
       var dateToCheck = new Date(this.focusedDateData.year, this.focusedDateData.month);
       var date = new Date(this.minDate.getFullYear(), this.minDate.getMonth());
       return dateToCheck <= date;
     },
     showNext: function showNext() {
       if (!this.maxDate) return false;
-
       if (this.isTypeMonth) {
         return this.focusedDateData.year >= this.maxDate.getFullYear();
       }
-
       var dateToCheck = new Date(this.focusedDateData.year, this.focusedDateData.month);
       var date = new Date(this.maxDate.getFullYear(), this.maxDate.getMonth());
       return dateToCheck >= date;
@@ -5821,7 +5499,6 @@ var script$k = {
         };
       }
     },
-
     /*
     * Emit input event on month and/or year change
     */
@@ -5838,7 +5515,6 @@ var script$k = {
     */
     onChange: function onChange(value) {
       var date = this.dateParser(value, this);
-
       if (date && (!isNaN(date) || Array.isArray(date) && date.length === 2 && !isNaN(date[0]) && !isNaN(date[1]))) {
         this.computedValue = date;
       } else {
@@ -5847,7 +5523,6 @@ var script$k = {
         this.$refs.input.newValue = this.computedValue;
       }
     },
-
     /*
     * Format date into string
     */
@@ -5858,17 +5533,14 @@ var script$k = {
         });
         return isArrayWithValidDates ? this.dateFormatter(value, this) : null;
       }
-
       return value && !isNaN(value) ? this.dateFormatter(value, this) : null;
     },
-
     /*
     * Either decrement month by 1 if not January or decrement year by 1
     * and set month to 11 (December) or decrement year when 'month'
     */
     prev: function prev() {
       if (this.disabled) return;
-
       if (this.isTypeMonth) {
         this.focusedDateData.year -= 1;
       } else {
@@ -5880,14 +5552,12 @@ var script$k = {
         }
       }
     },
-
     /*
     * Either increment month by 1 if not December or increment year by 1
     * and set month to 0 (January) or increment year when 'month'
     */
     next: function next() {
       if (this.disabled) return;
-
       if (this.isTypeMonth) {
         this.focusedDateData.year += 1;
       } else {
@@ -5902,45 +5572,37 @@ var script$k = {
     formatNative: function formatNative(value) {
       return this.isTypeMonth ? this.formatYYYYMM(value) : this.formatYYYYMMDD(value);
     },
-
     /*
     * Format date into string 'YYYY-MM-DD'
     */
     formatYYYYMMDD: function formatYYYYMMDD(value) {
       var date = new Date(value);
-
       if (value && !isNaN(date)) {
         var year = date.getFullYear();
         var month = date.getMonth() + 1;
         var day = date.getDate();
         return year + '-' + ((month < 10 ? '0' : '') + month) + '-' + ((day < 10 ? '0' : '') + day);
       }
-
       return '';
     },
-
     /*
     * Format date into string 'YYYY-MM'
     */
     formatYYYYMM: function formatYYYYMM(value) {
       var date = new Date(value);
-
       if (value && !isNaN(date)) {
         var year = date.getFullYear();
         var month = date.getMonth() + 1;
         return year + '-' + ((month < 10 ? '0' : '') + month);
       }
-
       return '';
     },
-
     /*
     * Parse date from string
     */
     onChangeNativePicker: function onChangeNativePicker(event) {
       var date = event.target.value;
       var s = date ? date.split('-') : [];
-
       if (s.length === 3) {
         var year = parseInt(s[0], 10);
         var month = parseInt(s[1]) - 1;
@@ -5959,7 +5621,6 @@ var script$k = {
       };
       this.dateSelected = value;
     },
-
     /*
     * Toggle datepicker
     */
@@ -5970,18 +5631,15 @@ var script$k = {
         }
       }
     },
-
     /*
     * Call default onFocus method and show datepicker
     */
     handleOnFocus: function handleOnFocus(event) {
       this.onFocus(event);
-
       if (this.openOnFocus) {
         this.togglePicker(true);
       }
     },
-
     /*
     * Toggle dropdown
     */
@@ -5992,10 +5650,8 @@ var script$k = {
         input.click();
         return;
       }
-
       this.$refs.dropdown.toggle();
     },
-
     /*
     * Avoid dropdown toggle when is already visible
     */
@@ -6004,7 +5660,6 @@ var script$k = {
         event.stopPropagation();
       }
     },
-
     /**
      * Keypress event that is bound to the document.
      */
@@ -6014,7 +5669,6 @@ var script$k = {
         this.togglePicker(false);
       }
     },
-
     /**
      * Emit 'blur' event on dropdown is not active (closed)
      */
@@ -6047,7 +5701,7 @@ var script$k = {
 const __vue_script__$k = script$k;
 
 /* template */
-var __vue_render__$i = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"datepicker control",class:[_vm.size, {'is-expanded': _vm.expanded}]},[(!_vm.isMobile || _vm.inline)?_c('b-dropdown',{ref:"dropdown",attrs:{"position":_vm.position,"disabled":_vm.disabled,"inline":_vm.inline,"mobile-modal":_vm.mobileModal,"trap-focus":_vm.trapFocus,"aria-role":_vm.ariaRole,"aria-modal":!_vm.inline,"append-to-body":_vm.appendToBody,"append-to-body-copy-parent":""},on:{"active-change":_vm.onActiveChange}},[(!_vm.inline)?_c('b-input',_vm._b({ref:"input",attrs:{"slot":"trigger","autocomplete":"off","value":_vm.formatValue(_vm.computedValue),"placeholder":_vm.placeholder,"size":_vm.size,"icon":_vm.icon,"icon-pack":_vm.iconPack,"rounded":_vm.rounded,"loading":_vm.loading,"disabled":_vm.disabled,"readonly":!_vm.editable || _vm.readonly,"use-html5-validation":false},on:{"focus":_vm.handleOnFocus},nativeOn:{"click":function($event){return _vm.onInputClick($event)},"keyup":function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }_vm.togglePicker(true);},"change":function($event){_vm.onChange($event.target.value);}},slot:"trigger"},'b-input',_vm.$attrs,false)):_vm._e(),_vm._v(" "),_c('b-dropdown-item',{class:{'dropdown-horizonal-timepicker': _vm.horizontalTimePicker},attrs:{"disabled":_vm.disabled,"focusable":_vm.focusable,"custom":""}},[_c('div',[_c('header',{staticClass:"datepicker-header"},[(_vm.$slots.header !== undefined && _vm.$slots.header.length)?[_vm._t("header")]:_c('div',{staticClass:"pagination field is-centered",class:_vm.size},[_c('a',{directives:[{name:"show",rawName:"v-show",value:(!_vm.showPrev && !_vm.disabled),expression:"!showPrev && !disabled"}],staticClass:"pagination-previous",attrs:{"role":"button","href":"#","disabled":_vm.disabled,"aria-label":_vm.ariaPreviousLabel},on:{"click":function($event){$event.preventDefault();return _vm.prev($event)},"keydown":[function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }$event.preventDefault();return _vm.prev($event)},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"space",32,$event.key,[" ","Spacebar"])){ return null; }$event.preventDefault();return _vm.prev($event)}]}},[_c('b-icon',{attrs:{"icon":_vm.iconPrev,"pack":_vm.iconPack,"both":"","type":"is-primary is-clickable"}})],1),_vm._v(" "),_c('a',{directives:[{name:"show",rawName:"v-show",value:(!_vm.showNext && !_vm.disabled),expression:"!showNext && !disabled"}],staticClass:"pagination-next",attrs:{"role":"button","href":"#","disabled":_vm.disabled,"aria-label":_vm.ariaNextLabel},on:{"click":function($event){$event.preventDefault();return _vm.next($event)},"keydown":[function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }$event.preventDefault();return _vm.next($event)},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"space",32,$event.key,[" ","Spacebar"])){ return null; }$event.preventDefault();return _vm.next($event)}]}},[_c('b-icon',{attrs:{"icon":_vm.iconNext,"pack":_vm.iconPack,"both":"","type":"is-primary is-clickable"}})],1),_vm._v(" "),_c('div',{staticClass:"pagination-list"},[_c('b-field',[(!_vm.isTypeMonth)?_c('b-select',{attrs:{"disabled":_vm.disabled,"size":_vm.size},model:{value:(_vm.focusedDateData.month),callback:function ($$v) {_vm.$set(_vm.focusedDateData, "month", $$v);},expression:"focusedDateData.month"}},_vm._l((_vm.listOfMonths),function(month){return _c('option',{key:month.name,attrs:{"disabled":month.disabled},domProps:{"value":month.index}},[_vm._v("\n                                            "+_vm._s(month.name)+"\n                                        ")])})):_vm._e(),_vm._v(" "),_c('b-select',{attrs:{"disabled":_vm.disabled,"size":_vm.size},model:{value:(_vm.focusedDateData.year),callback:function ($$v) {_vm.$set(_vm.focusedDateData, "year", $$v);},expression:"focusedDateData.year"}},_vm._l((_vm.listOfYears),function(year){return _c('option',{key:year,domProps:{"value":year}},[_vm._v("\n                                            "+_vm._s(year)+"\n                                        ")])}))],1)],1)])],2),_vm._v(" "),(!_vm.isTypeMonth)?_c('div',{staticClass:"datepicker-content",class:{'content-horizonal-timepicker': _vm.horizontalTimePicker}},[_c('b-datepicker-table',{attrs:{"day-names":_vm.dayNames,"month-names":_vm.monthNames,"first-day-of-week":_vm.firstDayOfWeek,"rules-for-first-week":_vm.rulesForFirstWeek,"min-date":_vm.minDate,"max-date":_vm.maxDate,"focused":_vm.focusedDateData,"disabled":_vm.disabled,"unselectable-dates":_vm.unselectableDates,"unselectable-days-of-week":_vm.unselectableDaysOfWeek,"selectable-dates":_vm.selectableDates,"events":_vm.events,"indicators":_vm.indicators,"date-creator":_vm.dateCreator,"type-month":_vm.isTypeMonth,"nearby-month-days":_vm.nearbyMonthDays,"nearby-selectable-month-days":_vm.nearbySelectableMonthDays,"show-week-number":_vm.showWeekNumber,"range":_vm.range,"multiple":_vm.multiple},on:{"update:focused":function($event){_vm.focusedDateData=$event;},"range-start":function (date) { return _vm.$emit('range-start', date); },"range-end":function (date) { return _vm.$emit('range-end', date); },"close":function($event){_vm.togglePicker(false);}},model:{value:(_vm.computedValue),callback:function ($$v) {_vm.computedValue=$$v;},expression:"computedValue"}})],1):_c('div',[_c('b-datepicker-month',{attrs:{"month-names":_vm.monthNames,"min-date":_vm.minDate,"max-date":_vm.maxDate,"focused":_vm.focusedDateData,"disabled":_vm.disabled,"unselectable-dates":_vm.unselectableDates,"unselectable-days-of-week":_vm.unselectableDaysOfWeek,"selectable-dates":_vm.selectableDates,"events":_vm.events,"indicators":_vm.indicators,"date-creator":_vm.dateCreator,"multiple":_vm.multiple},on:{"update:focused":function($event){_vm.focusedDateData=$event;},"close":function($event){_vm.togglePicker(false);},"change-focus":_vm.changeFocus},model:{value:(_vm.computedValue),callback:function ($$v) {_vm.computedValue=$$v;},expression:"computedValue"}})],1)]),_vm._v(" "),(_vm.$slots.default !== undefined && _vm.$slots.default.length)?_c('footer',{staticClass:"datepicker-footer",class:{'footer-horizontal-timepicker': _vm.horizontalTimePicker}},[_vm._t("default")],2):_vm._e()])],1):_c('b-input',_vm._b({ref:"input",attrs:{"type":!_vm.isTypeMonth ? 'date' : 'month',"autocomplete":"off","value":_vm.formatNative(_vm.computedValue),"placeholder":_vm.placeholder,"size":_vm.size,"icon":_vm.icon,"icon-pack":_vm.iconPack,"rounded":_vm.rounded,"loading":_vm.loading,"max":_vm.formatNative(_vm.maxDate),"min":_vm.formatNative(_vm.minDate),"disabled":_vm.disabled,"readonly":_vm.readonly,"use-html5-validation":false},on:{"focus":_vm.onFocus,"blur":_vm.onBlur},nativeOn:{"change":function($event){return _vm.onChangeNativePicker($event)}}},'b-input',_vm.$attrs,false))],1)};
+var __vue_render__$i = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"datepicker control",class:[_vm.size, {'is-expanded': _vm.expanded}]},[(!_vm.isMobile || _vm.inline)?_c('b-dropdown',{ref:"dropdown",attrs:{"position":_vm.position,"disabled":_vm.disabled,"inline":_vm.inline,"mobile-modal":_vm.mobileModal,"trap-focus":_vm.trapFocus,"aria-role":_vm.ariaRole,"aria-modal":!_vm.inline,"append-to-body":_vm.appendToBody,"append-to-body-copy-parent":""},on:{"active-change":_vm.onActiveChange}},[(!_vm.inline)?_c('b-input',_vm._b({ref:"input",attrs:{"slot":"trigger","autocomplete":"off","value":_vm.formatValue(_vm.computedValue),"placeholder":_vm.placeholder,"size":_vm.size,"icon":_vm.icon,"icon-pack":_vm.iconPack,"rounded":_vm.rounded,"loading":_vm.loading,"disabled":_vm.disabled,"readonly":!_vm.editable,"use-html5-validation":false},on:{"focus":_vm.handleOnFocus},nativeOn:{"click":function($event){return _vm.onInputClick($event)},"keyup":function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }_vm.togglePicker(true);},"change":function($event){_vm.onChange($event.target.value);}},slot:"trigger"},'b-input',_vm.$attrs,false)):_vm._e(),_vm._v(" "),_c('b-dropdown-item',{class:{'dropdown-horizonal-timepicker': _vm.horizontalTimePicker},attrs:{"disabled":_vm.disabled,"focusable":_vm.focusable,"custom":""}},[_c('div',[_c('header',{staticClass:"datepicker-header"},[(_vm.$slots.header !== undefined && _vm.$slots.header.length)?[_vm._t("header")]:_c('div',{staticClass:"pagination field is-centered",class:_vm.size},[_c('a',{directives:[{name:"show",rawName:"v-show",value:(!_vm.showPrev && !_vm.disabled),expression:"!showPrev && !disabled"}],staticClass:"pagination-previous",attrs:{"role":"button","href":"#","disabled":_vm.disabled,"aria-label":_vm.ariaPreviousLabel},on:{"click":function($event){$event.preventDefault();return _vm.prev($event)},"keydown":[function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }$event.preventDefault();return _vm.prev($event)},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"space",32,$event.key,[" ","Spacebar"])){ return null; }$event.preventDefault();return _vm.prev($event)}]}},[_c('b-icon',{attrs:{"icon":_vm.iconPrev,"pack":_vm.iconPack,"both":"","type":"is-primary is-clickable"}})],1),_vm._v(" "),_c('a',{directives:[{name:"show",rawName:"v-show",value:(!_vm.showNext && !_vm.disabled),expression:"!showNext && !disabled"}],staticClass:"pagination-next",attrs:{"role":"button","href":"#","disabled":_vm.disabled,"aria-label":_vm.ariaNextLabel},on:{"click":function($event){$event.preventDefault();return _vm.next($event)},"keydown":[function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }$event.preventDefault();return _vm.next($event)},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"space",32,$event.key,[" ","Spacebar"])){ return null; }$event.preventDefault();return _vm.next($event)}]}},[_c('b-icon',{attrs:{"icon":_vm.iconNext,"pack":_vm.iconPack,"both":"","type":"is-primary is-clickable"}})],1),_vm._v(" "),_c('div',{staticClass:"pagination-list"},[_c('b-field',[(!_vm.isTypeMonth)?_c('b-select',{attrs:{"disabled":_vm.disabled,"size":_vm.size},model:{value:(_vm.focusedDateData.month),callback:function ($$v) {_vm.$set(_vm.focusedDateData, "month", $$v);},expression:"focusedDateData.month"}},_vm._l((_vm.listOfMonths),function(month){return _c('option',{key:month.name,attrs:{"disabled":month.disabled},domProps:{"value":month.index}},[_vm._v("\n                                            "+_vm._s(month.name)+"\n                                        ")])})):_vm._e(),_vm._v(" "),_c('b-select',{attrs:{"disabled":_vm.disabled,"size":_vm.size},model:{value:(_vm.focusedDateData.year),callback:function ($$v) {_vm.$set(_vm.focusedDateData, "year", $$v);},expression:"focusedDateData.year"}},_vm._l((_vm.listOfYears),function(year){return _c('option',{key:year,domProps:{"value":year}},[_vm._v("\n                                            "+_vm._s(year)+"\n                                        ")])}))],1)],1)])],2),_vm._v(" "),(!_vm.isTypeMonth)?_c('div',{staticClass:"datepicker-content",class:{'content-horizonal-timepicker': _vm.horizontalTimePicker}},[_c('b-datepicker-table',{attrs:{"day-names":_vm.dayNames,"month-names":_vm.monthNames,"first-day-of-week":_vm.firstDayOfWeek,"rules-for-first-week":_vm.rulesForFirstWeek,"min-date":_vm.minDate,"max-date":_vm.maxDate,"focused":_vm.focusedDateData,"disabled":_vm.disabled,"unselectable-dates":_vm.unselectableDates,"unselectable-days-of-week":_vm.unselectableDaysOfWeek,"selectable-dates":_vm.selectableDates,"events":_vm.events,"indicators":_vm.indicators,"date-creator":_vm.dateCreator,"type-month":_vm.isTypeMonth,"nearby-month-days":_vm.nearbyMonthDays,"nearby-selectable-month-days":_vm.nearbySelectableMonthDays,"show-week-number":_vm.showWeekNumber,"range":_vm.range,"multiple":_vm.multiple},on:{"update:focused":function($event){_vm.focusedDateData=$event;},"range-start":function (date) { return _vm.$emit('range-start', date); },"range-end":function (date) { return _vm.$emit('range-end', date); },"close":function($event){_vm.togglePicker(false);}},model:{value:(_vm.computedValue),callback:function ($$v) {_vm.computedValue=$$v;},expression:"computedValue"}})],1):_c('div',[_c('b-datepicker-month',{attrs:{"month-names":_vm.monthNames,"min-date":_vm.minDate,"max-date":_vm.maxDate,"focused":_vm.focusedDateData,"disabled":_vm.disabled,"unselectable-dates":_vm.unselectableDates,"unselectable-days-of-week":_vm.unselectableDaysOfWeek,"selectable-dates":_vm.selectableDates,"events":_vm.events,"indicators":_vm.indicators,"date-creator":_vm.dateCreator,"multiple":_vm.multiple},on:{"update:focused":function($event){_vm.focusedDateData=$event;},"close":function($event){_vm.togglePicker(false);},"change-focus":_vm.changeFocus},model:{value:(_vm.computedValue),callback:function ($$v) {_vm.computedValue=$$v;},expression:"computedValue"}})],1)]),_vm._v(" "),(_vm.$slots.default !== undefined && _vm.$slots.default.length)?_c('footer',{staticClass:"datepicker-footer",class:{'footer-horizontal-timepicker': _vm.horizontalTimePicker}},[_vm._t("default")],2):_vm._e()])],1):_c('b-input',_vm._b({ref:"input",attrs:{"type":!_vm.isTypeMonth ? 'date' : 'month',"autocomplete":"off","value":_vm.formatNative(_vm.computedValue),"placeholder":_vm.placeholder,"size":_vm.size,"icon":_vm.icon,"icon-pack":_vm.iconPack,"rounded":_vm.rounded,"loading":_vm.loading,"max":_vm.formatNative(_vm.maxDate),"min":_vm.formatNative(_vm.minDate),"disabled":_vm.disabled,"readonly":false,"use-html5-validation":false},on:{"focus":_vm.onFocus,"blur":_vm.onBlur},nativeOn:{"change":function($event){return _vm.onChangeNativePicker($event)}}},'b-input',_vm.$attrs,false))],1)};
 var __vue_staticRenderFns__$i = [];
 
   /* style */
@@ -6062,30 +5716,33 @@ var __vue_staticRenderFns__$i = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Datepicker = normalizeComponent_1(
+  const __vue_component__$k = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$i, staticRenderFns: __vue_staticRenderFns__$i },
     __vue_inject_styles__$k,
     __vue_script__$k,
     __vue_scope_id__$k,
     __vue_is_functional_template__$k,
     __vue_module_identifier__$k,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin$6 = {
   install: function install(Vue) {
-    registerComponent(Vue, Datepicker);
+    registerComponent(Vue, __vue_component__$k);
   }
 };
 use(Plugin$6);
 
-var _components$2;
 var script$l = {
   name: 'BTimepicker',
-  components: (_components$2 = {}, _defineProperty(_components$2, Input.name, Input), _defineProperty(_components$2, Field.name, Field), _defineProperty(_components$2, Select.name, Select), _defineProperty(_components$2, Icon.name, Icon), _defineProperty(_components$2, Dropdown.name, Dropdown), _defineProperty(_components$2, DropdownItem.name, DropdownItem), _components$2),
+  components: _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty({}, __vue_component__$1.name, __vue_component__$1), __vue_component__$d.name, __vue_component__$d), __vue_component__$g.name, __vue_component__$g), __vue_component__.name, __vue_component__), __vue_component__$a.name, __vue_component__$a), __vue_component__$b.name, __vue_component__$b),
   mixins: [TimepickerMixin],
   inheritAttrs: false,
   data: function data() {
@@ -6119,23 +5776,26 @@ var __vue_staticRenderFns__$j = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Timepicker = normalizeComponent_1(
+  const __vue_component__$l = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$j, staticRenderFns: __vue_staticRenderFns__$j },
     __vue_inject_styles__$l,
     __vue_script__$l,
     __vue_scope_id__$l,
     __vue_is_functional_template__$l,
     __vue_module_identifier__$l,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
-var _components$3;
 var script$m = {
   name: 'BDatetimepicker',
-  components: (_components$3 = {}, _defineProperty(_components$3, Datepicker.name, Datepicker), _defineProperty(_components$3, Timepicker.name, Timepicker), _components$3),
+  components: _defineProperty(_defineProperty({}, __vue_component__$k.name, __vue_component__$k), __vue_component__$l.name, __vue_component__$l),
   mixins: [FormElementMixin],
   inheritAttrs: false,
   props: {
@@ -6201,7 +5861,6 @@ var script$m = {
       set: function set(value) {
         if (value) {
           var val = new Date(value.getTime());
-
           if (this.newValue) {
             // restore time part
             if ((value.getDate() !== this.newValue.getDate() || value.getMonth() !== this.newValue.getMonth() || value.getFullYear() !== this.newValue.getFullYear()) && value.getHours() === 0 && value.getMinutes() === 0 && value.getSeconds() === 0) {
@@ -6209,22 +5868,18 @@ var script$m = {
             }
           } else {
             val = this.datetimeCreator(value);
-          } // check min and max range
-
-
+          }
+          // check min and max range
           if (this.minDatetime && val < this.adjustValue(this.minDatetime)) {
             val = this.adjustValue(this.minDatetime);
           } else if (this.maxDatetime && val > this.adjustValue(this.maxDatetime)) {
             val = this.adjustValue(this.maxDatetime);
           }
-
           this.newValue = new Date(val.getTime());
         } else {
           this.newValue = this.adjustValue(this.value);
         }
-
         var adjustedValue = this.adjustValue(this.newValue, true); // reverse adjust
-
         this.$emit('input', adjustedValue);
       }
     },
@@ -6238,7 +5893,6 @@ var script$m = {
       if (!this.minDatetime) {
         return this.datepicker ? this.adjustValue(this.datepicker.minDate) : null;
       }
-
       var adjMinDatetime = this.adjustValue(this.minDatetime);
       return new Date(adjMinDatetime.getFullYear(), adjMinDatetime.getMonth(), adjMinDatetime.getDate(), 0, 0, 0, 0);
     },
@@ -6246,7 +5900,6 @@ var script$m = {
       if (!this.maxDatetime) {
         return this.datepicker ? this.adjustValue(this.datepicker.maxDate) : null;
       }
-
       var adjMaxDatetime = this.adjustValue(this.maxDatetime);
       return new Date(adjMaxDatetime.getFullYear(), adjMaxDatetime.getMonth(), adjMaxDatetime.getDate(), 0, 0, 0, 0);
     },
@@ -6254,9 +5907,7 @@ var script$m = {
       if (!this.minDatetime || this.newValue === null || typeof this.newValue === 'undefined') {
         return this.timepicker ? this.adjustValue(this.timepicker.minTime) : null;
       }
-
       var adjMinDatetime = this.adjustValue(this.minDatetime);
-
       if (adjMinDatetime.getFullYear() === this.newValue.getFullYear() && adjMinDatetime.getMonth() === this.newValue.getMonth() && adjMinDatetime.getDate() === this.newValue.getDate()) {
         return adjMinDatetime;
       }
@@ -6265,9 +5916,7 @@ var script$m = {
       if (!this.maxDatetime || this.newValue === null || typeof this.newValue === 'undefined') {
         return this.timepicker ? this.adjustValue(this.timepicker.maxTime) : null;
       }
-
       var adjMaxDatetime = this.adjustValue(this.maxDatetime);
-
       if (adjMaxDatetime.getFullYear() === this.newValue.getFullYear() && adjMaxDatetime.getMonth() === this.newValue.getMonth() && adjMaxDatetime.getDate() === this.newValue.getDate()) {
         return adjMaxDatetime;
       }
@@ -6294,7 +5943,6 @@ var script$m = {
     adjustValue: function adjustValue(value) {
       var reverse = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       if (!value) return value;
-
       if (reverse) {
         return new Date(value.getTime() - this.tzOffset * 60000);
       } else {
@@ -6320,26 +5968,23 @@ var script$m = {
           var d = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12);
           return d.toLocaleDateString() + ' ' + this.$refs.timepicker.timeFormatter(date, this.$refs.timepicker);
         }
-
         return null;
       }
     },
-
     /*
     * Parse date from string
     */
     onChangeNativePicker: function onChangeNativePicker(event) {
       var date = event.target.value;
       var s = date ? date.split(/\D/) : [];
-
       if (s.length >= 5) {
         var year = parseInt(s[0], 10);
         var month = parseInt(s[1], 10) - 1;
         var day = parseInt(s[2], 10);
         var hours = parseInt(s[3], 10);
-        var minutes = parseInt(s[4], 10); // Seconds are omitted intentionally; they are unsupported by input
+        var minutes = parseInt(s[4], 10);
+        // Seconds are omitted intentionally; they are unsupported by input
         // type=datetime-local and cause the control to fail native validation
-
         this.computedValue = new Date(year, month, day, hours, minutes);
       } else {
         this.computedValue = null;
@@ -6347,7 +5992,6 @@ var script$m = {
     },
     formatNative: function formatNative(value) {
       var date = new Date(value);
-
       if (value && !isNaN(date)) {
         var year = date.getFullYear();
         var month = date.getMonth() + 1;
@@ -6357,7 +6001,6 @@ var script$m = {
         var seconds = date.getSeconds();
         return year + '-' + ((month < 10 ? '0' : '') + month) + '-' + ((day < 10 ? '0' : '') + day) + 'T' + ((hours < 10 ? '0' : '') + hours) + ':' + ((minutes < 10 ? '0' : '') + minutes) + ':' + ((seconds < 10 ? '0' : '') + seconds);
       }
-
       return '';
     },
     toggle: function toggle() {
@@ -6393,22 +6036,26 @@ var __vue_staticRenderFns__$k = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Datetimepicker = normalizeComponent_1(
+  const __vue_component__$m = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$k, staticRenderFns: __vue_staticRenderFns__$k },
     __vue_inject_styles__$m,
     __vue_script__$m,
     __vue_scope_id__$m,
     __vue_is_functional_template__$m,
     __vue_module_identifier__$m,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin$7 = {
   install: function install(Vue) {
-    registerComponent(Vue, Datetimepicker);
+    registerComponent(Vue, __vue_component__$m);
   }
 };
 use(Plugin$7);
@@ -6496,7 +6143,6 @@ var script$n = {
           maxWidth: this.newWidth
         };
       }
-
       return null;
     }
   },
@@ -6506,7 +6152,6 @@ var script$n = {
     },
     isActive: function isActive(value) {
       var _this = this;
-
       if (value) this.destroyed = false;
       this.handleScroll();
       this.$nextTick(function () {
@@ -6519,35 +6164,28 @@ var script$n = {
   methods: {
     handleScroll: function handleScroll() {
       if (typeof window === 'undefined') return;
-
       if (this.scroll === 'clip') {
         if (this.isActive) {
           document.documentElement.classList.add('is-clipped');
         } else {
           document.documentElement.classList.remove('is-clipped');
         }
-
         return;
       }
-
       this.savedScrollTop = !this.savedScrollTop ? document.documentElement.scrollTop : this.savedScrollTop;
-
       if (this.isActive) {
         document.body.classList.add('is-noscroll');
       } else {
         document.body.classList.remove('is-noscroll');
       }
-
       if (this.isActive) {
         document.body.style.top = "-".concat(this.savedScrollTop, "px");
         return;
       }
-
       document.documentElement.scrollTop = this.savedScrollTop;
       document.body.style.top = null;
       this.savedScrollTop = null;
     },
-
     /**
     * Close the Modal if canCancel and call the onCancel prop (function).
     */
@@ -6556,27 +6194,24 @@ var script$n = {
       this.onCancel.apply(null, arguments);
       this.close();
     },
-
     /**
     * Call the onCancel prop (function).
     * Emit events, and destroy modal if it's programmatic.
     */
     close: function close() {
       var _this2 = this;
-
       this.$emit('close');
-      this.$emit('update:active', false); // Timeout for the animation complete before destroying
+      this.$emit('update:active', false);
 
+      // Timeout for the animation complete before destroying
       if (this.programmatic) {
         this.isActive = false;
         setTimeout(function () {
           _this2.$destroy();
-
           removeElement(_this2.$el);
         }, 150);
       }
     },
-
     /**
     * Keypress event that is bound to the document.
     */
@@ -6584,21 +6219,18 @@ var script$n = {
       // Esc key
       if (this.isActive && event.keyCode === 27) this.cancel('escape');
     },
-
     /**
     * Transition after-enter hook
     */
     afterEnter: function afterEnter() {
       this.animating = false;
     },
-
     /**
     * Transition before-leave hook
     */
     beforeLeave: function beforeLeave() {
       this.animating = true;
     },
-
     /**
     * Transition after-leave hook
     */
@@ -6623,8 +6255,8 @@ var script$n = {
   },
   beforeDestroy: function beforeDestroy() {
     if (typeof window !== 'undefined') {
-      document.removeEventListener('keyup', this.keyPress); // reset scroll
-
+      document.removeEventListener('keyup', this.keyPress);
+      // reset scroll
       document.documentElement.classList.remove('is-clipped');
       var savedScrollTop = !this.savedScrollTop ? document.documentElement.scrollTop : this.savedScrollTop;
       document.body.classList.remove('is-noscroll');
@@ -6653,26 +6285,30 @@ var __vue_staticRenderFns__$l = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Modal = normalizeComponent_1(
+  const __vue_component__$n = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$l, staticRenderFns: __vue_staticRenderFns__$l },
     __vue_inject_styles__$n,
     __vue_script__$n,
     __vue_scope_id__$n,
     __vue_is_functional_template__$n,
     __vue_module_identifier__$n,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var script$o = {
   name: 'BDialog',
-  components: _defineProperty({}, Icon.name, Icon),
+  components: _defineProperty({}, __vue_component__.name, __vue_component__),
   directives: {
     trapFocus: directive
   },
-  extends: Modal,
+  extends: __vue_component__$n,
   props: {
     title: String,
     message: String,
@@ -6750,7 +6386,6 @@ var script$o = {
         'has-custom-container': this.container !== null
       }];
     },
-
     /**
     * Icon name (MDI) based on the type.
     */
@@ -6758,16 +6393,12 @@ var script$o = {
       switch (this.type) {
         case 'is-info':
           return 'information';
-
         case 'is-success':
           return 'check-circle';
-
         case 'is-warning':
           return 'alert';
-
         case 'is-danger':
           return 'alert-circle';
-
         default:
           return null;
       }
@@ -6783,7 +6414,6 @@ var script$o = {
     */
     confirm: function confirm() {
       var _this = this;
-
       if (this.$refs.input !== undefined) {
         if (!this.$refs.input.checkValidity()) {
           this.validationMessage = this.$refs.input.validationMessage;
@@ -6793,29 +6423,24 @@ var script$o = {
           return;
         }
       }
-
       this.onConfirm(this.prompt, this);
       if (this.closeOnConfirm) this.close();
     },
-
     /**
     * Close the Dialog.
     */
     close: function close() {
       var _this2 = this;
-
-      this.isActive = false; // Timeout for the animation complete before destroying
-
+      this.isActive = false;
+      // Timeout for the animation complete before destroying
       setTimeout(function () {
         _this2.$destroy();
-
         removeElement(_this2.$el);
       }, 150);
     }
   },
   beforeMount: function beforeMount() {
     var _this3 = this;
-
     // Insert the Dialog component in the element container
     if (typeof window !== 'undefined') {
       this.$nextTick(function () {
@@ -6826,13 +6451,10 @@ var script$o = {
   },
   mounted: function mounted() {
     var _this4 = this;
-
     this.isActive = true;
-
     if (typeof this.inputAttrs.required === 'undefined') {
       this.$set(this.inputAttrs, 'required', true);
     }
-
     this.$nextTick(function () {
       // Handle which element receives focus
       if (_this4.hasInput) {
@@ -6850,7 +6472,7 @@ var script$o = {
 const __vue_script__$o = script$o;
 
 /* template */
-var __vue_render__$m = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('transition',{attrs:{"name":_vm.animation}},[(_vm.isActive)?_c('div',{directives:[{name:"trap-focus",rawName:"v-trap-focus",value:(_vm.trapFocus),expression:"trapFocus"}],staticClass:"dialog modal is-active",class:_vm.dialogClass,attrs:{"role":_vm.ariaRole,"aria-modal":_vm.ariaModal}},[_c('div',{staticClass:"modal-background",on:{"click":function($event){_vm.cancel('outside');}}}),_vm._v(" "),_c('div',{staticClass:"modal-card animation-content"},[(_vm.title)?_c('header',{staticClass:"modal-card-head"},[_c('div',{staticClass:"modal-card-title"},[_vm._v(_vm._s(_vm.title))]),_vm._v(" "),_c('button',{staticClass:"delete",attrs:{"aria-label":"close"},on:{"click":function($event){_vm.cancel('button');}}})]):_vm._e(),_vm._v(" "),_c('section',{staticClass:"modal-card-body",class:{ 'is-titleless': !_vm.title, 'is-flex': _vm.hasIcon }},[_c('div',{staticClass:"media"},[(_vm.hasIcon && (_vm.icon || _vm.iconByType))?_c('div',{staticClass:"media-left"},[_c('b-icon',{attrs:{"icon":_vm.icon ? _vm.icon : _vm.iconByType,"pack":_vm.iconPack,"type":_vm.type,"both":!_vm.icon,"size":"is-large"}})],1):_vm._e(),_vm._v(" "),_c('div',{staticClass:"media-content"},[_c('p',{domProps:{"innerHTML":_vm._s(_vm.message)}}),_vm._v(" "),(_vm.hasInput)?_c('div',{staticClass:"field"},[_c('div',{staticClass:"control"},[(((_vm.inputAttrs).type)==='checkbox')?_c('input',_vm._b({directives:[{name:"model",rawName:"v-model",value:(_vm.prompt),expression:"prompt"}],ref:"input",staticClass:"input",class:{ 'is-danger': _vm.validationMessage },attrs:{"type":"checkbox"},domProps:{"checked":Array.isArray(_vm.prompt)?_vm._i(_vm.prompt,null)>-1:(_vm.prompt)},on:{"keyup":function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.confirm($event)},"change":function($event){var $$a=_vm.prompt,$$el=$event.target,$$c=$$el.checked?(true):(false);if(Array.isArray($$a)){var $$v=null,$$i=_vm._i($$a,$$v);if($$el.checked){$$i<0&&(_vm.prompt=$$a.concat([$$v]));}else{$$i>-1&&(_vm.prompt=$$a.slice(0,$$i).concat($$a.slice($$i+1)));}}else{_vm.prompt=$$c;}}}},'input',_vm.inputAttrs,false)):(((_vm.inputAttrs).type)==='radio')?_c('input',_vm._b({directives:[{name:"model",rawName:"v-model",value:(_vm.prompt),expression:"prompt"}],ref:"input",staticClass:"input",class:{ 'is-danger': _vm.validationMessage },attrs:{"type":"radio"},domProps:{"checked":_vm._q(_vm.prompt,null)},on:{"keyup":function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.confirm($event)},"change":function($event){_vm.prompt=null;}}},'input',_vm.inputAttrs,false)):_c('input',_vm._b({directives:[{name:"model",rawName:"v-model",value:(_vm.prompt),expression:"prompt"}],ref:"input",staticClass:"input",class:{ 'is-danger': _vm.validationMessage },attrs:{"type":(_vm.inputAttrs).type},domProps:{"value":(_vm.prompt)},on:{"keyup":function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.confirm($event)},"input":function($event){if($event.target.composing){ return; }_vm.prompt=$event.target.value;}}},'input',_vm.inputAttrs,false))]),_vm._v(" "),_c('p',{staticClass:"help is-danger"},[_vm._v(_vm._s(_vm.validationMessage))])]):_vm._e()])])]),_vm._v(" "),_c('footer',{staticClass:"modal-card-foot"},[(_vm.showCancel)?_c('button',{ref:"cancelButton",staticClass:"button",on:{"click":function($event){_vm.cancel('button');}}},[_vm._v(_vm._s(_vm.cancelText))]):_vm._e(),_vm._v(" "),_c('button',{ref:"confirmButton",staticClass:"button",class:_vm.type,on:{"click":_vm.confirm}},[_vm._v(_vm._s(_vm.confirmText))])])])]):_vm._e()])};
+var __vue_render__$m = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('transition',{attrs:{"name":_vm.animation}},[(_vm.isActive)?_c('div',{directives:[{name:"trap-focus",rawName:"v-trap-focus",value:(_vm.trapFocus),expression:"trapFocus"}],staticClass:"dialog modal is-active",class:_vm.dialogClass,attrs:{"role":_vm.ariaRole,"aria-modal":_vm.ariaModal}},[_c('div',{staticClass:"modal-background",on:{"click":function($event){_vm.cancel('outside');}}}),_vm._v(" "),_c('div',{staticClass:"modal-card animation-content"},[(_vm.title)?_c('header',{staticClass:"modal-card-head"},[_c('p',{staticClass:"modal-card-title"},[_vm._v(_vm._s(_vm.title))])]):_vm._e(),_vm._v(" "),_c('section',{staticClass:"modal-card-body",class:{ 'is-titleless': !_vm.title, 'is-flex': _vm.hasIcon }},[_c('div',{staticClass:"media"},[(_vm.hasIcon && (_vm.icon || _vm.iconByType))?_c('div',{staticClass:"media-left"},[_c('b-icon',{attrs:{"icon":_vm.icon ? _vm.icon : _vm.iconByType,"pack":_vm.iconPack,"type":_vm.type,"both":!_vm.icon,"size":"is-large"}})],1):_vm._e(),_vm._v(" "),_c('div',{staticClass:"media-content"},[_c('p',{domProps:{"innerHTML":_vm._s(_vm.message)}}),_vm._v(" "),(_vm.hasInput)?_c('div',{staticClass:"field"},[_c('div',{staticClass:"control"},[(((_vm.inputAttrs).type)==='checkbox')?_c('input',_vm._b({directives:[{name:"model",rawName:"v-model",value:(_vm.prompt),expression:"prompt"}],ref:"input",staticClass:"input",class:{ 'is-danger': _vm.validationMessage },attrs:{"type":"checkbox"},domProps:{"checked":Array.isArray(_vm.prompt)?_vm._i(_vm.prompt,null)>-1:(_vm.prompt)},on:{"keyup":function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.confirm($event)},"change":function($event){var $$a=_vm.prompt,$$el=$event.target,$$c=$$el.checked?(true):(false);if(Array.isArray($$a)){var $$v=null,$$i=_vm._i($$a,$$v);if($$el.checked){$$i<0&&(_vm.prompt=$$a.concat([$$v]));}else{$$i>-1&&(_vm.prompt=$$a.slice(0,$$i).concat($$a.slice($$i+1)));}}else{_vm.prompt=$$c;}}}},'input',_vm.inputAttrs,false)):(((_vm.inputAttrs).type)==='radio')?_c('input',_vm._b({directives:[{name:"model",rawName:"v-model",value:(_vm.prompt),expression:"prompt"}],ref:"input",staticClass:"input",class:{ 'is-danger': _vm.validationMessage },attrs:{"type":"radio"},domProps:{"checked":_vm._q(_vm.prompt,null)},on:{"keyup":function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.confirm($event)},"change":function($event){_vm.prompt=null;}}},'input',_vm.inputAttrs,false)):_c('input',_vm._b({directives:[{name:"model",rawName:"v-model",value:(_vm.prompt),expression:"prompt"}],ref:"input",staticClass:"input",class:{ 'is-danger': _vm.validationMessage },attrs:{"type":(_vm.inputAttrs).type},domProps:{"value":(_vm.prompt)},on:{"keyup":function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.confirm($event)},"input":function($event){if($event.target.composing){ return; }_vm.prompt=$event.target.value;}}},'input',_vm.inputAttrs,false))]),_vm._v(" "),_c('p',{staticClass:"help is-danger"},[_vm._v(_vm._s(_vm.validationMessage))])]):_vm._e()])])]),_vm._v(" "),_c('footer',{staticClass:"modal-card-foot"},[(_vm.showCancel)?_c('button',{ref:"cancelButton",staticClass:"button",on:{"click":function($event){_vm.cancel('button');}}},[_vm._v(_vm._s(_vm.cancelText))]):_vm._e(),_vm._v(" "),_c('button',{ref:"confirmButton",staticClass:"button",class:_vm.type,on:{"click":_vm.confirm}},[_vm._v(_vm._s(_vm.confirmText))])])])]):_vm._e()])};
 var __vue_staticRenderFns__$m = [];
 
   /* style */
@@ -6865,30 +6487,32 @@ var __vue_staticRenderFns__$m = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Dialog = normalizeComponent_1(
+  const __vue_component__$o = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$m, staticRenderFns: __vue_staticRenderFns__$m },
     __vue_inject_styles__$o,
     __vue_script__$o,
     __vue_scope_id__$o,
     __vue_is_functional_template__$o,
     __vue_module_identifier__$o,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var localVueInstance;
-
 function open(propsData) {
   var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance;
-  var DialogComponent = vm.extend(Dialog);
+  var DialogComponent = vm.extend(__vue_component__$o);
   return new DialogComponent({
     el: document.createElement('div'),
     propsData: propsData
   });
 }
-
 var DialogProgrammatic = {
   alert: function alert(params) {
     if (typeof params === 'string') {
@@ -6896,7 +6520,6 @@ var DialogProgrammatic = {
         message: params
       };
     }
-
     var defaultParam = {
       canCancel: false
     };
@@ -6920,7 +6543,7 @@ var DialogProgrammatic = {
 var Plugin$8 = {
   install: function install(Vue) {
     localVueInstance = Vue;
-    registerComponent(Vue, Dialog);
+    registerComponent(Vue, __vue_component__$o);
     registerComponentProgrammatic(Vue, 'dialog', DialogProgrammatic);
   }
 };
@@ -6928,34 +6551,35 @@ use(Plugin$8);
 
 var Plugin$9 = {
   install: function install(Vue) {
-    registerComponent(Vue, Dropdown);
-    registerComponent(Vue, DropdownItem);
+    registerComponent(Vue, __vue_component__$a);
+    registerComponent(Vue, __vue_component__$b);
   }
 };
 use(Plugin$9);
 
 var Plugin$a = {
   install: function install(Vue) {
-    registerComponent(Vue, Field);
+    registerComponent(Vue, __vue_component__$d);
   }
 };
 use(Plugin$a);
 
 var Plugin$b = {
   install: function install(Vue) {
-    registerComponent(Vue, Icon);
+    registerComponent(Vue, __vue_component__);
   }
 };
 use(Plugin$b);
 
 var Plugin$c = {
   install: function install(Vue) {
-    registerComponent(Vue, Input);
+    registerComponent(Vue, __vue_component__$1);
   }
 };
 use(Plugin$c);
 
 // Polyfills for SSR
+
 var isSSR = typeof window === 'undefined';
 var HTMLElement = isSSR ? Object : window.HTMLElement;
 var File = isSSR ? Object : window.File;
@@ -7006,27 +6630,24 @@ var script$p = {
       if (!this.canCancel || !this.isActive) return;
       this.close();
     },
-
     /**
     * Emit events, and destroy modal if it's programmatic.
     */
     close: function close() {
       var _this = this;
-
       this.onCancel.apply(null, arguments);
       this.$emit('close');
-      this.$emit('update:active', false); // Timeout for the animation complete before destroying
+      this.$emit('update:active', false);
 
+      // Timeout for the animation complete before destroying
       if (this.programmatic) {
         this.isActive = false;
         setTimeout(function () {
           _this.$destroy();
-
           removeElement(_this.$el);
         }, 150);
       }
     },
-
     /**
     * Keypress event that is bound to the document.
     */
@@ -7082,15 +6703,19 @@ var __vue_staticRenderFns__$n = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Loading = normalizeComponent_1(
+  const __vue_component__$p = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$n, staticRenderFns: __vue_staticRenderFns__$n },
     __vue_inject_styles__$p,
     __vue_script__$p,
     __vue_scope_id__$p,
     __vue_is_functional_template__$p,
     __vue_module_identifier__$p,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -7103,7 +6728,7 @@ var LoadingProgrammatic = {
     };
     var propsData = merge(defaultParam, params);
     var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance$1 || VueInstance;
-    var LoadingComponent = vm.extend(Loading);
+    var LoadingComponent = vm.extend(__vue_component__$p);
     return new LoadingComponent({
       el: document.createElement('div'),
       propsData: propsData
@@ -7113,7 +6738,7 @@ var LoadingProgrammatic = {
 var Plugin$d = {
   install: function install(Vue) {
     localVueInstance$1 = Vue;
-    registerComponent(Vue, Loading);
+    registerComponent(Vue, __vue_component__$p);
     registerComponentProgrammatic(Vue, 'loading', LoadingProgrammatic);
   }
 };
@@ -7125,6 +6750,7 @@ use(Plugin$d);
 //
 //
 //
+
 var script$q = {
   name: 'BMenu',
   props: {
@@ -7140,7 +6766,6 @@ var script$q = {
   data: function data() {
     return {
       _isMenu: true // Used by MenuItem
-
     };
   }
 };
@@ -7164,15 +6789,19 @@ var __vue_staticRenderFns__$o = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Menu = normalizeComponent_1(
+  const __vue_component__$q = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$o, staticRenderFns: __vue_staticRenderFns__$o },
     __vue_inject_styles__$q,
     __vue_script__$q,
     __vue_scope_id__$q,
     __vue_is_functional_template__$q,
     __vue_module_identifier__$q,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -7192,7 +6821,6 @@ var script$r = {
   render: function render(createElement, context) {
     var vlabel = null;
     var slots = context.slots();
-
     if (context.props.label || slots.label) {
       vlabel = createElement('p', {
         attrs: {
@@ -7206,7 +6834,6 @@ var script$r = {
         }
       }), createElement('span', {}, context.props.label)] : context.props.label : slots.label);
     }
-
     var vnode = createElement('ul', {
       attrs: {
         'class': 'menu-list',
@@ -7234,22 +6861,26 @@ const __vue_script__$r = script$r;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var MenuList = normalizeComponent_1(
+  const __vue_component__$r = /*#__PURE__*/normalizeComponent_1(
     {},
     __vue_inject_styles__$r,
     __vue_script__$r,
     __vue_scope_id__$r,
     __vue_is_functional_template__$r,
     __vue_module_identifier__$r,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var script$s = {
   name: 'BMenuItem',
-  components: _defineProperty({}, Icon.name, Icon),
+  components: _defineProperty({}, __vue_component__.name, __vue_component__),
   inheritAttrs: false,
   props: {
     label: String,
@@ -7300,7 +6931,6 @@ var script$s = {
       this.reset(this.$parent, menu);
       this.newExpanded = !this.newExpanded;
       this.$emit('update:expanded', this.newActive);
-
       if (menu && menu.activable) {
         this.newActive = true;
         this.$emit('update:active', this.newActive);
@@ -7308,19 +6938,16 @@ var script$s = {
     },
     reset: function reset(parent, menu) {
       var _this = this;
-
       var items = parent.$children.filter(function (c) {
         return c.name === _this.name;
       });
       items.forEach(function (item) {
         if (item !== _this) {
           _this.reset(item, menu);
-
           if (!parent.$data._isMenu || parent.$data._isMenu && parent.accordion) {
             item.newExpanded = false;
             item.$emit('update:expanded', item.newActive);
           }
-
           if (menu && menu.activable) {
             item.newActive = false;
             item.$emit('update:active', item.newActive);
@@ -7330,11 +6957,9 @@ var script$s = {
     },
     getMenu: function getMenu() {
       var parent = this.$parent;
-
       while (parent && !parent.$data._isMenu) {
         parent = parent.$parent;
       }
-
       return parent;
     }
   }
@@ -7362,30 +6987,34 @@ var __vue_staticRenderFns__$p = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var MenuItem = normalizeComponent_1(
+  const __vue_component__$s = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$p, staticRenderFns: __vue_staticRenderFns__$p },
     __vue_inject_styles__$s,
     __vue_script__$s,
     __vue_scope_id__$s,
     __vue_is_functional_template__$s,
     __vue_module_identifier__$s,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin$e = {
   install: function install(Vue) {
-    registerComponent(Vue, Menu);
-    registerComponent(Vue, MenuList);
-    registerComponent(Vue, MenuItem);
+    registerComponent(Vue, __vue_component__$q);
+    registerComponent(Vue, __vue_component__$r);
+    registerComponent(Vue, __vue_component__$s);
   }
 };
 use(Plugin$e);
 
 var MessageMixin = {
-  components: _defineProperty({}, Icon.name, Icon),
+  components: _defineProperty({}, __vue_component__.name, __vue_component__),
   props: {
     active: {
       type: Boolean,
@@ -7439,20 +7068,15 @@ var MessageMixin = {
       if (this.icon) {
         return this.icon;
       }
-
       switch (this.type) {
         case 'is-info':
           return 'information';
-
         case 'is-success':
           return 'check-circle';
-
         case 'is-warning':
           return 'alert';
-
         case 'is-danger':
           return 'alert-circle';
-
         default:
           return null;
       }
@@ -7467,13 +7091,11 @@ var MessageMixin = {
       this.$emit('close');
       this.$emit('update:active', false);
     },
-
     /**
      * Set timer to auto close message
      */
     setAutoClose: function setAutoClose() {
       var _this = this;
-
       if (this.autoClose) {
         this.timer = setTimeout(function () {
           if (_this.isActive) {
@@ -7521,22 +7143,26 @@ var __vue_staticRenderFns__$q = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Message = normalizeComponent_1(
+  const __vue_component__$t = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$q, staticRenderFns: __vue_staticRenderFns__$q },
     __vue_inject_styles__$t,
     __vue_script__$t,
     __vue_scope_id__$t,
     __vue_is_functional_template__$t,
     __vue_module_identifier__$t,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin$f = {
   install: function install(Vue) {
-    registerComponent(Vue, Message);
+    registerComponent(Vue, __vue_component__$t);
   }
 };
 use(Plugin$f);
@@ -7545,25 +7171,21 @@ var localVueInstance$2;
 var ModalProgrammatic = {
   open: function open(params) {
     var parent;
-
     if (typeof params === 'string') {
       params = {
         content: params
       };
     }
-
     var defaultParam = {
       programmatic: true
     };
-
     if (params.parent) {
       parent = params.parent;
       delete params.parent;
     }
-
     var propsData = merge(defaultParam, params);
     var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance$2 || VueInstance;
-    var ModalComponent = vm.extend(Modal);
+    var ModalComponent = vm.extend(__vue_component__$n);
     return new ModalComponent({
       parent: parent,
       el: document.createElement('div'),
@@ -7574,7 +7196,7 @@ var ModalProgrammatic = {
 var Plugin$g = {
   install: function install(Vue) {
     localVueInstance$2 = Vue;
-    registerComponent(Vue, Modal);
+    registerComponent(Vue, __vue_component__$n);
     registerComponentProgrammatic(Vue, 'modal', ModalProgrammatic);
   }
 };
@@ -7613,15 +7235,19 @@ var __vue_staticRenderFns__$r = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Notification = normalizeComponent_1(
+  const __vue_component__$u = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$r, staticRenderFns: __vue_staticRenderFns__$r },
     __vue_inject_styles__$u,
     __vue_script__$u,
     __vue_scope_id__$u,
     __vue_is_functional_template__$u,
     __vue_module_identifier__$u,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -7662,7 +7288,6 @@ var NoticeMixin = {
         case 'is-top':
         case 'is-top-left':
           return this.parentTop;
-
         case 'is-bottom-right':
         case 'is-bottom':
         case 'is-bottom-left':
@@ -7678,7 +7303,6 @@ var NoticeMixin = {
             enter: 'fadeInDown',
             leave: 'fadeOut'
           };
-
         case 'is-bottom-right':
         case 'is-bottom':
         case 'is-bottom-left':
@@ -7697,20 +7321,18 @@ var NoticeMixin = {
     },
     close: function close() {
       var _this = this;
-
       clearTimeout(this.timer);
       this.isActive = false;
-      this.$emit('close'); // Timeout for the animation complete before destroying
+      this.$emit('close');
 
+      // Timeout for the animation complete before destroying
       setTimeout(function () {
         _this.$destroy();
-
         removeElement(_this.$el);
       }, 150);
     },
     showNotice: function showNotice() {
       var _this2 = this;
-
       if (this.shouldQueue()) {
         // Call recursively if should queue
         setTimeout(function () {
@@ -7718,10 +7340,8 @@ var NoticeMixin = {
         }, 250);
         return;
       }
-
       this.correctParent.insertAdjacentElement('afterbegin', this.$el);
       this.isActive = true;
-
       if (!this.indefinite) {
         this.timer = setTimeout(function () {
           return _this2.close();
@@ -7732,21 +7352,17 @@ var NoticeMixin = {
       this.parentTop = document.querySelector((this.newContainer ? this.newContainer : 'body') + '>.notices.is-top');
       this.parentBottom = document.querySelector((this.newContainer ? this.newContainer : 'body') + '>.notices.is-bottom');
       if (this.parentTop && this.parentBottom) return;
-
       if (!this.parentTop) {
         this.parentTop = document.createElement('div');
         this.parentTop.className = 'notices is-top';
       }
-
       if (!this.parentBottom) {
         this.parentBottom = document.createElement('div');
         this.parentBottom.className = 'notices is-bottom';
       }
-
       var container = document.querySelector(this.newContainer) || document.body;
       container.appendChild(this.parentTop);
       container.appendChild(this.parentBottom);
-
       if (this.newContainer) {
         this.parentTop.classList.add('has-custom-container');
         this.parentBottom.classList.add('has-custom-container');
@@ -7797,15 +7413,19 @@ var __vue_staticRenderFns__$s = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var NotificationNotice = normalizeComponent_1(
+  const __vue_component__$v = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$s, staticRenderFns: __vue_staticRenderFns__$s },
     __vue_inject_styles__$v,
     __vue_script__$v,
     __vue_scope_id__$v,
     __vue_is_functional_template__$v,
     __vue_module_identifier__$v,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -7814,25 +7434,21 @@ var localVueInstance$3;
 var NotificationProgrammatic = {
   open: function open(params) {
     var parent;
-
     if (typeof params === 'string') {
       params = {
         message: params
       };
     }
-
     var defaultParam = {
       position: config.defaultNotificationPosition || 'is-top-right'
     };
-
     if (params.parent) {
       parent = params.parent;
       delete params.parent;
     }
-
     var propsData = merge(defaultParam, params);
     var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance$3 || VueInstance;
-    var NotificationNoticeComponent = vm.extend(NotificationNotice);
+    var NotificationNoticeComponent = vm.extend(__vue_component__$v);
     return new NotificationNoticeComponent({
       parent: parent,
       el: document.createElement('div'),
@@ -7843,7 +7459,7 @@ var NotificationProgrammatic = {
 var Plugin$h = {
   install: function install(Vue) {
     localVueInstance$3 = Vue;
-    registerComponent(Vue, Notification);
+    registerComponent(Vue, __vue_component__$u);
     registerComponentProgrammatic(Vue, 'notification', NotificationProgrammatic);
   }
 };
@@ -7864,6 +7480,7 @@ use(Plugin$h);
 //
 //
 //
+
 var script$w = {
   name: 'NavbarBurger',
   props: {
@@ -7893,15 +7510,19 @@ var __vue_staticRenderFns__$t = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var NavbarBurger = normalizeComponent_1(
+  const __vue_component__$w = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$t, staticRenderFns: __vue_staticRenderFns__$t },
     __vue_inject_styles__$w,
     __vue_script__$w,
     __vue_scope_id__$w,
     __vue_is_functional_template__$w,
     __vue_module_identifier__$w,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -7909,14 +7530,11 @@ var __vue_staticRenderFns__$t = [];
 var isTouch = typeof window !== 'undefined' && ('ontouchstart' in window || navigator.msMaxTouchPoints > 0);
 var events = isTouch ? ['touchstart', 'click'] : ['click'];
 var instances = [];
-
 function processArgs(bindingValue) {
   var isFunction = typeof bindingValue === 'function';
-
   if (!isFunction && _typeof(bindingValue) !== 'object') {
     throw new Error("v-click-outside: Binding value should be a function or an object, typeof ".concat(bindingValue, " given"));
   }
-
   return {
     handler: isFunction ? bindingValue : bindingValue.handler,
     middleware: bindingValue.middleware || function (isClickOutside) {
@@ -7925,31 +7543,25 @@ function processArgs(bindingValue) {
     events: bindingValue.events || events
   };
 }
-
 function onEvent(_ref) {
   var el = _ref.el,
-      event = _ref.event,
-      handler = _ref.handler,
-      middleware = _ref.middleware;
+    event = _ref.event,
+    handler = _ref.handler,
+    middleware = _ref.middleware;
   var isClickOutside = event.target !== el && !el.contains(event.target);
-
   if (!isClickOutside) {
     return;
   }
-
   if (middleware(event, el)) {
     handler(event, el);
   }
 }
-
 function bind$1(el, _ref2) {
   var value = _ref2.value;
-
   var _processArgs = processArgs(value),
-      _handler = _processArgs.handler,
-      middleware = _processArgs.middleware,
-      events = _processArgs.events;
-
+    _handler = _processArgs.handler,
+    middleware = _processArgs.middleware,
+    events = _processArgs.events;
   var instance = {
     el: el,
     eventHandlers: events.map(function (eventName) {
@@ -7968,27 +7580,24 @@ function bind$1(el, _ref2) {
   };
   instance.eventHandlers.forEach(function (_ref3) {
     var event = _ref3.event,
-        handler = _ref3.handler;
+      handler = _ref3.handler;
     return document.addEventListener(event, handler);
   });
   instances.push(instance);
 }
-
 function update(el, _ref4) {
   var value = _ref4.value;
-
   var _processArgs2 = processArgs(value),
-      _handler2 = _processArgs2.handler,
-      middleware = _processArgs2.middleware,
-      events = _processArgs2.events; // `filter` instead of `find` for compat with IE
-
-
+    _handler2 = _processArgs2.handler,
+    middleware = _processArgs2.middleware,
+    events = _processArgs2.events;
+  // `filter` instead of `find` for compat with IE
   var instance = instances.filter(function (instance) {
     return instance.el === el;
   })[0];
   instance.eventHandlers.forEach(function (_ref5) {
     var event = _ref5.event,
-        handler = _ref5.handler;
+      handler = _ref5.handler;
     return document.removeEventListener(event, handler);
   });
   instance.eventHandlers = events.map(function (eventName) {
@@ -8006,11 +7615,10 @@ function update(el, _ref4) {
   });
   instance.eventHandlers.forEach(function (_ref6) {
     var event = _ref6.event,
-        handler = _ref6.handler;
+      handler = _ref6.handler;
     return document.addEventListener(event, handler);
   });
 }
-
 function unbind$1(el) {
   // `filter` instead of `find` for compat with IE
   var instance = instances.filter(function (instance) {
@@ -8018,11 +7626,10 @@ function unbind$1(el) {
   })[0];
   instance.eventHandlers.forEach(function (_ref7) {
     var event = _ref7.event,
-        handler = _ref7.handler;
+      handler = _ref7.handler;
     return document.removeEventListener(event, handler);
   });
 }
-
 var directive$1 = {
   bind: bind$1,
   update: update,
@@ -8036,15 +7643,13 @@ var BODY_SPACED_FIXED_TOP_CLASS = 'has-spaced-navbar-fixed-top';
 var FIXED_BOTTOM_CLASS = 'is-fixed-bottom';
 var BODY_FIXED_BOTTOM_CLASS = 'has-navbar-fixed-bottom';
 var BODY_SPACED_FIXED_BOTTOM_CLASS = 'has-spaced-navbar-fixed-bottom';
-
 var isFilled = function isFilled(str) {
   return !!str;
 };
-
 var script$x = {
   name: 'BNavbar',
   components: {
-    NavbarBurger: NavbarBurger
+    NavbarBurger: __vue_component__$w
   },
   directives: {
     clickOutside: directive$1
@@ -8085,7 +7690,6 @@ var script$x = {
     return {
       internalIsActive: this.isActive,
       _isNavBar: true // Used internally by NavbarItem
-
     };
   },
   computed: {
@@ -8093,9 +7697,7 @@ var script$x = {
       return this.internalIsActive;
     },
     computedClasses: function computedClasses() {
-      var _ref;
-
-      return [this.type, (_ref = {}, _defineProperty(_ref, FIXED_TOP_CLASS, this.fixedTop), _defineProperty(_ref, FIXED_BOTTOM_CLASS, this.fixedBottom), _defineProperty(_ref, 'is-spaced', this.spaced), _defineProperty(_ref, 'has-shadow', this.shadow), _defineProperty(_ref, 'is-transparent', this.transparent), _ref)];
+      return [this.type, _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty({}, FIXED_TOP_CLASS, this.fixedTop), FIXED_BOTTOM_CLASS, this.fixedBottom), 'is-spaced', this.spaced), 'has-shadow', this.shadow), 'is-transparent', this.transparent)];
     }
   },
   watch: {
@@ -8108,7 +7710,6 @@ var script$x = {
     fixedTop: {
       handler: function handler(isSet) {
         this.checkIfFixedPropertiesAreColliding();
-
         if (isSet) {
           // TODO Apply only one of the classes once PR is merged in Bulma:
           // https://github.com/jgthms/bulma/pull/2737
@@ -8124,7 +7725,6 @@ var script$x = {
     fixedBottom: {
       handler: function handler(isSet) {
         this.checkIfFixedPropertiesAreColliding();
-
         if (isSet) {
           // TODO Apply only one of the classes once PR is merged in Bulma:
           // https://github.com/jgthms/bulma/pull/2737
@@ -8164,19 +7764,17 @@ var script$x = {
     },
     checkIfFixedPropertiesAreColliding: function checkIfFixedPropertiesAreColliding() {
       var areColliding = this.fixedTop && this.fixedBottom;
-
       if (areColliding) {
         throw new Error('You should choose if the BNavbar is fixed bottom or fixed top, but not both');
       }
     },
     genNavbar: function genNavbar(createElement) {
       var navBarSlots = [this.genNavbarBrandNode(createElement), this.genNavbarSlotsNode(createElement)];
-
       if (!isFilled(this.wrapperClass)) {
         return this.genNavbarSlots(createElement, navBarSlots);
-      } // It wraps the slots into a div with the provided wrapperClass prop
+      }
 
-
+      // It wraps the slots into a div with the provided wrapperClass prop
       var navWrapper = createElement('div', {
         class: this.wrapperClass
       }, navBarSlots);
@@ -8238,7 +7836,6 @@ var script$x = {
       this.removeBodyClass(className);
     } else if (this.fixedBottom) {
       var _className = this.spaced ? BODY_SPACED_FIXED_BOTTOM_CLASS : BODY_FIXED_BOTTOM_CLASS;
-
       this.removeBodyClass(_className);
     }
   },
@@ -8264,15 +7861,19 @@ const __vue_script__$x = script$x;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Navbar = normalizeComponent_1(
+  const __vue_component__$x = /*#__PURE__*/normalizeComponent_1(
     {},
     __vue_inject_styles__$x,
     __vue_script__$x,
     __vue_scope_id__$x,
     __vue_is_functional_template__$x,
     __vue_module_identifier__$x,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -8290,6 +7891,7 @@ const __vue_script__$x = script$x;
 //
 //
 //
+
 var clickableWhiteList = ['div', 'span'];
 var script$y = {
   name: 'BNavbarItem',
@@ -8313,7 +7915,6 @@ var script$y = {
         this.closeMenuRecursive(this, ['NavBar']);
       }
     },
-
     /**
      * Close parent if clicked outside.
      */
@@ -8321,13 +7922,11 @@ var script$y = {
       var isOnWhiteList = clickableWhiteList.some(function (item) {
         return item === event.target.localName;
       });
-
       if (!isOnWhiteList) {
         var parent = this.closeMenuRecursive(this, ['NavbarDropdown', 'NavBar']);
         if (parent.$data._isNavbarDropdown) this.closeMenuRecursive(parent, ['NavBar']);
       }
     },
-
     /**
      * Close parent recursively
      */
@@ -8338,7 +7937,6 @@ var script$y = {
           current.$parent.closeMenu();
           return current.$parent;
         }
-
         return acc;
       }, null);
       return foundItem || this.closeMenuRecursive(current.$parent, targetComponents);
@@ -8379,15 +7977,19 @@ var __vue_staticRenderFns__$u = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var NavbarItem = normalizeComponent_1(
+  const __vue_component__$y = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$u, staticRenderFns: __vue_staticRenderFns__$u },
     __vue_inject_styles__$y,
     __vue_script__$y,
     __vue_scope_id__$y,
     __vue_is_functional_template__$y,
     __vue_module_identifier__$y,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -8416,7 +8018,6 @@ var script$z = {
       newActive: this.active,
       isHoverable: this.hoverable,
       _isNavbarDropdown: true // Used internally by NavbarItem
-
     };
   },
   watch: {
@@ -8428,13 +8029,11 @@ var script$z = {
     showMenu: function showMenu() {
       this.newActive = true;
     },
-
     /**
     * See naming convetion of navbaritem
     */
     closeMenu: function closeMenu() {
       this.newActive = !this.closeOnClick;
-
       if (this.hoverable && this.closeOnClick) {
         this.isHoverable = false;
       }
@@ -8475,32 +8074,35 @@ var __vue_staticRenderFns__$v = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var NavbarDropdown = normalizeComponent_1(
+  const __vue_component__$z = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$v, staticRenderFns: __vue_staticRenderFns__$v },
     __vue_inject_styles__$z,
     __vue_script__$z,
     __vue_scope_id__$z,
     __vue_is_functional_template__$z,
     __vue_module_identifier__$z,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin$i = {
   install: function install(Vue) {
-    registerComponent(Vue, Navbar);
-    registerComponent(Vue, NavbarItem);
-    registerComponent(Vue, NavbarDropdown);
+    registerComponent(Vue, __vue_component__$x);
+    registerComponent(Vue, __vue_component__$y);
+    registerComponent(Vue, __vue_component__$z);
   }
 };
 use(Plugin$i);
 
-var _components$4;
 var script$A = {
   name: 'BNumberinput',
-  components: (_components$4 = {}, _defineProperty(_components$4, Icon.name, Icon), _defineProperty(_components$4, Input.name, Input), _components$4),
+  components: _defineProperty(_defineProperty({}, __vue_component__.name, __vue_component__), __vue_component__$1.name, __vue_component__$1),
   mixins: [FormElementMixin],
   inheritAttrs: false,
   props: {
@@ -8541,11 +8143,9 @@ var script$A = {
       },
       set: function set(value) {
         var newValue = value;
-
         if (value === '') {
           newValue = parseFloat(this.min) || null;
         }
-
         this.newValue = newValue;
         this.$emit('input', newValue);
         !this.isValid && this.$refs.input.checkHtml5Validity();
@@ -8583,11 +8183,9 @@ var script$A = {
     stepDecimals: function stepDecimals() {
       var step = this.stepNumber.toString();
       var index = step.indexOf('.');
-
       if (index >= 0) {
         return step.substring(index + 1).length;
       }
-
       return 0;
     }
   },
@@ -8620,7 +8218,6 @@ var script$A = {
     },
     onStartLongPress: function onStartLongPress(event, inc) {
       var _this = this;
-
       if (event.button !== 0 && event.type !== 'touchstart') return;
       this._$intervalTime = new Date();
       clearInterval(this._$intervalRef);
@@ -8631,11 +8228,9 @@ var script$A = {
     onStopLongPress: function onStopLongPress(inc) {
       if (!this._$intervalRef) return;
       var d = new Date();
-
       if (d - this._$intervalTime < 250) {
         if (inc) this.increment();else this.decrement();
       }
-
       clearInterval(this._$intervalRef);
       this._$intervalRef = null;
     }
@@ -8661,22 +8256,26 @@ var __vue_staticRenderFns__$w = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Numberinput = normalizeComponent_1(
+  const __vue_component__$A = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$w, staticRenderFns: __vue_staticRenderFns__$w },
     __vue_inject_styles__$A,
     __vue_script__$A,
     __vue_scope_id__$A,
     __vue_is_functional_template__$A,
     __vue_module_identifier__$A,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin$j = {
   install: function install(Vue) {
-    registerComponent(Vue, Numberinput);
+    registerComponent(Vue, __vue_component__$A);
   }
 };
 use(Plugin$j);
@@ -8734,23 +8333,26 @@ var __vue_staticRenderFns__$x = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var PaginationButton = normalizeComponent_1(
+  const __vue_component__$B = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$x, staticRenderFns: __vue_staticRenderFns__$x },
     __vue_inject_styles__$B,
     __vue_script__$B,
     __vue_scope_id__$B,
     __vue_is_functional_template__$B,
     __vue_module_identifier__$B,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
-var _components$5;
 var script$C = {
   name: 'BPagination',
-  components: (_components$5 = {}, _defineProperty(_components$5, Icon.name, Icon), _defineProperty(_components$5, PaginationButton.name, PaginationButton), _components$5),
+  components: _defineProperty(_defineProperty({}, __vue_component__.name, __vue_component__), __vue_component__$B.name, __vue_component__$B),
   props: {
     total: [Number, String],
     perPage: {
@@ -8804,14 +8406,12 @@ var script$C = {
     afterCurrent: function afterCurrent() {
       return parseInt(this.rangeAfter);
     },
-
     /**
     * Total page size (count).
     */
     pageCount: function pageCount() {
       return Math.ceil(this.total / this.perPage);
     },
-
     /**
     * First item of the page (count).
     */
@@ -8819,49 +8419,42 @@ var script$C = {
       var firstItem = this.current * this.perPage - this.perPage + 1;
       return firstItem >= 0 ? firstItem : 0;
     },
-
     /**
     * Check if previous button is available.
     */
     hasPrev: function hasPrev() {
       return this.current > 1;
     },
-
     /**
     * Check if first page button should be visible.
     */
     hasFirst: function hasFirst() {
       return this.current >= 2 + this.beforeCurrent;
     },
-
     /**
     * Check if first ellipsis should be visible.
     */
     hasFirstEllipsis: function hasFirstEllipsis() {
       return this.current >= this.beforeCurrent + 4;
     },
-
     /**
     * Check if last page button should be visible.
     */
     hasLast: function hasLast() {
       return this.current <= this.pageCount - (1 + this.afterCurrent);
     },
-
     /**
     * Check if last ellipsis should be visible.
     */
     hasLastEllipsis: function hasLastEllipsis() {
       return this.current < this.pageCount - (2 + this.afterCurrent);
     },
-
     /**
     * Check if next button is available.
     */
     hasNext: function hasNext() {
       return this.current < this.pageCount;
     },
-
     /**
     * Get near pages, 1 before and 1 after the current.
     * Also add the click event to the array.
@@ -8869,23 +8462,17 @@ var script$C = {
     pagesInRange: function pagesInRange() {
       if (this.simple) return;
       var left = Math.max(1, this.current - this.beforeCurrent);
-
       if (left - 1 === 2) {
         left--; // Do not show the ellipsis if there is only one to hide
       }
-
       var right = Math.min(this.current + this.afterCurrent, this.pageCount);
-
       if (this.pageCount - right === 2) {
         right++; // Do not show the ellipsis if there is only one to hide
       }
-
       var pages = [];
-
       for (var i = left; i <= right; i++) {
         pages.push(this.getPage(i));
       }
-
       return pages;
     }
   },
@@ -8904,21 +8491,18 @@ var script$C = {
     prev: function prev(event) {
       this.changePage(this.current - 1, event);
     },
-
     /**
     * Next button click listener.
     */
     next: function next(event) {
       this.changePage(this.current + 1, event);
     },
-
     /**
     * First button click listener.
     */
     first: function first(event) {
       this.changePage(1, event);
     },
-
     /**
     * Last button click listener.
     */
@@ -8928,8 +8512,9 @@ var script$C = {
     changePage: function changePage(num, event) {
       if (this.current === num || num < 1 || num > this.pageCount) return;
       this.$emit('change', num);
-      this.$emit('update:current', num); // Set focus on element to keep tab order
+      this.$emit('update:current', num);
 
+      // Set focus on element to keep tab order
       if (event && event.target) {
         this.$nextTick(function () {
           return event.target.focus();
@@ -8938,7 +8523,6 @@ var script$C = {
     },
     getPage: function getPage(num) {
       var _this = this;
-
       var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       return {
         number: num,
@@ -8951,7 +8535,6 @@ var script$C = {
         'aria-label': options['aria-label'] || this.getAriaPageLabel(num, this.current === num)
       };
     },
-
     /**
     * Get text for aria-label according to page number.
     */
@@ -8961,7 +8544,6 @@ var script$C = {
       } else if (this.ariaPageLabel && isCurrent && this.ariaCurrentLabel) {
         return this.ariaCurrentLabel + ', ' + this.ariaPageLabel + ' ' + pageNumber + '.';
       }
-
       return null;
     }
   }
@@ -8994,23 +8576,27 @@ var __vue_staticRenderFns__$y = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Pagination = normalizeComponent_1(
+  const __vue_component__$C = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$y, staticRenderFns: __vue_staticRenderFns__$y },
     __vue_inject_styles__$C,
     __vue_script__$C,
     __vue_scope_id__$C,
     __vue_is_functional_template__$C,
     __vue_module_identifier__$C,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin$k = {
   install: function install(Vue) {
-    registerComponent(Vue, Pagination);
-    registerComponent(Vue, PaginationButton);
+    registerComponent(Vue, __vue_component__$C);
+    registerComponent(Vue, __vue_component__$B);
   }
 };
 use(Plugin$k);
@@ -9028,6 +8614,7 @@ use(Plugin$k);
 //
 //
 //
+
 var script$D = {
   name: 'BProgress',
   props: {
@@ -9075,13 +8662,10 @@ var script$D = {
       if (this.value === undefined || this.value === null || isNaN(this.value)) {
         return undefined;
       }
-
       if (this.format === 'percent') {
         var _val = this.toFixed(this.value * 100 / this.max);
-
         return "".concat(_val, "%");
       }
-
       var val = this.toFixed(this.value);
       return val;
     }
@@ -9106,11 +8690,9 @@ var script$D = {
     // Custom function that imitate the javascript toFixed method with improved rounding
     toFixed: function toFixed(num) {
       var fixed = (+"".concat(Math.round(+"".concat(num, "e").concat(this.precision)), "e").concat(-this.precision)).toFixed(this.precision);
-
       if (!this.keepTrailingZeroes) {
         fixed = fixed.replace(/\.?0+$/, '');
       }
-
       return fixed;
     }
   },
@@ -9138,22 +8720,26 @@ var __vue_staticRenderFns__$z = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Progress = normalizeComponent_1(
+  const __vue_component__$D = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$z, staticRenderFns: __vue_staticRenderFns__$z },
     __vue_inject_styles__$D,
     __vue_script__$D,
     __vue_scope_id__$D,
     __vue_is_functional_template__$D,
     __vue_module_identifier__$D,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin$l = {
   install: function install(Vue) {
-    registerComponent(Vue, Progress);
+    registerComponent(Vue, __vue_component__$D);
   }
 };
 use(Plugin$l);
@@ -9183,15 +8769,19 @@ var __vue_staticRenderFns__$A = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Radio = normalizeComponent_1(
+  const __vue_component__$E = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$A, staticRenderFns: __vue_staticRenderFns__$A },
     __vue_inject_styles__$E,
     __vue_script__$E,
     __vue_scope_id__$E,
     __vue_is_functional_template__$E,
     __vue_module_identifier__$E,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -9236,30 +8826,34 @@ var __vue_staticRenderFns__$B = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var RadioButton = normalizeComponent_1(
+  const __vue_component__$F = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$B, staticRenderFns: __vue_staticRenderFns__$B },
     __vue_inject_styles__$F,
     __vue_script__$F,
     __vue_scope_id__$F,
     __vue_is_functional_template__$F,
     __vue_module_identifier__$F,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin$m = {
   install: function install(Vue) {
-    registerComponent(Vue, Radio);
-    registerComponent(Vue, RadioButton);
+    registerComponent(Vue, __vue_component__$E);
+    registerComponent(Vue, __vue_component__$F);
   }
 };
 use(Plugin$m);
 
 var script$G = {
   name: 'BRate',
-  components: _defineProperty({}, Icon.name, Icon),
+  components: _defineProperty({}, __vue_component__.name, __vue_component__),
   props: {
     value: {
       type: Number,
@@ -9295,14 +8889,12 @@ var script$G = {
     },
     showMe: function showMe() {
       var result = '';
-
       if (this.showScore) {
         result = this.disabled ? this.value : this.newValue;
         if (result === 0) result = '';
       } else if (this.showText) {
         result = this.texts[Math.ceil(this.newValue) - 1];
       }
-
       return result;
     },
     valueDecimal: function valueDecimal() {
@@ -9338,13 +8930,11 @@ var script$G = {
     rateClass: function rateClass(index) {
       var output = '';
       var currentValue = this.hoverValue !== 0 ? this.hoverValue : this.newValue;
-
       if (index <= currentValue) {
         output = 'set-on';
       } else if (this.disabled && Math.ceil(this.value) === index) {
         output = 'set-half';
       }
-
       return output;
     }
   }
@@ -9369,29 +8959,33 @@ var __vue_staticRenderFns__$C = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Rate = normalizeComponent_1(
+  const __vue_component__$G = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$C, staticRenderFns: __vue_staticRenderFns__$C },
     __vue_inject_styles__$G,
     __vue_script__$G,
     __vue_scope_id__$G,
     __vue_is_functional_template__$G,
     __vue_module_identifier__$G,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin$n = {
   install: function install(Vue) {
-    registerComponent(Vue, Rate);
+    registerComponent(Vue, __vue_component__$G);
   }
 };
 use(Plugin$n);
 
 var Plugin$o = {
   install: function install(Vue) {
-    registerComponent(Vue, Select);
+    registerComponent(Vue, __vue_component__$g);
   }
 };
 use(Plugin$o);
@@ -9426,7 +9020,6 @@ var script$H = {
     var items = [];
     var width = context.props.width;
     var height = context.props.height;
-
     for (var i = 0; i < context.props.count; i++) {
       items.push(createElement('div', {
         staticClass: 'b-skeleton-item',
@@ -9441,7 +9034,6 @@ var script$H = {
         }
       }));
     }
-
     return createElement('div', {
       staticClass: 'b-skeleton',
       class: [context.props.size, {
@@ -9468,27 +9060,30 @@ const __vue_script__$H = script$H;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Skeleton = normalizeComponent_1(
+  const __vue_component__$H = /*#__PURE__*/normalizeComponent_1(
     {},
     __vue_inject_styles__$H,
     __vue_script__$H,
     __vue_scope_id__$H,
     __vue_is_functional_template__$H,
     __vue_module_identifier__$H,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin$p = {
   install: function install(Vue) {
-    registerComponent(Vue, Skeleton);
+    registerComponent(Vue, __vue_component__$H);
   }
 };
 use(Plugin$p);
 
-//
 var script$I = {
   name: 'BSidebar',
   props: {
@@ -9558,42 +9153,29 @@ var script$I = {
     isAbsolute: function isAbsolute() {
       return this.position === 'absolute';
     },
-
     /**
      * White-listed items to not close when clicked.
      * Add sidebar content and all children.
      */
     whiteList: function whiteList() {
       var whiteList = [];
-      whiteList.push(this.$refs.sidebarContent); // Add all chidren from dropdown
-
+      whiteList.push(this.$refs.sidebarContent);
+      // Add all chidren from dropdown
       if (this.$refs.sidebarContent !== undefined) {
         var children = this.$refs.sidebarContent.querySelectorAll('*');
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
+        var _iterator = _createForOfIteratorHelper(children),
+          _step;
         try {
-          for (var _iterator = children[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
             var child = _step.value;
             whiteList.push(child);
           }
         } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
+          _iterator.e(err);
         } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-              _iterator.return();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
-          }
+          _iterator.f();
         }
       }
-
       return whiteList;
     }
   },
@@ -9617,7 +9199,6 @@ var script$I = {
         if (this.isOpen && event.keyCode === 27) this.cancel('escape');
       }
     },
-
     /**
     * Close the Sidebar if canCancel and call the onCancel prop (function).
     */
@@ -9627,7 +9208,6 @@ var script$I = {
       this.onCancel.apply(null, arguments);
       this.close();
     },
-
     /**
     * Call the onCancel prop (function) and emit events
     */
@@ -9636,7 +9216,6 @@ var script$I = {
       this.$emit('close');
       this.$emit('update:open', false);
     },
-
     /**
      * Close fixed sidebar if clicked outside.
      */
@@ -9649,14 +9228,12 @@ var script$I = {
         }
       }
     },
-
     /**
     * Transition before-enter hook
     */
     beforeEnter: function beforeEnter() {
       this.animating = true;
     },
-
     /**
     * Transition after-leave hook
     */
@@ -9682,7 +9259,6 @@ var script$I = {
       document.removeEventListener('keyup', this.keyPress);
       document.removeEventListener('click', this.clickedOutside);
     }
-
     if (this.isFixed) {
       removeElement(this.$el);
     }
@@ -9708,22 +9284,26 @@ var __vue_staticRenderFns__$D = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Sidebar = normalizeComponent_1(
+  const __vue_component__$I = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$D, staticRenderFns: __vue_staticRenderFns__$D },
     __vue_inject_styles__$I,
     __vue_script__$I,
     __vue_scope_id__$I,
     __vue_is_functional_template__$I,
     __vue_module_identifier__$I,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin$q = {
   install: function install(Vue) {
-    registerComponent(Vue, Sidebar);
+    registerComponent(Vue, __vue_component__$I);
   }
 };
 use(Plugin$q);
@@ -9795,22 +9375,26 @@ var __vue_staticRenderFns__$E = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Tooltip = normalizeComponent_1(
+  const __vue_component__$J = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$E, staticRenderFns: __vue_staticRenderFns__$E },
     __vue_inject_styles__$J,
     __vue_script__$J,
     __vue_scope_id__$J,
     __vue_is_functional_template__$J,
     __vue_module_identifier__$J,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var script$K = {
   name: 'BSliderThumb',
-  components: _defineProperty({}, Tooltip.name, Tooltip),
+  components: _defineProperty({}, __vue_component__$J.name, __vue_component__$J),
   inheritAttrs: false,
   props: {
     value: {
@@ -9876,7 +9460,6 @@ var script$K = {
       if (this.disabled) return;
       event.preventDefault();
       this.onDragStart(event);
-
       if (typeof window !== 'undefined') {
         document.addEventListener('mousemove', this.onDragging);
         document.addEventListener('touchmove', this.onDragging);
@@ -9912,11 +9495,9 @@ var script$K = {
     onDragStart: function onDragStart(event) {
       this.dragging = true;
       this.$emit('dragstart');
-
       if (event.type === 'touchstart') {
         event.clientX = event.touches[0].clientX;
       }
-
       this.startX = event.clientX;
       this.startPosition = parseFloat(this.currentPosition);
       this.newPosition = this.startPosition;
@@ -9926,7 +9507,6 @@ var script$K = {
         if (event.type === 'touchmove') {
           event.clientX = event.touches[0].clientX;
         }
-
         var diff = (event.clientX - this.startX) / this.$parent.sliderSize() * 100;
         this.newPosition = this.startPosition + diff;
         this.setPosition(this.newPosition);
@@ -9935,13 +9515,10 @@ var script$K = {
     onDragEnd: function onDragEnd() {
       this.dragging = false;
       this.$emit('dragend');
-
       if (this.value !== this.oldValue) {
         this.$parent.emitValue('change');
       }
-
       this.setPosition(this.newPosition);
-
       if (typeof window !== 'undefined') {
         document.removeEventListener('mousemove', this.onDragging);
         document.removeEventListener('touchmove', this.onDragging);
@@ -9952,19 +9529,16 @@ var script$K = {
     },
     setPosition: function setPosition(percent) {
       if (percent === null || isNaN(percent)) return;
-
       if (percent < 0) {
         percent = 0;
       } else if (percent > 100) {
         percent = 100;
       }
-
       var stepLength = 100 / ((this.max - this.min) / this.step);
       var steps = Math.round(percent / stepLength);
       var value = steps * stepLength / 100 * (this.max - this.min) + this.min;
       value = parseFloat(value.toFixed(this.precision));
       this.$emit('input', value);
-
       if (!this.dragging && value !== this.oldValue) {
         this.oldValue = value;
       }
@@ -9991,15 +9565,19 @@ var __vue_staticRenderFns__$F = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var SliderThumb = normalizeComponent_1(
+  const __vue_component__$K = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$F, staticRenderFns: __vue_staticRenderFns__$F },
     __vue_inject_styles__$K,
     __vue_script__$K,
     __vue_scope_id__$K,
     __vue_is_functional_template__$K,
     __vue_module_identifier__$K,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -10015,6 +9593,7 @@ var __vue_staticRenderFns__$F = [];
 //
 //
 //
+
 var script$L = {
   name: 'BSliderTick',
   props: {
@@ -10066,23 +9645,26 @@ var __vue_staticRenderFns__$G = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var SliderTick = normalizeComponent_1(
+  const __vue_component__$L = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$G, staticRenderFns: __vue_staticRenderFns__$G },
     __vue_inject_styles__$L,
     __vue_script__$L,
     __vue_scope_id__$L,
     __vue_is_functional_template__$L,
     __vue_module_identifier__$L,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
-var _components$6;
 var script$M = {
   name: 'BSlider',
-  components: (_components$6 = {}, _defineProperty(_components$6, SliderThumb.name, SliderThumb), _defineProperty(_components$6, SliderTick.name, SliderTick), _components$6),
+  components: _defineProperty(_defineProperty({}, __vue_component__$K.name, __vue_component__$K), __vue_component__$L.name, __vue_component__$L),
   props: {
     value: {
       type: [Number, Array],
@@ -10140,7 +9722,6 @@ var script$M = {
       dragging: false,
       isRange: false,
       _isSlider: true // Used by Thumb and Tick
-
     };
   },
   computed: {
@@ -10150,11 +9731,9 @@ var script$M = {
     tickValues: function tickValues() {
       if (!this.ticks || this.min > this.max || this.step === 0) return [];
       var result = [];
-
       for (var i = this.min + this.step; i < this.max; i = i + this.step) {
         result.push(i);
       }
-
       return result;
     },
     minValue: function minValue() {
@@ -10216,7 +9795,6 @@ var script$M = {
       if (this.min > this.max) {
         return;
       }
-
       if (Array.isArray(newValue)) {
         this.isRange = true;
         var smallValue = typeof newValue[0] !== 'number' || isNaN(newValue[0]) ? this.min : Math.min(Math.max(this.min, newValue[0]), this.max);
@@ -10233,11 +9811,9 @@ var script$M = {
       if (this.isRange) {
         this.isThumbReversed = this.value1 > this.value2;
       }
-
       if (!this.lazy || !this.dragging) {
         this.emitValue('input');
       }
-
       if (this.dragging) {
         this.emitValue('dragging');
       }
@@ -10251,13 +9827,11 @@ var script$M = {
       var percent = (event.clientX - sliderOffsetLeft) / this.sliderSize() * 100;
       var targetValue = this.min + percent * (this.max - this.min) / 100;
       var diffFirst = Math.abs(targetValue - this.value1);
-
       if (!this.isRange) {
         if (diffFirst < this.step / 2) return;
         this.$refs.button1.setPosition(percent);
       } else {
         var diffSecond = Math.abs(targetValue - this.value2);
-
         if (diffFirst <= diffSecond) {
           if (diffFirst < this.step / 2) return;
           this.$refs['button1'].setPosition(percent);
@@ -10266,7 +9840,6 @@ var script$M = {
           this.$refs['button2'].setPosition(percent);
         }
       }
-
       this.emitValue('change');
     },
     onDragStart: function onDragStart() {
@@ -10275,7 +9848,6 @@ var script$M = {
     },
     onDragEnd: function onDragEnd() {
       var _this = this;
-
       this.isTrackClickDisabled = true;
       setTimeout(function () {
         // avoid triggering onSliderClick after dragend
@@ -10283,7 +9855,6 @@ var script$M = {
       }, 0);
       this.dragging = false;
       this.$emit('dragend');
-
       if (this.lazy) {
         this.emitValue('input');
       }
@@ -10318,23 +9889,27 @@ var __vue_staticRenderFns__$H = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Slider = normalizeComponent_1(
+  const __vue_component__$M = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$H, staticRenderFns: __vue_staticRenderFns__$H },
     __vue_inject_styles__$M,
     __vue_script__$M,
     __vue_scope_id__$M,
     __vue_is_functional_template__$M,
     __vue_module_identifier__$M,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin$r = {
   install: function install(Vue) {
-    registerComponent(Vue, Slider);
-    registerComponent(Vue, SliderTick);
+    registerComponent(Vue, __vue_component__$M);
+    registerComponent(Vue, __vue_component__$L);
   }
 };
 use(Plugin$r);
@@ -10451,16 +10026,20 @@ var __vue_staticRenderFns__$I = [];
   const __vue_is_functional_template__$N = false;
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Snackbar = normalizeComponent_1(
+  const __vue_component__$N = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$I, staticRenderFns: __vue_staticRenderFns__$I },
     __vue_inject_styles__$N,
     __vue_script__$N,
     __vue_scope_id__$N,
     __vue_is_functional_template__$N,
     __vue_module_identifier__$N,
+    false,
     browser,
+    undefined,
     undefined
   );
 
@@ -10468,26 +10047,22 @@ var localVueInstance$4;
 var SnackbarProgrammatic = {
   open: function open(params) {
     var parent;
-
     if (typeof params === 'string') {
       params = {
         message: params
       };
     }
-
     var defaultParam = {
       type: 'is-success',
       position: config.defaultSnackbarPosition || 'is-bottom-right'
     };
-
     if (params.parent) {
       parent = params.parent;
       delete params.parent;
     }
-
     var propsData = merge(defaultParam, params);
     var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance$4 || VueInstance;
-    var SnackbarComponent = vm.extend(Snackbar);
+    var SnackbarComponent = vm.extend(__vue_component__$N);
     return new SnackbarComponent({
       parent: parent,
       el: document.createElement('div'),
@@ -10554,10 +10129,9 @@ var SlotComponent = {
   }
 };
 
-var _components$7;
 var script$O = {
   name: 'BSteps',
-  components: (_components$7 = {}, _defineProperty(_components$7, Icon.name, Icon), _defineProperty(_components$7, SlotComponent.name, SlotComponent), _components$7),
+  components: _defineProperty(_defineProperty({}, __vue_component__.name, __vue_component__), SlotComponent.name, SlotComponent),
   props: {
     value: [Number, String],
     type: [String, Object],
@@ -10620,7 +10194,6 @@ var script$O = {
       contentHeight: 0,
       isTransitioning: false,
       _isSteps: true // Used internally by StepItem
-
     };
   },
   computed: {
@@ -10647,7 +10220,6 @@ var script$O = {
     reversedStepItems: function reversedStepItems() {
       return this.stepItems.slice().reverse();
     },
-
     /**
      * Check the first visible step index.
      */
@@ -10656,14 +10228,12 @@ var script$O = {
         return step.visible;
       }).indexOf(true);
     },
-
     /**
      * Check if previous button is available.
      */
     hasPrev: function hasPrev() {
       return this.firstVisibleStepIndex >= 0 && this.activeStep > this.firstVisibleStepIndex;
     },
-
     /**
      * Check the last visible step index.
      */
@@ -10671,14 +10241,11 @@ var script$O = {
       var idx = this.reversedStepItems.map(function (step, idx) {
         return step.visible;
       }).indexOf(true);
-
       if (idx >= 0) {
         return this.stepItems.length - 1 - idx;
       }
-
       return idx;
     },
-
     /**
      * Check if next button is available.
      */
@@ -10706,19 +10273,16 @@ var script$O = {
       var index = this.getIndexByValue(_value);
       this.changeStep(index);
     },
-
     /**
     * When step-items are updated, set active one.
     */
     stepItems: function stepItems() {
       var _this = this;
-
       if (this.activeStep < this.stepItems.length) {
         var previous = this.activeStep;
         this.stepItems.map(function (step, idx) {
           if (step.isActive) {
             previous = idx;
-
             if (previous < _this.stepItems.length) {
               _this.stepItems[previous].isActive = false;
             }
@@ -10734,23 +10298,19 @@ var script$O = {
     refreshSlots: function refreshSlots() {
       this.defaultSlots = this.$slots.default || [];
     },
-
     /**
      * Change the active step and emit change event.
      */
     changeStep: function changeStep(newIndex) {
       if (this.activeStep === newIndex) return;
       if (newIndex > this.stepItems.length) throw new Error('The index you trying to set is bigger than the steps length');
-
       if (this.activeStep < this.stepItems.length) {
         this.stepItems[this.activeStep].deactivate(this.activeStep, newIndex);
       }
-
       this.stepItems[newIndex].activate(this.activeStep, newIndex);
       this.activeStep = newIndex;
       this.$emit('change', this.getValueByIndex(newIndex));
     },
-
     /**
      * Return if the step should be clickable or not.
      */
@@ -10758,10 +10318,8 @@ var script$O = {
       if (stepItem.clickable === undefined) {
         return this.activeStep > index;
       }
-
       return stepItem.clickable;
     },
-
     /**
      * Step click listener, emit input event and change active step.
      */
@@ -10769,32 +10327,26 @@ var script$O = {
       this.$emit('input', this.getValueByIndex(index));
       this.changeStep(index);
     },
-
     /**
      * Previous button click listener.
      */
     prev: function prev() {
       var _this2 = this;
-
       if (!this.hasPrev) return;
       var prevItemIdx = this.reversedStepItems.map(function (step, idx) {
         return _this2.stepItems.length - 1 - idx < _this2.activeStep && step.visible;
       }).indexOf(true);
-
       if (prevItemIdx >= 0) {
         prevItemIdx = this.stepItems.length - 1 - prevItemIdx;
       }
-
       this.$emit('input', this.getValueByIndex(prevItemIdx));
       this.changeStep(prevItemIdx);
     },
-
     /**
      * Previous button click listener.
      */
     next: function next() {
       var _this3 = this;
-
       if (!this.hasNext) return;
       var nextItemIdx = this.stepItems.map(function (step, idx) {
         return idx > _this3.activeStep && step.visible;
@@ -10815,11 +10367,9 @@ var script$O = {
   },
   mounted: function mounted() {
     this.activeStep = this.getIndexByValue(this.value || 0);
-
     if (this.activeStep < this.stepItems.length) {
       this.stepItems[this.activeStep].isActive = true;
     }
-
     this.refreshSlots();
   }
 };
@@ -10846,15 +10396,19 @@ var __vue_staticRenderFns__$J = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Steps = normalizeComponent_1(
+  const __vue_component__$O = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$J, staticRenderFns: __vue_staticRenderFns__$J },
     __vue_inject_styles__$O,
     __vue_script__$O,
     __vue_scope_id__$O,
     __vue_is_functional_template__$O,
     __vue_module_identifier__$O,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -10882,7 +10436,6 @@ var script$P = {
       isActive: false,
       transitionName: null,
       _isStepItem: true // Used internally by Step
-
     };
   },
   methods: {
@@ -10893,7 +10446,6 @@ var script$P = {
       this.transitionName = index < oldIndex ? this.$parent.vertical ? 'slide-down' : 'slide-next' : this.$parent.vertical ? 'slide-up' : 'slide-prev';
       this.isActive = true;
     },
-
     /**
     * Deactivate step, alter animation name based on the index.
     */
@@ -10907,7 +10459,6 @@ var script$P = {
       this.$destroy();
       throw new Error('You should wrap bStepItem on a bSteps');
     }
-
     this.$parent.refreshSlots();
   },
   beforeDestroy: function beforeDestroy() {
@@ -10915,14 +10466,12 @@ var script$P = {
   },
   render: function render(createElement) {
     var _this = this;
-
     // if destroy apply v-if
     if (this.$parent.destroyOnHide) {
       if (!this.isActive || !this.visible) {
         return;
       }
     }
-
     var vnode = createElement('div', {
       directives: [{
         name: 'show',
@@ -10931,8 +10480,8 @@ var script$P = {
       attrs: {
         'class': 'step-item'
       }
-    }, this.$slots.default); // check animated prop
-
+    }, this.$slots.default);
+    // check animated prop
     if (this.$parent.animated) {
       return createElement('transition', {
         props: {
@@ -10948,7 +10497,6 @@ var script$P = {
         }
       }, [vnode]);
     }
-
     return vnode;
   }
 };
@@ -10970,23 +10518,27 @@ const __vue_script__$P = script$P;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var StepItem = normalizeComponent_1(
+  const __vue_component__$P = /*#__PURE__*/normalizeComponent_1(
     {},
     __vue_inject_styles__$P,
     __vue_script__$P,
     __vue_scope_id__$P,
     __vue_is_functional_template__$P,
     __vue_module_identifier__$P,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin$t = {
   install: function install(Vue) {
-    registerComponent(Vue, Steps);
-    registerComponent(Vue, StepItem);
+    registerComponent(Vue, __vue_component__$O);
+    registerComponent(Vue, __vue_component__$P);
   }
 };
 use(Plugin$t);
@@ -11024,6 +10576,7 @@ use(Plugin$t);
 //
 //
 //
+
 var script$Q = {
   name: 'BSwitch',
   props: {
@@ -11114,38 +10667,48 @@ var __vue_staticRenderFns__$K = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Switch = normalizeComponent_1(
+  const __vue_component__$Q = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$K, staticRenderFns: __vue_staticRenderFns__$K },
     __vue_inject_styles__$Q,
     __vue_script__$Q,
     __vue_scope_id__$Q,
     __vue_is_functional_template__$Q,
     __vue_module_identifier__$Q,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin$u = {
   install: function install(Vue) {
-    registerComponent(Vue, Switch);
+    registerComponent(Vue, __vue_component__$Q);
   }
 };
 use(Plugin$u);
 
-var _components$8;
 var script$R = {
   name: 'BTableMobileSort',
-  components: (_components$8 = {}, _defineProperty(_components$8, Select.name, Select), _defineProperty(_components$8, Icon.name, Icon), _components$8),
+  components: _defineProperty(_defineProperty({}, __vue_component__$g.name, __vue_component__$g), __vue_component__.name, __vue_component__),
   props: {
     currentSortColumn: Object,
     sortMultipleData: Array,
     isAsc: Boolean,
     columns: Array,
     placeholder: String,
-    customStyle: String,
-    customSelectStyle: String,
+    iconPack: String,
+    sortIcon: {
+      type: String,
+      default: 'arrow-up'
+    },
+    sortIconSize: {
+      type: String,
+      default: 'is-small'
+    },
     sortMultiple: {
       type: Boolean,
       default: false
@@ -11154,10 +10717,7 @@ var script$R = {
   data: function data() {
     return {
       sortMultipleSelect: '',
-      mobileSort: {
-        column: this.currentSortColumn,
-        index: null
-      },
+      mobileSort: this.currentSortColumn,
       defaultEvent: {
         shiftKey: true,
         altKey: true,
@@ -11167,18 +10727,8 @@ var script$R = {
     };
   },
   computed: {
-    calculateParsedColumns: function calculateParsedColumns() {
-      if (this.columns) {
-        return this.columns.reduce(function (res, current) {
-          return [].concat(_toConsumableArray(res), [current, current]);
-        }, []);
-      }
-
-      return [];
-    },
     showPlaceholder: function showPlaceholder() {
       var _this = this;
-
       return !this.columns || !this.columns.some(function (column) {
         return column === _this.mobileSort;
       });
@@ -11192,29 +10742,31 @@ var script$R = {
         this.$emit('sort', column, this.defaultEvent);
       }
     },
-    mobileSort: function mobileSort(newVal, oldVal) {
-      if (newVal.column !== oldVal.column || newVal.index !== oldVal.index) {
-        if (this.currentSortColumn === newVal.column && newVal.index === oldVal.index) return;
-        this.$emit('sort', newVal.column, newVal.index % 2 === 0 ? 'asc' : 'desc');
-      }
+    mobileSort: function mobileSort(column) {
+      if (this.currentSortColumn === column) return;
+      this.$emit('sort', column, this.defaultEvent);
     },
     currentSortColumn: function currentSortColumn(column) {
-      this.mobileSort.column = column;
+      this.mobileSort = column;
     }
   },
   methods: {
-    calculateLabel: function calculateLabel(column, index) {
-      var mobileSortOptions = column.mobileSortOptions || column.$attrs && column.$attrs['mobile-sort-options'];
-
-      if (mobileSortOptions) {
-        if (index % 2 === 0) {
-          return "".concat(column.label, ": ").concat(mobileSortOptions[0]);
-        } else {
-          return "".concat(column.label, ": ").concat(mobileSortOptions[1]);
-        }
-      }
-
-      return column.label;
+    removePriority: function removePriority() {
+      var _this2 = this;
+      this.$emit('removePriority', this.sortMultipleSelect);
+      // ignore the watcher to sort when we just change whats displayed in the select
+      // otherwise the direction will be flipped
+      // The sort event is already triggered by the emit
+      this.ignoreSort = true;
+      // Select one of the other options when we reset one
+      var remainingFields = this.sortMultipleData.filter(function (data) {
+        return data.field !== _this2.sortMultipleSelect.field;
+      }).map(function (data) {
+        return data.field;
+      });
+      this.sortMultipleSelect = this.columns.filter(function (column) {
+        return remainingFields.includes(column.field);
+      })[0];
     },
     getSortingObjectOfColumn: function getSortingObjectOfColumn(column) {
       return this.sortMultipleData.filter(function (i) {
@@ -11223,21 +10775,20 @@ var script$R = {
     },
     columnIsDesc: function columnIsDesc(column) {
       var sortingObject = this.getSortingObjectOfColumn(column);
-
       if (sortingObject) {
         return !!(sortingObject.order && sortingObject.order === 'desc');
       }
-
       return true;
     },
     getLabel: function getLabel(column) {
       var sortingObject = this.getSortingObjectOfColumn(column);
-
       if (sortingObject) {
         return column.label + '(' + (this.sortMultipleData.indexOf(sortingObject) + 1) + ')';
       }
-
       return column.label;
+    },
+    sort: function sort() {
+      this.$emit('sort', this.sortMultiple ? this.sortMultipleSelect : this.mobileSort, this.defaultEvent);
     }
   }
 };
@@ -11246,7 +10797,7 @@ var script$R = {
 const __vue_script__$R = script$R;
 
 /* template */
-var __vue_render__$L = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"table-mobile-sort",staticStyle:{"z-index":"0","width":"1px","height":"1px","right":"83px","position":"absolute","background":"transparent","top":"0","-moz-appearance":"none","-webkit-appearance":"none"},style:(_vm.customStyle)},[(_vm.sortMultiple)?_c('b-select',{attrs:{"expanded":""},model:{value:(_vm.sortMultipleSelect),callback:function ($$v) {_vm.sortMultipleSelect=$$v;},expression:"sortMultipleSelect"}},_vm._l((_vm.columns),function(column,index){return (column.sortable)?_c('option',{key:index,domProps:{"value":column}},[_vm._v("\n                "+_vm._s(_vm.getLabel(column))+"\n                "),(_vm.getSortingObjectOfColumn(column))?[(_vm.columnIsDesc(column))?[_vm._v("\n                        ↓\n                    ")]:[_vm._v("\n                        ↑\n                    ")]]:_vm._e()],2):_vm._e()})):_c('b-select',{staticClass:"mobile-sort",attrs:{"custom-style":_vm.customSelectStyle},model:{value:(_vm.mobileSort),callback:function ($$v) {_vm.mobileSort=$$v;},expression:"mobileSort"}},[(_vm.placeholder)?[_c('option',{directives:[{name:"show",rawName:"v-show",value:(_vm.showPlaceholder),expression:"showPlaceholder"}],attrs:{"selected":"","disabled":"","hidden":""},domProps:{"value":{}}},[_vm._v("\n                    "+_vm._s(_vm.placeholder)+"\n                ")])]:_vm._e(),_vm._v(" "),_vm._l((_vm.calculateParsedColumns),function(column,index){return (column.sortable)?_c('option',{key:index,domProps:{"value":{column: column, index: index}}},[_vm._v("\n                "+_vm._s(_vm.calculateLabel(column, index))+"\n            ")]):_vm._e()})],2)],1)};
+var __vue_render__$L = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"field table-mobile-sort"},[_c('div',{staticClass:"field has-addons"},[(_vm.sortMultiple)?_c('b-select',{attrs:{"expanded":""},model:{value:(_vm.sortMultipleSelect),callback:function ($$v) {_vm.sortMultipleSelect=$$v;},expression:"sortMultipleSelect"}},_vm._l((_vm.columns),function(column,index){return (column.sortable)?_c('option',{key:index,domProps:{"value":column}},[_vm._v("\n                    "+_vm._s(_vm.getLabel(column))+"\n                    "),(_vm.getSortingObjectOfColumn(column))?[(_vm.columnIsDesc(column))?[_vm._v("\n                            ↓\n                        ")]:[_vm._v("\n                            ↑\n                        ")]]:_vm._e()],2):_vm._e()})):_c('b-select',{attrs:{"expanded":""},model:{value:(_vm.mobileSort),callback:function ($$v) {_vm.mobileSort=$$v;},expression:"mobileSort"}},[(_vm.placeholder)?[_c('option',{directives:[{name:"show",rawName:"v-show",value:(_vm.showPlaceholder),expression:"showPlaceholder"}],attrs:{"selected":"","disabled":"","hidden":""},domProps:{"value":{}}},[_vm._v("\n                        "+_vm._s(_vm.placeholder)+"\n                    ")])]:_vm._e(),_vm._v(" "),_vm._l((_vm.columns),function(column,index){return (column.sortable)?_c('option',{key:index,domProps:{"value":column}},[_vm._v("\n                    "+_vm._s(column.label)+"\n                ")]):_vm._e()})],2),_vm._v(" "),_c('div',{staticClass:"control"},[(_vm.sortMultiple && _vm.sortMultipleData.length > 0)?[_c('button',{staticClass:"button is-primary",on:{"click":_vm.sort}},[_c('b-icon',{class:{ 'is-desc': _vm.columnIsDesc(_vm.sortMultipleSelect) },attrs:{"icon":_vm.sortIcon,"pack":_vm.iconPack,"size":_vm.sortIconSize,"both":""}})],1),_vm._v(" "),_c('button',{staticClass:"button is-primary",on:{"click":_vm.removePriority}},[_c('b-icon',{attrs:{"icon":"delete","size":_vm.sortIconSize,"both":""}})],1)]:(!_vm.sortMultiple)?_c('button',{staticClass:"button is-primary",on:{"click":_vm.sort}},[_c('b-icon',{directives:[{name:"show",rawName:"v-show",value:(_vm.currentSortColumn === _vm.mobileSort),expression:"currentSortColumn === mobileSort"}],class:{ 'is-desc': !_vm.isAsc },attrs:{"icon":_vm.sortIcon,"pack":_vm.iconPack,"size":_vm.sortIconSize,"both":""}})],1):_vm._e()],2)],1)])};
 var __vue_staticRenderFns__$L = [];
 
   /* style */
@@ -11261,15 +10812,19 @@ var __vue_staticRenderFns__$L = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var TableMobileSort = normalizeComponent_1(
+  const __vue_component__$R = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$L, staticRenderFns: __vue_staticRenderFns__$L },
     __vue_inject_styles__$R,
     __vue_script__$R,
     __vue_scope_id__$R,
     __vue_is_functional_template__$R,
     __vue_module_identifier__$R,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -11283,6 +10838,7 @@ var __vue_staticRenderFns__$L = [];
 //
 //
 //
+
 var script$S = {
   name: 'BTableColumn',
   props: {
@@ -11309,7 +10865,6 @@ var script$S = {
     headerClass: String,
     cellClass: String,
     internal: Boolean // Used internally by Table
-
   },
   data: function data() {
     return {
@@ -11328,15 +10883,14 @@ var script$S = {
   },
   beforeMount: function beforeMount() {
     var _this = this;
-
     if (!this.$parent.$data._isTable) {
       this.$destroy();
       throw new Error('You should wrap bTableColumn on a bTable');
     }
+    if (this.internal) return;
 
-    if (this.internal) return; // Since we're using scoped prop the columns gonna be multiplied,
+    // Since we're using scoped prop the columns gonna be multiplied,
     // this finds when to stop based on the newKey property.
-
     var repeated = this.$parent.newColumns.some(function (column) {
       return column.newKey === _this.newKey;
     });
@@ -11345,12 +10899,10 @@ var script$S = {
   beforeDestroy: function beforeDestroy() {
     if (!this.$parent.visibleData.length) return;
     if (this.$parent.newColumns.length !== 1) return;
-
     if (this.$parent.newColumns.length) {
       var index = this.$parent.newColumns.map(function (column) {
         return column.newKey;
       }).indexOf(this.newKey);
-
       if (index >= 0) {
         this.$parent.newColumns.splice(index, 1);
       }
@@ -11377,23 +10929,26 @@ var __vue_staticRenderFns__$M = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var TableColumn = normalizeComponent_1(
+  const __vue_component__$S = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$M, staticRenderFns: __vue_staticRenderFns__$M },
     __vue_inject_styles__$S,
     __vue_script__$S,
     __vue_scope_id__$S,
     __vue_is_functional_template__$S,
     __vue_module_identifier__$S,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
-var _components$9;
 var script$T = {
   name: 'BTable',
-  components: (_components$9 = {}, _defineProperty(_components$9, Checkbox.name, Checkbox), _defineProperty(_components$9, Icon.name, Icon), _defineProperty(_components$9, Input.name, Input), _defineProperty(_components$9, Pagination.name, Pagination), _defineProperty(_components$9, SlotComponent.name, SlotComponent), _defineProperty(_components$9, TableMobileSort.name, TableMobileSort), _defineProperty(_components$9, TableColumn.name, TableColumn), _components$9),
+  components: _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty({}, __vue_component__$7.name, __vue_component__$7), __vue_component__.name, __vue_component__), __vue_component__$1.name, __vue_component__$1), __vue_component__$C.name, __vue_component__$C), SlotComponent.name, SlotComponent), __vue_component__$R.name, __vue_component__$R), __vue_component__$S.name, __vue_component__$S),
   props: {
     data: {
       type: Array,
@@ -11424,10 +10979,6 @@ var script$T = {
       validator: function validator(value) {
         return ['left', 'right'].indexOf(value) >= 0;
       }
-    },
-    useCheckboxButton: {
-      type: Boolean,
-      default: false
     },
     checkboxType: String,
     selected: Object,
@@ -11537,14 +11088,6 @@ var script$T = {
       type: [Number, String],
       default: 0
     },
-    customStyle: {
-      type: String,
-      default: ''
-    },
-    customSelectStyle: {
-      type: String,
-      default: ''
-    },
     iconPack: String,
     mobileSortPlaceholder: String,
     customRowKey: String,
@@ -11582,7 +11125,6 @@ var script$T = {
       firstTimeSort: true,
       // Used by first time initSort
       _isTable: true // Used by TableColumn
-
     };
   },
   computed: {
@@ -11610,7 +11152,6 @@ var script$T = {
         'is-loading': this.loading
       };
     },
-
     /**
     * Splitted data based on the pagination.
     */
@@ -11618,7 +11159,6 @@ var script$T = {
       if (!this.paginated) return this.newData;
       var currentPage = this.newCurrentPage;
       var perPage = this.perPage;
-
       if (this.newData.length <= perPage) {
         return this.newData;
       } else {
@@ -11633,13 +11173,11 @@ var script$T = {
         return column.visible || column.visible === undefined;
       });
     },
-
     /**
     * Check if all rows in the page are checked.
     */
     isAllChecked: function isAllChecked() {
       var _this = this;
-
       var validVisibleData = this.visibleData.filter(function (row) {
         return _this.isRowCheckable(row);
       });
@@ -11649,19 +11187,16 @@ var script$T = {
       });
       return !isAllChecked;
     },
-
     /**
     * Check if all rows in the page are checkable.
     */
     isAllUncheckable: function isAllUncheckable() {
       var _this2 = this;
-
       var validVisibleData = this.visibleData.filter(function (row) {
         return _this2.isRowCheckable(row);
       });
       return validVisibleData.length === 0;
     },
-
     /**
     * Check if has any sortable column.
     */
@@ -11670,7 +11205,6 @@ var script$T = {
         return column.sortable;
       });
     },
-
     /**
     * Check if has any searchable column.
     */
@@ -11679,7 +11213,6 @@ var script$T = {
         return column.searchable;
       });
     },
-
     /**
     * Check if has any column using subheading.
     */
@@ -11689,7 +11222,6 @@ var script$T = {
         return column.subheading || column.$scopedSlots && column.$scopedSlots.subheading;
       });
     },
-
     /**
     * Return total column count based if it's checkable or expanded
     */
@@ -11699,7 +11231,6 @@ var script$T = {
       count += this.detailed && this.showDetailIcon ? 1 : 0;
       return count;
     },
-
     /**
     * return if detailed row tabled
     * will be with chevron column & icon or not
@@ -11707,7 +11238,6 @@ var script$T = {
     showDetailRowIcon: function showDetailRowIcon() {
       return this.detailed && this.showDetailIcon;
     },
-
     /**
     * return if scrollable table
     */
@@ -11729,24 +11259,19 @@ var script$T = {
     */
     data: function data(value) {
       var _this3 = this;
-
       this.newData = value;
-
       if (!this.backendFiltering) {
         this.newData = value.filter(function (row) {
           return _this3.isRowFiltered(row);
         });
       }
-
       if (!this.backendSorting) {
         this.sort(this.currentSortColumn, true);
       }
-
       if (!this.backendPagination) {
         this.newDataTotal = this.newData.length;
       }
     },
-
     /**
     * When Pagination total change, update internal total
     * only if it's backend-paginated.
@@ -11755,7 +11280,6 @@ var script$T = {
       if (!this.backendPagination) return;
       this.newDataTotal = newTotal;
     },
-
     /**
     * When checkedRows prop change, update internal value without
     * mutating original data.
@@ -11772,18 +11296,15 @@ var script$T = {
     filters: {
       handler: function handler(value) {
         var _this4 = this;
-
         if (this.backendFiltering) {
           this.$emit('filters-change', value);
         } else {
           this.newData = this.data.filter(function (row) {
             return _this4.isRowFiltered(row);
           });
-
           if (!this.backendPagination) {
             this.newDataTotal = this.newData.length;
           }
-
           if (!this.backendSorting) {
             if (this.sortMultiple && this.sortMultipleDataLocal && this.sortMultipleDataLocal.length > 0) {
               this.doSortMultiColumn();
@@ -11795,7 +11316,6 @@ var script$T = {
       },
       deep: true
     },
-
     /**
     * When the user wants to control the detailed rows via props.
     * Or wants to open the details of certain row with the router for example.
@@ -11838,14 +11358,13 @@ var script$T = {
       this.currentSortColumn = {};
       this.newData = this.data;
     },
-
     /**
     * Sort an array by key without mutating original data.
     * Call the user sort function if it was passed.
     */
     sortBy: function sortBy(array, key, fn, isAsc) {
-      var sorted = []; // Sorting without mutating original data
-
+      var sorted = [];
+      // Sorting without mutating original data
       if (fn && typeof fn === 'function') {
         sorted = _toConsumableArray(array).sort(function (a, b) {
           return fn(a, b, isAsc);
@@ -11854,12 +11373,12 @@ var script$T = {
         sorted = _toConsumableArray(array).sort(function (a, b) {
           // Get nested values from objects
           var newA = getValueByPath(a, key);
-          var newB = getValueByPath(b, key); // sort boolean type
+          var newB = getValueByPath(b, key);
 
+          // sort boolean type
           if (typeof newA === 'boolean' && typeof newB === 'boolean') {
             return isAsc ? newA - newB : newB - newA;
           }
-
           if (!newA && newA !== 0) return 1;
           if (!newB && newB !== 0) return -1;
           if (newA === newB) return 0;
@@ -11868,17 +11387,14 @@ var script$T = {
           return isAsc ? newA > newB ? 1 : -1 : newA > newB ? -1 : 1;
         });
       }
-
       return sorted;
     },
     sortMultiColumn: function sortMultiColumn(column) {
       this.currentSortColumn = {};
-
       if (!this.backendSorting) {
         var existingPriority = this.sortMultipleDataLocal.filter(function (i) {
           return i.field === column.field;
         })[0];
-
         if (existingPriority) {
           existingPriority.order = existingPriority.order === 'desc' ? 'asc' : 'desc';
         } else {
@@ -11887,7 +11403,6 @@ var script$T = {
             order: column.isAsc
           });
         }
-
         this.doSortMultiColumn();
       }
     },
@@ -11897,7 +11412,6 @@ var script$T = {
       });
       this.newData = multiColumnSort(this.newData, formattedSortingPriority);
     },
-
     /**
     * Sort the column.
     * Toggle current direction on column if it's sortable
@@ -11906,68 +11420,59 @@ var script$T = {
     sort: function sort(column) {
       var updatingData = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       var event = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-
-      if ( // if backend sorting is enabled, just emit the sort press like usual
+      if (
+      // if backend sorting is enabled, just emit the sort press like usual
       // if the correct key combination isnt pressed, sort like usual
       !this.backendSorting && this.sortMultiple && (this.sortMultipleKey && event[this.sortMultipleKey] || !this.sortMultipleKey)) {
         this.sortMultiColumn(column);
       } else {
-        if (!column || !column.sortable) return; // sort multiple is enabled but the correct key combination isnt pressed so reset
+        if (!column || !column.sortable) return;
 
+        // sort multiple is enabled but the correct key combination isnt pressed so reset
         if (this.sortMultiple) {
           this.sortMultipleDataLocal = [];
         }
-
         if (!updatingData) {
           this.isAsc = column === this.currentSortColumn ? !this.isAsc : this.defaultSortDirection.toLowerCase() !== 'desc';
         }
-
         if (!this.firstTimeSort) {
           this.$emit('sort', column.field, this.isAsc ? 'asc' : 'desc', event);
         }
-
         if (!this.backendSorting) {
           this.doSortSingleColumn(column);
         }
-
         this.currentSortColumn = column;
       }
     },
     doSortSingleColumn: function doSortSingleColumn(column) {
       this.newData = this.sortBy(this.newData, column.field, column.customSort, this.isAsc);
     },
-
     /**
     * Check if the row is checked (is added to the array).
     */
     isRowChecked: function isRowChecked(row) {
       return indexOf(this.newCheckedRows, row, this.customIsChecked) >= 0;
     },
-
     /**
     * Remove a checked row from the array.
     */
     removeCheckedRow: function removeCheckedRow(row) {
       var index = indexOf(this.newCheckedRows, row, this.customIsChecked);
-
       if (index >= 0) {
         this.newCheckedRows.splice(index, 1);
       }
     },
-
     /**
     * Header checkbox click listener.
     * Add or remove all rows in current page.
     */
     checkAll: function checkAll() {
       var _this5 = this;
-
       var isAllChecked = this.isAllChecked;
       this.visibleData.forEach(function (currentRow) {
         if (_this5.isRowCheckable(currentRow)) {
           _this5.removeCheckedRow(currentRow);
         }
-
         if (!isAllChecked) {
           if (_this5.isRowCheckable(currentRow)) {
             _this5.newCheckedRows.push(currentRow);
@@ -11975,11 +11480,11 @@ var script$T = {
         }
       });
       this.$emit('check', this.newCheckedRows);
-      this.$emit('check-all', this.newCheckedRows); // Emit checked rows to update user variable
+      this.$emit('check-all', this.newCheckedRows);
 
+      // Emit checked rows to update user variable
       this.$emit('update:checkedRows', this.newCheckedRows);
     },
-
     /**
     * Row checkbox click listener.
     */
@@ -11987,7 +11492,6 @@ var script$T = {
       if (!this.isRowCheckable(row)) return;
       var lastIndex = this.lastCheckedRowIndex;
       this.lastCheckedRowIndex = index;
-
       if (event.shiftKey && lastIndex !== null && index !== lastIndex) {
         this.shiftCheckRow(row, index, lastIndex);
       } else if (!this.isRowChecked(row)) {
@@ -11995,31 +11499,28 @@ var script$T = {
       } else {
         this.removeCheckedRow(row);
       }
+      this.$emit('check', this.newCheckedRows, row);
 
-      this.$emit('check', this.newCheckedRows, row); // Emit checked rows to update user variable
-
+      // Emit checked rows to update user variable
       this.$emit('update:checkedRows', this.newCheckedRows);
     },
-
     /**
      * Check row when shift is pressed.
      */
     shiftCheckRow: function shiftCheckRow(row, index, lastCheckedRowIndex) {
       var _this6 = this;
-
       // Get the subset of the list between the two indicies
-      var subset = this.visibleData.slice(Math.min(index, lastCheckedRowIndex), Math.max(index, lastCheckedRowIndex) + 1); // Determine the operation based on the state of the clicked checkbox
+      var subset = this.visibleData.slice(Math.min(index, lastCheckedRowIndex), Math.max(index, lastCheckedRowIndex) + 1);
 
+      // Determine the operation based on the state of the clicked checkbox
       var shouldCheck = !this.isRowChecked(row);
       subset.forEach(function (item) {
         _this6.removeCheckedRow(item);
-
         if (shouldCheck && _this6.isRowCheckable(item)) {
           _this6.newCheckedRows.push(item);
         }
       });
     },
-
     /**
     * Row click listener.
     * Emit all necessary events.
@@ -12027,13 +11528,14 @@ var script$T = {
     selectRow: function selectRow(row, index) {
       this.$emit('click', row);
       if (this.selected === row) return;
-      if (!this.isRowSelectable(row)) return; // Emit new and old row
+      if (!this.isRowSelectable(row)) return;
 
-      this.$emit('select', row, this.selected); // Emit new row to update user variable
+      // Emit new and old row
+      this.$emit('select', row, this.selected);
 
+      // Emit new row to update user variable
       this.$emit('update:selected', row);
     },
-
     /**
     * Paginator change listener.
     */
@@ -12042,22 +11544,20 @@ var script$T = {
       this.$emit('page-change', this.newCurrentPage);
       this.$emit('update:currentPage', this.newCurrentPage);
     },
-
     /**
     * Toggle to show/hide details slot
     */
     toggleDetails: function toggleDetails(obj) {
       var found = this.isVisibleDetailRow(obj);
-
       if (found) {
         this.closeDetailRow(obj);
         this.$emit('details-close', obj);
       } else {
         this.openDetailRow(obj);
         this.$emit('details-open', obj);
-      } // Syncs the detailed rows with the parent component
+      }
 
-
+      // Syncs the detailed rows with the parent component
       this.$emit('update:openedDetailed', this.visibleDetailRows);
     },
     openDetailRow: function openDetailRow(obj) {
@@ -12087,10 +11587,8 @@ var script$T = {
           delete this.filters[key];
           return true;
         }
-
         var value = this.getValueByPath(row, key);
         if (value == null) return false;
-
         if (Number.isInteger(value)) {
           if (value !== Number(this.filters[key])) return false;
         } else {
@@ -12099,10 +11597,8 @@ var script$T = {
           if (!value.match(re)) return false;
         }
       }
-
       return true;
     },
-
     /**
         * When the detailKey is defined we use the object[detailKey] as index.
         * If not, use the object reference by default.
@@ -12113,12 +11609,10 @@ var script$T = {
     },
     checkPredefinedDetailedRows: function checkPredefinedDetailedRows() {
       var defaultExpandedRowsDefined = this.openedDetailed.length > 0;
-
       if (defaultExpandedRowsDefined && !this.detailKey.length) {
         throw new Error('If you set a predefined opened-detailed, you must provide a unique key using the prop "detail-key"');
       }
     },
-
     /**
     * Call initSort only first time (For example async data).
     */
@@ -12137,7 +11631,6 @@ var script$T = {
         }
       }
     },
-
     /**
     * Check if footer slot has custom content.
     */
@@ -12147,27 +11640,24 @@ var script$T = {
       if (tag !== 'th' && tag !== 'td') return false;
       return true;
     },
-
     /**
     * Check if bottom-left slot exists.
     */
     hasBottomLeftSlot: function hasBottomLeftSlot() {
       return typeof this.$slots['bottom-left'] !== 'undefined';
     },
-
     /**
     * Table arrow keys listener, change selection.
     */
     pressedArrow: function pressedArrow(pos) {
       if (!this.visibleData.length) return;
-      var index = this.visibleData.indexOf(this.selected) + pos; // Prevent from going up from first and down from last
+      var index = this.visibleData.indexOf(this.selected) + pos;
 
+      // Prevent from going up from first and down from last
       index = index < 0 ? 0 : index > this.visibleData.length - 1 ? this.visibleData.length - 1 : index;
       var row = this.visibleData[index];
-
       if (!this.isRowSelectable(row)) {
         var newIndex = null;
-
         if (pos > 0) {
           for (var i = index; i < this.visibleData.length && newIndex === null; i++) {
             if (this.isRowSelectable(this.visibleData[i])) newIndex = i;
@@ -12177,7 +11667,6 @@ var script$T = {
             if (this.isRowSelectable(this.visibleData[_i])) newIndex = _i;
           }
         }
-
         if (newIndex >= 0) {
           this.selectRow(this.visibleData[newIndex]);
         }
@@ -12185,7 +11674,6 @@ var script$T = {
         this.selectRow(row);
       }
     },
-
     /**
     * Focus table element if has selected prop.
     */
@@ -12193,13 +11681,11 @@ var script$T = {
       if (!this.focusable) return;
       this.$el.querySelector('table').focus();
     },
-
     /**
     * Initial sorted column based on the default-sort prop.
     */
     initSort: function initSort() {
       var _this7 = this;
-
       if (!this.backendSorting) {
         if (this.sortMultiple && this.sortMultipleData) {
           this.sortMultipleData.forEach(function (column) {
@@ -12209,21 +11695,17 @@ var script$T = {
           if (!this.defaultSort) return;
           var sortField = '';
           var sortDirection = this.defaultSortDirection;
-
           if (Array.isArray(this.defaultSort)) {
             sortField = this.defaultSort[0];
-
             if (this.defaultSort[1]) {
               sortDirection = this.defaultSort[1];
             }
           } else {
             sortField = this.defaultSort;
           }
-
           var sortColumn = this.newColumns.filter(function (column) {
             return column.field === sortField;
           })[0];
-
           if (sortColumn) {
             this.isAsc = sortDirection.toLowerCase() !== 'desc';
             this.sort(sortColumn, true);
@@ -12231,7 +11713,6 @@ var script$T = {
         }
       }
     },
-
     /**
     * Emits drag start event
     */
@@ -12242,7 +11723,6 @@ var script$T = {
         index: index
       });
     },
-
     /**
     * Emits drag leave event
     */
@@ -12253,7 +11733,6 @@ var script$T = {
         index: index
       });
     },
-
     /**
     * Emits drop event
     */
@@ -12264,7 +11743,6 @@ var script$T = {
         index: index
       });
     },
-
     /**
     * Emits drag over event
     */
@@ -12275,7 +11753,6 @@ var script$T = {
         index: index
       });
     },
-
     /**
     * Emits drag leave event
     */
@@ -12301,10 +11778,10 @@ var script$T = {
 const __vue_script__$T = script$T;
 
 /* template */
-var __vue_render__$N = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"b-table",class:_vm.rooClasses},[(_vm.mobileCards && _vm.hasSortablenewColumns)?_c('b-table-mobile-sort',{attrs:{"current-sort-column":_vm.currentSortColumn,"sort-multiple":_vm.sortMultiple,"sort-multiple-data":_vm.sortMultipleDataComputed,"is-asc":_vm.isAsc,"columns":_vm.newColumns,"custom-style":_vm.customStyle,"custom-select-style":_vm.customSelectStyle,"placeholder":_vm.mobileSortPlaceholder,"icon-pack":_vm.iconPack,"sort-icon":_vm.sortIcon,"sort-icon-size":_vm.sortIconSize},on:{"sort":function (column, event) { return _vm.sort(column, null, event); },"removePriority":function (column) { return _vm.removeSortingPriority(column); }}}):_vm._e(),_vm._v(" "),(_vm.paginated && (_vm.paginationPosition === 'top' || _vm.paginationPosition === 'both'))?_c('div',{staticClass:"top level"},[_c('div',{staticClass:"level-left"},[_vm._t("top-left")],2),_vm._v(" "),_c('div',{staticClass:"level-right"},[(_vm.paginated)?_c('div',{staticClass:"level-item"},[_c('b-pagination',{attrs:{"icon-pack":_vm.iconPack,"total":_vm.newDataTotal,"per-page":_vm.perPage,"simple":_vm.paginationSimple,"size":_vm.paginationSize,"current":_vm.newCurrentPage,"aria-next-label":_vm.ariaNextLabel,"aria-previous-label":_vm.ariaPreviousLabel,"aria-page-label":_vm.ariaPageLabel,"aria-current-label":_vm.ariaCurrentLabel},on:{"change":_vm.pageChanged}})],1):_vm._e()])]):_vm._e(),_vm._v(" "),_c('div',{staticClass:"table-wrapper",class:_vm.tableWrapperClasses,style:({
+var __vue_render__$N = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"b-table",class:_vm.rooClasses},[(_vm.mobileCards && _vm.hasSortablenewColumns)?_c('b-table-mobile-sort',{attrs:{"current-sort-column":_vm.currentSortColumn,"sort-multiple":_vm.sortMultiple,"sort-multiple-data":_vm.sortMultipleDataComputed,"is-asc":_vm.isAsc,"columns":_vm.newColumns,"placeholder":_vm.mobileSortPlaceholder,"icon-pack":_vm.iconPack,"sort-icon":_vm.sortIcon,"sort-icon-size":_vm.sortIconSize},on:{"sort":function (column, event) { return _vm.sort(column, null, event); },"removePriority":function (column) { return _vm.removeSortingPriority(column); }}}):_vm._e(),_vm._v(" "),(_vm.paginated && (_vm.paginationPosition === 'top' || _vm.paginationPosition === 'both'))?_c('div',{staticClass:"top level"},[_c('div',{staticClass:"level-left"},[_vm._t("top-left")],2),_vm._v(" "),_c('div',{staticClass:"level-right"},[(_vm.paginated)?_c('div',{staticClass:"level-item"},[_c('b-pagination',{attrs:{"icon-pack":_vm.iconPack,"total":_vm.newDataTotal,"per-page":_vm.perPage,"simple":_vm.paginationSimple,"size":_vm.paginationSize,"current":_vm.newCurrentPage,"aria-next-label":_vm.ariaNextLabel,"aria-previous-label":_vm.ariaPreviousLabel,"aria-page-label":_vm.ariaPageLabel,"aria-current-label":_vm.ariaCurrentLabel},on:{"change":_vm.pageChanged}})],1):_vm._e()])]):_vm._e(),_vm._v(" "),_c('div',{staticClass:"table-wrapper",class:_vm.tableWrapperClasses,style:({
                 height: _vm.height === undefined ? null :
                 (isNaN(_vm.height) ? _vm.height : _vm.height + 'px')
-            })},[_c('table',{staticClass:"table",class:_vm.tableClasses,attrs:{"tabindex":!_vm.focusable ? false : 0},on:{"keydown":[function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"up",38,$event.key,["Up","ArrowUp"])){ return null; }if($event.target !== $event.currentTarget){ return null; }$event.preventDefault();_vm.pressedArrow(-1);},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"down",40,$event.key,["Down","ArrowDown"])){ return null; }if($event.target !== $event.currentTarget){ return null; }$event.preventDefault();_vm.pressedArrow(1);}]}},[(_vm.newColumns.length)?_c('thead',[_c('tr',[(_vm.showDetailRowIcon)?_c('th',{attrs:{"width":"40px"}}):_vm._e(),_vm._v(" "),(_vm.checkable && _vm.checkboxPosition === 'left')?_c('th',{staticClass:"checkbox-cell"},[(_vm.headerCheckable)?[(_vm.useCheckboxButton)?_c('b-checkbox-button',{attrs:{"value":_vm.isAllChecked,"disabled":_vm.isAllUncheckable,"type":_vm.checkboxType,"native-value":true},nativeOn:{"change":function($event){return _vm.checkAll($event)}}},[_c('fa-icon',{staticClass:"has-text-grey-lighter",attrs:{"icon":['far', 'check']}})],1):_c('b-checkbox',{attrs:{"value":_vm.isAllChecked,"disabled":_vm.isAllUncheckable,"type":_vm.checkboxType},nativeOn:{"change":function($event){return _vm.checkAll($event)}}})]:_vm._e()],2):_vm._e(),_vm._v(" "),_vm._l((_vm.visibleColumns),function(column,index){return _c('th',{key:index,class:[column.headerClass, {
+            })},[_c('table',{staticClass:"table",class:_vm.tableClasses,attrs:{"tabindex":!_vm.focusable ? false : 0},on:{"keydown":[function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"up",38,$event.key,["Up","ArrowUp"])){ return null; }if($event.target !== $event.currentTarget){ return null; }$event.preventDefault();_vm.pressedArrow(-1);},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"down",40,$event.key,["Down","ArrowDown"])){ return null; }if($event.target !== $event.currentTarget){ return null; }$event.preventDefault();_vm.pressedArrow(1);}]}},[(_vm.newColumns.length)?_c('thead',[_c('tr',[(_vm.showDetailRowIcon)?_c('th',{attrs:{"width":"40px"}}):_vm._e(),_vm._v(" "),(_vm.checkable && _vm.checkboxPosition === 'left')?_c('th',{staticClass:"checkbox-cell"},[(_vm.headerCheckable)?[_c('b-checkbox',{attrs:{"value":_vm.isAllChecked,"disabled":_vm.isAllUncheckable,"type":_vm.checkboxType},nativeOn:{"change":function($event){return _vm.checkAll($event)}}})]:_vm._e()],2):_vm._e(),_vm._v(" "),_vm._l((_vm.visibleColumns),function(column,index){return _c('th',{key:index,class:[column.headerClass, {
                                 'is-current-sort': !_vm.sortMultiple && _vm.currentSortColumn === column,
                                 'is-sortable': column.sortable,
                                 'is-sticky': column.sticky,
@@ -12323,7 +11800,7 @@ var __vue_render__$N = function () {var _vm=this;var _h=_vm.$createElement;var _
                                         },attrs:{"icon":_vm.sortIcon,"pack":_vm.iconPack,"both":"","size":_vm.sortIconSize}}),_vm._v("\n                                    "+_vm._s(_vm.findIndexOfSortData(column))+"\n                                    "),_c('button',{staticClass:"delete is-small multi-sort-cancel-icon",attrs:{"type":"button"},on:{"click":function($event){$event.stopPropagation();_vm.removeSortingPriority(column);}}})]:(column.sortable && !_vm.sortMultiple)?_c('b-icon',{class:{
                                         'is-desc': !_vm.isAsc,
                                         'is-invisible': _vm.currentSortColumn !== column
-                                    },attrs:{"icon":_vm.sortIcon,"pack":_vm.iconPack,"both":"","size":_vm.sortIconSize}}):_vm._e()],2)])}),_vm._v(" "),(_vm.checkable && _vm.checkboxPosition === 'right')?_c('th',{staticClass:"checkbox-cell"},[(_vm.headerCheckable)?[(_vm.useCheckboxButton)?_c('b-checkbox-button',{attrs:{"value":_vm.isAllChecked,"disabled":_vm.isAllUncheckable,"type":_vm.checkboxType,"native-value":true},nativeOn:{"change":function($event){return _vm.checkAll($event)}}},[_c('fa-icon',{staticClass:"has-text-grey-lighter",attrs:{"icon":['far', 'check']}})],1):_c('b-checkbox',{attrs:{"value":_vm.isAllChecked,"disabled":_vm.isAllUncheckable,"type":_vm.checkboxType},nativeOn:{"change":function($event){return _vm.checkAll($event)}}})]:_vm._e()],2):_vm._e()],2),_vm._v(" "),(_vm.hasCustomSubheadings)?_c('tr',{staticClass:"is-subheading"},[(_vm.showDetailRowIcon)?_c('th',{attrs:{"width":"40px"}}):_vm._e(),_vm._v(" "),(_vm.checkable && _vm.checkboxPosition === 'left')?_c('th'):_vm._e(),_vm._v(" "),_vm._l((_vm.visibleColumns),function(column,index){return _c('th',{key:index,style:({
+                                    },attrs:{"icon":_vm.sortIcon,"pack":_vm.iconPack,"both":"","size":_vm.sortIconSize}}):_vm._e()],2)])}),_vm._v(" "),(_vm.checkable && _vm.checkboxPosition === 'right')?_c('th',{staticClass:"checkbox-cell"},[(_vm.headerCheckable)?[_c('b-checkbox',{attrs:{"value":_vm.isAllChecked,"disabled":_vm.isAllUncheckable,"type":_vm.checkboxType},nativeOn:{"change":function($event){return _vm.checkAll($event)}}})]:_vm._e()],2):_vm._e()],2),_vm._v(" "),(_vm.hasCustomSubheadings)?_c('tr',{staticClass:"is-subheading"},[(_vm.showDetailRowIcon)?_c('th',{attrs:{"width":"40px"}}):_vm._e(),_vm._v(" "),(_vm.checkable && _vm.checkboxPosition === 'left')?_c('th'):_vm._e(),_vm._v(" "),_vm._l((_vm.visibleColumns),function(column,index){return _c('th',{key:index,style:({
                                 width: column.width === undefined ? null
                             : (isNaN(column.width) ? column.width : column.width + 'px') })},[_c('div',{staticClass:"th-wrap",class:{
                                     'is-numeric': column.numeric,
@@ -12334,7 +11811,7 @@ var __vue_render__$N = function () {var _vm=this;var _h=_vm.$createElement;var _
                                         && column.$scopedSlots.searchable)?[_c('b-slot-component',{attrs:{"component":column,"scoped":true,"name":"searchable","tag":"span","props":{ column: column, filters: _vm.filters }}})]:_c('b-input',{attrs:{"type":column.numeric ? 'number' : 'text'},nativeOn:{"[filtersEvent]":function($event){return _vm.onFiltersEvent($event)}},model:{value:(_vm.filters[column.field]),callback:function ($$v) {_vm.$set(_vm.filters, column.field, $$v);},expression:"filters[column.field]"}})]:_vm._e()],2)])}),_vm._v(" "),(_vm.checkable && _vm.checkboxPosition === 'right')?_c('th'):_vm._e()],2):_vm._e()]):_vm._e(),_vm._v(" "),(_vm.visibleData.length)?_c('tbody',[_vm._l((_vm.visibleData),function(row,index){return [_c('tr',{key:_vm.customRowKey ? row[_vm.customRowKey] : index,class:[_vm.rowClass(row, index), {
                                 'is-selected': row === _vm.selected,
                                 'is-checked': _vm.isRowChecked(row),
-                            }],attrs:{"draggable":_vm.draggable},on:{"click":function($event){_vm.selectRow(row);},"dblclick":function($event){_vm.$emit('dblclick', row);},"mouseenter":function($event){_vm.$listeners.mouseenter ? _vm.$emit('mouseenter', row) : null;},"mouseleave":function($event){_vm.$listeners.mouseleave ? _vm.$emit('mouseleave', row) : null;},"contextmenu":function($event){_vm.$emit('contextmenu', row, $event);},"dragstart":function($event){_vm.handleDragStart($event, row, index);},"dragend":function($event){_vm.handleDragEnd($event, row, index);},"drop":function($event){_vm.handleDrop($event, row, index);},"dragover":function($event){_vm.handleDragOver($event, row, index);},"dragleave":function($event){_vm.handleDragLeave($event, row, index);}}},[(_vm.showDetailRowIcon)?_c('td',{staticClass:"chevron-cell"},[(_vm.hasDetailedVisible(row))?_c('a',{attrs:{"role":"button"},on:{"click":function($event){$event.stopPropagation();_vm.toggleDetails(row);}}},[_c('b-icon',{class:{'is-expanded': _vm.isVisibleDetailRow(row)},attrs:{"icon":"chevron-right","pack":_vm.iconPack,"both":""}})],1):_vm._e()]):_vm._e(),_vm._v(" "),(_vm.checkable && _vm.checkboxPosition === 'left')?_c('td',{staticClass:"checkbox-cell"},[(_vm.useCheckboxButton)?_c('b-checkbox-button',{attrs:{"disabled":!_vm.isRowCheckable(row),"value":_vm.isRowChecked(row),"type":_vm.checkboxType,"native-value":true},nativeOn:{"click":function($event){$event.preventDefault();$event.stopPropagation();_vm.checkRow(row, index, $event);}}},[_c('fa-icon',{staticClass:"has-text-grey-lighter",attrs:{"icon":['far', 'check']}})],1):_c('b-checkbox',{attrs:{"disabled":!_vm.isRowCheckable(row),"value":_vm.isRowChecked(row),"type":_vm.checkboxType},nativeOn:{"click":function($event){$event.preventDefault();$event.stopPropagation();_vm.checkRow(row, index, $event);}}})],1):_vm._e(),_vm._v(" "),(_vm.$scopedSlots.default)?_vm._t("default",null,{row:row,index:index}):_vm._l((_vm.newColumns),function(column){return _c('BTableColumn',_vm._b({key:column.customKey || column.label,attrs:{"internal":""}},'BTableColumn',column,false),[(column.renderHtml)?_c('span',{domProps:{"innerHTML":_vm._s(_vm.getValueByPath(row, column.field))}}):(column.useSlot)?_vm._t("table-cell",null,{row:row,index:index,column:column}):[_vm._v("\n                                        "+_vm._s(_vm.getValueByPath(row, column.field))+"\n                                    ")]],2)}),_vm._v(" "),(_vm.checkable && _vm.checkboxPosition === 'right')?_c('td',{staticClass:"checkbox-cell"},[(_vm.useCheckboxButton)?_c('b-checkbox-button',{attrs:{"disabled":!_vm.isRowCheckable(row),"value":_vm.isRowChecked(row),"type":_vm.checkboxType,"native-value":true},nativeOn:{"click":function($event){$event.preventDefault();$event.stopPropagation();_vm.checkRow(row, index, $event);}}},[_c('fa-icon',{staticClass:"has-text-grey-lighter",attrs:{"icon":['far', 'check']}})],1):_c('b-checkbox',{attrs:{"disabled":!_vm.isRowCheckable(row),"value":_vm.isRowChecked(row),"type":_vm.checkboxType},nativeOn:{"click":function($event){$event.preventDefault();$event.stopPropagation();_vm.checkRow(row, index, $event);}}})],1):_vm._e()],2),_vm._v(" "),(_vm.isActiveDetailRow(row))?_c('tr',{staticClass:"detail"},[_c('td',{attrs:{"colspan":_vm.columnCount}},[_c('div',{staticClass:"detail-container"},[_vm._t("detail",null,{row:row,index:index})],2)])]):_vm._e(),_vm._v(" "),(_vm.isActiveCustomDetailRow(row))?_vm._t("detail",null,{row:row,index:index}):_vm._e()]})],2):_c('tbody',[_c('tr',{staticClass:"is-empty"},[_c('td',{attrs:{"colspan":_vm.columnCount}},[_vm._t("empty")],2)])]),_vm._v(" "),(_vm.$slots.footer !== undefined)?_c('tfoot',[_c('tr',{staticClass:"table-footer"},[(_vm.hasCustomFooterSlot())?_vm._t("footer"):_c('th',{attrs:{"colspan":_vm.columnCount}},[_vm._t("footer")],2)],2)]):_vm._e()])]),_vm._v(" "),((_vm.checkable && _vm.hasBottomLeftSlot()) ||
+                            }],attrs:{"draggable":_vm.draggable},on:{"click":function($event){_vm.selectRow(row);},"dblclick":function($event){_vm.$emit('dblclick', row);},"mouseenter":function($event){_vm.$listeners.mouseenter ? _vm.$emit('mouseenter', row) : null;},"mouseleave":function($event){_vm.$listeners.mouseleave ? _vm.$emit('mouseleave', row) : null;},"contextmenu":function($event){_vm.$emit('contextmenu', row, $event);},"dragstart":function($event){_vm.handleDragStart($event, row, index);},"dragend":function($event){_vm.handleDragEnd($event, row, index);},"drop":function($event){_vm.handleDrop($event, row, index);},"dragover":function($event){_vm.handleDragOver($event, row, index);},"dragleave":function($event){_vm.handleDragLeave($event, row, index);}}},[(_vm.showDetailRowIcon)?_c('td',{staticClass:"chevron-cell"},[(_vm.hasDetailedVisible(row))?_c('a',{attrs:{"role":"button"},on:{"click":function($event){$event.stopPropagation();_vm.toggleDetails(row);}}},[_c('b-icon',{class:{'is-expanded': _vm.isVisibleDetailRow(row)},attrs:{"icon":"chevron-right","pack":_vm.iconPack,"both":""}})],1):_vm._e()]):_vm._e(),_vm._v(" "),(_vm.checkable && _vm.checkboxPosition === 'left')?_c('td',{staticClass:"checkbox-cell"},[_c('b-checkbox',{attrs:{"disabled":!_vm.isRowCheckable(row),"value":_vm.isRowChecked(row),"type":_vm.checkboxType},nativeOn:{"click":function($event){$event.preventDefault();$event.stopPropagation();_vm.checkRow(row, index, $event);}}})],1):_vm._e(),_vm._v(" "),(_vm.$scopedSlots.default)?_vm._t("default",null,{row:row,index:index}):_vm._l((_vm.newColumns),function(column){return _c('BTableColumn',_vm._b({key:column.customKey || column.label,attrs:{"internal":""}},'BTableColumn',column,false),[(column.renderHtml)?_c('span',{domProps:{"innerHTML":_vm._s(_vm.getValueByPath(row, column.field))}}):(column.useSlot)?_vm._t("table-cell",null,{row:row,index:index,column:column}):[_vm._v("\n                                        "+_vm._s(_vm.getValueByPath(row, column.field))+"\n                                    ")]],2)}),_vm._v(" "),(_vm.checkable && _vm.checkboxPosition === 'right')?_c('td',{staticClass:"checkbox-cell"},[_c('b-checkbox',{attrs:{"disabled":!_vm.isRowCheckable(row),"value":_vm.isRowChecked(row),"type":_vm.checkboxType},nativeOn:{"click":function($event){$event.preventDefault();$event.stopPropagation();_vm.checkRow(row, index, $event);}}})],1):_vm._e()],2),_vm._v(" "),(_vm.isActiveDetailRow(row))?_c('tr',{staticClass:"detail"},[_c('td',{attrs:{"colspan":_vm.columnCount}},[_c('div',{staticClass:"detail-container"},[_vm._t("detail",null,{row:row,index:index})],2)])]):_vm._e(),_vm._v(" "),(_vm.isActiveCustomDetailRow(row))?_vm._t("detail",null,{row:row,index:index}):_vm._e()]})],2):_c('tbody',[_c('tr',{staticClass:"is-empty"},[_c('td',{attrs:{"colspan":_vm.columnCount}},[_vm._t("empty")],2)])]),_vm._v(" "),(_vm.$slots.footer !== undefined)?_c('tfoot',[_c('tr',{staticClass:"table-footer"},[(_vm.hasCustomFooterSlot())?_vm._t("footer"):_c('th',{attrs:{"colspan":_vm.columnCount}},[_vm._t("footer")],2)],2)]):_vm._e()])]),_vm._v(" "),((_vm.checkable && _vm.hasBottomLeftSlot()) ||
             (_vm.paginated && (_vm.paginationPosition === 'bottom' || _vm.paginationPosition === 'both')))?_c('div',{staticClass:"level is-mobile"},[_c('div',{staticClass:"level-left"},[_vm._t("bottom-left")],2),_vm._v(" "),_c('div',{staticClass:"level-right"},[(_vm.paginated)?_c('div',{staticClass:"level-item"},[_c('b-pagination',{attrs:{"icon-pack":_vm.iconPack,"total":_vm.newDataTotal,"per-page":_vm.perPage,"simple":_vm.paginationSimple,"size":_vm.paginationSize,"current":_vm.newCurrentPage,"aria-next-label":_vm.ariaNextLabel,"aria-previous-label":_vm.ariaPreviousLabel,"aria-page-label":_vm.ariaPageLabel,"aria-current-label":_vm.ariaCurrentLabel},on:{"change":_vm.pageChanged}})],1):_vm._e()])]):_vm._e()],1)};
 var __vue_staticRenderFns__$N = [];
 
@@ -12350,31 +11827,34 @@ var __vue_staticRenderFns__$N = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Table = normalizeComponent_1(
+  const __vue_component__$T = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$N, staticRenderFns: __vue_staticRenderFns__$N },
     __vue_inject_styles__$T,
     __vue_script__$T,
     __vue_scope_id__$T,
     __vue_is_functional_template__$T,
     __vue_module_identifier__$T,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin$v = {
   install: function install(Vue) {
-    registerComponent(Vue, Table);
-    registerComponent(Vue, TableColumn);
+    registerComponent(Vue, __vue_component__$T);
+    registerComponent(Vue, __vue_component__$S);
   }
 };
 use(Plugin$v);
 
-var _components$a;
 var script$U = {
   name: 'BTabs',
-  components: (_components$a = {}, _defineProperty(_components$a, Icon.name, Icon), _defineProperty(_components$a, SlotComponent.name, SlotComponent), _components$a),
+  components: _defineProperty(_defineProperty({}, __vue_component__.name, __vue_component__), SlotComponent.name, SlotComponent),
   props: {
     value: [Number, String],
     expanded: Boolean,
@@ -12401,7 +11881,6 @@ var script$U = {
       contentHeight: 0,
       isTransitioning: false,
       _isTabs: true // Used internally by TabItem
-
     };
   },
   computed: {
@@ -12413,9 +11892,7 @@ var script$U = {
       }, this.position, this.position && this.vertical);
     },
     navClasses: function navClasses() {
-      var _ref2;
-
-      return [this.type, this.size, (_ref2 = {}, _defineProperty(_ref2, this.position, this.position && !this.vertical), _defineProperty(_ref2, 'is-fullwidth', this.expanded), _defineProperty(_ref2, 'is-toggle-rounded is-toggle', this.type === 'is-toggle-rounded'), _ref2)];
+      return [this.type, this.size, _defineProperty(_defineProperty(_defineProperty({}, this.position, this.position && !this.vertical), 'is-fullwidth', this.expanded), 'is-toggle-rounded is-toggle', this.type === 'is-toggle-rounded')];
     },
     tabItems: function tabItems() {
       return this.defaultSlots.filter(function (vnode) {
@@ -12433,19 +11910,16 @@ var script$U = {
       var index = this.getIndexByValue(_value, _value);
       this.changeTab(index);
     },
-
     /**
     * When tab-items are updated, set active one.
     */
     tabItems: function tabItems() {
       var _this = this;
-
       if (this.activeTab < this.tabItems.length) {
         var previous = this.activeTab;
         this.tabItems.map(function (tab, idx) {
           if (tab.isActive) {
             previous = idx;
-
             if (previous < _this.tabItems.length) {
               _this.tabItems[previous].isActive = false;
             }
@@ -12463,16 +11937,13 @@ var script$U = {
     */
     changeTab: function changeTab(newIndex) {
       if (this.activeTab === newIndex || this.tabItems[newIndex] === undefined) return;
-
       if (this.activeTab < this.tabItems.length) {
         this.tabItems[this.activeTab].deactivate(this.activeTab, newIndex);
       }
-
       this.tabItems[newIndex].activate(this.activeTab, newIndex);
       this.activeTab = newIndex;
       this.$emit('change', this.getValueByIndex(newIndex));
     },
-
     /**
     * Tab click listener, emit input event and change active tab.
     */
@@ -12497,11 +11968,9 @@ var script$U = {
   },
   mounted: function mounted() {
     this.activeTab = this.getIndexByValue(this.value || 0);
-
     if (this.activeTab < this.tabItems.length) {
       this.tabItems[this.activeTab].isActive = true;
     }
-
     this.refreshSlots();
   }
 };
@@ -12525,15 +11994,19 @@ var __vue_staticRenderFns__$O = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Tabs = normalizeComponent_1(
+  const __vue_component__$U = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$O, staticRenderFns: __vue_staticRenderFns__$O },
     __vue_inject_styles__$U,
     __vue_script__$U,
     __vue_scope_id__$U,
     __vue_is_functional_template__$U,
     __vue_module_identifier__$U,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -12556,7 +12029,6 @@ var script$V = {
       isActive: false,
       transitionName: null,
       _isTabItem: true // Used internally by Tab
-
     };
   },
   methods: {
@@ -12567,7 +12039,6 @@ var script$V = {
       this.transitionName = index < oldIndex ? this.$parent.vertical ? 'slide-down' : 'slide-next' : this.$parent.vertical ? 'slide-up' : 'slide-prev';
       this.isActive = true;
     },
-
     /**
     * Deactivate tab, alter animation name based on the index.
     */
@@ -12581,7 +12052,6 @@ var script$V = {
       this.$destroy();
       throw new Error('You should wrap bTabItem on a bTabs');
     }
-
     this.$parent.refreshSlots();
   },
   beforeDestroy: function beforeDestroy() {
@@ -12589,22 +12059,20 @@ var script$V = {
   },
   render: function render(createElement) {
     var _this = this;
-
     // if destroy apply v-if
     if (this.$parent.destroyOnHide) {
       if (!this.isActive || !this.visible) {
         return;
       }
     }
-
     var vnode = createElement('div', {
       directives: [{
         name: 'show',
         value: this.isActive && this.visible
       }],
       class: 'tab-item'
-    }, this.$slots.default); // check animated prop
-
+    }, this.$slots.default);
+    // check animated prop
     if (this.$parent.animated) {
       return createElement('transition', {
         props: {
@@ -12620,7 +12088,6 @@ var script$V = {
         }
       }, [vnode]);
     }
-
     return vnode;
   }
 };
@@ -12642,23 +12109,27 @@ const __vue_script__$V = script$V;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var TabItem = normalizeComponent_1(
+  const __vue_component__$V = /*#__PURE__*/normalizeComponent_1(
     {},
     __vue_inject_styles__$V,
     __vue_script__$V,
     __vue_scope_id__$V,
     __vue_is_functional_template__$V,
     __vue_module_identifier__$V,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin$w = {
   install: function install(Vue) {
-    registerComponent(Vue, Tabs);
-    registerComponent(Vue, TabItem);
+    registerComponent(Vue, __vue_component__$U);
+    registerComponent(Vue, __vue_component__$V);
   }
 };
 use(Plugin$w);
@@ -12705,6 +12176,7 @@ use(Plugin$w);
 //
 //
 //
+
 var script$W = {
   name: 'BTag',
   props: {
@@ -12753,15 +12225,19 @@ var __vue_staticRenderFns__$P = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Tag = normalizeComponent_1(
+  const __vue_component__$W = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$P, staticRenderFns: __vue_staticRenderFns__$P },
     __vue_inject_styles__$W,
     __vue_script__$W,
     __vue_scope_id__$W,
     __vue_is_functional_template__$W,
     __vue_module_identifier__$W,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -12772,6 +12248,7 @@ var __vue_staticRenderFns__$P = [];
 //
 //
 //
+
 var script$X = {
   name: 'BTaglist',
   props: {
@@ -12798,31 +12275,34 @@ var __vue_staticRenderFns__$Q = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Taglist = normalizeComponent_1(
+  const __vue_component__$X = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$Q, staticRenderFns: __vue_staticRenderFns__$Q },
     __vue_inject_styles__$X,
     __vue_script__$X,
     __vue_scope_id__$X,
     __vue_is_functional_template__$X,
     __vue_module_identifier__$X,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin$x = {
   install: function install(Vue) {
-    registerComponent(Vue, Tag);
-    registerComponent(Vue, Taglist);
+    registerComponent(Vue, __vue_component__$W);
+    registerComponent(Vue, __vue_component__$X);
   }
 };
 use(Plugin$x);
 
-var _components$b;
 var script$Y = {
   name: 'BTaginput',
-  components: (_components$b = {}, _defineProperty(_components$b, Autocomplete.name, Autocomplete), _defineProperty(_components$b, Tag.name, Tag), _components$b),
+  components: _defineProperty(_defineProperty({}, __vue_component__$2.name, __vue_component__$2), __vue_component__$W.name, __vue_component__$W),
   mixins: [FormElementMixin],
   inheritAttrs: false,
   props: {
@@ -12952,7 +12432,6 @@ var script$Y = {
     hasFooterSlot: function hasFooterSlot() {
       return !!this.$slots.footer;
     },
-
     /**
      * Show the input field if a maxtags hasn't been set or reached.
      */
@@ -12962,7 +12441,6 @@ var script$Y = {
     tagsLength: function tagsLength() {
       return this.tags.length;
     },
-
     /**
      * If Taginput has onPasteSeparators prop,
      * returning new RegExp used to split pasted string.
@@ -12988,11 +12466,9 @@ var script$Y = {
   methods: {
     addTag: function addTag(tag) {
       var tagToAdd = tag || this.newTag.trim();
-
       if (tagToAdd) {
         if (!this.autocomplete) {
           var reg = this.separatorsAsRegExp;
-
           if (reg && tagToAdd.match(reg)) {
             tagToAdd.split(reg).map(function (t) {
               return t.trim();
@@ -13001,36 +12477,30 @@ var script$Y = {
             }).map(this.addTag);
             return;
           }
-        } // Remove the tag input previously added (if not allowDuplicates).
-
-
+        }
+        // Remove the tag input previously added (if not allowDuplicates).
         if (!this.allowDuplicates) {
           var index = this.tags.indexOf(tagToAdd);
-
           if (index >= 0) {
             this.tags.splice(index, 1);
             return;
           }
-        } // Add the tag input if it is not blank
+        }
+        // Add the tag input if it is not blank
         // or previously added (if not allowDuplicates).
-
-
         var add = !this.allowDuplicates ? this.tags.indexOf(tagToAdd) === -1 : true;
-
         if (add && this.beforeAdding(tagToAdd)) {
           this.tags.push(tagToAdd);
           this.$emit('input', this.tags);
           this.$emit('add', tagToAdd);
         }
       }
-
       this.newTag = '';
     },
     getNormalizedTagText: function getNormalizedTagText(tag) {
       if (_typeof(tag) === 'object') {
         return getValueByPath(tag, this.field);
       }
-
       return tag;
     },
     customOnBlur: function customOnBlur(event) {
@@ -13040,7 +12510,6 @@ var script$Y = {
     },
     onSelect: function onSelect(option) {
       var _this = this;
-
       if (!option) return;
       this.addTag(option);
       this.$nextTick(function () {
@@ -13052,11 +12521,9 @@ var script$Y = {
       this.$emit('input', this.tags);
       this.$emit('remove', tag);
       if (event) event.stopPropagation();
-
       if (this.openOnFocus && this.$refs.autocomplete) {
         this.$refs.autocomplete.focus();
       }
-
       return tag;
     },
     removeLastTag: function removeLastTag() {
@@ -13067,11 +12534,9 @@ var script$Y = {
     keydown: function keydown(event) {
       if (this.removeOnKeys.indexOf(event.keyCode) !== -1 && !this.newTag.length) {
         this.removeLastTag();
-      } // Stop if is to accept select only
-
-
+      }
+      // Stop if is to accept select only
       if (this.autocomplete && !this.allowNew) return;
-
       if (this.confirmKeyCodes.indexOf(event.keyCode) >= 0) {
         event.preventDefault();
         this.addTag();
@@ -13105,29 +12570,33 @@ var __vue_staticRenderFns__$R = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Taginput = normalizeComponent_1(
+  const __vue_component__$Y = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$R, staticRenderFns: __vue_staticRenderFns__$R },
     __vue_inject_styles__$Y,
     __vue_script__$Y,
     __vue_scope_id__$Y,
     __vue_is_functional_template__$Y,
     __vue_module_identifier__$Y,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin$y = {
   install: function install(Vue) {
-    registerComponent(Vue, Taginput);
+    registerComponent(Vue, __vue_component__$Y);
   }
 };
 use(Plugin$y);
 
 var Plugin$z = {
   install: function install(Vue) {
-    registerComponent(Vue, Timepicker);
+    registerComponent(Vue, __vue_component__$l);
   }
 };
 use(Plugin$z);
@@ -13162,15 +12631,19 @@ var __vue_staticRenderFns__$S = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Toast = normalizeComponent_1(
+  const __vue_component__$Z = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$S, staticRenderFns: __vue_staticRenderFns__$S },
     __vue_inject_styles__$Z,
     __vue_script__$Z,
     __vue_scope_id__$Z,
     __vue_is_functional_template__$Z,
     __vue_module_identifier__$Z,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -13179,25 +12652,21 @@ var localVueInstance$5;
 var ToastProgrammatic = {
   open: function open(params) {
     var parent;
-
     if (typeof params === 'string') {
       params = {
         message: params
       };
     }
-
     var defaultParam = {
       position: config.defaultToastPosition || 'is-top'
     };
-
     if (params.parent) {
       parent = params.parent;
       delete params.parent;
     }
-
     var propsData = merge(defaultParam, params);
     var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance$5 || VueInstance;
-    var ToastComponent = vm.extend(Toast);
+    var ToastComponent = vm.extend(__vue_component__$Z);
     return new ToastComponent({
       parent: parent,
       el: document.createElement('div'),
@@ -13215,7 +12684,7 @@ use(Plugin$A);
 
 var Plugin$B = {
   install: function install(Vue) {
-    registerComponent(Vue, Tooltip);
+    registerComponent(Vue, __vue_component__$J);
   }
 };
 use(Plugin$B);
@@ -13264,13 +12733,11 @@ var script$_ = {
     value: function value(_value) {
       var inputFiles = this.$refs.input.files;
       this.newValue = _value;
-
       if (!this.newValue || Array.isArray(this.newValue) && this.newValue.length === 0 || !inputFiles[0] || Array.isArray(this.newValue) && !this.newValue.some(function (a) {
         return a.name === inputFiles[0].name;
       })) {
         this.$refs.input.value = null;
       }
-
       !this.isValid && !this.dragDrop && this.checkHtml5Validity();
     }
   },
@@ -13281,18 +12748,14 @@ var script$_ = {
     */
     onFileChange: function onFileChange(event) {
       if (this.disabled || this.loading) return;
-
       if (this.dragDrop) {
         this.updateDragDropFocus(false);
       }
-
       var value = event.target.files || event.dataTransfer.files;
-
       if (value.length === 0) {
         if (!this.newValue) {
           return;
         }
-
         if (this.native) {
           this.newValue = null;
         }
@@ -13300,7 +12763,6 @@ var script$_ = {
         // only one element in case drag drop mode and isn't multiple
         if (this.dragDrop && value.length !== 1) return;else {
           var file = value[0];
-
           if (this.checkType(file)) {
             this.newValue = file;
           } else if (this.newValue) {
@@ -13312,30 +12774,24 @@ var script$_ = {
       } else {
         // always new values if native or undefined local
         var newValues = false;
-
         if (this.native || !this.newValue) {
           this.newValue = [];
           newValues = true;
         }
-
         for (var i = 0; i < value.length; i++) {
           var _file = value[i];
-
           if (this.checkType(_file)) {
             this.newValue.push(_file);
             newValues = true;
           }
         }
-
         if (!newValues) {
           return;
         }
       }
-
       this.$emit('input', this.newValue);
       !this.dragDrop && this.checkHtml5Validity();
     },
-
     /**
     * Listen drag-drop to update internal variable
     */
@@ -13344,7 +12800,6 @@ var script$_ = {
         this.dragDropFocus = focus;
       }
     },
-
     /**
     * Check mime type of file
     */
@@ -13353,16 +12808,13 @@ var script$_ = {
       var types = this.accept.split(',');
       if (types.length === 0) return true;
       var valid = false;
-
       for (var i = 0; i < types.length && !valid; i++) {
         var type = types[i].trim();
-
         if (type) {
           if (type.substring(0, 1) === '.') {
             // check extension
             var extIndex = file.name.lastIndexOf('.');
             var extension = extIndex >= 0 ? file.name.substring(extIndex) : '';
-
             if (extension.toLowerCase() === type.toLowerCase()) {
               valid = true;
             }
@@ -13374,7 +12826,6 @@ var script$_ = {
           }
         }
       }
-
       return valid;
     }
   }
@@ -13404,22 +12855,26 @@ var __vue_staticRenderFns__$T = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Upload = normalizeComponent_1(
+  const __vue_component__$_ = /*#__PURE__*/normalizeComponent_1(
     { render: __vue_render__$T, staticRenderFns: __vue_staticRenderFns__$T },
     __vue_inject_styles__$_,
     __vue_script__$_,
     __vue_scope_id__$_,
     __vue_is_functional_template__$_,
     __vue_module_identifier__$_,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin$C = {
   install: function install(Vue) {
-    registerComponent(Vue, Upload);
+    registerComponent(Vue, __vue_component__$_);
   }
 };
 use(Plugin$C);
@@ -13480,15 +12935,14 @@ var ConfigComponent = {
 var Buefy = {
   install: function install(Vue) {
     var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-    setVueInstance(Vue); // Options
-
-    setOptions(merge(config, options, true)); // Components
-
+    setVueInstance(Vue);
+    // Options
+    setOptions(merge(config, options, true));
+    // Components
     for (var componentKey in components) {
       Vue.use(components[componentKey]);
-    } // Config component
-
-
+    }
+    // Config component
     registerComponentProgrammatic(Vue, 'config', ConfigComponent);
   }
 };

@@ -5,85 +5,129 @@
   (global = global || self, factory(global.Timepicker = {}));
 }(this, function (exports) { 'use strict';
 
-  function _typeof(obj) {
+  function _arrayLikeToArray(r, a) {
+    (null == a || a > r.length) && (a = r.length);
+    for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
+    return n;
+  }
+  function _arrayWithHoles(r) {
+    if (Array.isArray(r)) return r;
+  }
+  function _createForOfIteratorHelper(r, e) {
+    var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+    if (!t) {
+      if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) {
+        t && (r = t);
+        var n = 0,
+          F = function () {};
+        return {
+          s: F,
+          n: function () {
+            return n >= r.length ? {
+              done: !0
+            } : {
+              done: !1,
+              value: r[n++]
+            };
+          },
+          e: function (r) {
+            throw r;
+          },
+          f: F
+        };
+      }
+      throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+    }
+    var o,
+      a = !0,
+      u = !1;
+    return {
+      s: function () {
+        t = t.call(r);
+      },
+      n: function () {
+        var r = t.next();
+        return a = r.done, r;
+      },
+      e: function (r) {
+        u = !0, o = r;
+      },
+      f: function () {
+        try {
+          a || null == t.return || t.return();
+        } finally {
+          if (u) throw o;
+        }
+      }
+    };
+  }
+  function _defineProperty(e, r, t) {
+    return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
+      value: t,
+      enumerable: !0,
+      configurable: !0,
+      writable: !0
+    }) : e[r] = t, e;
+  }
+  function _iterableToArray(r) {
+    if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r);
+  }
+  function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+  function ownKeys(e, r) {
+    var t = Object.keys(e);
+    if (Object.getOwnPropertySymbols) {
+      var o = Object.getOwnPropertySymbols(e);
+      r && (o = o.filter(function (r) {
+        return Object.getOwnPropertyDescriptor(e, r).enumerable;
+      })), t.push.apply(t, o);
+    }
+    return t;
+  }
+  function _objectSpread2(e) {
+    for (var r = 1; r < arguments.length; r++) {
+      var t = null != arguments[r] ? arguments[r] : {};
+      r % 2 ? ownKeys(Object(t), !0).forEach(function (r) {
+        _defineProperty(e, r, t[r]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) {
+        Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+      });
+    }
+    return e;
+  }
+  function _toArray(r) {
+    return _arrayWithHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableRest();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : i + "";
+  }
+  function _typeof(o) {
     "@babel/helpers - typeof";
 
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof = function (obj) {
-        return typeof obj;
-      };
-    } else {
-      _typeof = function (obj) {
-        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-      };
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+      return typeof o;
+    } : function (o) {
+      return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+    }, _typeof(o);
+  }
+  function _unsupportedIterableToArray(r, a) {
+    if (r) {
+      if ("string" == typeof r) return _arrayLikeToArray(r, a);
+      var t = {}.toString.call(r).slice(8, -1);
+      return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0;
     }
-
-    return _typeof(obj);
-  }
-
-  function _defineProperty(obj, key, value) {
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
-    }
-
-    return obj;
-  }
-
-  function ownKeys(object, enumerableOnly) {
-    var keys = Object.keys(object);
-
-    if (Object.getOwnPropertySymbols) {
-      var symbols = Object.getOwnPropertySymbols(object);
-      if (enumerableOnly) symbols = symbols.filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-      });
-      keys.push.apply(keys, symbols);
-    }
-
-    return keys;
-  }
-
-  function _objectSpread2(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i] != null ? arguments[i] : {};
-
-      if (i % 2) {
-        ownKeys(Object(source), true).forEach(function (key) {
-          _defineProperty(target, key, source[key]);
-        });
-      } else if (Object.getOwnPropertyDescriptors) {
-        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-      } else {
-        ownKeys(Object(source)).forEach(function (key) {
-          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-        });
-      }
-    }
-
-    return target;
-  }
-
-  function _toArray(arr) {
-    return _arrayWithHoles(arr) || _iterableToArray(arr) || _nonIterableRest();
-  }
-
-  function _arrayWithHoles(arr) {
-    if (Array.isArray(arr)) return arr;
-  }
-
-  function _iterableToArray(iter) {
-    if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
-  }
-
-  function _nonIterableRest() {
-    throw new TypeError("Invalid attempt to destructure non-iterable instance");
   }
 
   var config = {
@@ -169,23 +213,19 @@
        */
       parentField: function parentField() {
         var parent = this.$parent;
-
         for (var i = 0; i < 3; i++) {
           if (parent && !parent.$data._isField) {
             parent = parent.$parent;
           }
         }
-
         return parent;
       },
-
       /**
        * Get the type prop from parent if it's a Field.
        */
       statusType: function statusType() {
         if (!this.parentField) return;
         if (!this.parentField.newType) return;
-
         if (typeof this.parentField.newType === 'string') {
           return this.parentField.newType;
         } else {
@@ -196,7 +236,6 @@
           }
         }
       },
-
       /**
        * Get the message prop from parent if it's a Field.
        */
@@ -204,7 +243,6 @@
         if (!this.parentField) return;
         return this.parentField.newMessage || this.parentField.$slots.message;
       },
-
       /**
        * Fix icon size for inputs, large was too big
        */
@@ -212,10 +250,8 @@
         switch (this.size) {
           case 'is-small':
             return this.size;
-
           case 'is-medium':
             return;
-
           case 'is-large':
             return this.newIconPack === 'mdi' ? 'is-medium' : '';
         }
@@ -227,11 +263,9 @@
        */
       focus: function focus() {
         var _this = this;
-
         if (this.$data._elementRef === undefined) return;
         this.$nextTick(function () {
           var el = _this.$el.querySelector(_this.$data._elementRef);
-
           if (el) el.focus();
         });
       },
@@ -254,22 +288,19 @@
       },
       setValidity: function setValidity(type, message) {
         var _this2 = this;
-
         this.$nextTick(function () {
           if (_this2.parentField) {
             // Set type only if not defined
             if (!_this2.parentField.type) {
               _this2.parentField.newType = type;
-            } // Set message only if not defined
-
-
+            }
+            // Set message only if not defined
             if (!_this2.parentField.message) {
               _this2.parentField.newMessage = message;
             }
           }
         });
       },
-
       /**
        * Check HTML5 validation, set isValid property.
        * If validation fail, send 'is-danger' type,
@@ -279,7 +310,6 @@
         if (!this.useHtml5Validation) return;
         if (this.$refs[this.$data._elementRef] === undefined) return;
         if (this.getElement() === null) return;
-
         if (!this.getElement().checkValidity()) {
           this.setInvalid();
           this.isValid = false;
@@ -287,7 +317,6 @@
           this.setValidity(null, null);
           this.isValid = true;
         }
-
         return this.isValid;
       }
     }
@@ -296,36 +325,31 @@
   /**
    * Merge function to replace Object.assign with deep merging possibility
    */
-
   var isObject = function isObject(item) {
     return _typeof(item) === 'object' && !Array.isArray(item);
   };
-
-  var mergeFn = function mergeFn(target, source) {
+  var _mergeFn = function mergeFn(target, source) {
     var deep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
     if (deep || !Object.assign) {
       var isDeep = function isDeep(prop) {
         return isObject(source[prop]) && target !== null && target.hasOwnProperty(prop) && isObject(target[prop]);
       };
-
       var replaced = Object.getOwnPropertyNames(source).map(function (prop) {
-        return _defineProperty({}, prop, isDeep(prop) ? mergeFn(target[prop], source[prop], deep) : source[prop]);
+        return _defineProperty({}, prop, isDeep(prop) ? _mergeFn(target[prop], source[prop], deep) : source[prop]);
       }).reduce(function (a, b) {
-        return _objectSpread2({}, a, {}, b);
+        return _objectSpread2(_objectSpread2({}, a), b);
       }, {});
-      return _objectSpread2({}, target, {}, replaced);
+      return _objectSpread2(_objectSpread2({}, target), replaced);
     } else {
       return Object.assign(target, source);
     }
   };
+  var merge = _mergeFn;
 
-  var merge = mergeFn;
   /**
    * Mobile detection
    * https://www.abeautifulsite.net/detecting-mobile-devices-with-javascript
    */
-
   var isMobile = {
     Android: function Android() {
       return typeof window !== 'undefined' && window.navigator.userAgent.match(/Android/i);
@@ -369,57 +393,45 @@
   var PM = 'PM';
   var HOUR_FORMAT_24 = '24';
   var HOUR_FORMAT_12 = '12';
-
   var defaultTimeFormatter = function defaultTimeFormatter(date, vm) {
     var hours = date.getHours();
     var minutes = date.getMinutes();
     var seconds = date.getSeconds();
     var period = '';
-
     if (vm.hourFormat === HOUR_FORMAT_12) {
       period = ' ' + (hours < 12 ? AM : PM);
-
       if (hours > 12) {
         hours -= 12;
       } else if (hours === 0) {
         hours = 12;
       }
     }
-
     return vm.pad(hours) + ':' + vm.pad(minutes) + (vm.enableSeconds ? ':' + vm.pad(seconds) : '') + period;
   };
-
   var defaultTimeParser = function defaultTimeParser(timeString, vm) {
     if (timeString) {
       var am = false;
-
       if (vm.hourFormat === HOUR_FORMAT_12) {
         var dateString12 = timeString.split(' ');
         timeString = dateString12[0];
         am = dateString12[1] === AM;
       }
-
       var time = timeString.split(':');
       var hours = parseInt(time[0], 10);
       var minutes = parseInt(time[1], 10);
       var seconds = vm.enableSeconds ? parseInt(time[2], 10) : 0;
-
       if (isNaN(hours) || hours < 0 || hours > 23 || vm.hourFormat === HOUR_FORMAT_12 && (hours < 1 || hours > 12) || isNaN(minutes) || minutes < 0 || minutes > 59) {
         return null;
       }
-
       var d = null;
-
       if (vm.computedValue && !isNaN(vm.computedValue)) {
         d = new Date(vm.computedValue);
       } else {
         d = vm.timeCreator();
         d.setMilliseconds(0);
       }
-
       d.setSeconds(seconds);
       d.setMinutes(minutes);
-
       if (vm.hourFormat === HOUR_FORMAT_12) {
         if (am && hours === 12) {
           hours = 0;
@@ -427,14 +439,11 @@
           hours += 12;
         }
       }
-
       d.setHours(hours);
       return new Date(d.getTime());
     }
-
     return null;
   };
-
   var TimepickerMixin = {
     mixins: [FormElementMixin],
     inheritAttrs: false,
@@ -545,15 +554,12 @@
         if (!this.incrementHours || this.incrementHours < 1) throw new Error('Hour increment cannot be null or less than 1.');
         var hours = [];
         var numberOfHours = this.isHourFormat24 ? 24 : 12;
-
         for (var i = 0; i < numberOfHours; i += this.incrementHours) {
           var value = i;
           var label = value;
-
           if (!this.isHourFormat24) {
             value = i + 1;
             label = value;
-
             if (this.meridienSelected === this.AM) {
               if (value === 12) {
                 value = 0;
@@ -564,39 +570,33 @@
               }
             }
           }
-
           hours.push({
             label: this.formatNumber(label),
             value: value
           });
         }
-
         return hours;
       },
       minutes: function minutes() {
         if (!this.incrementMinutes || this.incrementMinutes < 1) throw new Error('Minute increment cannot be null or less than 1.');
         var minutes = [];
-
         for (var i = 0; i < 60; i += this.incrementMinutes) {
           minutes.push({
             label: this.formatNumber(i, true),
             value: i
           });
         }
-
         return minutes;
       },
       seconds: function seconds() {
         if (!this.incrementSeconds || this.incrementSeconds < 1) throw new Error('Second increment cannot be null or less than 1.');
         var seconds = [];
-
         for (var i = 0; i < 60; i += this.incrementSeconds) {
           seconds.push({
             label: this.formatNumber(i, true),
             value: i
           });
         }
-
         return seconds;
       },
       meridiens: function meridiens() {
@@ -615,7 +615,6 @@
           this.meridienSelected = this.hoursSelected >= 12 ? PM : AM;
         }
       },
-
       /**
        * When v-model is changed:
        *   1. Update internal value.
@@ -638,25 +637,21 @@
             this.hoursSelected -= 12;
           }
         }
-
         this.updateDateSelected(this.hoursSelected, this.minutesSelected, this.enableSeconds ? this.secondsSelected : 0, value);
       },
       onHoursChange: function onHoursChange(value) {
         if (!this.minutesSelected && typeof this.defaultMinutes !== 'undefined') {
           this.minutesSelected = this.defaultMinutes;
         }
-
         if (!this.secondsSelected && typeof this.defaultSeconds !== 'undefined') {
           this.secondsSelected = this.defaultSeconds;
         }
-
         this.updateDateSelected(parseInt(value, 10), this.minutesSelected, this.enableSeconds ? this.secondsSelected : 0, this.meridienSelected);
       },
       onMinutesChange: function onMinutesChange(value) {
         if (!this.secondsSelected && this.defaultSeconds) {
           this.secondsSelected = this.defaultSeconds;
         }
-
         this.updateDateSelected(this.hoursSelected, parseInt(value, 10), this.enableSeconds ? this.secondsSelected : 0, this.meridienSelected);
       },
       onSecondsChange: function onSecondsChange(value) {
@@ -665,14 +660,12 @@
       updateDateSelected: function updateDateSelected(hours, minutes, seconds, meridiens) {
         if (hours != null && minutes != null && (!this.isHourFormat24 && meridiens !== null || this.isHourFormat24)) {
           var time = null;
-
           if (this.computedValue && !isNaN(this.computedValue)) {
             time = new Date(this.computedValue);
           } else {
             time = this.timeCreator();
             time.setMilliseconds(0);
           }
-
           time.setHours(hours);
           time.setMinutes(minutes);
           time.setSeconds(seconds);
@@ -691,14 +684,11 @@
           this.secondsSelected = null;
           this.meridienSelected = AM;
         }
-
         this.dateSelected = value;
       },
       isHourDisabled: function isHourDisabled(hour) {
         var _this = this;
-
         var disabled = false;
-
         if (this.minTime) {
           var minHours = this.minTime.getHours();
           var noMinutesAvailable = this.minutes.every(function (minute) {
@@ -706,14 +696,12 @@
           });
           disabled = hour < minHours || noMinutesAvailable;
         }
-
         if (this.maxTime) {
           if (!disabled) {
             var maxHours = this.maxTime.getHours();
             disabled = hour > maxHours;
           }
         }
-
         if (this.unselectableTimes) {
           if (!disabled) {
             var unselectable = this.unselectableTimes.filter(function (time) {
@@ -728,18 +716,15 @@
             disabled = unselectable.length > 0;
           }
         }
-
         return disabled;
       },
       isMinuteDisabledForHour: function isMinuteDisabledForHour(hour, minute) {
         var disabled = false;
-
         if (this.minTime) {
           var minHours = this.minTime.getHours();
           var minMinutes = this.minTime.getMinutes();
           disabled = hour === minHours && minute < minMinutes;
         }
-
         if (this.maxTime) {
           if (!disabled) {
             var maxHours = this.maxTime.getHours();
@@ -747,21 +732,17 @@
             disabled = hour === maxHours && minute > maxMinutes;
           }
         }
-
         return disabled;
       },
       isMinuteDisabled: function isMinuteDisabled(minute) {
         var _this2 = this;
-
         var disabled = false;
-
         if (this.hoursSelected !== null) {
           if (this.isHourDisabled(this.hoursSelected)) {
             disabled = true;
           } else {
             disabled = this.isMinuteDisabledForHour(this.hoursSelected, minute);
           }
-
           if (this.unselectableTimes) {
             if (!disabled) {
               var unselectable = this.unselectableTimes.filter(function (time) {
@@ -775,14 +756,11 @@
             }
           }
         }
-
         return disabled;
       },
       isSecondDisabled: function isSecondDisabled(second) {
         var _this3 = this;
-
         var disabled = false;
-
         if (this.minutesSelected !== null) {
           if (this.isMinuteDisabled(this.minutesSelected)) {
             disabled = true;
@@ -793,7 +771,6 @@
               var minSeconds = this.minTime.getSeconds();
               disabled = this.hoursSelected === minHours && this.minutesSelected === minMinutes && second < minSeconds;
             }
-
             if (this.maxTime) {
               if (!disabled) {
                 var maxHours = this.maxTime.getHours();
@@ -803,7 +780,6 @@
               }
             }
           }
-
           if (this.unselectableTimes) {
             if (!disabled) {
               var unselectable = this.unselectableTimes.filter(function (time) {
@@ -813,17 +789,14 @@
             }
           }
         }
-
         return disabled;
       },
-
       /*
       * Parse string into date
       */
       onChange: function onChange(value) {
         var date = this.timeParser(value, this);
         this.updateInternalState(date);
-
         if (date && !isNaN(date)) {
           this.computedValue = date;
         } else {
@@ -832,7 +805,6 @@
           this.$refs.input.newValue = this.computedValue;
         }
       },
-
       /*
       * Toggle timepicker
       */
@@ -841,57 +813,47 @@
           this.$refs.dropdown.isActive = typeof active === 'boolean' ? active : !this.$refs.dropdown.isActive;
         }
       },
-
       /*
       * Close timepicker
       */
       close: function close() {
         this.toggle(false);
       },
-
       /*
       * Call default onFocus method and show timepicker
       */
       handleOnFocus: function handleOnFocus() {
         this.onFocus();
-
         if (this.openOnFocus) {
           this.toggle(true);
         }
       },
-
       /*
       * Format date into string 'HH-MM-SS'
       */
       formatHHMMSS: function formatHHMMSS(value) {
         var date = new Date(value);
-
         if (value && !isNaN(date)) {
           var hours = date.getHours();
           var minutes = date.getMinutes();
           var seconds = date.getSeconds();
           return this.formatNumber(hours, true) + ':' + this.formatNumber(minutes, true) + ':' + this.formatNumber(seconds, true);
         }
-
         return '';
       },
-
       /*
       * Parse time from string
       */
       onChangeNativePicker: function onChangeNativePicker(event) {
         var date = event.target.value;
-
         if (date) {
           var time = null;
-
           if (this.computedValue && !isNaN(this.computedValue)) {
             time = new Date(this.computedValue);
           } else {
             time = new Date();
             time.setMilliseconds(0);
           }
-
           var t = date.split(':');
           time.setHours(parseInt(t[0], 10));
           time.setMinutes(parseInt(t[1], 10));
@@ -907,7 +869,6 @@
       pad: function pad(value) {
         return (value < 10 ? '0' : '') + value;
       },
-
       /*
       * Format date into string
       */
@@ -918,7 +879,6 @@
           return null;
         }
       },
-
       /**
        * Keypress event that is bound to the document.
        */
@@ -928,7 +888,6 @@
           this.toggle(false);
         }
       },
-
       /**
        * Emit 'blur' event on dropdown is not active (closed)
        */
@@ -952,28 +911,21 @@
 
   var findFocusable = function findFocusable(element) {
     var programmatic = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
     if (!element) {
       return null;
     }
-
     if (programmatic) {
       return element.querySelectorAll("*[tabindex=\"-1\"]");
     }
-
     return element.querySelectorAll("a[href]:not([tabindex=\"-1\"]),\n                                     area[href],\n                                     input:not([disabled]),\n                                     select:not([disabled]),\n                                     textarea:not([disabled]),\n                                     button:not([disabled]),\n                                     iframe,\n                                     object,\n                                     embed,\n                                     *[tabindex]:not([tabindex=\"-1\"]),\n                                     *[contenteditable]");
   };
-
   var onKeyDown;
-
   var bind = function bind(el, _ref) {
     var _ref$value = _ref.value,
-        value = _ref$value === void 0 ? true : _ref$value;
-
+      value = _ref$value === void 0 ? true : _ref$value;
     if (value) {
       var focusable = findFocusable(el);
       var focusableProg = findFocusable(el, true);
-
       if (focusable && focusable.length > 0) {
         onKeyDown = function onKeyDown(event) {
           // Need to get focusable each time since it can change between key events
@@ -982,7 +934,6 @@
           focusableProg = findFocusable(el, true);
           var firstFocusable = focusable[0];
           var lastFocusable = focusable[focusable.length - 1];
-
           if (event.target === firstFocusable && event.shiftKey && event.key === 'Tab') {
             event.preventDefault();
             lastFocusable.focus();
@@ -991,16 +942,13 @@
             firstFocusable.focus();
           }
         };
-
         el.addEventListener('keydown', onKeyDown);
       }
     }
   };
-
   var unbind = function unbind(el) {
     el.removeEventListener('keydown', onKeyDown);
   };
-
   var directive = {
     bind: bind,
     unbind: unbind
@@ -1076,7 +1024,6 @@
         _isDropdown: true,
         // Used internally by DropdownItem
         _bodyEl: undefined // Used to append to body
-
       };
     },
     computed: {
@@ -1110,15 +1057,12 @@
       value: function value(_value) {
         this.selected = _value;
       },
-
       /**
       * Emit event when isActive value is changed.
       */
       isActive: function isActive(value) {
         var _this = this;
-
         this.$emit('active-change', value);
-
         if (this.appendToBody) {
           this.$nextTick(function () {
             _this.updateAppendToBody();
@@ -1137,7 +1081,6 @@
         if (this.multiple) {
           if (this.selected) {
             var index = this.selected.indexOf(value);
-
             if (index === -1) {
               this.selected.push(value);
             } else {
@@ -1146,7 +1089,6 @@
           } else {
             this.selected = [value];
           }
-
           this.$emit('change', this.selected);
         } else {
           if (this.selected !== value) {
@@ -1154,90 +1096,58 @@
             this.$emit('change', this.selected);
           }
         }
-
         this.$emit('input', this.selected);
-
         if (!this.multiple) {
           this.isActive = !this.closeOnClick;
-
           if (this.hoverable && this.closeOnClick) {
             this.isHoverable = false;
           }
         }
       },
-
       /**
       * White-listed items to not close when clicked.
       */
       isInWhiteList: function isInWhiteList(el) {
         if (el === this.$refs.dropdownMenu) return true;
-        if (el === this.$refs.trigger) return true; // All chidren from dropdown
-
+        if (el === this.$refs.trigger) return true;
+        // All chidren from dropdown
         if (this.$refs.dropdownMenu !== undefined) {
           var children = this.$refs.dropdownMenu.querySelectorAll('*');
-          var _iteratorNormalCompletion = true;
-          var _didIteratorError = false;
-          var _iteratorError = undefined;
-
+          var _iterator = _createForOfIteratorHelper(children),
+            _step;
           try {
-            for (var _iterator = children[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
               var child = _step.value;
-
               if (el === child) {
                 return true;
               }
             }
           } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
+            _iterator.e(err);
           } finally {
-            try {
-              if (!_iteratorNormalCompletion && _iterator.return != null) {
-                _iterator.return();
-              }
-            } finally {
-              if (_didIteratorError) {
-                throw _iteratorError;
-              }
-            }
+            _iterator.f();
           }
-        } // All children from trigger
-
-
+        }
+        // All children from trigger
         if (this.$refs.trigger !== undefined) {
           var _children = this.$refs.trigger.querySelectorAll('*');
-
-          var _iteratorNormalCompletion2 = true;
-          var _didIteratorError2 = false;
-          var _iteratorError2 = undefined;
-
+          var _iterator2 = _createForOfIteratorHelper(_children),
+            _step2;
           try {
-            for (var _iterator2 = _children[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
               var _child = _step2.value;
-
               if (el === _child) {
                 return true;
               }
             }
           } catch (err) {
-            _didIteratorError2 = true;
-            _iteratorError2 = err;
+            _iterator2.e(err);
           } finally {
-            try {
-              if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-                _iterator2.return();
-              }
-            } finally {
-              if (_didIteratorError2) {
-                throw _iteratorError2;
-              }
-            }
+            _iterator2.f();
           }
         }
-
         return false;
       },
-
       /**
       * Close dropdown if clicked outside.
       */
@@ -1246,7 +1156,6 @@
         if (this.inline) return;
         if (!this.isInWhiteList(event.target)) this.isActive = false;
       },
-
       /**
        * Keypress event that is bound to the document
        */
@@ -1257,22 +1166,19 @@
           this.isActive = false;
         }
       },
-
       /**
       * Toggle dropdown if it's not disabled.
       */
       toggle: function toggle() {
         var _this2 = this;
-
         if (this.disabled) return;
-
         if (!this.isActive) {
           // if not active, toggle after clickOutside event
           // this fixes toggling programmatic
           this.$nextTick(function () {
             var value = !_this2.isActive;
-            _this2.isActive = value; // Vue 2.6.x ???
-
+            _this2.isActive = value;
+            // Vue 2.6.x ???
             setTimeout(function () {
               return _this2.isActive = value;
             });
@@ -1289,7 +1195,6 @@
       updateAppendToBody: function updateAppendToBody() {
         var dropdownMenu = this.$refs.dropdownMenu;
         var trigger = this.$refs.trigger;
-
         if (dropdownMenu && trigger) {
           // update wrapper dropdown
           var dropdown = this.$data._bodyEl.children[0];
@@ -1298,11 +1203,9 @@
           });
           dropdown.classList.add('dropdown');
           dropdown.classList.add('dropdown-menu-animation');
-
           if (this.$vnode && this.$vnode.data && this.$vnode.data.staticClass) {
             dropdown.classList.add(this.$vnode.data.staticClass);
           }
-
           this.rootClasses.forEach(function (item) {
             // skip position prop
             if (item && _typeof(item) === 'object') {
@@ -1313,7 +1216,6 @@
               }
             }
           });
-
           if (this.appendToBodyCopyParent) {
             var parentNode = this.$refs.dropdown.parentNode;
             var parent = this.$data._bodyEl;
@@ -1324,21 +1226,17 @@
               parent.classList.add(item);
             });
           }
-
           var rect = trigger.getBoundingClientRect();
           var top = rect.top + window.scrollY;
           var left = rect.left + window.scrollX;
-
           if (!this.position || this.position.indexOf('bottom') >= 0) {
             top += trigger.clientHeight;
           } else {
             top -= dropdownMenu.clientHeight;
           }
-
           if (this.position && this.position.indexOf('left') >= 0) {
             left -= dropdownMenu.clientWidth - trigger.clientWidth;
           }
-
           this.style = {
             position: 'absolute',
             top: "".concat(top, "px"),
@@ -1365,7 +1263,6 @@
         document.removeEventListener('click', this.clickedOutside);
         document.removeEventListener('keyup', this.keyPress);
       }
-
       if (this.appendToBody) {
         removeElement(this.$data._bodyEl);
       }
@@ -1476,15 +1373,19 @@
     
     /* style inject SSR */
     
+    /* style inject shadow dom */
+    
 
     
-    var Dropdown = normalizeComponent_1(
+    const __vue_component__ = /*#__PURE__*/normalizeComponent_1(
       { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
       __vue_inject_styles__,
       __vue_script__,
       __vue_scope_id__,
       __vue_is_functional_template__,
       __vue_module_identifier__,
+      false,
+      undefined,
       undefined,
       undefined
     );
@@ -1510,6 +1411,7 @@
   //
   //
   //
+
   var script$1 = {
     name: 'BDropdownItem',
     props: {
@@ -1600,15 +1502,19 @@
     
     /* style inject SSR */
     
+    /* style inject shadow dom */
+    
 
     
-    var DropdownItem = normalizeComponent_1(
+    const __vue_component__$1 = /*#__PURE__*/normalizeComponent_1(
       { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
       __vue_inject_styles__$1,
       __vue_script__$1,
       __vue_scope_id__$1,
       __vue_is_functional_template__$1,
       __vue_module_identifier__$1,
+      false,
+      undefined,
       undefined,
       undefined
     );
@@ -1622,7 +1528,6 @@
     },
     iconPrefix: 'mdi-'
   };
-
   var faIcons = function faIcons() {
     var faIconPrefix = config && config.defaultIconComponent ? '' : 'fa-';
     return {
@@ -1647,7 +1552,6 @@
       }
     };
   };
-
   var getIcons = function getIcons() {
     var icons = {
       mdi: mdiIcons,
@@ -1658,11 +1562,9 @@
       fab: faIcons(),
       fal: faIcons()
     };
-
     if (config && config.customIconPacks) {
       icons = merge(icons, config.customIconPacks, true);
     }
-
     return icons;
   };
 
@@ -1677,7 +1579,6 @@
       customSize: String,
       customClass: String,
       both: Boolean // This is used internally to show both MDI and FA icon
-
     },
     computed: {
       iconConfig: function iconConfig() {
@@ -1688,10 +1589,8 @@
         if (this.iconConfig && this.iconConfig.iconPrefix) {
           return this.iconConfig.iconPrefix;
         }
-
         return '';
       },
-
       /**
       * Internal icon name based on the pack.
       * If pack is 'fa', gets the equivalent FA icon name of the MDI,
@@ -1706,7 +1605,6 @@
       newType: function newType() {
         if (!this.type) return;
         var splitType = [];
-
         if (typeof this.type === 'string') {
           splitType = this.type.split('-');
         } else {
@@ -1717,13 +1615,10 @@
             }
           }
         }
-
         if (splitType.length <= 1) return;
-
         var _splitType = splitType,
-            _splitType2 = _toArray(_splitType),
-            type = _splitType2.slice(1);
-
+          _splitType2 = _toArray(_splitType),
+          type = _splitType2.slice(1);
         return "has-text-".concat(type.join('-'));
       },
       newCustomSize: function newCustomSize() {
@@ -1737,7 +1632,6 @@
             return this.iconConfig.sizes.default;
           }
         }
-
         return null;
       },
       useIconComponent: function useIconComponent() {
@@ -1753,11 +1647,9 @@
         if (!this.both) {
           return value;
         }
-
         if (this.iconConfig && this.iconConfig.internalIcons && this.iconConfig.internalIcons[value]) {
           return this.iconConfig.internalIcons[value];
         }
-
         return value;
       }
     }
@@ -1782,22 +1674,26 @@
     
     /* style inject SSR */
     
+    /* style inject shadow dom */
+    
 
     
-    var Icon = normalizeComponent_1(
+    const __vue_component__$2 = /*#__PURE__*/normalizeComponent_1(
       { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
       __vue_inject_styles__$2,
       __vue_script__$2,
       __vue_scope_id__$2,
       __vue_is_functional_template__$2,
       __vue_module_identifier__$2,
+      false,
+      undefined,
       undefined,
       undefined
     );
 
   var script$3 = {
     name: 'BInput',
-    components: _defineProperty({}, Icon.name, Icon),
+    components: _defineProperty({}, __vue_component__$2.name, __vue_component__$2),
     mixins: [FormElementMixin],
     inheritAttrs: false,
     props: {
@@ -1862,7 +1758,6 @@
         } else if (this.iconRight) {
           return this.iconRight;
         }
-
         return this.statusTypeIcon;
       },
       rightIconType: function rightIconType() {
@@ -1871,10 +1766,8 @@
         } else if (this.iconRight) {
           return null;
         }
-
         return this.statusType;
       },
-
       /**
       * Position of the icon or if it's both sides.
       */
@@ -1887,7 +1780,6 @@
           return 'has-icons-left';
         }
       },
-
       /**
       * Icon name (MDI) based on the type.
       */
@@ -1895,32 +1787,26 @@
         switch (this.statusType) {
           case 'is-success':
             return 'check';
-
           case 'is-danger':
             return 'alert-circle';
-
           case 'is-info':
             return 'information';
-
           case 'is-warning':
             return 'alert';
         }
       },
-
       /**
       * Check if have any message prop from parent if it's a Field.
       */
       hasMessage: function hasMessage() {
         return !!this.statusMessage;
       },
-
       /**
       * Current password-reveal icon name.
       */
       passwordVisibleIcon: function passwordVisibleIcon() {
         return !this.isPasswordVisible ? 'eye' : 'eye-off';
       },
-
       /**
       * Get value length
       */
@@ -1930,7 +1816,6 @@
         } else if (typeof this.computedValue === 'number') {
           return this.computedValue.toString().length;
         }
-
         return 0;
       }
     },
@@ -1950,21 +1835,18 @@
       */
       togglePasswordVisibility: function togglePasswordVisibility() {
         var _this = this;
-
         this.isPasswordVisible = !this.isPasswordVisible;
         this.newType = this.isPasswordVisible ? 'text' : 'password';
         this.$nextTick(function () {
           _this.$refs[_this.$data._elementRef].focus();
         });
       },
-
       /**
       * Input's 'input' event listener, 'nextTick' is used to prevent event firing
       * before ui update, helps when using masks (Cleavejs and potentially others).
       */
       onInput: function onInput(event) {
         var _this2 = this;
-
         this.$nextTick(function () {
           if (event.target) {
             _this2.computedValue = event.target.value;
@@ -1973,7 +1855,6 @@
       },
       iconClick: function iconClick(emit, event) {
         var _this3 = this;
-
         this.$emit(emit, event);
         this.$nextTick(function () {
           _this3.$refs[_this3.$data._elementRef].focus();
@@ -2008,15 +1889,19 @@
     
     /* style inject SSR */
     
+    /* style inject shadow dom */
+    
 
     
-    var Input = normalizeComponent_1(
+    const __vue_component__$3 = /*#__PURE__*/normalizeComponent_1(
       { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
       __vue_inject_styles__$3,
       __vue_script__$3,
       __vue_scope_id__$3,
       __vue_is_functional_template__$3,
       __vue_module_identifier__$3,
+      false,
+      undefined,
       undefined,
       undefined
     );
@@ -2033,7 +1918,6 @@
     },
     render: function render(createElement) {
       var _this = this;
-
       var first = true;
       return createElement('div', {
         attrs: {
@@ -2044,14 +1928,11 @@
         if (!element.tag) {
           return element;
         }
-
         var message;
-
         if (first) {
           message = _this.message;
           first = false;
         }
-
         return createElement('b-field', {
           attrs: {
             type: _this.type,
@@ -2079,22 +1960,26 @@
     
     /* style inject SSR */
     
+    /* style inject shadow dom */
+    
 
     
-    var FieldBody = normalizeComponent_1(
+    const __vue_component__$4 = /*#__PURE__*/normalizeComponent_1(
       {},
       __vue_inject_styles__$4,
       __vue_script__$4,
       __vue_scope_id__$4,
       __vue_is_functional_template__$4,
       __vue_module_identifier__$4,
+      false,
+      undefined,
       undefined,
       undefined
     );
 
   var script$5 = {
     name: 'BField',
-    components: _defineProperty({}, FieldBody.name, FieldBody),
+    components: _defineProperty({}, __vue_component__$4.name, __vue_component__$4),
     props: {
       type: [String, Object],
       label: String,
@@ -2123,7 +2008,6 @@
         newMessage: this.message,
         fieldLabelSize: null,
         _isField: true // Used internally by Input and Select
-
       };
     },
     computed: {
@@ -2136,7 +2020,6 @@
           'is-floating-label': this.hasLabel && !this.horizontal && this.labelPosition === 'on-border'
         }, this.numberInputClasses];
       },
-
       /**
       * Correct Bulma class for the side of the addon or group.
       *
@@ -2151,7 +2034,6 @@
         var prefix = this.grouped ? 'is-grouped-' : 'has-addons-';
         if (this.position) return prefix + position[1];
       },
-
       /**
       * Formatted message in case it's an array
       * (each element is separated by <br> tag)
@@ -2160,9 +2042,7 @@
         if (typeof this.newMessage === 'string') {
           return [this.newMessage];
         }
-
         var messages = [];
-
         if (Array.isArray(this.newMessage)) {
           this.newMessage.forEach(function (message) {
             if (typeof message === 'string') {
@@ -2182,7 +2062,6 @@
             }
           }
         }
-
         return messages.filter(function (m) {
           if (m) return m;
         });
@@ -2198,24 +2077,19 @@
           var numberinput = this.$slots.default.filter(function (node) {
             return node.tag && node.tag.toLowerCase().indexOf('numberinput') >= 0;
           })[0];
-
           if (numberinput) {
             var classes = ['has-numberinput'];
             var controlsPosition = numberinput.componentOptions.propsData.controlsPosition;
             var size = numberinput.componentOptions.propsData.size;
-
             if (controlsPosition) {
               classes.push("has-numberinput-".concat(controlsPosition));
             }
-
             if (size) {
               classes.push("has-numberinput-".concat(size));
             }
-
             return classes;
           }
         }
-
         return null;
       }
     },
@@ -2226,7 +2100,6 @@
       type: function type(value) {
         this.newType = value;
       },
-
       /**
       * Set internal message when prop change.
       */
@@ -2244,13 +2117,11 @@
       fieldType: function fieldType() {
         if (this.grouped) return 'is-grouped';
         var renderedNode = 0;
-
         if (this.$slots.default) {
           renderedNode = this.$slots.default.reduce(function (i, node) {
             return node.tag ? i + 1 : i;
           }, 0);
         }
-
         if (renderedNode > 1 && this.addons && !this.horizontal) {
           return 'has-addons';
         }
@@ -2260,7 +2131,6 @@
       if (this.horizontal) {
         // Bulma docs: .is-normal for any .input or .button
         var elements = this.$el.querySelectorAll('.input, .select, .button, .textarea, .b-slider');
-
         if (elements.length > 0) {
           this.fieldLabelSize = 'is-normal';
         }
@@ -2287,22 +2157,26 @@
     
     /* style inject SSR */
     
+    /* style inject shadow dom */
+    
 
     
-    var Field = normalizeComponent_1(
+    const __vue_component__$5 = /*#__PURE__*/normalizeComponent_1(
       { render: __vue_render__$4, staticRenderFns: __vue_staticRenderFns__$4 },
       __vue_inject_styles__$5,
       __vue_script__$5,
       __vue_scope_id__$5,
       __vue_is_functional_template__$5,
       __vue_module_identifier__$5,
+      false,
+      undefined,
       undefined,
       undefined
     );
 
   var script$6 = {
     name: 'BSelect',
-    components: _defineProperty({}, Icon.name, Icon),
+    components: _defineProperty({}, __vue_component__$2.name, __vue_component__$2),
     mixins: [FormElementMixin],
     inheritAttrs: false,
     props: {
@@ -2312,8 +2186,7 @@
       },
       placeholder: String,
       multiple: Boolean,
-      nativeSize: [String, Number],
-      customStyle: String
+      nativeSize: [String, Number]
     },
     data: function data() {
       return {
@@ -2359,7 +2232,7 @@
   const __vue_script__$6 = script$6;
 
   /* template */
-  var __vue_render__$5 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"control",class:{ 'is-expanded': _vm.expanded, 'has-icons-left': _vm.icon },style:(_vm.customStyle)},[_c('span',{staticClass:"select",class:_vm.spanClasses},[_c('select',_vm._b({directives:[{name:"model",rawName:"v-model",value:(_vm.computedValue),expression:"computedValue"}],ref:"select",attrs:{"multiple":_vm.multiple,"size":_vm.nativeSize},on:{"blur":function($event){_vm.$emit('blur', $event) && _vm.checkHtml5Validity();},"focus":function($event){_vm.$emit('focus', $event);},"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.computedValue=$event.target.multiple ? $$selectedVal : $$selectedVal[0];}}},'select',_vm.$attrs,false),[(_vm.placeholder)?[(_vm.computedValue == null)?_c('option',{attrs:{"disabled":"","hidden":""},domProps:{"value":null}},[_vm._v("\n                        "+_vm._s(_vm.placeholder)+"\n                    ")]):_vm._e()]:_vm._e(),_vm._v(" "),_vm._t("default")],2)]),_vm._v(" "),(_vm.icon)?_c('b-icon',{staticClass:"is-left",attrs:{"icon":_vm.icon,"pack":_vm.iconPack,"size":_vm.iconSize}}):_vm._e()],1)};
+  var __vue_render__$5 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"control",class:{ 'is-expanded': _vm.expanded, 'has-icons-left': _vm.icon }},[_c('span',{staticClass:"select",class:_vm.spanClasses},[_c('select',_vm._b({directives:[{name:"model",rawName:"v-model",value:(_vm.computedValue),expression:"computedValue"}],ref:"select",attrs:{"multiple":_vm.multiple,"size":_vm.nativeSize},on:{"blur":function($event){_vm.$emit('blur', $event) && _vm.checkHtml5Validity();},"focus":function($event){_vm.$emit('focus', $event);},"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.computedValue=$event.target.multiple ? $$selectedVal : $$selectedVal[0];}}},'select',_vm.$attrs,false),[(_vm.placeholder)?[(_vm.computedValue == null)?_c('option',{attrs:{"disabled":"","hidden":""},domProps:{"value":null}},[_vm._v("\n                        "+_vm._s(_vm.placeholder)+"\n                    ")]):_vm._e()]:_vm._e(),_vm._v(" "),_vm._t("default")],2)]),_vm._v(" "),(_vm.icon)?_c('b-icon',{staticClass:"is-left",attrs:{"icon":_vm.icon,"pack":_vm.iconPack,"size":_vm.iconSize}}):_vm._e()],1)};
   var __vue_staticRenderFns__$5 = [];
 
     /* style */
@@ -2374,23 +2247,26 @@
     
     /* style inject SSR */
     
+    /* style inject shadow dom */
+    
 
     
-    var Select = normalizeComponent_1(
+    const __vue_component__$6 = /*#__PURE__*/normalizeComponent_1(
       { render: __vue_render__$5, staticRenderFns: __vue_staticRenderFns__$5 },
       __vue_inject_styles__$6,
       __vue_script__$6,
       __vue_scope_id__$6,
       __vue_is_functional_template__$6,
       __vue_module_identifier__$6,
+      false,
+      undefined,
       undefined,
       undefined
     );
 
-  var _components;
   var script$7 = {
     name: 'BTimepicker',
-    components: (_components = {}, _defineProperty(_components, Input.name, Input), _defineProperty(_components, Field.name, Field), _defineProperty(_components, Select.name, Select), _defineProperty(_components, Icon.name, Icon), _defineProperty(_components, Dropdown.name, Dropdown), _defineProperty(_components, DropdownItem.name, DropdownItem), _components),
+    components: _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty({}, __vue_component__$3.name, __vue_component__$3), __vue_component__$5.name, __vue_component__$5), __vue_component__$6.name, __vue_component__$6), __vue_component__$2.name, __vue_component__$2), __vue_component__.name, __vue_component__), __vue_component__$1.name, __vue_component__$1),
     mixins: [TimepickerMixin],
     inheritAttrs: false,
     data: function data() {
@@ -2424,15 +2300,19 @@
     
     /* style inject SSR */
     
+    /* style inject shadow dom */
+    
 
     
-    var Timepicker = normalizeComponent_1(
+    const __vue_component__$7 = /*#__PURE__*/normalizeComponent_1(
       { render: __vue_render__$6, staticRenderFns: __vue_staticRenderFns__$6 },
       __vue_inject_styles__$7,
       __vue_script__$7,
       __vue_scope_id__$7,
       __vue_is_functional_template__$7,
       __vue_module_identifier__$7,
+      false,
+      undefined,
       undefined,
       undefined
     );
@@ -2448,12 +2328,12 @@
 
   var Plugin = {
     install: function install(Vue) {
-      registerComponent(Vue, Timepicker);
+      registerComponent(Vue, __vue_component__$7);
     }
   };
   use(Plugin);
 
-  exports.BTimepicker = Timepicker;
+  exports.BTimepicker = __vue_component__$7;
   exports.default = Plugin;
 
   Object.defineProperty(exports, '__esModule', { value: true });

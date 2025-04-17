@@ -2,33 +2,29 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-require('./chunk-14c82365.js');
+require('./chunk-f22477ff.js');
 var helpers = require('./helpers.js');
 var __chunk_2 = require('./chunk-cd0dcc1d.js');
 var __chunk_5 = require('./chunk-13e039f5.js');
-require('./chunk-ae7e641a.js');
-var __chunk_17 = require('./chunk-8c69e10a.js');
+require('./chunk-81a092b8.js');
+var __chunk_17 = require('./chunk-f01eeb01.js');
 
 var localVueInstance;
 var ModalProgrammatic = {
   open: function open(params) {
     var parent;
-
     if (typeof params === 'string') {
       params = {
         content: params
       };
     }
-
     var defaultParam = {
       programmatic: true
     };
-
     if (params.parent) {
       parent = params.parent;
       delete params.parent;
     }
-
     var propsData = helpers.merge(defaultParam, params);
     var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || __chunk_2.VueInstance;
     var ModalComponent = vm.extend(__chunk_17.Modal);

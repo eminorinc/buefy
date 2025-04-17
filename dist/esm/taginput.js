@@ -1,17 +1,16 @@
-import { _ as _defineProperty, b as _typeof } from './chunk-1fafdf15.js';
+import { _ as _defineProperty, b as _typeof } from './chunk-94a101ab.js';
 import { getValueByPath } from './helpers.js';
 import { c as config } from './chunk-6985c8ce.js';
-import { F as FormElementMixin } from './chunk-7ef8bebf.js';
-import './chunk-a376283d.js';
+import { F as FormElementMixin } from './chunk-32d5bd27.js';
+import './chunk-665715e0.js';
 import { _ as __vue_normalize__, r as registerComponent, u as use } from './chunk-cca88db8.js';
-import './chunk-df5f75f1.js';
-import { A as Autocomplete } from './chunk-7d347a66.js';
-import { T as Tag } from './chunk-666612b2.js';
+import './chunk-30008156.js';
+import { A as Autocomplete } from './chunk-33c6e1d7.js';
+import { T as Tag } from './chunk-ecd4adf5.js';
 
-var _components;
 var script = {
   name: 'BTaginput',
-  components: (_components = {}, _defineProperty(_components, Autocomplete.name, Autocomplete), _defineProperty(_components, Tag.name, Tag), _components),
+  components: _defineProperty(_defineProperty({}, Autocomplete.name, Autocomplete), Tag.name, Tag),
   mixins: [FormElementMixin],
   inheritAttrs: false,
   props: {
@@ -141,7 +140,6 @@ var script = {
     hasFooterSlot: function hasFooterSlot() {
       return !!this.$slots.footer;
     },
-
     /**
      * Show the input field if a maxtags hasn't been set or reached.
      */
@@ -151,7 +149,6 @@ var script = {
     tagsLength: function tagsLength() {
       return this.tags.length;
     },
-
     /**
      * If Taginput has onPasteSeparators prop,
      * returning new RegExp used to split pasted string.
@@ -177,11 +174,9 @@ var script = {
   methods: {
     addTag: function addTag(tag) {
       var tagToAdd = tag || this.newTag.trim();
-
       if (tagToAdd) {
         if (!this.autocomplete) {
           var reg = this.separatorsAsRegExp;
-
           if (reg && tagToAdd.match(reg)) {
             tagToAdd.split(reg).map(function (t) {
               return t.trim();
@@ -190,36 +185,30 @@ var script = {
             }).map(this.addTag);
             return;
           }
-        } // Remove the tag input previously added (if not allowDuplicates).
-
-
+        }
+        // Remove the tag input previously added (if not allowDuplicates).
         if (!this.allowDuplicates) {
           var index = this.tags.indexOf(tagToAdd);
-
           if (index >= 0) {
             this.tags.splice(index, 1);
             return;
           }
-        } // Add the tag input if it is not blank
+        }
+        // Add the tag input if it is not blank
         // or previously added (if not allowDuplicates).
-
-
         var add = !this.allowDuplicates ? this.tags.indexOf(tagToAdd) === -1 : true;
-
         if (add && this.beforeAdding(tagToAdd)) {
           this.tags.push(tagToAdd);
           this.$emit('input', this.tags);
           this.$emit('add', tagToAdd);
         }
       }
-
       this.newTag = '';
     },
     getNormalizedTagText: function getNormalizedTagText(tag) {
       if (_typeof(tag) === 'object') {
         return getValueByPath(tag, this.field);
       }
-
       return tag;
     },
     customOnBlur: function customOnBlur(event) {
@@ -229,7 +218,6 @@ var script = {
     },
     onSelect: function onSelect(option) {
       var _this = this;
-
       if (!option) return;
       this.addTag(option);
       this.$nextTick(function () {
@@ -241,11 +229,9 @@ var script = {
       this.$emit('input', this.tags);
       this.$emit('remove', tag);
       if (event) event.stopPropagation();
-
       if (this.openOnFocus && this.$refs.autocomplete) {
         this.$refs.autocomplete.focus();
       }
-
       return tag;
     },
     removeLastTag: function removeLastTag() {
@@ -256,11 +242,9 @@ var script = {
     keydown: function keydown(event) {
       if (this.removeOnKeys.indexOf(event.keyCode) !== -1 && !this.newTag.length) {
         this.removeLastTag();
-      } // Stop if is to accept select only
-
-
+      }
+      // Stop if is to accept select only
       if (this.autocomplete && !this.allowNew) return;
-
       if (this.confirmKeyCodes.indexOf(event.keyCode) >= 0) {
         event.preventDefault();
         this.addTag();
@@ -294,25 +278,29 @@ var __vue_staticRenderFns__ = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Taginput = __vue_normalize__(
+  const __vue_component__ = /*#__PURE__*/__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
     __vue_scope_id__,
     __vue_is_functional_template__,
     __vue_module_identifier__,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin = {
   install: function install(Vue) {
-    registerComponent(Vue, Taginput);
+    registerComponent(Vue, __vue_component__);
   }
 };
 use(Plugin);
 
 export default Plugin;
-export { Taginput as BTaginput };
+export { __vue_component__ as BTaginput };

@@ -17,6 +17,7 @@ var __chunk_5 = require('./chunk-13e039f5.js');
 //
 //
 //
+
 var script = {
   name: 'BProgress',
   props: {
@@ -64,13 +65,10 @@ var script = {
       if (this.value === undefined || this.value === null || isNaN(this.value)) {
         return undefined;
       }
-
       if (this.format === 'percent') {
         var _val = this.toFixed(this.value * 100 / this.max);
-
         return "".concat(_val, "%");
       }
-
       var val = this.toFixed(this.value);
       return val;
     }
@@ -95,11 +93,9 @@ var script = {
     // Custom function that imitate the javascript toFixed method with improved rounding
     toFixed: function toFixed(num) {
       var fixed = (+"".concat(Math.round(+"".concat(num, "e").concat(this.precision)), "e").concat(-this.precision)).toFixed(this.precision);
-
       if (!this.keepTrailingZeroes) {
         fixed = fixed.replace(/\.?0+$/, '');
       }
-
       return fixed;
     }
   },
@@ -127,25 +123,29 @@ var __vue_staticRenderFns__ = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Progress = __chunk_5.__vue_normalize__(
+  const __vue_component__ = /*#__PURE__*/__chunk_5.__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
     __vue_scope_id__,
     __vue_is_functional_template__,
     __vue_module_identifier__,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin = {
   install: function install(Vue) {
-    __chunk_5.registerComponent(Vue, Progress);
+    __chunk_5.registerComponent(Vue, __vue_component__);
   }
 };
 __chunk_5.use(Plugin);
 
-exports.BProgress = Progress;
+exports.BProgress = __vue_component__;
 exports.default = Plugin;

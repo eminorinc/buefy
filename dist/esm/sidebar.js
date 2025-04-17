@@ -1,8 +1,7 @@
-import './chunk-1fafdf15.js';
+import { d as _createForOfIteratorHelper } from './chunk-94a101ab.js';
 import { removeElement } from './helpers.js';
 import { _ as __vue_normalize__, r as registerComponent, u as use } from './chunk-cca88db8.js';
 
-//
 var script = {
   name: 'BSidebar',
   props: {
@@ -72,42 +71,29 @@ var script = {
     isAbsolute: function isAbsolute() {
       return this.position === 'absolute';
     },
-
     /**
      * White-listed items to not close when clicked.
      * Add sidebar content and all children.
      */
     whiteList: function whiteList() {
       var whiteList = [];
-      whiteList.push(this.$refs.sidebarContent); // Add all chidren from dropdown
-
+      whiteList.push(this.$refs.sidebarContent);
+      // Add all chidren from dropdown
       if (this.$refs.sidebarContent !== undefined) {
         var children = this.$refs.sidebarContent.querySelectorAll('*');
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
+        var _iterator = _createForOfIteratorHelper(children),
+          _step;
         try {
-          for (var _iterator = children[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
             var child = _step.value;
             whiteList.push(child);
           }
         } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
+          _iterator.e(err);
         } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-              _iterator.return();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
-          }
+          _iterator.f();
         }
       }
-
       return whiteList;
     }
   },
@@ -131,7 +117,6 @@ var script = {
         if (this.isOpen && event.keyCode === 27) this.cancel('escape');
       }
     },
-
     /**
     * Close the Sidebar if canCancel and call the onCancel prop (function).
     */
@@ -141,7 +126,6 @@ var script = {
       this.onCancel.apply(null, arguments);
       this.close();
     },
-
     /**
     * Call the onCancel prop (function) and emit events
     */
@@ -150,7 +134,6 @@ var script = {
       this.$emit('close');
       this.$emit('update:open', false);
     },
-
     /**
      * Close fixed sidebar if clicked outside.
      */
@@ -163,14 +146,12 @@ var script = {
         }
       }
     },
-
     /**
     * Transition before-enter hook
     */
     beforeEnter: function beforeEnter() {
       this.animating = true;
     },
-
     /**
     * Transition after-leave hook
     */
@@ -196,7 +177,6 @@ var script = {
       document.removeEventListener('keyup', this.keyPress);
       document.removeEventListener('click', this.clickedOutside);
     }
-
     if (this.isFixed) {
       removeElement(this.$el);
     }
@@ -222,25 +202,29 @@ var __vue_staticRenderFns__ = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Sidebar = __vue_normalize__(
+  const __vue_component__ = /*#__PURE__*/__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
     __vue_scope_id__,
     __vue_is_functional_template__,
     __vue_module_identifier__,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin = {
   install: function install(Vue) {
-    registerComponent(Vue, Sidebar);
+    registerComponent(Vue, __vue_component__);
   }
 };
 use(Plugin);
 
 export default Plugin;
-export { Sidebar as BSidebar };
+export { __vue_component__ as BSidebar };
