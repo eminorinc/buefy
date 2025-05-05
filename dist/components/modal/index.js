@@ -7,28 +7,21 @@
 
     var findFocusable = function findFocusable(element) {
       var programmatic = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
       if (!element) {
         return null;
       }
-
       if (programmatic) {
         return element.querySelectorAll("*[tabindex=\"-1\"]");
       }
-
       return element.querySelectorAll("a[href]:not([tabindex=\"-1\"]),\n                                     area[href],\n                                     input:not([disabled]),\n                                     select:not([disabled]),\n                                     textarea:not([disabled]),\n                                     button:not([disabled]),\n                                     iframe,\n                                     object,\n                                     embed,\n                                     *[tabindex]:not([tabindex=\"-1\"]),\n                                     *[contenteditable]");
     };
-
     var onKeyDown;
-
     var bind = function bind(el, _ref) {
       var _ref$value = _ref.value,
-          value = _ref$value === void 0 ? true : _ref$value;
-
+        value = _ref$value === void 0 ? true : _ref$value;
       if (value) {
         var focusable = findFocusable(el);
         var focusableProg = findFocusable(el, true);
-
         if (focusable && focusable.length > 0) {
           onKeyDown = function onKeyDown(event) {
             // Need to get focusable each time since it can change between key events
@@ -37,7 +30,6 @@
             focusableProg = findFocusable(el, true);
             var firstFocusable = focusable[0];
             var lastFocusable = focusable[focusable.length - 1];
-
             if (event.target === firstFocusable && event.shiftKey && event.key === 'Tab') {
               event.preventDefault();
               lastFocusable.focus();
@@ -46,114 +38,94 @@
               firstFocusable.focus();
             }
           };
-
           el.addEventListener('keydown', onKeyDown);
         }
       }
     };
-
     var unbind = function unbind(el) {
       el.removeEventListener('keydown', onKeyDown);
     };
-
     var directive = {
       bind: bind,
       unbind: unbind
     };
 
-    function _typeof(obj) {
+    function _defineProperty(e, r, t) {
+      return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
+        value: t,
+        enumerable: !0,
+        configurable: !0,
+        writable: !0
+      }) : e[r] = t, e;
+    }
+    function ownKeys(e, r) {
+      var t = Object.keys(e);
+      if (Object.getOwnPropertySymbols) {
+        var o = Object.getOwnPropertySymbols(e);
+        r && (o = o.filter(function (r) {
+          return Object.getOwnPropertyDescriptor(e, r).enumerable;
+        })), t.push.apply(t, o);
+      }
+      return t;
+    }
+    function _objectSpread2(e) {
+      for (var r = 1; r < arguments.length; r++) {
+        var t = null != arguments[r] ? arguments[r] : {};
+        r % 2 ? ownKeys(Object(t), !0).forEach(function (r) {
+          _defineProperty(e, r, t[r]);
+        }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) {
+          Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+        });
+      }
+      return e;
+    }
+    function _toPrimitive(t, r) {
+      if ("object" != typeof t || !t) return t;
+      var e = t[Symbol.toPrimitive];
+      if (void 0 !== e) {
+        var i = e.call(t, r || "default");
+        if ("object" != typeof i) return i;
+        throw new TypeError("@@toPrimitive must return a primitive value.");
+      }
+      return ("string" === r ? String : Number)(t);
+    }
+    function _toPropertyKey(t) {
+      var i = _toPrimitive(t, "string");
+      return "symbol" == typeof i ? i : i + "";
+    }
+    function _typeof(o) {
       "@babel/helpers - typeof";
 
-      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-        _typeof = function (obj) {
-          return typeof obj;
-        };
-      } else {
-        _typeof = function (obj) {
-          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-        };
-      }
-
-      return _typeof(obj);
-    }
-
-    function _defineProperty(obj, key, value) {
-      if (key in obj) {
-        Object.defineProperty(obj, key, {
-          value: value,
-          enumerable: true,
-          configurable: true,
-          writable: true
-        });
-      } else {
-        obj[key] = value;
-      }
-
-      return obj;
-    }
-
-    function ownKeys(object, enumerableOnly) {
-      var keys = Object.keys(object);
-
-      if (Object.getOwnPropertySymbols) {
-        var symbols = Object.getOwnPropertySymbols(object);
-        if (enumerableOnly) symbols = symbols.filter(function (sym) {
-          return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-        });
-        keys.push.apply(keys, symbols);
-      }
-
-      return keys;
-    }
-
-    function _objectSpread2(target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i] != null ? arguments[i] : {};
-
-        if (i % 2) {
-          ownKeys(Object(source), true).forEach(function (key) {
-            _defineProperty(target, key, source[key]);
-          });
-        } else if (Object.getOwnPropertyDescriptors) {
-          Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-        } else {
-          ownKeys(Object(source)).forEach(function (key) {
-            Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-          });
-        }
-      }
-
-      return target;
+      return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+        return typeof o;
+      } : function (o) {
+        return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+      }, _typeof(o);
     }
 
     /**
      * Merge function to replace Object.assign with deep merging possibility
      */
-
     var isObject = function isObject(item) {
       return _typeof(item) === 'object' && !Array.isArray(item);
     };
-
-    var mergeFn = function mergeFn(target, source) {
+    var _mergeFn = function mergeFn(target, source) {
       var deep = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
       if (deep || !Object.assign) {
         var isDeep = function isDeep(prop) {
           return isObject(source[prop]) && target !== null && target.hasOwnProperty(prop) && isObject(target[prop]);
         };
-
         var replaced = Object.getOwnPropertyNames(source).map(function (prop) {
-          return _defineProperty({}, prop, isDeep(prop) ? mergeFn(target[prop], source[prop], deep) : source[prop]);
+          return _defineProperty({}, prop, isDeep(prop) ? _mergeFn(target[prop], source[prop], deep) : source[prop]);
         }).reduce(function (a, b) {
-          return _objectSpread2({}, a, {}, b);
+          return _objectSpread2(_objectSpread2({}, a), b);
         }, {});
-        return _objectSpread2({}, target, {}, replaced);
+        return _objectSpread2(_objectSpread2({}, target), replaced);
       } else {
         return Object.assign(target, source);
       }
     };
-
-    var merge = mergeFn;
+    var merge = _mergeFn;
     function removeElement(el) {
       if (typeof el.remove !== 'undefined') {
         el.remove();
@@ -297,7 +269,6 @@
               maxWidth: this.newWidth
             };
           }
-
           return null;
         }
       },
@@ -307,7 +278,6 @@
         },
         isActive: function isActive(value) {
           var _this = this;
-
           if (value) this.destroyed = false;
           this.handleScroll();
           this.$nextTick(function () {
@@ -320,35 +290,28 @@
       methods: {
         handleScroll: function handleScroll() {
           if (typeof window === 'undefined') return;
-
           if (this.scroll === 'clip') {
             if (this.isActive) {
               document.documentElement.classList.add('is-clipped');
             } else {
               document.documentElement.classList.remove('is-clipped');
             }
-
             return;
           }
-
           this.savedScrollTop = !this.savedScrollTop ? document.documentElement.scrollTop : this.savedScrollTop;
-
           if (this.isActive) {
             document.body.classList.add('is-noscroll');
           } else {
             document.body.classList.remove('is-noscroll');
           }
-
           if (this.isActive) {
             document.body.style.top = "-".concat(this.savedScrollTop, "px");
             return;
           }
-
           document.documentElement.scrollTop = this.savedScrollTop;
           document.body.style.top = null;
           this.savedScrollTop = null;
         },
-
         /**
         * Close the Modal if canCancel and call the onCancel prop (function).
         */
@@ -357,27 +320,24 @@
           this.onCancel.apply(null, arguments);
           this.close();
         },
-
         /**
         * Call the onCancel prop (function).
         * Emit events, and destroy modal if it's programmatic.
         */
         close: function close() {
           var _this2 = this;
-
           this.$emit('close');
-          this.$emit('update:active', false); // Timeout for the animation complete before destroying
+          this.$emit('update:active', false);
 
+          // Timeout for the animation complete before destroying
           if (this.programmatic) {
             this.isActive = false;
             setTimeout(function () {
               _this2.$destroy();
-
               removeElement(_this2.$el);
             }, 150);
           }
         },
-
         /**
         * Keypress event that is bound to the document.
         */
@@ -385,21 +345,18 @@
           // Esc key
           if (this.isActive && event.keyCode === 27) this.cancel('escape');
         },
-
         /**
         * Transition after-enter hook
         */
         afterEnter: function afterEnter() {
           this.animating = false;
         },
-
         /**
         * Transition before-leave hook
         */
         beforeLeave: function beforeLeave() {
           this.animating = true;
         },
-
         /**
         * Transition after-leave hook
         */
@@ -424,8 +381,8 @@
       },
       beforeDestroy: function beforeDestroy() {
         if (typeof window !== 'undefined') {
-          document.removeEventListener('keyup', this.keyPress); // reset scroll
-
+          document.removeEventListener('keyup', this.keyPress);
+          // reset scroll
           document.documentElement.classList.remove('is-clipped');
           var savedScrollTop = !this.savedScrollTop ? document.documentElement.scrollTop : this.savedScrollTop;
           document.body.classList.remove('is-noscroll');
@@ -539,15 +496,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var Modal = normalizeComponent_1(
+      const __vue_component__ = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
         __vue_inject_styles__,
         __vue_script__,
         __vue_scope_id__,
         __vue_is_functional_template__,
         __vue_module_identifier__,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -569,25 +530,21 @@
     var ModalProgrammatic = {
       open: function open(params) {
         var parent;
-
         if (typeof params === 'string') {
           params = {
             content: params
           };
         }
-
         var defaultParam = {
           programmatic: true
         };
-
         if (params.parent) {
           parent = params.parent;
           delete params.parent;
         }
-
         var propsData = merge(defaultParam, params);
         var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance;
-        var ModalComponent = vm.extend(Modal);
+        var ModalComponent = vm.extend(__vue_component__);
         return new ModalComponent({
           parent: parent,
           el: document.createElement('div'),
@@ -598,13 +555,13 @@
     var Plugin = {
       install: function install(Vue) {
         localVueInstance = Vue;
-        registerComponent(Vue, Modal);
+        registerComponent(Vue, __vue_component__);
         registerComponentProgrammatic(Vue, 'modal', ModalProgrammatic);
       }
     };
     use(Plugin);
 
-    exports.BModal = Modal;
+    exports.BModal = __vue_component__;
     exports.ModalProgrammatic = ModalProgrammatic;
     exports.default = Plugin;
 

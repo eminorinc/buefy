@@ -88,23 +88,19 @@
          */
         parentField: function parentField() {
           var parent = this.$parent;
-
           for (var i = 0; i < 3; i++) {
             if (parent && !parent.$data._isField) {
               parent = parent.$parent;
             }
           }
-
           return parent;
         },
-
         /**
          * Get the type prop from parent if it's a Field.
          */
         statusType: function statusType() {
           if (!this.parentField) return;
           if (!this.parentField.newType) return;
-
           if (typeof this.parentField.newType === 'string') {
             return this.parentField.newType;
           } else {
@@ -115,7 +111,6 @@
             }
           }
         },
-
         /**
          * Get the message prop from parent if it's a Field.
          */
@@ -123,7 +118,6 @@
           if (!this.parentField) return;
           return this.parentField.newMessage || this.parentField.$slots.message;
         },
-
         /**
          * Fix icon size for inputs, large was too big
          */
@@ -131,10 +125,8 @@
           switch (this.size) {
             case 'is-small':
               return this.size;
-
             case 'is-medium':
               return;
-
             case 'is-large':
               return this.newIconPack === 'mdi' ? 'is-medium' : '';
           }
@@ -146,11 +138,9 @@
          */
         focus: function focus() {
           var _this = this;
-
           if (this.$data._elementRef === undefined) return;
           this.$nextTick(function () {
             var el = _this.$el.querySelector(_this.$data._elementRef);
-
             if (el) el.focus();
           });
         },
@@ -173,22 +163,19 @@
         },
         setValidity: function setValidity(type, message) {
           var _this2 = this;
-
           this.$nextTick(function () {
             if (_this2.parentField) {
               // Set type only if not defined
               if (!_this2.parentField.type) {
                 _this2.parentField.newType = type;
-              } // Set message only if not defined
-
-
+              }
+              // Set message only if not defined
               if (!_this2.parentField.message) {
                 _this2.parentField.newMessage = message;
               }
             }
           });
         },
-
         /**
          * Check HTML5 validation, set isValid property.
          * If validation fail, send 'is-danger' type,
@@ -198,7 +185,6 @@
           if (!this.useHtml5Validation) return;
           if (this.$refs[this.$data._elementRef] === undefined) return;
           if (this.getElement() === null) return;
-
           if (!this.getElement().checkValidity()) {
             this.setInvalid();
             this.isValid = false;
@@ -206,13 +192,13 @@
             this.setValidity(null, null);
             this.isValid = true;
           }
-
           return this.isValid;
         }
       }
     };
 
     // Polyfills for SSR
+
     var isSSR = typeof window === 'undefined';
     var HTMLElement = isSSR ? Object : window.HTMLElement;
     var File = isSSR ? Object : window.File;
@@ -261,13 +247,11 @@
         value: function value(_value) {
           var inputFiles = this.$refs.input.files;
           this.newValue = _value;
-
           if (!this.newValue || Array.isArray(this.newValue) && this.newValue.length === 0 || !inputFiles[0] || Array.isArray(this.newValue) && !this.newValue.some(function (a) {
             return a.name === inputFiles[0].name;
           })) {
             this.$refs.input.value = null;
           }
-
           !this.isValid && !this.dragDrop && this.checkHtml5Validity();
         }
       },
@@ -278,18 +262,14 @@
         */
         onFileChange: function onFileChange(event) {
           if (this.disabled || this.loading) return;
-
           if (this.dragDrop) {
             this.updateDragDropFocus(false);
           }
-
           var value = event.target.files || event.dataTransfer.files;
-
           if (value.length === 0) {
             if (!this.newValue) {
               return;
             }
-
             if (this.native) {
               this.newValue = null;
             }
@@ -297,7 +277,6 @@
             // only one element in case drag drop mode and isn't multiple
             if (this.dragDrop && value.length !== 1) return;else {
               var file = value[0];
-
               if (this.checkType(file)) {
                 this.newValue = file;
               } else if (this.newValue) {
@@ -309,30 +288,24 @@
           } else {
             // always new values if native or undefined local
             var newValues = false;
-
             if (this.native || !this.newValue) {
               this.newValue = [];
               newValues = true;
             }
-
             for (var i = 0; i < value.length; i++) {
               var _file = value[i];
-
               if (this.checkType(_file)) {
                 this.newValue.push(_file);
                 newValues = true;
               }
             }
-
             if (!newValues) {
               return;
             }
           }
-
           this.$emit('input', this.newValue);
           !this.dragDrop && this.checkHtml5Validity();
         },
-
         /**
         * Listen drag-drop to update internal variable
         */
@@ -341,7 +314,6 @@
             this.dragDropFocus = focus;
           }
         },
-
         /**
         * Check mime type of file
         */
@@ -350,16 +322,13 @@
           var types = this.accept.split(',');
           if (types.length === 0) return true;
           var valid = false;
-
           for (var i = 0; i < types.length && !valid; i++) {
             var type = types[i].trim();
-
             if (type) {
               if (type.substring(0, 1) === '.') {
                 // check extension
                 var extIndex = file.name.lastIndexOf('.');
                 var extension = extIndex >= 0 ? file.name.substring(extIndex) : '';
-
                 if (extension.toLowerCase() === type.toLowerCase()) {
                   valid = true;
                 }
@@ -371,7 +340,6 @@
               }
             }
           }
-
           return valid;
         }
       }
@@ -486,15 +454,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var Upload = normalizeComponent_1(
+      const __vue_component__ = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
         __vue_inject_styles__,
         __vue_script__,
         __vue_scope_id__,
         __vue_is_functional_template__,
         __vue_module_identifier__,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -510,12 +482,12 @@
 
     var Plugin = {
       install: function install(Vue) {
-        registerComponent(Vue, Upload);
+        registerComponent(Vue, __vue_component__);
       }
     };
     use(Plugin);
 
-    exports.BUpload = Upload;
+    exports.BUpload = __vue_component__;
     exports.default = Plugin;
 
     Object.defineProperty(exports, '__esModule', { value: true });

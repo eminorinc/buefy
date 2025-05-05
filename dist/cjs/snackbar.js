@@ -2,11 +2,11 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-require('./chunk-14c82365.js');
+require('./chunk-f22477ff.js');
 var helpers = require('./helpers.js');
 var __chunk_2 = require('./chunk-cd0dcc1d.js');
 var __chunk_5 = require('./chunk-13e039f5.js');
-var __chunk_20 = require('./chunk-13d78c1a.js');
+var __chunk_20 = require('./chunk-6c0a3883.js');
 
 //
 var script = {
@@ -120,16 +120,20 @@ var __vue_staticRenderFns__ = [];
   const __vue_is_functional_template__ = false;
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Snackbar = __chunk_5.__vue_normalize__(
+  const __vue_component__ = /*#__PURE__*/__chunk_5.__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
     __vue_scope_id__,
     __vue_is_functional_template__,
     __vue_module_identifier__,
+    false,
     browser,
+    undefined,
     undefined
   );
 
@@ -137,26 +141,22 @@ var localVueInstance;
 var SnackbarProgrammatic = {
   open: function open(params) {
     var parent;
-
     if (typeof params === 'string') {
       params = {
         message: params
       };
     }
-
     var defaultParam = {
       type: 'is-success',
       position: __chunk_2.config.defaultSnackbarPosition || 'is-bottom-right'
     };
-
     if (params.parent) {
       parent = params.parent;
       delete params.parent;
     }
-
     var propsData = helpers.merge(defaultParam, params);
     var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || __chunk_2.VueInstance;
-    var SnackbarComponent = vm.extend(Snackbar);
+    var SnackbarComponent = vm.extend(__vue_component__);
     return new SnackbarComponent({
       parent: parent,
       el: document.createElement('div'),
@@ -172,6 +172,6 @@ var Plugin = {
 };
 __chunk_5.use(Plugin);
 
-exports.BSnackbar = Snackbar;
+exports.BSnackbar = __vue_component__;
 exports.SnackbarProgrammatic = SnackbarProgrammatic;
 exports.default = Plugin;

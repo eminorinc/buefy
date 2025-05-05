@@ -4,7 +4,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 require('./chunk-cd0dcc1d.js');
 var __chunk_5 = require('./chunk-13e039f5.js');
-var __chunk_22 = require('./chunk-ecc5e68e.js');
+var __chunk_22 = require('./chunk-38530975.js');
 
 var Plugin = {
   install: function install(Vue) {

@@ -2,17 +2,16 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var __chunk_1 = require('./chunk-14c82365.js');
+var __chunk_1 = require('./chunk-f22477ff.js');
 require('./helpers.js');
 var __chunk_2 = require('./chunk-cd0dcc1d.js');
-var __chunk_4 = require('./chunk-60f5141f.js');
+var __chunk_4 = require('./chunk-ff4db405.js');
 var __chunk_5 = require('./chunk-13e039f5.js');
 var __chunk_23 = require('./chunk-3dffe6e7.js');
 
-var _components;
 var script = {
   name: 'BTabs',
-  components: (_components = {}, __chunk_1._defineProperty(_components, __chunk_4.Icon.name, __chunk_4.Icon), __chunk_1._defineProperty(_components, __chunk_23.SlotComponent.name, __chunk_23.SlotComponent), _components),
+  components: __chunk_1._defineProperty(__chunk_1._defineProperty({}, __chunk_4.Icon.name, __chunk_4.Icon), __chunk_23.SlotComponent.name, __chunk_23.SlotComponent),
   props: {
     value: [Number, String],
     expanded: Boolean,
@@ -39,7 +38,6 @@ var script = {
       contentHeight: 0,
       isTransitioning: false,
       _isTabs: true // Used internally by TabItem
-
     };
   },
   computed: {
@@ -51,9 +49,7 @@ var script = {
       }, this.position, this.position && this.vertical);
     },
     navClasses: function navClasses() {
-      var _ref2;
-
-      return [this.type, this.size, (_ref2 = {}, __chunk_1._defineProperty(_ref2, this.position, this.position && !this.vertical), __chunk_1._defineProperty(_ref2, 'is-fullwidth', this.expanded), __chunk_1._defineProperty(_ref2, 'is-toggle-rounded is-toggle', this.type === 'is-toggle-rounded'), _ref2)];
+      return [this.type, this.size, __chunk_1._defineProperty(__chunk_1._defineProperty(__chunk_1._defineProperty({}, this.position, this.position && !this.vertical), 'is-fullwidth', this.expanded), 'is-toggle-rounded is-toggle', this.type === 'is-toggle-rounded')];
     },
     tabItems: function tabItems() {
       return this.defaultSlots.filter(function (vnode) {
@@ -71,19 +67,16 @@ var script = {
       var index = this.getIndexByValue(_value, _value);
       this.changeTab(index);
     },
-
     /**
     * When tab-items are updated, set active one.
     */
     tabItems: function tabItems() {
       var _this = this;
-
       if (this.activeTab < this.tabItems.length) {
         var previous = this.activeTab;
         this.tabItems.map(function (tab, idx) {
           if (tab.isActive) {
             previous = idx;
-
             if (previous < _this.tabItems.length) {
               _this.tabItems[previous].isActive = false;
             }
@@ -101,16 +94,13 @@ var script = {
     */
     changeTab: function changeTab(newIndex) {
       if (this.activeTab === newIndex || this.tabItems[newIndex] === undefined) return;
-
       if (this.activeTab < this.tabItems.length) {
         this.tabItems[this.activeTab].deactivate(this.activeTab, newIndex);
       }
-
       this.tabItems[newIndex].activate(this.activeTab, newIndex);
       this.activeTab = newIndex;
       this.$emit('change', this.getValueByIndex(newIndex));
     },
-
     /**
     * Tab click listener, emit input event and change active tab.
     */
@@ -135,11 +125,9 @@ var script = {
   },
   mounted: function mounted() {
     this.activeTab = this.getIndexByValue(this.value || 0);
-
     if (this.activeTab < this.tabItems.length) {
       this.tabItems[this.activeTab].isActive = true;
     }
-
     this.refreshSlots();
   }
 };
@@ -163,15 +151,19 @@ var __vue_staticRenderFns__ = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Tabs = __chunk_5.__vue_normalize__(
+  const __vue_component__ = /*#__PURE__*/__chunk_5.__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
     __vue_scope_id__,
     __vue_is_functional_template__,
     __vue_module_identifier__,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -194,7 +186,6 @@ var script$1 = {
       isActive: false,
       transitionName: null,
       _isTabItem: true // Used internally by Tab
-
     };
   },
   methods: {
@@ -205,7 +196,6 @@ var script$1 = {
       this.transitionName = index < oldIndex ? this.$parent.vertical ? 'slide-down' : 'slide-next' : this.$parent.vertical ? 'slide-up' : 'slide-prev';
       this.isActive = true;
     },
-
     /**
     * Deactivate tab, alter animation name based on the index.
     */
@@ -219,7 +209,6 @@ var script$1 = {
       this.$destroy();
       throw new Error('You should wrap bTabItem on a bTabs');
     }
-
     this.$parent.refreshSlots();
   },
   beforeDestroy: function beforeDestroy() {
@@ -227,22 +216,20 @@ var script$1 = {
   },
   render: function render(createElement) {
     var _this = this;
-
     // if destroy apply v-if
     if (this.$parent.destroyOnHide) {
       if (!this.isActive || !this.visible) {
         return;
       }
     }
-
     var vnode = createElement('div', {
       directives: [{
         name: 'show',
         value: this.isActive && this.visible
       }],
       class: 'tab-item'
-    }, this.$slots.default); // check animated prop
-
+    }, this.$slots.default);
+    // check animated prop
     if (this.$parent.animated) {
       return createElement('transition', {
         props: {
@@ -258,7 +245,6 @@ var script$1 = {
         }
       }, [vnode]);
     }
-
     return vnode;
   }
 };
@@ -280,27 +266,31 @@ const __vue_script__$1 = script$1;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var TabItem = __chunk_5.__vue_normalize__(
+  const __vue_component__$1 = /*#__PURE__*/__chunk_5.__vue_normalize__(
     {},
     __vue_inject_styles__$1,
     __vue_script__$1,
     __vue_scope_id__$1,
     __vue_is_functional_template__$1,
     __vue_module_identifier__$1,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin = {
   install: function install(Vue) {
-    __chunk_5.registerComponent(Vue, Tabs);
-    __chunk_5.registerComponent(Vue, TabItem);
+    __chunk_5.registerComponent(Vue, __vue_component__);
+    __chunk_5.registerComponent(Vue, __vue_component__$1);
   }
 };
 __chunk_5.use(Plugin);
 
-exports.BTabItem = TabItem;
-exports.BTabs = Tabs;
+exports.BTabItem = __vue_component__$1;
+exports.BTabs = __vue_component__;
 exports.default = Plugin;

@@ -1,4 +1,4 @@
-import { b as _typeof, _ as _defineProperty } from './chunk-1fafdf15.js';
+import { b as _typeof, _ as _defineProperty } from './chunk-94a101ab.js';
 import { _ as __vue_normalize__, r as registerComponent, u as use } from './chunk-cca88db8.js';
 
 //
@@ -16,6 +16,7 @@ import { _ as __vue_normalize__, r as registerComponent, u as use } from './chun
 //
 //
 //
+
 var script = {
   name: 'NavbarBurger',
   props: {
@@ -45,15 +46,19 @@ var __vue_staticRenderFns__ = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var NavbarBurger = __vue_normalize__(
+  const __vue_component__ = /*#__PURE__*/__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
     __vue_scope_id__,
     __vue_is_functional_template__,
     __vue_module_identifier__,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -61,14 +66,11 @@ var __vue_staticRenderFns__ = [];
 var isTouch = typeof window !== 'undefined' && ('ontouchstart' in window || navigator.msMaxTouchPoints > 0);
 var events = isTouch ? ['touchstart', 'click'] : ['click'];
 var instances = [];
-
 function processArgs(bindingValue) {
   var isFunction = typeof bindingValue === 'function';
-
   if (!isFunction && _typeof(bindingValue) !== 'object') {
     throw new Error("v-click-outside: Binding value should be a function or an object, typeof ".concat(bindingValue, " given"));
   }
-
   return {
     handler: isFunction ? bindingValue : bindingValue.handler,
     middleware: bindingValue.middleware || function (isClickOutside) {
@@ -77,31 +79,25 @@ function processArgs(bindingValue) {
     events: bindingValue.events || events
   };
 }
-
 function onEvent(_ref) {
   var el = _ref.el,
-      event = _ref.event,
-      handler = _ref.handler,
-      middleware = _ref.middleware;
+    event = _ref.event,
+    handler = _ref.handler,
+    middleware = _ref.middleware;
   var isClickOutside = event.target !== el && !el.contains(event.target);
-
   if (!isClickOutside) {
     return;
   }
-
   if (middleware(event, el)) {
     handler(event, el);
   }
 }
-
 function bind(el, _ref2) {
   var value = _ref2.value;
-
   var _processArgs = processArgs(value),
-      _handler = _processArgs.handler,
-      middleware = _processArgs.middleware,
-      events = _processArgs.events;
-
+    _handler = _processArgs.handler,
+    middleware = _processArgs.middleware,
+    events = _processArgs.events;
   var instance = {
     el: el,
     eventHandlers: events.map(function (eventName) {
@@ -120,27 +116,24 @@ function bind(el, _ref2) {
   };
   instance.eventHandlers.forEach(function (_ref3) {
     var event = _ref3.event,
-        handler = _ref3.handler;
+      handler = _ref3.handler;
     return document.addEventListener(event, handler);
   });
   instances.push(instance);
 }
-
 function update(el, _ref4) {
   var value = _ref4.value;
-
   var _processArgs2 = processArgs(value),
-      _handler2 = _processArgs2.handler,
-      middleware = _processArgs2.middleware,
-      events = _processArgs2.events; // `filter` instead of `find` for compat with IE
-
-
+    _handler2 = _processArgs2.handler,
+    middleware = _processArgs2.middleware,
+    events = _processArgs2.events;
+  // `filter` instead of `find` for compat with IE
   var instance = instances.filter(function (instance) {
     return instance.el === el;
   })[0];
   instance.eventHandlers.forEach(function (_ref5) {
     var event = _ref5.event,
-        handler = _ref5.handler;
+      handler = _ref5.handler;
     return document.removeEventListener(event, handler);
   });
   instance.eventHandlers = events.map(function (eventName) {
@@ -158,11 +151,10 @@ function update(el, _ref4) {
   });
   instance.eventHandlers.forEach(function (_ref6) {
     var event = _ref6.event,
-        handler = _ref6.handler;
+      handler = _ref6.handler;
     return document.addEventListener(event, handler);
   });
 }
-
 function unbind(el) {
   // `filter` instead of `find` for compat with IE
   var instance = instances.filter(function (instance) {
@@ -170,11 +162,10 @@ function unbind(el) {
   })[0];
   instance.eventHandlers.forEach(function (_ref7) {
     var event = _ref7.event,
-        handler = _ref7.handler;
+      handler = _ref7.handler;
     return document.removeEventListener(event, handler);
   });
 }
-
 var directive = {
   bind: bind,
   update: update,
@@ -188,15 +179,13 @@ var BODY_SPACED_FIXED_TOP_CLASS = 'has-spaced-navbar-fixed-top';
 var FIXED_BOTTOM_CLASS = 'is-fixed-bottom';
 var BODY_FIXED_BOTTOM_CLASS = 'has-navbar-fixed-bottom';
 var BODY_SPACED_FIXED_BOTTOM_CLASS = 'has-spaced-navbar-fixed-bottom';
-
 var isFilled = function isFilled(str) {
   return !!str;
 };
-
 var script$1 = {
   name: 'BNavbar',
   components: {
-    NavbarBurger: NavbarBurger
+    NavbarBurger: __vue_component__
   },
   directives: {
     clickOutside: directive
@@ -237,7 +226,6 @@ var script$1 = {
     return {
       internalIsActive: this.isActive,
       _isNavBar: true // Used internally by NavbarItem
-
     };
   },
   computed: {
@@ -245,9 +233,7 @@ var script$1 = {
       return this.internalIsActive;
     },
     computedClasses: function computedClasses() {
-      var _ref;
-
-      return [this.type, (_ref = {}, _defineProperty(_ref, FIXED_TOP_CLASS, this.fixedTop), _defineProperty(_ref, FIXED_BOTTOM_CLASS, this.fixedBottom), _defineProperty(_ref, 'is-spaced', this.spaced), _defineProperty(_ref, 'has-shadow', this.shadow), _defineProperty(_ref, 'is-transparent', this.transparent), _ref)];
+      return [this.type, _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty({}, FIXED_TOP_CLASS, this.fixedTop), FIXED_BOTTOM_CLASS, this.fixedBottom), 'is-spaced', this.spaced), 'has-shadow', this.shadow), 'is-transparent', this.transparent)];
     }
   },
   watch: {
@@ -260,7 +246,6 @@ var script$1 = {
     fixedTop: {
       handler: function handler(isSet) {
         this.checkIfFixedPropertiesAreColliding();
-
         if (isSet) {
           // TODO Apply only one of the classes once PR is merged in Bulma:
           // https://github.com/jgthms/bulma/pull/2737
@@ -276,7 +261,6 @@ var script$1 = {
     fixedBottom: {
       handler: function handler(isSet) {
         this.checkIfFixedPropertiesAreColliding();
-
         if (isSet) {
           // TODO Apply only one of the classes once PR is merged in Bulma:
           // https://github.com/jgthms/bulma/pull/2737
@@ -316,19 +300,17 @@ var script$1 = {
     },
     checkIfFixedPropertiesAreColliding: function checkIfFixedPropertiesAreColliding() {
       var areColliding = this.fixedTop && this.fixedBottom;
-
       if (areColliding) {
         throw new Error('You should choose if the BNavbar is fixed bottom or fixed top, but not both');
       }
     },
     genNavbar: function genNavbar(createElement) {
       var navBarSlots = [this.genNavbarBrandNode(createElement), this.genNavbarSlotsNode(createElement)];
-
       if (!isFilled(this.wrapperClass)) {
         return this.genNavbarSlots(createElement, navBarSlots);
-      } // It wraps the slots into a div with the provided wrapperClass prop
+      }
 
-
+      // It wraps the slots into a div with the provided wrapperClass prop
       var navWrapper = createElement('div', {
         class: this.wrapperClass
       }, navBarSlots);
@@ -390,7 +372,6 @@ var script$1 = {
       this.removeBodyClass(className);
     } else if (this.fixedBottom) {
       var _className = this.spaced ? BODY_SPACED_FIXED_BOTTOM_CLASS : BODY_FIXED_BOTTOM_CLASS;
-
       this.removeBodyClass(_className);
     }
   },
@@ -416,15 +397,19 @@ const __vue_script__$1 = script$1;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Navbar = __vue_normalize__(
+  const __vue_component__$1 = /*#__PURE__*/__vue_normalize__(
     {},
     __vue_inject_styles__$1,
     __vue_script__$1,
     __vue_scope_id__$1,
     __vue_is_functional_template__$1,
     __vue_module_identifier__$1,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -442,6 +427,7 @@ const __vue_script__$1 = script$1;
 //
 //
 //
+
 var clickableWhiteList = ['div', 'span'];
 var script$2 = {
   name: 'BNavbarItem',
@@ -465,7 +451,6 @@ var script$2 = {
         this.closeMenuRecursive(this, ['NavBar']);
       }
     },
-
     /**
      * Close parent if clicked outside.
      */
@@ -473,13 +458,11 @@ var script$2 = {
       var isOnWhiteList = clickableWhiteList.some(function (item) {
         return item === event.target.localName;
       });
-
       if (!isOnWhiteList) {
         var parent = this.closeMenuRecursive(this, ['NavbarDropdown', 'NavBar']);
         if (parent.$data._isNavbarDropdown) this.closeMenuRecursive(parent, ['NavBar']);
       }
     },
-
     /**
      * Close parent recursively
      */
@@ -490,7 +473,6 @@ var script$2 = {
           current.$parent.closeMenu();
           return current.$parent;
         }
-
         return acc;
       }, null);
       return foundItem || this.closeMenuRecursive(current.$parent, targetComponents);
@@ -531,15 +513,19 @@ var __vue_staticRenderFns__$1 = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var NavbarItem = __vue_normalize__(
+  const __vue_component__$2 = /*#__PURE__*/__vue_normalize__(
     { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
     __vue_inject_styles__$2,
     __vue_script__$2,
     __vue_scope_id__$2,
     __vue_is_functional_template__$2,
     __vue_module_identifier__$2,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -568,7 +554,6 @@ var script$3 = {
       newActive: this.active,
       isHoverable: this.hoverable,
       _isNavbarDropdown: true // Used internally by NavbarItem
-
     };
   },
   watch: {
@@ -580,13 +565,11 @@ var script$3 = {
     showMenu: function showMenu() {
       this.newActive = true;
     },
-
     /**
     * See naming convetion of navbaritem
     */
     closeMenu: function closeMenu() {
       this.newActive = !this.closeOnClick;
-
       if (this.hoverable && this.closeOnClick) {
         this.isHoverable = false;
       }
@@ -627,27 +610,31 @@ var __vue_staticRenderFns__$2 = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var NavbarDropdown = __vue_normalize__(
+  const __vue_component__$3 = /*#__PURE__*/__vue_normalize__(
     { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
     __vue_inject_styles__$3,
     __vue_script__$3,
     __vue_scope_id__$3,
     __vue_is_functional_template__$3,
     __vue_module_identifier__$3,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin = {
   install: function install(Vue) {
-    registerComponent(Vue, Navbar);
-    registerComponent(Vue, NavbarItem);
-    registerComponent(Vue, NavbarDropdown);
+    registerComponent(Vue, __vue_component__$1);
+    registerComponent(Vue, __vue_component__$2);
+    registerComponent(Vue, __vue_component__$3);
   }
 };
 use(Plugin);
 
 export default Plugin;
-export { Navbar as BNavbar, NavbarDropdown as BNavbarDropdown, NavbarItem as BNavbarItem };
+export { __vue_component__$1 as BNavbar, __vue_component__$3 as BNavbarDropdown, __vue_component__$2 as BNavbarItem };

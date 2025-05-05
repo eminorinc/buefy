@@ -2,11 +2,11 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-require('./chunk-14c82365.js');
+require('./chunk-f22477ff.js');
 var helpers = require('./helpers.js');
 var __chunk_2 = require('./chunk-cd0dcc1d.js');
 var __chunk_5 = require('./chunk-13e039f5.js');
-var __chunk_18 = require('./chunk-f1df1c63.js');
+var __chunk_18 = require('./chunk-e8b1ba4d.js');
 
 //
 var script = {
@@ -54,27 +54,24 @@ var script = {
       if (!this.canCancel || !this.isActive) return;
       this.close();
     },
-
     /**
     * Emit events, and destroy modal if it's programmatic.
     */
     close: function close() {
       var _this = this;
-
       this.onCancel.apply(null, arguments);
       this.$emit('close');
-      this.$emit('update:active', false); // Timeout for the animation complete before destroying
+      this.$emit('update:active', false);
 
+      // Timeout for the animation complete before destroying
       if (this.programmatic) {
         this.isActive = false;
         setTimeout(function () {
           _this.$destroy();
-
           helpers.removeElement(_this.$el);
         }, 150);
       }
     },
-
     /**
     * Keypress event that is bound to the document.
     */
@@ -130,15 +127,19 @@ var __vue_staticRenderFns__ = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Loading = __chunk_5.__vue_normalize__(
+  const __vue_component__ = /*#__PURE__*/__chunk_5.__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
     __vue_scope_id__,
     __vue_is_functional_template__,
     __vue_module_identifier__,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -151,7 +152,7 @@ var LoadingProgrammatic = {
     };
     var propsData = helpers.merge(defaultParam, params);
     var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || __chunk_2.VueInstance;
-    var LoadingComponent = vm.extend(Loading);
+    var LoadingComponent = vm.extend(__vue_component__);
     return new LoadingComponent({
       el: document.createElement('div'),
       propsData: propsData
@@ -161,12 +162,12 @@ var LoadingProgrammatic = {
 var Plugin = {
   install: function install(Vue) {
     localVueInstance = Vue;
-    __chunk_5.registerComponent(Vue, Loading);
+    __chunk_5.registerComponent(Vue, __vue_component__);
     __chunk_5.registerComponentProgrammatic(Vue, 'loading', LoadingProgrammatic);
   }
 };
 __chunk_5.use(Plugin);
 
-exports.BLoading = Loading;
+exports.BLoading = __vue_component__;
 exports.LoadingProgrammatic = LoadingProgrammatic;
 exports.default = Plugin;

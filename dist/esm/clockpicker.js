@@ -1,14 +1,14 @@
-import { _ as _defineProperty } from './chunk-1fafdf15.js';
+import { _ as _defineProperty } from './chunk-94a101ab.js';
 import './helpers.js';
 import { c as config } from './chunk-6985c8ce.js';
-import './chunk-7ef8bebf.js';
-import { I as Icon } from './chunk-a376283d.js';
+import './chunk-32d5bd27.js';
+import { I as Icon } from './chunk-665715e0.js';
 import { _ as __vue_normalize__, r as registerComponent, u as use } from './chunk-cca88db8.js';
-import { I as Input } from './chunk-df5f75f1.js';
-import { T as TimepickerMixin } from './chunk-f8d9dda7.js';
-import './chunk-42f463e6.js';
-import { D as Dropdown, a as DropdownItem } from './chunk-d1259ca0.js';
-import { F as Field } from './chunk-f6fe77d8.js';
+import { I as Input } from './chunk-30008156.js';
+import { T as TimepickerMixin } from './chunk-bc2d2806.js';
+import './chunk-28fd8807.js';
+import { D as DropdownItem, a as Dropdown } from './chunk-33b054ae.js';
+import { F as Field } from './chunk-0c66fa55.js';
 
 //
 //
@@ -37,6 +37,7 @@ import { F as Field } from './chunk-f6fe77d8.js';
 //
 //
 //
+
 // These should match the variables in clockpicker.scss
 var indicatorSize = 40;
 var paddingInner = 5;
@@ -65,35 +66,31 @@ var script = {
     count: function count() {
       return this.max - this.min + 1;
     },
-
     /**
     * How many number indicators are shown per ring on the face
     */
     countPerRing: function countPerRing() {
       return this.double ? this.count / 2 : this.count;
     },
-
     /**
     * Radius of the clock face
     */
     radius: function radius() {
       return this.pickerSize / 2;
     },
-
     /**
     * Radius of the outer ring of number indicators
     */
     outerRadius: function outerRadius() {
       return this.radius - paddingInner - indicatorSize / 2;
     },
-
     /**
     * Radius of the inner ring of number indicators
     */
     innerRadius: function innerRadius() {
-      return Math.max(this.outerRadius * 0.6, this.outerRadius - paddingInner - indicatorSize); // 48px gives enough room for the outer ring of numbers
+      return Math.max(this.outerRadius * 0.6, this.outerRadius - paddingInner - indicatorSize);
+      // 48px gives enough room for the outer ring of numbers
     },
-
     /**
     * The angle for each selectable value
     * For hours this ends up being 30 degrees, for minutes 6 degrees
@@ -101,31 +98,24 @@ var script = {
     degreesPerUnit: function degreesPerUnit() {
       return 360 / this.countPerRing;
     },
-
     /**
     * Used for calculating x/y grid location based on degrees
     */
     degrees: function degrees() {
       return this.degreesPerUnit * Math.PI / 180;
     },
-
     /**
     * Calculates the angle the clock hand should be rotated for the
     * selected value
     */
     handRotateAngle: function handRotateAngle() {
       var currentAngle = this.prevAngle;
-
-      while (currentAngle < 0) {
-        currentAngle += 360;
-      }
-
+      while (currentAngle < 0) currentAngle += 360;
       var targetAngle = this.calcHandAngle(this.displayedValue);
       var degreesDiff = this.shortestDistanceDegrees(currentAngle, targetAngle);
       var angle = this.prevAngle + degreesDiff;
       return angle;
     },
-
     /**
     * Determines how long the selector hand is based on if the
     * selected value is located along the outer or inner ring
@@ -139,7 +129,6 @@ var script = {
         transition: '.3s cubic-bezier(.25,.8,.50,1)'
       };
     },
-
     /**
     * The value the hand should be pointing at
     */
@@ -152,7 +141,6 @@ var script = {
       if (_value !== this.inputValue) {
         this.prevAngle = this.handRotateAngle;
       }
-
       this.inputValue = _value;
     }
   },
@@ -160,7 +148,6 @@ var script = {
     isDisabled: function isDisabled(value) {
       return this.disabledValues && this.disabledValues(value);
     },
-
     /**
     * Calculates the distance between two points
     */
@@ -174,7 +161,6 @@ var script = {
       var shortestDistance = 180 - Math.abs(Math.abs(modDiff) - 180);
       return (modDiff + 360) % 360 < 180 ? shortestDistance * 1 : shortestDistance * -1;
     },
-
     /**
     * Calculates the angle of the line from the center point
     * to the given point.
@@ -183,7 +169,6 @@ var script = {
       var value = 2 * Math.atan2(p1.y - center.y - this.euclidean(center, p1), p1.x - center.x);
       return Math.abs(value * 180 / Math.PI);
     },
-
     /**
     * Generates the inline style translate() property for a
     * number indicator, which determines it's location on the
@@ -191,12 +176,10 @@ var script = {
     */
     getNumberTranslate: function getNumberTranslate(value) {
       var _this$getNumberCoords = this.getNumberCoords(value),
-          x = _this$getNumberCoords.x,
-          y = _this$getNumberCoords.y;
-
+        x = _this$getNumberCoords.x,
+        y = _this$getNumberCoords.y;
       return "translate(".concat(x, "px, ").concat(y, "px)");
     },
-
     /***
     * Calculates the coordinates on the clock face for a number
     * indicator value
@@ -214,7 +197,6 @@ var script = {
         'disabled': this.isDisabled(num.value)
       };
     },
-
     /**
     * Determines if a value resides on the inner ring
     */
@@ -236,7 +218,6 @@ var script = {
     },
     onMouseUp: function onMouseUp() {
       this.isDragging = false;
-
       if (!this.isDisabled(this.inputValue)) {
         this.$emit('change', this.inputValue);
       }
@@ -244,16 +225,13 @@ var script = {
     onDragMove: function onDragMove(e) {
       e.preventDefault();
       if (!this.isDragging && e.type !== 'click') return;
-
       var _this$$refs$clock$get = this.$refs.clock.getBoundingClientRect(),
-          width = _this$$refs$clock$get.width,
-          top = _this$$refs$clock$get.top,
-          left = _this$$refs$clock$get.left;
-
+        width = _this$$refs$clock$get.width,
+        top = _this$$refs$clock$get.top,
+        left = _this$$refs$clock$get.left;
       var _ref = 'touches' in e ? e.touches[0] : e,
-          clientX = _ref.clientX,
-          clientY = _ref.clientY;
-
+        clientX = _ref.clientX,
+        clientY = _ref.clientY;
       var center = {
         x: width / 2,
         y: -width / 2
@@ -264,12 +242,12 @@ var script = {
       };
       var handAngle = Math.round(this.coordToAngle(center, coords) + 360) % 360;
       var insideClick = this.double && this.euclidean(center, coords) < (this.outerRadius + this.innerRadius) / 2 - 16;
-      var value = Math.round(handAngle / this.degreesPerUnit) + this.min + (insideClick ? this.countPerRing : 0); // Necessary to fix edge case when selecting left part of max value
+      var value = Math.round(handAngle / this.degreesPerUnit) + this.min + (insideClick ? this.countPerRing : 0);
 
+      // Necessary to fix edge case when selecting left part of max value
       if (handAngle >= 360 - this.degreesPerUnit / 2) {
         value = insideClick ? this.max : this.min;
       }
-
       this.update(value);
     },
     update: function update(value) {
@@ -301,24 +279,27 @@ var __vue_staticRenderFns__ = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var ClockpickerFace = __vue_normalize__(
+  const __vue_component__ = /*#__PURE__*/__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
     __vue_scope_id__,
     __vue_is_functional_template__,
     __vue_module_identifier__,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
-var _components;
 var outerPadding = 12;
 var script$1 = {
   name: 'BClockpicker',
-  components: (_components = {}, _defineProperty(_components, ClockpickerFace.name, ClockpickerFace), _defineProperty(_components, Input.name, Input), _defineProperty(_components, Field.name, Field), _defineProperty(_components, Icon.name, Icon), _defineProperty(_components, Dropdown.name, Dropdown), _defineProperty(_components, DropdownItem.name, DropdownItem), _components),
+  components: _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty({}, __vue_component__.name, __vue_component__), Input.name, Input), Field.name, Field), Icon.name, Icon), Dropdown.name, Dropdown), DropdownItem.name, DropdownItem),
   mixins: [TimepickerMixin],
   props: {
     pickerSize: {
@@ -432,25 +413,29 @@ var __vue_staticRenderFns__$1 = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Clockpicker = __vue_normalize__(
+  const __vue_component__$1 = /*#__PURE__*/__vue_normalize__(
     { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
     __vue_inject_styles__$1,
     __vue_script__$1,
     __vue_scope_id__$1,
     __vue_is_functional_template__$1,
     __vue_module_identifier__$1,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin = {
   install: function install(Vue) {
-    registerComponent(Vue, Clockpicker);
+    registerComponent(Vue, __vue_component__$1);
   }
 };
 use(Plugin);
 
 export default Plugin;
-export { Clockpicker as BClockpicker };
+export { __vue_component__$1 as BClockpicker };

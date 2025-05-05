@@ -5,39 +5,51 @@
   (global = global || self, factory(global.Slider = {}));
 }(this, function (exports) { 'use strict';
 
-  function _defineProperty(obj, key, value) {
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
-    }
-
-    return obj;
+  function _arrayLikeToArray(r, a) {
+    (null == a || a > r.length) && (a = r.length);
+    for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
+    return n;
   }
-
-  function _toConsumableArray(arr) {
-    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+  function _arrayWithoutHoles(r) {
+    if (Array.isArray(r)) return _arrayLikeToArray(r);
   }
-
-  function _arrayWithoutHoles(arr) {
-    if (Array.isArray(arr)) {
-      for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
-
-      return arr2;
-    }
+  function _defineProperty(e, r, t) {
+    return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
+      value: t,
+      enumerable: !0,
+      configurable: !0,
+      writable: !0
+    }) : e[r] = t, e;
   }
-
-  function _iterableToArray(iter) {
-    if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+  function _iterableToArray(r) {
+    if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r);
   }
-
   function _nonIterableSpread() {
-    throw new TypeError("Invalid attempt to spread non-iterable instance");
+    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+  function _toConsumableArray(r) {
+    return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : i + "";
+  }
+  function _unsupportedIterableToArray(r, a) {
+    if (r) {
+      if ("string" == typeof r) return _arrayLikeToArray(r, a);
+      var t = {}.toString.call(r).slice(8, -1);
+      return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0;
+    }
   }
 
   var config = {
@@ -243,22 +255,26 @@
     
     /* style inject SSR */
     
+    /* style inject shadow dom */
+    
 
     
-    var Tooltip = normalizeComponent_1(
+    const __vue_component__ = /*#__PURE__*/normalizeComponent_1(
       { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
       __vue_inject_styles__,
       __vue_script__,
       __vue_scope_id__,
       __vue_is_functional_template__,
       __vue_module_identifier__,
+      false,
+      undefined,
       undefined,
       undefined
     );
 
   var script$1 = {
     name: 'BSliderThumb',
-    components: _defineProperty({}, Tooltip.name, Tooltip),
+    components: _defineProperty({}, __vue_component__.name, __vue_component__),
     inheritAttrs: false,
     props: {
       value: {
@@ -324,7 +340,6 @@
         if (this.disabled) return;
         event.preventDefault();
         this.onDragStart(event);
-
         if (typeof window !== 'undefined') {
           document.addEventListener('mousemove', this.onDragging);
           document.addEventListener('touchmove', this.onDragging);
@@ -360,11 +375,9 @@
       onDragStart: function onDragStart(event) {
         this.dragging = true;
         this.$emit('dragstart');
-
         if (event.type === 'touchstart') {
           event.clientX = event.touches[0].clientX;
         }
-
         this.startX = event.clientX;
         this.startPosition = parseFloat(this.currentPosition);
         this.newPosition = this.startPosition;
@@ -374,7 +387,6 @@
           if (event.type === 'touchmove') {
             event.clientX = event.touches[0].clientX;
           }
-
           var diff = (event.clientX - this.startX) / this.$parent.sliderSize() * 100;
           this.newPosition = this.startPosition + diff;
           this.setPosition(this.newPosition);
@@ -383,13 +395,10 @@
       onDragEnd: function onDragEnd() {
         this.dragging = false;
         this.$emit('dragend');
-
         if (this.value !== this.oldValue) {
           this.$parent.emitValue('change');
         }
-
         this.setPosition(this.newPosition);
-
         if (typeof window !== 'undefined') {
           document.removeEventListener('mousemove', this.onDragging);
           document.removeEventListener('touchmove', this.onDragging);
@@ -400,19 +409,16 @@
       },
       setPosition: function setPosition(percent) {
         if (percent === null || isNaN(percent)) return;
-
         if (percent < 0) {
           percent = 0;
         } else if (percent > 100) {
           percent = 100;
         }
-
         var stepLength = 100 / ((this.max - this.min) / this.step);
         var steps = Math.round(percent / stepLength);
         var value = steps * stepLength / 100 * (this.max - this.min) + this.min;
         value = parseFloat(value.toFixed(this.precision));
         this.$emit('input', value);
-
         if (!this.dragging && value !== this.oldValue) {
           this.oldValue = value;
         }
@@ -439,15 +445,19 @@
     
     /* style inject SSR */
     
+    /* style inject shadow dom */
+    
 
     
-    var SliderThumb = normalizeComponent_1(
+    const __vue_component__$1 = /*#__PURE__*/normalizeComponent_1(
       { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
       __vue_inject_styles__$1,
       __vue_script__$1,
       __vue_scope_id__$1,
       __vue_is_functional_template__$1,
       __vue_module_identifier__$1,
+      false,
+      undefined,
       undefined,
       undefined
     );
@@ -463,6 +473,7 @@
   //
   //
   //
+
   var script$2 = {
     name: 'BSliderTick',
     props: {
@@ -514,23 +525,26 @@
     
     /* style inject SSR */
     
+    /* style inject shadow dom */
+    
 
     
-    var SliderTick = normalizeComponent_1(
+    const __vue_component__$2 = /*#__PURE__*/normalizeComponent_1(
       { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
       __vue_inject_styles__$2,
       __vue_script__$2,
       __vue_scope_id__$2,
       __vue_is_functional_template__$2,
       __vue_module_identifier__$2,
+      false,
+      undefined,
       undefined,
       undefined
     );
 
-  var _components;
   var script$3 = {
     name: 'BSlider',
-    components: (_components = {}, _defineProperty(_components, SliderThumb.name, SliderThumb), _defineProperty(_components, SliderTick.name, SliderTick), _components),
+    components: _defineProperty(_defineProperty({}, __vue_component__$1.name, __vue_component__$1), __vue_component__$2.name, __vue_component__$2),
     props: {
       value: {
         type: [Number, Array],
@@ -588,7 +602,6 @@
         dragging: false,
         isRange: false,
         _isSlider: true // Used by Thumb and Tick
-
       };
     },
     computed: {
@@ -598,11 +611,9 @@
       tickValues: function tickValues() {
         if (!this.ticks || this.min > this.max || this.step === 0) return [];
         var result = [];
-
         for (var i = this.min + this.step; i < this.max; i = i + this.step) {
           result.push(i);
         }
-
         return result;
       },
       minValue: function minValue() {
@@ -664,7 +675,6 @@
         if (this.min > this.max) {
           return;
         }
-
         if (Array.isArray(newValue)) {
           this.isRange = true;
           var smallValue = typeof newValue[0] !== 'number' || isNaN(newValue[0]) ? this.min : Math.min(Math.max(this.min, newValue[0]), this.max);
@@ -681,11 +691,9 @@
         if (this.isRange) {
           this.isThumbReversed = this.value1 > this.value2;
         }
-
         if (!this.lazy || !this.dragging) {
           this.emitValue('input');
         }
-
         if (this.dragging) {
           this.emitValue('dragging');
         }
@@ -699,13 +707,11 @@
         var percent = (event.clientX - sliderOffsetLeft) / this.sliderSize() * 100;
         var targetValue = this.min + percent * (this.max - this.min) / 100;
         var diffFirst = Math.abs(targetValue - this.value1);
-
         if (!this.isRange) {
           if (diffFirst < this.step / 2) return;
           this.$refs.button1.setPosition(percent);
         } else {
           var diffSecond = Math.abs(targetValue - this.value2);
-
           if (diffFirst <= diffSecond) {
             if (diffFirst < this.step / 2) return;
             this.$refs['button1'].setPosition(percent);
@@ -714,7 +720,6 @@
             this.$refs['button2'].setPosition(percent);
           }
         }
-
         this.emitValue('change');
       },
       onDragStart: function onDragStart() {
@@ -723,7 +728,6 @@
       },
       onDragEnd: function onDragEnd() {
         var _this = this;
-
         this.isTrackClickDisabled = true;
         setTimeout(function () {
           // avoid triggering onSliderClick after dragend
@@ -731,7 +735,6 @@
         }, 0);
         this.dragging = false;
         this.$emit('dragend');
-
         if (this.lazy) {
           this.emitValue('input');
         }
@@ -766,15 +769,19 @@
     
     /* style inject SSR */
     
+    /* style inject shadow dom */
+    
 
     
-    var Slider = normalizeComponent_1(
+    const __vue_component__$3 = /*#__PURE__*/normalizeComponent_1(
       { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
       __vue_inject_styles__$3,
       __vue_script__$3,
       __vue_scope_id__$3,
       __vue_is_functional_template__$3,
       __vue_module_identifier__$3,
+      false,
+      undefined,
       undefined,
       undefined
     );
@@ -790,14 +797,14 @@
 
   var Plugin = {
     install: function install(Vue) {
-      registerComponent(Vue, Slider);
-      registerComponent(Vue, SliderTick);
+      registerComponent(Vue, __vue_component__$3);
+      registerComponent(Vue, __vue_component__$2);
     }
   };
   use(Plugin);
 
-  exports.BSlider = Slider;
-  exports.BSliderTick = SliderTick;
+  exports.BSlider = __vue_component__$3;
+  exports.BSliderTick = __vue_component__$2;
   exports.default = Plugin;
 
   Object.defineProperty(exports, '__esModule', { value: true });

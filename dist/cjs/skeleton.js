@@ -34,7 +34,6 @@ var script = {
     var items = [];
     var width = context.props.width;
     var height = context.props.height;
-
     for (var i = 0; i < context.props.count; i++) {
       items.push(createElement('div', {
         staticClass: 'b-skeleton-item',
@@ -49,7 +48,6 @@ var script = {
         }
       }));
     }
-
     return createElement('div', {
       staticClass: 'b-skeleton',
       class: [context.props.size, {
@@ -76,25 +74,29 @@ const __vue_script__ = script;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Skeleton = __chunk_5.__vue_normalize__(
+  const __vue_component__ = /*#__PURE__*/__chunk_5.__vue_normalize__(
     {},
     __vue_inject_styles__,
     __vue_script__,
     __vue_scope_id__,
     __vue_is_functional_template__,
     __vue_module_identifier__,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin = {
   install: function install(Vue) {
-    __chunk_5.registerComponent(Vue, Skeleton);
+    __chunk_5.registerComponent(Vue, __vue_component__);
   }
 };
 __chunk_5.use(Plugin);
 
-exports.BSkeleton = Skeleton;
+exports.BSkeleton = __vue_component__;
 exports.default = Plugin;

@@ -1,7 +1,7 @@
-import { _ as _defineProperty } from './chunk-1fafdf15.js';
+import { _ as _defineProperty } from './chunk-94a101ab.js';
 import './helpers.js';
 import { c as config } from './chunk-6985c8ce.js';
-import { I as Icon } from './chunk-a376283d.js';
+import { I as Icon } from './chunk-665715e0.js';
 import { _ as __vue_normalize__, r as registerComponent, u as use } from './chunk-cca88db8.js';
 
 //
@@ -10,6 +10,7 @@ import { _ as __vue_normalize__, r as registerComponent, u as use } from './chun
 //
 //
 //
+
 var script = {
   name: 'BMenu',
   props: {
@@ -25,7 +26,6 @@ var script = {
   data: function data() {
     return {
       _isMenu: true // Used by MenuItem
-
     };
   }
 };
@@ -49,15 +49,19 @@ var __vue_staticRenderFns__ = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Menu = __vue_normalize__(
+  const __vue_component__ = /*#__PURE__*/__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
     __vue_scope_id__,
     __vue_is_functional_template__,
     __vue_module_identifier__,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -77,7 +81,6 @@ var script$1 = {
   render: function render(createElement, context) {
     var vlabel = null;
     var slots = context.slots();
-
     if (context.props.label || slots.label) {
       vlabel = createElement('p', {
         attrs: {
@@ -91,7 +94,6 @@ var script$1 = {
         }
       }), createElement('span', {}, context.props.label)] : context.props.label : slots.label);
     }
-
     var vnode = createElement('ul', {
       attrs: {
         'class': 'menu-list',
@@ -119,15 +121,19 @@ const __vue_script__$1 = script$1;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var MenuList = __vue_normalize__(
+  const __vue_component__$1 = /*#__PURE__*/__vue_normalize__(
     {},
     __vue_inject_styles__$1,
     __vue_script__$1,
     __vue_scope_id__$1,
     __vue_is_functional_template__$1,
     __vue_module_identifier__$1,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -185,7 +191,6 @@ var script$2 = {
       this.reset(this.$parent, menu);
       this.newExpanded = !this.newExpanded;
       this.$emit('update:expanded', this.newActive);
-
       if (menu && menu.activable) {
         this.newActive = true;
         this.$emit('update:active', this.newActive);
@@ -193,19 +198,16 @@ var script$2 = {
     },
     reset: function reset(parent, menu) {
       var _this = this;
-
       var items = parent.$children.filter(function (c) {
         return c.name === _this.name;
       });
       items.forEach(function (item) {
         if (item !== _this) {
           _this.reset(item, menu);
-
           if (!parent.$data._isMenu || parent.$data._isMenu && parent.accordion) {
             item.newExpanded = false;
             item.$emit('update:expanded', item.newActive);
           }
-
           if (menu && menu.activable) {
             item.newActive = false;
             item.$emit('update:active', item.newActive);
@@ -215,11 +217,9 @@ var script$2 = {
     },
     getMenu: function getMenu() {
       var parent = this.$parent;
-
       while (parent && !parent.$data._isMenu) {
         parent = parent.$parent;
       }
-
       return parent;
     }
   }
@@ -247,27 +247,31 @@ var __vue_staticRenderFns__$1 = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var MenuItem = __vue_normalize__(
+  const __vue_component__$2 = /*#__PURE__*/__vue_normalize__(
     { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
     __vue_inject_styles__$2,
     __vue_script__$2,
     __vue_scope_id__$2,
     __vue_is_functional_template__$2,
     __vue_module_identifier__$2,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin = {
   install: function install(Vue) {
-    registerComponent(Vue, Menu);
-    registerComponent(Vue, MenuList);
-    registerComponent(Vue, MenuItem);
+    registerComponent(Vue, __vue_component__);
+    registerComponent(Vue, __vue_component__$1);
+    registerComponent(Vue, __vue_component__$2);
   }
 };
 use(Plugin);
 
 export default Plugin;
-export { Menu as BMenu, MenuItem as BMenuItem, MenuList as BMenuList };
+export { __vue_component__ as BMenu, __vue_component__$2 as BMenuItem, __vue_component__$1 as BMenuList };

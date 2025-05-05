@@ -1,10 +1,10 @@
-import './chunk-1fafdf15.js';
+import './chunk-94a101ab.js';
 import { merge } from './helpers.js';
 import { c as config, V as VueInstance } from './chunk-6985c8ce.js';
-import './chunk-a376283d.js';
+import './chunk-665715e0.js';
 import { _ as __vue_normalize__, r as registerComponent, a as registerComponentProgrammatic, u as use } from './chunk-cca88db8.js';
-import { M as MessageMixin } from './chunk-7018cf75.js';
-import { N as NoticeMixin } from './chunk-9ef3c066.js';
+import { M as MessageMixin } from './chunk-f9f46a51.js';
+import { N as NoticeMixin } from './chunk-bd8d2417.js';
 
 //
 var script = {
@@ -39,15 +39,19 @@ var __vue_staticRenderFns__ = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Notification = __vue_normalize__(
+  const __vue_component__ = /*#__PURE__*/__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
     __vue_scope_id__,
     __vue_is_functional_template__,
     __vue_module_identifier__,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -88,15 +92,19 @@ var __vue_staticRenderFns__$1 = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var NotificationNotice = __vue_normalize__(
+  const __vue_component__$1 = /*#__PURE__*/__vue_normalize__(
     { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
     __vue_inject_styles__$1,
     __vue_script__$1,
     __vue_scope_id__$1,
     __vue_is_functional_template__$1,
     __vue_module_identifier__$1,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -105,25 +113,21 @@ var localVueInstance;
 var NotificationProgrammatic = {
   open: function open(params) {
     var parent;
-
     if (typeof params === 'string') {
       params = {
         message: params
       };
     }
-
     var defaultParam = {
       position: config.defaultNotificationPosition || 'is-top-right'
     };
-
     if (params.parent) {
       parent = params.parent;
       delete params.parent;
     }
-
     var propsData = merge(defaultParam, params);
     var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance;
-    var NotificationNoticeComponent = vm.extend(NotificationNotice);
+    var NotificationNoticeComponent = vm.extend(__vue_component__$1);
     return new NotificationNoticeComponent({
       parent: parent,
       el: document.createElement('div'),
@@ -134,11 +138,11 @@ var NotificationProgrammatic = {
 var Plugin = {
   install: function install(Vue) {
     localVueInstance = Vue;
-    registerComponent(Vue, Notification);
+    registerComponent(Vue, __vue_component__);
     registerComponentProgrammatic(Vue, 'notification', NotificationProgrammatic);
   }
 };
 use(Plugin);
 
 export default Plugin;
-export { Notification as BNotification, NotificationProgrammatic };
+export { __vue_component__ as BNotification, NotificationProgrammatic };

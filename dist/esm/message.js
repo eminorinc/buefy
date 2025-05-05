@@ -1,9 +1,9 @@
-import './chunk-1fafdf15.js';
+import './chunk-94a101ab.js';
 import './helpers.js';
 import './chunk-6985c8ce.js';
-import './chunk-a376283d.js';
+import './chunk-665715e0.js';
 import { _ as __vue_normalize__, r as registerComponent, u as use } from './chunk-cca88db8.js';
-import { M as MessageMixin } from './chunk-7018cf75.js';
+import { M as MessageMixin } from './chunk-f9f46a51.js';
 
 //
 var script = {
@@ -38,25 +38,29 @@ var __vue_staticRenderFns__ = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Message = __vue_normalize__(
+  const __vue_component__ = /*#__PURE__*/__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
     __vue_scope_id__,
     __vue_is_functional_template__,
     __vue_module_identifier__,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin = {
   install: function install(Vue) {
-    registerComponent(Vue, Message);
+    registerComponent(Vue, __vue_component__);
   }
 };
 use(Plugin);
 
 export default Plugin;
-export { Message as BMessage };
+export { __vue_component__ as BMessage };

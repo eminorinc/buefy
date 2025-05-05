@@ -5,6 +5,67 @@
   (global = global || self, factory(global.Sidebar = {}));
 }(this, function (exports) { 'use strict';
 
+  function _arrayLikeToArray(r, a) {
+    (null == a || a > r.length) && (a = r.length);
+    for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
+    return n;
+  }
+  function _createForOfIteratorHelper(r, e) {
+    var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+    if (!t) {
+      if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) {
+        t && (r = t);
+        var n = 0,
+          F = function () {};
+        return {
+          s: F,
+          n: function () {
+            return n >= r.length ? {
+              done: !0
+            } : {
+              done: !1,
+              value: r[n++]
+            };
+          },
+          e: function (r) {
+            throw r;
+          },
+          f: F
+        };
+      }
+      throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+    }
+    var o,
+      a = !0,
+      u = !1;
+    return {
+      s: function () {
+        t = t.call(r);
+      },
+      n: function () {
+        var r = t.next();
+        return a = r.done, r;
+      },
+      e: function (r) {
+        u = !0, o = r;
+      },
+      f: function () {
+        try {
+          a || null == t.return || t.return();
+        } finally {
+          if (u) throw o;
+        }
+      }
+    };
+  }
+  function _unsupportedIterableToArray(r, a) {
+    if (r) {
+      if ("string" == typeof r) return _arrayLikeToArray(r, a);
+      var t = {}.toString.call(r).slice(8, -1);
+      return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0;
+    }
+  }
+
   function removeElement(el) {
     if (typeof el.remove !== 'undefined') {
       el.remove();
@@ -13,7 +74,6 @@
     }
   }
 
-  //
   var script = {
     name: 'BSidebar',
     props: {
@@ -83,42 +143,29 @@
       isAbsolute: function isAbsolute() {
         return this.position === 'absolute';
       },
-
       /**
        * White-listed items to not close when clicked.
        * Add sidebar content and all children.
        */
       whiteList: function whiteList() {
         var whiteList = [];
-        whiteList.push(this.$refs.sidebarContent); // Add all chidren from dropdown
-
+        whiteList.push(this.$refs.sidebarContent);
+        // Add all chidren from dropdown
         if (this.$refs.sidebarContent !== undefined) {
           var children = this.$refs.sidebarContent.querySelectorAll('*');
-          var _iteratorNormalCompletion = true;
-          var _didIteratorError = false;
-          var _iteratorError = undefined;
-
+          var _iterator = _createForOfIteratorHelper(children),
+            _step;
           try {
-            for (var _iterator = children[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
               var child = _step.value;
               whiteList.push(child);
             }
           } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
+            _iterator.e(err);
           } finally {
-            try {
-              if (!_iteratorNormalCompletion && _iterator.return != null) {
-                _iterator.return();
-              }
-            } finally {
-              if (_didIteratorError) {
-                throw _iteratorError;
-              }
-            }
+            _iterator.f();
           }
         }
-
         return whiteList;
       }
     },
@@ -142,7 +189,6 @@
           if (this.isOpen && event.keyCode === 27) this.cancel('escape');
         }
       },
-
       /**
       * Close the Sidebar if canCancel and call the onCancel prop (function).
       */
@@ -152,7 +198,6 @@
         this.onCancel.apply(null, arguments);
         this.close();
       },
-
       /**
       * Call the onCancel prop (function) and emit events
       */
@@ -161,7 +206,6 @@
         this.$emit('close');
         this.$emit('update:open', false);
       },
-
       /**
        * Close fixed sidebar if clicked outside.
        */
@@ -174,14 +218,12 @@
           }
         }
       },
-
       /**
       * Transition before-enter hook
       */
       beforeEnter: function beforeEnter() {
         this.animating = true;
       },
-
       /**
       * Transition after-leave hook
       */
@@ -207,7 +249,6 @@
         document.removeEventListener('keyup', this.keyPress);
         document.removeEventListener('click', this.clickedOutside);
       }
-
       if (this.isFixed) {
         removeElement(this.$el);
       }
@@ -318,15 +359,19 @@
     
     /* style inject SSR */
     
+    /* style inject shadow dom */
+    
 
     
-    var Sidebar = normalizeComponent_1(
+    const __vue_component__ = /*#__PURE__*/normalizeComponent_1(
       { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
       __vue_inject_styles__,
       __vue_script__,
       __vue_scope_id__,
       __vue_is_functional_template__,
       __vue_module_identifier__,
+      false,
+      undefined,
       undefined,
       undefined
     );
@@ -342,12 +387,12 @@
 
   var Plugin = {
     install: function install(Vue) {
-      registerComponent(Vue, Sidebar);
+      registerComponent(Vue, __vue_component__);
     }
   };
   use(Plugin);
 
-  exports.BSidebar = Sidebar;
+  exports.BSidebar = __vue_component__;
   exports.default = Plugin;
 
   Object.defineProperty(exports, '__esModule', { value: true });

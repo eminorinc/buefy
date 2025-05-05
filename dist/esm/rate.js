@@ -1,7 +1,7 @@
-import { _ as _defineProperty } from './chunk-1fafdf15.js';
+import { _ as _defineProperty } from './chunk-94a101ab.js';
 import './helpers.js';
 import './chunk-6985c8ce.js';
-import { I as Icon } from './chunk-a376283d.js';
+import { I as Icon } from './chunk-665715e0.js';
 import { _ as __vue_normalize__, r as registerComponent, u as use } from './chunk-cca88db8.js';
 
 var script = {
@@ -42,14 +42,12 @@ var script = {
     },
     showMe: function showMe() {
       var result = '';
-
       if (this.showScore) {
         result = this.disabled ? this.value : this.newValue;
         if (result === 0) result = '';
       } else if (this.showText) {
         result = this.texts[Math.ceil(this.newValue) - 1];
       }
-
       return result;
     },
     valueDecimal: function valueDecimal() {
@@ -85,13 +83,11 @@ var script = {
     rateClass: function rateClass(index) {
       var output = '';
       var currentValue = this.hoverValue !== 0 ? this.hoverValue : this.newValue;
-
       if (index <= currentValue) {
         output = 'set-on';
       } else if (this.disabled && Math.ceil(this.value) === index) {
         output = 'set-half';
       }
-
       return output;
     }
   }
@@ -116,25 +112,29 @@ var __vue_staticRenderFns__ = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Rate = __vue_normalize__(
+  const __vue_component__ = /*#__PURE__*/__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
     __vue_scope_id__,
     __vue_is_functional_template__,
     __vue_module_identifier__,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin = {
   install: function install(Vue) {
-    registerComponent(Vue, Rate);
+    registerComponent(Vue, __vue_component__);
   }
 };
 use(Plugin);
 
 export default Plugin;
-export { Rate as BRate };
+export { __vue_component__ as BRate };

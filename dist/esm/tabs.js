@@ -1,14 +1,13 @@
-import { _ as _defineProperty } from './chunk-1fafdf15.js';
+import { _ as _defineProperty } from './chunk-94a101ab.js';
 import './helpers.js';
 import { c as config } from './chunk-6985c8ce.js';
-import { I as Icon } from './chunk-a376283d.js';
+import { I as Icon } from './chunk-665715e0.js';
 import { _ as __vue_normalize__, r as registerComponent, u as use } from './chunk-cca88db8.js';
 import { S as SlotComponent } from './chunk-0e3f4fb5.js';
 
-var _components;
 var script = {
   name: 'BTabs',
-  components: (_components = {}, _defineProperty(_components, Icon.name, Icon), _defineProperty(_components, SlotComponent.name, SlotComponent), _components),
+  components: _defineProperty(_defineProperty({}, Icon.name, Icon), SlotComponent.name, SlotComponent),
   props: {
     value: [Number, String],
     expanded: Boolean,
@@ -35,7 +34,6 @@ var script = {
       contentHeight: 0,
       isTransitioning: false,
       _isTabs: true // Used internally by TabItem
-
     };
   },
   computed: {
@@ -47,9 +45,7 @@ var script = {
       }, this.position, this.position && this.vertical);
     },
     navClasses: function navClasses() {
-      var _ref2;
-
-      return [this.type, this.size, (_ref2 = {}, _defineProperty(_ref2, this.position, this.position && !this.vertical), _defineProperty(_ref2, 'is-fullwidth', this.expanded), _defineProperty(_ref2, 'is-toggle-rounded is-toggle', this.type === 'is-toggle-rounded'), _ref2)];
+      return [this.type, this.size, _defineProperty(_defineProperty(_defineProperty({}, this.position, this.position && !this.vertical), 'is-fullwidth', this.expanded), 'is-toggle-rounded is-toggle', this.type === 'is-toggle-rounded')];
     },
     tabItems: function tabItems() {
       return this.defaultSlots.filter(function (vnode) {
@@ -67,19 +63,16 @@ var script = {
       var index = this.getIndexByValue(_value, _value);
       this.changeTab(index);
     },
-
     /**
     * When tab-items are updated, set active one.
     */
     tabItems: function tabItems() {
       var _this = this;
-
       if (this.activeTab < this.tabItems.length) {
         var previous = this.activeTab;
         this.tabItems.map(function (tab, idx) {
           if (tab.isActive) {
             previous = idx;
-
             if (previous < _this.tabItems.length) {
               _this.tabItems[previous].isActive = false;
             }
@@ -97,16 +90,13 @@ var script = {
     */
     changeTab: function changeTab(newIndex) {
       if (this.activeTab === newIndex || this.tabItems[newIndex] === undefined) return;
-
       if (this.activeTab < this.tabItems.length) {
         this.tabItems[this.activeTab].deactivate(this.activeTab, newIndex);
       }
-
       this.tabItems[newIndex].activate(this.activeTab, newIndex);
       this.activeTab = newIndex;
       this.$emit('change', this.getValueByIndex(newIndex));
     },
-
     /**
     * Tab click listener, emit input event and change active tab.
     */
@@ -131,11 +121,9 @@ var script = {
   },
   mounted: function mounted() {
     this.activeTab = this.getIndexByValue(this.value || 0);
-
     if (this.activeTab < this.tabItems.length) {
       this.tabItems[this.activeTab].isActive = true;
     }
-
     this.refreshSlots();
   }
 };
@@ -159,15 +147,19 @@ var __vue_staticRenderFns__ = [];
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var Tabs = __vue_normalize__(
+  const __vue_component__ = /*#__PURE__*/__vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
     __vue_scope_id__,
     __vue_is_functional_template__,
     __vue_module_identifier__,
+    false,
+    undefined,
     undefined,
     undefined
   );
@@ -190,7 +182,6 @@ var script$1 = {
       isActive: false,
       transitionName: null,
       _isTabItem: true // Used internally by Tab
-
     };
   },
   methods: {
@@ -201,7 +192,6 @@ var script$1 = {
       this.transitionName = index < oldIndex ? this.$parent.vertical ? 'slide-down' : 'slide-next' : this.$parent.vertical ? 'slide-up' : 'slide-prev';
       this.isActive = true;
     },
-
     /**
     * Deactivate tab, alter animation name based on the index.
     */
@@ -215,7 +205,6 @@ var script$1 = {
       this.$destroy();
       throw new Error('You should wrap bTabItem on a bTabs');
     }
-
     this.$parent.refreshSlots();
   },
   beforeDestroy: function beforeDestroy() {
@@ -223,22 +212,20 @@ var script$1 = {
   },
   render: function render(createElement) {
     var _this = this;
-
     // if destroy apply v-if
     if (this.$parent.destroyOnHide) {
       if (!this.isActive || !this.visible) {
         return;
       }
     }
-
     var vnode = createElement('div', {
       directives: [{
         name: 'show',
         value: this.isActive && this.visible
       }],
       class: 'tab-item'
-    }, this.$slots.default); // check animated prop
-
+    }, this.$slots.default);
+    // check animated prop
     if (this.$parent.animated) {
       return createElement('transition', {
         props: {
@@ -254,7 +241,6 @@ var script$1 = {
         }
       }, [vnode]);
     }
-
     return vnode;
   }
 };
@@ -276,26 +262,30 @@ const __vue_script__$1 = script$1;
   
   /* style inject SSR */
   
+  /* style inject shadow dom */
+  
 
   
-  var TabItem = __vue_normalize__(
+  const __vue_component__$1 = /*#__PURE__*/__vue_normalize__(
     {},
     __vue_inject_styles__$1,
     __vue_script__$1,
     __vue_scope_id__$1,
     __vue_is_functional_template__$1,
     __vue_module_identifier__$1,
+    false,
+    undefined,
     undefined,
     undefined
   );
 
 var Plugin = {
   install: function install(Vue) {
-    registerComponent(Vue, Tabs);
-    registerComponent(Vue, TabItem);
+    registerComponent(Vue, __vue_component__);
+    registerComponent(Vue, __vue_component__$1);
   }
 };
 use(Plugin);
 
 export default Plugin;
-export { TabItem as BTabItem, Tabs as BTabs };
+export { __vue_component__$1 as BTabItem, __vue_component__ as BTabs };
